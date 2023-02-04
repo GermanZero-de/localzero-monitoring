@@ -2,13 +2,17 @@
 
 ## Dev notes
 
-You need python 3.10 or greater!
-
 Quick overview:
 	- We use poetry (so pyproject.toml lists the requirements, and poetry.lock the exact versions used to fulfill those requirements).
 	- To make sure that exactly those are installed we use a python virtual environment
 	- black is used to format the code
 	- a pre-commit hook is used to keep commits clean
+
+### How to install the dev environment
+
+You need python 3.10 or greater already installed!  These notes are from a Mac user. So linux
+folks should be happy. Windows users might need to do some adjusting but in principle all the
+tooling is available for Windows users as well (I just haven't tested this).
 
 ```shell
 # in the checkout of the repository
@@ -21,6 +25,8 @@ poetry install --sync
 # Make sure the pre-commit hooks are installed in the git repo
  ./.venv/bin/pre-commit install
 ```
+
+### How to run the d
 
 We roughly follow some of the project layout / config layout ideas of the Two Scoops of Django book.
 
