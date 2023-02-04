@@ -25,3 +25,17 @@ RUN poetry export --format requirements.txt \
 
 COPY . .
 RUN poetry build && /venv/bin/pip install dist/*.whl
+
+FROM base as final
+
+ENV PATH="/venv/bin:${PATH}"
+ENV VIRTUAL_ENV="/venv"
+
+RUN adduser -D user
+USER user
+
+EXPOSE 8000
+
+COPY --from=builder /venv /venv
+
+CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "config.wsgi:application"]
