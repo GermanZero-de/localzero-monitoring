@@ -25,7 +25,7 @@ poetry shell
 # Make sure everything is installed as per the poetry.lock file
 poetry install --sync
 # Make sure the pre-commit hooks are installed in the git repo
- ./.venv/bin/pre-commit install
+./.venv/bin/pre-commit install
 ```
 
 On Windows, poetry and venv somehow do not work well together. Do this in a fresh check-out, instead:
@@ -64,3 +64,12 @@ python manage.py runserver --settings=config.settings.local
 
 The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
 package / module name it follows python style conventions of being short and all in one lowercase word.
+
+### Building a container that runs the production app
+
+The Dockerfile is based on the following resources:
+- [DigitalOcean blog post](https://www.digitalocean.com/community/tutorials/how-to-build-a-django-and-gunicorn-application-with-docker)
+- [Stackoverflow answer](https://stackoverflow.com/a/57886655)
+- [Sample Repo](https://github.com/mgnisia/Boilerplate-Docker-Django-Gunicorn-Nginx)
+
+It uses a multi-stage build to reduce the amount of layers that have to be rebuilt when only project code changes for faster builds and pulls.

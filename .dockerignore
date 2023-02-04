@@ -1,0 +1,7 @@
+.git
+.gitignore
+.pre-commit-config.yaml
+.venv
+LICENSE
+db.sqlite3
+docker-compose.yml
