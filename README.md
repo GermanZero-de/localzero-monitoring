@@ -36,6 +36,15 @@ locally you want to do this:
 
 ```shell
 # (inside your poetry shell)
+
+#prepare database 
+python manage.py makemigrations --settings=config.settings.local
+python manage.py migrate --settings=config.settings.local
+
+#generate user for admin UI 
+python manage.py createsuperuser --settings=config.settings.local
+
+#start the server
 python manage.py runserver --settings=config.settings.local
 ```
 
