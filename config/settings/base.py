@@ -15,8 +15,21 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env(var: str) -> str:
+    try:
+        return os.environ[var]
+    except KeyError:
+        raise ImproperlyConfigured(f"Set {var} environment variable")
+
+
+# Secret key for signing sessions / cookies and the like.
+# while local testing any random string will do.
+SECRET_KEY = get_env("SECRET_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
