@@ -27,10 +27,6 @@ def get_env(var: str) -> str:
         raise ImproperlyConfigured(f"Set {var} environment variable")
 
 
-# Secret key for signing sessions / cookies and the like.
-# while local testing any random string will do.
-SECRET_KEY = get_env("SECRET_KEY")
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
