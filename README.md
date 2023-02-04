@@ -7,6 +7,7 @@ Quick overview:
 	- To make sure that exactly those are installed we use a python virtual environment
 	- black is used to format the code
 	- a pre-commit hook is used to keep commits clean
+	- We use pyright to get a little bit of type checking. Currently this is just in basic mode and without any special handling for the django ORM.  I expect both things to potentially need tweaking (for example: https://github.com/sbdchd/django-types looks potentially useful).
 
 ### How to install the dev environment
 
@@ -26,7 +27,7 @@ poetry install --sync
  ./.venv/bin/pre-commit install
 ```
 
-### How to run the d
+### How to run the development server
 
 We roughly follow some of the project layout / config layout ideas of the Two Scoops of Django book.
 
@@ -38,5 +39,5 @@ locally you want to do this:
 python manage.py runserver --settings=config.settings.local
 ```
 
-The main app is called `cpmonitor` short for `climate projection monitor`. As that needs to be a python
+The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
 package / module name it follows python style conventions of being short and all in one lowercase word.
