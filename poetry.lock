@@ -254,6 +254,25 @@ pyyaml = ">=5.1"
 virtualenv = ">=20.10.0"
 
 [[package]]
+name = "pyright"
+version = "1.1.292"
+description = "Command line wrapper for pyright"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pyright-1.1.292-py3-none-any.whl", hash = "sha256:23d1f14b15afe38bb7a7117b9861ad0546aff078da312d294e60a727445c23ff"},
+    {file = "pyright-1.1.292.tar.gz", hash = "sha256:035ea1af6fabfdcc80c0afb545f677bd377114157d69779cce2a642ff894e51c"},
+]
+
+[package.dependencies]
+nodeenv = ">=1.6.0"
+
+[package.extras]
+all = ["twine (>=3.4.1)"]
+dev = ["twine (>=3.4.1)"]
+
+[[package]]
 name = "pyyaml"
 version = "6.0"
 description = "YAML parser and emitter for Python"
@@ -380,4 +399,4 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f5bd519b5de53607b4db981b67aca5694bc39be8b015e0c024dff3094bf73b43"
+content-hash = "8355be5d9a17beb282f601fb0db1c1d43b51607d979d9fd6928a78b4e7b20cae"
