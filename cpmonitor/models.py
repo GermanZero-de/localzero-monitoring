@@ -39,6 +39,7 @@ class City(models.Model):
 class Task(models.Model):
 
     class States(models.IntegerChoices):
+        UNKNOWN = 0
         SUGGESTED = 1
         PLANNED = 2
         WAITING = 3
@@ -58,9 +59,10 @@ class Task(models.Model):
     name = models.CharField(max_length=255)
     info = models.TextField()
 
-    state = models.IntegerField(choices=States.choices)
-    severity = models.IntegerField(choices=Severities.choices)
+    state = models.IntegerField(choices=States.choices,default=States.UNKNOWN)
+    severity = models.IntegerField(choices=Severities.choices, default=Severities.STANDARD)
     completion = models.IntegerField(
+                    default=0, 
                     validators=[
                         MinValueValidator(0),
                         MaxValueValidator(100)
