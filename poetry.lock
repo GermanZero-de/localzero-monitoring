@@ -137,6 +137,18 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-ordered-model"
+version = "3.6"
+description = "Allows Django models to be ordered and provides a simple admin interface for reordering them."
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-ordered-model-3.6.tar.gz", hash = "sha256:62161a6bc51d8b402644854b257605d7b5183d01fd349826682a87e9227c05b5"},
+    {file = "django_ordered_model-3.6-py3-none-any.whl", hash = "sha256:0006b111f472a2348f75554a4e77bee2b1f379a0f96726af6b1a3ebf3a950789"},
+]
+
+[[package]]
 name = "filelock"
 version = "3.9.0"
 description = "A platform independent file lock."
@@ -399,4 +411,4 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "8355be5d9a17beb282f601fb0db1c1d43b51607d979d9fd6928a78b4e7b20cae"
+content-hash = "475ad89c3c068f2c80ba33314f67b0c0182559902ebe1524e0208771330aaad5"
