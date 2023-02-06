@@ -1,15 +1,31 @@
 from django.contrib import admin
 from .models import City, Task
+from ordered_model.admin import OrderedTabularInline, OrderedInlineModelAdminMixin
 
-from django.contrib.auth.models import User, Group
 
-
-class TaskInline(admin.TabularInline):
+class TaskInline(OrderedTabularInline):
     model = Task
+    fields = (
+        "parent",
+        "title",
+        "description",
+        "planned_start",
+        "planned_completion",
+        "state",
+        "justification",
+        "completion",
+        "order",
+        "move_up_down_links",
+    )
+    readonly_fields = (
+        "order",
+        "move_up_down_links",
+    )
+    ordering = ("order",)
     extra = 2
 
 
-class CityAdmin(admin.ModelAdmin):
+class CityAdmin(OrderedInlineModelAdminMixin, admin.ModelAdmin):
     fields = ["zipcode", "name", "url", "introduction", "budget"]
     inlines = [TaskInline]
     search_fields = ["zipcode", "name"]

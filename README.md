@@ -8,7 +8,7 @@ Quick overview:
 - To make sure that exactly those are installed we use a python virtual environment
 - black is used to format the code
 - a pre-commit hook is used to keep commits clean
-- We use pyright to get a little bit of type checking. Currently this is just in basic mode and without any special handling for the django ORM. I expect both things to potentially need tweaking (for example: https://github.com/sbdchd/django-types looks potentially useful).
+- We use pyright to get a little bit of type checking. Currently this is just in basic mode and without any special handling for the django ORM. I expect both things to potentially need tweaking (for example: <https://github.com/sbdchd/django-types> looks potentially useful).
 
 ### How to install the dev environment
 

@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from ordered_model.models import OrderedModel
 
-# Note PEP-8 naming convetions for class names apply. So use the singular and CamelCase
+# Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
 
 
 class City(models.Model):
@@ -17,7 +18,9 @@ class City(models.Model):
         return self.zipcode + " " + self.name
 
 
-class Task(models.Model):
+class Task(OrderedModel):
+    order_with_respect_to = ("city", "parent")
+
     city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Stadt")
 
     parent = models.ForeignKey(
@@ -51,6 +54,8 @@ class Task(models.Model):
     state = models.IntegerField(
         "Zustand", choices=States.choices, default=States.UNKNOWN
     )
+
+    justification = models.TextField("Begründung Zustand", blank=True, default="")
 
     # Maybe later. Not part of the MVP:
 
