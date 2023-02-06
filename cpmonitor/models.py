@@ -4,39 +4,38 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Note PEP-8 naming convetions for class names apply. So use the singular and CamelCase
 
 
-### Lookup-entities (shared among all cities, entered by admins)
-
-class Sector(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    ord = models.IntegerField(unique=True)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class TaskCategory(models.Model):
-    sector = models.ForeignKey(Sector, on_delete=models.PROTECT)
-    name = models.CharField(max_length=200, unique=True)
-    info = models.TextField()
-    ord = models.IntegerField(unique=True)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-### data-entities (entered by users)
-
 class City(models.Model):
-    name = models.CharField(max_length=255)
-    zipcode = models.CharField(max_length=5)
-    info = models.TextField(blank=True)  
-    url = models.URLField(blank=True)
+    name = models.CharField("Name", max_length=255)
+    zipcode = models.CharField("PLZ", max_length=5)
+    url = models.URLField("Homepage", blank=True)
+
+    introduction = models.TextField("Einleitung", blank=True)
+
+    budget = models.IntegerField("CO2 Budget [Mio Tonnen]", default=0)
 
     def __str__(self) -> str:
         return self.zipcode + " " + self.name
 
 
 class Task(models.Model):
+    city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Stadt")
+
+    parent = models.ForeignKey(
+        "self",
+        blank=True,
+        null=True,
+        on_delete=models.PROTECT,
+        verbose_name="(Sub-)Sektor",
+        related_name="Maßnahme",
+    )
+
+    title = models.CharField("Titel", max_length=255)
+
+    description = models.TextField("Beschreibung", blank=True, default="")
+
+    planned_start = models.DateTimeField("Geplanter Start", blank=True, null=True)
+
+    planned_completion = models.DateTimeField("Geplantes Ende", blank=True, null=True)
 
     class States(models.IntegerChoices):
         UNKNOWN = 0
@@ -44,30 +43,78 @@ class Task(models.Model):
         PLANNED = 2
         WAITING = 3
         IN_PROGRESS = 4
-        DONE = 5
-        REJECTED =6
+        DELAYED = 5
+        SUCCEEDED = 6
+        FAILED = 7
+        REJECTED = 8
 
-    class Severities(models.IntegerChoices):
-        CRITICAL = 5
-        HIGH = 4
-        STANDARD=3
-        LOW = 2
-        VERY_LOW = 1
+    state = models.IntegerField(
+        "Zustand", choices=States.choices, default=States.UNKNOWN
+    )
 
-    city = models.ForeignKey(City, on_delete=models.PROTECT)
-    category = models.ForeignKey(TaskCategory, on_delete=models.PROTECT)
-    name = models.CharField(max_length=255)
-    info = models.TextField()
+    # Maybe later. Not part of the MVP:
 
-    state = models.IntegerField(choices=States.choices,default=States.UNKNOWN)
-    severity = models.IntegerField(choices=Severities.choices, default=Severities.STANDARD)
+    # class Severities(models.IntegerChoices):
+    #     CRITICAL = 5
+    #     HIGH = 4
+    #     STANDARD = 3
+    #     LOW = 2
+    #     VERY_LOW = 1
+    # severity = models.IntegerField(
+    #     "Schweregrad",
+    #     choices=Severities.choices,
+    #     default=Severities.STANDARD)
+
+    # weight = models.IntegerField(
+    #     "Gewicht",
+    #     default=0,
+    #     validators=[
+    #         MinValueValidator(0),
+    #         MaxValueValidator(3)
+    #     ]
+    # )
+
     completion = models.IntegerField(
-                    default=0, 
-                    validators=[
-                        MinValueValidator(0),
-                        MaxValueValidator(100)
-                    ]
-                )
+        "Vervollständigungsgrad",
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+    )
 
     def __str__(self) -> str:
-        return self.name
+        return self.title
+
+
+# Tables for comparing and connecting the plans of all cities
+# Lookup-entities (shared among all cities, entered by admins)
+
+# This is currently kept out of the above city-specific data, since
+# it might not be part of the MVP.
+
+# Thoughts:
+# - It might be better placed in a separate Django app, to keep it apart from the city stuff in the admin interface.
+# - Sector / TaskCategory might be one table with recursive reference. Lets see, how that works out with the Tasks table.
+
+# class Sector(models.Model):
+#     name = models.CharField(max_length=100, unique=True)
+#     ord = models.IntegerField(unique=True)
+
+#     def __str__(self) -> str:
+#         return self.name
+
+
+# class TaskCategory(models.Model):
+#     sector = models.ForeignKey(Sector, on_delete=models.PROTECT)
+#     name = models.CharField(max_length=200, unique=True)
+#     info = models.TextField()
+#     ord = models.IntegerField(unique=True)
+
+#     def __str__(self) -> str:
+#         return self.name
+
+
+# class TaskToCategory(models.Model):
+#     task = models.ForeignKey(Task, on_delete=models.PROTECT)
+#     category = models.ForeignKey(TaskCategory, on_delete=models.PROTECT)
+
+#     def __str__(self) -> str:
+#         return self.category.name + " - " + self.task.title
