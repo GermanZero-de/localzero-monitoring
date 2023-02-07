@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "A website to maintain the progress of a municipality towards net zero."
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
+packages = [
+    { include = "cpmonitor" },
+    { include = "config" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
