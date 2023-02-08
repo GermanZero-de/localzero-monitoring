@@ -25,7 +25,7 @@ poetry shell
 # Make sure everything is installed as per the poetry.lock file
 poetry install --sync
 # Make sure the pre-commit hooks are installed in the git repo
- ./.venv/bin/pre-commit install
+./.venv/bin/pre-commit install
 ```
 
 On Windows, poetry and venv somehow do not work well together. Do this in a fresh check-out, instead:
@@ -64,3 +64,42 @@ python manage.py runserver --settings=config.settings.local
 
 The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
 package / module name it follows python style conventions of being short and all in one lowercase word.
+
+### Building the Docker image and running the container
+
+The Dockerfile is based on the following resources:
+- [DigitalOcean blog post](https://www.digitalocean.com/community/tutorials/how-to-build-a-django-and-gunicorn-application-with-docker)
+- [Stackoverflow answer](https://stackoverflow.com/a/57886655)
+- [Sample Repo](https://github.com/mgnisia/Boilerplate-Docker-Django-Gunicorn-Nginx)
+
+It uses a multi-stage build to prevent shipping unnecessary files which would increase image size and attack surface.
+
+To build the image, run the following command in the repository root directory (containing the Dockerfile):
+```shell
+docker build . -t cpmonitor
+```
+
+To run the container, run (replacing directory of `db.sqlite3` and SECRET_KEY placeholders):
+```shell
+docker run --rm -it -p 8000:8000 -v <absolute path of directory containing db.sqlite3>:/db -e SECRET_KEY=<...> cpmonitor
+```
+
+By default, the container will run the app using the production configuration.
+To use the local configuration, run:
+```shell
+docker run --rm -it -p 8000:8000 -e DJANGO_SETTINGS_MODULE=config.settings.local-container -v <absolute path of directory containing db.sqlite3>:/db cpmonitor
+```
+
+Instead of passing the absolute path to this repo, you may instead use
+- in a Linux shell:
+    ```shell
+    -v "$PWD":/db
+    ```
+- in Powershell:
+    ```powershell
+    -v ${pwd}:db
+    ```
+- in a WSL Linux shell, if you decided to store your projects outside the WSL file system (otherwise see above):
+    ```shell
+    -v "${PWD/\/mnt/}":/db
+    ```
