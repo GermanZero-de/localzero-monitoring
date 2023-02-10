@@ -86,8 +86,10 @@ padding: 20px;
 }
 {% endblock style %}
 
+{% load static %}
+
 {% block content %}
-<h1>Klimaschutzmonitor</h1>
+<h1><img src="{% static 'logo.png' %}" style="width: 64px" alt="logo">Klimaschutzmonitor</h1>
 {% for city in cities %}
 <div style="width: 100%; margin: 3px">
   <div style="display: flex; flex-wrap: wrap">
