@@ -13,9 +13,11 @@ Quick overview:
 ### How to install the dev environment
 
 - Install python version 3.10 or greater from <https://www.python.org/downloads/>
+- Install venv with `sudo apt install python3-venv` (the version needs to match the python version)
 - Windows only: Install WSL (Windows Subsystem for Linux) with `wsl --install` (See <https://learn.microsoft.com/en-us/windows/wsl/setup/environment>)
 - Windows only: Use the WSL shell for all commands from here on.
 - Install poetry with `curl -sSL https://install.python-poetry.org | python3 -` (See <https://python-poetry.org/docs/>)
+- Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command
 
 The above steps are needed only once per machine.
 
