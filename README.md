@@ -82,9 +82,17 @@ python manage.py runserver --settings=config.settings.local
 The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
 package / module name it follows python style conventions of being short and all in one lowercase word.
 
-### Building the Docker image and running the container
+### Containerization and Deployment
 
-The Dockerfile is based on the following resources:
+The application is deployed to the server as a pair of Docker containers:
+- container 1 runs the gunicorn webserver to host the django app itself,
+- container 2 runs nginx, a proxy that hosts the static files while providing stability and security.
+
+Only the port of nginx is exposed, which will forward requests to the django app or provide any requested static files directly.
+
+#### Building the Django app Docker image and running the container
+
+The Dockerfile for the django app is based on the following resources:
 
 - [DigitalOcean blog post](https://www.digitalocean.com/community/tutorials/how-to-build-a-django-and-gunicorn-application-with-docker)
 - [Stackoverflow answer](https://stackoverflow.com/a/57886655)
@@ -130,3 +138,16 @@ Instead of passing the absolute path to this repo, you may instead use
     ```shell
     -v "${PWD/\/mnt/}":/db
     ```
+
+#### Deployment including nginx
+
+To run both containers together, build the app container as described above and then run the following command in the repository root directory:
+```shell
+# using production config
+docker compose --env-file .env.production up
+```
+```shell
+# using local config
+docker compose --env-file .env.local up
+```
+This will start both the Django app and the nginx containers. The website can then be reached at http://localhost:80.

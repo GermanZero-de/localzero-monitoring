@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  djangoapp:
+    image: cpmonitor
+    volumes:
+      - ./:/db
+      - static_volume:/static
+    networks:
+      - nginx_network
+    environment:
+      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:?Please select an environment using '--env-file .env.local' or '--env-file .env.production' (see README.md)!}
+
+  nginx-unprivileged:
+    image: nginxinc/nginx-unprivileged:alpine
+    ports:
+      - 80:8001
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - static_volume:/cpmonitor/static
+    depends_on:
+      - djangoapp
+    networks:
+      - nginx_network
+
+networks:
+  nginx_network:
+    driver: bridge
+
+volumes:
+  static_volume: # just declare the volume so nginx and django can share it
