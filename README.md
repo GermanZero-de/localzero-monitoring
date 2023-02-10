@@ -12,34 +12,38 @@ Quick overview:
 
 ### How to install the dev environment
 
-You need python 3.10 or greater already installed! These notes are from a Mac user. So linux
-folks should be happy. Windows users might need to do some adjusting but in principle all the
-tooling is available for Windows users as well (I just haven't tested this).
+- Install python version 3.10 or greater from <https://www.python.org/downloads/>
+- Windows only: Install WSL (Windows Subsystem for Linux) with `wsl --install` (See <https://learn.microsoft.com/en-us/windows/wsl/setup/environment>)
+- Windows only: Use the WSL shell for all commands from here on.
+- Install poetry with `curl -sSL https://install.python-poetry.org | python3 -` (See <https://python-poetry.org/docs/>)
+
+The above steps are needed only once per machine.
+
+Then clone this repository and run the following commands in the created local repository:
 
 ```shell
-# in the checkout of the repository
-# Create a python virtual environment (so that exactly the libraries we specify in the poetry file will be available)
 python3 -m venv .venv
-# Start the poetry shell (this is a shell where python points to the venv python)
 poetry shell
-# Make sure everything is installed as per the poetry.lock file
 poetry install --sync
-# Make sure the pre-commit hooks are installed in the git repo
 ./.venv/bin/pre-commit install
 ```
 
-On Windows, poetry and venv somehow do not work well together. Do this in a fresh check-out, instead:
+This will
 
-```shell
-# If not already installed globally, install poetry:
-pip install poetry
-# Make sure everything is installed as per the poetry.lock file. This creates a virtual environment in a user directory.
-python -m poetry install --sync
-# Start a poetry shell in that environment. (Has to be done each time.)
-python -m poetry shell
-# Make sure the pre-commit hooks are installed in the git repo.
-pre-commit install
-```
+- create a python virtual envirnoment in the directory `.venv`.
+- install all the dependencies of the project as specified in `pyproject.toml` and `poetry.lock` into this virtual environment, and
+- install a pre-commit hook in your local repository. It will be run before each commit and check the code.
+
+Whenever you work with the project, call `poetry shell` first . Windows only: Do this within the WSL shell.
+In this shell python points to the python virtual environment in `.venv`.
+
+Whenever dependencies changed, call `poetry install --sync` first.
+
+Otherwise, these commands need only be repeated when a new clone is created.
+
+### Tipps for vscode
+
+TODO
 
 ### How to run the development server
 
