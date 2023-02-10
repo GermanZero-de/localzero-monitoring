@@ -24,6 +24,7 @@ RUN poetry export --format requirements.txt \
     | /venv/bin/pip install --requirement /dev/stdin
 
 COPY . .
+RUN /venv/bin/python manage.py collectstatic --no-input -v 2 --settings=config.settings.container
 RUN poetry build && /venv/bin/pip install dist/*.whl
 
 FROM base as final
@@ -37,5 +38,6 @@ USER user
 EXPOSE 8000
 
 COPY --from=builder /venv /venv
+COPY --from=builder /static /static
 
 CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "config.wsgi:application"]
