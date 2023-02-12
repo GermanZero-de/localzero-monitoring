@@ -82,6 +82,17 @@ python manage.py runserver --settings=config.settings.local
 The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
 package / module name it follows python style conventions of being short and all in one lowercase word.
 
+### Testing
+Test are written in pytest (https://docs.pytest.org/en/7.2.x/index.html).
+
+Execute all tests with
+```shell
+pytest
+```
+
+New test files have to be named according to the convention: `*_test.py`. <br>
+Test names should follow the convention: `should_do_x_when_given_y`.
+
 ### Containerization and Deployment
 
 The application is deployed to the server as a pair of Docker containers:
