@@ -84,14 +84,22 @@ package / module name it follows python style conventions of being short and all
 
 ### Testing
 Test are written in pytest (https://docs.pytest.org/en/7.2.x/index.html).
+End-to-end tests are written with the playwright plugin of pytest (https://playwright.dev/python/docs/intro).
 
-Execute all tests with
+Execute tests with
 ```shell
+# run all tests
 pytest
+
+# run a single test
+pytest <path-to-test>
+
+# run e2e test in headed mode
+pytest --headed <path-to-e2e-test>
 ```
 
 New test files have to be named according to the convention: `*_test.py`. <br>
-Test names should follow the convention: `should_do_x_when_given_y`.
+Test names should follow the convention: `test_should_do_x_when_given_y`.
 
 ### Containerization and Deployment
 
