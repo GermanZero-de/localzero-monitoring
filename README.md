@@ -14,10 +14,11 @@ Quick overview:
 
 - Windows only: Install WSL (Windows Subsystem for Linux) with `wsl --install` (See <https://learn.microsoft.com/en-us/windows/wsl/setup/environment>)
   - Note: The Microsoft setup description says that Build 20262 is required. That seems to be a prerelease build number from 2020 or 2021. Windows 10 22H2 with build number 19045 works.
+  - After the installation: Update the Linux distribution (in the WSL shell) with `sudo apt-get update` 
 - Windows only: Use the WSL shell for all commands from here on. (For vscode see below.)
-- Install python version 3.10 or greater, e.g. with "`sudo apt install python3`".
-- Install venv, e.g. with "`sudo apt install python3-venv`" (the version needs to match the python version).
-- Install poetry with "`curl -sSL https://install.python-poetry.org | python3 -`" (See <https://python-poetry.org/docs/>. The version in Ubuntu is too old. A new login shell might be needed after that.)
+- Install python version 3.10 or greater, e.g. with `sudo apt install python3`.
+- Install venv, e.g. with `sudo apt install python3-venv` (the version needs to match the python version).
+- Install poetry with `curl -sSL https://install.python-poetry.org | python3 -` (See <https://python-poetry.org/docs/>. The version in Ubuntu is too old. A new login shell might be needed after that.)
 - Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command.
 
 The above steps are needed only once per machine.
