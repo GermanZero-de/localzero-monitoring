@@ -278,6 +278,21 @@ files = [
 ]
 
 [[package]]
+name = "django-treebeard"
+version = "4.6.1"
+description = "Efficient tree implementations for Django"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-treebeard-4.6.1.tar.gz", hash = "sha256:84ab35040277d524eb77939e235568c9c856cb523cc9655793b66fe9a3ef468b"},
+    {file = "django_treebeard-4.6.1-py3-none-any.whl", hash = "sha256:89bc79a7d9ae62e8071ff1f866c83b1484c408d6082ce11cf3eca689240712f6"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "exceptiongroup"
 version = "1.1.0"
 description = "Backport of PEP 654 (exception groups)"
@@ -865,4 +880,4 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "6b41bb61fa454f7ce59dfe2e1f3758f7f1dfded64f1cf790369aace5aab90ac8"
+content-hash = "2d4fb90777098cce653f0b069ff55e6998dbbf8048aac29f910b92de0c0be6f5"

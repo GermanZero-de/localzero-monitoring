@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "ordered_model",
+    "treebeard",
     "cpmonitor.apps.CpmonitorConfig",
 ]
 

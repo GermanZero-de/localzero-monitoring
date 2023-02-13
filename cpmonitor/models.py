@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from ordered_model.models import OrderedModel
+
+# from ordered_model.models import OrderedModel
+from treebeard.mp_tree import MP_Node
 
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
 
@@ -18,19 +20,19 @@ class City(models.Model):
         return self.zipcode + " " + self.name
 
 
-class Task(OrderedModel):
-    order_with_respect_to = ("city", "parent")
+class Task(MP_Node):
+    # order_with_respect_to = ("city", "parent")
 
     city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Stadt")
 
-    parent = models.ForeignKey(
-        "self",
-        blank=True,
-        null=True,
-        on_delete=models.PROTECT,
-        verbose_name="(Sub-)Sektor",
-        related_name="Maßnahme",
-    )
+    # parent = models.ForeignKey(
+    #     "self",
+    #     blank=True,
+    #     null=True,
+    #     on_delete=models.PROTECT,
+    #     verbose_name="(Sub-)Sektor",
+    #     related_name="Maßnahme",
+    # )
 
     title = models.CharField("Titel", max_length=255)
 

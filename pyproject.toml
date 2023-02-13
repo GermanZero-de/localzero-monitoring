@@ -17,6 +17,7 @@ gunicorn = "^20.1.0"
 pytest = "^7.2.1"
 pytest-playwright = "^0.3.0"
 pytest-base-url = "^2.0.0"
+django-treebeard = "^4.6.1"
 
 [tool.pyright]
 venvPath = "."
