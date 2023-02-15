@@ -266,16 +266,19 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
-name = "django-ordered-model"
-version = "3.6"
-description = "Allows Django models to be ordered and provides a simple admin interface for reordering them."
+name = "django-treebeard"
+version = "4.6.1"
+description = "Efficient tree implementations for Django"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 files = [
-    {file = "django-ordered-model-3.6.tar.gz", hash = "sha256:62161a6bc51d8b402644854b257605d7b5183d01fd349826682a87e9227c05b5"},
-    {file = "django_ordered_model-3.6-py3-none-any.whl", hash = "sha256:0006b111f472a2348f75554a4e77bee2b1f379a0f96726af6b1a3ebf3a950789"},
+    {file = "django-treebeard-4.6.1.tar.gz", hash = "sha256:84ab35040277d524eb77939e235568c9c856cb523cc9655793b66fe9a3ef468b"},
+    {file = "django_treebeard-4.6.1-py3-none-any.whl", hash = "sha256:89bc79a7d9ae62e8071ff1f866c83b1484c408d6082ce11cf3eca689240712f6"},
 ]
+
+[package.dependencies]
+Django = ">=3.2"
 
 [[package]]
 name = "exceptiongroup"
@@ -865,4 +868,4 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "6b41bb61fa454f7ce59dfe2e1f3758f7f1dfded64f1cf790369aace5aab90ac8"
+content-hash = "83b3c7ba88bfc7b5742e41f55f5dd4ee5ef44d90a7875ccc20e9e754ed767074"

@@ -6,6 +6,7 @@
         "github.vscode-pull-request-github",
         "davidanson.vscode-markdownlint",
         "donjayamanne.python-extension-pack",
-        "zeshuaro.vscode-python-poetry"
+        "zeshuaro.vscode-python-poetry",
+        "ms-python.black-formatter"
     ]
 }

@@ -9,6 +9,6 @@ def index(request):
         "index.html",
         {
             "cities": City.objects.order_by("id"),
-            "tasks": Task.objects.order_by("order"),
+            "tasks": Task.objects.order_by("id"),
         },
     )
