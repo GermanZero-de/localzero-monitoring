@@ -1,6 +1,10 @@
 {
   "name": "cpmonitor",
   "packageManager": "yarn@3.4.1",
+  "scripts": {
+    "compile:css:watch": "sass --watch --load-path=node_modules cpmonitor/static/css/main.scss cpmonitor/static/css/main.css",
+    "compile:css": "sass --load-path=node_modules cpmonitor/static/css/main.scss cpmonitor/static/css/main.css"
+  },
   "dependencies": {
     "bootstrap": "^5.2.3"
   },
