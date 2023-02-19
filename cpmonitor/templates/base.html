@@ -1,13 +1,14 @@
+{% load static %}
+
 <!DOCTYPE HTML>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Klimschutzmonitor</title>
-    <!-- TODO: What CSS framework? Bulma / Bootstrap / tailwind? -->
-    <!-- Font-awesome for icons? Or featherweight ? -->
-    <style>
-      {%block style %}{% endblock style %}
-    </style>
+    <title>Klimaschutzmonitor</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
   </head>
   <body>
   {% block content %}{% endblock content %}
