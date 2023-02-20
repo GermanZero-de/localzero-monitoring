@@ -22,6 +22,7 @@ Quick overview:
 - Install venv, e.g. with `sudo apt install python3-venv` (the version needs to match the python version).
 - Install poetry with `curl -sSL https://install.python-poetry.org | python3 -` (See <https://python-poetry.org/docs/>. The version in Ubuntu is too old. A new login shell might be needed after that.)
 - Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command.
+- Install Yarn version 3 as described here: https://yarnpkg.com/getting-started/install.
 
 The above steps are needed only once per machine.
 
