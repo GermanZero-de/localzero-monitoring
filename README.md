@@ -9,17 +9,20 @@ Quick overview:
 - black is used to format the code
 - a pre-commit hook is used to keep commits clean
 - We use pyright to get a little bit of type checking. Currently this is just in basic mode and without any special handling for the django ORM. I expect both things to potentially need tweaking (for example: <https://github.com/sbdchd/django-types> looks potentially useful).
+- <a href="https://classic.yarnpkg.com/en/">Yarn</a> is used to manage node dependencies that are needed to include
+  <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">Bootstrap</a>
 
 ### How to install the dev environment
 
 - Windows only: Install WSL (Windows Subsystem for Linux) with `wsl --install` (See <https://learn.microsoft.com/en-us/windows/wsl/setup/environment>)
   - Note: The Microsoft setup description says that Build 20262 is required. That seems to be a prerelease build number from 2020 or 2021. Windows 10 22H2 with build number 19045 works.
-  - After the installation: Update the Linux distribution (in the WSL shell) with `sudo apt-get update` 
+  - After the installation: Update the Linux distribution (in the WSL shell) with `sudo apt-get update`
 - Windows only: Use the WSL shell for all commands from here on. (For vscode see below.)
 - Install python version 3.10 or greater, e.g. with `sudo apt install python3`.
 - Install venv, e.g. with `sudo apt install python3-venv` (the version needs to match the python version).
 - Install poetry with `curl -sSL https://install.python-poetry.org | python3 -` (See <https://python-poetry.org/docs/>. The version in Ubuntu is too old. A new login shell might be needed after that.)
 - Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command.
+- Install Yarn version 3 as described here: https://yarnpkg.com/getting-started/install.
 
 The above steps are needed only once per machine.
 
@@ -79,6 +82,9 @@ python manage.py createsuperuser --settings=config.settings.local
 
 #start the server
 python manage.py runserver --settings=config.settings.local
+
+# install css and javascript libraries
+yarn install
 ```
 
 The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
@@ -102,6 +108,21 @@ pytest --headed <path-to-e2e-test>
 
 New test files have to be named according to the convention: `*_test.py`. <br>
 Test names should follow the convention: `test_should_do_x_when_given_y`.
+
+
+### Styling
+We use <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">Bootstrap</a> as a css framework.
+Custom scss can be written in main.scss. Whenever this file has changed it has to be compiled with sass
+```
+yarn run compile:css
+```
+to generate a static css file that can be used in base.html.
+
+To use the javascript from Bootstrap the relevant dependencies need to be installed in the node_modules folder. Run
+```
+yarn install
+```
+to do that.
 
 ### Containerization and Deployment
 
