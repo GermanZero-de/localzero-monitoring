@@ -1,4 +1,15 @@
-FROM python:3.10-alpine AS base
+# build frontend
+FROM node:19-alpine AS frontend-builder
+
+WORKDIR /cpmonitor
+
+COPY package.json .
+COPY cpmonitor/static/css cpmonitor/static/css
+RUN yarn install && \
+    yarn run compile:css
+
+# basic python settings
+FROM python:3.10-alpine AS python-base
 
 ENV PYTHONFAULTHANDLER=1 \
     PYTHONHASHSEED=random \
@@ -9,7 +20,8 @@ ENV PYTHONFAULTHANDLER=1 \
 
 WORKDIR /cpmonitor
 
-FROM base as builder
+# build python app
+FROM python-base as python-builder
 
 ENV PIP_DEFAULT_TIMEOUT=100 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
@@ -24,20 +36,26 @@ RUN poetry export --without dev --format requirements.txt \
     | /venv/bin/pip install --requirement /dev/stdin
 
 COPY . .
+COPY --from=frontend-builder /cpmonitor/cpmonitor/static/css ./cpmonitor/static/css
+COPY --from=frontend-builder /cpmonitor/node_modules/bootstrap/dist/js ./node_modules/bootstrap/dist/js
+COPY --from=frontend-builder /cpmonitor/node_modules/jquery/dist ./node_modules/jquery/dist
 RUN /venv/bin/python manage.py collectstatic --no-input -v 2 --settings=config.settings.container
-RUN poetry build && /venv/bin/pip install dist/*.whl
+RUN poetry build && \
+    /venv/bin/pip install dist/*.whl
 
-FROM base as final
+# put together final app container
+FROM python-base as final
 
 ENV PATH="/venv/bin:${PATH}"
 ENV VIRTUAL_ENV="/venv"
 
+# run as unprivileged user instead of root
 RUN adduser -D user
 USER user
 
 EXPOSE 8000
 
-COPY --from=builder /venv /venv
-COPY --from=builder /static /static
+COPY --from=python-builder /venv /venv
+COPY --from=python-builder /static /static
 
 CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "config.wsgi:application"]

@@ -214,7 +214,7 @@ Instead of passing the absolute path to this repo, you may instead use
 
 ### Deployment including nginx
 
-To run both containers together, build the app container as described above and then run the following command in the repository root directory:
+To run both containers together, run the following command in the repository root directory (the app container will be built automatically if necessary):
 
 ```shell
 # using production config
@@ -225,15 +225,19 @@ docker compose --env-file .env.production up --detach
 # using local config
 docker compose --env-file .env.local up --detach
 ```
+
 This will start both the Django app and the nginx containers *in the background*. The website can then be reached at <http://localhost:80>.
 
 To stop the containers from running in the background, run:
+
 ```shell
 # using production config
 docker compose --env-file .env.local down --volumes
 ```
+
 ```shell
 # using local config
 docker compose --env-file .env.local down --volumes
 ```
+
 The `--volumes` flag is important to make sure that at the next start, the latest static resources from the app container are served instead of potentially outdated files from the previous run cached by Docker.
