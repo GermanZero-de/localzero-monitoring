@@ -9,8 +9,8 @@ Quick overview:
 - black is used to format the code
 - a pre-commit hook is used to keep commits clean
 - We use pyright to get a little bit of type checking. Currently this is just in basic mode and without any special handling for the django ORM. I expect both things to potentially need tweaking (for example: <https://github.com/sbdchd/django-types> looks potentially useful).
-- <a href="https://classic.yarnpkg.com/en/">Yarn</a> is used to manage node dependencies that are needed to include
-  <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">Bootstrap</a>
+- [Yarn](https://classic.yarnpkg.com/en/) is used to manage node dependencies that are needed to include
+  [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 
 ### How to install the dev environment
 
@@ -73,18 +73,18 @@ locally you want to do this:
 ```shell
 # (inside your poetry shell)
 
-#prepare database
+# prepare database
 python manage.py makemigrations --settings=config.settings.local
 python manage.py migrate --settings=config.settings.local
 
-#generate user for admin UI
+# generate user for admin UI
 python manage.py createsuperuser --settings=config.settings.local
-
-#start the server
-python manage.py runserver --settings=config.settings.local
 
 # install css and javascript libraries
 yarn install
+
+# start the server
+python manage.py runserver --settings=config.settings.local
 ```
 
 The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
@@ -111,12 +111,21 @@ Test names should follow the convention: `test_should_do_x_when_given_y`.
 
 
 ### Styling
-We use <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">Bootstrap</a> as a css framework.
-Custom scss can be written in main.scss. Whenever this file has changed it has to be compiled with sass
+We use [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) as a css framework.
+Custom scss can be written in [main.scss](cpmonitor/static/css/main.scss). Whenever this file has changed it has to be compiled with sass
 ```
 yarn run compile:css
 ```
 to generate a static css file that can be used in base.html.
+
+To save this manual step, you can also run
+```shell
+yarn run compile:css:watch
+
+# or on WSL2 if the project is on the Windows file system (eats CPU...):
+yarn run compile:css:poll
+```
+in the background to keep compiling SCSS to CSS automatically upon changing the SCSS file.
 
 To use the javascript from Bootstrap the relevant dependencies need to be installed in the node_modules folder. Run
 ```
