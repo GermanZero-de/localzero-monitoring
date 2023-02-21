@@ -20,7 +20,7 @@ RUN pip install "poetry==$POETRY_VERSION"
 RUN python -m venv /venv
 
 COPY pyproject.toml poetry.lock ./
-RUN poetry export --format requirements.txt \
+RUN poetry export --without dev --format requirements.txt \
     | /venv/bin/pip install --requirement /dev/stdin
 
 COPY . .
