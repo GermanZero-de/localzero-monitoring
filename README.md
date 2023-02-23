@@ -14,15 +14,15 @@ Quick overview:
 
 ### How to install the dev environment
 
-- Windows only: Install WSL (Windows Subsystem for Linux) with `wsl --install` (See <https://learn.microsoft.com/en-us/windows/wsl/setup/environment>)
-  - Note: The Microsoft setup description says that Build 20262 is required. That seems to be a prerelease build number from 2020 or 2021. Windows 10 22H2 with build number 19045 works.
-  - After the installation: Update the Linux distribution (in the WSL shell) with `sudo apt-get update`
-- Windows only: Use the WSL shell for all commands from here on. (For vscode see below.)
-- Install python version 3.10 or greater, e.g. with `sudo apt install python3`.
-- Install venv, e.g. with `sudo apt install python3-venv` (the version needs to match the python version).
-- Install poetry with `curl -sSL https://install.python-poetry.org | python3 -` (See <https://python-poetry.org/docs/>. The version in Ubuntu is too old. A new login shell might be needed after that.)
+- Install git as described here: <https://git-scm.com/downloads>.
+- Windows: git includes a bash shell. Use it for the following commands.
+- Windows: Settings -> Apps -> Apps and Features -> “manage app execution aliases” / "Aliase für die App-Ausführung": Deactivate for `python.exe` and `python3.exe`.
+- Install python version 3.10 or greater. Linux: `sudo apt install python3`, Windows via <https://pyenv-win.github.io/pyenv-win/>.
+- If not present, install python venv. Linux: `sudo apt install python3-venv` (the version needs to match the python version).
+- Install poetry with `curl -sSL https://install.python-poetry.org | python3 -` (See <https://python-poetry.org/docs/>.)
+- Windows: Add the shown path in the `PATH` variable. (Search fpr "env" in Windows settings.)
 - Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command.
-- Install Yarn version 3 as described here: https://yarnpkg.com/getting-started/install.
+- Install Yarn version 3 as described here: <https://yarnpkg.com/getting-started/install>.
 
 The above steps are needed only once per machine.
 
@@ -31,7 +31,7 @@ Then run the following commands:
 ```shell
 git clone https://github.com/GermanZero-de/klimaschutzmonitor.git
 cd klimaschutzmonitor # Or `code klimaschutzmonitor` to open it with vscode.
-python3 -m venv .venv
+python -m venv .venv
 poetry shell
 poetry install --sync
 pre-commit install
@@ -53,13 +53,9 @@ Otherwise, these commands need only be repeated when a new clone is created.
 
 ### Tips for vscode
 
-Windows only: After installing WSL,
+After cloning the repository, open the new directory with vscode.
 
-- install the WSL extension in vscode,
-- click the bottom left corner (green) and select "Reopen folder in WSL", and
-- select Terminal -> New Terminal for a WSL shell.
-
-After cloning the repository, open the new directory with vscode. (Windows only: Make sure you are in WSL, possibly "Reopen folder in WSL".)
+Windows: As terminal choose "Git Bash".
 
 Recommended extensions should be offered. If not, got to the "Extensions" side-bar and enter `@recommended`. Then select "Install Workspace Recommended Extensions".
 
@@ -77,7 +73,7 @@ locally you want to do this:
 python manage.py makemigrations --settings=config.settings.local
 python manage.py migrate --settings=config.settings.local
 
-# generate user for admin UI
+# generate user for admin UI (Windows: prepend `winpty`)
 python manage.py createsuperuser --settings=config.settings.local
 
 # install css and javascript libraries
@@ -91,10 +87,12 @@ The main app is called `cpmonitor` short for `climate protection monitor`. As th
 package / module name it follows python style conventions of being short and all in one lowercase word.
 
 ### Testing
-Test are written in pytest (https://docs.pytest.org/en/7.2.x/index.html).
-End-to-end tests are written with the playwright plugin of pytest (https://playwright.dev/python/docs/intro).
+
+Test are written in pytest (<https://docs.pytest.org/en/7.2.x/index.html>).
+End-to-end tests are written with the playwright plugin of pytest (<https://playwright.dev/python/docs/intro>).
 
 Execute tests with
+
 ```shell
 # run all tests
 pytest
@@ -106,36 +104,43 @@ pytest <path-to-test>
 pytest --headed <path-to-e2e-test>
 ```
 
-New test files have to be named according to the convention: `*_test.py`. <br>
-Test names should follow the convention: `test_should_do_x_when_given_y`.
-
+- New test files have to be named according to the convention: `*_test.py`.
+- Test names should follow the convention: `test_should_do_x_when_given_y`.
 
 ### Styling
+
 We use [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) as a css framework.
 Custom scss can be written in [main.scss](cpmonitor/static/css/main.scss). Whenever this file has changed it has to be compiled with sass
-```
+
+```shell
 yarn run compile:css
 ```
+
 to generate a static css file that can be used in base.html.
 
 To save this manual step, you can also run
+
 ```shell
 yarn run compile:css:watch
 
 # or on WSL2 if the project is on the Windows file system (eats CPU...):
 yarn run compile:css:poll
 ```
+
 in the background to keep compiling SCSS to CSS automatically upon changing the SCSS file.
 
 To use the javascript from Bootstrap the relevant dependencies need to be installed in the node_modules folder. Run
-```
+
+```shell
 yarn install
 ```
+
 to do that.
 
 ### Containerization and Deployment
 
 The application is deployed to the server as a pair of Docker containers:
+
 - container 1 runs the gunicorn webserver to host the django app itself,
 - container 2 runs nginx, a proxy that hosts the static files while providing stability and security.
 
@@ -193,12 +198,15 @@ Instead of passing the absolute path to this repo, you may instead use
 #### Deployment including nginx
 
 To run both containers together, build the app container as described above and then run the following command in the repository root directory:
+
 ```shell
 # using production config
 docker compose --env-file .env.production up
 ```
+
 ```shell
 # using local config
 docker compose --env-file .env.local up
 ```
-This will start both the Django app and the nginx containers. The website can then be reached at http://localhost:80.
+
+This will start both the Django app and the nginx containers. The website can then be reached at <http://localhost:80>.
