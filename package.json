@@ -7,9 +7,10 @@
     "compile:css": "sass --load-path=node_modules cpmonitor/static/css/main.scss cpmonitor/static/css/main.css"
   },
   "dependencies": {
-    "bootstrap": "^5.2.3",
-    "jquery": "^3.6.3",
-    "popper.js": "^1.16.1"
+    "@popperjs/core": "^2.11.2",
+    "@tabler/core": "^1.0.0-beta17",
+    "bootstrap": "5.1.3",
+    "jquery": "^3.6.3"
   },
   "devDependencies": {
     "sass": "^1.58.3"
