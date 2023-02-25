@@ -643,6 +643,25 @@ pytest = ">=3.0.0,<8.0.0"
 requests = ">=2.9"
 
 [[package]]
+name = "pytest-django"
+version = "4.5.2"
+description = "A Django plugin for pytest."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "pytest-django-4.5.2.tar.gz", hash = "sha256:d9076f759bb7c36939dbdd5ae6633c18edfc2902d1a69fdbefd2426b970ce6c2"},
+    {file = "pytest_django-4.5.2-py3-none-any.whl", hash = "sha256:c60834861933773109334fe5a53e83d1ef4828f2203a1d6a0fa9972f4f75ab3e"},
+]
+
+[package.dependencies]
+pytest = ">=5.4.0"
+
+[package.extras]
+docs = ["sphinx", "sphinx-rtd-theme"]
+testing = ["Django", "django-configurations (>=2.0)"]
+
+[[package]]
 name = "pytest-playwright"
 version = "0.3.0"
 description = "A pytest wrapper with fixtures for Playwright to automate web browsers"
@@ -868,4 +887,4 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "83b3c7ba88bfc7b5742e41f55f5dd4ee5ef44d90a7875ccc20e9e754ed767074"
+content-hash = "52568d9d91b5a0a52b0bf621a0c10c634d64e6ce64a81f953f315372cb932b4d"
