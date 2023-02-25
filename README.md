@@ -177,7 +177,9 @@ To build the image, run the following command in the repository root directory (
 docker build . -t cpmonitor
 ```
 
-To run the container, run (replacing directory of `db.sqlite3` and SECRET_KEY placeholders):
+**Important:** Since static files are served by a separate nginx container, static files will be missing when you run the app container on its own. To run both the app and nginx, see the section [Deployment including nginx](#deployment-including-nginx).
+
+To run just the app container, run (replacing directory of `db.sqlite3` and SECRET_KEY placeholders):
 
 ```shell
 docker run --rm -it -p 8000:8000 -v <absolute path of directory containing db.sqlite3>:/db -e SECRET_KEY=<...> cpmonitor
@@ -216,12 +218,22 @@ To run both containers together, build the app container as described above and 
 
 ```shell
 # using production config
-docker compose --env-file .env.production up
+docker compose --env-file .env.production up --detach
 ```
 
 ```shell
 # using local config
-docker compose --env-file .env.local up
+docker compose --env-file .env.local up --detach
 ```
+This will start both the Django app and the nginx containers *in the background*. The website can then be reached at <http://localhost:80>.
 
-This will start both the Django app and the nginx containers. The website can then be reached at <http://localhost:80>.
+To stop the containers from running in the background, run:
+```shell
+# using production config
+docker compose --env-file .env.local down --volumes
+```
+```shell
+# using local config
+docker compose --env-file .env.local down --volumes
+```
+The `--volumes` flag is important to make sure that at the next start, the latest static resources from the app container are served instead of potentially outdated files from the previous run cached by Docker.
