@@ -70,8 +70,10 @@ locally you want to do this:
 # (inside your poetry shell)
 
 # prepare database
-python manage.py makemigrations --settings=config.settings.local
 python manage.py migrate --settings=config.settings.local
+
+# (optional) install example data
+python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
 
 # generate user for admin UI (Windows: prepend `winpty`)
 python manage.py createsuperuser --settings=config.settings.local
@@ -87,9 +89,9 @@ The main app is called `cpmonitor` short for `climate protection monitor`. As th
 package / module name it follows python style conventions of being short and all in one lowercase word.
 
 ### Testing
-
-Test are written in pytest (<https://docs.pytest.org/en/7.2.x/index.html>).
-End-to-end tests are written with the playwright plugin of pytest (<https://playwright.dev/python/docs/intro>).
+All tests are written in [pytest](https://docs.pytest.org/en/7.2.x/index.html).
+End-to-end tests are written with the [playwright plugin of pytest](https://playwright.dev/python/docs/intro).
+To provide a test-database for some tests we use [pytest-django](https://pytest-django.readthedocs.io/en/latest/index.html)
 
 Execute tests with
 
@@ -136,6 +138,19 @@ yarn install
 ```
 
 to do that.
+
+### Changing the database model
+When the database model in models.py is changed a new migration has to be created specifying how to change to the new
+database format. This can be done by
+```
+python manage.py makemigrations --settings=config.settings.local
+```
+
+Afterwards the test database has to be updated as well. Use the dumpdata command to generate a test database from the
+currently running database:
+```
+python manage.py dumpdata --settings=config.settings.local > e2e_tests/database/test_database.json
+```
 
 ### Containerization and Deployment
 
