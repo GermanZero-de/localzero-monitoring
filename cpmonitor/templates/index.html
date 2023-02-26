@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<nav class="navbar navbar-expand-sm navbar-light bg-primary">
+<nav class="navbar navbar-expand-sm navbar-light bg-primary mb-3">
   <div class="container">
     <a class="navbar-brand fw-bold text-white" href="/">
       <img src="{% static 'logo_inverted.png' %}" alt="" height="50" class="d-inline-block align-middle">
@@ -29,7 +29,25 @@
   </div>
 </nav>
 
-
+<div class="container">
+  <div class="row">
+    <div class="col-7 card">
+      <div class="card-body">
+        <h2 class="card-title">Klimaneutrale Städte und Kommunen</h3>
+          <p>Städte und Kommunen leisten einen wichtigen Beitrag zur Klimaneutralität</p>
+          <p>Der <a href="https://localzero.net/">LocalZero</a> Klimaschutzmonitor ist eine Initiative von <a href="https://germanzero.de">GermanZero</a>, um mehr Transparenz
+          zum Fortschritt der Klimaneutralität deutscher Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den
+          jeweiligen Kommunen regelmäßig aktualisiert.</p>
+          <p>Wähle oben rechts deine Kommune aus, und finde heraus, welche Maßnahmen sie bereits geplant und unternommen hat, um klimaneutral zu werden!</p>
+          <p>Du findest deine Kommune nicht? Dann <a href="https://germanzero.de/mitmachen/localzero-teams">finde Mitstreiter:innen</a> und gründe ein neues Team
+          bei dir vor Ort!</p>
+      </div>
+    </div>
+    <div class="col-5">
+      <img src="https://localzero.net/lz-media/pages/assets/50ff6a8922-1672312437/wurmsham_01_800pxbreite.jpg" width="100%" >
+    </div>
+  </div>
+</div>
 
 {% comment %} initial sample layout -- just for reference, delete later! {% endcomment %}
 <div class="container">
