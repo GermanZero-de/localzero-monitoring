@@ -1,1 +1,11 @@
-@use "bootstrap/scss/bootstrap";
+// GermanZero colors
+$gz-yellow: #ffc80c;
+$gz-darkblue: #011633;
+$gz-green: #a3d869;
+
+@use "bootstrap/scss/bootstrap"
+with (
+  // customize bootstrap defaults like colors here
+  $primary: $gz-yellow,
+)
+;
