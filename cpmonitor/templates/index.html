@@ -6,13 +6,13 @@
 <h1><img src="{% static 'logo.png' %}" style="width: 64px" alt="logo">Klimaschutzmonitor</h1>
 {% for city in cities %}
 <div style="width: 100%; margin: 3px">
-  <div style="display: flex; flex-wrap: wrap">
+  <div>
     <div class="city-heading">
-      <h1>Einleitung Klimaschutz Monitor {{ city.name }}</h1>
+      <h2>Einleitung Klimaschutz Monitor {{ city.name }}</h2>
       <p>{{ city.introduction }}</p>
     </div>
     <div class="city-charts">
-      <h1>Platzhalter für Charts etc.</h1>
+      <h2>Platzhalter für Charts etc.</h2>
     </div>
   </div>
   <div style="display: flex; flex-wrap: wrap">

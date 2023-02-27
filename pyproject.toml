@@ -17,6 +17,7 @@ pytest = "^7.2.1"
 pytest-playwright = "^0.3.0"
 pytest-base-url = "^2.0.0"
 django-treebeard = "^4.6.1"
+pytest-django = "^4.5.2"
 
 [tool.pyright]
 venvPath = "."
@@ -35,3 +36,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 base_url = "http://127.0.0.1:8000"
+DJANGO_SETTINGS_MODULE = "config.settings.local"
