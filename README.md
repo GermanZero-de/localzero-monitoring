@@ -1,8 +1,6 @@
 # klimaschutzmonitor
 
-## Dev notes
-
-Quick overview:
+## Quick overview
 
 - We use poetry (so pyproject.toml lists the requirements, and poetry.lock the exact versions used to fulfill those requirements).
 - To make sure that exactly those are installed we use a python virtual environment
@@ -12,7 +10,7 @@ Quick overview:
 - [Yarn](https://classic.yarnpkg.com/en/) is used to manage node dependencies that are needed to include
   [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 
-### How to install the dev environment
+## How to install the dev environment
 
 - Install git as described here: <https://git-scm.com/downloads>.
 - Windows: git includes a bash shell. Use it for the following commands.
@@ -51,7 +49,7 @@ Whenever dependencies changed, call "`poetry install --sync`" first.
 
 Otherwise, these commands need only be repeated when a new clone is created.
 
-### Tips for vscode
+## Tips for vscode
 
 After cloning the repository, open the new directory with vscode.
 
@@ -59,7 +57,7 @@ Windows: As terminal choose "Git Bash".
 
 Recommended extensions should be offered. If not, got to the "Extensions" side-bar and enter `@recommended`. Then select "Install Workspace Recommended Extensions".
 
-### How to run the development server
+## How to run the development server
 
 We roughly follow some of the project layout / config layout ideas of the Two Scoops of Django book (<https://www.feldroy.com/books/two-scoops-of-django-3-x>).
 
@@ -90,12 +88,12 @@ or create a new admin user with: `python manage.py createsuperuser --settings=co
 The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
 package / module name it follows python style conventions of being short and all in one lowercase word.
 
-### Testing
+## Testing
 All tests are written in [pytest](https://docs.pytest.org/en/7.2.x/index.html).
 End-to-end tests are written with the [playwright plugin of pytest](https://playwright.dev/python/docs/intro).
 To provide a test-database for some tests we use [pytest-django](https://pytest-django.readthedocs.io/en/latest/index.html)
 
-Execute tests with
+*Start the dev server in the background*, then execute tests with
 
 ```shell
 # run all tests
@@ -111,7 +109,7 @@ pytest --headed <path-to-e2e-test>
 - New test files have to be named according to the convention: `*_test.py`.
 - Test names should follow the convention: `test_should_do_x_when_given_y`.
 
-### Styling
+## Styling
 
 We use [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) as a css framework.
 Custom scss can be written in [main.scss](cpmonitor/static/css/main.scss). Whenever this file has changed it has to be compiled with sass
@@ -141,7 +139,7 @@ yarn install
 
 to do that.
 
-### Changing the database model
+## Changing the database model
 When the database model in models.py is changed a new migration has to be created specifying how to change to the new
 database format. This can be done by
 ```
@@ -154,7 +152,7 @@ currently running database:
 python manage.py dumpdata --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
-### Containerization and Deployment
+## Containerization and Deployment
 
 The application is deployed to the server as a pair of Docker containers:
 
@@ -163,7 +161,7 @@ The application is deployed to the server as a pair of Docker containers:
 
 Only the port of nginx is exposed, which will forward requests to the django app or provide any requested static files directly.
 
-#### Building the Django app Docker image and running the container
+### Building the Django app Docker image and running the container
 
 The Dockerfile for the django app is based on the following resources:
 
@@ -212,7 +210,7 @@ Instead of passing the absolute path to this repo, you may instead use
     -v "${PWD/\/mnt/}":/db
     ```
 
-#### Deployment including nginx
+### Deployment including nginx
 
 To run both containers together, build the app container as described above and then run the following command in the repository root directory:
 
