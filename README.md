@@ -75,15 +75,17 @@ python manage.py migrate --settings=config.settings.local
 # (optional) install example data
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
 
-# generate user for admin UI (Windows: prepend `winpty`)
-python manage.py createsuperuser --settings=config.settings.local
-
 # install css and javascript libraries
 yarn install
 
 # start the server
 python manage.py runserver --settings=config.settings.local
 ```
+The admin user for development is:
+* user name: admin
+* password: password
+
+or create a new admin user with: `python manage.py createsuperuser --settings=config.settings.local` (Windows: prepend `winpty`)
 
 The main app is called `cpmonitor` short for `climate protection monitor`. As that needs to be a python
 package / module name it follows python style conventions of being short and all in one lowercase word.
