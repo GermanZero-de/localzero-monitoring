@@ -2,6 +2,10 @@
 .gitignore
 .pre-commit-config.yaml
 .venv
-LICENSE
+.yarn
+**/*.css
+**/*.css.map
 db.sqlite3
 docker-compose.yml
+LICENSE
+node_modules

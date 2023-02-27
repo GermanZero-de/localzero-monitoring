@@ -21,6 +21,7 @@
 - Windows: Add the shown path in the `PATH` variable. (Search fpr "env" in Windows settings.)
 - Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command.
 - Install Yarn version 3 as described here: <https://yarnpkg.com/getting-started/install>.
+- Install [Docker Desktop](https://www.docker.com/) or [Docker Engine and Docker Compose without Docker Desktop](https://docs.docker.com/engine/install/), if you prefer and are on Linux.
 
 The above steps are needed only once per machine.
 
@@ -177,51 +178,32 @@ To build the image, run the following command in the repository root directory (
 docker build . -t cpmonitor
 ```
 
-To run the container, run (replacing directory of `db.sqlite3` and SECRET_KEY placeholders):
-
-```shell
-docker run --rm -it -p 8000:8000 -v <absolute path of directory containing db.sqlite3>:/db -e SECRET_KEY=<...> cpmonitor
-```
-
-By default, the container will run the app using the production configuration.
-To use the local configuration, run:
-
-```shell
-docker run --rm -it -p 8000:8000 -e DJANGO_SETTINGS_MODULE=config.settings.local-container -v <absolute path of directory containing db.sqlite3>:/db cpmonitor
-```
-
-Instead of passing the absolute path to this repo, you may instead use
-
-- in a Linux shell:
-
-    ```shell
-    -v "$PWD":/db
-    ```
-
-- in Powershell:
-
-    ```powershell
-    -v ${pwd}:db
-    ```
-
-- in a WSL Linux shell, if you decided to store your projects outside the WSL file system (otherwise see above):
-
-    ```shell
-    -v "${PWD/\/mnt/}":/db
-    ```
-
 ### Deployment including nginx
 
-To run both containers together, build the app container as described above and then run the following command in the repository root directory:
+To run both containers together, run the following command in the repository root directory (the app container will be built automatically if necessary):
 
 ```shell
 # using production config
-docker compose --env-file .env.production up
+docker compose --env-file .env.production up --detach
 ```
 
 ```shell
 # using local config
-docker compose --env-file .env.local up
+docker compose --env-file .env.local up --detach
 ```
 
-This will start both the Django app and the nginx containers. The website can then be reached at <http://localhost:80>.
+This will start both the Django app and the nginx containers *in the background*. The website can then be reached at <http://localhost:80>.
+
+To stop the containers from running in the background, run:
+
+```shell
+# using production config
+docker compose --env-file .env.local down --volumes
+```
+
+```shell
+# using local config
+docker compose --env-file .env.local down --volumes
+```
+
+The `--volumes` flag is important to make sure that at the next start, the latest static resources from the app container are served instead of potentially outdated files from the previous run cached by Docker.
