@@ -1,0 +1,12 @@
+{% extends "admin/tree_change_list.html" %}
+{% load admin_list admin_task_tree %}
+
+{% block result_list %}
+    {% if action_form and actions_on_top and cl.full_result_count %}
+        {% admin_actions %}
+    {% endif %}
+    {% result_tree cl request %}
+    {% if action_form and actions_on_bottom and cl.full_result_count %}
+        {% admin_actions %}
+    {% endif %}
+{% endblock %}

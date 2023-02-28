@@ -34,6 +34,8 @@ class CityAdmin(admin.ModelAdmin):
 class TaskAdmin(TreeAdmin):
     # ----- Changelist stuff ------
 
+    change_list_template = "admin/task_changelist.html"
+
     @admin.display(description="Struktur")
     def structure(self, obj: Task):
         """Additional read-only field showing the tree structure."""
