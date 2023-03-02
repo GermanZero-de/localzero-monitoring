@@ -3,11 +3,12 @@
 {% load static %}
 
 {% block content %}
+
 <nav class="navbar navbar-expand-sm navbar-light bg-primary mb-3">
   <div class="container">
     <a class="navbar-brand fw-bold text-white" href="/">
       <img src="{% static 'logo_inverted.png' %}" alt="" height="50" class="d-inline-block align-middle">
-      LocalZero Klimaschutzmonitor
+      LocalZero Monitoring
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,7 +21,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarSelectCity">
             {% for city in cities %}
-              <li><a class="dropdown-item" href="#">{{ city.name }}</a></li>
+              <li><a class="dropdown-item" href="/cities/{{ city.name }}">{{ city.name }}</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -35,7 +36,7 @@
       <div class="card-body">
         <h2 class="card-title">Klimaneutrale Städte und Kommunen</h3>
           <p>Städte und Kommunen leisten einen wichtigen Beitrag zur Klimaneutralität</p>
-          <p>Der <a href="https://localzero.net/">LocalZero</a> Klimaschutzmonitor ist eine Initiative von <a href="https://germanzero.de">GermanZero</a>, um mehr Transparenz
+          <p><a href="https://localzero.net/">LocalZero</a> Monitoring ist eine Initiative von <a href="https://germanzero.de">GermanZero</a>, um mehr Transparenz
           zum Fortschritt der Klimaneutralität deutscher Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den
           jeweiligen Kommunen regelmäßig aktualisiert.</p>
           <p>Wähle oben rechts deine Kommune aus, und finde heraus, welche Maßnahmen sie bereits geplant und unternommen hat, um klimaneutral zu werden!</p>
@@ -47,85 +48,6 @@
       <img src="https://localzero.net/lz-media/pages/assets/50ff6a8922-1672312437/wurmsham_01_800pxbreite.jpg" width="100%" >
     </div>
   </div>
-</div>
-
-{% comment %} initial sample layout -- just for reference, delete later! {% endcomment %}
-<div class="container">
-  {% for city in cities %}
-  <div style="width: 100%; margin: 3px">
-    <div style="display: flex; flex-wrap: wrap">
-      <div>
-        <h2>Einleitung Klimaschutz Monitor {{ city.name }}</h2>
-        <p>{{ city.introduction }}</p>
-      </div>
-      <div>
-        <h2>Platzhalter für Charts etc.</h2>
-      </div>
-    </div>
-    <div style="display: flex; flex-wrap: wrap">
-      {% for task in tasks %}
-        {% if not task.parent and task.city == city %}
-          <div class="task-card">
-            <div style="margin: 10px; border-radius: 10px; background-color: #FFEBA8; padding: 10px; color: #505050;">
-              <div style="padding: 10px 20px;">
-                <span style="color: #505050; font-size: 15pt;">{{ task.title }}</span>
-              </div>
-              {% comment %} [ div [ css [ C.padding2 (C.px 10) (C.px 20) ] ]
-                  [ myLink catTreeEntry.data.id [ css [ C.width (C.pct 100) ] ] [ text catTreeEntry.data.title ]
-                  , div
-                      [ css
-                          [ C.displayFlex
-                          , C.width (C.pct 100)
-                          , C.height (C.px 10)
-                          , C.borderRadius (C.px 3)
-                          , C.overflow C.hidden
-                          ]
-                      ]
-                      (progressBarEntries catTreeEntry)
-                  ] {% endcomment %}
-            {% for subtask in tasks %}
-              {% if subtask.parent == task %}
-                <div style="margin: 5px; padding: 5px; background-color: #FFDA62; border-radius: 5px;">
-                  <div style="width: 100%; font-size: 14pt;">{{ subtask.title }}</div>
-                  <span></span>
-                  <div>
-                    {% for node in tasks %}
-                      {% if node.parent == subtask %}
-                        <div style="display: flex; align-items: center; margin: 5px; padding: 5px; background-color: #ffffff;">
-                          <div style="width: 100%;">{{ node.title }}</div>
-                          {% if node.state == 0 %} <!-- UNKNOWN -->
-                            <div class="task-row" style="background-color: #777777;">?</div>
-                          {% elif node.state == 1 %} <!-- SUGGESTED -->
-                            <div class="task-row" style="background-color: #777777;">?</div>
-                          {% elif node.state == 2 %} <!-- PLANNED -->
-                            <div class="task-row" style="background-color: #FFAA00;">!</div>
-                          {% elif node.state == 3 %} <!-- WAITING -->
-                            <div class="task-row" style="background-color: #FFAA00;">!</div>
-                          {% elif node.state == 4 %} <!-- IN_PROGRESS -->
-                            <div class="task-row" style="background-color: #FFAA00;">!</div>
-                          {% elif node.state == 5 %} <!-- DELAYED -->
-                            <div class="task-row" style="background-color: #FF0000;">X</div>
-                          {% elif node.state == 6 %} <!-- SUCCEEDED -->
-                            <div class="task-row" style="background-color: #00AA00;">✓</div>
-                          {% elif node.state == 7 %} <!-- FAILED -->
-                            <div class="task-row" style="background-color: #FF0000;">X</div>
-                          {% elif node.state == 8 %} <!-- REJECTED -->
-                            <div class="task-row" style="background-color: #FF0000;">X</div>
-                          {% endif%}
-                        </div>
-                      {% endif %}
-                    {% endfor %}
-                  </div>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-  {% endfor %}
 </div>
 
 {% endblock content %}
