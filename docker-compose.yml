@@ -10,6 +10,7 @@ services:
       - nginx_network
     environment:
       - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:?Please select an environment using '--env-file .env.local' or '--env-file .env.production' (see README.md)!}
+      - SECRET_KEY=${SECRET_KEY:?Please set the secret key environment variable.}
 
   nginx-unprivileged:
     image: nginxinc/nginx-unprivileged:alpine

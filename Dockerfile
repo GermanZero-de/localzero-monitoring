@@ -58,4 +58,4 @@ EXPOSE 8000
 COPY --from=python-builder /venv /venv
 COPY --from=python-builder /static /static
 
-CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "config.wsgi:application"]
+CMD ["gunicorn", "--log-level", "debug", "--bind", ":8000", "--workers", "3", "config.wsgi:application"]
