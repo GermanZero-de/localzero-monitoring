@@ -6,6 +6,7 @@ services:
     volumes:
       - ./:/db
       - static_volume:/static
+      - nginx_config_volume:/nginx/conf.d
     networks:
       - nginx_network
     environment:
@@ -17,7 +18,7 @@ services:
     ports:
       - 80:8001
     volumes:
-      - ./config/nginx:/etc/nginx/conf.d
+      - nginx_config_volume:/etc/nginx/conf.d
       - static_volume:/cpmonitor/static
     depends_on:
       - djangoapp
@@ -29,4 +30,6 @@ networks:
     driver: bridge
 
 volumes:
-  static_volume: # just declare the volume so nginx and django can share it
+  # just declare the volumes so nginx and django can share them
+  nginx_config_volume:
+  static_volume:
