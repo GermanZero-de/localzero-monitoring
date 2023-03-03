@@ -7,15 +7,28 @@ from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory
 
 
-_filter_string = "city__id__exact"
+_city_filter_query = "city__id__exact"
+"""The query parameter used by the city filter."""
 
 
-def _url(model, type, city_id):
+def _admin_url(model, type, city_id):
+    """Reverse Django admin URL for a Model possibly filtered for one city.
+
+    See https://docs.djangoproject.com/en/4.1/ref/contrib/admin/#admin-reverse-urls
+
+    Args:
+        model (model.Model): The model for which to reverse the URL.
+        type (str): "changelist", "add", "history", "delete", or "change".
+        city_id (int|None): Primary key of city.
+
+    Returns:
+        str: URL including query string for filter.
+    """
     app = model._meta.app_label
     name = model._meta.model_name
     base = reverse(f"admin:{app}_{name}_{type}")
     if city_id:
-        return f"{base}?{_filter_string}={city_id}"
+        return f"{base}?{_city_filter_query}={city_id}"
     else:
         return base
 
@@ -26,8 +39,8 @@ class CityAdmin(admin.ModelAdmin):
 
     @admin.display(description="")
     def edit_tasks(self, city: City):
-        """For each city, link to Task changelist for just that city."""
-        list_url = _url(Task, "changelist", city.id)
+        """For each city, a link to the list (tree, actually) of Tasks for just that city."""
+        list_url = _admin_url(Task, "changelist", city.id)
         return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
 
 
@@ -37,17 +50,17 @@ class TaskAdmin(TreeAdmin):
     change_list_template = "admin/task_changelist.html"
 
     @admin.display(description="Struktur")
-    def structure(self, obj: Task):
+    def structure(self, task: Task):
         """Additional read-only field showing the tree structure."""
 
-        def add_parent(o: Task, hdr: str):
-            parent = o.get_parent()
+        def add_parents(current: Task, substructure: str):
+            parent = current.get_parent()
             if parent == None:
-                return hdr
+                return substructure
             else:
-                return add_parent(parent, "%s --> %s" % (parent.title, hdr))
+                return add_parents(parent, "%s --> %s" % (parent.title, substructure))
 
-        return add_parent(obj, obj.title)
+        return add_parents(task, task.title)
 
     list_display = ("title", "structure")
     form = movenodeform_factory(Task)
@@ -56,9 +69,9 @@ class TaskAdmin(TreeAdmin):
 
     def changelist_view(self, request):
         """Redirect to city changelist if no city filter is given."""
-        city_id = request.GET.get(_filter_string)
+        city_id = request.GET.get(_city_filter_query)
         if not city_id:
-            return HttpResponseRedirect(_url(City, "changelist", None))
+            return HttpResponseRedirect(_admin_url(City, "changelist", None))
         else:
             return super().changelist_view(request)
 
@@ -68,13 +81,13 @@ class TaskAdmin(TreeAdmin):
     # ----- Add / Change stuff -----
 
     def get_changeform_initial_data(self, request: HttpRequest):
-        filters_qs = self.get_preserved_filters(request)
-        print("Found filters: %s" % filters_qs)
-        filters = QueryDict(filters_qs).get("_changelist_filters")
-        city_id = QueryDict(filters).get(_filter_string)
+        """Prefill the city based on the filter preserved from the changelist view."""
+        query_string = self.get_preserved_filters(request)
+        filters = QueryDict(query_string).get("_changelist_filters")
+        city_id = QueryDict(filters).get(_city_filter_query)
         return {"city": city_id}
 
-    # This does not work in conjunction with `get_changeform_initial_data`:
+    # This does not work in conjunction with `get_changeform_initial_data`. See #50.
     # readonly_fields = ("city",)
 
 
