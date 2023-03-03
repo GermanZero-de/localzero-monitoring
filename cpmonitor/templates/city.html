@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block title %}{{ block.super }} {{ city.name }}{% endblock title %}
+
 {% block content %}
 
 {% comment %} initial sample layout -- just for reference, delete later! {% endcomment %}
