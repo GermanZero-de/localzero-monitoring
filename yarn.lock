@@ -32,6 +32,71 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@popperjs/core@npm:^2.11.2":
+  version: 2.11.6
+  resolution: "@popperjs/core@npm:2.11.6"
+  checksum: 47fb328cec1924559d759b48235c78574f2d71a8a6c4c03edb6de5d7074078371633b91e39bbf3f901b32aa8af9b9d8f82834856d2f5737a23475036b16817f0
+  languageName: node
+  linkType: hard
+
+"@tabler/core@npm:^1.0.0-beta17":
+  version: 1.0.0-beta9
+  resolution: "@tabler/core@npm:1.0.0-beta9"
+  dependencies:
+    "@popperjs/core": ^2.11.2
+    "@tabler/icons": ^1.53.0
+    bootstrap: 5.1.3
+  peerDependencies:
+    apexcharts: ^3.33.1
+    autosize: ^5.0.1
+    choices.js: ^10.1.0
+    countup.js: ^2.0.8
+    flatpickr: ^4.6.9
+    imask: ^6.4.2
+    jsvectormap: ^1.4.4
+    litepicker: ^2.0.12
+    nouislider: ^15.5.1
+    tom-select: ^2.0.0
+  peerDependenciesMeta:
+    apexcharts:
+      optional: true
+    autosize:
+      optional: true
+    choices.js:
+      optional: true
+    countup.js:
+      optional: true
+    flatpickr:
+      optional: true
+    imask:
+      optional: true
+    jsvectormap:
+      optional: true
+    litepicker:
+      optional: true
+    nouislider:
+      optional: true
+    tom-select:
+      optional: true
+  checksum: 1cb0c3ec379e3e239d9079613e1f98aa2d34a23a175e6396e2c1b21e28398488dc28a827502c741171d75b91554192f07931529bb7bb1ebb616826c113fd63c6
+  languageName: node
+  linkType: hard
+
+"@tabler/icons@npm:^1.53.0":
+  version: 1.119.0
+  resolution: "@tabler/icons@npm:1.119.0"
+  peerDependencies:
+    react: ^16.x || 17.x || 18.x
+    react-dom: ^16.x || 17.x || 18.x
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: ef1ac50c1a47b2205cb86ca43c28d69c7b8f547ad9c2c5545190fc4a455e9767f49cb511a6f9e8dc45b046ee7d2dab3d2c87af4fd5bbb1694832a15698158753
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:2":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -124,12 +189,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^5.2.3":
-  version: 5.2.3
-  resolution: "bootstrap@npm:5.2.3"
+"bootstrap@npm:5.1.3":
+  version: 5.1.3
+  resolution: "bootstrap@npm:5.1.3"
   peerDependencies:
-    "@popperjs/core": ^2.11.6
-  checksum: 0211805dec6a190c0911d142966df30fdb4b4139a04cc6c23dd83c6045ea3cb0a966b360ab2e701e7b3ad96ff01e05fdc0914be97b41bd876b11e457a8bdc6a3
+    "@popperjs/core": ^2.10.2
+  checksum: 301b5ed872efba061104cf22ac93568e3837867fb5527ab9326a51510fb752bd4883e1d488225c8be72f86d9d3a55ef5b166aa7fa62c2fdd077c3f05b65752f8
   languageName: node
   linkType: hard
 
@@ -247,9 +312,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cpmonitor@workspace:."
   dependencies:
-    bootstrap: ^5.2.3
+    "@popperjs/core": ^2.11.2
+    "@tabler/core": ^1.0.0-beta17
+    bootstrap: 5.1.3
     jquery: ^3.6.3
-    popper.js: ^1.16.1
     sass: ^1.58.3
   languageName: unknown
   linkType: soft
@@ -822,13 +888,6 @@ __metadata:
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 050c865ce81119c4822c45d3c84f1ced46f93a0126febae20737bd05ca20589c564d6e9226977df859ed5e03dc73f02584a2b0faad36e896936238238b0446cf
-  languageName: node
-  linkType: hard
-
-"popper.js@npm:^1.16.1":
-  version: 1.16.1
-  resolution: "popper.js@npm:1.16.1"
-  checksum: c56ae5001ec50a77ee297a8061a0221d99d25c7348d2e6bcd3e45a0d0f32a1fd81bca29d46cb0d4bdf13efb77685bd6a0ce93f9eb3c608311a461f945fffedbe
   languageName: node
   linkType: hard
 
