@@ -137,3 +137,14 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Martor (markdown editor)
+MARTOR_ENABLE_CONFIGS = {
+    "emoji": "true",
+    "imgur": "false",
+    "mention": "false",
+    "jquery": "true",
+    "living": "false",
+    "spellcheck": "false",
+    "hljs": "true",
+}
