@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from martor.models import MartorField
 from treebeard.mp_tree import MP_Node
 
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
@@ -10,7 +11,7 @@ class City(models.Model):
     zipcode = models.CharField("PLZ", max_length=5)
     url = models.URLField("Homepage", blank=True)
 
-    introduction = models.TextField("Einleitung", blank=True)
+    introduction = MartorField("Einleitung", blank=True)
 
     budget = models.IntegerField("CO2 Budget [Mio Tonnen]", default=0)
 
@@ -23,7 +24,7 @@ class Task(MP_Node):
 
     title = models.CharField("Titel", max_length=255)
 
-    description = models.TextField("Beschreibung", blank=True, default="")
+    description = MartorField("Beschreibung", blank=True, default="")
 
     planned_start = models.DateTimeField("Geplanter Start", blank=True, null=True)
 
@@ -44,7 +45,7 @@ class Task(MP_Node):
         "Zustand", choices=States.choices, default=States.UNKNOWN
     )
 
-    justification = models.TextField("Begründung Zustand", blank=True, default="")
+    justification = MartorField("Begründung Zustand", blank=True, default="")
 
     # Maybe later. Not part of the MVP:
 
