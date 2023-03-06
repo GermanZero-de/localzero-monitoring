@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.http import HttpRequest, HttpResponseRedirect, QueryDict
 from django.utils.html import format_html
 from django.urls import reverse
-from django.db import models
 from martor.models import MartorField
 from martor.widgets import AdminMartorWidget
 
