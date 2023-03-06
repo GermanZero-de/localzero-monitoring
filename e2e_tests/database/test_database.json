@@ -52,6 +52,19 @@
     }
   },
   {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2023-03-05T17:03:22.852Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "Radwege ausbauen",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"description\", \"Relative to\"]}}]"
+    }
+  },
+  {
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -344,7 +357,7 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-      "last_login": "2023-02-26T18:26:03.967Z",
+      "last_login": "2023-03-05T17:01:01.096Z",
       "is_superuser": true,
       "username": "admin",
       "first_name": "",
@@ -423,6 +436,14 @@
   },
   {
     "model": "sessions.session",
+    "pk": "1y8tehqteg1qrz1urr5j1jfcmiw411mg",
+    "fields": {
+      "session_data": ".eJxVjLEOwjAMRP8lM4qa0sQqIzvfENmOTQookZp2Qvw7rdQBxrv37t4m4rrkuDaZ45TMxThz-u0I-SllB-mB5V4t17LME9ldsQdt9laTvK6H-3eQseVtjQGAAHunIwl33vNZEioDo6h2wOTDqOgGpQGcUI-BCbYYMBBBMp8vICU5qg:1pYrjJ:ysoQIrJvjFlT1Hbb0Nf7kGMB7nnN6us513ISeIR4a8M",
+      "expire_date": "2023-03-19T17:01:01.107Z"
+    }
+  },
+  {
+    "model": "sessions.session",
     "pk": "c8idu5xw7s73sxucxl1w6wwjy704fimq",
     "fields": {
       "session_data": ".eJxVjDEOwjAMRe-SGUV2WzUxIztniBw7IQWUSk07Ie4OlTrA-t97_2UCb2sJW0tLmNScDZrT7xZZHqnuQO9cb7OVua7LFO2u2IM2e501PS-H-3dQuJVv7QdQlxKKjgPG7HPPHTpHkTPmHoQSMqJXn50HAXA0UkcCkYB8ZDXvD-luN9k:1pWLil:bX3aaZAtKKgzurP9OloERjVSxnFiFeSxIU97CTGs-24",
@@ -466,7 +487,7 @@
       "numchild": 0,
       "city": 1,
       "title": "Radwege ausbauen",
-      "description": "",
+      "description": "## Vorhaben\r\n\r\n* Radspuren mit einer Mindestbreite von 2,30 Metern\r\n* mehr Abstellanlagen für Fahrräder\r\n* optisch hervorgehobene Abschnitte mit Radvorrang \r\n* sicherere Kreuzungen für Radler",
       "planned_start": null,
       "planned_completion": null,
       "state": 1,

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load martortags %}
 
 {% block title %}{{ block.super }} {{ city.name }}{% endblock title %}
 
@@ -12,7 +13,7 @@
     <div style="display: flex; flex-wrap: wrap">
       <div>
         <h2>Einleitung Klimaschutz Monitor {{ city.name }}</h2>
-        <p>{{ city.introduction }}</p>
+        <p>{{ city.introduction | safe_markdown }}</p>
       </div>
       <div>
         <h2>Platzhalter für Charts etc.</h2>
@@ -24,7 +25,8 @@
           <div class="task-card">
             <div style="margin: 10px; border-radius: 10px; background-color: #FFEBA8; padding: 10px; color: #505050;">
               <div style="padding: 10px 20px;">
-                <span style="color: #505050; font-size: 15pt;">{{ task.title }}</span>
+                <div style="color: #505050; font-size: 15pt;">{{ task.title }}</div>
+                <div>{{ task.description | safe_markdown }}</div>
               </div>
               {% comment %} [ div [ css [ C.padding2 (C.px 10) (C.px 20) ] ]
                   [ myLink catTreeEntry.data.id [ css [ C.width (C.pct 100) ] ] [ text catTreeEntry.data.title ]
