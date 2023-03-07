@@ -55,6 +55,7 @@ USER user
 
 EXPOSE 8000
 
+COPY manage.py /cpmonitor/
 COPY --from=python-builder /venv /venv
 COPY --from=python-builder /static /static
 COPY config/nginx /nginx/conf.d

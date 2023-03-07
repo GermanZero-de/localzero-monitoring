@@ -207,3 +207,18 @@ docker compose --env-file .env.local down --volumes
 ```
 
 The `--volumes` flag is important to make sure that at the next start, the latest static resources from the app container are served instead of potentially outdated files from the previous run cached by Docker.
+
+## Server administration
+
+The databases on the test and production servers must be manually migrated whenever we deploy an app version which requires schema changes.
+To do so, one can open a shell in the running container and run `manage.py` with the respective arguments:
+```shell
+# find out django container name
+docker ps
+
+# run shell in container
+docker exec -it <django container name> sh
+
+# run manage.py inside container shell
+python manage.py migrate --settings=config.settings.local-container
+```
