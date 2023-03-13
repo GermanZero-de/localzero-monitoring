@@ -458,7 +458,13 @@
       "zipcode": "12345",
       "url": "",
       "introduction": "",
-      "budget": 0
+      "co2e_budget": 0,
+      "assessment_administration": "",
+      "assessment_action_plan": "",
+      "assessment_status": "",
+      "last_update": "2023-03-13",
+      "contact_name": "",
+      "contact_email": ""
     }
   },
   {
@@ -470,12 +476,18 @@
       "numchild": 2,
       "city": 1,
       "title": "Verkehr",
+      "summary": "",
       "description": "",
       "planned_start": null,
       "planned_completion": null,
-      "state": 0,
-      "justification": "",
-      "completion": 0
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_assessment": 0,
+      "execution_justification": "",
+      "execution_progress": 2,
+      "execution_completion": 0,
+      "actual_start": null,
+      "actual_completion": null
     }
   },
   {
@@ -487,12 +499,18 @@
       "numchild": 0,
       "city": 1,
       "title": "Radwege ausbauen",
+      "summary": "",
       "description": "## Vorhaben\r\n\r\n* Radspuren mit einer Mindestbreite von 2,30 Metern\r\n* mehr Abstellanlagen für Fahrräder\r\n* optisch hervorgehobene Abschnitte mit Radvorrang \r\n* sicherere Kreuzungen für Radler",
       "planned_start": null,
       "planned_completion": null,
-      "state": 1,
-      "justification": "",
-      "completion": 0
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_assessment": 1,
+      "execution_justification": "",
+      "execution_progress": 2,
+      "execution_completion": 0,
+      "actual_start": null,
+      "actual_completion": null
     }
   },
   {
@@ -504,12 +522,18 @@
       "numchild": 0,
       "city": 1,
       "title": "U-Bahn Strecke verlängern",
+      "summary": "",
       "description": "",
       "planned_start": null,
       "planned_completion": null,
-      "state": 5,
-      "justification": "",
-      "completion": 0
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_assessment": 5,
+      "execution_justification": "",
+      "execution_progress": 2,
+      "execution_completion": 0,
+      "actual_start": null,
+      "actual_completion": null
     }
   }
 ]
