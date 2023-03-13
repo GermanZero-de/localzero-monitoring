@@ -141,17 +141,24 @@ yarn install
 to do that.
 
 ## Changing the database model
+
 When the database model in models.py is changed a new migration has to be created specifying how to change to the new
 database format. This can be done by
-```
+
+```shell
 python manage.py makemigrations --settings=config.settings.local
 ```
 
 Afterwards the test database has to be updated as well. Use the dumpdata command to generate a test database from the
 currently running database:
-```
+
+```shell
 python manage.py dumpdata --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
+
+On Windows (and possibly others): Check the diff of `e2e_tests/database/test_database.json`.
+Possibly use a formatter on the generated file.
+Check for special characters, e.g. German umlauts.
 
 ## Containerization and Deployment
 
