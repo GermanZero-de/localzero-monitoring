@@ -86,32 +86,159 @@ class City(models.Model):
 
 
 class Task(MP_Node):
-    city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Stadt")
+    class Meta:
+        verbose_name = "Sektor / Maßnahme"
+        verbose_name_plural = "Sektoren und Maßnahmen"
 
-    title = models.CharField("Titel", max_length=255)
-
-    description = models.TextField("Beschreibung", blank=True, default="")
-
-    planned_start = models.DateTimeField("Geplanter Start", blank=True, null=True)
-
-    planned_completion = models.DateTimeField("Geplantes Ende", blank=True, null=True)
-
-    class States(models.IntegerChoices):
-        UNKNOWN = 0
-        SUGGESTED = 1
-        PLANNED = 2
-        WAITING = 3
-        IN_PROGRESS = 4
-        DELAYED = 5
-        SUCCEEDED = 6
-        FAILED = 7
-        REJECTED = 8
-
-    state = models.IntegerField(
-        "Zustand", choices=States.choices, default=States.UNKNOWN
+    city = models.ForeignKey(
+        City,
+        on_delete=models.PROTECT,
+        help_text="""
+            <p>Bitte nicht ändern!</p>
+            <p>Derzeit könnten dann die Strukturen der Klimaaktionspläne der Städte gehörig durcheinander geraten.</p>
+            <p>Wir arbeiten noch an der Lösung, das zu verhindern.</p>
+        """,
     )
 
-    justification = models.TextField("Begründung Zustand", blank=True, default="")
+    title = models.CharField(
+        "Titel",
+        max_length=255,
+        help_text="""
+            <p>Überschrift des Sektors, der Maßnahmengruppe oder der Maßnahme.</p>
+            <p>Möglichst wie im Klimaaktionsplan angegeben.</p>
+        """,
+    )
+
+    summary = models.TextField(
+        "Kurztext",
+        blank=True,
+        help_text="""
+            <p>Kann Beschreibung, Bewertung und Unsetzungsstand enthalten</p>
+            <p>Kann in einer Übersicht meherer Sektoren / Maßnahmen dargestellt werden.</p>
+            <p>Deswegen möglichst kurz und ohne Formatierungen. Fett, Kursiv, Links, etc. sind okay.</p>
+        """,
+    )
+
+    # 1. Beschreibung: Inhalte aus dem KAP
+
+    description = models.TextField(
+        "Beschreibung",
+        blank=True,
+        help_text="""
+            <p>Texte aus dem Klimaaktionsplan können hier eins-zu-eins eingegeben werden.</p>
+            <p>Für Sektoren und Maßnahmengruppen sind Einleitungstexte aus dem Plan geeignet.</p>
+            <p>Für Maßnahmen sollte hier die genaue Beschreibung stehen.</p>
+        """,
+    )
+
+    planned_start = models.DateField(
+        "Geplanter Start",
+        blank=True,
+        null=True,
+        help_text="Nur falls im Klimaaktionsplan angegeben.",
+    )
+
+    planned_completion = models.DateField(
+        "Geplantes Ende",
+        blank=True,
+        null=True,
+        help_text="Nur falls im Klimaaktionsplan angegeben.",
+    )
+
+    responsible_organ = models.TextField(
+        "Verantwortliches Organ",
+        blank=True,
+        help_text="""
+            <p>Genauer Name des verantwortlichen Gremiums oder der verantwortlichen Behörde.</p>
+            <p>Möglichst mit Ansprechperson, Kontaktdaten und was sonst notwendig ist, um Informationen einzuholen.</p>
+            <p>Diese Informationen könnten später in separate Felder aufgeteilt werden.</p>
+        """,
+    )
+
+    # 2. Bewertung der KAP Inhalte
+
+    plan_assessment = models.TextField(
+        "Bewertung der Planung",
+        blank=True,
+        help_text="""
+            <p>Würde(n) die im Klimaaktionsplan beschriebenen Maßnahme(n) ausreichen, um das gesteckte Ziel zu erreichen?</p>
+            <p>Sollte das gesteckte Ziel nicht ausreichen, kann das auch hier beschrieben werden.</p>
+        """,
+    )
+
+    # 3. Umsetzungsstand
+
+    class ExecutionAssessment(models.IntegerChoices):
+        UNKNOWN = 0, "unbekannt (grau)"
+        AHEAD = 1, "vor dem Plan (grün)"
+        AS_PLANNED = 2, "im Plan (grün)"
+        DELAYED = 3, "zurückgestellt / verzögert (orange)"
+        INSUFFICIENT = 4, "nicht ausreichend / in Teilen gescheitert (rot)"
+        FAILED = 5, "gescheitert (rot)"
+        MISSING = 6, "fehlt im Plan (rot)"
+
+    execution_assessment = models.IntegerField(
+        "Bewertung des Umsetzungsstandes",
+        choices=ExecutionAssessment.choices,
+        default=ExecutionAssessment.UNKNOWN,
+        help_text="""
+            <p>Bei Maßnahmen: Wird/wurde die Maßnahme wie geplant umgesetzt?</p>
+            <p>Bei Sektoren / Maßnahmengruppen:</p>
+            <p>Wenn hier "unbekannt" ausgewählt wird, werden die Umsetzungsstände der Maßnahmen in diesem Sektor / dieser Gruppe zusammengefasst.</p>
+            <p>Bei anderen Auswahlen wird diese Zusammenfassung überschrieben. Das sollte nur passieren, wenn sie unpassend oder irreführend ist.</p>
+        """,
+    )
+
+    execution_justification = models.TextField(
+        "Begründung der Bewertung",
+        blank=True,
+        help_text="Die Auswahl bei der Bewertung kann hier ausführlich begründet werden.",
+    )
+
+    class ExecutionProgress(models.IntegerChoices):
+        UNKNOWN = 0, "unbekannt"
+        NOT_PLANNED = 1, "ungeplant"
+        PLANNED = 2, "in Zukunft geplant"
+        IN_PROGRESS = 3, "läuft"
+        FINISHED = 4, "abgeschlossen / gescheitert"
+
+    execution_progress = models.IntegerField(
+        "Fortschritt",
+        choices=ExecutionProgress.choices,
+        default=ExecutionProgress.PLANNED,
+        help_text="""
+            <p>Eine grobe Einteilung, wo sich diese Maßnahme zeitlich in der Planung befindet.</p>
+            <p>Dies kann z.B. genutzt werden, um Maßnahmen zu filtern, deren Umsetzungsstand noch nicht bewertet werden kann.</p>
+        """,
+    )
+
+    execution_completion = models.IntegerField(
+        "Vervollständigungsgrad in Prozent",
+        blank=True,
+        null=True,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        help_text="""
+            <p>Bei wenigen Maßnahmen ist es möglich den Fortschritt quantitativ einzugeben. Nur bei solchen sollte hier ein Wert eingegeben werden.</p>
+            <p>Ob und wie diese Zahlen angezeigt werden, ist noch unklar.</p>
+        """,
+    )
+
+    actual_start = models.DateField(
+        "Tatsächlicher Start",
+        blank=True,
+        null=True,
+        help_text="Nur falls bekannt.",
+    )
+
+    actual_completion = models.DateField(
+        "Tatsächlicher Ende",
+        blank=True,
+        null=True,
+        help_text="Nur falls bekannt.",
+    )
+
+    def __str__(self) -> str:
+        return self.title
 
     # Maybe later. Not part of the MVP:
 
@@ -134,15 +261,6 @@ class Task(MP_Node):
     #         MaxValueValidator(3)
     #     ]
     # )
-
-    completion = models.IntegerField(
-        "Vervollständigungsgrad",
-        default=0,
-        validators=[MinValueValidator(0), MaxValueValidator(100)],
-    )
-
-    def __str__(self) -> str:
-        return self.title
 
 
 # Tables for comparing and connecting the plans of all cities

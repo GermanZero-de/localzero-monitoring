@@ -90,6 +90,10 @@ class TaskAdmin(TreeAdmin):
 
     # ----- Add / Change stuff -----
 
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
+
     def get_changeform_initial_data(self, request: HttpRequest):
         """Prefill the city based on the filter preserved from the changelist view."""
         query_string = self.get_preserved_filters(request)
