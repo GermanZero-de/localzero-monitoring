@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db import models
 from django.http import HttpRequest, HttpResponseRedirect, QueryDict
 from django.utils.html import format_html
 from django.urls import reverse
@@ -37,8 +38,14 @@ def _admin_url(model, type, city_id):
 
 
 class CityAdmin(admin.ModelAdmin):
-    list_display = ("name", "edit_tasks")
+    list_display = ("zipcode", "name", "introduction", "edit_tasks")
+    list_display_links = ("name",)
+    ordering = ("name",)
     search_fields = ["zipcode", "name"]
+
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
 
     @admin.display(description="")
     def edit_tasks(self, city: City):
@@ -67,9 +74,6 @@ class TaskAdmin(TreeAdmin):
 
     list_display = ("title", "structure")
     form = movenodeform_factory(Task)
-    formfield_overrides = {
-        MartorField: {"widget": AdminMartorWidget},
-    }
 
     list_filter = ("city",)
 
