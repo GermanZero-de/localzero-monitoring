@@ -175,7 +175,11 @@ It uses a multi-stage build to prevent shipping unnecessary files which would in
 To build the image, run the following command in the repository root directory (containing the Dockerfile):
 
 ```shell
-docker build . -t cpmonitor
+# using production config
+docker compose --env-file .env.production build
+
+# using local config
+docker compose --env-file .env.local build
 ```
 
 ### Deployment including nginx
