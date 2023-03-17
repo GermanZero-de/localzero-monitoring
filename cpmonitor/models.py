@@ -113,8 +113,8 @@ class Task(MP_Node):
         "Kurztext",
         blank=True,
         help_text="""
-            <p>Kann Beschreibung, Bewertung und Unsetzungsstand enthalten</p>
-            <p>Kann in einer Übersicht meherer Sektoren / Maßnahmen dargestellt werden.</p>
+            <p>Kann Beschreibung, Bewertung und Umsetzungsstand enthalten.</p>
+            <p>Kann in einer Übersicht mehrerer Sektoren / Maßnahmen dargestellt werden.</p>
             <p>Deswegen möglichst kurz und ohne Formatierungen. Fett, Kursiv, Links, etc. sind okay.</p>
         """,
     )
