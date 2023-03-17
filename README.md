@@ -80,9 +80,11 @@ yarn install
 # start the server
 python manage.py runserver --settings=config.settings.local
 ```
+
 The admin user for development is:
-* user name: admin
-* password: password
+
+- user name: admin
+- password: password
 
 or create a new admin user with: `python manage.py createsuperuser --settings=config.settings.local` (Windows: prepend `winpty`)
 
@@ -90,9 +92,16 @@ The main app is called `cpmonitor` short for `climate protection monitor`. As th
 package / module name it follows python style conventions of being short and all in one lowercase word.
 
 ## Testing
+
 All tests are written in [pytest](https://docs.pytest.org/en/7.2.x/index.html).
 End-to-end tests are written with the [playwright plugin of pytest](https://playwright.dev/python/docs/intro).
 To provide a test-database for some tests we use [pytest-django](https://pytest-django.readthedocs.io/en/latest/index.html)
+
+The first time playwright is used, let it download the tools it needs with:
+
+```shell
+playwright install
+```
 
 *Start the dev server in the background*, then execute tests with
 
