@@ -8,4 +8,5 @@ urlpatterns = [
     path("martor/", include("martor.urls")),
     path("", views.index, name="index"),
     path("<slug:city_slug>/", views.city, name="city"),
+    path("<slug:city_slug>/<path:task_slugs>/", views.task, name="task"),
 ]

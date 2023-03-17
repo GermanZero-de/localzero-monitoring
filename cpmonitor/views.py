@@ -28,3 +28,26 @@ def city(request, city_slug):
             "tasks": root_tasks,
         },
     )
+
+
+def task(request, city_slug, task_slugs):
+    try:
+        city = City.objects.get(slug=city_slug)
+    except City.DoesNotExist:
+        raise Http404("Wir haben keine Daten zu der Kommune '%s'." % city_slug)
+    try:
+        task: Task = Task.objects.get(slugs=task_slugs)
+    except City.DoesNotExist:
+        raise Http404(
+            "Wir haben keine Daten zu dem Sektor / der Maßnahme '%s'." % task_slugs
+        )
+    subtasks = task.get_children()
+    return render(
+        request,
+        "task.html",
+        {
+            "city": city,
+            "task": task,
+            "subtasks": subtasks,
+        },
+    )
