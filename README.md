@@ -141,17 +141,23 @@ yarn install
 to do that.
 
 ## Changing the database model
+
 When the database model in models.py is changed a new migration has to be created specifying how to change to the new
 database format. This can be done by
-```
+
+```shell
 python manage.py makemigrations --settings=config.settings.local
 ```
 
 Afterwards the test database has to be updated as well. Use the dumpdata command to generate a test database from the
 currently running database:
-```
+
+```shell
 python manage.py dumpdata --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
+
+On Windows (and possibly others): Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
+Possibly use a formatter on the generated file.
 
 ## Containerization and Deployment
 
@@ -216,6 +222,7 @@ The `--volumes` flag is important to make sure that at the next start, the lates
 
 The databases on the test and production servers must be manually migrated whenever we deploy an app version which requires schema changes.
 To do so, one can open a shell in the running container and run `manage.py` with the respective arguments:
+
 ```shell
 # find out django container name
 docker ps
