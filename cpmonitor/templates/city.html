@@ -25,7 +25,7 @@
           <div class="task-card">
             <div style="margin: 10px; border-radius: 10px; background-color: #FFEBA8; padding: 10px; color: #505050;">
               <div style="padding: 10px 20px;">
-                <div style="color: #505050; font-size: 15pt;">{{ task.title }}</div>
+                <div style="color: #505050; font-size: 15pt;"><a href="{% url 'task' city.slug task.slugs %}">{{ task.title }}</a></div>
                 <div>{{ task.description | safe_markdown }}</div>
               </div>
               {% comment %} [ div [ css [ C.padding2 (C.px 10) (C.px 20) ] ]

@@ -6,7 +6,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-light bg-primary mb-3">
   <div class="container">
-    <a class="navbar-brand fw-bold text-white" href="/">
+    <a class="navbar-brand fw-bold text-white" href="{% url 'index' %}">
       <img src="{% static 'logo_inverted.png' %}" alt="" height="50" class="d-inline-block align-middle">
       LocalZero Monitoring
     </a>
@@ -21,7 +21,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarSelectCity">
             {% for city in cities %}
-              <li><a class="dropdown-item" href="/cities/{{ city.name }}">{{ city.name }}</a></li>
+              <li><a class="dropdown-item" href="{% url 'city' city.slug %}">{{ city.name }}</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -53,7 +53,7 @@
 <div class="container fixed-bottom">
   <footer class="py-2 my-2 border-top">
     <ul class="nav">
-      <li class="nav-item"><a class="nav-link px-2 text-muted" href={% url 'admin:index' %}>Admin-Login</a></li>
+      <li class="nav-item"><a class="nav-link px-2 text-muted" href="{% url 'admin:index' %}">Admin-Login</a></li>
     </ul>
   </footer>
 </div>
