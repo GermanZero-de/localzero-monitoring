@@ -276,6 +276,43 @@ class Task(MP_Node):
     def __str__(self) -> str:
         return self.title
 
+    slugs = models.SlugField(
+        "slugs",
+        max_length=255,
+        unique=True,
+        editable=False,
+    )
+
+    def clean(self):
+        """Set / update the slugs on every validation. (Done by admin before `save()`)"""
+        self.slugs = ""
+        for anc in self.get_ancestors():
+            self.slugs += slugify(anc.title) + "/"
+        self.slugs += slugify(self.title)
+
+    def validate_unique(self, exclude=None):
+        """
+        Add slugs to fields to validate uniqueness and convert a slugs error to non-field error.
+
+        This is necessary, because `editable=False` excludes the field from validation
+        and cannot handle field-based validation errors.
+        """
+        exclude.remove("slugs")
+        try:
+            super().validate_unique(exclude=exclude)
+        except ValidationError as e:
+            msgs = e.message_dict
+            slug_errors = msgs.pop("slugs", None)
+            if slug_errors:
+                slug_errors.append(
+                    "Der Sektor / die Maßnahme wird in der URL als '%(slugs)s' geschrieben. Das kollidiert mit einem anderen Eintrag."
+                    % {"slugs": self.slugs}
+                )
+                if not NON_FIELD_ERRORS in msgs:
+                    msgs[NON_FIELD_ERRORS] = []
+                msgs[NON_FIELD_ERRORS].extend(slug_errors)
+            raise ValidationError(msgs)
+
     # Maybe later. Not part of the MVP:
 
     # class Severities(models.IntegerChoices):
