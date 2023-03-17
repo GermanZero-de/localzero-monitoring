@@ -1,5 +1,7 @@
 from django.db import models
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils.text import slugify
 from treebeard.mp_tree import MP_Node
 
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
@@ -83,6 +85,40 @@ class City(models.Model):
 
     def __str__(self) -> str:
         return self.zipcode + " " + self.name
+
+    slug = models.SlugField(
+        "slug",
+        max_length=255,
+        unique=True,
+        editable=False,
+    )
+
+    def clean(self):
+        """Set / update the slug on every validation. (Done by admin before `save()`)"""
+        self.slug = slugify(self.name)
+
+    def validate_unique(self, exclude=None):
+        """
+        Add slug to fields to validate uniqueness and convert a slug error to non-field error.
+
+        This is necessary, because `editable=False` excludes the field from validation
+        and cannot handle field-based validation errors.
+        """
+        exclude.remove("slug")
+        try:
+            super().validate_unique(exclude=exclude)
+        except ValidationError as e:
+            msgs = e.message_dict
+            slug_errors = msgs.pop("slug", None)
+            if slug_errors:
+                slug_errors.append(
+                    "Der Name der Kommune wird in der URL als '%(slug)s' geschrieben. Das kollidiert mit einer anderen Stadt."
+                    % {"slug": self.slug}
+                )
+                if not NON_FIELD_ERRORS in msgs:
+                    msgs[NON_FIELD_ERRORS] = []
+                msgs[NON_FIELD_ERRORS].extend(slug_errors)
+            raise ValidationError(msgs)
 
 
 class Task(MP_Node):

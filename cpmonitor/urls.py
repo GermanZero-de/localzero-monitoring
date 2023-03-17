@@ -7,5 +7,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("martor/", include("martor.urls")),
     path("", views.index, name="index"),
-    path("cities/<city_name>", views.city, name="city"),
+    path("<slug:city_slug>/", views.city, name="city"),
 ]
