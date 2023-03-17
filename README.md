@@ -156,9 +156,8 @@ currently running database:
 python manage.py dumpdata --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
-On Windows (and possibly others): Check the diff of `e2e_tests/database/test_database.json`.
+On Windows (and possibly others): Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
 Possibly use a formatter on the generated file.
-Check for special characters, e.g. German umlauts.
 
 ## Containerization and Deployment
 
@@ -219,6 +218,7 @@ The `--volumes` flag is important to make sure that at the next start, the lates
 
 The databases on the test and production servers must be manually migrated whenever we deploy an app version which requires schema changes.
 To do so, one can open a shell in the running container and run `manage.py` with the respective arguments:
+
 ```shell
 # find out django container name
 docker ps
