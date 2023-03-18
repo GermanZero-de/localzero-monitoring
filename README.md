@@ -4,7 +4,7 @@
 
 - We use poetry (so pyproject.toml lists the requirements, and poetry.lock the exact versions used to fulfill those requirements).
 - To make sure that exactly those are installed we use a python virtual environment
-- black is used to format the code
+- [black](https://github.com/psf/black) (for python) and [djlint](https://djlint.com/) (for django templates) are used to format code
 - a pre-commit hook is used to keep commits clean
 - We use pyright to get a little bit of type checking. Currently this is just in basic mode and without any special handling for the django ORM. I expect both things to potentially need tweaking (for example: <https://github.com/sbdchd/django-types> looks potentially useful).
 - [Yarn](https://classic.yarnpkg.com/en/) is used to manage node dependencies that are needed to include

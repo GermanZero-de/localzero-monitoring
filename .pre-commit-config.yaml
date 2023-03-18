@@ -18,6 +18,10 @@ repos:
       - id: black
         args: ["--target-version", "py310"]
         exclude: ^tests/end_to_end_expected
+-   repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.19.6
+    hooks:
+      - id: djlint-django
 # - repo: https://github.com/RobertCraigie/pyright-python
   # rev: v1.1.292
   # hooks:
