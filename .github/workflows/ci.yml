@@ -1,0 +1,13 @@
+name: Climate plan monitor CI
+on:
+  push:
+    branches:
+      - 20-github-actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: build application
+        run: docker compose --env-file .env.local up -d --build
