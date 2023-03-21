@@ -129,11 +129,6 @@ class Task(MP_Node):
     city = models.ForeignKey(
         City,
         on_delete=models.PROTECT,
-        help_text="""
-            <p>Bitte nicht ändern!</p>
-            <p>Derzeit könnten dann die Strukturen der Klimaaktionspläne der Städte gehörig durcheinander geraten.</p>
-            <p>Wir arbeiten noch an der Lösung, das zu verhindern.</p>
-        """,
     )
 
     title = models.CharField(

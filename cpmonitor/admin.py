@@ -1,15 +1,13 @@
 from django.contrib import admin
 from django.db import models
 from django.http import HttpRequest, HttpResponseRedirect, QueryDict
-from django.utils.html import format_html
 from django.urls import reverse
-from martor.models import MartorField
+from django.utils.html import format_html
 from martor.widgets import AdminMartorWidget
-
-from cpmonitor.models import City, Task
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory
 
+from cpmonitor.models import City, Task
 
 _city_filter_query = "city__id__exact"
 """The query parameter used by the city filter."""
@@ -55,8 +53,7 @@ class CityAdmin(admin.ModelAdmin):
 
 
 class TaskAdmin(TreeAdmin):
-    # ----- Changelist stuff ------
-
+    # ------ change list page ------
     change_list_template = "admin/task_changelist.html"
 
     @admin.display(description="Struktur")
@@ -88,7 +85,31 @@ class TaskAdmin(TreeAdmin):
     search_fields = ("title",)
     search_help_text = "Suche im Titel"
 
-    # ----- Add / Change stuff -----
+    # ------ add and change task page ------
+    fields = (
+        "city",
+        "title",
+        "summary",
+        "description",
+        "planned_start",
+        "planned_completion",
+        "responsible_organ",
+        "plan_assessment",
+        "execution_assessment",
+        "execution_justification",
+        "execution_progress",
+        "execution_completion",
+        "actual_start",
+        "actual_completion",
+        "_position",
+        "_ref_node_id",
+    )
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ("city",)
+        else:
+            return ()
 
     formfield_overrides = {
         models.TextField: {"widget": AdminMartorWidget},
@@ -100,9 +121,6 @@ class TaskAdmin(TreeAdmin):
         filters = QueryDict(query_string).get("_changelist_filters")
         city_id = QueryDict(filters).get(_city_filter_query)
         return {"city": city_id}
-
-    # This does not work in conjunction with `get_changeform_initial_data`. See #50.
-    # readonly_fields = ("city",)
 
 
 admin.site.site_header = "LocalZero Monitoring"
