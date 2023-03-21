@@ -237,7 +237,7 @@ To do so, one can open a shell in the running container and run `manage.py` with
 docker ps
 
 # run shell in container
-docker exec -it <django container name> sh
+docker exec -it djangoapp sh
 
 # run manage.py inside container shell
 python manage.py migrate --settings=config.settings.local-container
