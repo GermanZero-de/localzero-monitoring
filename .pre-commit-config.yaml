@@ -22,6 +22,7 @@ repos:
     rev: v1.19.6
     hooks:
       - id: djlint-django
+        args: ['--reformat', '--lint']
 # - repo: https://github.com/RobertCraigie/pyright-python
   # rev: v1.1.292
   # hooks:
