@@ -103,7 +103,7 @@ The first time playwright is used, let it download the tools it needs with:
 playwright install
 ```
 
-*Start the dev server in the background*, then execute tests with
+*Start the docker container with the local config*, then execute tests with
 
 ```shell
 # run all tests
@@ -237,7 +237,7 @@ To do so, one can open a shell in the running container and run `manage.py` with
 docker ps
 
 # run shell in container
-docker exec -it <django container name> sh
+docker exec -it djangoapp sh
 
 # run manage.py inside container shell
 python manage.py migrate --settings=config.settings.local-container
