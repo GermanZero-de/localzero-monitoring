@@ -3,7 +3,7 @@ FROM node:19-alpine AS frontend-builder
 
 WORKDIR /cpmonitor
 
-COPY package.json .
+COPY package.json yarn.lock .
 COPY cpmonitor/static/css cpmonitor/static/css
 RUN yarn install && \
     yarn run compile:css
@@ -37,7 +37,7 @@ RUN poetry export --without dev --format requirements.txt \
 
 COPY . .
 COPY --from=frontend-builder /cpmonitor/cpmonitor/static/css ./cpmonitor/static/css
-COPY --from=frontend-builder /cpmonitor/node_modules/bootstrap/dist/js ./node_modules/bootstrap/dist/js
+COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/core/dist ./node_modules/@tabler/core/dist
 COPY --from=frontend-builder /cpmonitor/node_modules/jquery/dist ./node_modules/jquery/dist
 RUN /venv/bin/python manage.py collectstatic --no-input -v 2 --settings=config.settings.container
 RUN poetry build && \
