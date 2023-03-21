@@ -103,7 +103,7 @@ The first time playwright is used, let it download the tools it needs with:
 playwright install
 ```
 
-*Start the dev server in the background*, then execute tests with
+*Start the docker container with the local config*, then execute tests with
 
 ```shell
 # run all tests
