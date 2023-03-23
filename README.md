@@ -115,6 +115,7 @@ pytest <path-to-test>
 # run e2e test in headed mode
 pytest --headed <path-to-e2e-test>
 ```
+
 or when using the dev server start the tests with `pytest --base-url http://localhost:8000`.
 
 - New test files have to be named according to the convention: `*_test.py`.
@@ -159,6 +160,8 @@ database format. This can be done by
 python manage.py makemigrations --settings=config.settings.local
 ```
 
+The migration might have to be improved, e.g. by using `migrations.RunPython`.
+
 Afterwards the test database has to be updated as well. Use the dumpdata command to generate a test database from the
 currently running database:
 
@@ -166,7 +169,18 @@ currently running database:
 python manage.py dumpdata --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
-On Windows (and possibly others): Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
+Cheat-sheet to make sure the correct data is dumped:
+
+```shell
+git checkout right-before-model-change
+rm db.sqlite3
+./manage.py migrate --settings=config.settings.local
+./manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+git checkout after-model-change-including-migration
+./manage.py migrate --settings=config.settings.local
+```
+
+Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
 Possibly use a formatter on the generated file.
 
 ## Containerization and Deployment
