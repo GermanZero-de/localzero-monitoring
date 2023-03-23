@@ -199,21 +199,44 @@ class Task(MP_Node):
 
     # 3. Umsetzungsstand
 
-    class ExecutionAssessment(models.IntegerChoices):
-        UNKNOWN = 0, "unbekannt (grau)"
-        AHEAD = 1, "vor dem Plan (grün)"
-        AS_PLANNED = 2, "im Plan (grün)"
-        DELAYED = 3, "zurückgestellt / verzögert (orange)"
-        INSUFFICIENT = 4, "nicht ausreichend / in Teilen gescheitert (rot)"
-        FAILED = 5, "gescheitert (rot)"
-        MISSING = 6, "fehlt im Plan (rot)"
+    class ExecutionStatus(models.IntegerChoices):
+        UNKNOWN = 0, "unbekannt / ungeplant"
+        AS_PLANNED = 2, "geplant / in Arbeit"
+        COMPLETE = 4, "abgeschlossen"
+        DELAYED = 6, "verzögert / fehlt"
+        FAILED = 8, "gescheitert"
 
-    execution_assessment = models.IntegerField(
-        "Bewertung des Umsetzungsstandes",
-        choices=ExecutionAssessment.choices,
-        default=ExecutionAssessment.UNKNOWN,
+    execution_status = models.IntegerField(
+        "Umsetzungsstand",
+        choices=ExecutionStatus.choices,
+        default=ExecutionStatus.UNKNOWN,
         help_text="""
             <p>Bei Maßnahmen: Wird/wurde die Maßnahme wie geplant umgesetzt?</p>
+            <dl>
+                <dt>unbekannt / ungeplant</dt><dd><ul>
+                    <li>Keine Infos vorhanden</li>
+                    <li>Es gibt einen unkonkreten Beschluss</li>
+                </ul></dd>
+                <dt>geplant / in Arbeit</dt><dd><ul>
+                    <li>Finden wir erstmal gut: Dinge werden bearbeitet.</li>
+                    <li>Maßnahmen, die im Zeitplan sind (sowohl begonnen als auch in Planung).</li>
+                    <li>Maßnahmen die in Umsetzung sind.</li>
+                    <li>Maßnahmen für die es einen positiven Beschluss + Zeitplan (Konkretisierung) gibt.</li>
+                </ul></dd>
+                <dt>abgeschlossen</dt><dd><ul>
+                    <li>Top und im Plan fertig.</li>
+                </ul></dd>
+                <dt>verzögert / fehlt</dt><dd><ul>
+                    <li>Maßnahmen, die nicht im Zeitplan sind.</li>
+                    <li>Maßnahmen, die im Prinzip noch vervollständigt werden können.</li>
+                    <li>Maßnahmen, die im KAP nicht aufgeführt sind, (und nicht bearbeitet weden)</li>
+                    <li>Im Prinzip könnten sie aber noch angegangen werden.</li>
+                </ul></dd>
+                <dt>gescheitert</dt><dd><ul>
+                    <li>Kann niemals mehr geschafft werden (Eiche ist gefällt, Moor ist mit einer Autobahn überbaut)</li>
+                    <li>Sowohl für Maßnahmen aus dem KAP, als auch Dinge, die gar nich im KAP aufgeführt waren.</li>
+                </ul></dd>
+            </dl>
             <p>Bei Sektoren / Maßnahmengruppen:</p>
             <p>Wenn hier "unbekannt" ausgewählt wird, werden die Umsetzungsstände der Maßnahmen in diesem Sektor / dieser Gruppe zusammengefasst.</p>
             <p>Bei anderen Auswahlen wird diese Zusammenfassung überschrieben. Das sollte nur passieren, wenn sie unpassend oder irreführend ist.</p>
@@ -221,26 +244,9 @@ class Task(MP_Node):
     )
 
     execution_justification = models.TextField(
-        "Begründung der Bewertung",
+        "Begründung Umsetzungsstand",
         blank=True,
-        help_text="Die Auswahl bei der Bewertung kann hier ausführlich begründet werden.",
-    )
-
-    class ExecutionProgress(models.IntegerChoices):
-        UNKNOWN = 0, "unbekannt"
-        NOT_PLANNED = 1, "ungeplant"
-        PLANNED = 2, "in Zukunft geplant"
-        IN_PROGRESS = 3, "läuft"
-        FINISHED = 4, "abgeschlossen / gescheitert"
-
-    execution_progress = models.IntegerField(
-        "Fortschritt",
-        choices=ExecutionProgress.choices,
-        default=ExecutionProgress.PLANNED,
-        help_text="""
-            <p>Eine grobe Einteilung, wo sich diese Maßnahme zeitlich in der Planung befindet.</p>
-            <p>Dies kann z.B. genutzt werden, um Maßnahmen zu filtern, deren Umsetzungsstand noch nicht bewertet werden kann.</p>
-        """,
+        help_text="Die Auswahl bei Umsetzungsstand kann hier ausführlich begründet werden.",
     )
 
     execution_completion = models.IntegerField(
