@@ -2,11 +2,12 @@
     "recommendations": [
         "batisteo.vscode-django",
         "mhutchie.git-graph",
-        "cschleiden.vscode-github-actions",
+        "github.vscode-github-actions",
         "github.vscode-pull-request-github",
         "davidanson.vscode-markdownlint",
         "donjayamanne.python-extension-pack",
         "zeshuaro.vscode-python-poetry",
-        "ms-python.black-formatter"
+        "ms-python.black-formatter",
+        "monosans.djlint"
     ]
 }
