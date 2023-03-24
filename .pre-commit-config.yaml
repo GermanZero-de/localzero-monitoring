@@ -26,6 +26,7 @@ repos:
 -   repo: https://github.com/ecugol/pre-commit-hooks-django
     rev: v0.4.0
     hooks:
+      # This does not behave well during a rebase. Work-around: Temporarily put `exit 0` in .git/hooks/pre-commit.
       - id: check-untracked-migrations
       # - id: check-absent-migrations  # Unfortunately, broken since it uses find and finds in ".venv"... Done locally:
 -   repo: local
