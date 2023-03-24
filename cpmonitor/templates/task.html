@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% load martortags %}
-
 {% block title %}
     {{ block.super }} {{ city.name }} {{ task.title }}
 {% endblock title %}
-
 {% block content %}
     <h1>LocalZero Monitoring {{ city.name }}</h1>
     <div>

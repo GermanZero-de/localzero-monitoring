@@ -1,17 +1,21 @@
 {% load static %}
-
 <!DOCTYPE HTML>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}LocalZero Monitoring{% endblock title %}</title>
-
-    <link rel="stylesheet" href="{% static 'tabler/css/tabler.css' %}">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'tabler/js/tabler.min.js' %}"></script>
-  </head>
-  <body>
-  {% block content %}{% endblock content %}
-  </body>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="LocalZero Monitoring">
+        <title>
+            {% block title %}
+                LocalZero Monitoring
+            {% endblock title %}
+        </title>
+        <link rel="stylesheet" href="{% static 'tabler/css/tabler.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <script src="{% static 'jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'tabler/js/tabler.min.js' %}"></script>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
 </html>
