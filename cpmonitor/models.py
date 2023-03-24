@@ -200,7 +200,7 @@ class Task(MP_Node):
     # 3. Umsetzungsstand
 
     class ExecutionStatus(models.IntegerChoices):
-        UNKNOWN = 0, "unbekannt / ungeplant"
+        UNKNOWN = 0, "unbekannt"
         AS_PLANNED = 2, "geplant / in Arbeit"
         COMPLETE = 4, "abgeschlossen"
         DELAYED = 6, "verzögert / fehlt"
@@ -213,7 +213,7 @@ class Task(MP_Node):
         help_text="""
             <p>Bei Maßnahmen: Wird/wurde die Maßnahme wie geplant umgesetzt?</p>
             <dl>
-                <dt>unbekannt / ungeplant</dt><dd><ul>
+                <dt>unbekannt</dt><dd><ul>
                     <li>Keine Infos vorhanden</li>
                     <li>Es gibt einen unkonkreten Beschluss</li>
                 </ul></dd>
