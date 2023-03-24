@@ -51,6 +51,7 @@ ENV VIRTUAL_ENV="/venv"
 
 # run as unprivileged user instead of root
 RUN adduser -D user
+RUN mkdir /images && chown user: /images && chmod +w /images  # allow user to write new files to /images for the image upload
 USER user
 
 EXPOSE 8000

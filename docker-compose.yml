@@ -7,6 +7,7 @@ services:
     volumes:
       - ./:/db
       - static_volume:/static
+      - image_volume:/images
       - nginx_config_volume:/nginx/conf.d
     networks:
       - nginx_network
@@ -21,6 +22,7 @@ services:
     volumes:
       - nginx_config_volume:/etc/nginx/conf.d
       - static_volume:/cpmonitor/static
+      - image_volume:/cpmonitor/images
     depends_on:
       - djangoapp
     networks:
@@ -34,3 +36,4 @@ volumes:
   # just declare the volumes so nginx and django can share them
   nginx_config_volume:
   static_volume:
+  image_volume:
