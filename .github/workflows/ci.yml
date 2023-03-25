@@ -21,6 +21,8 @@ jobs:
           pip install poetry==${{ env.POETRY_VERSION }}
           poetry install --with dev
           poetry run playwright install --with-deps chromium
+      - name: Run pre-commit hooks on all files
+        run: poetry run pre-commit run --all-files
       - name: create database
         run: poetry run python manage.py migrate --settings=config.settings.local
       - name: fill database

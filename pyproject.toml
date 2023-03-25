@@ -41,6 +41,6 @@ base_url = "http://localhost"
 DJANGO_SETTINGS_MODULE = "config.settings.local-container"
 
 [tool.djlint]
-ignore = "H017,H031"
+ignore = "H017,H031,H021"
 indent = 4
 quiet = true

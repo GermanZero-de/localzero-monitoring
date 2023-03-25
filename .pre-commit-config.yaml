@@ -23,6 +23,21 @@ repos:
     hooks:
       - id: djlint-django
         args: ['--reformat', '--lint']
+-   repo: https://github.com/ecugol/pre-commit-hooks-django
+    rev: v0.4.0
+    hooks:
+      # This does not behave well during a rebase. Work-around: Temporarily put `exit 0` in .git/hooks/pre-commit.
+      - id: check-untracked-migrations
+      # - id: check-absent-migrations  # Unfortunately, broken since it uses find and finds in ".venv"... Done locally:
+-   repo: local
+    hooks:
+      - id: check-absent-migrations
+        name: Check absent migrations with manage.py makemigrations --check --dry-run
+        entry: poetry run sh -c './manage.py makemigrations --check --dry-run --settings=config.settings.local'
+        pass_filenames: false
+        language: system
+        always_run: true
+
 # - repo: https://github.com/RobertCraigie/pyright-python
   # rev: v1.1.292
   # hooks:
