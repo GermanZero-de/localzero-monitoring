@@ -201,7 +201,7 @@ class Task(MP_Node):
 
     class ExecutionStatus(models.IntegerChoices):
         UNKNOWN = 0, "unbekannt"
-        AS_PLANNED = 2, "geplant / in Arbeit"
+        AS_PLANNED = 2, "in Arbeit"
         COMPLETE = 4, "abgeschlossen"
         DELAYED = 6, "verzögert / fehlt"
         FAILED = 8, "gescheitert"
@@ -217,7 +217,7 @@ class Task(MP_Node):
                     <li>Keine Infos vorhanden</li>
                     <li>Es gibt einen unkonkreten Beschluss</li>
                 </ul></dd>
-                <dt>geplant / in Arbeit</dt><dd><ul>
+                <dt>in Arbeit</dt><dd><ul>
                     <li>Finden wir erstmal gut: Dinge werden bearbeitet.</li>
                     <li>Maßnahmen, die im Zeitplan sind (sowohl begonnen als auch in Planung).</li>
                     <li>Maßnahmen die in Umsetzung sind.</li>
