@@ -139,3 +139,7 @@ dmypy.json
 !.yarn/sdks
 !.yarn/versions
 node_modules
+
+# images uploaded through the admin interface
+cpmonitor/images
+!cpmonitor/images/.gitkeep
