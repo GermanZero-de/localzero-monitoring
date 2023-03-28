@@ -76,20 +76,27 @@ def markdown_uploader(request):
     image_types = ["image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"]
     if image.content_type not in image_types:
         data = json.dumps(
-            {"status": 405, "error": _("Bad image format.")}, cls=LazyEncoder
+            {
+                "status": 415,
+                "error": _(
+                    "Unsupported image format. Supported formats: "
+                    + ", ".join(image_types)
+                ),
+            },
+            cls=LazyEncoder,
         )
-        return HttpResponse(data, content_type="application/json", status=405)
+        return HttpResponse(data, content_type="application/json", status=415)
 
     if image.size > settings.MAX_IMAGE_UPLOAD_SIZE:
         to_mb = settings.MAX_IMAGE_UPLOAD_SIZE / (1024 * 1024)
         data = json.dumps(
             {
-                "status": 405,
+                "status": 413,
                 "error": _("Maximum image file is %(size)s MB.") % {"size": to_mb},
             },
             cls=LazyEncoder,
         )
-        return HttpResponse(data, content_type="application/json", status=405)
+        return HttpResponse(data, content_type="application/json", status=413)
 
     img_uuid = "{0}-{1}".format(uuid.uuid4().hex[:10], image.name.replace(" ", "-"))
     tmp_file = os.path.join(settings.MARTOR_UPLOAD_PATH, img_uuid)
