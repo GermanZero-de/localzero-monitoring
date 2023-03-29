@@ -75,7 +75,10 @@ class City(models.Model):
         "Kontakt Name",
         max_length=255,
         blank=True,
-        help_text="Name des Lokalteams oder einer Ansprechperson aus dem Lokalteam, das dieses Monitoring betreibt.",
+        help_text=(
+            "Name des Lokalteams oder einer Ansprechperson aus dem Lokalteam, das dieses Monitoring"
+            " betreibt."
+        ),
     )
     contact_email = models.EmailField(
         "Kontakt E-Mail",
@@ -112,13 +115,21 @@ class City(models.Model):
             slug_errors = msgs.pop("slug", None)
             if slug_errors:
                 slug_errors.append(
-                    "Der Name der Kommune wird in der URL als '%(slug)s' geschrieben. Das kollidiert mit einer anderen Stadt."
-                    % {"slug": self.slug}
+                    "Der Name der Kommune wird in der URL als '%(slug)s' geschrieben. Das"
+                    " kollidiert mit einer anderen Stadt." % {"slug": self.slug}
                 )
                 if not NON_FIELD_ERRORS in msgs:
                     msgs[NON_FIELD_ERRORS] = []
                 msgs[NON_FIELD_ERRORS].extend(slug_errors)
             raise ValidationError(msgs)
+
+
+class ExecutionStatus(models.IntegerChoices):
+    UNKNOWN = 0, "unbekannt"
+    AS_PLANNED = 2, "in Arbeit"
+    COMPLETE = 4, "abgeschlossen"
+    DELAYED = 6, "verzögert / fehlt"
+    FAILED = 8, "gescheitert"
 
 
 class Task(MP_Node):
@@ -198,13 +209,6 @@ class Task(MP_Node):
     )
 
     # 3. Umsetzungsstand
-
-    class ExecutionStatus(models.IntegerChoices):
-        UNKNOWN = 0, "unbekannt"
-        AS_PLANNED = 2, "in Arbeit"
-        COMPLETE = 4, "abgeschlossen"
-        DELAYED = 6, "verzögert / fehlt"
-        FAILED = 8, "gescheitert"
 
     execution_status = models.IntegerField(
         "Umsetzungsstand",
@@ -306,8 +310,8 @@ class Task(MP_Node):
             slug_errors = msgs.pop("slugs", None)
             if slug_errors:
                 slug_errors.append(
-                    "Der Sektor / die Maßnahme wird in der URL als '%(slugs)s' geschrieben. Das kollidiert mit einem anderen Eintrag."
-                    % {"slugs": self.slugs}
+                    "Der Sektor / die Maßnahme wird in der URL als '%(slugs)s' geschrieben. Das"
+                    " kollidiert mit einem anderen Eintrag." % {"slugs": self.slugs}
                 )
                 if not NON_FIELD_ERRORS in msgs:
                     msgs[NON_FIELD_ERRORS] = []

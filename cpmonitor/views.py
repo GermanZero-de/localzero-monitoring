@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from martor.utils import LazyEncoder
 
-from .models import City, Task
+from .models import City, ExecutionStatus, Task
 
 
 # Our main page
@@ -32,13 +32,24 @@ def city(request, city_slug):
     except City.DoesNotExist:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
     root_tasks = Task.get_root_nodes().filter(city=city)
+    for task in root_tasks:
+        subtasks = task.get_children()
+        total = len(subtasks)
+        statuses = {s.value: s for s in ExecutionStatus}
+        task.statuses = {}
+        for subtask in subtasks:
+            status = subtask.execution_status
+            task.statuses[status] = task.statuses.get(status, 0) + round(100 / total)
+
+        task.statuses = [
+            (v, statuses[k].label, statuses[k].name)
+            for k, v in sorted(task.statuses.items(), reverse=True)
+        ]
+
     return render(
         request,
         "city.html",
-        {
-            "city": city,
-            "tasks": root_tasks,
-        },
+        {"city": city, "tasks": root_tasks},
     )
 
 
