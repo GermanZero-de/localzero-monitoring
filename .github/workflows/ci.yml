@@ -1,6 +1,7 @@
 name: Climate plan monitor CI
 on:
-  push
+  push:
+  workflow_dispatch:
 
 env:
   PYTHON_VERSION: '3.10'
