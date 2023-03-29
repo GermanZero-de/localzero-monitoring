@@ -42,5 +42,5 @@ DJANGO_SETTINGS_MODULE = "config.settings.local-container"
 
 [tool.djlint]
 ignore = "H017,H031,H021"
-indent = 4
+indent = 2
 quiet = true

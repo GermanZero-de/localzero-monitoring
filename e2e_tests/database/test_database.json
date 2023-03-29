@@ -435,29 +435,13 @@
     }
   },
   {
-    "model": "sessions.session",
-    "pk": "1y8tehqteg1qrz1urr5j1jfcmiw411mg",
-    "fields": {
-      "session_data": ".eJxVjLEOwjAMRP8lM4qa0sQqIzvfENmOTQookZp2Qvw7rdQBxrv37t4m4rrkuDaZ45TMxThz-u0I-SllB-mB5V4t17LME9ldsQdt9laTvK6H-3eQseVtjQGAAHunIwl33vNZEioDo6h2wOTDqOgGpQGcUI-BCbYYMBBBMp8vICU5qg:1pYrjJ:ysoQIrJvjFlT1Hbb0Nf7kGMB7nnN6us513ISeIR4a8M",
-      "expire_date": "2023-03-19T17:01:01.107Z"
-    }
-  },
-  {
-    "model": "sessions.session",
-    "pk": "c8idu5xw7s73sxucxl1w6wwjy704fimq",
-    "fields": {
-      "session_data": ".eJxVjDEOwjAMRe-SGUV2WzUxIztniBw7IQWUSk07Ie4OlTrA-t97_2UCb2sJW0tLmNScDZrT7xZZHqnuQO9cb7OVua7LFO2u2IM2e501PS-H-3dQuJVv7QdQlxKKjgPG7HPPHTpHkTPmHoQSMqJXn50HAXA0UkcCkYB8ZDXvD-luN9k:1pWLil:bX3aaZAtKKgzurP9OloERjVSxnFiFeSxIU97CTGs-24",
-      "expire_date": "2023-03-12T18:26:03.978Z"
-    }
-  },
-  {
     "model": "cpmonitor.city",
     "pk": 1,
     "fields": {
       "name": "Beispielstadt",
       "zipcode": "12345",
       "url": "",
-      "introduction": "",
+      "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. **Lorem Ipsum** has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
       "co2e_budget": 0,
       "assessment_administration": "",
       "assessment_action_plan": "",
@@ -472,11 +456,11 @@
     "model": "cpmonitor.task",
     "pk": 1,
     "fields": {
-      "path": "0001",
+      "path": "0002",
       "depth": 1,
-      "numchild": 2,
+      "numchild": 5,
       "city": 1,
-      "title": "Verkehr",
+      "title": "Mobilität",
       "summary": "",
       "description": "",
       "planned_start": null,
@@ -488,14 +472,14 @@
       "execution_completion": 0,
       "actual_start": null,
       "actual_completion": null,
-      "slugs": "verkehr"
+      "slugs": "mobilitat"
     }
   },
   {
     "model": "cpmonitor.task",
     "pk": 2,
     "fields": {
-      "path": "00010002",
+      "path": "00020002",
       "depth": 2,
       "numchild": 0,
       "city": 1,
@@ -518,7 +502,7 @@
     "model": "cpmonitor.task",
     "pk": 3,
     "fields": {
-      "path": "00010001",
+      "path": "00020001",
       "depth": 2,
       "numchild": 0,
       "city": 1,
@@ -535,6 +519,236 @@
       "actual_start": null,
       "actual_completion": null,
       "slugs": "verkehr/u-bahn-strecke-verlangern"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 4,
+    "fields": {
+      "path": "00020003",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "Carsharing einführen",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 6,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "mobilitat/carsharing-einfuhren"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 5,
+    "fields": {
+      "path": "00020005",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "Parkraumbewirtschaftung",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 6,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "mobilitat/parkraumbewirtschaftung"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 6,
+    "fields": {
+      "path": "00020006",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "Jobtickets für Verwaltung",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 4,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "jobtickets-fur-verwaltung"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 7,
+    "fields": {
+      "path": "0001",
+      "depth": 1,
+      "numchild": 6,
+      "city": 1,
+      "title": "Strukturen",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 0,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "strukturen"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 8,
+    "fields": {
+      "path": "00010001",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "Personal einstellen",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 6,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "personal-einstellen"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 9,
+    "fields": {
+      "path": "00010002",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "Klimaaktionsplan",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 6,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "klimaaktionsplan"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 10,
+    "fields": {
+      "path": "00010003",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "Bürgerbeteiligung",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 6,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "burgerbeteiligung"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 11,
+    "fields": {
+      "path": "00010004",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "Monitoring",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 6,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "monitoring"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 12,
+    "fields": {
+      "path": "00010005",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "European Energy Award",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 2,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "european-energy-award"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 13,
+    "fields": {
+      "path": "00010006",
+      "depth": 2,
+      "numchild": 0,
+      "city": 1,
+      "title": "Klimarelevanzprüfung",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 0,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "klimarelevanzprufung"
     }
   }
 ]

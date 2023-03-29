@@ -4,16 +4,43 @@ $gz-darkblue: #011633;
 $gz-green: #a3d869;
 
 :root {
-  --tblr-body-bg: #fff;
-  --tblr-body-font-size: 1rem;
+  --tblr-body-bg: #fff9e5;
   --tblr-font-weight-bold: 700;
   --tblr-primary: #{$gz-yellow}; //$gz-yellow;
   --tblr-primary-rgb: #{red($gz-yellow)}, #{green($gz-yellow)}, #{blue($gz-yellow)}; //$gz-yellow;
 }
 .navbar {
   --tblr-navbar-brand-font-size: 1.25rem;
+  --tblr-navbar-bg: var(--tblr-primary);
+
+  .navbar-brand {
+    color: white;
+
+    a {
+      color: white !important;
+      text-decoration: none !important;
+    }
+  }
 }
 
 .card-title {
   font-size: 2rem;
+}
+
+.lz-status {
+  &.UNKNOWN {
+    background-color: grey;
+  }
+  &.AS_PLANNED {
+    background-color: #f9b31a;
+  }
+  &.COMPLETE {
+    background-color: #9ec422;
+  }
+  &.DELAYED {
+    background-color: #ca3922;
+  }
+  &.FAILED {
+    background-color: black;
+  }
 }
