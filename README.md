@@ -242,6 +242,20 @@ docker compose --env-file .env.local down --volumes
 
 The `--volumes` flag is important to make sure that at the next start, the latest static resources from the app container are served instead of potentially outdated files from the previous run cached by Docker.
 
+## Set / change temporary password protection
+
+The user / password for the development phase is stored in `config/nginx/htpasswd`. A new user / password may be set with
+
+```shell
+htpasswd -c config/nginx/htpasswd <username>
+```
+
+The `htpasswd` tool might have to be installed before, with (on Linux)
+
+```shell
+sudo apt install apache2-utils
+```
+
 ## Server administration
 
 The databases on the test and production servers must be manually migrated whenever we deploy an app version which requires schema changes.
