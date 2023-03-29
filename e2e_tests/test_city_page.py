@@ -24,7 +24,7 @@ def test_city_page_should_have_city_name_in_title(page: Page, django_db_setup):
 def test_should_go_to_task_view_when_clicking_task_item(page: Page, django_db_setup):
     page.goto("/beispielstadt")
 
-    task_title = page.get_by_text("Verkehr")
+    task_title = page.get_by_text("Mobilität")
     task_title.click()
 
-    expect(page).to_have_url("/beispielstadt/verkehr/")
+    expect(page).to_have_url("/beispielstadt/mobilitat/")
