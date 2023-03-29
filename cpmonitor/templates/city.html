@@ -2,37 +2,37 @@
 {% load static %}
 {% load martortags %}
 {% block title %}
-    {{ block.super }} {{ city.name }}
+  {{ block.super }} {{ city.name }}
 {% endblock title %}
 {% block content %}
-    {% comment %} initial sample layout -- just for reference, delete later! {% endcomment %}
-    <div class="container">
-        <div style="width: 100%; margin: 3px">
-            <div style="display: flex; flex-wrap: wrap">
-                <div>
-                    <h2>Einleitung Klimaschutz Monitor {{ city.name }}</h2>
-                    <p>{{ city.introduction | safe_markdown }}</p>
+  {% comment %} initial sample layout -- just for reference, delete later! {% endcomment %}
+  <div class="container">
+    <div style="width: 100%; margin: 3px">
+      <div style="display: flex; flex-wrap: wrap">
+        <div>
+          <h2>Einleitung Klimaschutz Monitor {{ city.name }}</h2>
+          <p>{{ city.introduction | safe_markdown }}</p>
+        </div>
+        <div>
+          <h2>Platzhalter für Charts etc.</h2>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap">
+        {% for task in tasks %}
+          {% if not task.parent and task.city == city %}
+            <div class="task-card">
+              <div style="margin: 10px;
+                          border-radius: 10px;
+                          background-color: #FFEBA8;
+                          padding: 10px;
+                          color: #505050">
+                <div style="padding: 10px 20px;">
+                  <div style="color: #505050; font-size: 15pt;">
+                    <a href="{% url 'task' city.slug task.slugs %}">{{ task.title }}</a>
+                  </div>
+                  <div>{{ task.description | safe_markdown }}</div>
                 </div>
-                <div>
-                    <h2>Platzhalter für Charts etc.</h2>
-                </div>
-            </div>
-            <div style="display: flex; flex-wrap: wrap">
-                {% for task in tasks %}
-                    {% if not task.parent and task.city == city %}
-                        <div class="task-card">
-                            <div style="margin: 10px;
-                                        border-radius: 10px;
-                                        background-color: #FFEBA8;
-                                        padding: 10px;
-                                        color: #505050">
-                                <div style="padding: 10px 20px;">
-                                    <div style="color: #505050; font-size: 15pt;">
-                                        <a href="{% url 'task' city.slug task.slugs %}">{{ task.title }}</a>
-                                    </div>
-                                    <div>{{ task.description | safe_markdown }}</div>
-                                </div>
-                                {% comment %} [ div [ css [ C.padding2 (C.px 10) (C.px 20) ] ]
+                {% comment %} [ div [ css [ C.padding2 (C.px 10) (C.px 20) ] ]
                   [ myLink catTreeEntry.data.id [ css [ C.width (C.pct 100) ] ] [ text catTreeEntry.data.title ]
                   , div
                       [ css
@@ -44,63 +44,63 @@
                           ]
                       ]
                       (progressBarEntries catTreeEntry)
-                                ] {% endcomment %}
-                                {% for subtask in tasks %}
-                                    {% if subtask.parent == task %}
-                                        <div style="margin: 5px;
-                                                    padding: 5px;
-                                                    background-color: #FFDA62;
-                                                    border-radius: 5px">
-                                            <div style="width: 100%; font-size: 14pt;">{{ subtask.title }}</div>
-                                            <div>
-                                                {% for node in tasks %}
-                                                    {% if node.parent == subtask %}
-                                                        <div style="display: flex;
-                                                                    align-items: center;
-                                                                    margin: 5px;
-                                                                    padding: 5px;
-                                                                    background-color: #ffffff">
-                                                            <div style="width: 100%;">{{ node.title }}</div>
-                                                            {% if node.state == 0 %}
-                                                                <!-- UNKNOWN -->
-                                                                <div class="task-row" style="background-color: #777777;">?</div>
-                                                            {% elif node.state == 1 %}
-                                                                <!-- SUGGESTED -->
-                                                                <div class="task-row" style="background-color: #777777;">?</div>
-                                                            {% elif node.state == 2 %}
-                                                                <!-- PLANNED -->
-                                                                <div class="task-row" style="background-color: #FFAA00;">!</div>
-                                                            {% elif node.state == 3 %}
-                                                                <!-- WAITING -->
-                                                                <div class="task-row" style="background-color: #FFAA00;">!</div>
-                                                            {% elif node.state == 4 %}
-                                                                <!-- IN_PROGRESS -->
-                                                                <div class="task-row" style="background-color: #FFAA00;">!</div>
-                                                            {% elif node.state == 5 %}
-                                                                <!-- DELAYED -->
-                                                                <div class="task-row" style="background-color: #FF0000;">X</div>
-                                                            {% elif node.state == 6 %}
-                                                                <!-- SUCCEEDED -->
-                                                                <div class="task-row" style="background-color: #00AA00;">✓</div>
-                                                            {% elif node.state == 7 %}
-                                                                <!-- FAILED -->
-                                                                <div class="task-row" style="background-color: #FF0000;">X</div>
-                                                            {% elif node.state == 8 %}
-                                                                <!-- REJECTED -->
-                                                                <div class="task-row" style="background-color: #FF0000;">X</div>
-                                                            {% endif %}
-                                                        </div>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
+                ] {% endcomment %}
+                {% for subtask in tasks %}
+                  {% if subtask.parent == task %}
+                    <div style="margin: 5px;
+                                padding: 5px;
+                                background-color: #FFDA62;
+                                border-radius: 5px">
+                      <div style="width: 100%; font-size: 14pt;">{{ subtask.title }}</div>
+                      <div>
+                        {% for node in tasks %}
+                          {% if node.parent == subtask %}
+                            <div style="display: flex;
+                                        align-items: center;
+                                        margin: 5px;
+                                        padding: 5px;
+                                        background-color: #ffffff">
+                              <div style="width: 100%;">{{ node.title }}</div>
+                              {% if node.state == 0 %}
+                                <!-- UNKNOWN -->
+                                <div class="task-row" style="background-color: #777777;">?</div>
+                              {% elif node.state == 1 %}
+                                <!-- SUGGESTED -->
+                                <div class="task-row" style="background-color: #777777;">?</div>
+                              {% elif node.state == 2 %}
+                                <!-- PLANNED -->
+                                <div class="task-row" style="background-color: #FFAA00;">!</div>
+                              {% elif node.state == 3 %}
+                                <!-- WAITING -->
+                                <div class="task-row" style="background-color: #FFAA00;">!</div>
+                              {% elif node.state == 4 %}
+                                <!-- IN_PROGRESS -->
+                                <div class="task-row" style="background-color: #FFAA00;">!</div>
+                              {% elif node.state == 5 %}
+                                <!-- DELAYED -->
+                                <div class="task-row" style="background-color: #FF0000;">X</div>
+                              {% elif node.state == 6 %}
+                                <!-- SUCCEEDED -->
+                                <div class="task-row" style="background-color: #00AA00;">✓</div>
+                              {% elif node.state == 7 %}
+                                <!-- FAILED -->
+                                <div class="task-row" style="background-color: #FF0000;">X</div>
+                              {% elif node.state == 8 %}
+                                <!-- REJECTED -->
+                                <div class="task-row" style="background-color: #FF0000;">X</div>
+                              {% endif %}
                             </div>
-                        </div>
-                    {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endif %}
                 {% endfor %}
+              </div>
             </div>
-        </div>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
+  </div>
 {% endblock content %}
