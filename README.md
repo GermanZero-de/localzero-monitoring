@@ -183,6 +183,14 @@ git checkout after-model-change-including-migration
 Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
 Possibly use a formatter on the generated file.
 
+## When pre-commit hooks make trouble
+
+E.g. the hook `check-untracked-migrations` is known to make trouble with detachted HEAD, e.g. during a rebase. Then it can be skipped:
+
+```shell
+SKIP=check-untracked-migrations git commit
+```
+
 ## Containerization and Deployment
 
 The application is deployed to the server as a pair of Docker containers:
