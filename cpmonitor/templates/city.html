@@ -1,92 +1,59 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "pageframe.html" %}
 {% load martortags %}
-{% block title %}
-  {{ block.super }} {{ city.name }}
-{% endblock title %}
-{% block content %}
-  <div class="page">
-    <header class="navbar navbar-expand-md navbar-light d-print-none">
-      <div class="container-xl">
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbar-menu"
-                aria-controls="navbar-menu"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-          <a href=".">
-            <img src="{% static 'logo_inverted.png' %}"
-                 alt="LocalZero Monitoring Logo"
-                 height="35"
-                 width="35"
-                 class="d-inline-block align-middle">
-            {{ city.name }}
-          </a>
-        </h1>
-      </div>
-    </header>
-    <div class="page-wrapper">
-      <div class="page-body">
-        <div class="container-xl">
-          <div class="row row-deck row-cards">
-            <div class="col-12">
-              <div class="card card-md">
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <h3 class="h1">Einleitung</h3>
-                    <div class="markdown text-muted">{{ city.introduction | safe_markdown }}</div>
-                  </div>
-                </div>
-              </div>
+{% block page_body %}
+  <div class="container-xl">
+    <div class="row row-deck row-cards">
+      <div class="col-12">
+        <div class="card card-md">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <h3 class="h1">Einleitung</h3>
+              <div class="markdown text-muted">{{ city.introduction | safe_markdown }}</div>
             </div>
-            <div class="col-12">
-              <div class="card card-md">
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <h3 class="h1">Charts etc.</h3>
-                    <div class="markdown text-muted"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% for task in tasks %}
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Sektor</div>
-                    </div>
-                    <div class="h1 mb-3">
-                      <a href="{% url 'task' city.slug task.slugs %}">{{ task.title }}</a>
-                    </div>
-                    <div class="progress progress-separated mb-3">
-                      {% for value, label, name in task.statuses %}
-                        <div class="progress-bar lz-status {{ name }}"
-                             role="progressbar"
-                             style="width: {{ value }}%"
-                             aria-label="{{ label }}">
-                        </div>
-                      {% endfor %}
-                    </div>
-                    <div class="row">
-                      {% for value, label, name in task.statuses %}
-                        <div class="col-auto d-flex align-items-center pe-2">
-                          <span class="legend me-2 lz-status {{ name }}"></span>
-                          <span>{{ label }}</span>
-                        </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
           </div>
         </div>
       </div>
+      <div class="col-12">
+        <div class="card card-md">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <h3 class="h1">Charts etc.</h3>
+              <div class="markdown text-muted"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% for task in tasks %}
+        <div class="col-sm-6 col-lg-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="subheader">Sektor</div>
+              </div>
+              <div class="h1 mb-3">
+                <a href="{% url 'task' city.slug task.slugs %}">{{ task.title }}</a>
+              </div>
+              <div class="progress progress-separated mb-3">
+                {% for value, label, name in task.statuses %}
+                  <div class="progress-bar lz-status {{ name }}"
+                       role="progressbar"
+                       style="width: {{ value }}%"
+                       aria-label="{{ label }}">
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="row">
+                {% for value, label, name in task.statuses %}
+                  <div class="col-auto d-flex align-items-center pe-2">
+                    <span class="legend me-2 lz-status {{ name }}"></span>
+                    <span>{{ label }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
-{% endblock content %}
+{% endblock page_body %}

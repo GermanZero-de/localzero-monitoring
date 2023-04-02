@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load martortags %}
+{% block content %}
+  <div class="page">
+    <header class="navbar navbar-expand-md navbar-light d-print-none">
+      <div class="container-xl">
+        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+          <a href=".">
+            <img src="{% static 'logo_inverted.png' %}"
+                 alt="LocalZero Monitoring Logo"
+                 height="35"
+                 width="35"
+                 class="d-inline-block align-middle">
+            {% block title %}
+              {% if city %}
+                {{ block.super }} - {{ city.name }}
+              {% else %}
+                {{ block.super }}
+              {% endif %}
+            {% endblock title %}
+          </a>
+        </h1>
+        {% if not city %}
+          <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav w-100 mb-1 mb-lg-1">
+              <li class="nav-item dropdown ms-auto">
+                <a class="nav-link dropdown-toggle"
+                   href="#"
+                   id="navbarSelectCity"
+                   role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                  Stadt auswählen
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarSelectCity">
+                  {% for city in cities %}
+                    <li>
+                      <a class="dropdown-item" href="{% url 'city' city.slug %}">{{ city.name }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    </header>
+    <div class="page-wrapper">
+      <div class="page-body">
+        {% block page_body %}
+        {% endblock page_body %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
