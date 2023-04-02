@@ -1,3 +1,4 @@
+from typing import Dict
 from django.db import models
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -132,10 +133,20 @@ class ExecutionStatus(models.IntegerChoices):
     FAILED = 8, "gescheitert"
 
 
+TASK_UNIQUE_CONSTRAINT_NAME = "unique_urls"
+
+
 class Task(MP_Node):
     class Meta:
         verbose_name = "Sektor / Maßnahme"
         verbose_name_plural = "Sektoren und Maßnahmen"
+        constraints = [
+            models.UniqueConstraint(
+                models.F("city"),
+                models.F("slugs"),
+                name=TASK_UNIQUE_CONSTRAINT_NAME,
+            )
+        ]
 
     city = models.ForeignKey(
         City,
@@ -284,7 +295,6 @@ class Task(MP_Node):
     slugs = models.SlugField(
         "slugs",
         max_length=255,
-        unique=True,
         editable=False,
     )
 
@@ -295,27 +305,26 @@ class Task(MP_Node):
             self.slugs += slugify(anc.title) + "/"
         self.slugs += slugify(self.title)
 
-    def validate_unique(self, exclude=None):
+    def validate_constraints(self, exclude=None):
         """
-        Add slugs to fields to validate uniqueness and convert a slugs error to non-field error.
+        Add slugs to fields to validate uniqueness and convert to a more readable error.
 
         This is necessary, because `editable=False` excludes the field from validation
-        and cannot handle field-based validation errors.
+        and UniqueConstraint does not allow error messages showing content.
         """
         exclude.remove("slugs")
         try:
-            super().validate_unique(exclude=exclude)
+            super().validate_constraints(exclude=exclude)
         except ValidationError as e:
-            msgs = e.message_dict
-            slug_errors = msgs.pop("slugs", None)
-            if slug_errors:
-                slug_errors.append(
-                    "Der Sektor / die Maßnahme wird in der URL als '%(slugs)s' geschrieben. Das"
-                    " kollidiert mit einem anderen Eintrag." % {"slugs": self.slugs}
-                )
-                if not NON_FIELD_ERRORS in msgs:
-                    msgs[NON_FIELD_ERRORS] = []
-                msgs[NON_FIELD_ERRORS].extend(slug_errors)
+            new_msg = (
+                "Der Sektor / die Maßnahme wird in der URL als '%(slugs)s' geschrieben."
+                " Das kollidiert mit einem anderen Eintrag."
+            ) % {"slugs": self.slugs}
+            msgs: dict[str, str] = e.message_dict
+            msgs[NON_FIELD_ERRORS][:] = [
+                new_msg if TASK_UNIQUE_CONSTRAINT_NAME in msg else msg
+                for msg in msgs[NON_FIELD_ERRORS]
+            ]
             raise ValidationError(msgs)
 
     # Maybe later. Not part of the MVP:
