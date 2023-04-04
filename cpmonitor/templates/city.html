@@ -23,27 +23,29 @@
           </div>
         </div>
       </div>
-      {% for task in tasks %}
+      {% for group in groups %}
         <div class="col-sm-6 col-lg-3">
           <div class="card">
             <div class="card-body">
               <div class="d-flex align-items-center">
-                <div class="subheader">Sektor</div>
+                <div class="subheader">Handlungsfeld</div>
               </div>
               <div class="h1 mb-3">
-                <a href="{% url 'task' city.slug task.slugs %}">{{ task.title }}</a>
+                <a href="{% url 'task' city.slug group.slugs %}">{{ group.title }}</a>
               </div>
+              <div class="col">{{ group.total }} Maßnahmen</div>
               <div class="progress progress-separated mb-3">
-                {% for value, label, name in task.statuses %}
+                {% for value, label, name in group.statuses %}
                   <div class="progress-bar lz-status {{ name }}"
                        role="progressbar"
                        style="width: {{ value }}%"
+                       title="{{ label }}"
                        aria-label="{{ label }}">
                   </div>
                 {% endfor %}
               </div>
               <div class="row">
-                {% for value, label, name in task.statuses %}
+                {% for value, label, name in group.statuses %}
                   <div class="col-auto d-flex align-items-center pe-2">
                     <span class="legend me-2 lz-status {{ name }}"></span>
                     <span>{{ label }}</span>

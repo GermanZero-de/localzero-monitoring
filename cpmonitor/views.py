@@ -31,25 +31,29 @@ def city(request, city_slug):
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
-    root_tasks = Task.get_root_nodes().filter(city=city)
-    for task in root_tasks:
-        subtasks = task.get_children()
-        total = len(subtasks)
+    groups = Task.get_root_nodes().filter(city=city)
+    for group in groups:
+        tasks = group.get_descendants().filter(numchild=0)
+        total = len(tasks)
         statuses = {s.value: s for s in ExecutionStatus}
-        task.statuses = {}
-        for subtask in subtasks:
-            status = subtask.execution_status
-            task.statuses[status] = task.statuses.get(status, 0) + round(100 / total)
+        group.statuses = {}
+        for task in tasks:
+            status = task.execution_status
+            group.statuses[status] = group.statuses.get(status, 0) + round(100 / total)
 
-        task.statuses = [
+        group.statuses = [
             (v, statuses[k].label, statuses[k].name)
-            for k, v in sorted(task.statuses.items(), reverse=True)
+            for k, v in sorted(group.statuses.items(), reverse=True)
         ]
+        group.total = total
 
     return render(
         request,
         "city.html",
-        {"city": city, "tasks": root_tasks},
+        {
+            "city": city,
+            "groups": groups,
+        },
     )
 
 
@@ -65,6 +69,7 @@ def task(request, city_slug, task_slugs):
             "Wir haben keine Daten zu dem Sektor / der Maßnahme '%s'." % task_slugs
         )
     subtasks = task.get_children()
+
     return render(
         request,
         "task.html",
