@@ -1,29 +1,22 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "pageframe.html" %}
 {% load martortags %}
-{% block title %}
-  {{ block.super }} {{ city.name }} {{ task.title }}
-{% endblock title %}
-{% block content %}
-  <h1>LocalZero Monitoring {{ city.name }}</h1>
-  <div>
-    <h2>{{ task.title }}</h2>
-    <p>{{ task.summary | safe_markdown }}</p>
-    <div>
-      <h3>Beschreibung</h3>
-      <p>{{ task.description | safe_markdown }}</p>
-    </div>
-    <div>
-      <h3>Unterteilung</h3>
-      {% for subtask in subtasks %}
-        <div>
-          <h4>
-            <a href="{% url "task" city.slug subtask.slugs %}">{{ subtask.title }}</a>
-          </h4>
-          <p>Debugging: {{ subtask.slugs }}</p>
-          <p>{{ subtask.summary | safe_markdown }}</p>
+{% block page_body %}
+  <div class="container-xl">
+    <div class="space-y">
+      <div class="col">
+        <!-- Page pre-title -->
+        <div class="page-pretitle">Maßnahme</div>
+        <h1>{{ task.title }}</h1>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="markdown text-muted">
+              {{ task.description | safe_markdown | default:"Diese Maßnahme hat keine Beschreibung" }}
+            </div>
+          </div>
         </div>
-      {% endfor %}
+      </div>
     </div>
   </div>
-{% endblock content %}
+{% endblock page_body %}

@@ -6,7 +6,7 @@ def test_task_page_should_have_city_name_and_task_title_in_title(
 ):
     page.goto("/beispielstadt/mobilitat")
 
-    expect(page).to_have_title("LocalZero Monitoring Beispielstadt Mobilität")
+    expect(page).to_have_title("LocalZero Monitoring - Beispielstadt")
 
 
 def test_should_go_to_subtask_view_when_clicking_task_item(page: Page, django_db_setup):

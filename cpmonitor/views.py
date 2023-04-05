@@ -15,6 +15,37 @@ from martor.utils import LazyEncoder
 from .models import City, ExecutionStatus, Task
 
 
+def _get_children(city, node=None):
+    statuses = {s.value: s for s in ExecutionStatus}
+
+    if not node:
+        children = Task.get_root_nodes()
+    else:
+        children = node.get_children()
+
+    groups = children.filter(city=city, numchild__gt=0)
+    tasks = children.filter(city=city, numchild=0)
+    for group in groups:
+        subtasks = group.get_descendants().filter(numchild=0)
+        total = len(subtasks)
+        group.statuses = {}
+        for subtask in subtasks:
+            status = subtask.execution_status
+            group.statuses[status] = group.statuses.get(status, 0) + round(100 / total)
+
+        group.statuses = [
+            (v, statuses[k].label, statuses[k].name)
+            for k, v in sorted(group.statuses.items(), reverse=True)
+        ]
+        group.total = total
+
+    for task in tasks:
+        status = task.execution_status
+        task.execution_status_name = statuses[status].name
+
+    return groups, tasks
+
+
 # Our main page
 def index(request):
     return render(
@@ -31,26 +62,7 @@ def city(request, city_slug):
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
-    statuses = {s.value: s for s in ExecutionStatus}
-    groups = Task.get_root_nodes().filter(city=city, numchild__gt=0)
-    for group in groups:
-        tasks = group.get_descendants().filter(numchild=0)
-        total = len(tasks)
-        group.statuses = {}
-        for task in tasks:
-            status = task.execution_status
-            group.statuses[status] = group.statuses.get(status, 0) + round(100 / total)
-
-        group.statuses = [
-            (v, statuses[k].label, statuses[k].name)
-            for k, v in sorted(group.statuses.items(), reverse=True)
-        ]
-        group.total = total
-
-    tasks = Task.get_root_nodes().filter(city=city, numchild=0)
-    for task in tasks:
-        status = task.execution_status
-        task.execution_status_name = statuses[status].name
+    groups, tasks = _get_children(city)
 
     return render(
         request,
@@ -66,21 +78,25 @@ def task(request, city_slug, task_slugs):
         raise Http404("Wir haben keine Daten zu der Kommune '%s'." % city_slug)
     try:
         task: Task = Task.objects.get(slugs=task_slugs)
-    except City.DoesNotExist:
+    except Task.DoesNotExist:
         raise Http404(
             "Wir haben keine Daten zu dem Sektor / der Maßnahme '%s'." % task_slugs
         )
-    subtasks = task.get_children()
 
-    return render(
-        request,
-        "task.html",
-        {
-            "city": city,
-            "task": task,
-            "subtasks": subtasks,
-        },
-    )
+    if task.is_leaf():
+        return render(
+            request,
+            "task.html",
+            {"city": city, "task": task},
+        )
+    else:
+        groups, tasks = _get_children(city, task)
+
+        return render(
+            request,
+            "group.html",
+            {"city": city, "group": task, "groups": groups, "tasks": tasks},
+        )
 
 
 @login_required
