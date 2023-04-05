@@ -18,7 +18,7 @@ def test_should_go_to_city_view_when_clicking_city_select_dropdown_item(
 def test_city_page_should_have_city_name_in_title(page: Page, django_db_setup):
     page.goto("/beispielstadt")
 
-    expect(page).to_have_title("LocalZero Monitoring Beispielstadt")
+    expect(page).to_have_title("LocalZero Monitoring - Beispielstadt")
 
 
 def test_should_go_to_task_view_when_clicking_task_item(page: Page, django_db_setup):
