@@ -31,11 +31,11 @@ def city(request, city_slug):
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
-    groups = Task.get_root_nodes().filter(city=city)
+    statuses = {s.value: s for s in ExecutionStatus}
+    groups = Task.get_root_nodes().filter(city=city, numchild__gt=0)
     for group in groups:
         tasks = group.get_descendants().filter(numchild=0)
         total = len(tasks)
-        statuses = {s.value: s for s in ExecutionStatus}
         group.statuses = {}
         for task in tasks:
             status = task.execution_status
@@ -47,13 +47,15 @@ def city(request, city_slug):
         ]
         group.total = total
 
+    tasks = Task.get_root_nodes().filter(city=city, numchild=0)
+    for task in tasks:
+        status = task.execution_status
+        task.execution_status_name = statuses[status].name
+
     return render(
         request,
         "city.html",
-        {
-            "city": city,
-            "groups": groups,
-        },
+        {"city": city, "groups": groups, "tasks": tasks},
     )
 
 
