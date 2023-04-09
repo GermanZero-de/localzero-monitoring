@@ -38,6 +38,21 @@ services:
     networks:
       - nginx_network
 
+  dbeaver:
+    build: ./docker/dbeaver
+    container_name: dbeaver
+    volumes:
+      - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
+    ports:
+      - 8080:8978
+    environment:
+      CB_SERVER_NAME: CloudBeaver CE Server
+      CB_SERVER_URL: http://localhost:8080
+      CB_ADMIN_NAME: cbadmin
+      CB_ADMIN_PASSWORD: password
+    depends_on:
+      - djangoapp
+
 networks:
   nginx_network:
     driver: bridge
