@@ -121,6 +121,28 @@ or when using the dev server start the tests with `pytest --base-url http://loca
 - New test files have to be named according to the convention: `*_test.py`.
 - Test names should follow the convention: `test_should_do_x_when_given_y`.
 
+### Fixtures for tests
+
+From a local database filled with suitable data, generate a fixture named `example_fixture` with
+
+```shell
+python -Xutf8 manage.py dumpdata cpmonitor --indent 2 --settings=config.settings.local > cpmonitor/fixtures/example_fixture.json
+```
+
+(The `-Xutf8` and `--indent 2` options ensure consistent and readable output on all platforms.)
+
+This fixture may be loaded in a test with. (Similar in a pytest fixture.)
+
+```python
+@pytest.mark.django_db
+def test_something(django_db_blocker):
+    with django_db_blocker.unblock():
+        call_command("loaddata", "example_fixture")
+    # Test something here
+```
+
+This does not work when testing migrations, but there is a way: Use `read_fixture` in `cpmonitor/tests/migrations_test.py`.
+
 ## Styling
 
 We use [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) as a css framework.

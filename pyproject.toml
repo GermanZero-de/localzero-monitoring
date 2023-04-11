@@ -31,6 +31,7 @@ pytest-playwright = "^0.3.0"
 pytest-base-url = "^2.0.0"
 pytest-django = "^4.5.2"
 djlint = "^1.19.16"
+django-test-migrations = "^1.2.0"
 
 [build-system]
 requires = ["poetry-core>=1.3.2"]
