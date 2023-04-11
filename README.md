@@ -166,7 +166,7 @@ Afterwards the test database has to be updated as well. Use the dumpdata command
 currently running database:
 
 ```shell
-python manage.py dumpdata --settings=config.settings.local > e2e_tests/database/test_database.json
+python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
 Cheat-sheet to make sure the correct data is dumped:
@@ -174,14 +174,14 @@ Cheat-sheet to make sure the correct data is dumped:
 ```shell
 git checkout right-before-model-change
 rm db.sqlite3
-./manage.py migrate --settings=config.settings.local
-./manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+python manage.py migrate --settings=config.settings.local
+python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
 git checkout after-model-change-including-migration
-./manage.py migrate --settings=config.settings.local
+python manage.py migrate --settings=config.settings.local
+python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
 Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
-Possibly use a formatter on the generated file.
 
 ## When pre-commit hooks make trouble
 

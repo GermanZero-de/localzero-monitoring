@@ -1,823 +1,823 @@
 [
-  {
-    "model": "admin.logentry",
-    "pk": 1,
-    "fields": {
-      "action_time": "2023-02-26T18:26:19.109Z",
-      "user": 1,
-      "content_type": 7,
-      "object_id": "1",
-      "object_repr": "12345 Beispielstadt",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 2,
-    "fields": {
-      "action_time": "2023-02-26T18:26:29.897Z",
-      "user": 1,
-      "content_type": 8,
-      "object_id": "1",
-      "object_repr": "Verkehr",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 3,
-    "fields": {
-      "action_time": "2023-02-26T18:27:03.032Z",
-      "user": 1,
-      "content_type": 8,
-      "object_id": "2",
-      "object_repr": "Radwege ausbauen",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 4,
-    "fields": {
-      "action_time": "2023-02-26T18:27:36.579Z",
-      "user": 1,
-      "content_type": 8,
-      "object_id": "3",
-      "object_repr": "U-Bahn Strecke verlängern",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 5,
-    "fields": {
-      "action_time": "2023-03-05T17:03:22.852Z",
-      "user": 1,
-      "content_type": 8,
-      "object_id": "2",
-      "object_repr": "Radwege ausbauen",
-      "action_flag": 2,
-      "change_message": "[{\"changed\": {\"fields\": [\"description\", \"Relative to\"]}}]"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 1,
-    "fields": {
-      "name": "Can add log entry",
-      "content_type": 1,
-      "codename": "add_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 2,
-    "fields": {
-      "name": "Can change log entry",
-      "content_type": 1,
-      "codename": "change_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 3,
-    "fields": {
-      "name": "Can delete log entry",
-      "content_type": 1,
-      "codename": "delete_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 4,
-    "fields": {
-      "name": "Can view log entry",
-      "content_type": 1,
-      "codename": "view_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 5,
-    "fields": {
-      "name": "Can add permission",
-      "content_type": 2,
-      "codename": "add_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 6,
-    "fields": {
-      "name": "Can change permission",
-      "content_type": 2,
-      "codename": "change_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 7,
-    "fields": {
-      "name": "Can delete permission",
-      "content_type": 2,
-      "codename": "delete_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 8,
-    "fields": {
-      "name": "Can view permission",
-      "content_type": 2,
-      "codename": "view_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 9,
-    "fields": {
-      "name": "Can add group",
-      "content_type": 3,
-      "codename": "add_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 10,
-    "fields": {
-      "name": "Can change group",
-      "content_type": 3,
-      "codename": "change_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 11,
-    "fields": {
-      "name": "Can delete group",
-      "content_type": 3,
-      "codename": "delete_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 12,
-    "fields": {
-      "name": "Can view group",
-      "content_type": 3,
-      "codename": "view_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 13,
-    "fields": {
-      "name": "Can add user",
-      "content_type": 4,
-      "codename": "add_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 14,
-    "fields": {
-      "name": "Can change user",
-      "content_type": 4,
-      "codename": "change_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 15,
-    "fields": {
-      "name": "Can delete user",
-      "content_type": 4,
-      "codename": "delete_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 16,
-    "fields": {
-      "name": "Can view user",
-      "content_type": 4,
-      "codename": "view_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 17,
-    "fields": {
-      "name": "Can add content type",
-      "content_type": 5,
-      "codename": "add_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 18,
-    "fields": {
-      "name": "Can change content type",
-      "content_type": 5,
-      "codename": "change_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 19,
-    "fields": {
-      "name": "Can delete content type",
-      "content_type": 5,
-      "codename": "delete_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 20,
-    "fields": {
-      "name": "Can view content type",
-      "content_type": 5,
-      "codename": "view_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 21,
-    "fields": {
-      "name": "Can add session",
-      "content_type": 6,
-      "codename": "add_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 22,
-    "fields": {
-      "name": "Can change session",
-      "content_type": 6,
-      "codename": "change_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 23,
-    "fields": {
-      "name": "Can delete session",
-      "content_type": 6,
-      "codename": "delete_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 24,
-    "fields": {
-      "name": "Can view session",
-      "content_type": 6,
-      "codename": "view_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 25,
-    "fields": {
-      "name": "Can add city",
-      "content_type": 7,
-      "codename": "add_city"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 26,
-    "fields": {
-      "name": "Can change city",
-      "content_type": 7,
-      "codename": "change_city"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 27,
-    "fields": {
-      "name": "Can delete city",
-      "content_type": 7,
-      "codename": "delete_city"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 28,
-    "fields": {
-      "name": "Can view city",
-      "content_type": 7,
-      "codename": "view_city"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 29,
-    "fields": {
-      "name": "Can add task",
-      "content_type": 8,
-      "codename": "add_task"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 30,
-    "fields": {
-      "name": "Can change task",
-      "content_type": 8,
-      "codename": "change_task"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 31,
-    "fields": {
-      "name": "Can delete task",
-      "content_type": 8,
-      "codename": "delete_task"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 32,
-    "fields": {
-      "name": "Can view task",
-      "content_type": 8,
-      "codename": "view_task"
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 1,
-    "fields": {
-      "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-      "last_login": "2023-04-02T17:40:59.384Z",
-      "is_superuser": true,
-      "username": "admin",
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2023-02-26T18:25:59.346Z",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 1,
-    "fields": {
-      "app_label": "admin",
-      "model": "logentry"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 2,
-    "fields": {
-      "app_label": "auth",
-      "model": "permission"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 3,
-    "fields": {
-      "app_label": "auth",
-      "model": "group"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 4,
-    "fields": {
-      "app_label": "auth",
-      "model": "user"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 5,
-    "fields": {
-      "app_label": "contenttypes",
-      "model": "contenttype"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 6,
-    "fields": {
-      "app_label": "sessions",
-      "model": "session"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 7,
-    "fields": {
-      "app_label": "cpmonitor",
-      "model": "city"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 8,
-    "fields": {
-      "app_label": "cpmonitor",
-      "model": "task"
-    }
-  },
-  {
-    "model": "cpmonitor.city",
-    "pk": 1,
-    "fields": {
-      "name": "Beispielstadt",
-      "zipcode": "12345",
-      "url": "",
-      "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. **Lorem Ipsum** has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
-      "co2e_budget": 0,
-      "assessment_administration": "",
-      "assessment_action_plan": "",
-      "assessment_status": "",
-      "last_update": "2023-03-13",
-      "contact_name": "",
-      "contact_email": "",
-      "slug": "beispielstadt"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 1,
-    "fields": {
-      "path": "0002",
-      "depth": 1,
-      "numchild": 5,
-      "city": 1,
-      "title": "Mobilität",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 0,
-      "execution_justification": "",
-      "execution_completion": 0,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "mobilitat"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 2,
-    "fields": {
-      "path": "00020002",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "Radwege ausbauen",
-      "summary": "",
-      "description": "## Vorhaben\r\n\r\n* Radspuren mit einer Mindestbreite von 2,30 Metern\r\n* mehr Abstellanlagen für Fahrräder\r\n* optisch hervorgehobene Abschnitte mit Radvorrang \r\n* sicherere Kreuzungen für Radler",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 2,
-      "execution_justification": "",
-      "execution_completion": 0,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "verkehr/radwege-ausbauen"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 3,
-    "fields": {
-      "path": "00020001",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "U-Bahn Strecke verlängern",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 8,
-      "execution_justification": "",
-      "execution_completion": 0,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "verkehr/u-bahn-strecke-verlangern"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 4,
-    "fields": {
-      "path": "00020003",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "Carsharing einführen",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 6,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "mobilitat/carsharing-einfuhren"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 5,
-    "fields": {
-      "path": "00020005",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "Parkraumbewirtschaftung",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 6,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "mobilitat/parkraumbewirtschaftung"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 6,
-    "fields": {
-      "path": "00020006",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "Jobtickets für Verwaltung",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 4,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "jobtickets-fur-verwaltung"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 7,
-    "fields": {
-      "path": "0001",
-      "depth": 1,
-      "numchild": 6,
-      "city": 1,
-      "title": "Strukturen",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 0,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "strukturen"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 8,
-    "fields": {
-      "path": "00010001",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "Personal einstellen",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 6,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "personal-einstellen"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 9,
-    "fields": {
-      "path": "00010002",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "Klimaaktionsplan",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 6,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "klimaaktionsplan"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 10,
-    "fields": {
-      "path": "00010003",
-      "depth": 2,
-      "numchild": 2,
-      "city": 1,
-      "title": "Bürgerbeteiligung",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 6,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "burgerbeteiligung"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 11,
-    "fields": {
-      "path": "00010004",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "Monitoring",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 6,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "monitoring"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 12,
-    "fields": {
-      "path": "00010005",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "European Energy Award",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 2,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "european-energy-award"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 13,
-    "fields": {
-      "path": "00010006",
-      "depth": 2,
-      "numchild": 0,
-      "city": 1,
-      "title": "Klimarelevanzprüfung",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 0,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "klimarelevanzprufung"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 14,
-    "fields": {
-      "path": "000100030001",
-      "depth": 3,
-      "numchild": 0,
-      "city": 1,
-      "title": "Beteiligungswerkstatt",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 0,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "beteiligungswerkstatt"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 15,
-    "fields": {
-      "path": "000100030002",
-      "depth": 3,
-      "numchild": 0,
-      "city": 1,
-      "title": "Marke schaffen",
-      "summary": "",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 0,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "marke-schaffen"
-    }
-  },
-  {
-    "model": "cpmonitor.task",
-    "pk": 16,
-    "fields": {
-      "path": "0003",
-      "depth": 1,
-      "numchild": 0,
-      "city": 1,
-      "title": "Umstellung Fernwärme auf Geothermie",
-      "summary": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
-      "description": "",
-      "planned_start": null,
-      "planned_completion": null,
-      "responsible_organ": "",
-      "plan_assessment": "",
-      "execution_status": 0,
-      "execution_justification": "",
-      "execution_completion": null,
-      "actual_start": null,
-      "actual_completion": null,
-      "slugs": "umstellung-fernwarme-auf-geothermie"
-    }
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2023-02-26T18:26:19.109Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2023-02-26T18:26:29.897Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Verkehr",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2023-02-26T18:27:03.032Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Radwege ausbauen",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2023-02-26T18:27:36.579Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "U-Bahn Strecke verlängern",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2023-03-05T17:03:22.852Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Radwege ausbauen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"description\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add city",
+    "content_type": 7,
+    "codename": "add_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change city",
+    "content_type": 7,
+    "codename": "change_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete city",
+    "content_type": 7,
+    "codename": "delete_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view city",
+    "content_type": 7,
+    "codename": "view_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add task",
+    "content_type": 8,
+    "codename": "add_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change task",
+    "content_type": 8,
+    "codename": "change_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete task",
+    "content_type": 8,
+    "codename": "delete_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view task",
+    "content_type": 8,
+    "codename": "view_task"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
+    "last_login": "2023-04-02T17:40:59.384Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-02-26T18:25:59.346Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "cpmonitor",
+    "model": "city"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "cpmonitor",
+    "model": "task"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 1,
+  "fields": {
+    "name": "Beispielstadt",
+    "zipcode": "12345",
+    "url": "",
+    "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. **Lorem Ipsum** has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
+    "co2e_budget": 0,
+    "assessment_administration": "",
+    "assessment_action_plan": "",
+    "assessment_status": "",
+    "last_update": "2023-03-13",
+    "contact_name": "",
+    "contact_email": "",
+    "slug": "beispielstadt"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 1,
+  "fields": {
+    "path": "0002",
+    "depth": 1,
+    "numchild": 5,
+    "city": 1,
+    "title": "Mobilität",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": 0,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "mobilitat"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 2,
+  "fields": {
+    "path": "00020002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Radwege ausbauen",
+    "summary": "",
+    "description": "## Vorhaben\r\n\r\n* Radspuren mit einer Mindestbreite von 2,30 Metern\r\n* mehr Abstellanlagen für Fahrräder\r\n* optisch hervorgehobene Abschnitte mit Radvorrang \r\n* sicherere Kreuzungen für Radler",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": 0,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "verkehr/radwege-ausbauen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 3,
+  "fields": {
+    "path": "00020001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "U-Bahn Strecke verlängern",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 8,
+    "execution_justification": "",
+    "execution_completion": 0,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "verkehr/u-bahn-strecke-verlangern"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 4,
+  "fields": {
+    "path": "00020003",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Carsharing einführen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "mobilitat/carsharing-einfuhren"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 5,
+  "fields": {
+    "path": "00020005",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Parkraumbewirtschaftung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "mobilitat/parkraumbewirtschaftung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 6,
+  "fields": {
+    "path": "00020006",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Jobtickets für Verwaltung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 4,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "jobtickets-fur-verwaltung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 7,
+  "fields": {
+    "path": "0001",
+    "depth": 1,
+    "numchild": 6,
+    "city": 1,
+    "title": "Strukturen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "strukturen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 8,
+  "fields": {
+    "path": "00010001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Personal einstellen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "personal-einstellen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 9,
+  "fields": {
+    "path": "00010002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Klimaaktionsplan",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "klimaaktionsplan"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 10,
+  "fields": {
+    "path": "00010003",
+    "depth": 2,
+    "numchild": 2,
+    "city": 1,
+    "title": "Bürgerbeteiligung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "burgerbeteiligung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 11,
+  "fields": {
+    "path": "00010004",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Monitoring",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "monitoring"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 12,
+  "fields": {
+    "path": "00010005",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "European Energy Award",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "european-energy-award"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 13,
+  "fields": {
+    "path": "00010006",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Klimarelevanzprüfung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "klimarelevanzprufung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 14,
+  "fields": {
+    "path": "000100030001",
+    "depth": 3,
+    "numchild": 0,
+    "city": 1,
+    "title": "Beteiligungswerkstatt",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "beteiligungswerkstatt"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 15,
+  "fields": {
+    "path": "000100030002",
+    "depth": 3,
+    "numchild": 0,
+    "city": 1,
+    "title": "Marke schaffen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "marke-schaffen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 16,
+  "fields": {
+    "path": "0003",
+    "depth": 1,
+    "numchild": 0,
+    "city": 1,
+    "title": "Umstellung Fernwärme auf Geothermie",
+    "summary": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "umstellung-fernwarme-auf-geothermie"
+  }
+}
 ]
