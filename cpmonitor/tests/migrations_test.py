@@ -48,8 +48,9 @@ def test_complete_migrations_from_0006(migrator: Migrator) -> None:
     """
     Tests all migrations starting at 0006 work in both ways.
 
-    Test starting from migration 0006 loading meaningful data and continue
-    to the end and back, thereby testing all future migrations.
+    Test starting from migration 0006, loading meaningful data which covers
+    most possible cases at the time, and continuing to the end and back,
+    thereby also testing all future migrations.
     """
 
     # Prepare DB up to migration 00006 before execution_status refactoring
@@ -74,7 +75,12 @@ def test_complete_migrations_from_0006(migrator: Migrator) -> None:
 
 
 def test_migration_0007(migrator: Migrator) -> None:
-    """Test the status conversion of migration 0007 in both directions."""
+    """Test the status conversion of migration 0007 in both directions.
+
+    This loads test data from a fixture file and thereby covers most
+    possible cases, but might be more fragile.
+    See comment for `test_migration_0007_by_hand`.
+    """
 
     # Prepare DB up to migration 00006 before execution_status refactoring
     old_state = migrator.apply_initial_migration((app_name, "0006_alter_task_city"))
@@ -126,7 +132,12 @@ def test_migration_0007(migrator: Migrator) -> None:
 
 
 def test_migration_0007_by_hand(migrator: Migrator) -> None:
-    """Test the status conversion of migration 0007 in both directions without fixture."""
+    """Test the status conversion of migration 0007 in both directions without fixture.
+
+    This is very similar to `test_migration_0007` and probably too redundant.
+    Currently, it is not clear, which one is easier to maintain. If one of the
+    two makes problems, it is probably best just do remove it.
+    """
 
     old_state = migrator.apply_initial_migration((app_name, "0006_alter_task_city"))
 
@@ -186,5 +197,3 @@ def test_migration_0007_by_hand(migrator: Migrator) -> None:
     back_verkehr = back_Task.objects.get(city=back_testburg, title=verkehr.title)
     assert back_verkehr.execution_assessment == 5
     assert back_verkehr.execution_progress == 0
-
-    migrator.reset()
