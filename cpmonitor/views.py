@@ -1,3 +1,4 @@
+from collections import Counter
 import json
 import os
 import uuid
@@ -27,17 +28,17 @@ def _get_children(city, node=None):
     tasks = children.filter(city=city, numchild=0)
     for group in groups:
         subtasks = group.get_descendants().filter(numchild=0)
-        total = len(subtasks)
-        group.statuses = {}
-        for subtask in subtasks:
-            status = subtask.execution_status
-            group.statuses[status] = group.statuses.get(status, 0) + round(100 / total)
+        subtasks_count = len(subtasks)
+        status_counts = Counter([s.execution_status for s in subtasks])
+        status_proportions = {
+            s: round(c / subtasks_count * 100) for s, c in status_counts.items()
+        }
 
-        group.statuses = [
+        group.status_proportions = [
             (v, statuses[k].label, statuses[k].name)
-            for k, v in sorted(group.statuses.items(), reverse=True)
+            for k, v in sorted(status_proportions.items(), reverse=True)
         ]
-        group.total = total
+        group.subtasks_count = subtasks_count
 
     for task in tasks:
         status = task.execution_status

@@ -7,28 +7,7 @@
         <div class="card">
           <div class="card-body">
             <div class="row align-items-center">
-              <div class="markdown text-muted">{{ city.introduction | safe_markdown }}</div>
-            </div>
-          </div>
-        </div>
-        <h3>Charts</h3>
-        <div class="row row-deck">
-          <div class="col-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="markdown text-muted"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="markdown text-muted"></div>
-                </div>
-              </div>
+              <div class="markdown">{{ city.introduction | safe_markdown }}</div>
             </div>
           </div>
         </div>
@@ -66,7 +45,7 @@
                   <div class="h1 mb-3">{{ group.title }}</div>
                   <div class="col">{{ group.total }} Maßnahmen</div>
                   <div class="progress progress-separated mb-3">
-                    {% for value, label, name in group.statuses %}
+                    {% for value, label, name in group.status_proportions %}
                       <div class="progress-bar lz-status {{ name }}"
                            role="progressbar"
                            style="width: {{ value }}%"
@@ -76,7 +55,7 @@
                     {% endfor %}
                   </div>
                   <div class="row">
-                    {% for value, label, name in group.statuses %}
+                    {% for value, label, name in group.status_proportions %}
                       <div class="col-auto d-flex align-items-center pe-2">
                         <span class="legend me-2 lz-status {{ name }}"></span>
                         <span>{{ label }}</span>
