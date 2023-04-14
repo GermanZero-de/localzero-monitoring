@@ -47,9 +47,9 @@ services:
       - 8080:8978
     environment:
       CB_SERVER_NAME: CloudBeaver CE Server
-      CB_SERVER_URL: http://localhost:8080
-      CB_ADMIN_NAME: cbadmin
-      CB_ADMIN_PASSWORD: password
+      CB_SERVER_URL: ${CB_SERVER_URL}
+      CB_ADMIN_NAME: ${CB_ADMIN_NAME}
+      CB_ADMIN_PASSWORD: ${CB_ADMIN_PASSWORD}
     depends_on:
       - djangoapp
 
