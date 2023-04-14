@@ -357,7 +357,7 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-      "last_login": "2023-03-05T17:01:01.096Z",
+      "last_login": "2023-04-02T17:40:59.384Z",
       "is_superuser": true,
       "username": "admin",
       "first_name": "",
@@ -665,7 +665,7 @@
     "fields": {
       "path": "00010003",
       "depth": 2,
-      "numchild": 0,
+      "numchild": 2,
       "city": 1,
       "title": "Bürgerbeteiligung",
       "summary": "",
@@ -749,6 +749,75 @@
       "actual_start": null,
       "actual_completion": null,
       "slugs": "klimarelevanzprufung"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 14,
+    "fields": {
+      "path": "000100030001",
+      "depth": 3,
+      "numchild": 0,
+      "city": 1,
+      "title": "Beteiligungswerkstatt",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 0,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "beteiligungswerkstatt"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 15,
+    "fields": {
+      "path": "000100030002",
+      "depth": 3,
+      "numchild": 0,
+      "city": 1,
+      "title": "Marke schaffen",
+      "summary": "",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 0,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "marke-schaffen"
+    }
+  },
+  {
+    "model": "cpmonitor.task",
+    "pk": 16,
+    "fields": {
+      "path": "0003",
+      "depth": 1,
+      "numchild": 0,
+      "city": 1,
+      "title": "Umstellung Fernwärme auf Geothermie",
+      "summary": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
+      "description": "",
+      "planned_start": null,
+      "planned_completion": null,
+      "responsible_organ": "",
+      "plan_assessment": "",
+      "execution_status": 0,
+      "execution_justification": "",
+      "execution_completion": null,
+      "actual_start": null,
+      "actual_completion": null,
+      "slugs": "umstellung-fernwarme-auf-geothermie"
     }
   }
 ]

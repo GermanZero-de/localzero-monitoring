@@ -1,48 +1,6 @@
-{% extends "base.html" %}
+{% extends "pageframe.html" %}
 {% load static %}
-{% block content %}
-  <nav class="navbar navbar-expand-sm navbar-light bg-primary mb-3">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-white" href="{% url 'index' %}">
-        <img src="{% static 'logo_inverted.png' %}"
-             alt=""
-             height="50"
-             width="50"
-             class="d-inline-block align-middle">
-        LocalZero Monitoring
-      </a>
-      <button class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarMain"
-              aria-controls="navbarMain"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarMain">
-        <ul class="navbar-nav w-100 mb-1 mb-lg-1">
-          <li class="nav-item dropdown ms-auto">
-            <a class="nav-link dropdown-toggle"
-               href="#"
-               id="navbarSelectCity"
-               role="button"
-               data-bs-toggle="dropdown"
-               aria-expanded="false">
-              Stadt auswählen
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarSelectCity">
-              {% for city in cities %}
-                <li>
-                  <a class="dropdown-item" href="{% url 'city' city.slug %}">{{ city.name }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+{% block page_body %}
   <div class="container">
     <div class="row">
       <div class="col-7 card">
@@ -80,4 +38,4 @@
       </ul>
     </footer>
   </div>
-{% endblock content %}
+{% endblock page_body %}
