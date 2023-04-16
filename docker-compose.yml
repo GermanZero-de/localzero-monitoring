@@ -43,11 +43,11 @@ services:
     container_name: dbeaver
     volumes:
       - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
+    networks:
+      - nginx_network
     ports:
-      - 8080:8978
+      - 8978
     environment:
-      CB_SERVER_NAME: CloudBeaver CE Server
-      CB_SERVER_URL: ${CB_SERVER_URL}
       CB_ADMIN_NAME: ${CB_ADMIN_NAME}
       CB_ADMIN_PASSWORD: ${CB_ADMIN_PASSWORD}
     depends_on:
