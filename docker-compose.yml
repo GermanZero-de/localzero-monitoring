@@ -48,6 +48,7 @@ services:
     ports:
       - 8978
     environment:
+      CB_SERVER_NAME: CloudBeaver CE Server
       CB_ADMIN_NAME: ${CB_ADMIN_NAME}
       CB_ADMIN_PASSWORD: ${CB_ADMIN_PASSWORD}
     depends_on:
