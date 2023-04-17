@@ -1,0 +1,68 @@
+name: Deploy
+on:
+  push:
+    branches: [deploy-to-production, deploy-to-test]
+  workflow_dispatch:
+
+jobs:
+  get-environment:
+    name: Get GitHub Environment
+    # Determine the GitHub "Environment" to be used by the "deploy" job.
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.do-it.outputs.environment }}
+      url:         ${{ steps.do-it.outputs.url }}
+    steps:
+      - id: do-it
+        name: Determine environment
+        run: |
+          case $GITHUB_REF in
+          refs/heads/deploy-to-production)
+            echo "environment=production"
+            echo "url=https://monitoring.localzero.net/";;
+          refs/heads/deploy-to-test)
+            echo "environment=test"
+            echo "url=https://monitoring-test.localzero.net/";;
+          *)
+            echo "";;
+          esac >> $GITHUB_OUTPUT
+
+  deploy:
+    name: Deploy to ${{ needs.get-environment.outputs.environment }}
+    runs-on: ubuntu-latest
+    needs: get-environment
+    environment:
+      name: ${{ needs.get-environment.outputs.environment }}
+      url:  ${{ needs.get-environment.outputs.url }}
+    env:
+      ENVIRONMENT: ${{ needs.get-environment.outputs.environment }}
+      URL: ${{ needs.get-environment.outputs.url }}
+      DIR: ${{ vars.DEPLOY_TO_DIR }} # Set here: https://github.com/GermanZero-de/klimaschutzmonitor/settings/variables/actions
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # TODO: Build whatever is needed for the deployment here.
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          name: id_lzm
+          key: ${{ secrets.LZM_SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.LZM_SSH_KNOWN_HOSTS }}
+          config: |
+            Host lzm
+                HostName monitoring.localzero.net
+                User monitoring
+                IdentityFile ~/.ssh/id_lzm
+
+      # TODO: Do the actual deployment here and remove the test steps below.
+
+      - name: Test ssh connection (to be removed)
+        run: ssh lzm "echo \"$DIR - $URL - $GITHUB_REF - $GITHUB_SHA\" >> auto_deploy_test_file"
+      - name: Test conditional deployment 1 (to be removed)
+        if: ${{ env.ENVIRONMENT == 'production' }}
+        run: echo 'TODO Deploy production system'
+      - name: Test conditional deployment 2 (to be removed)
+        if: ${{ env.ENVIRONMENT == '' }}
+        run: echo 'Not really a true deployment'
