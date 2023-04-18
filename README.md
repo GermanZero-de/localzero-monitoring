@@ -293,7 +293,8 @@ docker compose --env-file .env.production up --detach
 docker compose --env-file .env.local up --detach
 ```
 
-This will start both the Django app and the nginx containers *in the background*. The website can then be reached at <http://localhost:80>.
+This will start both the Django app and the nginx containers *in the background*. The website can then be reached at <https://localhost>.
+You'll have to tell your browser to make an exception for the [self-signed certificate](ssl_certificates_localhost) we use when running locally, or import it into your browser.
 
 To stop the containers from running in the background, run:
 
@@ -348,7 +349,7 @@ Replace your local DB with the current DB from the server with:
 
 ```sh
 rm db.sqlite3
-scp lzm:testing/db.sqlite3 .
+scp lzm:testing/db/db.sqlite3 .
 rm -r cpmonitor/images/uploads
 scp -r lzm:testing/cpmonitor/images/uploads cpmonitor/images/
 ```
@@ -371,22 +372,6 @@ du -hs e2e_tests/database/${SNAPSHOT_NAME}*
 
 Commit the result.
 
-### Migration (to be incorporated in deployment guide below)
-
-The databases on the test and production servers must be manually migrated whenever we deploy an app version which requires schema changes.
-To do so, one can open a shell in the running container and run `manage.py` with the respective arguments:
-
-```shell
-# find out django container name
-docker ps
-
-# run shell in container
-docker exec -it djangoapp sh
-
-# run manage.py inside container shell
-SECRET_KEY=whatever python manage.py migrate --settings=config.settings.local-container
-```
-
 ### Deploying a new version
 
 1. Checkout the commit you want to deploy (usually the latest commit of main).
@@ -407,7 +392,7 @@ docker-compose down --volumes
 cp db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.<current date in format YYYY-MON-DD>
 # apply migrations using a temporary container
 docker run --user=1007:1007 --rm -it -v $(pwd):/db klimaschutzmonitor-djangoapp:latest sh
-SECRET_KEY=whatever python manage.py migrate --settings=config.settings.production-container
+SECRET_KEY=whatever python manage.py migrate --settings=config.settings.container
 # exit and stop the temporary container
 exit
 docker-compose up --detach

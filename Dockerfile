@@ -39,7 +39,8 @@ COPY . .
 COPY --from=frontend-builder /cpmonitor/cpmonitor/static/css ./cpmonitor/static/css
 COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/core/dist ./node_modules/@tabler/core/dist
 COPY --from=frontend-builder /cpmonitor/node_modules/jquery/dist ./node_modules/jquery/dist
-RUN /venv/bin/python manage.py collectstatic --no-input -v 2 --settings=config.settings.container
+RUN DJANGO_SECRET_KEY="dummy" DJANGO_CSRF_TRUSTED_ORIGINS="dummy" DJANGO_DEBUG="False" \
+    /venv/bin/python manage.py collectstatic --no-input -v 2 --settings=config.settings.container
 RUN poetry build && \
     /venv/bin/pip install dist/*.whl
 
@@ -58,6 +59,6 @@ EXPOSE 8000
 COPY manage.py /cpmonitor/
 COPY --from=python-builder /venv /venv
 COPY --from=python-builder /static /static
-COPY config/nginx /nginx/conf.d
+COPY config/nginx/ /nginx/
 
 CMD ["gunicorn", "--log-level", "debug", "--bind", ":8000", "--workers", "3", "config.wsgi:application"]
