@@ -44,37 +44,41 @@ def read_fixture(fixture_name: str, app_name: str, migration_state_apps: Apps):
             Model.objects.create(**data)
 
 
-def test_complete_migrations_from_0006(migrator: Migrator) -> None:
+def test_should_succeed_when_migrating_complete_data_set_from_0006_to_current_and_back(
+    migrator: Migrator,
+) -> None:
     """
     Tests all migrations starting at 0006 work in both ways.
+
+    The main expectation of this test is, that the migrations are applied without error.
+    The assertions are just there to verify that they were applied.
 
     Test starting from migration 0006, loading meaningful data which covers
     most possible cases at the time, and continuing to the end and back,
     thereby also testing all future migrations.
     """
 
-    # Prepare DB up to migration 00006 before execution_status refactoring
     old_state = migrator.apply_initial_migration((app_name, "0006_alter_task_city"))
 
-    # Read a complete data set for that model version
     read_fixture("complete_0006", app_name, old_state.apps)
 
-    # Complete migration all the way to the current state
+    # Complete migration all the way to the current state. `apply_tested_migration` does not work here.
     migrator.reset()
 
-    # Check some data
+    # Verify the conversion in migration 0007 was applied.
     assert Task.objects.get(pk=5).execution_status == 8
 
-    # Migrate backward to migration 00006 before the execution_status refactoring
     back_state = migrator.apply_tested_migration((app_name, "0006_alter_task_city"))
 
-    # Check some data (back conversion in migration 0008)
+    # Verify the back-conversion in migration 0007, again.
     back_Task = back_state.apps.get_model(app_name, "Task")
     assert back_Task.objects.get(pk=5).execution_assessment == 5
     assert back_Task.objects.get(pk=5).execution_progress == 0
 
 
-def test_migration_0007(migrator: Migrator) -> None:
+def test_should_convert_status_correctly_when_migrating_0007_and_back(
+    migrator: Migrator,
+) -> None:
     """Test the status conversion of migration 0007 in both directions.
 
     This loads test data from a fixture file and thereby covers most
@@ -82,13 +86,11 @@ def test_migration_0007(migrator: Migrator) -> None:
     See comment for `test_migration_0007_by_hand`.
     """
 
-    # Prepare DB up to migration 00006 before execution_status refactoring
     old_state = migrator.apply_initial_migration((app_name, "0006_alter_task_city"))
 
-    # Read a complete data set for that model version
     read_fixture("complete_0006", app_name, old_state.apps)
 
-    # Check the execution_status values (for comparison with backward conversion below)
+    # Just for comparison with backward conversion below.
     old_Task = old_state.apps.get_model(app_name, "Task")
     assert old_Task.objects.get(pk=1).execution_assessment == 0
     assert old_Task.objects.get(pk=1).execution_progress == 0
@@ -101,12 +103,10 @@ def test_migration_0007(migrator: Migrator) -> None:
     assert old_Task.objects.get(pk=5).execution_assessment == 5
     assert old_Task.objects.get(pk=5).execution_progress == 4
 
-    # Migrate to migration 0007
     new_state = migrator.apply_tested_migration(
         (app_name, "0007_rename_to_execution_status_and_more")
     )
 
-    # Check that `execution_status` is set correctly for some Tasks
     new_Task = new_state.apps.get_model(app_name, "Task")
     assert new_Task.objects.get(pk=1).execution_status == 0
     assert new_Task.objects.get(pk=2).execution_status == 2
@@ -114,7 +114,6 @@ def test_migration_0007(migrator: Migrator) -> None:
     assert new_Task.objects.get(pk=4).execution_status == 6
     assert new_Task.objects.get(pk=5).execution_status == 8
 
-    # Migrate backward to migration 00006 before the execution_status refactoring
     back_state = migrator.apply_tested_migration((app_name, "0006_alter_task_city"))
 
     # Check the backward conversion values
@@ -131,7 +130,9 @@ def test_migration_0007(migrator: Migrator) -> None:
     assert back_Task.objects.get(pk=5).execution_progress == 0
 
 
-def test_migration_0007_by_hand(migrator: Migrator) -> None:
+def test_should_convert_status_correctly_when_migrating_0007_and_back_by_hand(
+    migrator: Migrator,
+) -> None:
     """Test the status conversion of migration 0007 in both directions without fixture.
 
     This is very similar to `test_migration_0007` and probably too redundant.
@@ -166,7 +167,6 @@ def test_migration_0007_by_hand(migrator: Migrator) -> None:
         slugs="b",
     )
 
-    # Migrate to migration 0007
     new_state = migrator.apply_tested_migration(
         (app_name, "0007_rename_to_execution_status_and_more")
     )
@@ -182,7 +182,6 @@ def test_migration_0007_by_hand(migrator: Migrator) -> None:
     new_verkehr = new_Task.objects.get(city=new_testburg, title=verkehr.title)
     assert new_verkehr.execution_status == 8
 
-    # Migrate back to migration 0006
     back_state = migrator.apply_tested_migration((app_name, "0006_alter_task_city"))
 
     back_City = back_state.apps.get_model(app_name, "City")
