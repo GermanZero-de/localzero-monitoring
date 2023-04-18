@@ -54,7 +54,7 @@ class CityAdmin(admin.ModelAdmin):
 
 
 class TaskForm(MoveNodeForm):
-    """Restrict the positions to move to to the same city."""
+    """Restrict the positions to move to the same city."""
 
     def __init__(
         self,
@@ -69,6 +69,7 @@ class TaskForm(MoveNodeForm):
         instance=None,
         **kwargs,
     ):
+        """Extract the city from 3 different sources."""
         if isinstance(instance, Task):
             self.city = instance.city.id
         elif initial is dict and "city" in initial:
@@ -90,7 +91,10 @@ class TaskForm(MoveNodeForm):
         )
 
     def mk_dropdown_tree(self, model, for_node=None):
-        """Overriding the class method as an instance method to access self.initial."""
+        """
+        Overriding to filter for the city.
+        Class method is overridden as an instance method to access self.city.
+        """
         options = [(None, "Oberste Ebene")]
         for node in model.get_root_nodes().filter(city=self.city):
             self.__class__.add_subtree(for_node, node, options)
