@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.db import models
+from django.forms.models import ErrorList
 from django.http import HttpRequest, HttpResponseRedirect, QueryDict
 from django.urls import reverse
 from django.utils.html import format_html
 from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
-from treebeard.forms import movenodeform_factory
+from treebeard.forms import movenodeform_factory, MoveNodeForm
 
 from cpmonitor.models import City, Task
 
@@ -52,6 +53,54 @@ class CityAdmin(admin.ModelAdmin):
         return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
 
 
+class TaskForm(MoveNodeForm):
+    """Restrict the positions to move to the same city."""
+
+    def __init__(
+        self,
+        data=None,
+        files=None,
+        auto_id="id_%s",
+        prefix=None,
+        initial: Task = None,
+        error_class=ErrorList,
+        label_suffix=":",
+        empty_permitted=False,
+        instance=None,
+        **kwargs,
+    ):
+        """Extract the city from 3 different sources."""
+        if isinstance(instance, Task):
+            self.city = instance.city.id
+        elif initial is dict and "city" in initial:
+            self.city = initial["city"]
+        elif "city" in data:
+            self.city = data["city"][0]
+        self._saved_initial = initial
+        super().__init__(
+            data=data,
+            files=files,
+            auto_id=auto_id,
+            prefix=prefix,
+            initial=initial,
+            error_class=error_class,
+            label_suffix=label_suffix,
+            empty_permitted=empty_permitted,
+            instance=instance,
+            **kwargs,
+        )
+
+    def mk_dropdown_tree(self, model, for_node=None):
+        """
+        Overriding to filter for the city.
+        Class method is overridden as an instance method to access self.city.
+        """
+        options = [(None, "Oberste Ebene")]
+        for node in model.get_root_nodes().filter(city=self.city):
+            self.__class__.add_subtree(for_node, node, options)
+        return options
+
+
 class TaskAdmin(TreeAdmin):
     # ------ change list page ------
     change_list_template = "admin/task_changelist.html"
@@ -70,7 +119,7 @@ class TaskAdmin(TreeAdmin):
         return add_parents(task, task.title)
 
     list_display = ("title", "structure")
-    form = movenodeform_factory(Task)
+    form = movenodeform_factory(Task, TaskForm)
 
     list_filter = ("city",)
 
