@@ -62,7 +62,7 @@ class TaskForm(MoveNodeForm):
         files=None,
         auto_id="id_%s",
         prefix=None,
-        initial: Task = None,
+        initial=None,
         error_class=ErrorList,
         label_suffix=":",
         empty_permitted=False,
@@ -72,11 +72,10 @@ class TaskForm(MoveNodeForm):
         """Extract the city from 3 different sources."""
         if isinstance(instance, Task):
             self.city = instance.city.id
-        elif initial is dict and "city" in initial:
+        elif isinstance(initial, dict) and "city" in initial:
             self.city = initial["city"]
-        elif "city" in data:
+        elif isinstance(data, dict) and "city" in data:
             self.city = data["city"][0]
-        self._saved_initial = initial
         super().__init__(
             data=data,
             files=files,
