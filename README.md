@@ -121,6 +121,28 @@ or when using the dev server start the tests with `pytest --base-url http://loca
 - New test files have to be named according to the convention: `*_test.py`.
 - Test names should follow the convention: `test_should_do_x_when_given_y`.
 
+### Fixtures for tests
+
+From a local database filled with suitable data, generate a fixture named `example_fixture` with
+
+```shell
+python -Xutf8 manage.py dumpdata cpmonitor --indent 2 --settings=config.settings.local > cpmonitor/fixtures/example_fixture.json
+```
+
+(The `-Xutf8` and `--indent 2` options ensure consistent and readable output on all platforms.)
+
+This fixture may be loaded in a test with. (Similar in a pytest fixture.)
+
+```python
+@pytest.mark.django_db
+def test_something(django_db_blocker):
+    with django_db_blocker.unblock():
+        call_command("loaddata", "example_fixture")
+    # Test something here
+```
+
+This does not work when testing migrations, but there is a way: Use `read_fixture` in `cpmonitor/tests/migrations_test.py`.
+
 ## Styling
 
 We use [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) as a css framework.
@@ -166,7 +188,7 @@ Afterwards the test database has to be updated as well. Use the dumpdata command
 currently running database:
 
 ```shell
-python manage.py dumpdata --settings=config.settings.local > e2e_tests/database/test_database.json
+python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
 Cheat-sheet to make sure the correct data is dumped:
@@ -174,14 +196,14 @@ Cheat-sheet to make sure the correct data is dumped:
 ```shell
 git checkout right-before-model-change
 rm db.sqlite3
-./manage.py migrate --settings=config.settings.local
-./manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+python manage.py migrate --settings=config.settings.local
+python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
 git checkout after-model-change-including-migration
-./manage.py migrate --settings=config.settings.local
+python manage.py migrate --settings=config.settings.local
+python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
 Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
-Possibly use a formatter on the generated file.
 
 ## When pre-commit hooks make trouble
 

@@ -301,6 +301,21 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-test-migrations"
+version = "1.2.0"
+description = "Test django schema and data migrations, including ordering"
+category = "dev"
+optional = false
+python-versions = ">=3.6,<4.0"
+files = [
+    {file = "django-test-migrations-1.2.0.tar.gz", hash = "sha256:874884ff4e980583cd9f1c986bb9fbfe72b436e759be23004e4f52c26a15f363"},
+    {file = "django_test_migrations-1.2.0-py3-none-any.whl", hash = "sha256:9e8b9b4364fef70dde10a5f85c5a75d447ca2189ec648325610fab1268daec97"},
+]
+
+[package.dependencies]
+typing_extensions = ">=3.6,<5"
+
+[[package]]
 name = "django-treebeard"
 version = "4.6.1"
 description = "Efficient tree implementations for Django"
@@ -1173,4 +1188,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "49f212e167338451fbcf15dc8bb3efe6cc8f430401192f1f67bf7054d501226a"
+content-hash = "073f43b288c4f73288d508cd3aabaf89ce3f2bfa457b64630c1651451c74892b"
