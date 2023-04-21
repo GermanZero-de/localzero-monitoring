@@ -9,19 +9,20 @@ $gz-green: #a3d869;
   --tblr-primary: #{$gz-yellow}; //$gz-yellow;
   --tblr-primary-rgb: #{red($gz-yellow)}, #{green($gz-yellow)}, #{blue($gz-yellow)}; //$gz-yellow;
 }
+
+.progress {
+  --tblr-progress-height: 0.85rem;
+}
+
 .navbar {
   --tblr-navbar-brand-font-size: 1.25rem;
   --tblr-navbar-bg: var(--tblr-primary);
 
-  span.lz-title {
+  a.lz-title {
     font-size: 1rem;
     font-weight: 700;
-    color: white;
-
-    a {
-      color: white !important;
-      text-decoration: none !important;
-    }
+    color: white !important;
+    text-decoration: none !important;
   }
 
   &.lz-breadcrumbs-bar {

@@ -16,9 +16,33 @@ from martor.utils import LazyEncoder
 from .models import City, ExecutionStatus, Task
 
 
-def _get_children(city, node=None):
-    statuses = {s.value: s for s in ExecutionStatus}
+def _calculate_summary(node):
+    """calculate summarized status for a give node or a whole city"""
 
+    statuses = {s.value: s for s in ExecutionStatus}
+    if isinstance(node, City):
+        subtasks = [
+            t
+            for r in Task.get_root_nodes()
+            for t in r.get_descendants().filter(numchild=0)
+        ]
+    else:
+        subtasks = node.get_descendants().filter(numchild=0)
+
+    subtasks_count = len(subtasks)
+    status_counts = Counter([s.execution_status for s in subtasks])
+    status_proportions = {
+        s: round(c / subtasks_count * 100) for s, c in status_counts.items()
+    }
+
+    node.status_proportions = [
+        (v, statuses[k].label, statuses[k].name)
+        for k, v in sorted(status_proportions.items(), reverse=True)
+    ]
+    node.subtasks_count = subtasks_count
+
+
+def _get_children(city, node=None):
     if not node:
         children = Task.get_root_nodes()
     else:
@@ -27,18 +51,7 @@ def _get_children(city, node=None):
     groups = children.filter(city=city, numchild__gt=0)
     tasks = children.filter(city=city, numchild=0)
     for group in groups:
-        subtasks = group.get_descendants().filter(numchild=0)
-        subtasks_count = len(subtasks)
-        status_counts = Counter([s.execution_status for s in subtasks])
-        status_proportions = {
-            s: round(c / subtasks_count * 100) for s, c in status_counts.items()
-        }
-
-        group.status_proportions = [
-            (v, statuses[k].label, statuses[k].name)
-            for k, v in sorted(status_proportions.items(), reverse=True)
-        ]
-        group.subtasks_count = subtasks_count
+        _calculate_summary(group)
 
     return groups, tasks
 
@@ -60,6 +73,7 @@ def city(request, city_slug):
     except City.DoesNotExist:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
     groups, tasks = _get_children(city)
+    _calculate_summary(city)
 
     return render(
         request,
