@@ -1,4 +1,6 @@
+from datetime import date
 from typing import Dict
+
 from django.db import models
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -318,14 +320,37 @@ class Task(MP_Node):
         except ValidationError as e:
             new_msg = (
                 "Der Sektor / die Maßnahme wird in der URL als '%(slugs)s' geschrieben."
-                " Das kollidiert mit einem anderen Eintrag."
-            ) % {"slugs": self.slugs}
+                " Das kollidiert mit einem anderen Eintrag." % {"slugs": self.slugs}
+            )
             msgs: dict[str, str] = e.message_dict
             msgs[NON_FIELD_ERRORS][:] = [
                 new_msg if TASK_UNIQUE_CONSTRAINT_NAME in msg else msg
                 for msg in msgs[NON_FIELD_ERRORS]
             ]
             raise ValidationError(msgs)
+
+    def get_execution_status_name(self):
+        for s in ExecutionStatus:
+            if s.value == self.execution_status:
+                return s.name
+        return ""
+
+    @property
+    def started_late(self):
+        return (
+            self.planned_start
+            and self.actual_start
+            and self.planned_start < self.actual_start
+        )
+
+    @property
+    def completed_late(self):
+        return self.planned_completion and (
+            not self.actual_completion
+            and self.planned_completion < date.today()
+            or self.actual_completion
+            and self.planned_completion < self.actual_completion
+        )
 
     # Maybe later. Not part of the MVP:
 

@@ -13,18 +13,20 @@ $gz-green: #a3d869;
   --tblr-navbar-brand-font-size: 1.25rem;
   --tblr-navbar-bg: var(--tblr-primary);
 
-  .navbar-brand {
-    color: white;
-
-    a {
-      color: white !important;
-      text-decoration: none !important;
-    }
+  a.lz-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white !important;
+    text-decoration: none !important;
   }
 }
 
 .card-title {
   font-size: 2rem;
+}
+
+.lz-date-missed {
+  color: red !important;
 }
 
 .lz-status {

@@ -16,10 +16,10 @@
         <h3>Maßnahmen</h3>
         <div class="row row-deck row-cards">
           {% for task in tasks %}
-            <div class="col-3">
+            <div class="col-sm-6 col-lg-3">
               <a href="{% url 'task' city.slug task.slugs %}"
                  class="card card-link card-link-popup">
-                <div class="ribbon lz-status {{ task.execution_status_name }}">&nbsp</div>
+                <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
                 <div class="card-body">
                   <div class="h2 mb-3">{{ task.title }}</div>
                   <div style="-webkit-line-clamp:8;
@@ -36,9 +36,9 @@
       {% endif %}
       {% if groups %}
         <h3>Weitere Handlungsfelder</h3>
-        <div class="row row-deck">
+        <div class="row row-deck row-cards">
           {% for group in groups %}
-            <div class="col-3">
+            <div class="col-sm-6 col-lg-3">
               <a href="{% url 'task' city.slug group.slugs %}"
                  class="card card-link card-link-pop">
                 <div class="card-body">

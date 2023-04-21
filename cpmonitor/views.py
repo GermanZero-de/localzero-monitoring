@@ -40,10 +40,6 @@ def _get_children(city, node=None):
         ]
         group.subtasks_count = subtasks_count
 
-    for task in tasks:
-        status = task.execution_status
-        task.execution_status_name = statuses[status].name
-
     return groups, tasks
 
 
