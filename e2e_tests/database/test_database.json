@@ -357,7 +357,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-04-02T17:40:59.384Z",
+    "last_login": "2023-04-19T05:53:48.634Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -479,7 +479,7 @@
   "model": "cpmonitor.task",
   "pk": 2,
   "fields": {
-    "path": "00020002",
+    "path": "00020003",
     "depth": 2,
     "numchild": 0,
     "city": 1,
@@ -502,7 +502,7 @@
   "model": "cpmonitor.task",
   "pk": 3,
   "fields": {
-    "path": "00020001",
+    "path": "00020002",
     "depth": 2,
     "numchild": 0,
     "city": 1,
@@ -525,7 +525,7 @@
   "model": "cpmonitor.task",
   "pk": 4,
   "fields": {
-    "path": "00020003",
+    "path": "00020004",
     "depth": 2,
     "numchild": 0,
     "city": 1,
@@ -617,7 +617,7 @@
   "model": "cpmonitor.task",
   "pk": 8,
   "fields": {
-    "path": "00010001",
+    "path": "00010002",
     "depth": 2,
     "numchild": 0,
     "city": 1,
@@ -640,7 +640,7 @@
   "model": "cpmonitor.task",
   "pk": 9,
   "fields": {
-    "path": "00010002",
+    "path": "00010001",
     "depth": 2,
     "numchild": 0,
     "city": 1,
@@ -806,16 +806,16 @@
     "numchild": 0,
     "city": 1,
     "title": "Umstellung Fernwärme auf Geothermie",
-    "summary": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
-    "description": "",
-    "planned_start": null,
-    "planned_completion": null,
+    "summary": "Der Kurztext der Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
+    "description": "Die Beschreibung der Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
+    "planned_start": "2023-04-19",
+    "planned_completion": "2022-12-31",
     "responsible_organ": "",
-    "plan_assessment": "",
-    "execution_status": 0,
+    "plan_assessment": "Die Bewertung der geplanten Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
+    "execution_status": 2,
     "execution_justification": "",
     "execution_completion": null,
-    "actual_start": null,
+    "actual_start": "2023-04-19",
     "actual_completion": null,
     "slugs": "umstellung-fernwarme-auf-geothermie"
   }

@@ -9,22 +9,34 @@ $gz-green: #a3d869;
   --tblr-primary: #{$gz-yellow}; //$gz-yellow;
   --tblr-primary-rgb: #{red($gz-yellow)}, #{green($gz-yellow)}, #{blue($gz-yellow)}; //$gz-yellow;
 }
+
+.progress {
+  --tblr-progress-height: 0.85rem;
+}
+
 .navbar {
   --tblr-navbar-brand-font-size: 1.25rem;
   --tblr-navbar-bg: var(--tblr-primary);
 
-  .navbar-brand {
-    color: white;
+  a.lz-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white !important;
+    text-decoration: none !important;
+  }
 
-    a {
-      color: white !important;
-      text-decoration: none !important;
-    }
+  &.lz-breadcrumbs-bar {
+    background: white;
+    min-height: 0px;
   }
 }
 
 .card-title {
   font-size: 2rem;
+}
+
+.lz-date-missed {
+  color: red !important;
 }
 
 .lz-status {

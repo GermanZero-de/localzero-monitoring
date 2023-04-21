@@ -5,20 +5,31 @@
   --tblr-primary-rgb: 255, 200, 12;
 }
 
+.progress {
+  --tblr-progress-height: 0.85rem;
+}
+
 .navbar {
   --tblr-navbar-brand-font-size: 1.25rem;
   --tblr-navbar-bg: var(--tblr-primary);
 }
-.navbar .navbar-brand {
-  color: white;
-}
-.navbar .navbar-brand a {
+.navbar a.lz-title {
+  font-size: 1rem;
+  font-weight: 700;
   color: white !important;
   text-decoration: none !important;
+}
+.navbar.lz-breadcrumbs-bar {
+  background: white;
+  min-height: 0px;
 }
 
 .card-title {
   font-size: 2rem;
+}
+
+.lz-date-missed {
+  color: red !important;
 }
 
 .lz-status.UNKNOWN {
