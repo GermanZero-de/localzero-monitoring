@@ -7,7 +7,7 @@
         <div class="col">
           <!-- Page pre-title -->
           <div class="page-pretitle">Maßnahme</div>
-          <h1>{{ task.title }}</h1>
+          <h1>{{ node.title }}</h1>
         </div>
       </div>
       <div class="row">
@@ -17,40 +17,40 @@
               <div>
                 <h4 class="my-0">Status</h4>
               </div>
-              <span class="badge lz-status {{ task.get_execution_status_name }}">{{ task.get_execution_status_display }}</span>
+              <span class="badge lz-status {{ node.get_execution_status_name }}">{{ node.get_execution_status_display }}</span>
             </li>
             <li class="list-group-item">
               <div class="justify-content-between d-flex">
                 <h4 class="my-0">Beginn</h4>
-                <span class="text-muted">{{ task.actual_start|date:"d.m.Y"|default:"--" }}</span>
+                <span class="text-muted">{{ node.actual_start|date:"d.m.Y"|default:"--" }}</span>
               </div>
-              {% if task.planned_start %}
+              {% if node.planned_start %}
                 <div class="justify-content-between d-flex">
                   <span class="text-muted">geplant</span>
-                  <span class="text-muted  {{ task.started_late|yesno:'lz-date-missed,' }}">{{ task.planned_start|date:"d.m.Y" }}</span>
+                  <span class="text-muted  {{ node.started_late|yesno:'lz-date-missed,' }}">{{ node.planned_start|date:"d.m.Y" }}</span>
                 </div>
               {% endif %}
             </li>
             <li class="list-group-item">
               <div class="justify-content-between d-flex">
                 <h4 class="my-0">Ende</h4>
-                <span class="text-muted">{{ task.actual_completion|date:"d.m.Y"|default:"--" }}</span>
+                <span class="text-muted">{{ node.actual_completion|date:"d.m.Y"|default:"--" }}</span>
               </div>
-              {% if task.planned_completion %}
+              {% if node.planned_completion %}
                 <div class="justify-content-between d-flex">
                   <span class="text-muted">geplant</span>
-                  <span class="text-muted {{ task.completed_late|yesno:'lz-date-missed,' }}">{{ task.planned_completion|date:"d.m.Y" }}</span>
+                  <span class="text-muted {{ node.completed_late|yesno:'lz-date-missed,' }}">{{ node.planned_completion|date:"d.m.Y" }}</span>
                 </div>
               {% endif %}
             </li>
           </ul>
         </div>
         <div class="col-sm-9">
-          {% if task.summary %}<div style="font-weight: 600">{{ task.summary | safe_markdown }}</div>{% endif %}
-          {{ task.description | safe_markdown | default:"Diese Maßnahme hat keine Beschreibung" }}
-          {% if task.plan_assessment %}
+          {% if node.summary %}<div style="font-weight: 600">{{ node.summary | safe_markdown }}</div>{% endif %}
+          {{ node.description | safe_markdown | default:"Diese Maßnahme hat keine Beschreibung" }}
+          {% if node.plan_assessment %}
             <h3>Bewertung der geplanten Maßnahme</h3>
-            {{ task.plan_assessment | safe_markdown }}
+            {{ node.plan_assessment | safe_markdown }}
           {% endif %}
         </div>
       </div>

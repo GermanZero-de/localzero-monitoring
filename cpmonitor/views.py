@@ -84,7 +84,7 @@ def task(request, city_slug, task_slugs):
         return render(
             request,
             "task.html",
-            {"city": city, "task": task},
+            {"city": city, "node": task},
         )
     else:
         groups, tasks = _get_children(city, task)
@@ -92,7 +92,7 @@ def task(request, city_slug, task_slugs):
         return render(
             request,
             "group.html",
-            {"city": city, "group": task, "groups": groups, "tasks": tasks},
+            {"city": city, "node": task, "groups": groups, "tasks": tasks},
         )
 
 

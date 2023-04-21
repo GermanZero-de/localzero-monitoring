@@ -4,13 +4,13 @@
   <div class="col">
     <!-- Page pre-title -->
     <div class="page-pretitle">Handlungsfeld</div>
-    <h1>{{ group.title }}</h1>
+    <h1>{{ node.title }}</h1>
   </div>
   <div class="card">
     <div class="card-body">
       <div class="row align-items-center">
         <div class="markdown text-muted">
-          {{ group.description | safe_markdown | default:"Dieses Handlungsfeld hat keine Beschreibung" }}
+          {{ node.description | safe_markdown | default:"Dieses Handlungsfeld hat keine Beschreibung" }}
         </div>
       </div>
     </div>

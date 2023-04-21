@@ -13,11 +13,20 @@ $gz-green: #a3d869;
   --tblr-navbar-brand-font-size: 1.25rem;
   --tblr-navbar-bg: var(--tblr-primary);
 
-  a.lz-title {
+  span.lz-title {
     font-size: 1rem;
     font-weight: 700;
-    color: white !important;
-    text-decoration: none !important;
+    color: white;
+
+    a {
+      color: white !important;
+      text-decoration: none !important;
+    }
+  }
+
+  &.lz-breadcrumbs-bar {
+    background: white;
+    min-height: 0px;
   }
 }
 

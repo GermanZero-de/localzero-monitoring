@@ -5,7 +5,7 @@
   <div class="page">
     <header class="navbar navbar-expand-md navbar-light d-print-none">
       <div class="container-xl">
-        <a class="lz-title" href=".">
+        <a class="lz-title" href="{% url 'index' %}">
           <img src="{% static 'logo_inverted.png' %}"
                alt="LocalZero Monitoring Logo"
                height="35"
@@ -44,6 +44,25 @@
         {% endif %}
       </div>
     </header>
+    {% if node %}
+      <header class="navbar navbar-expand-md navbar-light lz-breadcrumbs-bar">
+        <div class="container-xl">
+          <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+            <li class="breadcrumb-item">
+              <a href="{% url 'city' city.slug %}">Start</a>
+            </li>
+            {% for ancestor in node.get_ancestors %}
+              <li class="breadcrumb-item">
+                <a href="{% url 'task' city.slug ancestor.slugs %}">{{ ancestor.title }}</a>
+              </li>
+            {% endfor %}
+            <li class="breadcrumb-item active">
+              <a href="{% url 'task' city.slug node.slugs %}">{{ node.title }}</a>
+            </li>
+          </ol>
+        </div>
+      </header>
+    {% endif %}
     <div class="page-wrapper">
       <div class="page-body">
         {% block page_body %}
