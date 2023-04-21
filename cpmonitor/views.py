@@ -23,7 +23,7 @@ def _calculate_summary(node):
     if isinstance(node, City):
         subtasks = [
             t
-            for r in Task.get_root_nodes()
+            for r in Task.get_root_nodes().filter(city=node)
             for t in r.get_descendants().filter(numchild=0)
         ]
     else:
