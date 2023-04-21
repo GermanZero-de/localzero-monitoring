@@ -15,7 +15,10 @@ def read_fixture(fixture_name: str, app_name: str, migration_state_apps: Apps):
     Reads data from a JSON fixture file of the given application into a given applications state.
 
     This is a drastically simplified version of `django.core.management` "loaddata" command,
-    which cannot be used, since it uses `django.apps.apps` and we need to use `old_state.apps`.
+    which cannot be used, since it uses `django.apps.apps` and we need to use `migration_state_apps`.
+    `django.apps.apps.get_model()` returns classes from the current model while
+    `migration_state_apps.get_model()` returns classes matching the state of the model at the
+    migration state.
     """
     app_path = apps.get_app_config(app_name).path
     fixture_path = os.path.join(app_path, "fixtures", fixture_name + ".json")
