@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.text import slugify
 from treebeard.mp_tree import MP_Node
+from treebeard.exceptions import InvalidPosition
 
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
 
@@ -295,17 +296,27 @@ class Task(MP_Node):
         return self.title
 
     slugs = models.SlugField(
-        "slugs",
+        "In der URL",
         max_length=255,
         editable=False,
     )
 
-    def clean(self):
-        """Set / update the slugs on every validation. (Done by admin before `save()`)"""
-        self.slugs = ""
-        for anc in self.get_ancestors():
-            self.slugs += slugify(anc.title) + "/"
-        self.slugs += slugify(self.title)
+    @staticmethod
+    def _get_slugs_with_parent(new_parent, title):
+        """Determine the `slugs` field based on the new parents slugs and title."""
+        if new_parent:
+            return new_parent.slugs + "/" + slugify(title)
+        else:
+            return slugify(title)
+
+    @staticmethod
+    def get_slugs_for_move(ref_node, pos, title):
+        """Determine the `slugs` field given treebeards reference data."""
+        if ref_node and isinstance(pos, str) and not pos.endswith("-child"):
+            new_parent = ref_node.get_parent()
+        else:
+            new_parent = ref_node
+        return Task._get_slugs_with_parent(new_parent, title)
 
     def validate_constraints(self, exclude=None):
         """
@@ -314,7 +325,12 @@ class Task(MP_Node):
         This is necessary, because `editable=False` excludes the field from validation
         and UniqueConstraint does not allow error messages showing content.
         """
-        exclude.remove("slugs")
+
+        if exclude and "slugs" in exclude:
+            if "slugs" in exclude:
+                exclude.remove("slugs")
+            if "city" in exclude:
+                exclude.remove("city")
         try:
             super().validate_constraints(exclude=exclude)
         except ValidationError as e:
@@ -328,6 +344,38 @@ class Task(MP_Node):
                 for msg in msgs[NON_FIELD_ERRORS]
             ]
             raise ValidationError(msgs)
+
+    def move(self, target, pos=None):
+        """Override to validate uniqueness of slugs field in case of move in changelist.
+
+        It might also be possible to override `treebeard.admin.TreeAdmin.try_to_move_node()`,
+        instead. This would possibly catch more cases.
+        """
+
+        self.slugs = self.get_slugs_for_move(target, pos, self.title)
+        try:
+            self.validate_constraints()
+        except ValidationError as e:
+            raise InvalidPosition(
+                "Diese Verschiebung ist nicht möglich."
+                " Es gibt bereits einen Sektor / eine Maßnahme"
+                " mit der URL '%s'." % self.slugs
+            )
+        super().move(target, pos)
+
+    def save(self, *args, **kwargs):
+        """Override to correct `slugs` of whole sub-tree after move or rename.
+
+        Calls itself recursively for all descendants after the regular save.
+
+        Any move within the tree structure has to happen before such that
+        `get_parent()` returns the correct parent. Treebeard first moves, then saves.
+        """
+
+        self.slugs = self._get_slugs_with_parent(self.get_parent(), self.title)
+        super().save(*args, **kwargs)
+        for child in self.get_children().only("slugs", "title"):
+            child.save()
 
     def get_execution_status_name(self):
         for s in ExecutionStatus:
