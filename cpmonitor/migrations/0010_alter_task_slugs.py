@@ -2,6 +2,14 @@
 
 from django.db import migrations, models
 
+from ..models import Task
+
+
+def correct_slugs(apps, schema_editor):
+    for task in Task.objects.all():
+        # task.slugs = Task._get_slugs_with_parent(task.get_parent(), task.title)
+        task.save()
+
 
 class Migration(migrations.Migration):
     dependencies = [
@@ -16,4 +24,5 @@ class Migration(migrations.Migration):
                 editable=False, max_length=255, verbose_name="In der URL"
             ),
         ),
+        migrations.RunPython(correct_slugs, migrations.RunPython.noop),
     ]

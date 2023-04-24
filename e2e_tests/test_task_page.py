@@ -13,4 +13,4 @@ def test_should_go_to_subtask_view_when_clicking_task_item(page: Page):
     subtask_title = page.get_by_text("Radwege ausbauen")
     subtask_title.click()
 
-    expect(page).to_have_url("/beispielstadt/verkehr/radwege-ausbauen/")
+    expect(page).to_have_url("/beispielstadt/mobilitat/radwege-ausbauen/")

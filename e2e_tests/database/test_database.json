@@ -357,7 +357,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-04-19T05:53:48.634Z",
+    "last_login": "2023-04-24T09:17:06.913Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -435,6 +435,14 @@
   }
 },
 {
+  "model": "sessions.session",
+  "pk": "3h80mfs0kjjxfectgn3a0x6c6zz3esme",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1pqsJm:hu2RvPJFpyb4Ol67nhIuVCNJNtMnKa2vY8HwkwCnWSk",
+    "expire_date": "2023-05-08T09:17:06.922Z"
+  }
+},
+{
   "model": "cpmonitor.city",
   "pk": 1,
   "fields": {
@@ -495,7 +503,7 @@
     "execution_completion": 0,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "verkehr/radwege-ausbauen"
+    "slugs": "mobilitat/radwege-ausbauen"
   }
 },
 {
@@ -518,7 +526,7 @@
     "execution_completion": 0,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "verkehr/u-bahn-strecke-verlangern"
+    "slugs": "mobilitat/u-bahn-strecke-verlangern"
   }
 },
 {
@@ -587,7 +595,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "jobtickets-fur-verwaltung"
+    "slugs": "mobilitat/jobtickets-fur-verwaltung"
   }
 },
 {
@@ -633,7 +641,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "personal-einstellen"
+    "slugs": "strukturen/personal-einstellen"
   }
 },
 {
@@ -656,7 +664,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "klimaaktionsplan"
+    "slugs": "strukturen/klimaaktionsplan"
   }
 },
 {
@@ -679,7 +687,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "burgerbeteiligung"
+    "slugs": "strukturen/burgerbeteiligung"
   }
 },
 {
@@ -702,7 +710,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "monitoring"
+    "slugs": "strukturen/monitoring"
   }
 },
 {
@@ -725,7 +733,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "european-energy-award"
+    "slugs": "strukturen/european-energy-award"
   }
 },
 {
@@ -748,7 +756,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "klimarelevanzprufung"
+    "slugs": "strukturen/klimarelevanzprufung"
   }
 },
 {
@@ -771,7 +779,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "beteiligungswerkstatt"
+    "slugs": "strukturen/burgerbeteiligung/beteiligungswerkstatt"
   }
 },
 {
@@ -794,7 +802,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
-    "slugs": "marke-schaffen"
+    "slugs": "strukturen/burgerbeteiligung/marke-schaffen"
   }
 },
 {
