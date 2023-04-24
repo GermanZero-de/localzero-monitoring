@@ -124,7 +124,6 @@ class TaskForm(MoveNodeForm):
         self.instance.slugs = self.instance.get_slugs_for_move(
             reference_node, position_type, title
         )
-        print(f"form-clean: {self.instance.slugs}")
 
         return super().clean()
 
@@ -146,7 +145,15 @@ class TaskAdmin(TreeAdmin):
 
         return add_parents(task, task.title)
 
-    list_display = ("title", "structure", "slugs")
+    @admin.display(description="Public page")
+    def slug_link(self, task: Task):
+        """Additional link to the public page and also showing the slugs."""
+        url = reverse(
+            "task", kwargs={"city_slug": task.city.slug, "task_slugs": task.slugs}
+        )
+        return format_html('<a href="{}" target="_blank">{}</a>', url, task.slugs)
+
+    list_display = ("title", "structure", "slug_link")
     form = movenodeform_factory(Task, TaskForm)
 
     list_filter = ("city",)
