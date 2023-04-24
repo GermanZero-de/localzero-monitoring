@@ -316,8 +316,10 @@ docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<cur
 ```
 8. Stop the server, apply the migrations, start the server:
 ```sh
-cd ~/{testing|production}/
+cd ~/<testing|production>/
 docker-compose down --volumes
+# backup the db
+cp db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.<current date in format YYYY-MON-DD>
 # apply migrations using a temporary container
 docker run --user=1007:1007 --rm -it -v $(pwd):/db klimaschutzmonitor-djangoapp:latest sh
 SECRET_KEY=whatever python manage.py migrate --settings=config.settings.production-container
