@@ -12,7 +12,7 @@ services:
       - static_volume:/static
       - ${IMAGES_PATH?:Please set the IMAGES_PATH environment variable.}:/images
       - nginx_config_volume:/nginx/conf.d
-      - nginx_extras_volume:/nginx/conf.d/extras-${ENVIRONMENT_NAME}
+      - nginx_extras_volume:/nginx/extras-${ENVIRONMENT_NAME}
     networks:
       - nginx_network
     environment:
