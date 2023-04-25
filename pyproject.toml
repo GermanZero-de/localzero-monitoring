@@ -27,6 +27,7 @@ black = "^23.1.0"
 pre-commit = "^3.0.4"
 pyright = "^1.1.292"
 pytest = "^7.2.1"
+pytest-env = "^0.8.1"
 pytest-playwright = "^0.3.0"
 pytest-base-url = "^2.0.0"
 pytest-django = "^4.5.2"
@@ -39,7 +40,12 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 base_url = "http://localhost"
-DJANGO_SETTINGS_MODULE = "config.settings.container"
+env = [
+    "DJANGO_SETTINGS_MODULE=config.settings.container",
+    "DJANGO_SECRET_KEY=somePlaceholder",
+    "DJANGO_CSRF_TRUSTED_ORIGINS=https://localhost",
+    "DJANGO_DEBUG=True"
+]
 
 [tool.djlint]
 ignore = "H017,H031,H021"
