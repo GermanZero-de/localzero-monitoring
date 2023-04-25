@@ -8,12 +8,17 @@ import pytest
 def admin_login(page: Page):
     page.goto("/admin")
     page.wait_for_selector("text=LocalZero Monitoring")
-    page.fill("[name=username]", "admin")
-    page.fill("[name=password]", "password")
-    page.click("text=Anmelden")
+    page.locator("#id_username").fill("admin")
+    page.locator("#id_password").fill("password")
+    page.get_by_role("button").click()
 
 
-def test_should_succeed_when_logging_into_admin(page: Page, admin_login):
+def test_should_succeed_when_logging_into_admin(page: Page):
+    page.goto("/admin")
+    page.wait_for_selector("text=LocalZero Monitoring")
+    page.locator("#id_username").fill("admin")
+    page.locator("#id_password").fill("password")
+    page.get_by_role("button").click()
     expect(page).to_have_title("Dateneingabe | LocalZero Monitoring")
     page.close()
 
