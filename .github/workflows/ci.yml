@@ -29,6 +29,6 @@ jobs:
       - name: fill database
         run: poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
       - name: build application
-        run: docker compose --env-file .env.local up -d --build
+        run: docker compose up -d --build
       - name: run tests
         run: poetry run pytest

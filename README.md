@@ -272,11 +272,7 @@ It uses a multi-stage build to prevent shipping unnecessary files which would in
 To build the image, run the following command in the repository root directory (containing the Dockerfile):
 
 ```shell
-# using production config
-docker compose --env-file .env.production build
-
-# using local config
-docker compose --env-file .env.local build
+docker compose build
 ```
 
 ### Deployment including nginx
@@ -284,13 +280,7 @@ docker compose --env-file .env.local build
 To run both containers together, run the following command in the repository root directory (the app container will be built automatically if necessary):
 
 ```shell
-# using production config
-docker compose --env-file .env.production up --detach
-```
-
-```shell
-# using local config
-docker compose --env-file .env.local up --detach
+docker compose up --detach
 ```
 
 This will start both the Django app and the nginx containers *in the background*. The website can then be reached at <https://localhost>.
@@ -299,13 +289,7 @@ You'll have to tell your browser to make an exception for the [self-signed certi
 To stop the containers from running in the background, run:
 
 ```shell
-# using production config
-docker compose --env-file .env.local down --volumes
-```
-
-```shell
-# using local config
-docker compose --env-file .env.local down --volumes
+docker compose down --volumes
 ```
 
 The `--volumes` flag is important to make sure that at the next start, the latest static resources from the app container are served instead of potentially outdated files from the previous run cached by Docker.
