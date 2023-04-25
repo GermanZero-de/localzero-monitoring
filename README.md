@@ -299,5 +299,31 @@ docker ps
 docker exec -it djangoapp sh
 
 # run manage.py inside container shell
-python manage.py migrate --settings=config.settings.local-container
+SECRET_KEY=whatever python manage.py migrate --settings=config.settings.local-container
+```
+
+### Deploying a new version
+
+1. Checkout the commit you want to deploy (usually the latest commit of main).
+2. Build the image for the Django app: `docker compose --env-file .env.local build`
+3. Export the image: `docker save klimaschutzmonitor-djangoapp -o img.tar`
+4. Copy the image to the server: `scp -C img.tar monitoring@monitoring.localzero.net:/tmp/`
+5. Login to the server: `ssh monitoring@monitoring.localzero.net`
+6. Import the image into Docker on the server: `docker load -i /tmp/img.tar && rm /tmp/img.tar`
+7. Tag the image with the current date in case we want to roll back:
+```sh
+docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<current date in format YYYY-MON-DD>
+```
+8. Stop the server, apply the migrations, start the server:
+```sh
+cd ~/<testing|production>/
+docker-compose down --volumes
+# backup the db
+cp db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.<current date in format YYYY-MON-DD>
+# apply migrations using a temporary container
+docker run --user=1007:1007 --rm -it -v $(pwd):/db klimaschutzmonitor-djangoapp:latest sh
+SECRET_KEY=whatever python manage.py migrate --settings=config.settings.production-container
+# exit and stop the temporary container
+exit
+docker-compose up --detach
 ```
