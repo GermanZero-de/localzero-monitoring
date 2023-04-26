@@ -288,6 +288,40 @@ sudo apt install apache2-utils
 
 ## Server administration
 
+### SSH access
+
+Team members with their SSH keys installed on the server can add this to their `~/.ssh/config` file:
+
+```.ssh/config
+Host lzm
+    HostName monitoring.localzero.net
+    User monitoring
+    IdentityFile ~/.ssh/<private_key_file>
+```
+
+This enables easy login:
+
+```sh
+ssh lzm
+```
+
+### Retrieve current DB from server
+
+Replace your local DB with the current DB from the server with:
+
+```sh
+rm db.sqlite3
+scp lzm:testing/db.sqlite3 .
+```
+
+Make it available to others by checking in a dump generated with:
+
+```sh
+python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/prod_database_$(date -u +"%FT%H%M%SZ").json
+```
+
+### Migration (to be incorporated in deployment guide below)
+
 The databases on the test and production servers must be manually migrated whenever we deploy an app version which requires schema changes.
 To do so, one can open a shell in the running container and run `manage.py` with the respective arguments:
 

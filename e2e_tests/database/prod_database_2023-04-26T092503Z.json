@@ -1,0 +1,3868 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2023-02-26T18:26:19.109Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2023-02-26T18:26:29.897Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Verkehr",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2023-02-26T18:27:03.032Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Radwege ausbauen",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2023-02-26T18:27:36.579Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "U-Bahn Strecke verlängern",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2023-03-06T20:11:36.094Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"introduction\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2023-03-07T19:55:44.847Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "80807 München",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2023-03-07T19:56:35.680Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "80807 München",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2023-03-07T19:56:52.730Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "80807 München",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2023-03-07T19:57:45.205Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "Solar ausbauen",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2023-03-07T19:58:11.638Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "5",
+    "object_repr": "Solaranlage auf Willy-Brandt-Schule",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2023-03-27T10:58:53.444Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "6",
+    "object_repr": "Neuer Sektor",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2023-03-27T10:59:03.027Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2023-03-27T10:59:14.598Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "7",
+    "object_repr": "Schöne Maßnahme",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2023-03-27T11:04:59.058Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "8",
+    "object_repr": "Energie",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2023-03-27T11:05:11.562Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "9",
+    "object_repr": "Gebäude",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2023-03-27T13:05:14.664Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2023-03-28T08:54:27.797Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "17252 MasterMirow",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2023-03-28T09:11:00.600Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "10",
+    "object_repr": "Strom",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2023-03-28T09:17:35.408Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "11",
+    "object_repr": "PV",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2023-03-28T09:18:29.336Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "12",
+    "object_repr": "PV - Potentiale auf öffentlichen  Liegenschaften nutzen",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2023-03-28T09:20:43.115Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "13",
+    "object_repr": "Agri PV / Freiflächen PV",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2023-03-28T09:20:47.482Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "13",
+    "object_repr": "Agri PV / Freiflächen PV",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2023-03-28T09:21:03.953Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "14",
+    "object_repr": "PV privat",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2023-03-28T09:22:28.543Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "15",
+    "object_repr": "Ausbau Wind",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2023-03-28T09:22:33.149Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "15",
+    "object_repr": "Ausbau Wind",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2023-03-28T09:22:43.679Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "16",
+    "object_repr": "Repowering",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2023-03-28T09:22:53.104Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "17",
+    "object_repr": "Windräder / Windparks auf öffentlichen Flächen oder verpachtung dieser Flächen an Genossenschaft",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2023-03-28T09:23:02.762Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "18",
+    "object_repr": "Klein-Windräder privat",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2023-03-28T09:23:31.356Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "19",
+    "object_repr": "Speicherung",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2023-03-28T09:27:45.131Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "20",
+    "object_repr": "klimaneutrale Kommune",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2023-03-28T09:28:00.960Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "21",
+    "object_repr": "Ausschreibung qualifizierter Ökostrom für alle kommunale Liegenschaften",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2023-03-28T14:34:26.180Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "22",
+    "object_repr": "Wärme",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2023-03-28T14:34:58.799Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "23",
+    "object_repr": "Fernwärme auf EE umstellen / neue Fernwärmenetze installlieren",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2023-03-28T14:37:36.796Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "24",
+    "object_repr": "EE Nahwärmenetze auf EE umstellen / bzw. installieren",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2023-03-28T14:40:21.826Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "25",
+    "object_repr": "GebäudeMaster",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2023-03-28T15:46:08.028Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "25",
+    "object_repr": "GebäudeMaster",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Beschreibung\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2023-03-28T15:51:24.517Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "26",
+    "object_repr": "Was Neues",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2023-03-28T15:54:51.477Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "26",
+    "object_repr": "Was Neues",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Beschreibung\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2023-03-30T11:33:42.724Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "27",
+    "object_repr": "Industrie",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2023-03-30T11:33:58.179Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "28",
+    "object_repr": "Landwirtschaft",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2023-03-30T11:34:23.874Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "6",
+    "object_repr": "Neuer Sektor",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2023-03-30T11:35:22.007Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "29",
+    "object_repr": "Autofreie Innenstadt",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2023-03-30T11:35:42.200Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "7",
+    "object_repr": "Schöne Maßnahme",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2023-03-30T11:36:23.399Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "30",
+    "object_repr": "Windkraft",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2023-03-30T11:36:47.070Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "31",
+    "object_repr": "Photovoltaik",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2023-03-30T11:37:01.472Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "32",
+    "object_repr": "Wasserstoff",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2023-03-30T11:37:50.353Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "33",
+    "object_repr": "Photovoltaik auf allen öffentlichen Dächern",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2023-03-30T11:38:41.147Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "31",
+    "object_repr": "Photovoltaik Ausschreibungen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2023-03-30T11:39:04.260Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "30",
+    "object_repr": "Windkraft Flächenauszeichnungen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2023-03-30T11:39:26.115Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "32",
+    "object_repr": "Anbindung an Wasserstoffnetz",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2023-03-30T11:39:45.581Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "9",
+    "object_repr": "Sanierung öffentliche Gebäude",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2023-03-30T11:40:03.339Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "34",
+    "object_repr": "Gebäude",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2023-03-30T11:41:02.064Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "35",
+    "object_repr": "Förderung Altbausanierung",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2023-03-30T11:41:15.192Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "36",
+    "object_repr": "Neubauprogramm",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2023-03-30T11:41:47.911Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "30",
+    "object_repr": "Windkraft Flächenauszeichnungen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2023-03-30T11:42:13.429Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "31",
+    "object_repr": "Photovoltaik Ausschreibungen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2023-03-30T11:42:36.503Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "33",
+    "object_repr": "Photovoltaik auf allen öffentlichen Dächern",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2023-03-30T11:43:03.149Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "32",
+    "object_repr": "Anbindung an Wasserstoffnetz",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2023-03-30T11:46:24.393Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2023-03-30T11:51:14.665Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "8",
+    "object_repr": "Energie",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Kurztext\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2023-03-30T13:52:09.191Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "14",
+    "object_repr": "PV privat",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2023-03-30T13:52:56.447Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "14",
+    "object_repr": "PV privat",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2023-03-30T13:56:52.658Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "11",
+    "object_repr": "PV",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2023-03-30T16:05:59.894Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "80807 München",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2023-03-30T16:06:21.925Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "80807 München",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2023-03-30T16:17:15.116Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "22941 Bargteheide",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2023-03-30T16:19:36.096Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "80935 München_TestChristiane",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2023-03-30T16:21:31.695Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "37",
+    "object_repr": "LULUCF",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2023-03-30T16:23:56.049Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "38",
+    "object_repr": "Wärme München",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2023-03-30T16:27:05.901Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "39",
+    "object_repr": "Umbau der Fernwärme in Geothermie bis 2035",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2023-03-30T16:31:48.481Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "40",
+    "object_repr": "Moor Renaturierung",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2023-03-30T16:38:40.550Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "41",
+    "object_repr": "Mobilität",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2023-03-30T16:55:30.684Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "39",
+    "object_repr": "Umbau der Fernwärme in Geothermie bis 2035",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2023-03-31T09:09:52.962Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "42",
+    "object_repr": "Tempo 30 innerorts",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2023-03-31T09:10:48.120Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "42",
+    "object_repr": "Tempo 30 innerorts",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Beschreibung\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2023-03-31T09:11:27.563Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "42",
+    "object_repr": "Tempo 30 innerorts",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Beschreibung\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2023-03-31T09:15:36.393Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "42",
+    "object_repr": "Tempo 30 innerorts",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Kurztext\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2023-03-31T09:41:00.385Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "28000 Hansestadt Bremen",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2023-03-31T09:43:31.962Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "28000 Hansestadt Bremen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2023-03-31T11:44:04.164Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "43",
+    "object_repr": "Verkehr HB",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2023-04-01T07:50:18.550Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "80935 München_TestChristiane",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Homepage\", \"Einleitung\", \"Bewertung Verwaltung\", \"Bewertung Klimaaktionsplan\", \"Bewertung Umsetzungsstand\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 82,
+  "fields": {
+    "action_time": "2023-04-01T07:59:15.318Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "39",
+    "object_repr": "Umbau der Fernwärme in Geothermie bis 2035",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 83,
+  "fields": {
+    "action_time": "2023-04-01T08:00:05.709Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "44",
+    "object_repr": "Untermaßnahme in Wärme",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 84,
+  "fields": {
+    "action_time": "2023-04-01T08:02:54.259Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "45",
+    "object_repr": "2. Untermaßnahme in Wärme",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 85,
+  "fields": {
+    "action_time": "2023-04-01T08:25:07.785Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "39",
+    "object_repr": "Umbau der Fernwärme in Geothermie bis 2035",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 86,
+  "fields": {
+    "action_time": "2023-04-02T13:43:15.653Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "7",
+    "object_repr": "97070 Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 87,
+  "fields": {
+    "action_time": "2023-04-02T13:55:28.595Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "46",
+    "object_repr": "Stadtverwaltung Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 88,
+  "fields": {
+    "action_time": "2023-04-02T13:56:13.201Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "47",
+    "object_repr": "Energieversorgung Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 89,
+  "fields": {
+    "action_time": "2023-04-02T13:56:49.099Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "48",
+    "object_repr": "Wohnen Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 90,
+  "fields": {
+    "action_time": "2023-04-02T13:57:08.005Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "49",
+    "object_repr": "Wirtschaft Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 91,
+  "fields": {
+    "action_time": "2023-04-02T13:57:37.079Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "50",
+    "object_repr": "Mobilität Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 92,
+  "fields": {
+    "action_time": "2023-04-02T13:57:56.920Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "51",
+    "object_repr": "Konsum und Abfall Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 93,
+  "fields": {
+    "action_time": "2023-04-02T13:59:16.981Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "52",
+    "object_repr": "Kompensation, Klimapartnerschaften und Senken Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 94,
+  "fields": {
+    "action_time": "2023-04-02T13:59:41.926Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "53",
+    "object_repr": "Bildung und Kultur Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 95,
+  "fields": {
+    "action_time": "2023-04-02T14:00:28.393Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "54",
+    "object_repr": "Kommunikation, Beteiligung, Soziales Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 96,
+  "fields": {
+    "action_time": "2023-04-02T14:01:20.611Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "55",
+    "object_repr": "Weichen stellen für klimaneutrale Wärmeversorgung Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 97,
+  "fields": {
+    "action_time": "2023-04-02T14:02:28.412Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "56",
+    "object_repr": "Solare Stromerzeugung rapide ausbauen Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 98,
+  "fields": {
+    "action_time": "2023-04-02T14:03:28.856Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "57",
+    "object_repr": "Ausbau und Integration erneuerbarer Energien ins Energiesystem Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 99,
+  "fields": {
+    "action_time": "2023-04-02T14:06:56.113Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "58",
+    "object_repr": "Deine, meine, unsere Bürgerenergie Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 100,
+  "fields": {
+    "action_time": "2023-04-02T14:10:14.119Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "55",
+    "object_repr": "Weichen stellen für klimaneutrale Wärmeversorgung Würzburg",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Kurztext\", \"Beschreibung\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 101,
+  "fields": {
+    "action_time": "2023-04-02T14:14:09.815Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "56",
+    "object_repr": "Solare Stromerzeugung rapide ausbauen Würzburg",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Kurztext\", \"Beschreibung\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 102,
+  "fields": {
+    "action_time": "2023-04-02T14:16:14.752Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "57",
+    "object_repr": "Ausbau und Integration erneuerbarer Energien ins Energiesystem Würzburg",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Kurztext\", \"Beschreibung\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 103,
+  "fields": {
+    "action_time": "2023-04-02T14:18:12.174Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "59",
+    "object_repr": "Zentrale Wärmversorgung: Klimaneutrale Fernwärme Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 104,
+  "fields": {
+    "action_time": "2023-04-02T14:23:51.885Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "60",
+    "object_repr": "Energieleitplan Würzburg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 105,
+  "fields": {
+    "action_time": "2023-04-02T14:36:44.466Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "55",
+    "object_repr": "Weichen stellen für klimaneutrale Wärmeversorgung Würzburg",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Verantwortliches Organ\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 106,
+  "fields": {
+    "action_time": "2023-04-03T15:20:05.399Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "61",
+    "object_repr": "Wärme",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 107,
+  "fields": {
+    "action_time": "2023-04-03T16:57:01.198Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Mobilität",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 108,
+  "fields": {
+    "action_time": "2023-04-03T16:58:37.437Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "43",
+    "object_repr": "Mobilität",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 109,
+  "fields": {
+    "action_time": "2023-04-05T21:16:59.485Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "43",
+    "object_repr": "Verkehr",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 110,
+  "fields": {
+    "action_time": "2023-04-06T06:57:35.708Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "10",
+    "object_repr": "Strom2",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 111,
+  "fields": {
+    "action_time": "2023-04-06T06:58:13.770Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "10",
+    "object_repr": "Strom",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 112,
+  "fields": {
+    "action_time": "2023-04-07T20:46:59.322Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "80807 München",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 113,
+  "fields": {
+    "action_time": "2023-04-11T17:14:44.553Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 114,
+  "fields": {
+    "action_time": "2023-04-19T10:21:22.045Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "62",
+    "object_repr": "Strukturen",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 115,
+  "fields": {
+    "action_time": "2023-04-19T10:22:08.707Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "62",
+    "object_repr": "Strukturen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 116,
+  "fields": {
+    "action_time": "2023-04-19T10:22:28.975Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "63",
+    "object_repr": "Strukturen",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 117,
+  "fields": {
+    "action_time": "2023-04-19T10:23:15.535Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "63",
+    "object_repr": "Strukturenn",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 118,
+  "fields": {
+    "action_time": "2023-04-19T17:06:56.677Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "28000 Hansestadt Bremen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Kontakt Name\", \"Kontakt E-Mail\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 119,
+  "fields": {
+    "action_time": "2023-04-19T20:27:49.070Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "64",
+    "object_repr": "Energie und Abfall",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 120,
+  "fields": {
+    "action_time": "2023-04-19T20:45:50.342Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "28000 Hansestadt Bremen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"CO2e Budget [Mio Tonnen]\", \"Bewertung Verwaltung\", \"Bewertung Klimaaktionsplan\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 121,
+  "fields": {
+    "action_time": "2023-04-19T20:56:16.861Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "28000 Hansestadt Bremen",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Einleitung\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 122,
+  "fields": {
+    "action_time": "2023-04-20T14:30:28.157Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "46",
+    "object_repr": "Stadtverwaltung",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 123,
+  "fields": {
+    "action_time": "2023-04-20T14:30:50.802Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "47",
+    "object_repr": "Energieversorgung",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 124,
+  "fields": {
+    "action_time": "2023-04-20T17:06:50.832Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "43",
+    "object_repr": "Mobilität",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 125,
+  "fields": {
+    "action_time": "2023-04-20T17:11:39.128Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "43",
+    "object_repr": "Verkehr",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add city",
+    "content_type": 7,
+    "codename": "add_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change city",
+    "content_type": 7,
+    "codename": "change_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete city",
+    "content_type": 7,
+    "codename": "delete_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view city",
+    "content_type": 7,
+    "codename": "view_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add task",
+    "content_type": 8,
+    "codename": "add_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change task",
+    "content_type": 8,
+    "codename": "change_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete task",
+    "content_type": 8,
+    "codename": "delete_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view task",
+    "content_type": 8,
+    "codename": "view_task"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
+    "last_login": "2023-04-24T19:41:11.062Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-02-26T18:25:59.346Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "cpmonitor",
+    "model": "city"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "cpmonitor",
+    "model": "task"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "04eq8v9596em7nyr3exwh065be5trmxz",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1piVxr:Gr4qI_GF_1vsUTfgxcVkZIrfNooko4Vz4N65WsGGoR0",
+    "expire_date": "2023-04-15T07:47:55.080Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "4llw6robto4vkq8z3cxdwu74ed2ogs5e",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1piAmD:bMzaNMFwrODWP_F-qD9IM5IDFXlxosYbdFIBlGk_pRQ",
+    "expire_date": "2023-04-14T09:10:29.797Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "5w22m8wrr5xgu5ng97we4mmy13u7lqss",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pgkYF:ud7K6i1JsOMDJ8WulfWRnyM55CHS_nB_dTpFl5nuvSc",
+    "expire_date": "2023-04-10T10:58:11.670Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "7wrlxx3bjrlprjd76lpbikgdxxgn75qs",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pkj25:PLfBxaV_jbHSBlCTaxL-CWzZMEhKxwP_HBThXnMLdI8",
+    "expire_date": "2023-04-21T10:09:25.749Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8ypawe7nytnsmh55ks5zwsnqo674rlfw",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pr23j:wgIpsew_appQiDN5DSnlbAQwrRNhMUtE1_XBLnjpEsM",
+    "expire_date": "2023-05-08T19:41:11.082Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "90tc8werdierr26luycnecde0n3vhsot",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1phlvs:h2JbW3KwCEQM4lVxFoKCeLrn4uRACRyQ3VCB_dFe_Qk",
+    "expire_date": "2023-04-13T06:38:48.835Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "982lj3t6wgkno1o5pur06jrijr1uzzso",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1phui1:B2fw6fXEPunejOkKzFXfzWOYg0cTpo_xXWrrbfJ9sKo",
+    "expire_date": "2023-04-13T16:01:05.671Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "a2jre2du9eo3osf6cuakud137jgp8j4p",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pecqe:zbM7K1_evzpcBW_zQWV4mP2s9gAwuYTz1gkszV_bswY",
+    "expire_date": "2023-04-04T14:20:24.447Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "a43whsz34aarnp1knjdvn4uwomu8bmxp",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1ppVHs:Coyy6WZg3fuDROOxYi6S_ZIhh4HXj-Ud0MrL4Y91mt4",
+    "expire_date": "2023-05-04T14:29:28.235Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "c8idu5xw7s73sxucxl1w6wwjy704fimq",
+  "fields": {
+    "session_data": ".eJxVjDEOwjAMRe-SGUV2WzUxIztniBw7IQWUSk07Ie4OlTrA-t97_2UCb2sJW0tLmNScDZrT7xZZHqnuQO9cb7OVua7LFO2u2IM2e501PS-H-3dQuJVv7QdQlxKKjgPG7HPPHTpHkTPmHoQSMqJXn50HAXA0UkcCkYB8ZDXvD-luN9k:1pWLil:bX3aaZAtKKgzurP9OloERjVSxnFiFeSxIU97CTGs-24",
+    "expire_date": "2023-03-12T18:26:03.978Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "cbyf73dhou1nttu4y993bfozv2463so6",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1phulY:9ZgIEG3y14iLTXRu-d0RS4Ef2qUugadh42PqbN65UNU",
+    "expire_date": "2023-04-13T16:04:44.847Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "cn9myr4unmyuyyyvdxpxiatvzfvitws4",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pZdOj:Z2f84Y48tNM8GFLorC_pcnDFf-YMmajaUHg5EtOVJXs",
+    "expire_date": "2023-03-21T19:54:57.228Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "eyqs4retj93sopt7dp1cmpt1zmx4muee",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pkj4j:9mVfTVpC4ZmKvwrWiFztKQ09In_pfkatp2oXB4ZzTCE",
+    "expire_date": "2023-04-21T10:12:09.678Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "f3n6qc687ku26pb1tmxk7vydwtcd1wyj",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1phvMX:HSVQgV0q7zP07i5yGUaUDoewuWFvXn3XXs6p_ORQbcc",
+    "expire_date": "2023-04-13T16:42:57.670Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "hp17dltij5ynwt28g650he40cxpwynl0",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pZSdA:RJxlbCJak6ROvAyWDLOuDD-pzjOIF26ntCs2cFjWTWQ",
+    "expire_date": "2023-03-21T08:25:08.386Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "i0olr7plkd2chw9ib4lr9qx38zo60gvy",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1piAmS:CyJVXlQJCjXb_-wFrq6IxijrRbFZt8EGe6a-bxHnVuc",
+    "expire_date": "2023-04-14T09:10:44.631Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "i8lqo5r36eoy2techjdgz1cmelkkz0ym",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1ppEwc:k1hXm5xdp0_xdIgmmTgXx5ncio3AM7ajKEvGJVUqo_w",
+    "expire_date": "2023-05-03T21:02:26.895Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ic8m0bgequdvrvtmdg34ue04hm9no3ff",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1phtkQ:7MskP0arXmNtOEpbvTnZKadW8wxlNLjcWehneV5SS3k",
+    "expire_date": "2023-04-13T14:59:30.400Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "j8rp0opeef0fbndmed58m5o3acqu1x70",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pkUls:Xb0MSgnToTz0SAHcNIK1LZqLO8SbfURqEy_ilP5DI_o",
+    "expire_date": "2023-04-20T18:55:44.606Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "k93xabdbvfq1v2bd4pl3mc92unvwh2gj",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pfpge:p-oPaRi9VWB-ks4HdX1R80mMuyRIcTCfd_Z30yv3Yso",
+    "expire_date": "2023-04-07T22:15:04.057Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "kehzbozqm39s3j7kvnrhnod4mvgfwohr",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pq6U1:bJERBYxx68TRq19Z9lV9rloCUScLo8DJK1wt0dT8-P8",
+    "expire_date": "2023-05-06T06:12:29.669Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "li32h276vx04rnws4z5dgl0km8l26poh",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pmN8h:0McV1ww9JV4iSBe8YtVGriDFTqy68XgNaPdGZfebaUU",
+    "expire_date": "2023-04-25T23:11:03.552Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ls2ge4cl241tj6phpkbncyrzuus8nnbq",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pkvJA:sNmuq80th-BBBzwFVXLKdsyWiE89GGYnGCexL3PAlO8",
+    "expire_date": "2023-04-21T23:15:52.444Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "lxpnlr2mtv5br8gecarx7xo9klndki4u",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pZSg6:XtvpLAWYYmOEeLs9az5vW2TLoxG5EpZGPsX0pSI36gs",
+    "expire_date": "2023-03-21T08:28:10.308Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "mefjgs35b7tmogn1trl99l0ivc5r17vg",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1po7QU:Kpjq5mbDUcz8H9Zp4lRtg-daubf3HV_AOBJC9_D6bH8",
+    "expire_date": "2023-04-30T18:48:38.952Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "mkgztx3qsjzfnl7t6iq859x0lqwscspf",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pZShT:omi9tYoXImVX-mvaCvL_I0wwHTuLRiKYCoub0Rxqgho",
+    "expire_date": "2023-03-21T08:29:35.667Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "njmba26asou4dat5p82e1vowpsqppx58",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pesu7:56XLwS6P9RjLQcRSjJ43Iaya1gWO2UFusnpPS9Iy17g",
+    "expire_date": "2023-04-05T07:29:03.321Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "p7uhqpb72lrc47skw9mjbbv9k3fgks9d",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pqs4N:xk03aDe6D0ta0QY-vYCtrE0em1M0Mhv1xgmewPPmB4I",
+    "expire_date": "2023-05-08T09:01:11.231Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rvv7p3uy5kt8vlwz87rz4hdxnmfd8w6k",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pgjyD:cAPvzFF3Jf6qQkhc3Fd2ae7sycG0g1v6HPrAFv75dPM",
+    "expire_date": "2023-04-10T10:20:57.656Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rvxnjz77zy5mbbdoqhqj2250zw7wnwkw",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1pktC2:4FN4wnhtAlp8JrmshA-xbvQzXc5uBu-Hg_rmwwDSSLw",
+    "expire_date": "2023-04-21T21:00:22.692Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "skr0n4z1nacam1j4qdd9hmfhbfewev1r",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1phuuj:XCsSIg-nAiXRMzYFkvzJsRFbx-KhUvn9zKYssvziRLs",
+    "expire_date": "2023-04-13T16:14:13.720Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "wla4m80psn5llrex4bmjd8u5cu5wsnez",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pixnE:HqON5UtRu5Nw-EUYYWl81GoVmyTEdYdfcGPen6ZAdrM",
+    "expire_date": "2023-04-16T13:30:48.158Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xd8gv22wc3n6pqp01luynln7hr34v5cz",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1phuvf:Z3nA_DD7Q1Ns91Z4VXJn_elftFYZ0_2ByIm0keXXtzw",
+    "expire_date": "2023-04-13T16:15:11.066Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xgrjjw69b4irokdsz17ixa5ag4ns7i9c",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAURO_StWlaKOXXpXvP0PRPfwU1kFBYGe-uJCx0O--9eamYtnWIW5UljlmdlVWn340THjLtIN_TdJs15mldRta7og9a9XXO8rwc7t_BkOrwrZumtyhM2YcME9h4l3orCdRSsQjowNRxcYbYEbxQK2jJ9YCAbFDvD_RZOHY:1ppBEN:7NA54NzwWNs1LZuIdA7prkDNbh7OiWxZnIQkivopVPs",
+    "expire_date": "2023-05-03T17:04:31.300Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yeqhuq9pz3p9cap20le7xtamp2k7tdvx",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pZSg3:nkY63xD8CtzMwMTPZZnO3s9zLQh346He5QSZPQ6UoRM",
+    "expire_date": "2023-03-21T08:28:07.847Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zf1ud3j4m5pieezrnr32zxaz1oi8b8qf",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pZSg6:XtvpLAWYYmOEeLs9az5vW2TLoxG5EpZGPsX0pSI36gs",
+    "expire_date": "2023-03-21T08:28:10.760Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zkuzqqyma4ee63kcak7snfccjob8dpw5",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSHAlIcu3fsNZIYBWzWQlHZl_HfbpAvd3nPOfYuI6zLGtec5TiwuQovT70aYnrnugB9Y702mVpd5Irkr8qBd3hrn1_Vw_w5G7ONWDw4sQrZgybDnYpjSwKSLgbPC4LUCg2DYZV0G54C8ysQFQ9jCpI34fAHgWDe8:1pZHAs:6WmljwWzmoCynSZB1ni-YcR1X-aDKAqxP8S5hdqZieo",
+    "expire_date": "2023-03-20T20:11:10.329Z"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 1,
+  "fields": {
+    "name": "Beispielstadt",
+    "zipcode": "12345",
+    "url": "",
+    "introduction": "# Ein Beispiel für eine Kleinstadt\r\n\r\nHier gibt es nicht besonders gut durchdachte Maßnahmen, weil keine Zeit war, sie sich auszudenken.\r\n\r\nDie Hierarchie ist: Sektor -> Maßnahme. Für eine Kleinstadt sollte das ausreichen.\r\n\r\n## Beispiel für einen Abschnitt\r\n\r\n...mit einer Auflistung:\r\n\r\n- Ein Punkt\r\n- Noch ein Punkt\r\n- Ein Dritter\r\n- \r\n![wurmsham_01_800pxbreite.jpg](/images/uploads/2023/04/07/ffbefe7647-wurmsham_01_800pxbreite.jpg)",
+    "co2e_budget": 0,
+    "assessment_administration": "",
+    "assessment_action_plan": "",
+    "assessment_status": "",
+    "last_update": "2023-04-11",
+    "contact_name": "",
+    "contact_email": "",
+    "slug": "beispielstadt"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 2,
+  "fields": {
+    "name": "München",
+    "zipcode": "80807",
+    "url": "",
+    "introduction": "München will bis 2035 *klimaneutral* werden - ob es das schafft wird spannend..!",
+    "co2e_budget": 6,
+    "assessment_administration": "",
+    "assessment_action_plan": "",
+    "assessment_status": "",
+    "last_update": "2023-04-07",
+    "contact_name": "",
+    "contact_email": "",
+    "slug": "munchen"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 3,
+  "fields": {
+    "name": "MasterMirow",
+    "zipcode": "17252",
+    "url": "https://xkcd.com/",
+    "introduction": "Wie aktuell immer gilt: Das kann alles sofort wieder gelöscht werden / verschwinden. \r\n\r\nHier sind die wichtigsten Maßnahmen-Überschriften dargestellt. \r\n\r\nDer Input für die wichtigsten Maßnahmen kommt teilweise aus der [Klimavision](https://localzero.net/loesungen/klimavision) und teilweise aus einer Recherche über gute [Klima-Aktionspläne](https://mitmachen-wiki.germanzero.org/w/LocalZero:Klima-Aktionsplan).",
+    "co2e_budget": 0,
+    "assessment_administration": "Die Verwaltung ist spitzenfreundlich und nutzt vor allem Einhörner als Fortbewegungsmittel.",
+    "assessment_action_plan": "# Der KAP \r\n- kapt\r\n- und kapt\r\n\r\n## die Inhalte des KAP\r\nsind ambitioniert\r\n\r\n### Sektor Energie\r\n- PV auf Dach\r\nein Dach vergessen\r\n- Wärmeleitplanung\r\nläuft",
+    "assessment_status": "Der Umsetzungsstand steht sehr gut da.",
+    "last_update": "2023-03-28",
+    "contact_name": "tim aus der Zentral",
+    "contact_email": "timbuktu@mailbox.org",
+    "slug": "mastermirow"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 4,
+  "fields": {
+    "name": "Bargteheide",
+    "zipcode": "22941",
+    "url": "http://www.bargteheidezero.de",
+    "introduction": "die lebendige Stadt in Stormarn",
+    "co2e_budget": 0,
+    "assessment_administration": "gut gemeit ist nich gekonnt",
+    "assessment_action_plan": "ist immer noch nicht beauftragt",
+    "assessment_status": "in Arbeit - verzögert",
+    "last_update": "2023-03-30",
+    "contact_name": "Tom Mac Arthur",
+    "contact_email": "tom@bargteheidezero.de",
+    "slug": "bargteheide"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 5,
+  "fields": {
+    "name": "München_TestChristiane",
+    "zipcode": "80935",
+    "url": "http://muenchenzero.org",
+    "introduction": "München hat sich vorgenommen, bis 2035 klimaneutral zu werden. \r\nNoch mehr Einleitungstext...\r\nNoch mehr Einleitungstext...\r\nNoch mehr Einleitungstext...",
+    "co2e_budget": 0,
+    "assessment_administration": "Bewertung der Verwaltung:\r\nHier kommt der Text von Julia und Heiner hin mit Helmuts Einschätzung.\r\nText...\r\nText...\r\nText...",
+    "assessment_action_plan": "Bewertung des Klimaaktionsplans:\r\nHier kommt der Text von Julia und Heiner hin mit Helmuts Einschätzung.\r\nText...\r\nText...\r\nText...",
+    "assessment_status": "Hier gibt es Platz für eine globale Bewertung, wie der Umsetzungsstand aller Maßnahmen in München ist.\r\nText...\r\nText...\r\nText...",
+    "last_update": "2023-04-01",
+    "contact_name": "MünchenZero, Christiane Schweda",
+    "contact_email": "",
+    "slug": "munchen_testchristiane"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 6,
+  "fields": {
+    "name": "Hansestadt Bremen",
+    "zipcode": "28000",
+    "url": "",
+    "introduction": "Das Klimaziel für das Land Bremen bis 2038 Reduzierung der CO2 Emissionen von 95 Prozent um Klimaneutralität zu erreichen.\r\n\r\n:heavy_check_mark: Ende 2021 wurde mit dem Abschlussbericht der Enquetekommission für Klimaschutz in Bremen bereits ein erster Konsens gefunden, um mit dem Klimaschutz zu beginnen.\r\n :fast_forward: Das novellierte Klimaschutzgesetz wird allerdings erst in den folgenden Monaten beschlossen, so dass die notwendigen Personalressourcen eingestellt werden können um die beschlossenen Maßnahmen umzusetzen. \r\n \r\n ![Emissionspfade im Verglecih.png](/images/uploads/2023/04/16/e3d0e86e12-Emissionspfade-im-Verglecih.png)",
+    "co2e_budget": 25,
+    "assessment_administration": "Bremen hat schon viel erreicht gut vorbereitet zu sein. 2,5 Milliarden liegen seit März 2023 bereit um loszulegen. Personal kann nun aufgestockt werden. \r\n\r\n :x: Aber nun stockt es weil man erst die Wahl im Mai abwarten möchte um dann nach politischer Situation loszulegen? Gründe gibt es viele - wir müsssen ins '**machen**' kommmen!\r\n\r\n:heavy_check_mark: Ende 2021 wurde mit dem Abschlussbericht der Enquetekommission für Klimaschutz in Bremen bereits ein erster Konsens gefunden, um mit dem Klimaschutz zu beginnen.\r\n :fast_forward: Das novellierte Klimaschutzgesetz wird allerdings erst in den folgenden Monaten beschlossen, so dass die notwendigen Personalressourcen eingestellt werden können um die beschlossenen Maßnahmen umzusetzen. \r\n\r\n... \r\n\r\n\r\n##  :heavy_check_mark:   Checkliste?",
+    "assessment_action_plan": "![![Emissionspfade im Verglecih.png](/images/uploads/2023/04/16/88c035fed6-Emissionspfade-im-Verglecih.png) ] \r\n \r\n Der Klimaaktionsplan beinhaltet viele wichtige Maßnahmen, zuschreibung von Ressourcen , Aufbau einer guten Nachhaltigkeitsarchitektur, Gesetzesänderung um den Ausbau von umweltfreundlicher Infrastruktur zu ermöglichen. \r\n \r\n Von einem 1,5 ° konformen Maßnahmenplan ist er weit entfernt. Aufgrund einiger Sondervoten ist die weitere Verspätung von Maßnahmen vorprogrammiert.",
+    "assessment_status": "noch ungewiss",
+    "last_update": "2023-04-19",
+    "contact_name": "Christian",
+    "contact_email": "christian.haake@vodafonemail.de",
+    "slug": "hansestadt-bremen"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 7,
+  "fields": {
+    "name": "Würzburg",
+    "zipcode": "97070",
+    "url": "",
+    "introduction": "Der Stadtrat hat am 20. Januar 2022 das neu aufgestellte integrierte Klimaschutzkonzept beschlossen. Würzburg soll klimaneutral werden - und zwar bis 2040. Die Verwaltung der Stadt Würzburg soll bis 2028 klimaneutral werden.",
+    "co2e_budget": 0,
+    "assessment_administration": "",
+    "assessment_action_plan": "",
+    "assessment_status": "",
+    "last_update": "2023-04-02",
+    "contact_name": "",
+    "contact_email": "",
+    "slug": "wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 1,
+  "fields": {
+    "path": "0003",
+    "depth": 1,
+    "numchild": 3,
+    "city": 1,
+    "title": "Mobilität",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": 0,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "mobilitat"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 2,
+  "fields": {
+    "path": "00030005",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Radwege ausbauen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": 0,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "verkehr/radwege-ausbauen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 3,
+  "fields": {
+    "path": "00030002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "U-Bahn Strecke verlängern",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 8,
+    "execution_justification": "",
+    "execution_completion": 0,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "verkehr/u-bahn-strecke-verlangern"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 4,
+  "fields": {
+    "path": "0005",
+    "depth": 1,
+    "numchild": 1,
+    "city": 2,
+    "title": "Solar ausbauen",
+    "summary": "",
+    "description": "...asdasd",
+    "planned_start": "2023-03-07",
+    "planned_completion": "2023-03-07",
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 8,
+    "execution_justification": "gibt schon ganz viel solar",
+    "execution_completion": 100,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "solar-ausbauen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 5,
+  "fields": {
+    "path": "00050001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 2,
+    "title": "Solaranlage auf Willy-Brandt-Schule",
+    "summary": "",
+    "description": "...",
+    "planned_start": "2023-03-07",
+    "planned_completion": "2023-03-22",
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": 3,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "solar-ausbauen/solaranlage-auf-willy-brandt-schule"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 7,
+  "fields": {
+    "path": "00020003",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Schöne Maßnahme",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 4,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "verkehr/schone-manahme"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 8,
+  "fields": {
+    "path": "0002",
+    "depth": 1,
+    "numchild": 5,
+    "city": 1,
+    "title": "Energie",
+    "summary": "Die Transformation der Energieversorgung in Beispielstadt hat begonnen.\r\n\r\nHier ein Bild:",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energie"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 9,
+  "fields": {
+    "path": "000D0001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Sanierung öffentliche Gebäude",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "sanierung-offentliche-gebaude"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 10,
+  "fields": {
+    "path": "0006",
+    "depth": 1,
+    "numchild": 4,
+    "city": 3,
+    "title": "Strom",
+    "summary": "Der Strom des **Stroms** stromt.",
+    "description": "# Das ist eine lange Strombechreibung \r\n\r\n\r\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    "planned_start": "2023-03-28",
+    "planned_completion": "2024-06-28",
+    "responsible_organ": "Die folgende Person ist verantwortlich\r\n\r\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    "plan_assessment": "SO finde ich die Planung \r\n\r\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    "execution_status": 0,
+    "execution_justification": "# Begründung\r\n\r\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    "execution_completion": null,
+    "actual_start": "2023-03-28",
+    "actual_completion": "2023-03-31",
+    "slugs": "strom"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 11,
+  "fields": {
+    "path": "00060001",
+    "depth": 2,
+    "numchild": 2,
+    "city": 3,
+    "title": "PV",
+    "summary": "PV Kurztext",
+    "description": "Alles zum Thema PV in Mirow",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "lala Verantwortlicher",
+    "plan_assessment": "",
+    "execution_status": 4,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "strom/pv"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 12,
+  "fields": {
+    "path": "000600010004",
+    "depth": 3,
+    "numchild": 0,
+    "city": 3,
+    "title": "PV - Potentiale auf öffentlichen  Liegenschaften nutzen",
+    "summary": "lala Kurztext",
+    "description": "lala beschreibung",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "pv-potentiale-auf-offentlichen-liegenschaften-nutzen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 13,
+  "fields": {
+    "path": "000600010003",
+    "depth": 3,
+    "numchild": 0,
+    "city": 3,
+    "title": "Agri PV / Freiflächen PV",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "strom/pv/agri-pv-freiflachen-pv"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 14,
+  "fields": {
+    "path": "000600020001",
+    "depth": 3,
+    "numchild": 0,
+    "city": 3,
+    "title": "PV privat",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 4,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "strom/pv/pv-privat"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 15,
+  "fields": {
+    "path": "00060005",
+    "depth": 2,
+    "numchild": 3,
+    "city": 3,
+    "title": "Ausbau Wind",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "ausbau-wind"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 16,
+  "fields": {
+    "path": "000600050004",
+    "depth": 3,
+    "numchild": 0,
+    "city": 3,
+    "title": "Repowering",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "repowering"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 17,
+  "fields": {
+    "path": "000600050003",
+    "depth": 3,
+    "numchild": 0,
+    "city": 3,
+    "title": "Windräder / Windparks auf öffentlichen Flächen oder verpachtung dieser Flächen an Genossenschaft",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "windrader-windparks-auf-offentlichen-flachen-oder-verpachtung-dieser-flachen-an-genossenschaft"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 18,
+  "fields": {
+    "path": "000600050002",
+    "depth": 3,
+    "numchild": 0,
+    "city": 3,
+    "title": "Klein-Windräder privat",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "klein-windrader-privat"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 19,
+  "fields": {
+    "path": "00060004",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "Speicherung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "speicherung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 20,
+  "fields": {
+    "path": "00060002",
+    "depth": 2,
+    "numchild": 2,
+    "city": 3,
+    "title": "klimaneutrale Kommune",
+    "summary": "KLurztext",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "klimaneutrale-kommune"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 21,
+  "fields": {
+    "path": "000600020002",
+    "depth": 3,
+    "numchild": 0,
+    "city": 3,
+    "title": "Ausschreibung qualifizierter Ökostrom für alle kommunale Liegenschaften",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "ausschreibung-qualifizierter-okostrom-fur-alle-kommunale-liegenschaften"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 22,
+  "fields": {
+    "path": "000A",
+    "depth": 1,
+    "numchild": 2,
+    "city": 3,
+    "title": "Wärme",
+    "summary": "Kurze Beschreibung Wärme",
+    "description": "## Lange Beschreibung Wärme\r\n\r\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "warme"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 23,
+  "fields": {
+    "path": "000A0002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "Fernwärme auf EE umstellen / neue Fernwärmenetze installlieren",
+    "summary": "Kurztext Fernwärme",
+    "description": "langtext Fernwärme",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "fernwarme-auf-ee-umstellen-neue-fernwarmenetze-installlieren"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 24,
+  "fields": {
+    "path": "000A0003",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "EE Nahwärmenetze auf EE umstellen / bzw. installieren",
+    "summary": "kurze Nahwärme",
+    "description": "EE Nahwärmenetze auf EE umstellen / bzw. installieren",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "ee-nahwarmenetze-auf-ee-umstellen-bzw-installieren"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 25,
+  "fields": {
+    "path": "000B",
+    "depth": 1,
+    "numchild": 0,
+    "city": 3,
+    "title": "GebäudeMaster",
+    "summary": "Kurze Gebäude",
+    "description": "Kurztext Gebäude\r\n :green_heart:  \r\n ![test](https://localzero.net/assets/L0_Logo_Nav.svg)",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "gebaudemaster"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 26,
+  "fields": {
+    "path": "000C",
+    "depth": 1,
+    "numchild": 0,
+    "city": 3,
+    "title": "Was Neues",
+    "summary": "",
+    "description": "![tast](https://www.google.de/logos/doodles/2023/celebrating-justine-siegemund-6753651837109580.2-l.webp)",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "was-neues"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 27,
+  "fields": {
+    "path": "000E",
+    "depth": 1,
+    "numchild": 2,
+    "city": 1,
+    "title": "Industrie",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "industrie"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 28,
+  "fields": {
+    "path": "000F",
+    "depth": 1,
+    "numchild": 0,
+    "city": 1,
+    "title": "Landwirtschaft",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "landwirtschaft"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 29,
+  "fields": {
+    "path": "00030006",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Autofreie Innenstadt",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "autofreie-innenstadt"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 30,
+  "fields": {
+    "path": "00020001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Windkraft Flächenauszeichnungen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 4,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energie/windkraft-flachenauszeichnungen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 31,
+  "fields": {
+    "path": "00020002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Photovoltaik Ausschreibungen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 4,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energie/photovoltaik-ausschreibungen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 32,
+  "fields": {
+    "path": "00020004",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Anbindung an Wasserstoffnetz",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energie/anbindung-an-wasserstoffnetz"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 33,
+  "fields": {
+    "path": "00020005",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Photovoltaik auf allen öffentlichen Dächern",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energie/photovoltaik-auf-allen-offentlichen-dachern"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 34,
+  "fields": {
+    "path": "000D",
+    "depth": 1,
+    "numchild": 3,
+    "city": 1,
+    "title": "Gebäude",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "gebaude"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 35,
+  "fields": {
+    "path": "000D0002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Förderung Altbausanierung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "forderung-altbausanierung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 36,
+  "fields": {
+    "path": "000D0003",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Neubauprogramm",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "neubauprogramm"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 37,
+  "fields": {
+    "path": "000G",
+    "depth": 1,
+    "numchild": 1,
+    "city": 4,
+    "title": "LULUCF",
+    "summary": "Landwirtschaft",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "erste unkonkrete Überlegungen",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "lulucf"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 38,
+  "fields": {
+    "path": "000J",
+    "depth": 1,
+    "numchild": 2,
+    "city": 5,
+    "title": "Wärme München",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "warme-munchen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 39,
+  "fields": {
+    "path": "000H",
+    "depth": 1,
+    "numchild": 0,
+    "city": 5,
+    "title": "Umbau der Fernwärme in Geothermie bis 2035",
+    "summary": "Hier kann noch eine Kurzbeschreibung reinkommen.",
+    "description": "München hat mit 900km das zweit-größte Fernwärmenetz in Europa. Heute werden sechs Einzelnetze mittels Steinkohle- und Erdgas-Heiz- und Heizkraftwerke betrieben, zwei bereits mit klimafreundlicher Geothermie. Schon 2012 haben die Stadtwerke München GmbH – 100% Stadt München – in ihrer „Vision 2040“ versprochen, dass die Fernwärme bis 2040 vollständig auf erneuerbare Energien umgebaut sein werden; der Stadtrat der Landeshauptstadt München hat 2019 beschlossen, dass dies bereits bis 2035 erfolgt sein soll.\r\n Kein Zweifel: Umbau eines fossilen Wärmenetzes ist hoch anspruchsvoll, technisch, (genehmigungs-) rechtlich, kommunalpolitisch – Beispiel: Für den Umbau des Innenstadt Dampfnetzes (mit Temperaturen >120oC) in ein Geothermie-taugliches Heißwassernetz (80oC) müssen in der Innenstadt nacheinander alle Straßen für je eine Woche gesperrt und aufgerissen werden! Und wer will schon eine große Wärme-Anlage in seiner Nachbarschaft?!",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "Der Stadtrat der Landeshauptstadt München hat 2019 beschlossen, dass für ganz München bis 2035 Klimaneutralität hergestellt sein soll, zumindest für alle energetischen CO2-Emissionen, die innerhalb Münchens entstehen.\r\n 40% dieser in München entstehenden Treibhausgase stammen aus der Erzeugung von Strom und Wärme inkl. Brauchwasser für Haushalte sowie Industrie, Gewerbe etc. Und zwar „zentral“, wo bereits Fernwärmeleitungen liegen, und „dezentral“ dort, wo überwiegend Öl-, Kohle- oder Gas-Einzelheizungen bei Einfamilienhäusern oder Wohnanlagen bestehen. Deshalb ist „Decarbonisierung der Wärme“ ganz weit oben auf der Ziele-Skala der CO2-Minderungen bei allen politischen Parteien im Münchner Rathaus.\r\n Bis heute aber steht ein diesbezüglicher Stadtratsbeschluss aus.",
+    "execution_status": 2,
+    "execution_justification": "Die Grafik zeigt: Bis 2035 sollen 100% der Fernwärmenetze (5.000 GWh) von fossilen auf erneuerbare Energien, insbesondere Geothermie, umgebaut sein. Unter Einrechnung auch des Dampfes aus der Müllverbrennung im Heizkraftwerk Nord seit Mitte der 1990er Jahre werden heute zwei Fernwärmenetze (Riem, Freiham) bereits mit Geothermie betrieben, bis Mitte 2022 also etwa 1/5 des Gesamtbedarfs. Ende 2022 wurde dann die Geothermieanlage beim HKW Süd (Schäftlarnstr.) eingeweiht – die größte ihrer Art in Europa. Ursprünglich für 2025, jetzt bis 2030 ist die Inbetriebnahme der GT Michaelibad vorgesehen. Zusammen mit den beiden in (Vor-) Planung befindlichen GT-Anlagen – Baierbrunn und Virginia Depot – werden bis 2032 erst etwas mehr als 55% der Fernwärme auf Geothermie umgebaut sein.\r\n Wie dann Klimaneutralität bei der fossilen Fernwärme erreicht werden soll – bis 204X wie die Gutachter sagen – ist völlig offen, es gibt weder gesicherte Standorte für neue GT-Anlagen, noch Kooperationspartner ausserhalb der Stadtgrenze, noch Planungen für die erforderlichen Wärme-Pipelines...",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "umbau-der-fernwarme-in-geothermie-bis-2035"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 40,
+  "fields": {
+    "path": "000G0001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 4,
+    "title": "Moor Renaturierung",
+    "summary": "sdfsdfsdfsdfsdfsdf",
+    "description": "sdfsdfsdf",
+    "planned_start": "2023-03-30",
+    "planned_completion": "2023-03-31",
+    "responsible_organ": "sdf",
+    "plan_assessment": "sdf",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "moor-renaturierung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 41,
+  "fields": {
+    "path": "000K",
+    "depth": 1,
+    "numchild": 1,
+    "city": 4,
+    "title": "Mobilität",
+    "summary": "Verkehrsmassnahmen",
+    "description": "kommunale Massnahmen",
+    "planned_start": "2023-03-30",
+    "planned_completion": "2023-03-31",
+    "responsible_organ": "Verwaltung",
+    "plan_assessment": "muss",
+    "execution_status": 6,
+    "execution_justification": "keine Massnahmen geplant",
+    "execution_completion": 1,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "mobilitat"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 42,
+  "fields": {
+    "path": "000K0001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 4,
+    "title": "Tempo 30 innerorts",
+    "summary": "Ziel ist es im gesamten Stadtgebiet eine maximale Geschwindigkeit von 30 Km/h festzusetzen",
+    "description": "Das Bundesumweltamt empfiehlt Tempo 30 innerorts   [hier](https://https://www.umweltbundesamt.de/themen/uba-empfiehlt-tempo-30-als-inneroertliche#:~:text=Ein%20Tempolimit%20von%2030%20km,Auftrag%20des%20Umweltbundesamtes%20(UBA).)",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "tempo-30-innerorts"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 43,
+  "fields": {
+    "path": "000L",
+    "depth": 1,
+    "numchild": 0,
+    "city": 6,
+    "title": "Verkehr",
+    "summary": "Bremen will die Verkehrswende",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "verkehr"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 44,
+  "fields": {
+    "path": "000J0001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 5,
+    "title": "Untermaßnahme in Wärme",
+    "summary": "Kurzbeschreibung",
+    "description": "Detailbeschreibung",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "Bewertung, ob Maßnahme sinnvoll",
+    "execution_status": 6,
+    "execution_justification": "Umsetzungsstand",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "untermanahme-in-warme"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 45,
+  "fields": {
+    "path": "000J0002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 5,
+    "title": "2. Untermaßnahme in Wärme",
+    "summary": "Kurzbeschreibung",
+    "description": "Detailbeschreibung",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "Ist Maßnahme sinnvoll?",
+    "execution_status": 2,
+    "execution_justification": "Umsetzungsstand",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "2-untermanahme-in-warme"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 46,
+  "fields": {
+    "path": "000N",
+    "depth": 1,
+    "numchild": 0,
+    "city": 7,
+    "title": "Stadtverwaltung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "stadtverwaltung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 47,
+  "fields": {
+    "path": "000O",
+    "depth": 1,
+    "numchild": 4,
+    "city": 7,
+    "title": "Energieversorgung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energieversorgung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 48,
+  "fields": {
+    "path": "000P",
+    "depth": 1,
+    "numchild": 0,
+    "city": 7,
+    "title": "Wohnen Würzburg",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "wohnen-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 49,
+  "fields": {
+    "path": "000Q",
+    "depth": 1,
+    "numchild": 0,
+    "city": 7,
+    "title": "Wirtschaft Würzburg",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "wirtschaft-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 50,
+  "fields": {
+    "path": "000R",
+    "depth": 1,
+    "numchild": 0,
+    "city": 7,
+    "title": "Mobilität Würzburg",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "mobilitat-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 51,
+  "fields": {
+    "path": "000S",
+    "depth": 1,
+    "numchild": 0,
+    "city": 7,
+    "title": "Konsum und Abfall Würzburg",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "konsum-und-abfall-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 52,
+  "fields": {
+    "path": "000T",
+    "depth": 1,
+    "numchild": 0,
+    "city": 7,
+    "title": "Kompensation, Klimapartnerschaften und Senken Würzburg",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "kompensation-klimapartnerschaften-und-senken-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 53,
+  "fields": {
+    "path": "000U",
+    "depth": 1,
+    "numchild": 0,
+    "city": 7,
+    "title": "Bildung und Kultur Würzburg",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "bildung-und-kultur-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 54,
+  "fields": {
+    "path": "000V",
+    "depth": 1,
+    "numchild": 0,
+    "city": 7,
+    "title": "Kommunikation, Beteiligung, Soziales Würzburg",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "kommunikation-beteiligung-soziales-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 55,
+  "fields": {
+    "path": "000O0001",
+    "depth": 2,
+    "numchild": 1,
+    "city": 7,
+    "title": "Weichen stellen für klimaneutrale Wärmeversorgung Würzburg",
+    "summary": "Um Klimaneutralität zu erreichen, verfolgt Würzburg neben der Reduktion des Heizwärmebedarfs in Gebäuden die Dekarbonisierung der Wärmeversorgung. Hier ist primär die leitungsgebundene Versorgung durch Fernwärme und Erdgas im Fokus. In Würzburg wurde der Kohleausstieg schon vor Jahren vollzogen, nun geht es daran, zunehmend restliches Heizöl sowie Erdgas durch erneuerbare Energien zu ersetzen.",
+    "description": "Ziel bis:\r\n\r\n- 2030: \r\n→ Anteile an der Wärmeversorgung in Würzburg\r\nHeizöl: 1%\r\nErdgas: 50%\r\nErneuerbare Energien: 16%\r\nFernwärme: 27%\r\nNahwärme: 6%\r\n→ 40% Anteil erneuerbarer Energien (bis 2035) in der Fernwärmeversorgung\r\n\r\n\r\n- 2045:\r\n→ Anteile an der Wärmeversorgung in Würzburg\r\nHeizöl: 0%\r\nErdgas: 0%\r\nErneuerbare Energien: 36%\r\nFernwärme: 43%\r\nNahwärme: 20%\r\n→ 100 % Anteil erneuerbarer Energien in der Fernwärmeversorgung",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "**Zuständigkeit:**\r\n- WVV\r\n- Zweckverband Abfallwirtschaft im Raum Würzburg (ZVAWS)\r\n- weitere Energieversorger\r\n\r\n**Mitarbeit durch:**\r\nIntern:\r\n- Referat VI Umwelt und Klima, Referat IV Bau\r\n- WVV-Gruppe, Mitglieder des ZVAWS, ggf. WRG\r\nExtern:\r\n- Einrichtungen aus Forschung, Bildung, Wissenschaft, regionale Unternehmen, Verbände, Vereine, Initiativen",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energieversorgung-wurzburg/weichen-stellen-fur-klimaneutrale-warmeversorgung-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 56,
+  "fields": {
+    "path": "000O0003",
+    "depth": 2,
+    "numchild": 0,
+    "city": 7,
+    "title": "Solare Stromerzeugung rapide ausbauen Würzburg",
+    "summary": "Solarstrom gehört zu den erneuerbaren Energiequellen mit einem sehr großen Potenzial, da Flächen vielfach im urbanen Raum zur Verfügung stehen. Die Stadt Würzburg möchte den Anteil an Solarstromanlagen und im Stadtgebiet deutlich erhöhen. Aktuell (2019) werden 3,4 % der lokalen Stromerzeugung durch Photovoltaik bereitgestellt. Laut Abschätzung (50 % Ausschöpfung der Potenziale) könnte bis 2030 die installierte Leistung bis 2030 etwa verfünffacht und bis 2045 verfünfzehnfacht werden.",
+    "description": "Ziel bis:\r\n\r\n- 2030: 12 % Anteil Erzeugung Photovoltaik am Stromverbrauch\r\n\r\n- 2045: 25 % Anteil Erzeugung Photovoltaik am Stromverbrauch",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energieversorgung-wurzburg/solare-stromerzeugung-rapide-ausbauen-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 57,
+  "fields": {
+    "path": "000O0004",
+    "depth": 2,
+    "numchild": 0,
+    "city": 7,
+    "title": "Ausbau und Integration erneuerbarer Energien ins Energiesystem Würzburg",
+    "summary": "Neben Solarstrom und Dekarbonisierung der Wärme werden auch weitere Technologien zur Nutzung erneuerbarer Energien gezielt gestärkt und ausgebaut. Hierfür sollen überregionale Kooperationen zum Ausbau der erneuerbaren Energien, aber auch zur Erhöhung der Speicher- und Flexibilisierungsoptionen gestärkt werden. Nutzungen und Anwendungen für Strom, Wärme und Verkehr werden gemeinsam betrachtet, flexibilisiert und optimiert (Sektorenkopplung). Stromüberschüsse aus erneuerbaren Energien sollen dabei für andere Sektoren genutzt werden. Die Anwendung von Speichersystemen soll die Stabilität und Verfügbarkeit erhöhen.",
+    "description": "Ziel bis:\r\n\r\n_Hinweis: Eine Quantifizierung konnte noch nicht erfolgen, hierfür sind weiterführende Detailanalysen notwendig, die im Rahmen der Bearbeitung zum Klimaschutzkonzept nicht geleistet werden konnten._\r\n\r\n- 2030: Ausbau lokaler Speicherkapazitäten\r\n\r\n- 2045: Ausbau lokaler Speicherkapazitäten",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energieversorgung-wurzburg/ausbau-und-integration-erneuerbarer-energien-ins-energiesystem-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 58,
+  "fields": {
+    "path": "000O0005",
+    "depth": 2,
+    "numchild": 0,
+    "city": 7,
+    "title": "Deine, meine, unsere Bürgerenergie Würzburg",
+    "summary": "Bei Bürgerenergieprojekten schließen sich Bürger*innen zusammen und finanzieren und/oder betreiben gemeinschaftlich erneuerbare Energieanlagen. Die Stadt Würzburg bestärkt die Gründung von Bürgerenergieprojekten und hilft durch Beratung und Förderung bei der Umsetzung.",
+    "description": "Ziel bis:\r\n\r\n- 2030: 10 Bürgerenergieprojekte bis 2030 oder mindestens 1 Projekt pro Jahr\r\n- 2045: Verdopplung der Zielvorgaben gegenüber 2030: 30 Bürgerenergieprojekte zwischen 2030 und 2045 d.h. 2 Projekte pro Jahr",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "deine-meine-unsere-burgerenergie-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 59,
+  "fields": {
+    "path": "000O00010001",
+    "depth": 3,
+    "numchild": 1,
+    "city": 7,
+    "title": "Zentrale Wärmversorgung: Klimaneutrale Fernwärme Würzburg",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "zentrale-warmversorgung-klimaneutrale-fernwarme-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 60,
+  "fields": {
+    "path": "000O000100010001",
+    "depth": 4,
+    "numchild": 0,
+    "city": 7,
+    "title": "Energieleitplan Würzburg",
+    "summary": "Energieleitplan ist die fachliche Voraussetzung für eine kontinuierliche kommunale Wärmeplanung.\r\n(Gesamtstädtische Konzeption zur Wärmeversorgung inkl. Konzepte auf Quartiersebene)",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": 30,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energieleitplan-wurzburg"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 61,
+  "fields": {
+    "path": "000W",
+    "depth": 1,
+    "numchild": 0,
+    "city": 2,
+    "title": "Wärme",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "warme"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 62,
+  "fields": {
+    "path": "000E0001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Strukturen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "industrie/strukturen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 63,
+  "fields": {
+    "path": "000E0002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 1,
+    "title": "Strukturenn",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "industrie/strukturenn"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 64,
+  "fields": {
+    "path": "000X",
+    "depth": 1,
+    "numchild": 0,
+    "city": 6,
+    "title": "Energie und Abfall",
+    "summary": "## Wichtige Sektormerkmale\r\n\r\n769 MW Kohlekapazität\r\n460 MW Erdgaskapazität\r\n260 MW Gichtgaskapazität\r\n56,6 MW PV (Stand Juni 2021)\r\n203 MW Wind\r\n115 MW Biomasse/Abfall\r\n\r\n1. Kohleausstieg 2023\r\n2. Ausbau der Erneuerbaren\r\nSolar 500 MW bis 2030 1000 MW bis 2038\r\nWindkraft 300 MW bis 2030 , 350-400 MW bis 2040\r\n\r\n\r\nUmsetzung hat begonnen, aufgrund des Ukraine Krieges wurde das KKW noch nicht vom Netz genommen.",
+    "description": "# Sektorvision:\r\n \r\n## Strom\r\n\r\n* Stromversorgung ausschließlich aus Erneuerbaren Energien und Müllverbrennung aus Bremen und Umland. \r\n* Strombedarf ist um 100% gestiegen durch die Elektrifizierung der Sektoren Verkehr, Wärme und Industrie. \r\n\r\n* Eine flächendeckende und bedarfsorientierte Ladeinfrastruktur wurde aufgebaut.\r\n\r\n* 7 TWh werden über grünen Wasserstoff abgedeckt. Diese dienen zum Großteil der Versorgung des Stahlwerks (Umstellung auf Elektrostahlanlage.\r\n\r\n\r\n## Wärme\r\n\r\n\r\n* Verdichtete Quartiere und Innenstädtische Bereiche beziehen Ihre Wärme aus Nah- und Fernwärmenetzen, diese werden aus Müllheizkraftwerken, Klärschlammverbrennung und industrieller Abwärme mit erneuerbaren Wärmequellen versorgt.\r\n* Es wird kein Erdgas verbraucht. Das Gasnetz wird zu einem Wasserstoffnetz transformiert und deutlich verkleinert.\r\n\r\n## Abfall\r\n* Das Abfallaufkommen des Landes Bremen wird nicht erhöht. \r\n* Die gewonnene Energie aus der Verbrennung wird effizient genutzt und\r\ndas verbleibende CO2 mittels CCU- Technologie einer klimaneutralen Weiterverwendung zugeführt.",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "Plan muss noch bewertet werden. \r\n\r\nDer Kohleausstieg ist wichtig für die erste Entlastung. Ausbau der erneuerbaren ist zu langsam geplant um 1,5° zu ermöglichen.",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energie-und-abfall"
+  }
+}
+]
