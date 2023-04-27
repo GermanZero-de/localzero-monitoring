@@ -16,7 +16,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
-import time
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 
@@ -154,6 +153,6 @@ MARTOR_ENABLE_CONFIGS = {
 MEDIA_ROOT = BASE_DIR / "cpmonitor" / "images"
 MEDIA_URL = "images/"
 
-MARTOR_UPLOAD_PATH = "uploads/{}".format(time.strftime("%Y/%m/%d/"))
+MARTOR_UPLOAD_PATH = "uploads/"
 MARTOR_UPLOAD_URL = "/api/uploader/"
 MAX_IMAGE_UPLOAD_SIZE = 104857600  # 100 MB
