@@ -359,7 +359,7 @@ Commit the result.
 ### Deploying a new version
 
 1. Checkout the commit you want to deploy (usually the latest commit of main).
-2. Build the image for the Django app: `docker compose --env-file .env.local build`
+2. Build the image for the Django app: `docker compose build`
 3. Export the image: `docker save klimaschutzmonitor-djangoapp -o img.tar`
 4. Copy the image to the server: `scp -C img.tar monitoring@monitoring.localzero.net:/tmp/`
 5. Login to the server: `ssh monitoring@monitoring.localzero.net`
