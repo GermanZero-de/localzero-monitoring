@@ -159,13 +159,13 @@ rm -r cpmonitor/images/uploads
 # Create DB
 python manage.py migrate --settings=config.settings.local
 
-# Optionally migrate back to suitable version. See the corresponding README:
+# Optionally migrate back to suitable version (see the .README file corresponding to the snapshot you're about to load):
 python manage.py migrate cpmonitor <some-earlier-migration> --settings=config.settings.local
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/${SNAPSHOT_NAME}.json
 cp -r e2e_tests/database/${SNAPSHOT_NAME}_uploads cpmonitor/images/uploads
 ```
 
-If this is based on an older model version, migrations have to be applied and are tested:
+If snapshot you want to use is based on an older model version, migrations have to be applied and are tested:
 
 ```sh
 python manage.py migrate --settings=config.settings.local
@@ -353,13 +353,13 @@ rm -r cpmonitor/images/uploads
 scp -r lzm:testing/cpmonitor/images/uploads cpmonitor/images/
 ```
 
-To find out, on which migration version this is based use:
+To find out, on which migration version this database is based use:
 
 ```sh
 ssh -tt lzm docker exec -it djangoapp python manage.py showmigrations --settings=config.settings.production-container
 ```
 
-Possibly migrate, test this, and check that the size is reasonable. Then make it available to others with:
+Possibly migrate, test the data, and check that the size is reasonable. Then make it available to others with:
 
 ```sh
 SNAPSHOT_NAME=prod_database_$(date -u +"%FT%H%M%SZ")
