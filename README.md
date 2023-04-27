@@ -143,6 +143,43 @@ def test_something(django_db_blocker):
 
 This does not work when testing migrations, but there is a way: Use `read_fixture` in `cpmonitor/tests/migrations_test.py`.
 
+## Manual tests with data from production
+
+Occasionally, someone with access may provide a copy of the current production database. (See "Server Administration", below.)
+This may be used as follows:
+
+```sh
+# Select the snapshot to use
+SNAPSHOT_NAME=prod_database_<some date found in e2e_tests/database/>
+
+# Remove previous data
+rm db.sqlite3
+rm -r cpmonitor/images/uploads
+
+# Create DB
+python manage.py migrate --settings=config.settings.local
+
+# Optionally migrate back to suitable version. See the corresponding README:
+python manage.py migrate cpmonitor <some-earlier-migration> --settings=config.settings.local
+python manage.py loaddata --settings=config.settings.local e2e_tests/database/${SNAPSHOT_NAME}.json
+cp -r e2e_tests/database/${SNAPSHOT_NAME}_uploads cpmonitor/images/uploads
+```
+
+If this is based on an older model version, migrations have to be applied and are tested:
+
+```sh
+python manage.py migrate --settings=config.settings.local
+```
+
+The E2E tests will most likely fail, since they are based on another DB dump, e.g. with other password settings.
+But manual tests with the dev server or container-based should be possible and images should be visible:
+
+```sh
+python manage.py runserver --settings=config.settings.local
+#or
+docker compose --env-file .env.local up --detach --build
+```
+
 ## Styling
 
 We use [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) as a css framework.
@@ -312,13 +349,27 @@ Replace your local DB with the current DB from the server with:
 ```sh
 rm db.sqlite3
 scp lzm:testing/db.sqlite3 .
+rm -r cpmonitor/images/uploads
+scp -r lzm:testing/cpmonitor/images/uploads cpmonitor/images/
 ```
 
-Make it available to others by checking in a dump generated with:
+To find out, on which migration version this is based use:
 
 ```sh
-python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/prod_database_$(date -u +"%FT%H%M%SZ").json
+ssh -tt lzm docker exec -it djangoapp python manage.py showmigrations --settings=config.settings.production-container
 ```
+
+Possibly migrate, test this, and check that the size is reasonable. Then make it available to others with:
+
+```sh
+SNAPSHOT_NAME=prod_database_$(date -u +"%FT%H%M%SZ")
+python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/${SNAPSHOT_NAME}.json
+cp -r cpmonitor/images/uploads e2e_tests/database/${SNAPSHOT_NAME}_uploads
+echo "Some useful information, e.g. the migration state of the snapshot" > e2e_tests/database/${SNAPSHOT_NAME}.README
+du -hs e2e_tests/database/${SNAPSHOT_NAME}*
+```
+
+Commit the result.
 
 ### Migration (to be incorporated in deployment guide below)
 
