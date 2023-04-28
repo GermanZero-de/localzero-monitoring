@@ -272,11 +272,7 @@ It uses a multi-stage build to prevent shipping unnecessary files which would in
 To build the image, run the following command in the repository root directory (containing the Dockerfile):
 
 ```shell
-# using production config
-docker compose --env-file .env.production build
-
-# using local config
-docker compose --env-file .env.local build
+docker compose build
 ```
 
 ### Deployment including nginx
@@ -284,27 +280,16 @@ docker compose --env-file .env.local build
 To run both containers together, run the following command in the repository root directory (the app container will be built automatically if necessary):
 
 ```shell
-# using production config
-docker compose --env-file .env.production up --detach
+docker compose up --detach
 ```
 
-```shell
-# using local config
-docker compose --env-file .env.local up --detach
-```
-
-This will start both the Django app and the nginx containers *in the background*. The website can then be reached at <http://localhost:80>.
+This will start both the Django app and the nginx containers *in the background*. The website can then be reached at <https://localhost>.
+You'll have to tell your browser to make an exception for the [self-signed certificate](ssl_certificates_localhost) we use when running locally, or import it into your browser.
 
 To stop the containers from running in the background, run:
 
 ```shell
-# using production config
-docker compose --env-file .env.local down --volumes
-```
-
-```shell
-# using local config
-docker compose --env-file .env.local down --volumes
+docker compose down --volumes
 ```
 
 The `--volumes` flag is important to make sure that at the next start, the latest static resources from the app container are served instead of potentially outdated files from the previous run cached by Docker.
@@ -348,7 +333,7 @@ Replace your local DB with the current DB from the server with:
 
 ```sh
 rm db.sqlite3
-scp lzm:testing/db.sqlite3 .
+scp lzm:testing/db/db.sqlite3 .
 rm -r cpmonitor/images/uploads
 scp -r lzm:testing/cpmonitor/images/uploads cpmonitor/images/
 ```
@@ -371,44 +356,30 @@ du -hs e2e_tests/database/${SNAPSHOT_NAME}*
 
 Commit the result.
 
-### Migration (to be incorporated in deployment guide below)
-
-The databases on the test and production servers must be manually migrated whenever we deploy an app version which requires schema changes.
-To do so, one can open a shell in the running container and run `manage.py` with the respective arguments:
-
-```shell
-# find out django container name
-docker ps
-
-# run shell in container
-docker exec -it djangoapp sh
-
-# run manage.py inside container shell
-SECRET_KEY=whatever python manage.py migrate --settings=config.settings.local-container
-```
-
 ### Deploying a new version
 
 1. Checkout the commit you want to deploy (usually the latest commit of main).
-2. Build the image for the Django app: `docker compose --env-file .env.local build`
+2. Build the image for the Django app: `docker compose build`
 3. Export the image: `docker save klimaschutzmonitor-djangoapp -o img.tar`
-4. Copy the image to the server: `scp -C img.tar monitoring@monitoring.localzero.net:/tmp/`
+4. Copy the image and the compose file to the server: `scp -C img.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
 5. Login to the server: `ssh monitoring@monitoring.localzero.net`
-6. Import the image into Docker on the server: `docker load -i /tmp/img.tar && rm /tmp/img.tar`
+6. Import the image into Docker on the server: `docker load -i /tmp/img.tar && rm /tmp/img.tar
 7. Tag the image with the current date in case we want to roll back:
 ```sh
-docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<current date in format YYYY-MON-DD>
+docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<current date in format YYYY-mon-DD>
 ```
 8. Stop the server, apply the migrations, start the server:
 ```sh
 cd ~/<testing|production>/
 docker-compose down --volumes
 # backup the db
-cp db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.<current date in format YYYY-MON-DD>
+cp db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.<current date in format YYYY-mon-DD>
 # apply migrations using a temporary container
-docker run --user=1007:1007 --rm -it -v $(pwd):/db klimaschutzmonitor-djangoapp:latest sh
-SECRET_KEY=whatever python manage.py migrate --settings=config.settings.production-container
+docker run --user=1007:1007 --rm -it -v $(pwd):/db cpmonitor:latest sh
+DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
 # exit and stop the temporary container
 exit
+# use the latest docker-compose.yml to start the app using the new image
+mv docker-compose.yml docker-compose.yml.bak && mv /tmp/docker-compose.yml .
 docker-compose up --detach
 ```

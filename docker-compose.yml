@@ -2,27 +2,37 @@ version: '3'
 
 services:
   djangoapp:
-    container_name: djangoapp
+    container_name: djangoapp-${ENVIRONMENT_NAME}
+    # find a way so we dont have to toggle this on the server
     build: .
+    image: cpmonitor
+    user: "1007"
     volumes:
-      - ./:/db
+      - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
       - static_volume:/static
-      - ./cpmonitor/images:/images
+      - ${IMAGES_PATH?:Please set the IMAGES_PATH environment variable.}:/images
       - nginx_config_volume:/nginx/conf.d
+      - nginx_extras_volume:/nginx/extras-${ENVIRONMENT_NAME}
     networks:
       - nginx_network
     environment:
-      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:?Please select an environment using '--env-file .env.local' or '--env-file .env.production' (see README.md)!}
-      - SECRET_KEY=${SECRET_KEY:?Please set the secret key environment variable.}
+      - DJANGO_SETTINGS_MODULE=config.settings.container
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:?Please set the DJANGO_SECRET_KEY environment variable.}
+      - DJANGO_CSRF_TRUSTED_ORIGINS=${DJANGO_CSRF_TRUSTED_ORIGINS:?Please set the DJANGO_CSRF_TRUSTED_ORIGINS environment variable.}
 
   nginx-unprivileged:
+    container_name: nginx-${ENVIRONMENT_NAME}
     image: nginxinc/nginx-unprivileged:alpine
     ports:
-      - 80:8001
+      - 80:8080
+      - 443:8443
     volumes:
       - nginx_config_volume:/etc/nginx/conf.d
+      - nginx_extras_volume:/etc/nginx/conf.d/extras
       - static_volume:/cpmonitor/static
-      - ./cpmonitor/images:/cpmonitor/images
+      - ${IMAGES_PATH}:/cpmonitor/images
+      - ${CERTIFICATES_PATH?:Please set the CERTIFICATES_PATH environment variable.}:/etc/letsencrypt
     depends_on:
       - djangoapp
     networks:
@@ -35,4 +45,5 @@ networks:
 volumes:
   # just declare the volumes so nginx and django can share them
   nginx_config_volume:
+  nginx_extras_volume:
   static_volume:
