@@ -107,7 +107,7 @@ class TaskForm(MoveNodeForm):
         The descendant's `slugs` are corrected during `instance.save()`.
         """
 
-        # Copied from treebeard.forms.MoveNodeForm._clean_cleaned_data():
+        # Based on treebeard.forms.MoveNodeForm._clean_cleaned_data():
         reference_node_id = None
         if "_ref_node_id" in self.cleaned_data:
             if self.cleaned_data["_ref_node_id"] != "0":

@@ -7,7 +7,6 @@ from ..models import Task
 
 def correct_slugs(apps, schema_editor):
     for task in Task.objects.all():
-        # task.slugs = Task._get_slugs_with_parent(task.get_parent(), task.title)
         task.save()
 
 

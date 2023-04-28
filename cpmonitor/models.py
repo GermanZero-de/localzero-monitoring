@@ -311,7 +311,11 @@ class Task(MP_Node):
 
     @staticmethod
     def get_slugs_for_move(ref_node, pos, title):
-        """Determine the `slugs` field given treebeards reference data."""
+        """Determine the `slugs` field given treebeards reference data.
+
+        Some values of `pos` mean a position as sibling of ref_node and others
+        as child. The latter all end with "-child".
+        """
         if ref_node and isinstance(pos, str) and not pos.endswith("-child"):
             new_parent = ref_node.get_parent()
         else:
@@ -326,7 +330,7 @@ class Task(MP_Node):
         and UniqueConstraint does not allow error messages showing content.
         """
 
-        if exclude and "slugs" in exclude:
+        if exclude:
             if "slugs" in exclude:
                 exclude.remove("slugs")
             if "city" in exclude:

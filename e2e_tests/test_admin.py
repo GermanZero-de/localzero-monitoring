@@ -82,13 +82,13 @@ def test_should_not_allow_add_when_same_title_in_same_sector(page: Page, admin_l
     page.close()
 
 
-def drag_task_from_to(page, source, target):
+def drag_task_to(page, dragged_task, target_task):
     target_locator = page.locator(
-        f"//*[@class='field-title' and contains(., '{target}')]"
+        f"//*[@class='field-title' and contains(., '{target_task}')]"
     )
 
     drag_handler = page.locator(
-        f"//th[@class='field-title' and contains(., '{source}')]/preceding-sibling::td[@class='drag-handler']/span"
+        f"//th[@class='field-title' and contains(., '{dragged_task}')]/preceding-sibling::td[@class='drag-handler']/span"
     )
 
     drag_handler.drag_to(
@@ -131,7 +131,7 @@ def test_should_move_and_adjust_slugs_when_dragged(page: Page, admin_login):
     expect(page.get_by_text(slug_s1 + sub_sub_slug)).to_be_visible()
     expect(page.get_by_text(slug_s2 + sub_sub_slug)).not_to_be_visible()
 
-    drag_task_from_to(page, task, sector2)
+    drag_task_to(page, task, sector2)
 
     expect(page.locator(".messagelist")).to_contain_text("positioniert unterhalb von")
 
@@ -143,7 +143,9 @@ def test_should_move_and_adjust_slugs_when_dragged(page: Page, admin_login):
     page.close()
 
 
-def test_should_not_allow_move_when_same_title_in_same_sector(page: Page, admin_login):
+def test_should_not_allow_move_when_same_case_ignored_title_in_same_sector(
+    page: Page, admin_login
+):
     uid = str(uuid.uuid4())
 
     sector1 = "Admin Test 1 " + uid
@@ -160,7 +162,7 @@ def test_should_not_allow_move_when_same_title_in_same_sector(page: Page, admin_
     # Make sure all tasks are visible
     page.goto("/admin/cpmonitor/task/?all=&city__id__exact=1")
 
-    drag_task_from_to(page, task2, sector1)
+    drag_task_to(page, task2, sector1)
 
     expect(page.locator(".messagelist")).to_contain_text(
         "Es gibt bereits einen Sektor / eine Maßnahme mit der URL "
