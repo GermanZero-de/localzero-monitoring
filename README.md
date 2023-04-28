@@ -363,11 +363,11 @@ Commit the result.
 3. Export the image: `docker save klimaschutzmonitor-djangoapp -o img.tar`
 4. Copy the image and the compose file to the server: `scp -C img.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
 5. Login to the server: `ssh monitoring@monitoring.localzero.net`
-6. Import the image into Docker on the server: `docker load -i /tmp/img.tar && rm /tmp/img.tar
+6. Import the image into Docker on the server: `docker load -i /tmp/img.tar && rm /tmp/img.tar`
 7. Tag the image with the current date in case we want to roll back:
-```sh
-docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<current date in format YYYY-mon-DD>
-```
+    ```sh
+    docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<current date in format YYYY-mon-DD>
+    ```
 8. Stop the server, apply the migrations, start the server:
 ```sh
 cd ~/<testing|production>/
@@ -375,7 +375,7 @@ docker-compose down --volumes
 # backup the db
 cp db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.<current date in format YYYY-mon-DD>
 # apply migrations using a temporary container
-docker run --user=1007:1007 --rm -it -v $(pwd):/db cpmonitor:latest sh
+docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:latest sh
 DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
 # exit and stop the temporary container
 exit
