@@ -360,10 +360,10 @@ Commit the result.
 
 1. Checkout the commit you want to deploy (usually the latest commit of main).
 2. Build the image for the Django app: `docker compose build`
-3. Export the image: `docker save klimaschutzmonitor-djangoapp -o img.tar`
+3. Export the image: `docker save cpmonitor -o img.tar`
 4. Copy the image and the compose file to the server: `scp -C img.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
 5. Login to the server: `ssh monitoring@monitoring.localzero.net`
-6. Import the image into Docker on the server: `docker load -i /tmp/img.tar && rm /tmp/img.tar`
+6. Import the image into Docker on the server: `docker load -i /tmp/img.tar` (Docker should print "Loading layer".)
 7. Tag the image with the current date in case we want to roll back:
     ```sh
     docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<current date in format YYYY-mon-DD>
@@ -380,6 +380,6 @@ DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_D
 # exit and stop the temporary container
 exit
 # use the latest docker-compose.yml to start the app using the new image
-mv docker-compose.yml docker-compose.yml.bak && mv /tmp/docker-compose.yml .
+mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
 docker-compose up --detach
 ```
