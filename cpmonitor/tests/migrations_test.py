@@ -199,3 +199,22 @@ def test_should_convert_status_correctly_when_migrating_0007_and_back_by_hand(
     back_verkehr = back_Task.objects.get(city=back_testburg, title=verkehr.title)
     assert back_verkehr.execution_assessment == 5
     assert back_verkehr.execution_progress == 0
+
+
+def test_should_correct_slugs_when_migrating_0010(
+    migrator: Migrator,
+) -> None:
+    """Test the correction of the slugs in migration 0010."""
+
+    old_state = migrator.apply_initial_migration((app_name, "0006_alter_task_city"))
+
+    read_fixture("complete_0006", app_name, old_state.apps)
+
+    # Just to make sure something is actually changed.
+    old_Task = old_state.apps.get_model(app_name, "Task")
+    assert old_Task.objects.get(pk=13).slugs == "zement"
+
+    new_state = migrator.apply_tested_migration((app_name, "0010_alter_task_slugs"))
+
+    new_Task = new_state.apps.get_model(app_name, "Task")
+    assert new_Task.objects.get(pk=13).slugs == "industrie/zement"

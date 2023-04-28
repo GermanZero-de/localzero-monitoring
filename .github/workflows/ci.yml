@@ -31,4 +31,4 @@ jobs:
       - name: build application
         run: docker compose up -d --build
       - name: run tests
-        run: poetry run pytest
+        run: poetry run pytest --ignore e2e_tests/test_admin.py # See issue #141

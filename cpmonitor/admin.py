@@ -99,6 +99,34 @@ class TaskForm(MoveNodeForm):
             self.__class__.add_subtree(for_node, node, options)
         return options
 
+    def clean(self):
+        """Prepare uniqueness validation of `slugs` in case position or title changed in form.
+
+        This only updates `slugs` according to new parents `slugs` and title.
+        The actual validation is done by `validate_constraints` in the model.
+        The descendant's `slugs` are corrected during `instance.save()`.
+        """
+
+        # Based on treebeard.forms.MoveNodeForm._clean_cleaned_data():
+        reference_node_id = None
+        if "_ref_node_id" in self.cleaned_data:
+            if self.cleaned_data["_ref_node_id"] != "0":
+                reference_node_id = self.cleaned_data["_ref_node_id"]
+                if reference_node_id.isdigit():
+                    reference_node_id = int(reference_node_id)
+        reference_node = None
+        if reference_node_id:
+            reference_node = self._meta.model.objects.get(pk=reference_node_id)
+        position_type = self.cleaned_data["_position"]
+
+        title = self.cleaned_data["title"]
+
+        self.instance.slugs = self.instance.get_slugs_for_move(
+            reference_node, position_type, title
+        )
+
+        return super().clean()
+
 
 class TaskAdmin(TreeAdmin):
     # ------ change list page ------
@@ -117,7 +145,15 @@ class TaskAdmin(TreeAdmin):
 
         return add_parents(task, task.title)
 
-    list_display = ("title", "structure")
+    @admin.display(description="Public page")
+    def slug_link(self, task: Task):
+        """Additional link to the public page and also showing the slugs."""
+        url = reverse(
+            "task", kwargs={"city_slug": task.city.slug, "task_slugs": task.slugs}
+        )
+        return format_html('<a href="{}" target="_blank">{}</a>', url, task.slugs)
+
+    list_display = ("title", "structure", "slug_link")
     form = movenodeform_factory(Task, TaskForm)
 
     list_filter = ("city",)
