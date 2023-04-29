@@ -45,12 +45,12 @@ def _calculate_summary(node):
 
 def _get_children(city, node=None):
     if not node:
-        children = Task.get_root_nodes()
+        children = Task.get_root_nodes().filter(city=city)
     else:
         children = node.get_children()
 
-    groups = children.filter(city=city, numchild__gt=0)
-    tasks = children.filter(city=city, numchild=0)
+    groups = children.filter(numchild__gt=0)
+    tasks = children.filter(numchild=0)
     for group in groups:
         _calculate_summary(group)
 
@@ -89,7 +89,7 @@ def task(request, city_slug, task_slugs):
     except City.DoesNotExist:
         raise Http404("Wir haben keine Daten zu der Kommune '%s'." % city_slug)
     try:
-        task: Task = Task.objects.get(slugs=task_slugs)
+        task: Task = Task.objects.get(city=city, slugs=task_slugs)
     except Task.DoesNotExist:
         raise Http404(
             "Wir haben keine Daten zu dem Sektor / der Maßnahme '%s'." % task_slugs
