@@ -6,22 +6,25 @@
       {% block introduction %}
         <div class="card col-7 mx-auto">
           <div class="card-body">
-            <div class="align-items-center d-flex mb-3">
-              <div class="text-nowrap">{{ city.subtasks_count }} Maßnahmen</div>
-              <div class="progress progress-lg progress-separated ms-1">
+            <div class="align-items-center d-flex mb-2">
+              <div class="text-nowrap">
+                <h4 class="my-0">{{ city.subtasks_count }} Maßnahmen</h4>
+                <div class="text-muted">{{ city.completed_proportion }}% abgeschlossen</div>
+              </div>
+              <div class="progress progress-lg progress-separated ms-2">
                 {% for value, label, name in city.status_proportions %}
                   <div class="progress-bar lz-status {{ name }}"
                        role="progressbar"
                        style="width: {{ value }}%"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       title="{{ value }} % {{ label }}"
-                       aria-label="{{ label }}">
+                       title="{{ value }}% {{ label }}"
+                       aria-label="{{ valu }}% {{ label }}">
                   </div>
                 {% endfor %}
               </div>
             </div>
-            <div class="row">
+            <div class="row mb-3">
               {% for value, label, name in city.status_proportions %}
                 <div class="col-auto d-flex align-items-center pe-2">
                   <span class="legend me-2 lz-status {{ name }}"></span>
@@ -29,6 +32,25 @@
                 </div>
               {% endfor %}
             </div>
+            {% if days_gone %}
+              <div class="align-items-center d-flex mb-2">
+                <div class="text-nowrap">
+                  <h4 class="my-0">Noch {{ days_left }} Tage</h4>
+                  <div class="text-muted">{{ days_gone_proportion }}% verstrichen</div>
+                </div>
+                <div class="progress ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" aria-label="{{ days_gone }} Tage seit Beschluss,{{ days_left }} Tage bis zum Zieljahr" title="{{ days_gone }} Tage seit Beschluss
+                  <br>
+                  {{ days_left }} Tage bis zum Zieljahr">
+                  <div class="progress-bar days-left"
+                       style="width: {{ days_gone_proportion }}%"
+                       role="progressbar"
+                       aria-valuenow="{{ days_gone_proportion }}"
+                       aria-valuemin="0"
+                       aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            {% endif %}
           </div>
         </div>
       {% endblock introduction %}

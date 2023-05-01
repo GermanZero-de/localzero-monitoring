@@ -12,6 +12,10 @@ $gz-green: #a3d869;
 
 .progress {
   --tblr-progress-height: 0.85rem;
+
+  .progress-bar.days-left {
+    background-color: #011633;
+  }
 }
 
 .navbar {

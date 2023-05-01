@@ -1,4 +1,5 @@
 from collections import Counter
+from datetime import date
 import json
 import os
 import time
@@ -41,6 +42,7 @@ def _calculate_summary(node):
         for k, v in sorted(status_proportions.items(), reverse=True)
     ]
     node.subtasks_count = subtasks_count
+    node.completed_proportion = status_proportions.get(ExecutionStatus.COMPLETE, 0)
 
 
 def _get_children(city, node=None):
@@ -76,11 +78,27 @@ def city(request, city_slug):
     groups, tasks = _get_children(city)
     _calculate_summary(city)
 
-    return render(
-        request,
-        "city.html",
-        {"city": city, "groups": groups, "tasks": tasks},
-    )
+    context = {
+        "city": city,
+        "groups": groups,
+        "tasks": tasks,
+    }
+
+    if city.resolution_date and city.target_year:
+        target_date = date(city.target_year, 12, 31)
+        days_total = (target_date - city.resolution_date).days + 1
+        days_gone = (date.today() - city.resolution_date).days
+        days_left = days_total - days_gone
+        days_gone_proportion = round(days_gone / days_total * 100)
+        context.update(
+            {
+                "days_gone": days_gone,
+                "days_left": days_left,
+                "days_gone_proportion": days_gone_proportion,
+            }
+        )
+
+    return render(request, "city.html", context)
 
 
 def task(request, city_slug, task_slugs):

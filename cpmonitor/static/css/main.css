@@ -8,6 +8,9 @@
 .progress {
   --tblr-progress-height: 0.85rem;
 }
+.progress .progress-bar.days-left {
+  background-color: #011633;
+}
 
 .navbar {
   --tblr-navbar-brand-font-size: 1.25rem;
