@@ -12,6 +12,34 @@ def admin_login(base_url: str, page: Page):
     page.get_by_role("button").click()
 
 
+def add_task(base_url: str, page: Page, title, parent=None):
+    page.goto(
+        base_url + "/admin/cpmonitor/task/add/?_changelist_filters=city__id__exact%3D1"
+    )
+    page.fill("[name=title]", title)
+    if parent:
+        full_parent = page.get_by_text(parent).all_inner_texts()[0]
+        page.get_by_label("relativ zu").select_option(label=full_parent)
+    page.click("[name=_save]")
+
+
+def drag_task_to(page, dragged_task, target_task):
+    target_locator = page.locator(
+        f"//*[@class='field-title' and contains(., '{target_task}')]"
+    )
+
+    drag_handler = page.locator(
+        f"//th[@class='field-title' and contains(., '{dragged_task}')]/preceding-sibling::td[@class='drag-handler']/span"
+    )
+
+    drag_handler.drag_to(
+        target_locator,
+        target_position={"x": 10, "y": 50},
+        force=True,
+        timeout=1000,
+    )
+
+
 def test_should_succeed_when_logging_into_admin(
     django_db_setup, live_server, page: Page
 ):
@@ -22,17 +50,6 @@ def test_should_succeed_when_logging_into_admin(
     page.get_by_role("button").click()
     expect(page).to_have_title("Dateneingabe | LocalZero Monitoring")
     page.close()
-
-
-def add_task(base_url: str, page: Page, title, parent=None):
-    page.goto(
-        base_url + "/admin/cpmonitor/task/add/?_changelist_filters=city__id__exact%3D1"
-    )
-    page.fill("[name=title]", title)
-    if parent:
-        full_parent = page.get_by_text(parent).all_inner_texts()[0]
-        page.get_by_label("relativ zu").select_option(label=full_parent)
-    page.click("[name=_save]")
 
 
 def test_should_not_allow_duplicate_sectors(django_db_setup, live_server, page: Page):
@@ -99,23 +116,6 @@ def test_should_not_allow_add_when_same_title_in_same_sector(
     )
 
     page.close()
-
-
-def drag_task_to(page, dragged_task, target_task):
-    target_locator = page.locator(
-        f"//*[@class='field-title' and contains(., '{target_task}')]"
-    )
-
-    drag_handler = page.locator(
-        f"//th[@class='field-title' and contains(., '{dragged_task}')]/preceding-sibling::td[@class='drag-handler']/span"
-    )
-
-    drag_handler.drag_to(
-        target_locator,
-        target_position={"x": 10, "y": 50},
-        force=True,
-        timeout=1000,
-    )
 
 
 def test_should_move_and_adjust_slugs_when_dragged(
