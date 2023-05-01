@@ -20,6 +20,16 @@ class City(models.Model):
     zipcode = models.CharField("PLZ", max_length=5)
     url = models.URLField("Homepage", blank=True)
 
+    resolution_date = models.DateField(
+        "Datum des Klimaneutralitäts-Beschlusses",
+        blank=True,
+        null=True,
+    )
+
+    target_year = models.IntegerField(
+        "Zieljahr Klimaneutralität", blank=True, null=True, help_text="z.B. 2035"
+    )
+
     introduction = models.TextField(
         "Einleitung",
         blank=True,
