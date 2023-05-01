@@ -44,7 +44,8 @@ env = [
     "DJANGO_SETTINGS_MODULE=config.settings.container",
     "DJANGO_SECRET_KEY=somePlaceholder",
     "DJANGO_CSRF_TRUSTED_ORIGINS=https://localhost",
-    "DJANGO_DEBUG=True"
+    "DJANGO_DEBUG=True",
+    "DJANGO_ALLOW_ASYNC_UNSAFE=True",
 ]
 
 [tool.djlint]

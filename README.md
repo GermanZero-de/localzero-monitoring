@@ -94,17 +94,20 @@ package / module name it follows python style conventions of being short and all
 ## Testing
 
 All tests are written in [pytest](https://docs.pytest.org/en/7.2.x/index.html).
-End-to-end tests are written with the [playwright plugin of pytest](https://playwright.dev/python/docs/intro).
-To provide a test-database for some tests we use [pytest-django](https://pytest-django.readthedocs.io/en/latest/index.html).
+End-to-end tests are written with the [playwright plugin of pytest](https://playwright.dev/python/docs/intro). <br>
+The end-to-end tests use [pytest-django](https://pytest-django.readthedocs.io/en/latest/index.html) to set up a live server and
+provide a test-database that is cleaned after each test. <br>
+In order to automatically test the docker setup, there is also a smoke test in `e2e_tests/test_deployed` that requires starting the application with the local
+configuration and creating the database with migrations applied and `e2e_tests/database/test_database.json` loaded.
 
+#### Install playwright
 The first time playwright is used, let it download the tools it needs with:
 
 ```shell
 playwright install
 ```
 
-*Start the docker container with the local config*, then execute tests with
-
+#### Run the tests
 ```shell
 # run all tests
 pytest
@@ -116,8 +119,7 @@ pytest <path-to-test>
 pytest --headed <path-to-e2e-test>
 ```
 
-or when using the dev server start the tests with `pytest --base-url http://localhost:8000`.
-
+#### Test conventions
 - New test files have to be named according to the convention: `*_test.py`.
 - Test names should follow the convention: `test_should_do_x_when_given_y`.
 
