@@ -41,11 +41,7 @@ def drag_task_to(page, dragged_task, target_task):
 
 
 def test_should_succeed_when_logging_into_admin(live_server, page: Page):
-    page.goto(live_server.url + "/admin/")
-    page.wait_for_selector("text=LocalZero Monitoring")
-    page.locator("#id_username").fill("admin")
-    page.locator("#id_password").fill("password")
-    page.get_by_role("button").click()
+    admin_login(live_server.url, page)
     expect(page).to_have_title("Dateneingabe | LocalZero Monitoring")
     page.close()
 
