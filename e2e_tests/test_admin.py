@@ -72,10 +72,6 @@ def test_should_allow_add_when_same_title_in_another_sector(live_server, page: P
     uid = str(uuid.uuid4())
 
     sector1 = "Admin Test " + uid + " 1"
-    page.goto(
-        live_server.url
-        + "/admin/cpmonitor/task/add/?_changelist_filters=city__id__exact%3D1"
-    )
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, "Personal Einstellen", sector1)
 
@@ -96,10 +92,6 @@ def test_should_not_allow_add_when_same_title_in_same_sector(live_server, page: 
     uid = str(uuid.uuid4())
 
     sector1 = "Admin Test " + uid + " 1"
-    page.goto(
-        live_server.url
-        + "/admin/cpmonitor/task/add/?_changelist_filters=city__id__exact%3D1"
-    )
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, "Personal Einstellen", sector1)
     add_task(live_server.url, page, "personal einstellen", sector1)
