@@ -112,6 +112,9 @@ playwright install
 # run all tests
 pytest
 
+# run all live server tests
+pytest --ignore e2e_tests/test_deployed.py
+
 # run a single test
 pytest <path-to-test>
 
