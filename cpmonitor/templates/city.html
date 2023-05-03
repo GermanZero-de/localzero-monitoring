@@ -4,7 +4,7 @@
   <div class="container-xl">
     <div class="space-y">
       {% block introduction %}
-        <div class="card col-7 mx-auto">
+        <div class="card col-lg-7 mx-auto">
           <div class="card-body">
             <div class="align-items-center d-flex mb-2">
               <div class="text-nowrap">
@@ -54,6 +54,62 @@
           </div>
         </div>
       {% endblock introduction %}
+      <div class="row row-deck row-cards">
+        {% if asmt_admin or asmt_plan or asmt_status %}
+          <div class="col-sm-12 col-lg-6">
+            <div id="assessments">
+              {% if asmt_admin %}
+                <h3>Bewertung Verwaltung</h3>
+                <div class="card mb-3 card-body">{{ asmt_admin | safe_markdown }}</div>
+              {% endif %}
+              {% if asmt_plan %}
+                <h3>Bewertung Klimaaktionsplan</h3>
+                <div class="card mb-3 card-body">{{ asmt_plan | safe_markdown }}</div>
+              {% endif %}
+              {% if asmt_status %}
+                <h3>Bewertung Umsetzungsstand</h3>
+                <div class="card mb-3 card-body">{{ asmt_status | safe_markdown }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+        <div class="col-sm-12 col-lg-6">
+          {% if kpi_charts %}
+            <div id="kpi-charts" class="carousel slide carousel-fade carousel-dark">
+              <h3>KPIs</h3>
+              {% with first_chart=kpi_charts.first %}
+                <div class="carousel-indicators-thumb">
+                  {% for chart in kpi_charts %}
+                    <button type="button"
+                            data-bs-target="#kpi-charts"
+                            data-bs-slide-to="{{ forloop.counter0 }}"
+                            class="border ratio ratio-4x3{% if chart == first_chart %} active{% endif %}"
+                            style="background-image: url({{ chart.image.url }})">
+                    </button>
+                  {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                  {% for chart in kpi_charts %}
+                    <div class="carousel-item{% if chart == first_chart %} active{% endif %}">
+                      <div class="card">
+                        <div class="card-body">
+                          <img class="d-block w-100 border"
+                               width="100%"
+                               height="100%"
+                               alt="{{ chart.alt_description }}"
+                               src="{{ chart.image.url }}"/>
+                          {{ chart.caption | safe_markdown }}
+                          <span class="text-muted">Quelle: {{ chart.source }} - Lizenz: {{ chart.license }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endwith %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
       {% if tasks %}
         <h3>Maßnahmen</h3>
         <div class="row row-deck row-cards">
