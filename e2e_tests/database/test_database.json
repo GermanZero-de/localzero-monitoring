@@ -65,6 +65,253 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2023-05-03T14:27:51.992Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2023-05-03T14:29:27.783Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: Matt Lemmon\", \"fields\": [\"Quelle\", \"Lizenz\", \"Bildunterschrift\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2023-05-03T14:50:43.496Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Ben\\u00f6tigte Leistung (in Anzahl Pferden) in Abh\\u00e4ngigkeit von der Steigung - Quelle: Seattle Municipal Archives\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2023-05-03T14:56:40.061Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "00000 Ohnenix",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2023-05-03T15:01:33.898Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "99999 Mitallem",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: Matt Lemmon\"}}, {\"added\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Ben\\u00f6tigte Leistung (in Anzahl Pferden) in Abh\\u00e4ngigkeit von der Steigung - Quelle: Seattle Municipal Archives\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2023-05-03T15:01:51.380Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "17",
+    "object_repr": "Energie",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2023-05-03T15:02:00.533Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "18",
+    "object_repr": "Mobilität",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2023-05-03T15:02:09.646Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "19",
+    "object_repr": "Gebäude",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2023-05-03T15:02:29.345Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "20",
+    "object_repr": "Strukturen",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2023-05-03T15:02:42.740Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "21",
+    "object_repr": "Landwirtschaft",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2023-05-03T15:03:00.256Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "22",
+    "object_repr": "PF auf alle öffentlichen Dächer",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2023-05-03T15:03:15.759Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "22",
+    "object_repr": "PV auf alle öffentlichen Dächer",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2023-05-03T15:04:04.872Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "23",
+    "object_repr": "Sanierungsprogramm: Dämmung",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2023-05-03T15:04:31.096Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "22",
+    "object_repr": "PV auf alle öffentlichen Dächer",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2023-05-03T15:05:33.401Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "24",
+    "object_repr": "Ladesäulen flächendeckend",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2023-05-03T15:06:05.064Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "25",
+    "object_repr": "Förderung Ökologischer Landbau",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2023-05-03T15:06:50.514Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "26",
+    "object_repr": "Zukunftswerkstatt",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2023-05-03T15:07:13.155Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "26",
+    "object_repr": "Zukunftswerkstatt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2023-05-03T15:07:55.866Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "27",
+    "object_repr": "Expertenrat",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -353,11 +600,47 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add  KPI Graph",
+    "content_type": 9,
+    "codename": "add_chart"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change  KPI Graph",
+    "content_type": 9,
+    "codename": "change_chart"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete  KPI Graph",
+    "content_type": 9,
+    "codename": "delete_chart"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view  KPI Graph",
+    "content_type": 9,
+    "codename": "view_chart"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-05-01T11:10:27.388Z",
+    "last_login": "2023-05-03T14:24:27.944Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -435,11 +718,27 @@
   }
 },
 {
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "cpmonitor",
+    "model": "chart"
+  }
+},
+{
   "model": "sessions.session",
   "pk": "3h80mfs0kjjxfectgn3a0x6c6zz3esme",
   "fields": {
     "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1pqsJm:hu2RvPJFpyb4Ol67nhIuVCNJNtMnKa2vY8HwkwCnWSk",
     "expire_date": "2023-05-08T09:17:06.922Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zkid91ej61wejh07li8fcfuu1qmod8ez",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1puDPA:Jguzk4JKh04XzB8JsWIvIuCgQmPgM298j2hqDWflYng",
+    "expire_date": "2023-05-17T14:24:28.097Z"
   }
 },
 {
@@ -456,10 +755,98 @@
     "assessment_administration": "",
     "assessment_action_plan": "",
     "assessment_status": "",
-    "last_update": "2023-05-01",
+    "last_update": "2023-05-03",
     "contact_name": "",
     "contact_email": "",
     "slug": "beispielstadt"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 2,
+  "fields": {
+    "name": "Ohnenix",
+    "zipcode": "00000",
+    "url": "",
+    "resolution_date": null,
+    "target_year": null,
+    "introduction": "Eine Kommune ohne jegliche Infos. Muss ja auch getestet werden.",
+    "co2e_budget": 0,
+    "assessment_administration": "",
+    "assessment_action_plan": "",
+    "assessment_status": "",
+    "last_update": "2023-05-03",
+    "contact_name": "",
+    "contact_email": "",
+    "slug": "ohnenix"
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 3,
+  "fields": {
+    "name": "Mitallem",
+    "zipcode": "99999",
+    "url": "https://mitallem.de/",
+    "resolution_date": "2023-05-03",
+    "target_year": 2035,
+    "introduction": "Diese Kommune hat gaaanz viele Daten.",
+    "co2e_budget": 3,
+    "assessment_administration": "Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
+    "assessment_action_plan": "Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
+    "assessment_status": "Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
+    "last_update": "2023-05-03",
+    "contact_name": "Maxime Musterfrau",
+    "contact_email": "maxime@muster.frau",
+    "slug": "mitallem"
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 1,
+  "fields": {
+    "city": 1,
+    "image": "uploads/2023/05/03/3202552975_cdafe46620_o.jpg",
+    "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
+    "source": "Matt Lemmon",
+    "license": "CC BY-SA 2.0",
+    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden."
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 2,
+  "fields": {
+    "city": 1,
+    "image": "uploads/2023/05/03/52563572761_b724d0fd88_o.jpg",
+    "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
+    "source": "Seattle Municipal Archives",
+    "license": "CC BY 2.0",
+    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 3,
+  "fields": {
+    "city": 3,
+    "image": "uploads/2023/05/03/3202552975_cdafe46620_o.jpg",
+    "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
+    "source": "Matt Lemmon",
+    "license": "CC BY-SA 2.0",
+    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden."
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 4,
+  "fields": {
+    "city": 3,
+    "image": "uploads/2023/05/03/52563572761_b724d0fd88_o.jpg",
+    "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
+    "source": "Seattle Municipal Archives",
+    "license": "CC BY 2.0",
+    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
   }
 },
 {
@@ -828,6 +1215,259 @@
     "actual_start": "2023-04-19",
     "actual_completion": null,
     "slugs": "umstellung-fernwarme-auf-geothermie"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 17,
+  "fields": {
+    "path": "0005",
+    "depth": 1,
+    "numchild": 1,
+    "city": 3,
+    "title": "Energie",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energie"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 18,
+  "fields": {
+    "path": "0006",
+    "depth": 1,
+    "numchild": 1,
+    "city": 3,
+    "title": "Mobilität",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "mobilitat"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 19,
+  "fields": {
+    "path": "0007",
+    "depth": 1,
+    "numchild": 1,
+    "city": 3,
+    "title": "Gebäude",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "gebaude"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 20,
+  "fields": {
+    "path": "0004",
+    "depth": 1,
+    "numchild": 2,
+    "city": 3,
+    "title": "Strukturen",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "strukturen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 21,
+  "fields": {
+    "path": "0009",
+    "depth": 1,
+    "numchild": 1,
+    "city": 3,
+    "title": "Landwirtschaft",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "landwirtschaft"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 22,
+  "fields": {
+    "path": "00050001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "PV auf alle öffentlichen Dächer",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "energie/pv-auf-alle-offentlichen-dacher"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 23,
+  "fields": {
+    "path": "00070001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "Sanierungsprogramm: Dämmung",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "gebaude/sanierungsprogramm-dammung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 24,
+  "fields": {
+    "path": "00060001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "Ladesäulen flächendeckend",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 4,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "mobilitat/ladesaulen-flachendeckend"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 25,
+  "fields": {
+    "path": "00090001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "Förderung Ökologischer Landbau",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "landwirtschaft/forderung-okologischer-landbau"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 26,
+  "fields": {
+    "path": "00040002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "Zukunftswerkstatt",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 8,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "strukturen/zukunftswerkstatt"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 27,
+  "fields": {
+    "path": "00040001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "title": "Expertenrat",
+    "summary": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "slugs": "strukturen/expertenrat"
   }
 }
 ]
