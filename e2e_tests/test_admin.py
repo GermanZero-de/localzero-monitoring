@@ -40,19 +40,13 @@ def drag_task_to(page, dragged_task, target_task):
     )
 
 
-def test_should_succeed_when_logging_into_admin(
-    django_db_setup, live_server, page: Page
-):
-    page.goto(live_server.url + "/admin/")
-    page.wait_for_selector("text=LocalZero Monitoring")
-    page.locator("#id_username").fill("admin")
-    page.locator("#id_password").fill("password")
-    page.get_by_role("button").click()
+def test_should_succeed_when_logging_into_admin(live_server, page: Page):
+    admin_login(live_server.url, page)
     expect(page).to_have_title("Dateneingabe | LocalZero Monitoring")
     page.close()
 
 
-def test_should_not_allow_duplicate_sectors(django_db_setup, live_server, page: Page):
+def test_should_not_allow_duplicate_sectors(live_server, page: Page):
     admin_login(live_server.url, page)
 
     uid = str(uuid.uuid4())
@@ -69,17 +63,11 @@ def test_should_not_allow_duplicate_sectors(django_db_setup, live_server, page: 
     page.close()
 
 
-def test_should_allow_add_when_same_title_in_another_sector(
-    django_db_setup, live_server, page: Page
-):
+def test_should_allow_add_when_same_title_in_another_sector(live_server, page: Page):
     admin_login(live_server.url, page)
     uid = str(uuid.uuid4())
 
     sector1 = "Admin Test " + uid + " 1"
-    page.goto(
-        live_server.url
-        + "/admin/cpmonitor/task/add/?_changelist_filters=city__id__exact%3D1"
-    )
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, "Personal Einstellen", sector1)
 
@@ -95,17 +83,11 @@ def test_should_allow_add_when_same_title_in_another_sector(
     page.close()
 
 
-def test_should_not_allow_add_when_same_title_in_same_sector(
-    django_db_setup, live_server, page: Page
-):
+def test_should_not_allow_add_when_same_title_in_same_sector(live_server, page: Page):
     admin_login(live_server.url, page)
     uid = str(uuid.uuid4())
 
     sector1 = "Admin Test " + uid + " 1"
-    page.goto(
-        live_server.url
-        + "/admin/cpmonitor/task/add/?_changelist_filters=city__id__exact%3D1"
-    )
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, "Personal Einstellen", sector1)
     add_task(live_server.url, page, "personal einstellen", sector1)
@@ -118,9 +100,7 @@ def test_should_not_allow_add_when_same_title_in_same_sector(
     page.close()
 
 
-def test_should_move_and_adjust_slugs_when_dragged(
-    django_db_setup, live_server, page: Page
-):
+def test_should_move_and_adjust_slugs_when_dragged(live_server, page: Page):
     admin_login(live_server.url, page)
     uid = str(uuid.uuid4())
 
@@ -166,7 +146,7 @@ def test_should_move_and_adjust_slugs_when_dragged(
 
 
 def test_should_not_allow_move_when_same_case_ignored_title_in_same_sector(
-    django_db_setup, live_server, page: Page
+    live_server, page: Page
 ):
     admin_login(live_server.url, page)
     uid = str(uuid.uuid4())

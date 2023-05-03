@@ -109,8 +109,16 @@ playwright install
 
 #### Run the tests
 ```shell
-# run all tests
-pytest
+
+# run all tests (exept the smoke test requiring a running server.)
+pytest --ignore e2e_tests/test_deployed.py
+
+# prepare external server and run smoke test against it (deletes DB):
+rm db.sqlite3
+poetry run python manage.py migrate --settings=config.settings.local
+poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+docker compose up -d --build
+pytest e2e_tests/test_deployed.py
 
 # run a single test
 pytest <path-to-test>
