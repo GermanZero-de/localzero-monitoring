@@ -385,9 +385,9 @@ docker-compose up --detach
 ```
 
 ### Database Client
-In order to view, manipulate and export the database on the test and prod server the database client
-[Cloudbeaver](https://github.com/dbeaver/cloudbeaver) is installed.
+In order to view, manipulate and export the database in any of the environments (local, testing, production), the database webclient
+[Cloudbeaver](https://github.com/dbeaver/cloudbeaver) is started automatically together with the application.
 
-The client can be accessed at http://localhost/dbeaver (or http://monitoring-test.localzero.net/dbeaver depending on
-the environment) and the credentials can be found in the .env.local file. For production the credentials should be
-configured in .env.production.
+The client can be accessed at http://localhost/dbeaver (or http://monitoring-test.localzero.net/dbeaver, http://monitoring.localzero.net/dbeaver depending on
+the environment) and the credentials can be found in the .env.local file. For testing and production, the credentials should be
+configured in the respective .env files on the server.
