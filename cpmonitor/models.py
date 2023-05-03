@@ -81,8 +81,6 @@ class City(models.Model):
             <p>Auf Sektorebene und bis zu den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
     )
 
-    # images #58
-
     last_update = models.DateField("Letzte Aktualisierung", auto_now=True)
 
     contact_name = models.CharField(
@@ -136,6 +134,24 @@ class City(models.Model):
                     msgs[NON_FIELD_ERRORS] = []
                 msgs[NON_FIELD_ERRORS].extend(slug_errors)
             raise ValidationError(msgs)
+
+
+class Chart(models.Model):
+    class Meta:
+        verbose_name = " KPI Graph"
+        verbose_name_plural = "KPI Graphen"
+
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="kpi_charts")
+    image = models.ImageField("Bilddatei", upload_to="uploads/%Y/%m/%d/")
+    alt_description = models.CharField(
+        "Beschreibung (für Menschen, die das Bild nicht sehen können)", max_length=255
+    )
+    source = models.CharField("Quelle", max_length=255)
+    license = models.CharField("Lizenz", max_length=255)
+    caption = models.TextField("Bildunterschrift")
+
+    def __str__(self) -> str:
+        return self.alt_description + " - Quelle: " + self.source
 
 
 class ExecutionStatus(models.IntegerChoices):

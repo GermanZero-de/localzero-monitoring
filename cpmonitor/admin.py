@@ -8,7 +8,7 @@ from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 
-from cpmonitor.models import City, Task
+from .models import Chart, City, Task
 
 _city_filter_query = "city__id__exact"
 """The query parameter used by the city filter."""
@@ -36,6 +36,11 @@ def _admin_url(model, type, city_id):
         return base
 
 
+class ChartInline(admin.StackedInline):
+    model = Chart
+    extra = 0
+
+
 class CityAdmin(admin.ModelAdmin):
     list_display = ("zipcode", "name", "introduction", "edit_tasks")
     list_display_links = ("name",)
@@ -51,6 +56,8 @@ class CityAdmin(admin.ModelAdmin):
         """For each city, a link to the list (tree, actually) of Tasks for just that city."""
         list_url = _admin_url(Task, "changelist", city.id)
         return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
+
+    inlines = (ChartInline,)
 
 
 class TaskForm(MoveNodeForm):
