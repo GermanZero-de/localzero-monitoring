@@ -351,7 +351,9 @@ scp -r lzm:testing/cpmonitor/images/uploads cpmonitor/images/
 To find out, on which migration version this database is based use:
 
 ```sh
-ssh -tt lzm docker exec -it djangoapp python manage.py showmigrations --settings=config.settings.production-container
+ssh -tt lzm docker exec -it djangoapp-testing python manage.py showmigrations --settings=config.settings.container
+# or
+ssh -tt lzm docker exec -it djangoapp-production python manage.py showmigrations --settings=config.settings.container
 ```
 
 Possibly migrate, test the data, and check that the size is reasonable. Then make it available to others with:
@@ -369,27 +371,41 @@ Commit the result.
 ### Deploying a new version
 
 1. Checkout the commit you want to deploy (usually the latest commit of main).
-2. Build the image for the Django app: `docker compose build`
-3. Export the image: `docker save cpmonitor -o img.tar`
-4. Copy the image and the compose file to the server: `scp -C img.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
-5. Login to the server: `ssh monitoring@monitoring.localzero.net`
-6. Import the image into Docker on the server: `docker load -i /tmp/img.tar` (Docker should print "Loading layer".)
-7. Tag the image with the current date in case we want to roll back:
+2. Tag that revision with
+
     ```sh
-    docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<current date in format YYYY-mon-DD>
+    DATESTR=$(date +%Y-%b-%d) && echo ${DATESTR}
+    git tag -a deploy-prod-${DATESTR} -m "Deployment to production" && git push origin deploy-prod-${DATESTR}
+    # and / or
+    git tag -a deploy-test-${DATESTR} -m "Deployment to test" && git push origin deploy-test-${DATESTR}
     ```
-8. Stop the server, apply the migrations, start the server:
-```sh
-cd ~/<testing|production>/
-docker-compose down --volumes
-# backup the db
-cp db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.<current date in format YYYY-mon-DD>
-# apply migrations using a temporary container
-docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:latest sh
-DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
-# exit and stop the temporary container
-exit
-# use the latest docker-compose.yml to start the app using the new image
-mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-docker-compose up --detach
-```
+
+3. Build the image for the Django app: `docker compose build`
+4. Export the image: `docker save cpmonitor -o img.tar`
+5. Copy the image and the compose file to the server: `scp -C img.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
+6. Login to the server: `ssh monitoring@monitoring.localzero.net`
+7. Import the image into Docker on the server: `docker load -i /tmp/img.tar` (Docker should print "Loading layer".)
+8. Tag the image with the current date in case we want to roll back:
+
+    ```sh
+    DATESTR=$(date +%Y-%b-%d) && echo ${DATESTR}
+    docker tag cpmonitor:latest cpmonitor:${DATESTR}
+    ```
+
+9. Stop the server, apply the migrations, start the server:
+
+    ```sh
+    cd ~/<testing|production>/
+    docker-compose down --volumes
+    # backup the db
+    cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.${DATESTR}
+    cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/testing/uploads.${DATESTR}
+    # apply migrations using a temporary container
+    docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:latest sh
+    DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
+    # exit and stop the temporary container
+    exit
+    # use the latest docker-compose.yml to start the app using the new image
+    mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
+    docker-compose up --detach
+    ```
