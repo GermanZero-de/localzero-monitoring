@@ -136,24 +136,6 @@ class City(models.Model):
             raise ValidationError(msgs)
 
 
-class Chart(models.Model):
-    class Meta:
-        verbose_name = " KPI Graph"
-        verbose_name_plural = "KPI Graphen"
-
-    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="kpi_charts")
-    image = models.ImageField("Bilddatei", upload_to="uploads/%Y/%m/%d/")
-    alt_description = models.CharField(
-        "Beschreibung (für Menschen, die das Bild nicht sehen können)", max_length=255
-    )
-    source = models.CharField("Quelle", max_length=255)
-    license = models.CharField("Lizenz", max_length=255)
-    caption = models.TextField("Bildunterschrift")
-
-    def __str__(self) -> str:
-        return self.alt_description + " - Quelle: " + self.source
-
-
 class ExecutionStatus(models.IntegerChoices):
     UNKNOWN = 0, "unbekannt"
     AS_PLANNED = 2, "in Arbeit"
@@ -451,6 +433,24 @@ class Task(MP_Node):
     #         MaxValueValidator(3)
     #     ]
     # )
+
+
+class Chart(models.Model):
+    class Meta:
+        verbose_name = " KPI Graph"
+        verbose_name_plural = "KPI Graphen"
+
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="kpi_charts")
+    image = models.ImageField("Bilddatei", upload_to="uploads/%Y/%m/%d/")
+    alt_description = models.CharField(
+        "Beschreibung (für Menschen, die das Bild nicht sehen können)", max_length=255
+    )
+    source = models.CharField("Quelle", max_length=255)
+    license = models.CharField("Lizenz", max_length=255)
+    caption = models.TextField("Bildunterschrift")
+
+    def __str__(self) -> str:
+        return self.alt_description + " - Quelle: " + self.source
 
 
 # Tables for comparing and connecting the plans of all cities
