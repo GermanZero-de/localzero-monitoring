@@ -11,6 +11,10 @@ from treebeard.exceptions import InvalidPosition
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
 
 
+class NewModel(models.Model):
+    test_field = models.CharField("Test Feld", max_length=255)
+
+
 class City(models.Model):
     class Meta:
         verbose_name = "Kommune"
@@ -435,10 +439,6 @@ class Task(MP_Node):
     #         MaxValueValidator(3)
     #     ]
     # )
-
-
-class NewModel(models.Model):
-    test_field = models.CharField("Test Feld", max_length=255)
 
 
 # Tables for comparing and connecting the plans of all cities
