@@ -4,7 +4,9 @@ services:
   djangoapp:
     container_name: djangoapp-${ENVIRONMENT_NAME}
     # find a way so we dont have to toggle this on the server
-    build: .
+    build:
+      context: ./
+      dockerfile: ./docker/cpmonitor/Dockerfile
     image: cpmonitor
     user: "1007"
     volumes:
