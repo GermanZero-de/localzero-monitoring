@@ -82,7 +82,7 @@ def city(request, city_slug):
         "city": city,
         "groups": groups,
         "tasks": tasks,
-        "kpi_charts": city.kpi_charts.all,
+        "charts": city.charts.all,
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,

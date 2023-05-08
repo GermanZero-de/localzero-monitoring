@@ -437,10 +437,10 @@ class Task(MP_Node):
 
 class Chart(models.Model):
     class Meta:
-        verbose_name = " KPI Graph"
-        verbose_name_plural = "KPI Graphen"
+        verbose_name = "Diagramm"
+        verbose_name_plural = "Diagramme"
 
-    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="kpi_charts")
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="charts")
     image = models.ImageField("Bilddatei", upload_to="uploads/%Y/%m/%d/")
     alt_description = models.CharField(
         "Beschreibung (für Menschen, die das Bild nicht sehen können)", max_length=255
