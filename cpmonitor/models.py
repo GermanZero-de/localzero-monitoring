@@ -1,12 +1,12 @@
 from datetime import date
-from typing import Dict
 
-from django.db import models
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 from django.utils.text import slugify
-from treebeard.mp_tree import MP_Node
 from treebeard.exceptions import InvalidPosition
+from treebeard.mp_tree import MP_Node
+
 
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
 
@@ -70,8 +70,6 @@ class City(models.Model):
             <p>Auf Sektorebene und bis zu den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
     )
 
-    # checklist_action_plan #72
-
     assessment_status = models.TextField(
         "Bewertung Umsetzungsstand",
         blank=True,
@@ -134,6 +132,65 @@ class City(models.Model):
                     msgs[NON_FIELD_ERRORS] = []
                 msgs[NON_FIELD_ERRORS].extend(slug_errors)
             raise ValidationError(msgs)
+
+
+class ChecklistClimateActionPlan(models.Model):
+    city = models.OneToOneField(
+        City,
+        models.PROTECT,
+        name="KAP Checkliste",
+        related_name="checklist_climate_action_plan",
+    )
+
+    climate_action_plan_exists = models.BooleanField(
+        "Gibt es einen KAP?", default=False
+    )
+    target_date_exists = models.BooleanField(
+        "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten kommunalen Gremium beschlossen?",
+        default=False,
+    )
+    based_on_remaining_co2_budget = models.BooleanField(
+        "Sind die Einsparziele im KAP auf Grundlage des Restbudgets berechnet?",
+        default=False,
+    )
+    sectors_of_climate_vision_used = models.BooleanField(
+        "Bilanziert der KAP in den Sektoren der Klimavision (inkl. LULUCF und Landwirtschaft)",
+        default=False,
+    )
+    scenario_for_climate_neutrality_till_2035_exists = models.BooleanField(
+        "Enthält der KAP ein Szenario mit dem Ziel Klimaneutralität bis 2035?",
+        default=False,
+    )
+    scenario_for_business_as_usual_exists = models.BooleanField(
+        "Ist ein Trendszenario hinterlegt (wie entwickeln sich die THG-Emissionen, wenn alles so weiterläuft wie bisher)?",
+        default=False,
+    )
+    annual_costs_are_specified = models.BooleanField(
+        "Sind die jährlichen Kosten und der jährliche Personalbedarf der Maßnahmen ausgewiesen?",
+        default=False,
+    )
+    tasks_are_planned_yearly = models.BooleanField(
+        "Haben die Maßnahmen eine jahresscharfe Planung?", default=False
+    )
+    tasks_have_responsible_entity = models.BooleanField(
+        "Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen hinterlegt?",
+        default=False,
+    )
+    annual_reduction_of_emissions_can_be_predicted = models.BooleanField(
+        "Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der THG-Emissionen ersichtlich?",
+        default=False,
+    )
+    concept_for_participation_specified = models.BooleanField(
+        "Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
+        default=False,
+    )
+    sustainability_architecture_in_administration_exists = models.BooleanField(
+        "Gibt es eine gute Nachhaltigkeitsarchitektur in der Verwaltung?",
+        default=False,
+    )
+    climate_council_exists = models.BooleanField(
+        "Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat?", default=False
+    )
 
 
 class ExecutionStatus(models.IntegerChoices):
