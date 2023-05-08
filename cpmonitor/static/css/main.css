@@ -51,4 +51,17 @@
   background-color: black;
 }
 
+figure.lz-chart {
+  height: 400px;
+  display: flex;
+  width: 100% !important;
+  align-items: stretch;
+  flex-direction: column;
+}
+figure.lz-chart img {
+  height: 0;
+  flex-grow: 1;
+  object-fit: contain;
+}
+
 /*# sourceMappingURL=main.css.map */

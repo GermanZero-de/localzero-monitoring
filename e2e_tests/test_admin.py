@@ -34,7 +34,7 @@ def drag_task_to(page, dragged_task, target_task):
 
     drag_handler.drag_to(
         target_locator,
-        target_position={"x": 10, "y": 50},
+        target_position={"x": 10, "y": 60},
         force=True,
         timeout=1000,
     )

@@ -82,6 +82,10 @@ def city(request, city_slug):
         "city": city,
         "groups": groups,
         "tasks": tasks,
+        "charts": city.charts.all,
+        "asmt_admin": city.assessment_administration,
+        "asmt_plan": city.assessment_action_plan,
+        "asmt_status": city.assessment_status,
     }
 
     if city.resolution_date and city.target_year:
