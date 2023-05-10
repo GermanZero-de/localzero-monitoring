@@ -73,6 +73,7 @@ python manage.py migrate --settings=config.settings.local
 
 # (optional) install example data
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
 
 # install css and javascript libraries
 yarn install
@@ -117,6 +118,7 @@ pytest --ignore e2e_tests/test_deployed.py
 rm db.sqlite3
 poetry run python manage.py migrate --settings=config.settings.local
 poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
 docker compose up -d --build
 pytest e2e_tests/test_deployed.py
 
@@ -245,9 +247,12 @@ git checkout right-before-model-change
 rm db.sqlite3
 python manage.py migrate --settings=config.settings.local
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
 git checkout after-model-change-including-migration
 python manage.py migrate --settings=config.settings.local
 python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
+# Only if additional images were uploaded:
+cp -r cpmonitor/images/uploads e2e_tests/database/test_database_uploads
 ```
 
 Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
@@ -409,3 +414,11 @@ Commit the result.
     mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
     docker-compose up --detach
     ```
+
+### Database Client
+In order to view, manipulate and export the database in any of the environments (local, testing, production), the database webclient
+[Cloudbeaver](https://github.com/dbeaver/cloudbeaver) is started automatically together with the application.
+
+The client can be accessed at http://localhost/dbeaver (or http://monitoring-test.localzero.net/dbeaver, http://monitoring.localzero.net/dbeaver depending on
+the environment) and the credentials can be found in the .env.local file. For testing and production, the credentials should be
+configured in the respective .env files on the server.

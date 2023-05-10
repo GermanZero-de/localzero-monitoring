@@ -60,3 +60,17 @@ $gz-green: #a3d869;
     background-color: black;
   }
 }
+
+figure.lz-chart {
+  height: 400px;
+  display: flex;
+  width: 100% !important;
+  align-items: stretch;
+  flex-direction: column;
+
+  img {
+    height: 0;
+    flex-grow: 1;
+    object-fit: contain;
+  }
+}
