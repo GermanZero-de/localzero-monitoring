@@ -15,7 +15,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from martor.utils import LazyEncoder
 
-from .models import City, ExecutionStatus, Task
+from .models import City, ExecutionStatus, Task, ChecklistClimateActionPlan
 
 
 def _calculate_summary(node):
@@ -108,7 +108,12 @@ def city(request, city_slug):
 
 def get_checklist_climate_action_plan(city):
     checklist_climate_action_plan = {}
-    checklist_items = city.checklist_climate_action_plan._meta.get_fields()
+
+    try:
+        checklist_items = city.checklist_climate_action_plan._meta.get_fields()
+    except ChecklistClimateActionPlan.DoesNotExist:
+        return checklist_climate_action_plan
+
     checklist_items = filter(
         lambda a: a.attname != "KAP Checkliste_id" and a.attname != "id",
         checklist_items,
