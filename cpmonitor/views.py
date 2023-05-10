@@ -83,6 +83,7 @@ def city(request, city_slug):
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
+        "checklist_climate_action_plan": get_checklist_climate_action_plan(city),
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,
@@ -103,6 +104,20 @@ def city(request, city_slug):
         )
 
     return render(request, "city.html", context)
+
+
+def get_checklist_climate_action_plan(city):
+    checklist_climate_action_plan = {}
+    checklist_items = city.checklist_climate_action_plan._meta.get_fields()
+    checklist_items = filter(
+        lambda a: a.attname != "KAP Checkliste_id" and a.attname != "id",
+        checklist_items,
+    )
+    for checklist_item in checklist_items:
+        checklist_climate_action_plan[checklist_item.verbose_name] = getattr(
+            city.checklist_climate_action_plan, checklist_item.attname
+        )
+    return checklist_climate_action_plan
 
 
 def task(request, city_slug, task_slugs):
