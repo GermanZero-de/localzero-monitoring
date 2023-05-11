@@ -15,11 +15,11 @@
                 {% for value, label, name in city.status_proportions %}
                   <div class="progress-bar lz-status {{ name }}"
                        role="progressbar"
-                       style="width: {{ value }}%"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
+                       data-value="{{ value }}"
                        title="{{ value }}% {{ label }}"
-                       aria-label="{{ valu }}% {{ label }}">
+                       aria-label="{{ label }}">
                   </div>
                 {% endfor %}
               </div>
@@ -42,8 +42,8 @@
                   <br>
                   {{ days_left }} Tage bis zum Zieljahr">
                   <div class="progress-bar days-left"
-                       style="width: {{ days_gone_proportion }}%"
                        role="progressbar"
+                       data-value="{{ days_gone_proportion }}"
                        aria-valuenow="{{ days_gone_proportion }}"
                        aria-valuemin="0"
                        aria-valuemax="100">
@@ -78,18 +78,8 @@
           {% if charts %}
             <div class="card">
               <div class="card-body">
-                <div id="charts" class="carousel slide carousel-fade carousel-dark">
+                <div id="charts" class="carousel slide carousel-dark">
                   {% with first_chart=charts.first %}
-                    <div class="carousel-indicators-thumb">
-                      {% for chart in charts %}
-                        <button type="button"
-                                data-bs-target="#charts"
-                                data-bs-slide-to="{{ forloop.counter0 }}"
-                                class="border ratio ratio-4x3{% if chart == first_chart %} active{% endif %}"
-                                style="background-image: url({{ chart.image.url }})">
-                        </button>
-                      {% endfor %}
-                    </div>
                     <div class="carousel-inner">
                       {% for chart in charts %}
                         <div class="carousel-item{% if chart == first_chart %} active{% endif %}">
@@ -107,6 +97,20 @@
                         </div>
                       {% endfor %}
                     </div>
+                    <a class="carousel-control-prev"
+                       href="#charts"
+                       role="button"
+                       data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next"
+                       href="#charts"
+                       role="button"
+                       data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </a>
                   {% endwith %}
                 </div>
               </div>
@@ -124,12 +128,7 @@
                 <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
                 <div class="card-body">
                   <div class="h2 mb-3">{{ task.title }}</div>
-                  <div style="-webkit-line-clamp:8;
-                              display: -webkit-box;
-                              -webkit-box-orient: vertical;
-                              overflow:hidden">
-                    {{ task.summary }}
-                  </div>
+                  <div class="lz-card-summary">{{ task.summary }}</div>
                 </div>
               </a>
             </div>
@@ -145,12 +144,14 @@
                  class="card card-link card-link-pop">
                 <div class="card-body">
                   <div class="h2 mb-3">{{ group.title }}</div>
-                  <div class="col">{{ group.subtasks_count }} Maßnahmen</div>
+                  <div class="col">
+                    {{ group.subtasks_count }} Maßnahmen
+                  </div>
                   <div class="progress progress-lg progress-separated mb-3">
                     {% for value, label, name in group.status_proportions %}
                       <div class="progress-bar lz-status {{ name }}"
                            role="progressbar"
-                           style="width: {{ value }}%"
+                           data-value="{{ value }}"
                            data-bs-toggle="tooltip"
                            data-bs-placement="top"
                            title="{{ value }} % {{ label }}"

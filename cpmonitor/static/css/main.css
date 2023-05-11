@@ -64,4 +64,11 @@ figure.lz-chart img {
   object-fit: contain;
 }
 
+.lz-card-summary {
+  -webkit-line-clamp: 8;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /*# sourceMappingURL=main.css.map */
