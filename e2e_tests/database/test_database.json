@@ -654,78 +654,6 @@
   }
 },
 {
-  "model": "contenttypes.contenttype",
-  "pk": 1,
-  "fields": {
-    "app_label": "admin",
-    "model": "logentry"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 2,
-  "fields": {
-    "app_label": "auth",
-    "model": "permission"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 3,
-  "fields": {
-    "app_label": "auth",
-    "model": "group"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 4,
-  "fields": {
-    "app_label": "auth",
-    "model": "user"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 5,
-  "fields": {
-    "app_label": "contenttypes",
-    "model": "contenttype"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 6,
-  "fields": {
-    "app_label": "sessions",
-    "model": "session"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 7,
-  "fields": {
-    "app_label": "cpmonitor",
-    "model": "city"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 8,
-  "fields": {
-    "app_label": "cpmonitor",
-    "model": "task"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 9,
-  "fields": {
-    "app_label": "cpmonitor",
-    "model": "chart"
-  }
-},
-{
   "model": "sessions.session",
   "pk": "3h80mfs0kjjxfectgn3a0x6c6zz3esme",
   "fields": {
@@ -799,54 +727,6 @@
     "contact_name": "Maxime Musterfrau",
     "contact_email": "maxime@muster.frau",
     "slug": "mitallem"
-  }
-},
-{
-  "model": "cpmonitor.chart",
-  "pk": 1,
-  "fields": {
-    "city": 1,
-    "image": "uploads/2023/05/03/3202552975_cdafe46620_o.jpg",
-    "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
-    "source": "Matt Lemmon",
-    "license": "CC BY-SA 2.0",
-    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden."
-  }
-},
-{
-  "model": "cpmonitor.chart",
-  "pk": 2,
-  "fields": {
-    "city": 1,
-    "image": "uploads/2023/05/03/52563572761_b724d0fd88_o.jpg",
-    "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
-    "source": "Seattle Municipal Archives",
-    "license": "CC BY 2.0",
-    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
-  }
-},
-{
-  "model": "cpmonitor.chart",
-  "pk": 3,
-  "fields": {
-    "city": 3,
-    "image": "uploads/2023/05/03/3202552975_cdafe46620_o.jpg",
-    "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
-    "source": "Matt Lemmon",
-    "license": "CC BY-SA 2.0",
-    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden."
-  }
-},
-{
-  "model": "cpmonitor.chart",
-  "pk": 4,
-  "fields": {
-    "city": 3,
-    "image": "uploads/2023/05/03/52563572761_b724d0fd88_o.jpg",
-    "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
-    "source": "Seattle Municipal Archives",
-    "license": "CC BY 2.0",
-    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
   }
 },
 {
@@ -1468,6 +1348,54 @@
     "actual_start": null,
     "actual_completion": null,
     "slugs": "strukturen/expertenrat"
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 1,
+  "fields": {
+    "city": 1,
+    "image": "uploads/2023/05/03/3202552975_cdafe46620_o.jpg",
+    "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
+    "source": "Matt Lemmon",
+    "license": "CC BY-SA 2.0",
+    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden."
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 2,
+  "fields": {
+    "city": 1,
+    "image": "uploads/2023/05/03/52563572761_b724d0fd88_o.jpg",
+    "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
+    "source": "Seattle Municipal Archives",
+    "license": "CC BY 2.0",
+    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 3,
+  "fields": {
+    "city": 3,
+    "image": "uploads/2023/05/03/3202552975_cdafe46620_o.jpg",
+    "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
+    "source": "Matt Lemmon",
+    "license": "CC BY-SA 2.0",
+    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden."
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 4,
+  "fields": {
+    "city": 3,
+    "image": "uploads/2023/05/03/52563572761_b724d0fd88_o.jpg",
+    "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
+    "source": "Seattle Municipal Archives",
+    "license": "CC BY 2.0",
+    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
   }
 }
 ]
