@@ -146,6 +146,27 @@ def get_cap_checklist(city):
         for item in checklist_items
     }
 
+def get_checklist_sustainability_architecture_in_administration(city):
+    checklist_sustainability_architecture = {}
+
+    try:
+        checklist_items = (
+            city.checklist_sustainability_architecture_in_administration._meta.get_fields()
+        )
+    except ChecklistSustainabilityArchitectureInAdministration.DoesNotExist:
+        return checklist_sustainability_architecture
+
+    checklist_id = "Nachhaltigkeitsarchitektur in der Verwaltung Checkliste_id"
+    checklist_items = filter(
+        lambda a: a.attname != checklist_id and a.attname != "id",
+        checklist_items,
+    )
+    for checklist_item in checklist_items:
+        checklist_sustainability_architecture[checklist_item.verbose_name] = getattr(
+            city.checklist_sustainability_architecture_in_administration,
+            checklist_item.attname,
+        )
+    return checklist_sustainability_architecture
 
 def get_checklist_sustainability_architecture_in_administration(city):
     checklist_sustainability_architecture = {}

@@ -8,7 +8,6 @@ from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 
-from .models import Chart, City, Task, CapChecklist
 from .models import (
     Chart,
     City,
