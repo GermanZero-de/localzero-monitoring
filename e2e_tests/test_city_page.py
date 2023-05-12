@@ -40,3 +40,19 @@ def test_city_page_should_show_climate_action_plan_checklist_when_values_for_the
     page.goto(live_server.url + "/ohnenix/")
 
     expect(page.get_by_text("Klimaaktionsplan (KAP) Checkliste")).not_to_be_visible()
+
+
+def test_city_page_should_show_sustainability_architecture_in_administration_checklist_when_values_for_the_checklist_exist(
+    live_server, page: Page
+):
+    page.goto(live_server.url + "/beispielstadt/")
+
+    expect(
+        page.get_by_text("Nachhaltigkeitsarchitektur in der Verwaltung Checkliste")
+    ).to_be_visible()
+
+    page.goto(live_server.url + "/ohnenix/")
+
+    expect(
+        page.get_by_text("Nachhaltigkeitsarchitektur in der Verwaltung Checkliste")
+    ).not_to_be_visible()

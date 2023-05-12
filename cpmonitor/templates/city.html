@@ -204,6 +204,43 @@
           </div>
         </div>
       {% endif %}
+      {% if checklist_sustainability_architecture_in_administration %}
+        <h3>
+          Nachhaltigkeitsarchitektur in der Verwaltung Checkliste
+        </h3>
+        <div class="card col-sm-12 col-lg-6">
+          <div class="card-body">
+            <table class="table table-sm table-borderless">
+              <thead>
+                <tr>
+                  <th>
+                    Kriterium
+                  </th>
+                  <th>
+                    Erfüllt
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for key, value in checklist_sustainability_architecture_in_administration.items %}
+                  <tr>
+                    <td>
+                      {{ key }}
+                    </td>
+                    <td>
+                      {% if value %}
+                        {% include "circle-checked-filled.html" %}
+                      {% else %}
+                        {% include "circle-x-filled.html" %}
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 {% endblock page_body %}

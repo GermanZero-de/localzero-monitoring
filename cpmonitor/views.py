@@ -15,7 +15,13 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from martor.utils import LazyEncoder
 
-from .models import City, ExecutionStatus, Task, ChecklistClimateActionPlan
+from .models import (
+    City,
+    ExecutionStatus,
+    Task,
+    ChecklistClimateActionPlan,
+    ChecklistSustainabilityArchitectureInAdministration,
+)
 
 
 def _calculate_summary(node):
@@ -84,6 +90,9 @@ def city(request, city_slug):
         "tasks": tasks,
         "charts": city.charts.all,
         "checklist_climate_action_plan": get_checklist_climate_action_plan(city),
+        "checklist_sustainability_architecture_in_administration": get_checklist_sustainability_architecture_in_administration(
+            city
+        ),
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,
@@ -123,6 +132,29 @@ def get_checklist_climate_action_plan(city):
             city.checklist_climate_action_plan, checklist_item.attname
         )
     return checklist_climate_action_plan
+
+
+def get_checklist_sustainability_architecture_in_administration(city):
+    checklist_sustainability_architecture = {}
+
+    try:
+        checklist_items = (
+            city.checklist_sustainability_architecture_in_administration._meta.get_fields()
+        )
+    except ChecklistSustainabilityArchitectureInAdministration.DoesNotExist:
+        return checklist_sustainability_architecture
+
+    checklist_id = "Nachhaltigkeitsarchitektur in der Verwaltung Checkliste_id"
+    checklist_items = filter(
+        lambda a: a.attname != checklist_id and a.attname != "id",
+        checklist_items,
+    )
+    for checklist_item in checklist_items:
+        checklist_sustainability_architecture[checklist_item.verbose_name] = getattr(
+            city.checklist_sustainability_architecture_in_administration,
+            checklist_item.attname,
+        )
+    return checklist_sustainability_architecture
 
 
 def task(request, city_slug, task_slugs):
