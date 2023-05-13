@@ -2,6 +2,8 @@
 $gz-yellow: #ffc80c;
 $gz-darkblue: #011633;
 $gz-green: #a3d869;
+$gz-complete: #9ec422;
+$gz-delayed: #ca3922;
 
 :root {
   --tblr-body-bg: #fff9e5;
@@ -51,13 +53,23 @@ $gz-green: #a3d869;
     background-color: #f9b31a;
   }
   &.COMPLETE {
-    background-color: #9ec422;
+    background-color: $gz-complete;
   }
   &.DELAYED {
-    background-color: #ca3922;
+    background-color: $gz-delayed;
   }
   &.FAILED {
     background-color: black;
+  }
+}
+
+.lz-icon {
+  &.CHECKED {
+    color: $gz-complete;
+  }
+
+  &.CROSSED {
+    color: $gz-delayed;
   }
 }
 
