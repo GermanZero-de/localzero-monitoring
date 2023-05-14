@@ -1,5 +1,6 @@
 {% extends "pageframe.html" %}
 {% load martortags %}
+{% load static %}
 {% block page_body %}
   <div class="container-xl">
     <div class="space-y">
@@ -192,9 +193,13 @@
                     </td>
                     <td>
                       {% if value %}
-                        {% include "circle-checked-filled.html" %}
+                        <svg width="20" height="20" class="lz-icon CHECKED">
+                          <use href="{% static 'tabler-sprite.svg' %}#tabler-circle-check-filled" />
+                        </svg>
                       {% else %}
-                        {% include "circle-x-filled.html" %}
+                        <svg width="20" height="20" class="lz-icon CROSSED">
+                          <use href="{% static 'tabler-sprite.svg' %}#tabler-circle-x-filled" />
+                        </svg>
                       {% endif %}
                     </td>
                   </tr>
