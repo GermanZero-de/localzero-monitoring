@@ -19,7 +19,7 @@ from .models import (
     City,
     ExecutionStatus,
     Task,
-    ChecklistClimateActionPlan,
+    CapChecklist,
     ChecklistSustainabilityArchitectureInAdministration,
 )
 
@@ -89,7 +89,7 @@ def city(request, city_slug):
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
-        "checklist_climate_action_plan": get_checklist_climate_action_plan(city),
+        "cap_checklist": get_cap_checklist(city),
         "checklist_sustainability_architecture_in_administration": get_checklist_sustainability_architecture_in_administration(
             city
         ),
@@ -115,23 +115,23 @@ def city(request, city_slug):
     return render(request, "city.html", context)
 
 
-def get_checklist_climate_action_plan(city):
-    checklist_climate_action_plan = {}
+def get_cap_checklist(city):
+    cap_checklist = {}
 
     try:
-        checklist_items = city.checklist_climate_action_plan._meta.get_fields()
-    except ChecklistClimateActionPlan.DoesNotExist:
-        return checklist_climate_action_plan
+        checklist_items = city.cap_checklist._meta.get_fields()
+    except CapChecklist.DoesNotExist:
+        return cap_checklist
 
     checklist_items = filter(
         lambda a: a.attname != "KAP Checkliste_id" and a.attname != "id",
         checklist_items,
     )
     for checklist_item in checklist_items:
-        checklist_climate_action_plan[checklist_item.verbose_name] = getattr(
-            city.checklist_climate_action_plan, checklist_item.attname
+        cap_checklist[checklist_item.verbose_name] = getattr(
+            city.cap_checklist, checklist_item.attname
         )
-    return checklist_climate_action_plan
+    return cap_checklist
 
 
 def get_checklist_sustainability_architecture_in_administration(city):

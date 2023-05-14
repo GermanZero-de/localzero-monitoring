@@ -168,7 +168,7 @@
           {% endfor %}
         </div>
       {% endif %}
-      {% if checklist_climate_action_plan %}
+      {% if cap_checklist %}
         <h3>
           Klimaaktionsplan (KAP) Checkliste
         </h3>
@@ -176,7 +176,7 @@
           <div class="card-body">
             <table class="table table-sm table-borderless">
               <tbody>
-                {% for key, value in checklist_climate_action_plan.items %}
+                {% for key, value in cap_checklist.items %}
                   <tr>
                     <td>
                       {{ key }}

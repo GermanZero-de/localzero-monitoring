@@ -134,17 +134,15 @@ class City(models.Model):
             raise ValidationError(msgs)
 
 
-class ChecklistClimateActionPlan(models.Model):
+class CapChecklist(models.Model):
     city = models.OneToOneField(
         City,
         models.PROTECT,
         name="KAP Checkliste",
-        related_name="checklist_climate_action_plan",
+        related_name="cap_checklist",
     )
 
-    climate_action_plan_exists = models.BooleanField(
-        "Gibt es einen KAP?", default=False
-    )
+    cap_exists = models.BooleanField("Gibt es einen KAP?", default=False)
     target_date_exists = models.BooleanField(
         "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten kommunalen Gremium beschlossen?",
         default=False,
