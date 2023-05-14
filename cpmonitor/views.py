@@ -107,22 +107,21 @@ def city(request, city_slug):
 
 
 def get_cap_checklist(city):
-    cap_checklist = {}
-
     try:
         checklist_items = city.cap_checklist._meta.get_fields()
     except CapChecklist.DoesNotExist:
-        return cap_checklist
+        return {}
 
-    checklist_items = filter(
-        lambda a: a.attname != "KAP Checkliste_id" and a.attname != "id",
-        checklist_items,
-    )
-    for checklist_item in checklist_items:
-        cap_checklist[checklist_item.verbose_name] = getattr(
-            city.cap_checklist, checklist_item.attname
-        )
-    return cap_checklist
+    checklist_items = [
+        item
+        for item in checklist_items
+        if item.attname not in ["KAP Checkliste_id", "id"]
+    ]
+
+    return {
+        item.verbose_name: getattr(city.cap_checklist, item.attname)
+        for item in checklist_items
+    }
 
 
 def task(request, city_slug, task_slugs):
