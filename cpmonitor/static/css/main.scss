@@ -1,15 +1,15 @@
 // GermanZero colors
-$gz-yellow: #ffc80c;
-$gz-darkblue: #011633;
-$gz-green: #a3d869;
-$gz-complete: #9ec422;
-$gz-delayed: #ca3922;
+$lz-yellow: #ffc80c;
+$lz-darkblue: #011633;
+$lz-green: #a3d869;
+$lz-complete: #9ec422;
+$lz-delayed: #ca3922;
 
 :root {
   --tblr-body-bg: #fff9e5;
   --tblr-font-weight-bold: 700;
-  --tblr-primary: #{$gz-yellow}; //$gz-yellow;
-  --tblr-primary-rgb: #{red($gz-yellow)}, #{green($gz-yellow)}, #{blue($gz-yellow)}; //$gz-yellow;
+  --tblr-primary: #{$lz-yellow};
+  --tblr-primary-rgb: #{red($lz-yellow)}, #{green($lz-yellow)}, #{blue($lz-yellow)};
 }
 
 .progress {
@@ -53,10 +53,10 @@ $gz-delayed: #ca3922;
     background-color: #f9b31a;
   }
   &.COMPLETE {
-    background-color: $gz-complete;
+    background-color: $lz-complete;
   }
   &.DELAYED {
-    background-color: $gz-delayed;
+    background-color: $lz-delayed;
   }
   &.FAILED {
     background-color: black;
@@ -65,11 +65,11 @@ $gz-delayed: #ca3922;
 
 .lz-icon {
   &.CHECKED {
-    color: $gz-complete;
+    color: $lz-complete;
   }
 
   &.CROSSED {
-    color: $gz-delayed;
+    color: $lz-delayed;
   }
 }
 
