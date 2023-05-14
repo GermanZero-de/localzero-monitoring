@@ -9,6 +9,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.2",
     "@tabler/core": "^1.0.0-beta17",
+    "@tabler/icons": "^2.18.0",
     "jquery": "^3.6.3"
   },
   "devDependencies": {
