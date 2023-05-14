@@ -1,6 +1,5 @@
 {% extends "pageframe.html" %}
 {% load martortags %}
-{% load static %}
 {% block page_body %}
   <div class="container-xl">
     <div class="space-y">
@@ -55,6 +54,11 @@
           </div>
         </div>
       {% endblock introduction %}
+      {% if cap_checklist %}
+        <div>
+          <a class="btn btn-primary" href="{% url 'cap_checklist' city.slug %}">Klimaaktionsplan Checkliste</a>
+        </div>
+      {% endif %}
       <div class="row row-deck row-cards">
         {% if asmt_admin or asmt_plan or asmt_status %}
           <div class="col-sm-12 col-lg-6">
@@ -74,9 +78,9 @@
             </div>
           </div>
         {% endif %}
-        <h3>KPIs</h3>
-        <div class="col-sm-12 col-lg-6">
-          {% if charts %}
+        {% if charts %}
+          <h3>KPIs</h3>
+          <div class="col-sm-12 col-lg-6">
             <div class="card">
               <div class="card-body">
                 <div id="charts" class="carousel slide carousel-dark">
@@ -116,8 +120,8 @@
                 </div>
               </div>
             </div>
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
       </div>
       {% if tasks %}
         <h3>Maßnahmen</h3>
@@ -144,7 +148,9 @@
               <a href="{% url 'task' city.slug group.slugs %}"
                  class="card card-link card-link-pop">
                 <div class="card-body">
-                  <div class="h2 mb-3">{{ group.title }}</div>
+                  <div class="h2 mb-3">
+                    {{ group.title }}
+                  </div>
                   <div class="col">
                     {{ group.subtasks_count }} Maßnahmen
                   </div>
@@ -166,37 +172,6 @@
               </a>
             </div>
           {% endfor %}
-        </div>
-      {% endif %}
-      {% if cap_checklist %}
-        <h3>
-          Klimaaktionsplan (KAP) Checkliste
-        </h3>
-        <div class="card col-sm-12 col-lg-6">
-          <div class="card-body">
-            <table class="table table-sm table-borderless">
-              <tbody>
-                {% for key, value in cap_checklist.items %}
-                  <tr>
-                    <td>
-                      {{ key }}
-                    </td>
-                    <td>
-                      {% if value %}
-                        <svg width="20" height="20" class="lz-icon CHECKED">
-                          <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check-filled" />
-                        </svg>
-                      {% else %}
-                        <svg width="20" height="20" class="lz-icon CROSSED">
-                          <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-x-filled" />
-                        </svg>
-                      {% endif %}
-                    </td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
         </div>
       {% endif %}
       {% if checklist_sustainability_architecture_in_administration %}

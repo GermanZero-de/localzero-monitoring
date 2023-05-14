@@ -115,6 +115,19 @@ def city(request, city_slug):
     return render(request, "city.html", context)
 
 
+def cap_checklist(request, city_slug):
+    try:
+        city = City.objects.get(slug=city_slug)
+    except City.DoesNotExist:
+        raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
+
+    context = {
+        "city": city,
+        "cap_checklist": get_cap_checklist(city),
+    }
+    return render(request, "cap_checklist.html", context)
+
+
 def get_cap_checklist(city):
     try:
         checklist_items = city.cap_checklist._meta.get_fields()

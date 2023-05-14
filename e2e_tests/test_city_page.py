@@ -30,16 +30,14 @@ def test_should_go_to_task_view_when_clicking_task_item(live_server, page: Page)
     expect(page).to_have_url(live_server.url + "/beispielstadt/mobilitat/")
 
 
-def test_city_page_should_show_cap_checklist_when_values_for_the_checklist_exist(
+def test_should_redirect_to_the_cap_checklist_page_when_clicking_the_cap_checklist_button(
     live_server, page: Page
 ):
     page.goto(live_server.url + "/beispielstadt/")
 
-    expect(page.get_by_text("Klimaaktionsplan (KAP) Checkliste")).to_be_visible()
+    page.get_by_text("Klimaaktionsplan Checkliste").click()
 
-    page.goto(live_server.url + "/ohnenix/")
-
-    expect(page.get_by_text("Klimaaktionsplan (KAP) Checkliste")).not_to_be_visible()
+    expect(page).to_have_url(live_server.url + "/beispielstadt/kap_checkliste/")
 
 
 def test_city_page_should_show_sustainability_architecture_in_administration_checklist_when_values_for_the_checklist_exist(
