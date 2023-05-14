@@ -3,6 +3,11 @@
   --tblr-font-weight-bold: 700;
   --tblr-primary: #ffc80c;
   --tblr-primary-rgb: 255, 200, 12;
+  --lz-color-complete: #9ec422;
+  --lz-color-delayed: #ca3922;
+  --lz-color-as-planned: #f9b31a;
+  --lz-color-unknown: grey;
+  --lz-color-failed: black;
 }
 
 .progress {
@@ -36,26 +41,26 @@
 }
 
 .lz-status.UNKNOWN {
-  background-color: grey;
+  background-color: var(--lz-color-unknown);
 }
 .lz-status.AS_PLANNED {
-  background-color: #f9b31a;
+  background-color: var(--lz-color-as-planned);
 }
 .lz-status.COMPLETE {
-  background-color: #9ec422;
+  background-color: var(--lz-color-complete);
 }
 .lz-status.DELAYED {
-  background-color: #ca3922;
+  background-color: var(--lz-color-delayed);
 }
 .lz-status.FAILED {
-  background-color: black;
+  background-color: var(--lz-color-failed);
 }
 
 .lz-icon.CHECKED {
-  color: #9ec422;
+  color: var(--lz-color-complete);
 }
 .lz-icon.CROSSED {
-  color: #ca3922;
+  color: var(--lz-color-delayed);
 }
 
 figure.lz-chart {
