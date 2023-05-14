@@ -131,6 +131,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "cpmonitor" / "static",
     ("jquery", os.path.join(BASE_DIR, "node_modules", "jquery", "dist")),
     ("tabler", os.path.join(BASE_DIR, "node_modules", "@tabler", "core", "dist")),
+    ("tabler-icons", os.path.join(BASE_DIR, "node_modules", "@tabler", "icons")),
 ]
 
 # Default primary key field type
