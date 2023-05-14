@@ -15,7 +15,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from martor.utils import LazyEncoder
 
-from .models import City, ExecutionStatus, Task, ChecklistClimateActionPlan
+from .models import City, ExecutionStatus, Task, CapChecklist
 
 
 def _calculate_summary(node):
@@ -83,7 +83,7 @@ def city(request, city_slug):
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
-        "checklist_climate_action_plan": get_checklist_climate_action_plan(city),
+        "cap_checklist": get_cap_checklist(city),
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,
@@ -106,23 +106,23 @@ def city(request, city_slug):
     return render(request, "city.html", context)
 
 
-def get_checklist_climate_action_plan(city):
-    checklist_climate_action_plan = {}
+def get_cap_checklist(city):
+    cap_checklist = {}
 
     try:
-        checklist_items = city.checklist_climate_action_plan._meta.get_fields()
-    except ChecklistClimateActionPlan.DoesNotExist:
-        return checklist_climate_action_plan
+        checklist_items = city.cap_checklist._meta.get_fields()
+    except CapChecklist.DoesNotExist:
+        return cap_checklist
 
     checklist_items = filter(
         lambda a: a.attname != "KAP Checkliste_id" and a.attname != "id",
         checklist_items,
     )
     for checklist_item in checklist_items:
-        checklist_climate_action_plan[checklist_item.verbose_name] = getattr(
-            city.checklist_climate_action_plan, checklist_item.attname
+        cap_checklist[checklist_item.verbose_name] = getattr(
+            city.cap_checklist, checklist_item.attname
         )
-    return checklist_climate_action_plan
+    return cap_checklist
 
 
 def task(request, city_slug, task_slugs):

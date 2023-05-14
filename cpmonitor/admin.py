@@ -8,7 +8,7 @@ from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 
-from .models import Chart, City, Task, ChecklistClimateActionPlan
+from .models import Chart, City, Task, CapChecklist
 
 _city_filter_query = "city__id__exact"
 """The query parameter used by the city filter."""
@@ -41,8 +41,8 @@ class ChartInline(admin.StackedInline):
     extra = 0
 
 
-class ChecklistClimateActionPlanInline(admin.TabularInline):
-    model = ChecklistClimateActionPlan
+class CapChecklistInline(admin.TabularInline):
+    model = CapChecklist
 
 
 class CityAdmin(admin.ModelAdmin):
@@ -63,7 +63,7 @@ class CityAdmin(admin.ModelAdmin):
 
     inlines = [
         ChartInline,
-        ChecklistClimateActionPlanInline,
+        CapChecklistInline,
     ]
 
 

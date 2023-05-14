@@ -30,7 +30,7 @@ def test_should_go_to_task_view_when_clicking_task_item(live_server, page: Page)
     expect(page).to_have_url(live_server.url + "/beispielstadt/mobilitat/")
 
 
-def test_city_page_should_show_climate_action_plan_checklist_when_values_for_the_checklist_exist(
+def test_city_page_should_show_cap_checklist_when_values_for_the_checklist_exist(
     live_server, page: Page
 ):
     page.goto(live_server.url + "/beispielstadt/")
