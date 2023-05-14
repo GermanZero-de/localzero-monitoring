@@ -315,26 +315,26 @@
   "model": "admin.logentry",
   "pk": 25,
   "fields": {
-    "action_time": "2023-05-12T08:51:00.185Z",
+    "action_time": "2023-05-14T12:18:23.453Z",
     "user": 1,
     "content_type": 7,
     "object_id": "1",
     "object_repr": "12345 Beispielstadt",
     "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"checklist climate action plan\", \"object\": \"ChecklistClimateActionPlan object (1)\"}}]"
+    "change_message": "[{\"added\": {\"name\": \"cap checklist\", \"object\": \"CapChecklist object (1)\"}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 26,
   "fields": {
-    "action_time": "2023-05-12T08:51:21.249Z",
+    "action_time": "2023-05-14T12:18:41.323Z",
     "user": 1,
     "content_type": 7,
     "object_id": "3",
     "object_repr": "99999 Mitallem",
     "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"checklist climate action plan\", \"object\": \"ChecklistClimateActionPlan object (2)\"}}]"
+    "change_message": "[{\"added\": {\"name\": \"cap checklist\", \"object\": \"CapChecklist object (2)\"}}]"
   }
 },
 {
@@ -691,36 +691,36 @@
   "model": "auth.permission",
   "pk": 37,
   "fields": {
-    "name": "Can add checklist climate action plan",
+    "name": "Can add cap checklist",
     "content_type": 10,
-    "codename": "add_checklistclimateactionplan"
+    "codename": "add_capchecklist"
   }
 },
 {
   "model": "auth.permission",
   "pk": 38,
   "fields": {
-    "name": "Can change checklist climate action plan",
+    "name": "Can change cap checklist",
     "content_type": 10,
-    "codename": "change_checklistclimateactionplan"
+    "codename": "change_capchecklist"
   }
 },
 {
   "model": "auth.permission",
   "pk": 39,
   "fields": {
-    "name": "Can delete checklist climate action plan",
+    "name": "Can delete cap checklist",
     "content_type": 10,
-    "codename": "delete_checklistclimateactionplan"
+    "codename": "delete_capchecklist"
   }
 },
 {
   "model": "auth.permission",
   "pk": 40,
   "fields": {
-    "name": "Can view checklist climate action plan",
+    "name": "Can view cap checklist",
     "content_type": 10,
-    "codename": "view_checklistclimateactionplan"
+    "codename": "view_capchecklist"
   }
 },
 {
@@ -823,7 +823,7 @@
     "assessment_administration": "",
     "assessment_action_plan": "",
     "assessment_status": "",
-    "last_update": "2023-05-12",
+    "last_update": "2023-05-14",
     "contact_name": "",
     "contact_email": "",
     "slug": "beispielstadt"
@@ -863,20 +863,20 @@
     "assessment_administration": "Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_action_plan": "Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_status": "Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
-    "last_update": "2023-05-12",
+    "last_update": "2023-05-14",
     "contact_name": "Maxime Musterfrau",
     "contact_email": "maxime@muster.frau",
     "slug": "mitallem"
   }
 },
 {
-  "model": "cpmonitor.checklistclimateactionplan",
+  "model": "cpmonitor.capchecklist",
   "pk": 1,
   "fields": {
     "KAP Checkliste": 1,
-    "climate_action_plan_exists": true,
+    "cap_exists": true,
     "target_date_exists": true,
-    "based_on_remaining_co2_budget": false,
+    "based_on_remaining_co2_budget": true,
     "sectors_of_climate_vision_used": false,
     "scenario_for_climate_neutrality_till_2035_exists": false,
     "scenario_for_business_as_usual_exists": false,
@@ -890,11 +890,11 @@
   }
 },
 {
-  "model": "cpmonitor.checklistclimateactionplan",
+  "model": "cpmonitor.capchecklist",
   "pk": 2,
   "fields": {
     "KAP Checkliste": 3,
-    "climate_action_plan_exists": true,
+    "cap_exists": true,
     "target_date_exists": true,
     "based_on_remaining_co2_budget": true,
     "sectors_of_climate_vision_used": true,
