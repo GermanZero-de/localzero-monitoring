@@ -28,3 +28,13 @@ def test_should_go_to_task_view_when_clicking_task_item(live_server, page: Page)
     task_title.click()
 
     expect(page).to_have_url(live_server.url + "/beispielstadt/mobilitat/")
+
+
+def test_should_redirect_to_the_cap_checklist_page_when_clicking_the_cap_checklist_button(
+    live_server, page: Page
+):
+    page.goto(live_server.url + "/beispielstadt/")
+
+    page.get_by_text("Klimaaktionsplan Checkliste").click()
+
+    expect(page).to_have_url(live_server.url + "/beispielstadt/kap_checkliste/")

@@ -96,6 +96,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tabler/icons@npm:^2.18.0":
+  version: 2.18.0
+  resolution: "@tabler/icons@npm:2.18.0"
+  checksum: 2257b5f39c570e3e87d1c6d9cfb2a1b6326600d39c42a077c491f584f9769efc9d9c361df1d3099243774d18cdaa5506075595a3fd626c82e812dd2b43700e34
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:2":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -313,6 +320,7 @@ __metadata:
   dependencies:
     "@popperjs/core": ^2.11.2
     "@tabler/core": ^1.0.0-beta17
+    "@tabler/icons": ^2.18.0
     jquery: ^3.6.3
     sass: ^1.58.3
   languageName: unknown

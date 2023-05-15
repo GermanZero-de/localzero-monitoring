@@ -1,13 +1,16 @@
 // GermanZero colors
-$gz-yellow: #ffc80c;
-$gz-darkblue: #011633;
-$gz-green: #a3d869;
+$lz-yellow: #ffc80c;
 
 :root {
   --tblr-body-bg: #fff9e5;
   --tblr-font-weight-bold: 700;
-  --tblr-primary: #{$gz-yellow}; //$gz-yellow;
-  --tblr-primary-rgb: #{red($gz-yellow)}, #{green($gz-yellow)}, #{blue($gz-yellow)}; //$gz-yellow;
+  --tblr-primary: #{$lz-yellow};
+  --tblr-primary-rgb: #{red($lz-yellow)}, #{green($lz-yellow)}, #{blue($lz-yellow)};
+  --lz-color-complete: #9ec422;
+  --lz-color-delayed: #ca3922;
+  --lz-color-as-planned: #f9b31a;
+  --lz-color-unknown: grey;
+  --lz-color-failed: black;
 }
 
 .progress {
@@ -45,19 +48,29 @@ $gz-green: #a3d869;
 
 .lz-status {
   &.UNKNOWN {
-    background-color: grey;
+    background-color: var(--lz-color-unknown);
   }
   &.AS_PLANNED {
-    background-color: #f9b31a;
+    background-color: var(--lz-color-as-planned);
   }
   &.COMPLETE {
-    background-color: #9ec422;
+    background-color: var(--lz-color-complete);
   }
   &.DELAYED {
-    background-color: #ca3922;
+    background-color: var(--lz-color-delayed);
   }
   &.FAILED {
-    background-color: black;
+    background-color: var(--lz-color-failed);
+  }
+}
+
+.lz-icon {
+  &.CHECKED {
+    color: var(--lz-color-complete);
+  }
+
+  &.CROSSED {
+    color: var(--lz-color-delayed);
   }
 }
 

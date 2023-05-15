@@ -15,7 +15,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from martor.utils import LazyEncoder
 
-from .models import City, ExecutionStatus, Task
+from .models import City, ExecutionStatus, Task, CapChecklist
 
 
 def _calculate_summary(node):
@@ -83,6 +83,7 @@ def city(request, city_slug):
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
+        "cap_checklist": get_cap_checklist(city),
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,
@@ -103,6 +104,37 @@ def city(request, city_slug):
         )
 
     return render(request, "city.html", context)
+
+
+def cap_checklist(request, city_slug):
+    try:
+        city = City.objects.get(slug=city_slug)
+    except City.DoesNotExist:
+        raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
+
+    context = {
+        "city": city,
+        "cap_checklist": get_cap_checklist(city),
+    }
+    return render(request, "cap_checklist.html", context)
+
+
+def get_cap_checklist(city):
+    try:
+        checklist_items = city.cap_checklist._meta.get_fields()
+    except CapChecklist.DoesNotExist:
+        return {}
+
+    checklist_items = [
+        item
+        for item in checklist_items
+        if item.attname not in ["KAP Checkliste_id", "id"]
+    ]
+
+    return {
+        item.verbose_name: getattr(city.cap_checklist, item.attname)
+        for item in checklist_items
+    }
 
 
 def task(request, city_slug, task_slugs):
