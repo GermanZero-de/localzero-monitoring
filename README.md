@@ -386,15 +386,25 @@ Commit the result.
     ```
 
 3. Build the image for the Django app: `docker compose build`
-4. Export the image: `docker save cpmonitor -o img.tar`
-5. Copy the image and the compose file to the server: `scp -C img.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
+4. Export the images:
+```
+docker save cpmonitor -o cpmonitor.tar
+docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
+```
+5. Copy the images and the compose file to the server: `scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
 6. Login to the server: `ssh monitoring@monitoring.localzero.net`
-7. Import the image into Docker on the server: `docker load -i /tmp/img.tar` (Docker should print "Loading layer".)
-8. Tag the image with the current date in case we want to roll back:
+7. Import the images into Docker on the server:
+```
+docker load -i /tmp/cpmonitor.tar
+docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
+```
+(Docker should print "Loading layer" for both images.)
+8. Tag the images with the current date in case we want to roll back:
 
     ```sh
     DATESTR=$(date +%Y-%b-%d) && echo ${DATESTR}
     docker tag cpmonitor:latest cpmonitor:${DATESTR}
+    docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${DATESTR}
     ```
 
 9. Stop the server, apply the migrations, start the server:
@@ -412,7 +422,7 @@ Commit the result.
     exit
     # use the latest docker-compose.yml to start the app using the new image
     mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-    docker-compose up --detach
+    docker-compose up --detach --no-build
     ```
 
 ### Database Client

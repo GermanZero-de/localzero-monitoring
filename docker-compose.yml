@@ -43,6 +43,7 @@ services:
   dbeaver:
     build: ./docker/dbeaver
     container_name: dbeaver
+    image: klimaschutzmonitor-dbeaver
     volumes:
       - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
     networks:
