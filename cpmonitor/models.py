@@ -135,16 +135,19 @@ class City(models.Model):
 
 
 class CapChecklist(models.Model):
+    class Meta:
+        verbose_name = "KAP Checkliste"
+
     city = models.OneToOneField(
         City,
         models.PROTECT,
-        name="KAP Checkliste",
         related_name="cap_checklist",
     )
 
     cap_exists = models.BooleanField("Gibt es einen KAP?", default=False)
     target_date_exists = models.BooleanField(
-        "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten kommunalen Gremium beschlossen?",
+        "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten"
+        " kommunalen Gremium beschlossen?",
         default=False,
     )
     based_on_remaining_co2_budget = models.BooleanField(
@@ -160,7 +163,8 @@ class CapChecklist(models.Model):
         default=False,
     )
     scenario_for_business_as_usual_exists = models.BooleanField(
-        "Ist ein Trendszenario hinterlegt (wie entwickeln sich die THG-Emissionen, wenn alles so weiterläuft wie bisher)?",
+        "Ist ein Trendszenario hinterlegt (wie entwickeln sich die THG-Emissionen, wenn alles so"
+        " weiterläuft wie bisher)?",
         default=False,
     )
     annual_costs_are_specified = models.BooleanField(
@@ -171,11 +175,13 @@ class CapChecklist(models.Model):
         "Haben die Maßnahmen eine jahresscharfe Planung?", default=False
     )
     tasks_have_responsible_entity = models.BooleanField(
-        "Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen hinterlegt?",
+        "Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen"
+        " hinterlegt?",
         default=False,
     )
     annual_reduction_of_emissions_can_be_predicted = models.BooleanField(
-        "Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der THG-Emissionen ersichtlich?",
+        "Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der"
+        " THG-Emissionen ersichtlich?",
         default=False,
     )
     concept_for_participation_specified = models.BooleanField(

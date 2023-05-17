@@ -135,9 +135,7 @@ def get_cap_checklist(city):
         return {}
 
     checklist_items = [
-        item
-        for item in checklist_items
-        if item.attname not in ["KAP Checkliste_id", "id"]
+        item for item in checklist_items if item.attname not in ["city_id", "id"]
     ]
 
     return {
