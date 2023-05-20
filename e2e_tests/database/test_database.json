@@ -803,7 +803,7 @@
   "model": "cpmonitor.capchecklist",
   "pk": 1,
   "fields": {
-    "KAP Checkliste": 1,
+    "city": 1,
     "cap_exists": true,
     "target_date_exists": true,
     "based_on_remaining_co2_budget": true,
@@ -823,7 +823,7 @@
   "model": "cpmonitor.capchecklist",
   "pk": 2,
   "fields": {
-    "KAP Checkliste": 3,
+    "city": 3,
     "cap_exists": true,
     "target_date_exists": true,
     "based_on_remaining_co2_budget": true,
