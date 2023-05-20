@@ -724,83 +724,11 @@
   }
 },
 {
-  "model": "auth.permission",
-  "pk": 41,
-  "fields": {
-    "name": "Can add cap checklist",
-    "content_type": 11,
-    "codename": "add_capchecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 42,
-  "fields": {
-    "name": "Can change cap checklist",
-    "content_type": 11,
-    "codename": "change_capchecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 43,
-  "fields": {
-    "name": "Can delete cap checklist",
-    "content_type": 11,
-    "codename": "delete_capchecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 44,
-  "fields": {
-    "name": "Can view cap checklist",
-    "content_type": 11,
-    "codename": "view_capchecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 41,
-  "fields": {
-    "name": "Can add checklist sustainability architecture in administration",
-    "content_type": 11,
-    "codename": "add_checklistsustainabilityarchitectureinadministration"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 42,
-  "fields": {
-    "name": "Can change checklist sustainability architecture in administration",
-    "content_type": 11,
-    "codename": "change_checklistsustainabilityarchitectureinadministration"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 43,
-  "fields": {
-    "name": "Can delete checklist sustainability architecture in administration",
-    "content_type": 11,
-    "codename": "delete_checklistsustainabilityarchitectureinadministration"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 44,
-  "fields": {
-    "name": "Can view checklist sustainability architecture in administration",
-    "content_type": 11,
-    "codename": "view_checklistsustainabilityarchitectureinadministration"
-  }
-},
-{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-05-17T15:31:20.183Z",
+    "last_login": "2023-05-12T08:50:46.844Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -811,22 +739,6 @@
     "date_joined": "2023-02-26T18:25:59.346Z",
     "groups": [],
     "user_permissions": []
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "2nxbl8extd4zak7dwu6v9wiunyq6xzxx",
-  "fields": {
-    "session_data": ".eJxVjMsOwiAQRf-FtSF0hvJw6d5vIAODUjWQlHZl_HfbpAvdnnPufYtA61LC2vMcJhZnMYjTL4uUnrnugh9U702mVpd5inJP5GG7vDbOr8vR_h0U6mVb--wpasiYbAZLaNEQMrg0kibSAyHyGDk6gA2xSgA6eVbO3KxRzovPF_GwN_U:1pzJ7Y:M7AcAxFCjxqi2xY6_2qWi-ztFD3EQTX5nleymhYw3K8",
-    "expire_date": "2023-05-31T15:31:20.186Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "1verupdhsxb98xgfut6jjuqq78d6dhmx",
-  "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGFbqF49N5vIMsuSNVAUtqT8d9tkx50jvPezFt43NbstxYXP7O4CiUuv11AesZyAH5guVdJtazLHOShyJM2OVWOr9vp_h1kbHlfu9h3bCgZAyMnSmlgBKsGhQoBVEeWaNQ9sGXHzpBzGnSf9jgMwEZ8vvZWOHg:1pxRCb:AZl4FVqTbj7h0dNduWxiEmV4WByBhuXEZYz85UNpEhA",
-    "expire_date": "2023-05-26T11:44:49.268Z"
   }
 },
 {
