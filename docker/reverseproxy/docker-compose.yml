@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    container_name: reverse-proxy
+    image: nginxinc/nginx-unprivileged:alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    networks:
+      - production
+      - testing
+
+networks:
+  production:
+    external:
+      name: production_nginx_network
+  testing:
+    external:
+      name: testing_nginx_network

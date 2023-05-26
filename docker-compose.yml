@@ -26,8 +26,8 @@ services:
     container_name: nginx-${ENVIRONMENT_NAME}
     image: nginxinc/nginx-unprivileged:alpine
     ports:
-      - 80:8080
-      - 443:8443
+      - 8080
+      - 8443
     volumes:
       - nginx_config_volume:/etc/nginx/conf.d
       - nginx_extras_volume:/etc/nginx/conf.d/extras
@@ -51,7 +51,7 @@ services:
 
   dbeaver:
     build: ./docker/dbeaver
-    container_name: dbeaver
+    container_name: dbeaver-${ENVIRONMENT_NAME}
     image: klimaschutzmonitor-dbeaver
     volumes:
       - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
