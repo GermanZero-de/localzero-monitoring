@@ -388,19 +388,28 @@ Commit the result.
     git tag -a deploy-test-${DATESTR} -m "Deployment to test" && git push origin deploy-test-${DATESTR}
     ```
 
-3. Build the image for the Django app: `docker compose build`
+3. Build the image for the Django app:
+    ```sh
+    docker compose build
+    ```
 4. Export the images:
-```
-docker save cpmonitor -o cpmonitor.tar
-docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
-```
-5. Copy the images and the compose file to the server: `scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
-6. Login to the server: `ssh monitoring@monitoring.localzero.net`
+    ```
+    docker save cpmonitor -o cpmonitor.tar
+    docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
+    ```
+5. Copy the images and the compose file to the server:
+    ```sh
+    scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/
+    ```
+6. Login to the server:
+    ```sh
+    ssh monitoring@monitoring.localzero.net
+    ```
 7. Import the images into Docker on the server:
-```
-docker load -i /tmp/cpmonitor.tar
-docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
-```
+    ```
+    docker load -i /tmp/cpmonitor.tar
+    docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
+    ```
 (Docker should print "Loading layer" for both images.)
 8. Tag the images with the current date in case we want to roll back:
 
