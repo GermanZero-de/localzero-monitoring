@@ -271,7 +271,9 @@ SKIP=check-untracked-migrations git commit
 The application is deployed to the server as a pair of Docker containers:
 
 - container 1 runs the gunicorn webserver to host the django app itself,
-- container 2 runs nginx, a proxy that hosts the static files while providing stability and security.
+- container 2 runs nginx, a proxy that hosts the static files while providing stability and security,
+- container 3 runs the server for the database web client (Cloudbeaver),
+- container 4 runs acme.sh, which handles SSL certificate renewal.
 
 Only the port of nginx is exposed, which will forward requests to the django app or provide any requested static files directly.
 
