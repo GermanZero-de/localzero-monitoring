@@ -142,3 +142,6 @@ node_modules
 # images uploaded through the admin interface
 cpmonitor/images
 !cpmonitor/images/.gitkeep
+
+# docker images exported for upload
+*.tar
