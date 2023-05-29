@@ -3,7 +3,6 @@ version: '3'
 services:
   djangoapp:
     container_name: djangoapp-${ENVIRONMENT_NAME}
-    # find a way so we dont have to toggle this on the server
     build:
       context: ./
       dockerfile: ./docker/cpmonitor/Dockerfile
