@@ -115,12 +115,13 @@ playwright install
 pytest --ignore e2e_tests/test_deployed.py
 
 # prepare external server and run smoke test against it (deletes DB):
-rm db.sqlite3
+rm db/db.sqlite3
 poetry run python manage.py migrate --settings=config.settings.local
 poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
 cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
 docker compose up -d --build
 pytest e2e_tests/test_deployed.py
+docker compose down --volumes
 
 # run a single test
 pytest <path-to-test>
