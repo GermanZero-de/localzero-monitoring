@@ -451,11 +451,11 @@ configured in the respective .env files on the server.
 ### TLS Certificate and Renewal
 We currently use a single TLS certificate for both monitoring.localzero.org and monitoring-test.localzero.org. The certificate is issued by letsencrypt.org and requesting and renewal is performed using [acme.sh](https://github.com/acmesh-official/acme.sh), which runs in a container. This solution allows us to have almost all necessary code and config in the repo instead of only on the server.
 
-Renewal is triggered by a cron job which can be viewed by executing the following on the server:
+Renewal is triggered by a cron job which can be found in [crontab](crontab) or by executing the following on the server:
 ```sh
 crontab -l
 ```
-The cron job tells the acme.sh container to perform a renewal twice a day (with some offset from 00:00 and 12:00 to not DDOS letsencrypt). acme.sh then...
+The cron job runs [a script](renew-cert.sh) that tells the acme.sh container to perform a renewal twice a day (with some offset from 00:00 and 12:00 to not DDOS letsencrypt). acme.sh then...
 - checks if a renewal is necessary, and if so:
 - requests a new certificate from letsencrypt,
 - performs the challenge-response-mechanism to verify ownership of the domain,
