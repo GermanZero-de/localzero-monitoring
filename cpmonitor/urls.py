@@ -17,5 +17,6 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("<slug:city_slug>/", views.city, name="city"),
     path("<slug:city_slug>/kap_checkliste/", views.cap_checklist, name="cap_checklist"),
-    path("<slug:city_slug>/<path:task_slugs>/", views.task, name="task"),
+    path("<slug:city_slug>/massnahmen/", views.task, name="task"),
+    path("<slug:city_slug>/massnahmen/<path:task_slugs>/", views.task, name="task"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
