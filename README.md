@@ -417,7 +417,13 @@ Commit the result.
     docker tag cpmonitor:latest cpmonitor:${DATESTR}
     docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${DATESTR}
     ```
-9. Stop the server, apply the migrations, start the server:
+9. Stop the reverse proxy:
+    ```sh
+    cd docker/reverseproxy
+    docker-compose down
+    cd -
+    ```
+10. Stop the server, apply the migrations, start the server:
     ```sh
     cd ~/<testing|production>/
     docker-compose down --volumes
@@ -434,7 +440,15 @@ Commit the result.
     # explicitly define the compose file so that the overrides for local development are not applied
     docker-compose -f docker-compose.yml up --detach --no-build
     ```
-10. Install certificate renewal cron job:
+11. Start the reverse proxy:
+    ```sh
+    cd docker/reverseproxy
+    docker-compose up --detach --no-build
+    cd -
+    ```
+    This requires that both testing and production containers are running because the docker-compose file expects the external networks
+    to exist. If just testing or production is running, a fake network could be created with the command: `docker network create -d bridge <testing|production>_nginx_network`.
+12.Install certificate renewal cron job:
     ```sh
     crontab /tmp/crontab
     cp /tmp/renew-cert.sh /home/monitoring/
