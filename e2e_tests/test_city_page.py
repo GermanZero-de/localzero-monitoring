@@ -21,21 +21,22 @@ def test_city_page_should_have_city_name_in_title(live_server, page: Page):
     expect(page).to_have_title("LocalZero Monitoring - Beispielstadt")
 
 
-def test_should_go_to_task_view_when_clicking_task_item(live_server, page: Page):
-    page.goto(live_server.url + "/beispielstadt/")
-
-    task_title = page.get_by_text("Mobilität")
-    task_title.click()
-
-    expect(page).to_have_url(live_server.url + "/beispielstadt/mobilitat/")
-
-
-def test_should_redirect_to_the_cap_checklist_page_when_clicking_the_cap_checklist_button(
+def test_should_go_to_tasks_view_when_clicking_on_the_tasks_card(
     live_server, page: Page
 ):
     page.goto(live_server.url + "/beispielstadt/")
 
-    page.get_by_text("Klimaaktionsplan Checkliste").click()
+    page.get_by_text("Maßnahmen offen").click()
+
+    expect(page).to_have_url(live_server.url + "/beispielstadt/massnahmen/")
+
+
+def test_should_go_to_the_cap_checklist_view_when_clicking_the_cap_checklist_card(
+    live_server, page: Page
+):
+    page.goto(live_server.url + "/beispielstadt/")
+
+    page.get_by_text("Klimaaktionsplan").click()
 
     expect(page).to_have_url(live_server.url + "/beispielstadt/kap_checkliste/")
 
