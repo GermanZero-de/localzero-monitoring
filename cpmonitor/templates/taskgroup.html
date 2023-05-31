@@ -1,0 +1,85 @@
+{% extends "pageframe.html" %}
+{% load martortags %}
+{% block breadcrumbs %}
+  {% if node %}
+    <header class="navbar navbar-expand-md navbar-light lz-breadcrumbs-bar">
+      <div class="container-xl">
+        <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+          <li class="breadcrumb-item">
+            <a href="{% url 'task' city.slug %}">Start</a>
+          </li>
+          {% for ancestor in node.get_ancestors %}
+            <li class="breadcrumb-item">
+              <a href="{% url 'task' city.slug ancestor.slugs %}">{{ ancestor.title }}</a>
+            </li>
+          {% endfor %}
+          <li class="breadcrumb-item active">
+            <a href="{% url 'task' city.slug node.slugs %}">{{ node.title }}</a>
+          </li>
+        </ol>
+      </div>
+    </header>
+  {% endif %}
+{% endblock breadcrumbs %}
+{% block page_body %}
+  {% if node %}
+    <div class="col">
+      <!-- Page pre-title -->
+      <div class="page-pretitle">Handlungsfeld</div>
+      <h1>{{ node.title }}</h1>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="markdown text-muted">
+            {{ node.description | safe_markdown | default:"Dieses Handlungsfeld hat keine Beschreibung" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% if tasks %}
+    <div class="row row-deck row-cards">
+      {% for task in tasks %}
+        <div class="col-sm-6 col-lg-3">
+          <a href="{% url 'task' city.slug task.slugs %}"
+             class="card card-link card-link-popup">
+            <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
+            <div class="card-body">
+              <div class="h2 mb-3">{{ task.title }}</div>
+              <div class="lz-card-summary">{{ task.summary }}</div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if groups %}
+    <h3>Weitere Handlungsfelder</h3>
+    <div class="row row-deck row-cards">
+      {% for group in groups %}
+        <div class="col-sm-6 col-lg-3">
+          <a href="{% url 'task' city.slug group.slugs %}"
+             class="card card-link card-link-pop">
+            <div class="card-body">
+              <div class="h2 mb-3">{{ group.title }}</div>
+              <div class="col">{{ group.subtasks_count }} Maßnahmen</div>
+              <div class="progress progress-lg progress-separated mb-3">
+                {% for value, label, name in group.status_proportions %}
+                  <div class="progress-bar lz-status {{ name }}"
+                       role="progressbar"
+                       data-value="{{ value }}"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       title="{{ value }} % {{ label }}"
+                       aria-label="{{ label }}">
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock page_body %}

@@ -42,7 +42,8 @@ def _calculate_summary(node):
         for k, v in sorted(status_proportions.items(), reverse=True)
     ]
     node.subtasks_count = subtasks_count
-    node.completed_proportion = status_proportions.get(ExecutionStatus.COMPLETE, 0)
+    node.complete_proportion = status_proportions.get(ExecutionStatus.COMPLETE, 0)
+    node.incomplete_proportion = 100 - node.complete_proportion
 
 
 def _get_children(city, node=None):
@@ -95,11 +96,13 @@ def city(request, city_slug):
         days_gone = (date.today() - city.resolution_date).days
         days_left = days_total - days_gone
         days_gone_proportion = round(days_gone / days_total * 100)
+        days_left_proportion = round(days_left / days_total * 100)
         context.update(
             {
                 "days_gone": days_gone,
                 "days_left": days_left,
                 "days_gone_proportion": days_gone_proportion,
+                "days_left_proportion": days_left_proportion,
             }
         )
 
@@ -135,11 +138,21 @@ def get_cap_checklist(city):
     }
 
 
-def task(request, city_slug, task_slugs):
+def task(request, city_slug, task_slugs=None):
     try:
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
         raise Http404("Wir haben keine Daten zu der Kommune '%s'." % city_slug)
+
+    if not task_slugs:
+        groups, tasks = _get_children(city)
+
+        return render(
+            request,
+            "taskgroup.html",
+            {"city": city, "groups": groups, "tasks": tasks},
+        )
+
     try:
         task: Task = Task.objects.get(city=city, slugs=task_slugs)
     except Task.DoesNotExist:
@@ -158,7 +171,7 @@ def task(request, city_slug, task_slugs):
 
         return render(
             request,
-            "group.html",
+            "taskgroup.html",
             {"city": city, "node": task, "groups": groups, "tasks": tasks},
         )
 
