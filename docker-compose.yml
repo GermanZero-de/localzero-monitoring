@@ -3,7 +3,6 @@ version: '3'
 services:
   djangoapp:
     container_name: djangoapp-${ENVIRONMENT_NAME}
-    # find a way so we dont have to toggle this on the server
     build:
       context: ./
       dockerfile: ./docker/cpmonitor/Dockerfile
@@ -37,6 +36,16 @@ services:
       - ${CERTIFICATES_PATH?:Please set the CERTIFICATES_PATH environment variable.}:/etc/letsencrypt
     depends_on:
       - djangoapp
+      - acme-sh
+    networks:
+      - nginx_network
+
+  acme-sh:
+    image: neilpang/acme.sh
+    container_name: acme-sh
+    command: daemon
+    volumes:
+      - ${CERTIFICATES_PATH?:Please set the CERTIFICATES_PATH environment variable.}:/acme.sh
     networks:
       - nginx_network
 

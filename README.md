@@ -271,7 +271,9 @@ SKIP=check-untracked-migrations git commit
 The application is deployed to the server as a pair of Docker containers:
 
 - container 1 runs the gunicorn webserver to host the django app itself,
-- container 2 runs nginx, a proxy that hosts the static files while providing stability and security.
+- container 2 runs nginx, a proxy that hosts the static files while providing stability and security,
+- container 3 runs the server for the database web client (Cloudbeaver),
+- container 4 runs acme.sh, which handles SSL certificate renewal.
 
 Only the port of nginx is exposed, which will forward requests to the django app or provide any requested static files directly.
 
@@ -385,20 +387,28 @@ Commit the result.
     # and / or
     git tag -a deploy-test-${DATESTR} -m "Deployment to test" && git push origin deploy-test-${DATESTR}
     ```
-
-3. Build the image for the Django app: `docker compose build`
+3. Build the image for the Django app:
+    ```sh
+    docker compose build
+    ```
 4. Export the images:
-```
-docker save cpmonitor -o cpmonitor.tar
-docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
-```
-5. Copy the images and the compose file to the server: `scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
-6. Login to the server: `ssh monitoring@monitoring.localzero.net`
+    ```
+    docker save cpmonitor -o cpmonitor.tar
+    docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
+    ```
+5. Copy the images, the compose file and the certificate renewal cron job to the server:
+    ```sh
+    scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab renew-cert.sh monitoring@monitoring.localzero.net:/tmp/
+    ```
+6. Login to the server:
+    ```sh
+    ssh monitoring@monitoring.localzero.net
+    ```
 7. Import the images into Docker on the server:
-```
-docker load -i /tmp/cpmonitor.tar
-docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
-```
+    ```
+    docker load -i /tmp/cpmonitor.tar
+    docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
+    ```
 (Docker should print "Loading layer" for both images.)
 8. Tag the images with the current date in case we want to roll back:
 
@@ -407,9 +417,7 @@ docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
     docker tag cpmonitor:latest cpmonitor:${DATESTR}
     docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${DATESTR}
     ```
-
 9. Stop the server, apply the migrations, start the server:
-
     ```sh
     cd ~/<testing|production>/
     docker-compose down --volumes
@@ -425,6 +433,12 @@ docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
     mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
     docker-compose up --detach --no-build
     ```
+10. Install certificate renewal cron job:
+    ```sh
+    crontab /tmp/crontab
+    cp /tmp/renew-cert.sh /home/monitoring/
+    chmod +x /home/monitoring/renew-cert.sh
+    ```
 
 ### Database Client
 In order to view, manipulate and export the database in any of the environments (local, testing, production), the database webclient
@@ -433,3 +447,17 @@ In order to view, manipulate and export the database in any of the environments 
 The client can be accessed at http://localhost/dbeaver (or http://monitoring-test.localzero.net/dbeaver, http://monitoring.localzero.net/dbeaver depending on
 the environment) and the credentials can be found in the .env.local file. For testing and production, the credentials should be
 configured in the respective .env files on the server.
+
+### TLS Certificate and Renewal
+We currently use a single TLS certificate for both monitoring.localzero.org and monitoring-test.localzero.org. The certificate is issued by letsencrypt.org and requesting and renewal is performed using [acme.sh](https://github.com/acmesh-official/acme.sh), which runs in a container. This solution allows us to have almost all necessary code and config in the repo instead of only on the server.
+
+Renewal is triggered by a cron job which can be found in [crontab](crontab) or by executing the following on the server:
+```sh
+crontab -l
+```
+The cron job runs [a script](renew-cert.sh) that tells the acme.sh container to perform a renewal twice a day (with some offset from 00:00 and 12:00 to not DDOS letsencrypt). acme.sh then...
+- checks if a renewal is necessary, and if so:
+- requests a new certificate from letsencrypt,
+- performs the challenge-response-mechanism to verify ownership of the domain,
+- exports the certificate and key to where nginx can find it
+- and tells nginx to reload its configuration, applying the renewed certificate.
