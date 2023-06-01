@@ -85,6 +85,8 @@ def city(request, city_slug):
     groups, tasks = _get_children(city)
     _calculate_summary(city)
 
+    cap_checklist_for_city = get_cap_checklist(city)
+
     administration_checklist_for_city = get_administration_checklist(city)
     administration_checklist_exists = administration_checklist_for_city != {}
 
@@ -93,7 +95,9 @@ def city(request, city_slug):
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
-        "cap_checklist": get_cap_checklist(city),
+        "cap_checklist_number_fulfilled": list(cap_checklist_for_city.values()).count(
+            True
+        ),
         "administration_checklist_exists": administration_checklist_exists,
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
@@ -150,7 +154,7 @@ def cap_checklist(request, city_slug):
     return render(request, "cap_checklist.html", context)
 
 
-def get_cap_checklist(city):
+def get_cap_checklist(city) -> dict:
     try:
         checklist_items = city.cap_checklist._meta.get_fields()
     except CapChecklist.DoesNotExist:
