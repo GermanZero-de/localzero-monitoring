@@ -451,6 +451,11 @@ configured in the respective .env files on the server.
 ### TLS Certificate and Renewal
 We currently use a single TLS certificate for both monitoring.localzero.org and monitoring-test.localzero.org. The certificate is issued by letsencrypt.org and requesting and renewal is performed using [acme.sh](https://github.com/acmesh-official/acme.sh), which runs in a container. This solution allows us to have almost all necessary code and config in the repo instead of only on the server.
 
+The initial certificate was issued using the following command:
+```sh
+docker exec acme-sh  --issue -d monitoring-test.localzero.net  -d monitoring.localzero.net --standalone --server https://acme-v02.api.letsencrypt.org/directory --cert-file /acme.sh/ssl-cert.cer --key-file /acme.sh/ssl-cert.key
+```
+
 Renewal is triggered by a cron job which can be found in [crontab](crontab) or by executing the following on the server:
 ```sh
 crontab -l
