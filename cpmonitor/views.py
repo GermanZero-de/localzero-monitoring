@@ -97,6 +97,7 @@ def city(request, city_slug):
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
+        "cap_checklist_exists": cap_checklist_for_city != {},
         "cap_checklist_number_fulfilled": cap_checklist_number_fulfilled,
         "cap_checklist_proportion_fulfilled": round(
             cap_checklist_number_fulfilled / cap_checklist_total * 100
