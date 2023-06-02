@@ -36,7 +36,7 @@ def test_should_go_to_the_administration_checklist_view_when_clicking_the_checkl
 ):
     page.goto(live_server.url + "/beispielstadt/")
 
-    page.get_by_text("Klimaaktionsplan").click()
+    page.get_by_text("Verwaltungsstrukturen").click()
 
     expect(page).to_have_url(
         live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/"
