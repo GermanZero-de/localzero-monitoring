@@ -15,7 +15,13 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from martor.utils import LazyEncoder
 
-from .models import City, ExecutionStatus, Task, CapChecklist
+from .models import (
+    City,
+    ExecutionStatus,
+    Task,
+    CapChecklist,
+    SustainabilityArchitectureChecklist,
+)
 
 
 def _calculate_summary(node):
@@ -85,6 +91,9 @@ def city(request, city_slug):
         "tasks": tasks,
         "charts": city.charts.all,
         "cap_checklist": get_cap_checklist(city),
+        "sustainability_architecture_checklist": get_sustainability_architecture_checklist(
+            city
+        ),
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,
@@ -134,6 +143,40 @@ def get_cap_checklist(city):
 
     return {
         item.verbose_name: getattr(city.cap_checklist, item.attname)
+        for item in checklist_items
+    }
+
+
+def sustainability_architecture_checklist(request, city_slug):
+    try:
+        city = City.objects.get(slug=city_slug)
+    except City.DoesNotExist:
+        raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
+
+    context = {
+        "city": city,
+        "sustainability_architecture_checklist": get_sustainability_architecture_checklist(
+            city
+        ),
+    }
+
+    return render(request, "sustainability_architecture_checklist.html", context)
+
+
+def get_sustainability_architecture_checklist(city):
+    try:
+        checklist_items = city.sustainability_architecture_checklist._meta.get_fields()
+    except SustainabilityArchitectureChecklist.DoesNotExist:
+        return {}
+
+    checklist_items = [
+        item for item in checklist_items if item.attname not in ["city_id", "id"]
+    ]
+
+    return {
+        item.verbose_name: getattr(
+            city.sustainability_architecture_checklist, item.attname
+        )
         for item in checklist_items
     }
 

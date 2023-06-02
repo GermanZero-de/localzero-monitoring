@@ -17,6 +17,11 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("<slug:city_slug>/", views.city, name="city"),
     path("<slug:city_slug>/kap_checkliste/", views.cap_checklist, name="cap_checklist"),
+    path(
+        "<slug:city_slug>/verwaltungsstrukturen_checkliste/",
+        views.sustainability_architecture_checklist,
+        name="sustainability_architecture_checklist",
+    ),
     path("<slug:city_slug>/massnahmen/", views.task, name="task"),
     path("<slug:city_slug>/massnahmen/<path:task_slugs>/", views.task, name="task"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

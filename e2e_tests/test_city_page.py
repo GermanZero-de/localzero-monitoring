@@ -31,11 +31,13 @@ def test_should_go_to_tasks_view_when_clicking_on_the_tasks_card(
     expect(page).to_have_url(live_server.url + "/beispielstadt/massnahmen/")
 
 
-def test_should_go_to_the_cap_checklist_view_when_clicking_the_cap_checklist_card(
+def test_should_go_to_the_sustainability_architecture_checklist_view_when_clicking_the_checklist_card(
     live_server, page: Page
 ):
     page.goto(live_server.url + "/beispielstadt/")
 
     page.get_by_text("Klimaaktionsplan").click()
 
-    expect(page).to_have_url(live_server.url + "/beispielstadt/kap_checkliste/")
+    expect(page).to_have_url(
+        live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/"
+    )

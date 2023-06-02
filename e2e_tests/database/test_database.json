@@ -338,6 +338,84 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2023-05-12T13:31:41.452Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"checklist sustainability architecture in administration\", \"object\": \"ChecklistSustainabilityArchitectureInAdministration object (1)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2023-05-12T14:17:17.573Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "99999 Mitallem",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"checklist sustainability architecture in administration\", \"object\": \"ChecklistSustainabilityArchitectureInAdministration object (2)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2023-06-02T11:39:37.189Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "99999 Mitallem",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"sustainability architecture checklist\", \"object\": \"SustainabilityArchitectureChecklist object (1)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2023-06-02T12:03:25.509Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"sustainability architecture checklist\", \"object\": \"SustainabilityArchitectureChecklist object (2)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2023-06-02T12:03:39.102Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "99999 Mitallem",
+    "action_flag": 2,
+    "change_message": "[{\"deleted\": {\"name\": \"sustainability architecture checklist\", \"object\": \"SustainabilityArchitectureChecklist object (None)\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2023-06-02T12:06:25.524Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "99999 Mitallem",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"sustainability architecture checklist\", \"object\": \"SustainabilityArchitectureChecklist object (3)\"}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -698,6 +776,114 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add checklist sustainability architecture in administration",
+    "content_type": 11,
+    "codename": "add_checklistsustainabilityarchitectureinadministration"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change checklist sustainability architecture in administration",
+    "content_type": 11,
+    "codename": "change_checklistsustainabilityarchitectureinadministration"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete checklist sustainability architecture in administration",
+    "content_type": 11,
+    "codename": "delete_checklistsustainabilityarchitectureinadministration"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view checklist sustainability architecture in administration",
+    "content_type": 11,
+    "codename": "view_checklistsustainabilityarchitectureinadministration"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add KAP Checkliste",
+    "content_type": 12,
+    "codename": "add_capchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change KAP Checkliste",
+    "content_type": 12,
+    "codename": "change_capchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete KAP Checkliste",
+    "content_type": 12,
+    "codename": "delete_capchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view KAP Checkliste",
+    "content_type": 12,
+    "codename": "view_capchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add sustainability architecture checklist",
+    "content_type": 13,
+    "codename": "add_sustainabilityarchitecturechecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change sustainability architecture checklist",
+    "content_type": 13,
+    "codename": "change_sustainabilityarchitecturechecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete sustainability architecture checklist",
+    "content_type": 13,
+    "codename": "delete_sustainabilityarchitecturechecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view sustainability architecture checklist",
+    "content_type": 13,
+    "codename": "view_sustainabilityarchitecturechecklist"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
@@ -717,6 +903,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "1verupdhsxb98xgfut6jjuqq78d6dhmx",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQRP-FsyGFbqF49N5vIMsuSNVAUtqT8d9tkx50jvPezFt43NbstxYXP7O4CiUuv11AesZyAH5guVdJtazLHOShyJM2OVWOr9vp_h1kbHlfu9h3bCgZAyMnSmlgBKsGhQoBVEeWaNQ9sGXHzpBzGnSf9jgMwEZ8vvZWOHg:1pxRCb:AZl4FVqTbj7h0dNduWxiEmV4WByBhuXEZYz85UNpEhA",
+    "expire_date": "2023-05-26T11:44:49.268Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "3h80mfs0kjjxfectgn3a0x6c6zz3esme",
   "fields": {
     "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1pqsJm:hu2RvPJFpyb4Ol67nhIuVCNJNtMnKa2vY8HwkwCnWSk",
@@ -729,6 +923,14 @@
   "fields": {
     "session_data": ".eJxVjEEOgjAQRe_StWkYasuMS_ecoRk6U4saSCisjHdXEha6_e-9_zKRt7XEreoSRzEXA-b0uw2cHjrtQO483Wab5mldxsHuij1otf0s-rwe7t9B4Vq-NYNnCtAGxyrUoIhLmIkzIkHIqGFISB7VN0ySOugAHPhW8lmcUjbvD-UtN_M:1pxOUA:X8ty0yL20MTQz29j3ydhkBZGCi3WcuAQ6lBFma4WP4o",
     "expire_date": "2023-05-26T08:50:46.855Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "wfr1mso3qeeze0wzse6sa81er0gu9oiw",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQRP-FsyGFbqF49N5vIMsuSNVAUtqT8d9tkx50jvPezFt43NbstxYXP7O4CiUuv11AesZyAH5guVdJtazLHOShyJM2OVWOr9vp_h1kbHlfu9h3bCgZAyMnSmlgBKsGhQoBVEeWaNQ9sGXHzpBzGnSf9jgMwEZ8vvZWOHg:1q537Q:Spmq5YihiH-krdKua7SekvW6RFt0SK-lRzltxFEwc-k",
+    "expire_date": "2023-06-16T11:38:56.771Z"
   }
 },
 {
@@ -753,7 +955,7 @@
     "assessment_administration": "",
     "assessment_action_plan": "",
     "assessment_status": "",
-    "last_update": "2023-05-14",
+    "last_update": "2023-06-02",
     "contact_name": "",
     "contact_email": "",
     "slug": "beispielstadt"
@@ -793,7 +995,7 @@
     "assessment_administration": "Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_action_plan": "Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_status": "Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
-    "last_update": "2023-05-14",
+    "last_update": "2023-06-02",
     "contact_name": "Maxime Musterfrau",
     "contact_email": "maxime@muster.frau",
     "slug": "mitallem"
@@ -837,6 +1039,40 @@
     "concept_for_participation_specified": false,
     "sustainability_architecture_in_administration_exists": false,
     "climate_council_exists": true
+  }
+},
+{
+  "model": "cpmonitor.sustainabilityarchitecturechecklist",
+  "pk": 2,
+  "fields": {
+    "Nachhaltigkeitsarchitektur in der Verwaltung Checkliste": 1,
+    "climate_protection_management_exists": true,
+    "climate_technical_committee_exists": false,
+    "climate_relevance_check_exists": true,
+    "interdisciplinary_climate_protection_exists": false,
+    "climate_protection_monitoring_exists": true,
+    "intersectoral_concepts_exists": false,
+    "climate_protection_reports_are_continuously_published": true,
+    "guidelines_for_sustainable_procurement_exists": false,
+    "municipal_office_for_funding_management_exists": false,
+    "public_relation_with_local_actors_exists": false
+  }
+},
+{
+  "model": "cpmonitor.sustainabilityarchitecturechecklist",
+  "pk": 3,
+  "fields": {
+    "Nachhaltigkeitsarchitektur in der Verwaltung Checkliste": 3,
+    "climate_protection_management_exists": true,
+    "climate_technical_committee_exists": true,
+    "climate_relevance_check_exists": true,
+    "interdisciplinary_climate_protection_exists": true,
+    "climate_protection_monitoring_exists": true,
+    "intersectoral_concepts_exists": true,
+    "climate_protection_reports_are_continuously_published": true,
+    "guidelines_for_sustainable_procurement_exists": true,
+    "municipal_office_for_funding_management_exists": true,
+    "public_relation_with_local_actors_exists": true
   }
 },
 {

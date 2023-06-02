@@ -1,0 +1,36 @@
+{% extends "pageframe.html" %}
+{% load static %}
+{% block page_body %}
+  <div class="container-xl">
+    <div class="space-y">
+      <h3>Nachhaltigkeitsarchitektur in der Verwaltung Checkliste</h3>
+      <div class="card col-sm-12 col-lg-6">
+        <div class="card-body">
+          <table class="table table-sm table-borderless">
+            <tbody>
+              {% for key, value in sustainability_architecture_checklist.items %}
+                <tr>
+                  <td>{{ key }}</td>
+                  <td>
+                    {% if value %}
+                      <svg width="20" height="20" class="lz-icon CHECKED">
+                        <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check-filled"/>
+                      </svg>
+                    {% else %}
+                      <svg width="20" height="20" class="lz-icon CROSSED">
+                        <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-x-filled"/>
+                      </svg>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <a class="btn btn-primary" href="{% url 'city' city.slug %}">Zurück</a>
+      </div>
+    </div>
+  </div>
+{% endblock page_body %}

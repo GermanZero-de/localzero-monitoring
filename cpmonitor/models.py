@@ -197,6 +197,55 @@ class CapChecklist(models.Model):
     )
 
 
+class SustainabilityArchitectureChecklist(models.Model):
+    city = models.OneToOneField(
+        City,
+        models.PROTECT,
+        name="Nachhaltigkeitsarchitektur in der Verwaltung Checkliste",
+        related_name="sustainability_architecture_checklist",
+    )
+
+    climate_protection_management_exists = models.BooleanField(
+        "Gibt es ein Klimaschutzmanagement? Ist dieses befugt, Entscheidungen zu treffen? Sind Haushaltsmittel hinterlegt?",
+        default=False,
+    )
+    climate_technical_committee_exists = models.BooleanField(
+        "Gibt es einen Fachausschuss mit dem Fokus auf Klimaschutz? Ist dieser befugt, Haushaltsentscheidungen zu treffen?",
+        default=False,
+    )
+    climate_relevance_check_exists = models.BooleanField(
+        "Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die Auswirkungen auf das Klima geprüft?",
+        default=False,
+    )
+    interdisciplinary_climate_protection_exists = models.BooleanField(
+        "Ist Klimaschutz als Querschnittsaufgabe über alle Fachbereiche etabliert?",
+        default=False,
+    )
+    climate_protection_monitoring_exists = models.BooleanField(
+        "Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
+        default=False,
+    )
+    intersectoral_concepts_exists = models.BooleanField(
+        "Gibt es (sektorenübergreifende) Konzepte (siehe Planung und Konzepte bzw. Sektorenübergreifende Konzepte)?",
+        default=False,
+    )
+    climate_protection_reports_are_continuously_published = models.BooleanField(
+        "Werden regelmäßige Klimaschutz- und Energieberichte veröffentlicht?",
+        default=False,
+    )
+    guidelines_for_sustainable_procurement_exists = models.BooleanField(
+        "Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?", default=False
+    )
+    municipal_office_for_funding_management_exists = models.BooleanField(
+        "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
+        default=False,
+    )
+    public_relation_with_local_actors_exists = models.BooleanField(
+        "Vernetzung in der Öffentlichkeitsarbeit mit lokalen Akteuren (Handwerk, Sparkasse...)?",
+        default=False,
+    )
+
+
 class ExecutionStatus(models.IntegerChoices):
     UNKNOWN = 0, "unbekannt"
     AS_PLANNED = 2, "in Arbeit"
