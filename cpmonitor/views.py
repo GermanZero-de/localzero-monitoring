@@ -20,7 +20,7 @@ from .models import (
     ExecutionStatus,
     Task,
     CapChecklist,
-    SustainabilityArchitectureChecklist,
+    AdministrationChecklist,
 )
 
 
@@ -85,14 +85,26 @@ def city(request, city_slug):
     groups, tasks = _get_children(city)
     _calculate_summary(city)
 
+    administration_checklist_for_city = get_administration_checklist(city)
+    administration_checklist_number_fulfilled = list(
+        administration_checklist_for_city.values()
+    ).count(True)
+    administration_checklist_total = 10
+
     context = {
         "city": city,
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
         "cap_checklist": get_cap_checklist(city),
-        "sustainability_architecture_checklist": get_sustainability_architecture_checklist(
-            city
+        "administration_checklist": get_administration_checklist(city),
+        "administration_checklist_exists": administration_checklist_for_city != {},
+        "administration_checklist_total": administration_checklist_total,
+        "administration_checklist_number_fulfilled": administration_checklist_number_fulfilled,
+        "administration_checklist_proportion_fulfilled": round(
+            administration_checklist_number_fulfilled
+            / administration_checklist_total
+            * 100
         ),
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
@@ -147,7 +159,7 @@ def get_cap_checklist(city):
     }
 
 
-def sustainability_architecture_checklist(request, city_slug):
+def administration_checklist(request, city_slug):
     try:
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
@@ -155,18 +167,16 @@ def sustainability_architecture_checklist(request, city_slug):
 
     context = {
         "city": city,
-        "sustainability_architecture_checklist": get_sustainability_architecture_checklist(
-            city
-        ),
+        "administration_checklist": get_administration_checklist(city),
     }
 
-    return render(request, "sustainability_architecture_checklist.html", context)
+    return render(request, "administration_checklist.html", context)
 
 
-def get_sustainability_architecture_checklist(city):
+def get_administration_checklist(city) -> dict:
     try:
-        checklist_items = city.sustainability_architecture_checklist._meta.get_fields()
-    except SustainabilityArchitectureChecklist.DoesNotExist:
+        checklist_items = city.administration_checklist._meta.get_fields()
+    except AdministrationChecklist.DoesNotExist:
         return {}
 
     checklist_items = [
@@ -174,9 +184,7 @@ def get_sustainability_architecture_checklist(city):
     ]
 
     return {
-        item.verbose_name: getattr(
-            city.sustainability_architecture_checklist, item.attname
-        )
+        item.verbose_name: getattr(city.administration_checklist, item.attname)
         for item in checklist_items
     }
 

@@ -197,12 +197,14 @@ class CapChecklist(models.Model):
     )
 
 
-class SustainabilityArchitectureChecklist(models.Model):
+class AdministrationChecklist(models.Model):
+    class Meta:
+        verbose_name = "Verwaltungsstrukturen Checkliste"
+
     city = models.OneToOneField(
         City,
         models.PROTECT,
-        name="Nachhaltigkeitsarchitektur in der Verwaltung Checkliste",
-        related_name="sustainability_architecture_checklist",
+        related_name="administration_checklist",
     )
 
     climate_protection_management_exists = models.BooleanField(

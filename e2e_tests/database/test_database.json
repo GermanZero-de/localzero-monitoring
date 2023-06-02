@@ -341,78 +341,26 @@
   "model": "admin.logentry",
   "pk": 27,
   "fields": {
-    "action_time": "2023-05-12T13:31:41.452Z",
+    "action_time": "2023-06-02T17:23:41.654Z",
     "user": 1,
     "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
+    "object_id": "3",
+    "object_repr": "99999 Mitallem",
     "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"checklist sustainability architecture in administration\", \"object\": \"ChecklistSustainabilityArchitectureInAdministration object (1)\"}}]"
+    "change_message": "[{\"added\": {\"name\": \"Verwaltungsstrukturen Checkliste\", \"object\": \"AdministrationChecklist object (1)\"}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 28,
   "fields": {
-    "action_time": "2023-05-12T14:17:17.573Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "99999 Mitallem",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"checklist sustainability architecture in administration\", \"object\": \"ChecklistSustainabilityArchitectureInAdministration object (2)\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 29,
-  "fields": {
-    "action_time": "2023-06-02T11:39:37.189Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "99999 Mitallem",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"sustainability architecture checklist\", \"object\": \"SustainabilityArchitectureChecklist object (1)\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 30,
-  "fields": {
-    "action_time": "2023-06-02T12:03:25.509Z",
+    "action_time": "2023-06-02T17:24:04.672Z",
     "user": 1,
     "content_type": 7,
     "object_id": "1",
     "object_repr": "12345 Beispielstadt",
     "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"sustainability architecture checklist\", \"object\": \"SustainabilityArchitectureChecklist object (2)\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 31,
-  "fields": {
-    "action_time": "2023-06-02T12:03:39.102Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "99999 Mitallem",
-    "action_flag": 2,
-    "change_message": "[{\"deleted\": {\"name\": \"sustainability architecture checklist\", \"object\": \"SustainabilityArchitectureChecklist object (None)\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 32,
-  "fields": {
-    "action_time": "2023-06-02T12:06:25.524Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "99999 Mitallem",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"sustainability architecture checklist\", \"object\": \"SustainabilityArchitectureChecklist object (3)\"}}]"
+    "change_message": "[{\"added\": {\"name\": \"Verwaltungsstrukturen Checkliste\", \"object\": \"AdministrationChecklist object (2)\"}}]"
   }
 },
 {
@@ -779,108 +727,36 @@
   "model": "auth.permission",
   "pk": 41,
   "fields": {
-    "name": "Can add checklist sustainability architecture in administration",
+    "name": "Can add Verwaltungsstrukturen Checkliste",
     "content_type": 11,
-    "codename": "add_checklistsustainabilityarchitectureinadministration"
+    "codename": "add_administrationchecklist"
   }
 },
 {
   "model": "auth.permission",
   "pk": 42,
   "fields": {
-    "name": "Can change checklist sustainability architecture in administration",
+    "name": "Can change Verwaltungsstrukturen Checkliste",
     "content_type": 11,
-    "codename": "change_checklistsustainabilityarchitectureinadministration"
+    "codename": "change_administrationchecklist"
   }
 },
 {
   "model": "auth.permission",
   "pk": 43,
   "fields": {
-    "name": "Can delete checklist sustainability architecture in administration",
+    "name": "Can delete Verwaltungsstrukturen Checkliste",
     "content_type": 11,
-    "codename": "delete_checklistsustainabilityarchitectureinadministration"
+    "codename": "delete_administrationchecklist"
   }
 },
 {
   "model": "auth.permission",
   "pk": 44,
   "fields": {
-    "name": "Can view checklist sustainability architecture in administration",
+    "name": "Can view Verwaltungsstrukturen Checkliste",
     "content_type": 11,
-    "codename": "view_checklistsustainabilityarchitectureinadministration"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 45,
-  "fields": {
-    "name": "Can add KAP Checkliste",
-    "content_type": 12,
-    "codename": "add_capchecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 46,
-  "fields": {
-    "name": "Can change KAP Checkliste",
-    "content_type": 12,
-    "codename": "change_capchecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 47,
-  "fields": {
-    "name": "Can delete KAP Checkliste",
-    "content_type": 12,
-    "codename": "delete_capchecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 48,
-  "fields": {
-    "name": "Can view KAP Checkliste",
-    "content_type": 12,
-    "codename": "view_capchecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 49,
-  "fields": {
-    "name": "Can add sustainability architecture checklist",
-    "content_type": 13,
-    "codename": "add_sustainabilityarchitecturechecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 50,
-  "fields": {
-    "name": "Can change sustainability architecture checklist",
-    "content_type": 13,
-    "codename": "change_sustainabilityarchitecturechecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 51,
-  "fields": {
-    "name": "Can delete sustainability architecture checklist",
-    "content_type": 13,
-    "codename": "delete_sustainabilityarchitecturechecklist"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 52,
-  "fields": {
-    "name": "Can view sustainability architecture checklist",
-    "content_type": 13,
-    "codename": "view_sustainabilityarchitecturechecklist"
+    "codename": "view_administrationchecklist"
   }
 },
 {
@@ -888,7 +764,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-05-12T08:50:46.844Z",
+    "last_login": "2023-06-02T17:23:23.347Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -899,14 +775,6 @@
     "date_joined": "2023-02-26T18:25:59.346Z",
     "groups": [],
     "user_permissions": []
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "1verupdhsxb98xgfut6jjuqq78d6dhmx",
-  "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGFbqF49N5vIMsuSNVAUtqT8d9tkx50jvPezFt43NbstxYXP7O4CiUuv11AesZyAH5guVdJtazLHOShyJM2OVWOr9vp_h1kbHlfu9h3bCgZAyMnSmlgBKsGhQoBVEeWaNQ9sGXHzpBzGnSf9jgMwEZ8vvZWOHg:1pxRCb:AZl4FVqTbj7h0dNduWxiEmV4WByBhuXEZYz85UNpEhA",
-    "expire_date": "2023-05-26T11:44:49.268Z"
   }
 },
 {
@@ -927,10 +795,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "wfr1mso3qeeze0wzse6sa81er0gu9oiw",
+  "pk": "dqcocxnefhypjhbl9ak7aw6vhsiqltaa",
   "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGFbqF49N5vIMsuSNVAUtqT8d9tkx50jvPezFt43NbstxYXP7O4CiUuv11AesZyAH5guVdJtazLHOShyJM2OVWOr9vp_h1kbHlfu9h3bCgZAyMnSmlgBKsGhQoBVEeWaNQ9sGXHzpBzGnSf9jgMwEZ8vvZWOHg:1q537Q:Spmq5YihiH-krdKua7SekvW6RFt0SK-lRzltxFEwc-k",
-    "expire_date": "2023-06-16T11:38:56.771Z"
+    "session_data": ".eJxVjMEOwiAQRP-FsyGFbqF49N5vIMsuSNVAUtqT8d9tkx50jvPezFt43NbstxYXP7O4CiUuv11AesZyAH5guVdJtazLHOShyJM2OVWOr9vp_h1kbHlfu9h3bCgZAyMnSmlgBKsGhQoBVEeWaNQ9sGXHzpBzGnSf9jgMwEZ8vvZWOHg:1q58Ul:HGNABZYGt5rapxcqgZ8bVDSAE4PAfvMmdFuJbVQNOQA",
+    "expire_date": "2023-06-16T17:23:23.347Z"
   }
 },
 {
@@ -1042,27 +910,10 @@
   }
 },
 {
-  "model": "cpmonitor.sustainabilityarchitecturechecklist",
-  "pk": 2,
+  "model": "cpmonitor.administrationchecklist",
+  "pk": 1,
   "fields": {
-    "Nachhaltigkeitsarchitektur in der Verwaltung Checkliste": 1,
-    "climate_protection_management_exists": true,
-    "climate_technical_committee_exists": false,
-    "climate_relevance_check_exists": true,
-    "interdisciplinary_climate_protection_exists": false,
-    "climate_protection_monitoring_exists": true,
-    "intersectoral_concepts_exists": false,
-    "climate_protection_reports_are_continuously_published": true,
-    "guidelines_for_sustainable_procurement_exists": false,
-    "municipal_office_for_funding_management_exists": false,
-    "public_relation_with_local_actors_exists": false
-  }
-},
-{
-  "model": "cpmonitor.sustainabilityarchitecturechecklist",
-  "pk": 3,
-  "fields": {
-    "Nachhaltigkeitsarchitektur in der Verwaltung Checkliste": 3,
+    "city": 3,
     "climate_protection_management_exists": true,
     "climate_technical_committee_exists": true,
     "climate_relevance_check_exists": true,
@@ -1073,6 +924,23 @@
     "guidelines_for_sustainable_procurement_exists": true,
     "municipal_office_for_funding_management_exists": true,
     "public_relation_with_local_actors_exists": true
+  }
+},
+{
+  "model": "cpmonitor.administrationchecklist",
+  "pk": 2,
+  "fields": {
+    "city": 1,
+    "climate_protection_management_exists": true,
+    "climate_technical_committee_exists": true,
+    "climate_relevance_check_exists": true,
+    "interdisciplinary_climate_protection_exists": true,
+    "climate_protection_monitoring_exists": true,
+    "intersectoral_concepts_exists": false,
+    "climate_protection_reports_are_continuously_published": false,
+    "guidelines_for_sustainable_procurement_exists": false,
+    "municipal_office_for_funding_management_exists": false,
+    "public_relation_with_local_actors_exists": false
   }
 },
 {
