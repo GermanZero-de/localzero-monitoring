@@ -874,7 +874,6 @@
   "pk": 1,
   "fields": {
     "city": 1,
-    "cap_exists": true,
     "target_date_exists": true,
     "based_on_remaining_co2_budget": true,
     "sectors_of_climate_vision_used": false,
@@ -894,7 +893,6 @@
   "pk": 2,
   "fields": {
     "city": 3,
-    "cap_exists": true,
     "target_date_exists": true,
     "based_on_remaining_co2_budget": true,
     "sectors_of_climate_vision_used": true,
