@@ -86,8 +86,7 @@ def city(request, city_slug):
     _calculate_summary(city)
 
     cap_checklist_for_city = _get_cap_checklist(city)
-    cap_checklist_number_fulfilled = list(cap_checklist_for_city.values()).count(True)
-    cap_checklist_total = 13
+    cap_checklist_exists = cap_checklist_for_city != {}
 
     administration_checklist_for_city = _get_administration_checklist(city)
     administration_checklist_exists = administration_checklist_for_city != {}
@@ -97,16 +96,29 @@ def city(request, city_slug):
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
-        "cap_checklist_exists": cap_checklist_for_city != {},
-        "cap_checklist_number_fulfilled": cap_checklist_number_fulfilled,
-        "cap_checklist_proportion_fulfilled": round(
-            cap_checklist_number_fulfilled / cap_checklist_total * 100
-        ),
+        "cap_checklist_exists": cap_checklist_exists,
         "administration_checklist_exists": administration_checklist_exists,
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,
     }
+
+    if cap_checklist_exists:
+        cap_checklist_total = len(cap_checklist_for_city)
+        cap_checklist_number_fulfilled = list(cap_checklist_for_city.values()).count(
+            True
+        )
+        cap_checklist_proportion_fulfilled = round(
+            cap_checklist_number_fulfilled / cap_checklist_total * 100
+        )
+
+        context.update(
+            {
+                "cap_checklist_total": cap_checklist_total,
+                "cap_checklist_number_fulfilled": cap_checklist_number_fulfilled,
+                "cap_checklist_proportion_fulfilled": cap_checklist_proportion_fulfilled,
+            }
+        )
 
     if administration_checklist_exists:
         administration_checklist_total = len(administration_checklist_for_city)
