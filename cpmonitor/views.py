@@ -15,7 +15,13 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from martor.utils import LazyEncoder
 
-from .models import City, ExecutionStatus, Task, CapChecklist
+from .models import (
+    City,
+    ExecutionStatus,
+    Task,
+    CapChecklist,
+    AdministrationChecklist,
+)
 
 
 def _calculate_summary(node):
@@ -79,16 +85,38 @@ def city(request, city_slug):
     groups, tasks = _get_children(city)
     _calculate_summary(city)
 
+    administration_checklist_for_city = get_administration_checklist(city)
+    administration_checklist_exists = administration_checklist_for_city != {}
+
     context = {
         "city": city,
         "groups": groups,
         "tasks": tasks,
         "charts": city.charts.all,
         "cap_checklist": get_cap_checklist(city),
+        "administration_checklist_exists": administration_checklist_exists,
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,
     }
+
+    if administration_checklist_exists:
+        administration_checklist_total = len(administration_checklist_for_city)
+        administration_checklist_number_fulfilled = list(
+            administration_checklist_for_city.values()
+        ).count(True)
+        administration_checklist_proportion_fulfilled = round(
+            administration_checklist_number_fulfilled
+            / administration_checklist_total
+            * 100
+        )
+        context.update(
+            {
+                "administration_checklist_total": administration_checklist_total,
+                "administration_checklist_number_fulfilled": administration_checklist_number_fulfilled,
+                "administration_checklist_proportion_fulfilled": administration_checklist_proportion_fulfilled,
+            }
+        )
 
     if city.resolution_date and city.target_year:
         target_date = date(city.target_year, 12, 31)
@@ -134,6 +162,36 @@ def get_cap_checklist(city):
 
     return {
         item.verbose_name: getattr(city.cap_checklist, item.attname)
+        for item in checklist_items
+    }
+
+
+def administration_checklist(request, city_slug):
+    try:
+        city = City.objects.get(slug=city_slug)
+    except City.DoesNotExist:
+        raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
+
+    context = {
+        "city": city,
+        "administration_checklist": get_administration_checklist(city),
+    }
+
+    return render(request, "administration_checklist.html", context)
+
+
+def get_administration_checklist(city) -> dict:
+    try:
+        checklist_items = city.administration_checklist._meta.get_fields()
+    except AdministrationChecklist.DoesNotExist:
+        return {}
+
+    checklist_items = [
+        item for item in checklist_items if item.attname not in ["city_id", "id"]
+    ]
+
+    return {
+        item.verbose_name: getattr(city.administration_checklist, item.attname)
         for item in checklist_items
     }
 
