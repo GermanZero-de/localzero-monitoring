@@ -456,15 +456,16 @@ The initial certificate was issued using the following command:
 docker exec acme-sh  --issue -d monitoring-test.localzero.net  -d monitoring.localzero.net --standalone --server https://acme-v02.api.letsencrypt.org/directory --fullchain-file /acme.sh/fullchain.cer --key-file /acme.sh/ssl-cert.key
 ```
 
-Renewal is triggered by a cron job which can be found in [crontab](crontab) or by executing the following on the server:
+Renewal is performed automatically by acme.sh's internal cron job, which...
+- checks if a renewal is necessary, and if so:
+- requests a new certificate from letsencrypt,
+- performs the challenge-response-mechanism to verify ownership of the domain
+- and exports the full certificate chain and key to where nginx can find it.
+
+A reload of the nginx config is independently triggered every four hours by our own cron job which can be found in [crontab](crontab) or by executing the following on the server:
 ```sh
 crontab -l
 ```
-The cron job runs [a script](renew-cert.sh) that tells the acme.sh container to perform a renewal twice a day (with some offset from 00:00 and 12:00 to not DDOS letsencrypt). acme.sh then...
-- checks if a renewal is necessary, and if so:
-- requests a new certificate from letsencrypt,
-- performs the challenge-response-mechanism to verify ownership of the domain,
-- exports the certificate and key to where nginx can find it
-- and tells nginx to reload its configuration, applying the renewed certificate.
+This job runs [a script](renew-cert.sh) which applies the latest certificate that acme.sh has produced. This means there can be some delay between renewal and application of the certificate, but since acme.sh performs renewal a few days before expiry, there should be enough time for nginx to reload the certificate.
 
 When running locally, we instead use a [certificate created for localhost](ssl_certificates_localhost). Since ownership of localhost cannot be certified, this is a single self-signed certificate instead of a full chain signed by a CA like on the server, and an exception must be added to your browser to trust it.
