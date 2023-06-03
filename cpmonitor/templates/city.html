@@ -17,7 +17,7 @@
             <div class="progress" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" aria-label="{{ days_gone }} Tage seit Beschluss,{{ days_left }} Tage bis zum Zieljahr" title="{{ days_gone }} Tage seit Beschluss
               <br>
               {{ days_left }} Tage bis zum Zieljahr">
-              <div class="progress-bar days-left"
+              <div class="progress-bar neutral"
                    role="progressbar"
                    data-value="{{ days_gone_proportion }}"
                    aria-valuenow="{{ days_gone_proportion }}"
@@ -57,30 +57,30 @@
       </a>
     </div>
     {% if cap_checklist_exists %}
-    <div class="col-sm-6 col-lg-3">
-      <a href="{% url 'cap_checklist' city.slug %}"
-         class="card card-link card-link-popup">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="subheader">Klimaaktionsplan</div>
-          </div>
-          <div class="h1 mb-3">{{ cap_checklist_number_fulfilled }}/13</div>
-          <div class="d-flex mb-2">
-            <div>Qualitätskriterien erfüllt</div>
-            <div class="ms-auto"></div>
-          </div>
-          <div class="progress">
-            <div class="progress-bar lz-status COMPLETE"
-                 role="progressbar"
-                 data-value="{{ cap_checklist_proportion_fulfilled }}"
-                 aria-valuenow="{{ cap_checklist_proportion_fulfilled }}"
-                 aria-valuemin="0"
-                 aria-valuemax="100">
+      <div class="col-sm-6 col-lg-3">
+        <a href="{% url 'cap_checklist' city.slug %}"
+           class="card card-link card-link-popup">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">Klimaaktionsplan</div>
+            </div>
+            <div class="h1 mb-3">{{ cap_checklist_number_fulfilled }}/13</div>
+            <div class="d-flex mb-2">
+              <div>Qualitätskriterien erfüllt</div>
+              <div class="ms-auto"></div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar neutral"
+                   role="progressbar"
+                   data-value="{{ cap_checklist_proportion_fulfilled }}"
+                   aria-valuenow="{{ cap_checklist_proportion_fulfilled }}"
+                   aria-valuemin="0"
+                   aria-valuemax="100">
+              </div>
             </div>
           </div>
-        </div>
-      </a>
-    </div>
+        </a>
+      </div>
     {% endif %}
     {% if administration_checklist_exists %}
       <div class="col-sm-6 col-lg-3">
@@ -96,7 +96,7 @@
               <div class="ms-auto"></div>
             </div>
             <div class="progress">
-              <div class="progress-bar lz-status COMPLETE"
+              <div class="progress-bar neutral"
                    role="progressbar"
                    data-value="{{ administration_checklist_proportion_fulfilled }}"
                    aria-valuenow="{{ administration_checklist_proportion_fulfilled }}"
