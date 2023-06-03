@@ -32,7 +32,7 @@ pytest-env = "^0.8.1"
 pytest-playwright = "^0.3.0"
 pytest-base-url = "^2.0.0"
 pytest-django = "^4.5.2"
-djlint = "^1.19.16"
+djlint = "^1.30.2"
 django-test-migrations = "^1.2.0"
 
 [build-system]
