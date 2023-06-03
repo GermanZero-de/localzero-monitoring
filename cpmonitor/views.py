@@ -85,11 +85,11 @@ def city(request, city_slug):
     groups, tasks = _get_children(city)
     _calculate_summary(city)
 
-    cap_checklist_for_city = get_cap_checklist(city)
+    cap_checklist_for_city = _get_cap_checklist(city)
     cap_checklist_number_fulfilled = list(cap_checklist_for_city.values()).count(True)
     cap_checklist_total = 13
 
-    administration_checklist_for_city = get_administration_checklist(city)
+    administration_checklist_for_city = _get_administration_checklist(city)
     administration_checklist_exists = administration_checklist_for_city != {}
 
     context = {
@@ -153,12 +153,12 @@ def cap_checklist(request, city_slug):
 
     context = {
         "city": city,
-        "cap_checklist": get_cap_checklist(city),
+        "cap_checklist": _get_cap_checklist(city),
     }
     return render(request, "cap_checklist.html", context)
 
 
-def get_cap_checklist(city) -> dict:
+def _get_cap_checklist(city) -> dict:
     try:
         checklist_items = city.cap_checklist._meta.get_fields()
     except CapChecklist.DoesNotExist:
@@ -182,13 +182,13 @@ def administration_checklist(request, city_slug):
 
     context = {
         "city": city,
-        "administration_checklist": get_administration_checklist(city),
+        "administration_checklist": _get_administration_checklist(city),
     }
 
     return render(request, "administration_checklist.html", context)
 
 
-def get_administration_checklist(city) -> dict:
+def _get_administration_checklist(city) -> dict:
     try:
         checklist_items = city.administration_checklist._meta.get_fields()
     except AdministrationChecklist.DoesNotExist:
