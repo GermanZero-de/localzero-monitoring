@@ -86,10 +86,7 @@ def city(request, city_slug):
     _calculate_summary(city)
 
     administration_checklist_for_city = get_administration_checklist(city)
-    administration_checklist_number_fulfilled = list(
-        administration_checklist_for_city.values()
-    ).count(True)
-    administration_checklist_total = 10
+    administration_checklist_exists = administration_checklist_for_city != {}
 
     context = {
         "city": city,
@@ -97,19 +94,29 @@ def city(request, city_slug):
         "tasks": tasks,
         "charts": city.charts.all,
         "cap_checklist": get_cap_checklist(city),
-        "administration_checklist": get_administration_checklist(city),
-        "administration_checklist_exists": administration_checklist_for_city != {},
-        "administration_checklist_total": administration_checklist_total,
-        "administration_checklist_number_fulfilled": administration_checklist_number_fulfilled,
-        "administration_checklist_proportion_fulfilled": round(
-            administration_checklist_number_fulfilled
-            / administration_checklist_total
-            * 100
-        ),
+        "administration_checklist_exists": administration_checklist_exists,
         "asmt_admin": city.assessment_administration,
         "asmt_plan": city.assessment_action_plan,
         "asmt_status": city.assessment_status,
     }
+
+    if administration_checklist_exists:
+        administration_checklist_total = len(administration_checklist_for_city)
+        administration_checklist_number_fulfilled = list(
+            administration_checklist_for_city.values()
+        ).count(True)
+        administration_checklist_proportion_fulfilled = round(
+            administration_checklist_number_fulfilled
+            / administration_checklist_total
+            * 100
+        )
+        context.update(
+            {
+                "administration_checklist_total": administration_checklist_total,
+                "administration_checklist_number_fulfilled": administration_checklist_number_fulfilled,
+                "administration_checklist_proportion_fulfilled": administration_checklist_proportion_fulfilled,
+            }
+        )
 
     if city.resolution_date and city.target_year:
         target_date = date(city.target_year, 12, 31)
