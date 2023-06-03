@@ -453,7 +453,7 @@ We currently use a single TLS certificate for both monitoring.localzero.org and 
 
 The initial certificate was issued using the following command:
 ```sh
-docker exec acme-sh  --issue -d monitoring-test.localzero.net  -d monitoring.localzero.net --standalone --server https://acme-v02.api.letsencrypt.org/directory --cert-file /acme.sh/ssl-cert.cer --key-file /acme.sh/ssl-cert.key
+docker exec acme-sh  --issue -d monitoring-test.localzero.net  -d monitoring.localzero.net --standalone --server https://acme-v02.api.letsencrypt.org/directory --fullchain-file /acme.sh/fullchain.cer --key-file /acme.sh/ssl-cert.key
 ```
 
 Renewal is triggered by a cron job which can be found in [crontab](crontab) or by executing the following on the server:
@@ -466,3 +466,5 @@ The cron job runs [a script](renew-cert.sh) that tells the acme.sh container to 
 - performs the challenge-response-mechanism to verify ownership of the domain,
 - exports the certificate and key to where nginx can find it
 - and tells nginx to reload its configuration, applying the renewed certificate.
+
+When running locally, we instead use a [certificate created for localhost](ssl_certificates_localhost). Since ownership of localhost cannot be certified, this is a single self-signed certificate instead of a full chain signed by a CA like on the server, and an exception must be added to your browser to trust it.
