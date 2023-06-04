@@ -59,8 +59,6 @@ class City(models.Model):
         """,
     )
 
-    # checklist_administration #72
-
     assessment_action_plan = models.TextField(
         "Bewertung Klimaaktionsplan",
         blank=True,
