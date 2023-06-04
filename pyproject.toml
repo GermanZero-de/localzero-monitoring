@@ -40,11 +40,11 @@ requires = ["poetry-core>=1.3.2"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-base_url = "https://localhost"
+base_url = "http://localhost"
 env = [
     "DJANGO_SETTINGS_MODULE=config.settings.container",
     "DJANGO_SECRET_KEY=somePlaceholder",
-    "DJANGO_CSRF_TRUSTED_ORIGINS=https://localhost",
+    "DJANGO_CSRF_TRUSTED_ORIGINS=http://localhost",
     "DJANGO_DEBUG=True",
     "DJANGO_ALLOW_ASYNC_UNSAFE=True",
 ]
