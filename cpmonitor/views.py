@@ -77,7 +77,7 @@ def index(request):
     )
 
 
-def city(request, city_slug):
+def city_view(request, city_slug):
     try:
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
@@ -85,11 +85,11 @@ def city(request, city_slug):
     groups, tasks = _get_children(city)
     _calculate_summary(city)
 
-    cap_checklist_for_city = _get_cap_checklist(city)
-    cap_checklist_exists = cap_checklist_for_city != {}
+    cap_checklist = _get_cap_checklist(city)
+    cap_checklist_exists = cap_checklist != {}
 
-    administration_checklist_for_city = _get_administration_checklist(city)
-    administration_checklist_exists = administration_checklist_for_city != {}
+    administration_checklist = _get_administration_checklist(city)
+    administration_checklist_exists = administration_checklist != {}
 
     context = {
         "city": city,
@@ -104,10 +104,8 @@ def city(request, city_slug):
     }
 
     if cap_checklist_exists:
-        cap_checklist_total = len(cap_checklist_for_city)
-        cap_checklist_number_fulfilled = list(cap_checklist_for_city.values()).count(
-            True
-        )
+        cap_checklist_total = len(cap_checklist)
+        cap_checklist_number_fulfilled = list(cap_checklist.values()).count(True)
         cap_checklist_proportion_fulfilled = round(
             cap_checklist_number_fulfilled / cap_checklist_total * 100
         )
@@ -121,9 +119,9 @@ def city(request, city_slug):
         )
 
     if administration_checklist_exists:
-        administration_checklist_total = len(administration_checklist_for_city)
+        administration_checklist_total = len(administration_checklist)
         administration_checklist_number_fulfilled = list(
-            administration_checklist_for_city.values()
+            administration_checklist.values()
         ).count(True)
         administration_checklist_proportion_fulfilled = round(
             administration_checklist_number_fulfilled
@@ -157,7 +155,7 @@ def city(request, city_slug):
     return render(request, "city.html", context)
 
 
-def cap_checklist(request, city_slug):
+def cap_checklist_view(request, city_slug):
     try:
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
@@ -186,7 +184,7 @@ def _get_cap_checklist(city) -> dict:
     }
 
 
-def administration_checklist(request, city_slug):
+def administration_checklist_view(request, city_slug):
     try:
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
@@ -216,7 +214,7 @@ def _get_administration_checklist(city) -> dict:
     }
 
 
-def task(request, city_slug, task_slugs=None):
+def task_view(request, city_slug, task_slugs=None):
     try:
         city = City.objects.get(slug=city_slug)
     except City.DoesNotExist:
@@ -255,7 +253,7 @@ def task(request, city_slug, task_slugs=None):
 
 
 @login_required
-def markdown_uploader(request):
+def markdown_uploader_view(request):
     if request.method != "POST":
         return HttpResponse(_("Invalid request!"))
     if "markdown-image-upload" not in request.FILES:
