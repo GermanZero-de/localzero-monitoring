@@ -27,25 +27,13 @@ services:
     image: nginxinc/nginx-unprivileged:alpine
     ports:
       - 8080
-      - 8443
     volumes:
       - nginx_config_volume:/etc/nginx/conf.d
       - nginx_extras_volume:/etc/nginx/conf.d/extras
       - static_volume:/cpmonitor/static
       - ${IMAGES_PATH}:/cpmonitor/images
-      - ${CERTIFICATES_PATH?:Please set the CERTIFICATES_PATH environment variable.}:/etc/letsencrypt
     depends_on:
       - djangoapp
-      - acme-sh
-    networks:
-      - nginx_network
-
-  acme-sh:
-    image: neilpang/acme.sh
-    container_name: acme-sh
-    command: daemon
-    volumes:
-      - ${CERTIFICATES_PATH?:Please set the CERTIFICATES_PATH environment variable.}:/acme.sh
     networks:
       - nginx_network
 

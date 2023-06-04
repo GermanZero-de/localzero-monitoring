@@ -9,9 +9,22 @@ services:
       - 443:443
     volumes:
       - ./conf.d:/etc/nginx/conf.d
+      - /home/monitoring/ssl_certificates:/etc/letsencrypt
     networks:
       - production
       - testing
+      - reverse_proxy_network
+    depends_on:
+      - acme-sh
+
+  acme-sh:
+    image: neilpang/acme.sh
+    container_name: acme-sh
+    command: daemon
+    volumes:
+      - /home/monitoring/ssl_certificates:/acme.sh
+    networks:
+      - reverse_proxy_network
 
 networks:
   production:
@@ -20,3 +33,5 @@ networks:
   testing:
     external:
       name: testing_nginx_network
+  reverse_proxy_network:
+    driver: bridge
