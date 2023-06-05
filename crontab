@@ -1,2 +1,2 @@
 # renew certificate around every midnight and noon, if necessary
-0 0,12 * * * sleep 3109 && /home/monitoring/renew-cert.sh > /home/monitoring/last_cert_renewal.log 2>&1
+0 */4 * * * sleep 3109 && /home/monitoring/renew-cert.sh > /home/monitoring/last_cert_renewal.log 2>&1
