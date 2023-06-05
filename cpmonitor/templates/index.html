@@ -1,5 +1,6 @@
 {% extends "pageframe.html" %}
 {% load static %}
+{% load martortags %}
 {% block page_body %}
   <div class="container">
     <div class="row">
@@ -28,6 +29,20 @@
              height="100%">
       </div>
     </div>
+  </div>
+  <div class="row row-deck row-cards">
+    {% for city in cities %}
+      <div class="col-sm-6 col-lg-3">
+        <a class="card" href="{% url 'city' city.slug %}">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="h2 mb-3">{{ city.name }}</div>
+            </div>
+            <div class="lz-card-summary lines-3">{{ city.introduction | safe_markdown }}</div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
   </div>
   <div class="container fixed-bottom">
     <footer class="py-2 my-2 border-top">

@@ -72,7 +72,7 @@ def index(request):
         request,
         "index.html",
         {
-            "cities": City.objects.order_by("id"),
+            "cities": City.objects.order_by("name"),
         },
     )
 
