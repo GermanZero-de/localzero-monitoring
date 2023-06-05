@@ -88,7 +88,14 @@ figure.lz-chart {
   }
 }
 
-.lz-card-summary {
+.lz-card-summary-3 {
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lz-card-summary-8 {
   -webkit-line-clamp: 8;
   display: -webkit-box;
   -webkit-box-orient: vertical;

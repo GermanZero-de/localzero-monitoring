@@ -38,7 +38,7 @@
             <div class="d-flex align-items-center">
               <div class="subheader">{{ city.name }}</div>
             </div>
-            {{ city.introduction | truncatechars:100 | safe_markdown }}
+            <div class="lz-card-summary-3">{{ city.introduction | safe_markdown }}</div>
           </div>
         </a>
       </div>
