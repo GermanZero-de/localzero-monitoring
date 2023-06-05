@@ -13,7 +13,7 @@
 .progress {
   --tblr-progress-height: 0.85rem;
 }
-.progress .progress-bar.days-left {
+.progress .progress-bar.neutral {
   background-color: #011633;
 }
 
