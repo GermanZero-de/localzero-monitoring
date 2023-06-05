@@ -142,6 +142,7 @@ class CapChecklist(models.Model):
         related_name="cap_checklist",
     )
 
+    cap_exists = models.BooleanField("Gibt es einen KAP?", default=False)
     target_date_exists = models.BooleanField(
         "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten"
         " kommunalen Gremium beschlossen?",
