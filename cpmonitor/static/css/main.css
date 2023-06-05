@@ -76,18 +76,16 @@ figure.lz-chart img {
   object-fit: contain;
 }
 
-.lz-card-summary-3 {
-  -webkit-line-clamp: 3;
+.lz-card-summary {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-.lz-card-summary-8 {
+.lz-card-summary.lines-3 {
+  -webkit-line-clamp: 3;
+}
+.lz-card-summary.lines-8 {
   -webkit-line-clamp: 8;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /*# sourceMappingURL=main.css.map */
