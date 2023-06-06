@@ -443,6 +443,7 @@ Commit the result.
 11. Start the reverse proxy:
     ```sh
     cd docker/reverseproxy
+    export export CERTIFICATES_PATH=/home/monitoring/ssl_certificates
     docker-compose up --detach --no-build
     cd -
     ```

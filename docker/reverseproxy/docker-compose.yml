@@ -9,7 +9,7 @@ services:
       - 443:443
     volumes:
       - ./conf.d:/etc/nginx/conf.d
-      - /home/monitoring/ssl_certificates:/etc/letsencrypt
+      - ${CERTIFICATES_PATH}:/etc/letsencrypt
     networks:
       - production
       - testing
@@ -22,7 +22,7 @@ services:
     container_name: acme-sh
     command: daemon
     volumes:
-      - /home/monitoring/ssl_certificates:/acme.sh
+      - ${CERTIFICATES_PATH}:/acme.sh
     networks:
       - reverse_proxy_network
 
