@@ -3,7 +3,7 @@ FROM node:19-alpine AS frontend-builder
 
 WORKDIR /cpmonitor
 
-COPY package.json yarn.lock .
+COPY package.json yarn.lock ./
 COPY cpmonitor/static/css cpmonitor/static/css
 RUN yarn install && \
     yarn run compile:css
