@@ -6,6 +6,7 @@
 *.tar
 **/*.css
 **/*.css.map
+cpmonitor/images
 db/db.sqlite3
 docker-compose.yml
 LICENSE
