@@ -1,6 +1,14 @@
-{% extends "pageframe.html" %}
+{% extends "base.html" %}
 {% load martortags %}
-{% block page_body %}
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <h1>Monitoring für {{ city.name }}</h1>
+    </div>
+    <div class="col-auto">
+      <span class="align-middle">von <a href="">MünchenZero</a></span>
+    </div>
+  </div>
   <div class="row row-deck row-cards">
     {% if days_gone %}
       <div class="col-sm-6 col-lg-3">
@@ -135,4 +143,4 @@
     </div>
   </div>
 </div>
-{% endblock page_body %}
+{% endblock content %}

@@ -81,20 +81,20 @@ def _get_cities(request, slug=None):
         if slug:
             return cities.get(slug=slug)
         else:
-            return cities
+            return cities.order_by("name")
     except City.DoesNotExist:
         return None
 
 
+def _get_base_context(request):
+    return {
+        "cities": _get_cities(request),
+    }
+
+
 # Our main page
 def index_view(request):
-    return render(
-        request,
-        "index.html",
-        {
-            "cities": _get_cities(request).order_by("name"),
-        },
-    )
+    return render(request, "index.html", _get_base_context(request))
 
 
 def city_view(request, city_slug):
@@ -111,17 +111,20 @@ def city_view(request, city_slug):
     administration_checklist = _get_administration_checklist(city)
     administration_checklist_exists = administration_checklist != {}
 
-    context = {
-        "city": city,
-        "groups": groups,
-        "tasks": tasks,
-        "charts": city.charts.all,
-        "cap_checklist_exists": cap_checklist_exists,
-        "administration_checklist_exists": administration_checklist_exists,
-        "asmt_admin": city.assessment_administration,
-        "asmt_plan": city.assessment_action_plan,
-        "asmt_status": city.assessment_status,
-    }
+    context = _get_base_context(request)
+    context.update(
+        {
+            "city": city,
+            "groups": groups,
+            "tasks": tasks,
+            "charts": city.charts.all,
+            "cap_checklist_exists": cap_checklist_exists,
+            "administration_checklist_exists": administration_checklist_exists,
+            "asmt_admin": city.assessment_administration,
+            "asmt_plan": city.assessment_action_plan,
+            "asmt_status": city.assessment_status,
+        }
+    )
 
     if cap_checklist_exists:
         cap_checklist_total = len(cap_checklist)
@@ -180,10 +183,13 @@ def cap_checklist_view(request, city_slug):
     if not city:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
 
-    context = {
-        "city": city,
-        "cap_checklist": _get_cap_checklist(city),
-    }
+    context = _get_base_context(request)
+    context.update(
+        {
+            "city": city,
+            "cap_checklist": _get_cap_checklist(city),
+        }
+    )
     return render(request, "cap_checklist.html", context)
 
 
@@ -208,10 +214,13 @@ def administration_checklist_view(request, city_slug):
     if not city:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
 
-    context = {
-        "city": city,
-        "administration_checklist": _get_administration_checklist(city),
-    }
+    context = _get_base_context(request)
+    context.update(
+        {
+            "city": city,
+            "administration_checklist": _get_administration_checklist(city),
+        }
+    )
 
     return render(request, "administration_checklist.html", context)
 
@@ -260,20 +269,27 @@ def task_view(request, city_slug, task_slugs=None):
             "Wir haben keine Daten zu dem Sektor / der Maßnahme '%s'." % task_slugs
         )
 
+    context = _get_base_context(request)
+    context.update({"city": city, "node": task})
     if task.is_leaf():
         return render(
             request,
             "task.html",
-            {"city": city, "node": task},
+            context,
         )
     else:
         groups, tasks = _get_children(request, city, task)
 
+        context.update({"groups": groups, "tasks": tasks})
         return render(
             request,
             "taskgroup.html",
-            {"city": city, "node": task, "groups": groups, "tasks": tasks},
+            context,
         )
+
+
+def project_view(request):
+    return render(request, "project.html", _get_base_context(request))
 
 
 @login_required

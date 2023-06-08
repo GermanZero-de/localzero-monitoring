@@ -15,19 +15,22 @@ urlpatterns = [
     path("martor/", include("martor.urls")),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("", views.index_view, name="index"),
-    path("<slug:city_slug>/", views.city_view, name="city"),
+    path("kommunen/<slug:city_slug>/", views.city_view, name="city"),
     path(
-        "<slug:city_slug>/kap_checkliste/",
+        "kommunen/<slug:city_slug>/kap_checkliste/",
         views.cap_checklist_view,
         name="cap_checklist",
     ),
     path(
-        "<slug:city_slug>/verwaltungsstrukturen_checkliste/",
+        "kommunen/<slug:city_slug>/verwaltungsstrukturen_checkliste/",
         views.administration_checklist_view,
         name="administration_checklist",
     ),
-    path("<slug:city_slug>/massnahmen/", views.task_view, name="task"),
+    path("kommunen/<slug:city_slug>/massnahmen/", views.task_view, name="task"),
     path(
-        "<slug:city_slug>/massnahmen/<path:task_slugs>/", views.task_view, name="task"
+        "kommunen/<slug:city_slug>/massnahmen/<path:task_slugs>/",
+        views.task_view,
+        name="task",
     ),
+    path("projekt/", views.project_view, name="project"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

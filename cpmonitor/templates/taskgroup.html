@@ -1,4 +1,4 @@
-{% extends "pageframe.html" %}
+{% extends "base.html" %}
 {% load martortags %}
 {% block breadcrumbs %}
   {% if node %}
@@ -21,7 +21,7 @@
     </header>
   {% endif %}
 {% endblock breadcrumbs %}
-{% block page_body %}
+{% block content %}
   {% if node %}
     <div class="col">
       <!-- Page pre-title -->
@@ -82,4 +82,4 @@
       {% endfor %}
     </div>
   {% endif %}
-{% endblock page_body %}
+{% endblock content %}
