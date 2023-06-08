@@ -423,7 +423,7 @@ Commit the result.
     docker-compose down --volumes
     # backup the db
     cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.${DATESTR}
-    cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/testing/uploads.${DATESTR}
+    cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/<testing|production>/uploads.${DATESTR}
     # apply migrations using a temporary container
     docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:latest sh
     DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
