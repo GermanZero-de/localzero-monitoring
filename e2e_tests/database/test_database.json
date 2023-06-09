@@ -855,7 +855,7 @@
   "model": "cpmonitor.city",
   "pk": 2,
   "fields": {
-    "draft_mode": true,
+    "draft_mode": false,
     "name": "Ohnenix",
     "zipcode": "00000",
     "url": "",
@@ -876,7 +876,7 @@
   "model": "cpmonitor.city",
   "pk": 3,
   "fields": {
-    "draft_mode": true,
+    "draft_mode": false,
     "name": "Mitallem",
     "zipcode": "99999",
     "url": "https://mitallem.de/",
