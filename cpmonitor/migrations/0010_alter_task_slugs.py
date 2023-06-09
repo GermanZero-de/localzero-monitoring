@@ -2,11 +2,14 @@
 
 from django.db import migrations, models
 
-from ..models import Task
+from ..models import Task as FullTask
 
 
 def correct_slugs(apps, schema_editor):
-    for task in Task.objects.all():
+    Task = apps.get_model("cpmonitor", "Task")
+    db_alias = schema_editor.connection.alias
+    for task in Task.objects.using(db_alias).all():
+        task.__class__ = FullTask
         task.save()
 
 
