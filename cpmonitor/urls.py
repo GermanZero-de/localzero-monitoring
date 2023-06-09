@@ -33,4 +33,8 @@ urlpatterns = [
         name="task",
     ),
     path("projekt/", views.project_view, name="project"),
+    path("impressum/", views.impressum_view, name="impressum"),
+    path("datenschutz/", views.datenschutz_view, name="datenschutz"),
+    path("jetzt-spenden/", views.jetzt_spenden_view, name="jetzt-spenden"),
+    path("ueber-uns/", views.ueber_uns_view, name="ueber-uns"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

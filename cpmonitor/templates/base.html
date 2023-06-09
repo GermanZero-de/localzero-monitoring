@@ -25,18 +25,19 @@
           Vorab-Version. Die Software befindet sich noch in Entwicklung. <a href="https://github.com/orgs/GermanZero-de">Github-Projekt</a>
         </div>
       </header>
-      <header class="navbar navbar-expand-md d-print-none sticky-top">
+      <header id="site-header"
+              class="navbar navbar-expand-md d-print-none sticky-top">
         <div class="container-xl">
-          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="{% url 'index' %}">
-              <img src="{% static 'logo.png' %}"
-                   alt="LocalZero Monitoring Logo"
+          <a href="{% url 'index' %}">
+            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+              <img src="{% static 'Logo_Text.svg' %}"
+                   alt="LocalZero Logo"
+                   width="98"
                    height="35"
-                   width="35"
                    class="d-inline-block align-middle">
-            </a>
-            LocalZero Monitoring
-          </h1>
+              <p>Monitoring</p>
+            </h1>
+          </a>
           <div class="collapse navbar-collapse" id="navbar-menu">
             <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
               <ul class="navbar-nav">
@@ -46,7 +47,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">
+                  <a class="nav-link" href="{% url 'ueber-uns' %}">
                     <span class="nav-link-title">Über uns</span>
                   </a>
                 </li>
@@ -66,6 +67,13 @@
                 </li>
               </ul>
             </div>
+          </div>
+          <div class="nav-spenden-container">
+            <a class="btn nav-spenden"
+               href="{% url 'jetzt-spenden' %}"
+               type="button">Jetzt
+              <br>
+            spenden</a>
           </div>
         </div>
       </header>
@@ -87,17 +95,17 @@
             <div class="col-lg-auto ms-lg-auto">
               <ul class="list-inline list-inline-dots mb-0">
                 <li class="list-inline-item">
-                  <a href="" target="_blank">Impressum</a>
+                  <a href="{% url 'impressum' %}">Impressum</a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="">Datenschutz</a>
+                  <a href="{% url 'datenschutz' %}">Datenschutz</a>
                 </li>
               </ul>
             </div>
             <div class="col-12 col-lg-auto mt-3 mt-lg-0">
               <ul class="list-inline list-inline-dots mb-0">
                 <li class="list-inline-item">
-                  Copyright ©  <a href="https://localzero.net/">LocalZero.net</a>
+                  Copyright © <a href="https://localzero.net/">LocalZero.net</a>
                 </li>
               </ul>
             </div>

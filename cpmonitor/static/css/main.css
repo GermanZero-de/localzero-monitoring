@@ -1,5 +1,5 @@
 :root {
-  --tblr-body-bg: #fff9e5;
+  --tblr-body-bg: #fff9d5;
   --tblr-font-weight-bold: 700;
   --tblr-primary: #ffc80c;
   --tblr-primary-rgb: 255, 200, 12;
@@ -24,9 +24,11 @@
   --tblr-navbar-bg: white;
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.12);
   padding: 10px;
+  /*#region ******* Spendenbutton ***********/
+  /*#endregion*/
 }
 .navbar h1 {
-  color: var(--lz-yellow) !important;
+  color: black !important;
   margin-right: 40px;
 }
 .navbar h1 img {
@@ -47,6 +49,35 @@
 .navbar.lz-breadcrumbs-bar {
   background: white;
   min-height: 0px;
+}
+.navbar .nav-spenden-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.navbar .nav-spenden-container a.nav-spenden {
+  flex-shrink: 0;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  font-family: FabrikatNormal, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  line-height: 1.2;
+  color: #011633;
+  width: 136px;
+  height: auto;
+  padding: 7px 12px 7px 12px;
+  border-radius: 0 25px 25px 25px;
+  border: solid 0 #a3d869;
+  background-color: #a3d869;
+  margin: 0px 24px 0px 0px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.navbar .nav-spenden-container a.nav-spenden:hover {
+  background: var(--lz-yellow);
 }
 
 .footer {
@@ -115,7 +146,7 @@ figure.lz-chart img {
 }
 
 .lz-construction-banner {
-  background: orange;
+  background: #ffc80c;
   font-weight: bold;
   padding-top: 3px;
   padding-bottom: 3px;

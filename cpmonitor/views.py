@@ -292,6 +292,22 @@ def project_view(request):
     return render(request, "project.html", _get_base_context(request))
 
 
+def impressum_view(request):
+    return render(request, "impressum.html", _get_base_context(request))
+
+
+def datenschutz_view(request):
+    return render(request, "datenschutz.html", _get_base_context(request))
+
+
+def jetzt_spenden_view(request):
+    return render(request, "jetzt-spenden.html", _get_base_context(request))
+
+
+def ueber_uns_view(request):
+    return render(request, "ueber-uns.html", _get_base_context(request))
+
+
 @login_required
 def markdown_uploader_view(request):
     if request.method != "POST":
