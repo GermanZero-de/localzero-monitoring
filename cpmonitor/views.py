@@ -67,7 +67,7 @@ def _get_children(city, node=None):
 
 
 # Our main page
-def index(request):
+def index_view(request):
     return render(
         request,
         "index.html",

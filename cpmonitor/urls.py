@@ -14,7 +14,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("martor/", include("martor.urls")),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
-    path("", views.index, name="index"),
+    path("", views.index_view, name="index"),
     path("<slug:city_slug>/", views.city_view, name="city"),
     path(
         "<slug:city_slug>/kap_checkliste/",
