@@ -419,7 +419,7 @@ Commit the result.
     ```
 9. Stop the reverse proxy:
     ```sh
-    cd docker/reverseproxy
+    cd reverseproxy
     docker-compose down
     cd -
     ```
