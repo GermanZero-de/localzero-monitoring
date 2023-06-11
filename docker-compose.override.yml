@@ -1,5 +1,6 @@
 version: '3'
 
+# Bind to HTTP port to allow local development without reverse proxy.
 services:
   nginx-unprivileged:
     ports:
