@@ -16,6 +16,15 @@ class City(models.Model):
         verbose_name = "Kommune"
         verbose_name_plural = "Kommunen"
 
+    draft_mode = models.BooleanField(
+        "Entwurfs-Modus",
+        default=True,
+        help_text=(
+            "Im Entwurfs-Modus wird ist die Kommune für normale Besucher im Frontend unsichtbar."
+            " Nur wenn im gleichen Browser ein User im Admin angemeldet ist, wird sie angezeigt."
+        ),
+    )
+
     name = models.CharField("Name", max_length=255)
     zipcode = models.CharField("PLZ", max_length=5)
     url = models.URLField("Homepage", blank=True)
@@ -206,15 +215,18 @@ class AdministrationChecklist(models.Model):
     )
 
     climate_protection_management_exists = models.BooleanField(
-        "Gibt es ein Klimaschutzmanagement? Ist dieses befugt, Entscheidungen zu treffen? Sind Haushaltsmittel hinterlegt?",
+        "Gibt es ein Klimaschutzmanagement? Ist dieses befugt, Entscheidungen zu treffen? Sind"
+        " Haushaltsmittel hinterlegt?",
         default=False,
     )
     climate_technical_committee_exists = models.BooleanField(
-        "Gibt es einen Fachausschuss mit dem Fokus auf Klimaschutz? Ist dieser befugt, Haushaltsentscheidungen zu treffen?",
+        "Gibt es einen Fachausschuss mit dem Fokus auf Klimaschutz? Ist dieser befugt,"
+        " Haushaltsentscheidungen zu treffen?",
         default=False,
     )
     climate_relevance_check_exists = models.BooleanField(
-        "Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die Auswirkungen auf das Klima geprüft?",
+        "Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
+        " Auswirkungen auf das Klima geprüft?",
         default=False,
     )
     interdisciplinary_climate_protection_exists = models.BooleanField(
@@ -226,7 +238,8 @@ class AdministrationChecklist(models.Model):
         default=False,
     )
     intersectoral_concepts_exists = models.BooleanField(
-        "Gibt es (sektorenübergreifende) Konzepte (siehe Planung und Konzepte bzw. Sektorenübergreifende Konzepte)?",
+        "Gibt es (sektorenübergreifende) Konzepte (siehe Planung und Konzepte bzw."
+        " Sektorenübergreifende Konzepte)?",
         default=False,
     )
     climate_protection_reports_are_continuously_published = models.BooleanField(
@@ -237,7 +250,8 @@ class AdministrationChecklist(models.Model):
         "Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?", default=False
     )
     municipal_office_for_funding_management_exists = models.BooleanField(
-        "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
+        "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung"
+        " etc. für den Klimaschutz)?",
         default=False,
     )
     public_relation_with_local_actors_exists = models.BooleanField(
@@ -272,6 +286,15 @@ class Task(MP_Node):
     city = models.ForeignKey(
         City,
         on_delete=models.PROTECT,
+    )
+
+    draft_mode = models.BooleanField(
+        "Entwurfs-Modus",
+        default=True,
+        help_text=(
+            "Im Entwurfs-Modus wird ist der Sektor/die Maßnahme für normale Besucher im Frontend unsichtbar."
+            " Nur wenn im gleichen Browser ein User im Admin angemeldet ist, wird er/sie angezeigt."
+        ),
     )
 
     title = models.CharField(

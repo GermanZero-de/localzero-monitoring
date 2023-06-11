@@ -24,18 +24,20 @@ from .models import (
 )
 
 
-def _calculate_summary(node):
-    """calculate summarized status for a give node or a whole city"""
+def _show_drafts(request):
+    return request.user.is_authenticated
+
+
+def _calculate_summary(request, node):
+    """calculate summarized status for a given node or a whole city"""
 
     statuses = {s.value: s for s in ExecutionStatus}
     if isinstance(node, City):
-        subtasks = [
-            t
-            for r in Task.get_root_nodes().filter(city=node)
-            for t in r.get_descendants().filter(numchild=0)
-        ]
+        subtasks = Task.objects.filter(city=node, numchild=0)
     else:
         subtasks = node.get_descendants().filter(numchild=0)
+    if not _show_drafts(request):
+        subtasks = subtasks.filter(draft_mode=False)
 
     subtasks_count = len(subtasks)
     status_counts = Counter([s.execution_status for s in subtasks])
@@ -52,38 +54,56 @@ def _calculate_summary(node):
     node.incomplete_proportion = 100 - node.complete_proportion
 
 
-def _get_children(city, node=None):
+def _get_children(request, city, node=None):
     if not node:
         children = Task.get_root_nodes().filter(city=city)
     else:
         children = node.get_children()
+    if not _show_drafts(request):
+        if city.draft_mode:
+            children = children.none()
+        else:
+            children = children.filter(draft_mode=False)
 
     groups = children.filter(numchild__gt=0)
     tasks = children.filter(numchild=0)
     for group in groups:
-        _calculate_summary(group)
+        _calculate_summary(request, group)
 
     return groups, tasks
 
 
+def _get_cities(request, slug=None):
+    try:
+        cities = City.objects.all()
+        if not _show_drafts(request):
+            cities = cities.filter(draft_mode=False)
+        if slug:
+            return cities.get(slug=slug)
+        else:
+            return cities
+    except City.DoesNotExist:
+        return None
+
+
 # Our main page
-def index(request):
+def index_view(request):
     return render(
         request,
         "index.html",
         {
-            "cities": City.objects.order_by("name"),
+            "cities": _get_cities(request).order_by("name"),
         },
     )
 
 
 def city_view(request, city_slug):
-    try:
-        city = City.objects.get(slug=city_slug)
-    except City.DoesNotExist:
+    city = _get_cities(request, city_slug)
+    if not city:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
-    groups, tasks = _get_children(city)
-    _calculate_summary(city)
+
+    groups, tasks = _get_children(request, city)
+    _calculate_summary(request, city)
 
     cap_checklist = _get_cap_checklist(city)
     cap_checklist_exists = cap_checklist != {}
@@ -156,9 +176,8 @@ def city_view(request, city_slug):
 
 
 def cap_checklist_view(request, city_slug):
-    try:
-        city = City.objects.get(slug=city_slug)
-    except City.DoesNotExist:
+    city = _get_cities(request, city_slug)
+    if not city:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
 
     context = {
@@ -185,9 +204,8 @@ def _get_cap_checklist(city) -> dict:
 
 
 def administration_checklist_view(request, city_slug):
-    try:
-        city = City.objects.get(slug=city_slug)
-    except City.DoesNotExist:
+    city = _get_cities(request, city_slug)
+    if not city:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
 
     context = {
@@ -214,14 +232,20 @@ def _get_administration_checklist(city) -> dict:
     }
 
 
+def _get_task(request, city, task_slugs):
+    task = Task.objects.get(city=city, slugs=task_slugs)
+    if task.draft_mode and not _show_drafts(request):
+        raise Task.DoesNotExist()
+    return task
+
+
 def task_view(request, city_slug, task_slugs=None):
-    try:
-        city = City.objects.get(slug=city_slug)
-    except City.DoesNotExist:
-        raise Http404("Wir haben keine Daten zu der Kommune '%s'." % city_slug)
+    city = _get_cities(request, city_slug)
+    if not city:
+        raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
 
     if not task_slugs:
-        groups, tasks = _get_children(city)
+        groups, tasks = _get_children(request, city)
 
         return render(
             request,
@@ -230,7 +254,7 @@ def task_view(request, city_slug, task_slugs=None):
         )
 
     try:
-        task: Task = Task.objects.get(city=city, slugs=task_slugs)
+        task: Task = _get_task(request, city, task_slugs)
     except Task.DoesNotExist:
         raise Http404(
             "Wir haben keine Daten zu dem Sektor / der Maßnahme '%s'." % task_slugs
@@ -243,7 +267,7 @@ def task_view(request, city_slug, task_slugs=None):
             {"city": city, "node": task},
         )
     else:
-        groups, tasks = _get_children(city, task)
+        groups, tasks = _get_children(request, city, task)
 
         return render(
             request,

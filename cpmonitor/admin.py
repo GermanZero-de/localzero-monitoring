@@ -191,6 +191,7 @@ class TaskAdmin(TreeAdmin):
     # ------ add and change task page ------
     fields = (
         "city",
+        "draft_mode",
         "title",
         "summary",
         "description",
