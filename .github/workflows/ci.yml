@@ -30,13 +30,11 @@ jobs:
         run: poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
       - name: build testing application
         run: |
-          sed -i 's/ENVIRONMENT_NAME=local/ENVIRONMENT_NAME=testing/g' .env
-          docker-compose -f docker-compose.yml -p testing up -d
+          docker-compose -f docker-compose.yml up -d
       - name: start reverse-proxy
         run: |
           cd docker/reverseproxy
           docker network create -d bridge production_nginx_network
-          export CERTIFICATES_PATH=./ssl_certificates_localhost
           docker compose up -d --build
       - name: run tests
         run: poetry run pytest

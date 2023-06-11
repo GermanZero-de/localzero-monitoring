@@ -120,8 +120,10 @@ poetry run python manage.py migrate --settings=config.settings.local
 poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
 cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
 docker compose up -d --build
+docker compose -f docker/reverseproxy/docker-compose.yml up -d --build
 pytest e2e_tests/test_deployed.py
 docker compose down --volumes
+docker compose -f docker/reverseproxy/docker-compose.yml down --volumes
 
 # run a single test
 pytest <path-to-test>

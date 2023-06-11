@@ -28,10 +28,10 @@ services:
 
 networks:
   production:
-    external:
-      name: production_nginx_network
+    name: production_nginx_network
+    external: true
   testing:
-    external:
-      name: testing_nginx_network
+    name: testing_nginx_network
+    external: true
   reverse_proxy_network:
     driver: bridge
