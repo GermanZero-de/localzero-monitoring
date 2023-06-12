@@ -6,7 +6,7 @@ def test_should_go_to_city_view_when_clicking_city_select_dropdown_item(
 ):
     page.goto(live_server.url)
 
-    city_select_button = page.get_by_text("Stadt auswählen")
+    city_select_button = page.get_by_role("button", name="Kommunen")
     city_select_button.click()
 
     city_button = page.locator(".dropdown-item", has_text="Beispielstadt")

@@ -12,10 +12,11 @@ def test_should_show_the_title_when_being_on_the_front_page(live_server, page: P
 def test_should_show_the_city_name_in_city_select_dropdown(live_server, page: Page):
     page.goto(live_server.url)
 
-    city_select_button = page.get_by_text("Stadt auswählen")
+    city_select_button = page.get_by_role("button", name="Kommunen")
     city_select_button.click()
 
-    assert "Beispielstadt" in page.get_by_role("listitem").all_inner_texts()
+    city_link = page.get_by_role("link", name="Beispielstadt", exact=True)
+    expect(city_link).to_contain_text("Beispielstadt")
 
 
 def test_should_show_the_city_cards_with_an_introductory_text(live_server, page: Page):
