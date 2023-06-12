@@ -1,4 +1,5 @@
 {% load static %}
+{% load martortags %}
 <!DOCTYPE HTML>
 <html lang="de">
   <head>
@@ -18,8 +19,100 @@
     <script src="{% static 'tabler/js/tabler.min.js' %}" defer></script>
   </head>
   <body>
-    {% block content %}
-    {% endblock content %}
+    <div class="page">
+      <header class="lz-construction-banner">
+        <div class="container-xl">
+          Vorab-Version. Die Software befindet sich noch in Entwicklung. <a href="https://github.com/orgs/GermanZero-de">Github-Projekt</a>
+        </div>
+      </header>
+      <header id="site-header"
+              class="navbar navbar-expand-md d-print-none sticky-top">
+        <div class="container-xl">
+          <a href="{% url 'index' %}">
+            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+              <img src="{% static 'Logo_Text.svg' %}"
+                   alt="LocalZero Logo"
+                   width="98"
+                   height="35"
+                   class="d-inline-block align-middle">
+              <p>Monitoring</p>
+            </h1>
+          </a>
+          <div class="collapse navbar-collapse" id="navbar-menu">
+            <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'project' %}">
+                    <span class="nav-link-title">Das Projekt</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'ueber-uns' %}">
+                    <span class="nav-link-title">Über uns</span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link"
+                     data-bs-toggle="dropdown"
+                     data-bs-auto-close="outside"
+                     role="button"
+                     aria-expanded="false">
+                    <span class="nav-link-title">Kommunen</span>
+                  </a>
+                  <div class="dropdown-menu">
+                    {% for city in cities %}
+                      <a class="dropdown-item" href="{% url 'city' city.slug %}">{{ city.name }}</a>
+                    {% endfor %}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="nav-spenden-container">
+            <a class="btn nav-spenden"
+               href="{% url 'jetzt-spenden' %}"
+               type="button">Jetzt
+              <br>
+            spenden</a>
+          </div>
+        </div>
+      </header>
+      {% block breadcrumbs %}
+      {% endblock breadcrumbs %}
+      <div class="page-wrapper">
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="space-y">
+              {% block content %}
+              {% endblock content %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer d-print-none">
+        <div class="container-xl">
+          <div class="row text-center align-items-center flex-row-reverse">
+            <div class="col-lg-auto ms-lg-auto">
+              <ul class="list-inline list-inline-dots mb-0">
+                <li class="list-inline-item">
+                  <a href="{% url 'impressum' %}">Impressum</a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="{% url 'datenschutz' %}">Datenschutz</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+              <ul class="list-inline list-inline-dots mb-0">
+                <li class="list-inline-item">
+                  Copyright © <a href="https://localzero.net/">LocalZero.net</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
     <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>

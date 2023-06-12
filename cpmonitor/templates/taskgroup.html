@@ -1,5 +1,8 @@
-{% extends "pageframe.html" %}
+{% extends "base.html" %}
 {% load martortags %}
+{% block title %}
+  LocalZero Monitoring - {{ city.name }}
+{% endblock title %}
 {% block breadcrumbs %}
   {% if node %}
     <header class="navbar navbar-expand-md navbar-light lz-breadcrumbs-bar">
@@ -21,7 +24,7 @@
     </header>
   {% endif %}
 {% endblock breadcrumbs %}
-{% block page_body %}
+{% block content %}
   {% if node %}
     <div class="col">
       <!-- Page pre-title -->
@@ -82,4 +85,4 @@
       {% endfor %}
     </div>
   {% endif %}
-{% endblock page_body %}
+{% endblock content %}

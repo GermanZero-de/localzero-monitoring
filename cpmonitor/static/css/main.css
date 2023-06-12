@@ -1,8 +1,10 @@
 :root {
-  --tblr-body-bg: #fff9e5;
+  --tblr-body-bg: #fff9d5;
   --tblr-font-weight-bold: 700;
   --tblr-primary: #ffc80c;
   --tblr-primary-rgb: 255, 200, 12;
+  --lz-yellow: #ffc80c;
+  --lz-dark-blue: #011633;
   --lz-color-complete: #9ec422;
   --lz-color-delayed: #ca3922;
   --lz-color-as-planned: #f9b31a;
@@ -19,17 +21,72 @@
 
 .navbar {
   --tblr-navbar-brand-font-size: 1.25rem;
-  --tblr-navbar-bg: var(--tblr-primary);
+  --tblr-navbar-bg: white;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  /*#region ******* Spendenbutton ***********/
+  /*#endregion*/
 }
-.navbar a.lz-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: white !important;
-  text-decoration: none !important;
+.navbar h1 {
+  color: black !important;
+  margin-right: 40px;
+}
+.navbar h1 img {
+  margin-right: 5px;
+}
+.navbar .nav-item {
+  font-family: FabrikatNormal, sans-serif;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  background: url(../Nav_Down.png) no-repeat center;
+  background-size: 20px;
+  background-position-x: center;
+  background-position-y: bottom;
+  padding-bottom: 5px;
 }
 .navbar.lz-breadcrumbs-bar {
   background: white;
   min-height: 0px;
+}
+.navbar .nav-spenden-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.navbar .nav-spenden-container a.nav-spenden {
+  flex-shrink: 0;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  font-family: FabrikatNormal, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  line-height: 1.2;
+  color: #011633;
+  width: 136px;
+  height: auto;
+  padding: 7px 12px 7px 12px;
+  border-radius: 0 25px 25px 25px;
+  border: solid 0 #a3d869;
+  background-color: #a3d869;
+  margin: 0px 24px 0px 0px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.navbar .nav-spenden-container a.nav-spenden:hover {
+  background: var(--lz-yellow);
+}
+
+.footer {
+  background-color: var(--lz-dark-blue);
+  color: white;
+  padding: 1rem 0;
+}
+.footer a {
+  color: white;
 }
 
 .card-title {
@@ -86,6 +143,13 @@ figure.lz-chart img {
 }
 .lz-card-summary.lines-8 {
   -webkit-line-clamp: 8;
+}
+
+.lz-construction-banner {
+  background: #ffc80c;
+  font-weight: bold;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 /*# sourceMappingURL=main.css.map */

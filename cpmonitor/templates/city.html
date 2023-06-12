@@ -1,6 +1,17 @@
-{% extends "pageframe.html" %}
+{% extends "base.html" %}
 {% load martortags %}
-{% block page_body %}
+{% block title %}
+  LocalZero Monitoring - {{ city.name }}
+{% endblock title %}
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <h1>Monitoring für {{ city.name }}</h1>
+    </div>
+    <div class="col-auto">
+      <span class="align-middle">von <a href="">Lokalteam</a></span>
+    </div>
+  </div>
   <div class="row row-deck row-cards">
     {% if days_gone %}
       <div class="col-sm-6 col-lg-3">
@@ -123,16 +134,15 @@
                      src="{{ chart.image.url }}"/>
                 <figcaption>
                   {{ chart.caption | safe_markdown }}
-                  <span class="text-muted">Quelle: {{ chart.source }} - Lizenz: {{ chart.license }}</span
-                    >
-                  </figcaption>
-                </figure>
-              </div>
+                  <span class="text-muted">Quelle: {{ chart.source }} - Lizenz: {{ chart.license }}</span>
+                </figcaption>
+              </figure>
             </div>
           </div>
-        {% endfor %}
-      {% endif %}
-    </div>
+        </div>
+      {% endfor %}
+    {% endif %}
   </div>
 </div>
-{% endblock page_body %}
+</div>
+{% endblock content %}

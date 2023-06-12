@@ -21,6 +21,7 @@
 - Windows: Add the shown path in the `PATH` variable. (Search fpr "env" in Windows settings.)
 - Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command.
 - Install Yarn version 3 as described here: <https://yarnpkg.com/getting-started/install>.
+- Install node.js from <https://nodejs.org/en/download>.
 - Install [Docker Desktop](https://www.docker.com/) or [Docker Engine and Docker Compose without Docker Desktop](https://docs.docker.com/engine/install/), if you prefer and are on Linux.
 
 The above steps are needed only once per machine.
