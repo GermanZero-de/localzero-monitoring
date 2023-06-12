@@ -34,6 +34,7 @@
     <div class="card">
       <div class="card-body">
         <div class="row align-items-center">
+          {% if node.teaser %}<strong>{{ node.teaser }}</strong>{% endif %}
           <div class="markdown text-muted">
             {{ node.description | safe_markdown | default:"Dieses Handlungsfeld hat keine Beschreibung" }}
           </div>
