@@ -25,6 +25,11 @@
   {% endif %}
 {% endblock breadcrumbs %}
 {% block content %}
+  {% if city.assessment_status %}
+    <div class="card col-sm-12 col-lg-12">
+      <div class="card-body">{{ city.assessment_status | safe_markdown }}</div>
+    </div>
+  {% endif %}
   {% if node %}
     <div class="col">
       <!-- Page pre-title -->
