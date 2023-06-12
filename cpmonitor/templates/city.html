@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load martortags %}
+{% block title %}
+  LocalZero Monitoring - {{ city.name }}
+{% endblock title %}
 {% block content %}
   <div class="row">
     <div class="col">
       <h1>Monitoring für {{ city.name }}</h1>
     </div>
     <div class="col-auto">
-      <span class="align-middle">von <a href="">MünchenZero</a></span>
+      <span class="align-middle">von <a href="">Lokalteam</a></span>
     </div>
   </div>
   <div class="row row-deck row-cards">
@@ -131,16 +134,15 @@
                      src="{{ chart.image.url }}"/>
                 <figcaption>
                   {{ chart.caption | safe_markdown }}
-                  <span class="text-muted">Quelle: {{ chart.source }} - Lizenz: {{ chart.license }}</span
-                    >
-                  </figcaption>
-                </figure>
-              </div>
+                  <span class="text-muted">Quelle: {{ chart.source }} - Lizenz: {{ chart.license }}</span>
+                </figcaption>
+              </figure>
             </div>
           </div>
-        {% endfor %}
-      {% endif %}
-    </div>
+        </div>
+      {% endfor %}
+    {% endif %}
   </div>
+</div>
 </div>
 {% endblock content %}

@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% load martortags %}
+{% block title %}
+  LocalZero Monitoring - {{ city.name }}
+{% endblock title %}
 {% block content %}
   <div class="row">
     <div class="col">
-      <!-- Page pre-title -->
+      <!-- Page  pre-title -->
       <div class="page-pretitle">Maßnahme</div>
       <h1>{{ node.title }}</h1>
     </div>
