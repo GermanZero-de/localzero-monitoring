@@ -169,7 +169,7 @@ This may be used as follows:
 SNAPSHOT_NAME=prod_database_<some date found in e2e_tests/database/>
 
 # Remove previous data
-rm db.sqlite3
+rm db/db.sqlite3
 rm -r cpmonitor/images/uploads
 
 # Create DB
@@ -248,7 +248,7 @@ Cheat-sheet to make sure the correct data is dumped:
 
 ```shell
 git checkout right-before-model-change
-rm db.sqlite3
+rm db/db.sqlite3
 python manage.py migrate --settings=config.settings.local
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
 cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
@@ -353,8 +353,8 @@ ssh lzm
 Replace your local DB with the current DB from the server with:
 
 ```sh
-rm db.sqlite3
-scp lzm:testing/db/db.sqlite3 .
+rm db/db.sqlite3
+scp lzm:testing/db/db.sqlite3 db/
 rm -r cpmonitor/images/uploads
 scp -r lzm:testing/cpmonitor/images/uploads cpmonitor/images/
 ```
