@@ -47,7 +47,7 @@
       </ul>
     </div>
     <div class="col-sm-9">
-      {% if node.summary %}<strong>{{ node.summary | safe_markdown }}</strong>{% endif %}
+      {% if node.teaser %}<strong>{{ node.teaser }}</strong>{% endif %}
       {{ node.description | safe_markdown | default:"Diese Maßnahme hat keine Beschreibung" }}
       {% if node.plan_assessment %}
         <h3>Bewertung der geplanten Maßnahme</h3>

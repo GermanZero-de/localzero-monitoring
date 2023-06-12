@@ -50,7 +50,7 @@ class AdministrationChecklistInline(admin.TabularInline):
 
 
 class CityAdmin(admin.ModelAdmin):
-    list_display = ("zipcode", "name", "introduction", "edit_tasks")
+    list_display = ("zipcode", "name", "teaser", "edit_tasks")
     list_display_links = ("name",)
     ordering = ("name",)
     search_fields = ["zipcode", "name"]
@@ -193,7 +193,7 @@ class TaskAdmin(TreeAdmin):
         "city",
         "draft_mode",
         "title",
-        "summary",
+        "teaser",
         "description",
         "planned_start",
         "planned_completion",
