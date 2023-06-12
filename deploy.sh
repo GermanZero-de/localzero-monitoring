@@ -9,10 +9,14 @@ fi
 
 env="${1:-}"
 tag_suffix="${2:-}"
+if [[ -n "$tag_suffix" ]]; then
+    # add leading dash
+    tag_suffix=${tag_suffix/#/-}
+fi
 
 # 2
 date=$(date +%Y-%b-%d)
-tag="deploy-${env}-${date}-${tag_suffix}"
+tag="deploy-${env}-${date}${tag_suffix}"
 echo "Tagging version as $tag in git."
 git tag -a $tag -m "Deployment to test" && git push origin $tag
 
@@ -34,15 +38,15 @@ docker load -i /tmp/cpmonitor.tar
 docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
 
 # 8
-docker tag cpmonitor:latest cpmonitor:${date}-${tag_suffix}
-docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${date}-${tag_suffix}
+docker tag cpmonitor:latest cpmonitor:${date}${tag_suffix}
+docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${date}${tag_suffix}
 
 # 9
 cd ~/${env}/
 docker-compose down --volumes
 # backup the db
-cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/${env}/db.sqlite3.${date}-${tag_suffix}
-cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/testing/uploads.${date}-${tag_suffix}
+cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/${env}/db.sqlite3.${date}${tag_suffix}
+cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/testing/uploads.${date}${tag_suffix}
 # apply migrations using a temporary container
 docker run --user=1007:1007 --rm -it -v /home/monitoring/${env}/db:/db cpmonitor:latest sh
 DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
