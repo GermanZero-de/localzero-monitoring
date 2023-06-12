@@ -18,7 +18,7 @@ fi
 date=$(date +%Y-%b-%d)
 tag="deploy-${env}-${date}${tag_suffix}"
 echo "Tagging version as $tag in git."
-git tag -a $tag -m "Deployment to test" && git push origin $tag
+git tag -a $tag -m "Deployment to ${env}" && git push origin $tag
 
 #3
 docker compose build
