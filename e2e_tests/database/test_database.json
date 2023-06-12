@@ -377,6 +377,19 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2023-06-12T20:12:31.438Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Bewertung Klimaaktionsplan\", \"Bewertung Umsetzungsstand\"]}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -777,7 +790,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-06-04T07:33:26.314Z",
+    "last_login": "2023-06-12T20:11:14.431Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -816,6 +829,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "la9ytgclqprfil35c6lp5f8k5ukpssbd",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pBCGbEu3fcMZIYZpGogKe3KeHfbpAvd_vfef6uA65LD2mQOE6urMur0uxHGp5Qd8APLvepYyzJPpHdFH7TpsbK8bof7d5Cx5a2GeBbp2HpIYAb0xgk7K8k6tJSM5f6CQw_EBphc7Hwv7C0BCaSNO_X5AvDnOIM:1q8nsg:EXnRO_tnvPQVApEuszmwxUyXfjcDdfsdKTuCTWg7wdw",
+    "expire_date": "2023-06-26T20:11:14.442Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "wf24d94ueyo0r1i0362ql9fufmz16uxt",
   "fields": {
     "session_data": ".eJxVjMsOwiAQRf-FtSFAebp07zeQYRikaiAp7cr479qkC93ec859sQjbWuM2aIlzZmcm2el3S4APajvId2i3zrG3dZkT3xV-0MGvPdPzcrh_BxVG_dbWEeVp0kVIo8AqyiUZICpBIHpQWRQyqK3RXkAK1iavEUKhIMlNLrD3BwXLOKM:1q5iEw:z6fTxHGg-Ly6WLbbTwSL6jeo_-ak3b1mvII5bs4h_dQ",
@@ -843,9 +864,9 @@
     "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. **Lorem Ipsum** has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
     "co2e_budget": 0,
     "assessment_administration": "Wie bewertet ihr die **Nachhaltigkeitsarchitektur der Verwaltung**? Dieser Text fasst die wichtigsten Punkte zusammen.",
-    "assessment_action_plan": "Hier soll die Bewertung des **Klimaaktionsplans** stehen. Was haltet ihr von dem Plan? ",
-    "assessment_status": "",
-    "last_update": "2023-06-04",
+    "assessment_action_plan": "Hier soll die Bewertung des **Klimaaktionsplans** stehen. Was haltet ihr von dem Plan?",
+    "assessment_status": "### Wie sieht es aus? \r\n\r\nEine einleitende Übersicht in die Bewertung des Umsetzungsstandes.\r\nHält die Kommune sich im Wesentlichen an ihren eigenen Plan?",
+    "last_update": "2023-06-12",
     "contact_name": "",
     "contact_email": "",
     "slug": "beispielstadt"
