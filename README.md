@@ -382,7 +382,7 @@ Commit the result.
 ### Deploying the reverse proxy initially
 
 ```sh
-scp -C -r docker/reverseproxy/conf.d/ docker/reverseproxy/docker-compose.yml docker/reverseproxy/.env.server lzm:/tmp/reverseproxy
+scp -C -r docker/reverseproxy/conf.d/ docker/reverseproxy/docker-compose.yml docker/reverseproxy/.env.server monitoring@monitoring.localzero.net:/tmp/reverseproxy
 
 # Run the remaining commands on the server:
 
