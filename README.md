@@ -379,6 +379,24 @@ du -hs e2e_tests/database/${SNAPSHOT_NAME}*
 
 Commit the result.
 
+### Deploying the reverse proxy initially
+
+```sh
+scp -C -r docker/reverseproxy/conf.d/ docker/reverseproxy/docker-compose.yml docker/reverseproxy/.env.server lzm:/tmp/reverseproxy
+
+# Run the remaining commands on the server:
+
+cd ~/reverseproxy
+cp -r /tmp/reverseproxy .
+mv .env.server .env
+
+# If production or testing are not running, create the missing network(s):
+docker network create testing_nginx_network
+docker network create production_nginx_network
+
+docker compose up -d
+```
+
 ### Deploying a new version
 
 1. Checkout the commit you want to deploy (usually the latest commit of main).
@@ -399,7 +417,7 @@ Commit the result.
     docker save cpmonitor -o cpmonitor.tar
     docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
     ```
-5. Copy the images, the compose file and the certificate renewal cron job to the server:
+5. Copy the images, the compose files, the certificate renewal cron job and the reverse proxy settings to the server:
     ```sh
     scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab renew-cert.sh monitoring@monitoring.localzero.net:/tmp/
     ```
