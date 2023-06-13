@@ -107,8 +107,8 @@ def test_should_move_and_adjust_slugs_when_dragged(live_server, page: Page):
     sector1 = "Admin Test 1 " + uid
     sector2 = "Admin Test 2 " + uid
     task = "To be dragged " + uid
-    sub_task = "Has to be adjusted " + uid
-    sub_sub_task = "Has to be adjusted " + uid
+    sub_task = "Adjust " + uid
+    sub_sub_task = "Adjust " + uid
 
     slug_s1 = slugify(sector1)
     slug_s2 = slugify(sector2)
@@ -153,8 +153,8 @@ def test_should_not_allow_move_when_same_case_ignored_title_in_same_sector(
 
     sector1 = "Admin Test 1 " + uid
     sector2 = "Admin Test 2 " + uid
-    task1 = "Personal Einstellen " + uid
-    task2 = "personal einstellen " + uid
+    task1 = "Personal " + uid
+    task2 = "personal " + uid
 
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, task1, sector1)
