@@ -46,10 +46,6 @@
   background-position-y: bottom;
   padding-bottom: 5px;
 }
-.navbar.lz-breadcrumbs-bar {
-  background: white;
-  min-height: 0px;
-}
 .navbar .nav-spenden-container {
   display: flex;
   flex-direction: column;
@@ -78,6 +74,14 @@
 }
 .navbar .nav-spenden-container a.nav-spenden:hover {
   background: var(--lz-yellow);
+}
+
+.lz-breadcrumbs-bar {
+  margin-top: 10px;
+}
+.lz-breadcrumbs-bar .breadcrumb-item a, .lz-breadcrumbs-bar .breadcrumb-item.active {
+  font-weight: normal;
+  color: var(--tblr-muted);
 }
 
 .footer {
