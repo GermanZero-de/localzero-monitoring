@@ -4,12 +4,18 @@
   LocalZero Monitoring - {{ city.name }}
 {% endblock title %}
 {% block breadcrumbs %}
-  {% if node %}
-    <header class="navbar navbar-expand-md navbar-light lz-breadcrumbs-bar">
-      <div class="container-xl">
-        <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+  <header class="navbar navbar-expand-md navbar-light lz-breadcrumbs-bar">
+    <div class="container-xl">
+      <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+        <li class="breadcrumb-item">
+          <a href="{% url 'index' %}">Start</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'city' city.slug %}">{{ city.name }}</a>
+        </li>
+        {% if node %}
           <li class="breadcrumb-item">
-            <a href="{% url 'task' city.slug %}">Start</a>
+            <a href="{% url 'task' city.slug %}">Maßnahmen</a>
           </li>
           {% for ancestor in node.get_ancestors %}
             <li class="breadcrumb-item">
@@ -19,10 +25,14 @@
           <li class="breadcrumb-item active">
             <a href="{% url 'task' city.slug node.slugs %}">{{ node.title }}</a>
           </li>
-        </ol>
-      </div>
-    </header>
-  {% endif %}
+        {% else %}
+          <li class="breadcrumb-item active">
+            <a href="{% url 'task' city.slug %}">Maßnahmen</a>
+          </li>
+        {% endif %}
+      </ol>
+    </div>
+  </header>
 {% endblock breadcrumbs %}
 {% block content %}
   {% if not node and city.assessment_status %}
