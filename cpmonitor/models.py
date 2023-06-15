@@ -20,7 +20,7 @@ class City(models.Model):
         "Entwurfs-Modus",
         default=True,
         help_text=(
-            "Im Entwurfs-Modus wird ist die Kommune für normale Besucher im Frontend unsichtbar."
+            "Im Entwurfs-Modus ist die Kommune für normale Besucher im Frontend unsichtbar."
             " Nur wenn im gleichen Browser ein User im Admin angemeldet ist, wird sie angezeigt."
         ),
     )
@@ -307,8 +307,9 @@ class Task(MP_Node):
         "Entwurfs-Modus",
         default=True,
         help_text=(
-            "Im Entwurfs-Modus wird ist der Sektor/die Maßnahme für normale Besucher im Frontend unsichtbar."
-            " Nur wenn im gleichen Browser ein User im Admin angemeldet ist, wird er/sie angezeigt."
+            "Im Entwurfs-Modus ist der Sektor/die Maßnahme für normale Besucher im Frontend"
+            " unsichtbar. Nur wenn im gleichen Browser ein User im Admin angemeldet ist, wird"
+            " er/sie angezeigt."
         ),
     )
 
