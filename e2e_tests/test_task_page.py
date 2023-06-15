@@ -26,3 +26,25 @@ def test_should_go_to_subtask_view_when_clicking_task_item(live_server, page: Pa
     expect(page).to_have_url(
         live_server.url + "/beispielstadt/massnahmen/mobilitat/radwege-ausbauen/"
     )
+
+
+def test_should_go_to_the_linked_page_when_clicking_on_a_breadcrumb(
+    live_server, page: Page
+):
+    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/radwege-ausbauen/")
+
+    page.get_by_role("link", name="Mobilität").click()
+
+    expect(page).to_have_url(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+
+    page.get_by_role("link", name="Maßnahmen").click()
+
+    expect(page).to_have_url(live_server.url + "/beispielstadt/massnahmen/")
+
+    page.get_by_role("link", name="Beispielstadt").click()
+
+    expect(page).to_have_url(live_server.url + "/beispielstadt/")
+
+    page.get_by_role("link", name="Start").click()
+
+    expect(page).to_have_url(live_server.url + "/")
