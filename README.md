@@ -442,6 +442,7 @@ docker compose up -d
     ```sh
     cd ~/<testing|production>/
     docker-compose down --volumes
+    docker volume rm <testing|production>_nginx_config_volume <testing|production>_nginx_extras_volume <testing|production>_static_volume
     # backup the db
     cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.${DATESTR}
     cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/<testing|production>/uploads.${DATESTR}
