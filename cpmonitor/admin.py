@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.db import models
+from django.forms import TextInput
 from django.forms.models import ErrorList
 from django.http import HttpRequest, HttpResponseRedirect, QueryDict
 from django.urls import reverse
@@ -50,12 +51,13 @@ class AdministrationChecklistInline(admin.TabularInline):
 
 
 class CityAdmin(admin.ModelAdmin):
-    list_display = ("zipcode", "name", "introduction", "edit_tasks")
+    list_display = ("zipcode", "name", "teaser", "edit_tasks")
     list_display_links = ("name",)
     ordering = ("name",)
     search_fields = ["zipcode", "name"]
 
     formfield_overrides = {
+        models.CharField: {"widget": TextInput(attrs={"size": "170"})},
         models.TextField: {"widget": AdminMartorWidget},
     }
 
@@ -193,7 +195,7 @@ class TaskAdmin(TreeAdmin):
         "city",
         "draft_mode",
         "title",
-        "summary",
+        "teaser",
         "description",
         "planned_start",
         "planned_completion",
@@ -215,6 +217,7 @@ class TaskAdmin(TreeAdmin):
             return ()
 
     formfield_overrides = {
+        models.CharField: {"widget": TextInput(attrs={"size": "170"})},
         models.TextField: {"widget": AdminMartorWidget},
     }
 

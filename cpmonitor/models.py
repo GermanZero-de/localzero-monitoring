@@ -25,7 +25,13 @@ class City(models.Model):
         ),
     )
 
-    name = models.CharField("Name", max_length=255)
+    name = models.CharField(
+        "Name",
+        max_length=50,
+        help_text="""
+            <p>Name der Kommune. Maximal 50 Zeichen.</p>
+        """,
+    )
     zipcode = models.CharField("PLZ", max_length=5)
     url = models.URLField("Homepage", blank=True)
 
@@ -39,13 +45,22 @@ class City(models.Model):
         "Zieljahr Klimaneutralität", blank=True, null=True, help_text="z.B. 2035"
     )
 
-    introduction = models.TextField(
-        "Einleitung",
+    teaser = models.CharField(
+        "Teaser",
+        max_length=200,
         blank=True,
         help_text="""
-            <p>Eine kurze Beschreibung der Situation in der Kommune.</p>
-            <p>Kann in einer Übersicht aller Kommunen dargestellt werden.</p>
-            <p>Deswegen möglichst kurz und ohne Formatierungen. Fett, Kursiv, Links, etc. sind okay.</p>
+            <p>Eine kurze Beschreibung der Situation in der Kommune. Maximal 200 Zeichen. Keine Formatierungen.</p>
+            <p>Kann in einer Übersicht aller Kommunen oder als Vorschau eines Links dargestellt werden.</p>
+        """,
+    )
+
+    description = models.TextField(
+        "Beschreibung",
+        blank=True,
+        help_text="""
+            <p>Ein einleitender Text, der die wesentlichen Inhalte zusammenfasst und/oder einen Überblick über die weiteren Inhalte gibt.</p>
+            <p>Dieser wird nur auf der Seite der Kommune angezeigt unter einem fett gedruckten Absatz, der den Teaser enthält.</p>
         """,
     )
 
@@ -299,20 +314,20 @@ class Task(MP_Node):
 
     title = models.CharField(
         "Titel",
-        max_length=255,
+        max_length=50,
         help_text="""
-            <p>Überschrift des Sektors, der Maßnahmengruppe oder der Maßnahme.</p>
-            <p>Möglichst wie im Klimaaktionsplan angegeben.</p>
+            <p>Überschrift des Sektors / der Maßnahme.</p>
+            <p>Wie im Klimaaktionsplan angegeben oder verkürzt. Maximal 50 Zeichen.</p>
         """,
     )
 
-    summary = models.TextField(
-        "Kurztext",
+    teaser = models.CharField(
+        "Teaser",
+        max_length=200,
         blank=True,
         help_text="""
-            <p>Kann Beschreibung, Bewertung und Umsetzungsstand enthalten.</p>
-            <p>Kann in einer Übersicht mehrerer Sektoren / Maßnahmen dargestellt werden.</p>
-            <p>Deswegen möglichst kurz und ohne Formatierungen. Fett, Kursiv, Links, etc. sind okay.</p>
+            <p>Eine kurze Beschreibung des Sektors / der Maßnahme. Maximal 200 Zeichen. Keine Formatierungen.</p>
+            <p>Kann in einer Übersicht mehrerer Sektoren / Maßnahmen oder als Vorschau eines Links dargestellt werden.</p>
         """,
     )
 

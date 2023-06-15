@@ -39,6 +39,7 @@
     <div class="card">
       <div class="card-body">
         <div class="row align-items-center">
+          {% if node.teaser %}<strong>{{ node.teaser }}</strong>{% endif %}
           <div class="markdown text-muted">
             {{ node.description | safe_markdown | default:"Dieses Handlungsfeld hat keine Beschreibung" }}
           </div>
@@ -55,7 +56,7 @@
             <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
             <div class="card-body">
               <div class="h2 mb-3">{{ task.title }}</div>
-              <div class="lz-card-summary lines-8">{{ task.summary }}</div>
+              <div class="lz-card-summary lines-8">{{ task.teaser }}</div>
             </div>
           </a>
         </div>

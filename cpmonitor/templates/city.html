@@ -122,6 +122,13 @@
       </div>
     {% endif %}
   </div>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      {% if city.teaser %}<strong>{{ city.teaser }}</strong>{% endif %}
+      {{ city.description | safe_markdown }}
+    </div>
+  </div>
   <div class="row row-deck row-cards">
     {% if charts %}
       {% for chart in charts %}
