@@ -77,7 +77,7 @@
 }
 
 .lz-breadcrumbs-bar {
-  margin-top: 10px;
+  padding-top: 20px;
 }
 .lz-breadcrumbs-bar .breadcrumb-item a, .lz-breadcrumbs-bar .breadcrumb-item.active {
   font-weight: normal;
