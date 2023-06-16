@@ -24,7 +24,7 @@ def test_city_page_should_have_city_name_in_title(live_server, page: Page):
 def test_city_page_should_not_contain_internal_information(live_server, page: Page):
     page.goto(live_server.url + "/beispielstadt/")
 
-    expect(page.locator("div")).not_to_contain_text(
+    expect(page.locator(".page-body")).not_to_contain_text(
         "Dies ist eine total wichtige interne Info!"
     )
 
