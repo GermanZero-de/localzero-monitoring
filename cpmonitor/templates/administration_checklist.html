@@ -4,23 +4,6 @@
 {% block title %}
   LocalZero Monitoring - {{ city.name }}
 {% endblock title %}
-{% block breadcrumbs %}
-  <header class="lz-breadcrumbs-bar">
-    <div class="container-xl">
-      <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-        <li class="breadcrumb-item">
-          <a href="{% url 'index' %}">Start</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a href="{% url 'city' city.slug %}">{{ city.name }}</a>
-        </li>
-        <li class="breadcrumb-item active">
-          <a href="{% url 'administration_checklist' city.slug %}">Verwaltung Checkliste</a>
-        </li>
-      </ol>
-    </div>
-  </header>
-{% endblock breadcrumbs %}
 {% block content %}
   <div class="container-xl">
     <div class="space-y">

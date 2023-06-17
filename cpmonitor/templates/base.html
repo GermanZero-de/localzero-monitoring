@@ -78,6 +78,19 @@
         </div>
       </header>
       {% block breadcrumbs %}
+        {% if breadcrumbs %}
+          <header class="lz-breadcrumbs-bar">
+            <div class="container-xl">
+              <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+                {% for breadcrumb in breadcrumbs %}
+                  <li class="breadcrumb-item {% if forloop.last %}active{% endif %}">
+                    <a href="{{ breadcrumb.url }}">{{ breadcrumb.label }}</a>
+                  </li>
+                {% endfor %}
+              </ol>
+            </div>
+          </header>
+        {% endif %}
       {% endblock breadcrumbs %}
       <div class="page-wrapper">
         <div class="page-body">

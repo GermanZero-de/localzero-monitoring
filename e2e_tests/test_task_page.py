@@ -33,18 +33,26 @@ def test_should_go_to_the_linked_page_when_clicking_on_a_breadcrumb(
 ):
     page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/radwege-ausbauen/")
 
-    page.get_by_role("link", name="Mobilität").click()
+    page.get_by_role("list", name="breadcrumbs").get_by_role(
+        "link", name="Mobilität"
+    ).click()
 
     expect(page).to_have_url(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
 
-    page.get_by_role("link", name="Maßnahmen").click()
+    page.get_by_role("list", name="breadcrumbs").get_by_role(
+        "link", name="Maßnahmen"
+    ).click()
 
     expect(page).to_have_url(live_server.url + "/beispielstadt/massnahmen/")
 
-    page.get_by_role("link", name="Beispielstadt").click()
+    page.get_by_role("list", name="breadcrumbs").get_by_role(
+        "link", name="Beispielstadt"
+    ).click()
 
     expect(page).to_have_url(live_server.url + "/beispielstadt/")
 
-    page.get_by_role("link", name="Start").click()
+    page.get_by_role("list", name="breadcrumbs").get_by_role(
+        "link", name="Start"
+    ).click()
 
     expect(page).to_have_url(live_server.url + "/")
