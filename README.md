@@ -390,10 +390,6 @@ cd ~/reverseproxy
 cp -r /tmp/reverseproxy .
 mv .env.server .env
 
-# If production or testing are not running, create the missing network(s):
-docker network create testing_nginx_network
-docker network create production_nginx_network
-
 docker compose up -d
 ```
 
@@ -442,7 +438,6 @@ docker compose up -d
     ```sh
     cd ~/<testing|production>/
     docker-compose down --volumes
-    docker volume rm <testing|production>_nginx_config_volume <testing|production>_nginx_extras_volume <testing|production>_static_volume
     # backup the db
     cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.${DATESTR}
     cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/<testing|production>/uploads.${DATESTR}
