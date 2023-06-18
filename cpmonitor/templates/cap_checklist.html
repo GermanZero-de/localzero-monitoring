@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% load martortags %}
+{% block title %}
+  LocalZero Monitoring - {{ city.name }}
+{% endblock title %}
 {% block content %}
   <div class="container-xl">
     <div class="space-y">
@@ -33,9 +36,6 @@
             </tbody>
           </table>
         </div>
-      </div>
-      <div>
-        <a class="btn btn-primary" href="{% url 'city' city.slug %}">Zurück</a>
       </div>
     </div>
   </div>

@@ -50,10 +50,6 @@ $lz-yellow: #ffc80c;
     background-position-y: bottom;
     padding-bottom: 5px;
   }
-  &.lz-breadcrumbs-bar {
-    background: white;
-    min-height: 0px;
-  }
 
   /*#region ******* Spendenbutton ***********/
 
@@ -92,6 +88,15 @@ $lz-yellow: #ffc80c;
   }
 
   /*#endregion*/
+}
+
+.lz-breadcrumbs-bar {
+  padding-top: 20px;
+
+  .breadcrumb-item a, .breadcrumb-item.active {
+    font-weight: normal;
+    color: var(--tblr-muted);
+  }
 }
 
 .footer {
