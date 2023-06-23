@@ -370,13 +370,18 @@ class Task(MP_Node):
         help_text="Nur falls im Klimaaktionsplan angegeben.",
     )
 
-    responsible_organ = models.TextField(
+    responsible_organ = models.CharField(
         "Verantwortliches Organ",
         blank=True,
+        max_length=200,
+    )
+
+    responsible_organ_explanation = models.TextField(
+        "Erklärungstext zum verantwortlichen Organ",
+        blank=True,
         help_text="""
-            <p>Genauer Name des verantwortlichen Gremiums oder der verantwortlichen Behörde.</p>
-            <p>Möglichst mit Ansprechperson, Kontaktdaten und was sonst notwendig ist, um Informationen einzuholen.</p>
-            <p>Diese Informationen könnten später in separate Felder aufgeteilt werden.</p>
+            <p>Eventuell Ansprechperson oder Kontaktdaten, wenn diese öffentlich zugänglich sind.</p>
+            <p>Gegebenenfalls eine Begründung, warum es an diesem Organ hängt.</p>
         """,
     )
 

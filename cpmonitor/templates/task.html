@@ -44,6 +44,15 @@
             </div>
           {% endif %}
         </li>
+        <li class="list-group-item d-flex justify-content-between"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="{{ node.responsible_organ_explanation }}">
+          <div>
+            <h4 class="my-0">Zuständige Instanz</h4>
+          </div>
+          <span>{{ node.responsible_organ | default:"--" }}</span>
+        </li>
       </ul>
     </div>
     <div class="col-sm-9">
