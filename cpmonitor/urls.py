@@ -24,6 +24,11 @@ urlpatterns = [
     path("", views.index_view, name="index"),
     path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),
     path(
+        prefix_kommune + "<slug:city_slug>/lokalgruppe/",
+        views.local_group_view,
+        name="local_group",
+    ),
+    path(
         prefix_kommune + "<slug:city_slug>/kap_checkliste/",
         views.cap_checklist_view,
         name="cap_checklist",
