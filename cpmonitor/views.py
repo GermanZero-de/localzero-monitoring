@@ -93,6 +93,12 @@ def _get_base_context(request):
     }
 
 
+def _get_breadcrumbs(*args):
+    breadcrumbs = [{"label": "Start", "url": reverse("index")}]
+    breadcrumbs += args
+    return breadcrumbs
+
+
 # Our main page
 def index_view(request):
     return render(request, "index.html", _get_base_context(request))
@@ -112,10 +118,9 @@ def city_view(request, city_slug):
     administration_checklist = _get_administration_checklist(city)
     administration_checklist_exists = administration_checklist != {}
 
-    breadcrumbs = [
-        {"label": "Start", "url": reverse("index")},
+    breadcrumbs = _get_breadcrumbs(
         {"label": city.name, "url": reverse("city", args=[city_slug])},
-    ]
+    )
 
     context = _get_base_context(request)
     context.update(
@@ -190,11 +195,10 @@ def cap_checklist_view(request, city_slug):
     if not city:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
 
-    breadcrumbs = [
-        {"label": "Start", "url": reverse("index")},
+    breadcrumbs = _get_breadcrumbs(
         {"label": city.name, "url": reverse("city", args=[city_slug])},
         {"label": "KAP Checkliste", "url": reverse("cap_checklist", args=[city_slug])},
-    ]
+    )
 
     context = _get_base_context(request)
     context.update(
@@ -228,14 +232,13 @@ def administration_checklist_view(request, city_slug):
     if not city:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
 
-    breadcrumbs = [
-        {"label": "Start", "url": reverse("index")},
+    breadcrumbs = _get_breadcrumbs(
         {"label": city.name, "url": reverse("city", args=[city_slug])},
         {
             "label": "Verwaltung Checkliste",
             "url": reverse("administration_checklist", args=[city_slug]),
         },
-    ]
+    )
 
     context = _get_base_context(request)
     context.update(
@@ -279,11 +282,10 @@ def task_view(request, city_slug, task_slugs=None):
     if not city:
         raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
 
-    breadcrumbs = [
-        {"label": "Start", "url": reverse("index")},
+    breadcrumbs = _get_breadcrumbs(
         {"label": city.name, "url": reverse("city", args=[city_slug])},
         {"label": "Maßnahmen", "url": reverse("task", args=[city_slug])},
-    ]
+    )
 
     if not task_slugs:
         groups, tasks = _get_children(request, city)
@@ -333,10 +335,9 @@ def task_view(request, city_slug, task_slugs=None):
 
 
 def project_view(request):
-    breadcrumbs = [
-        {"label": "Start", "url": reverse("index")},
+    breadcrumbs = _get_breadcrumbs(
         {"label": "Projekt", "url": reverse("project")},
-    ]
+    )
     context = _get_base_context(request)
     context.update({"breadcrumbs": breadcrumbs})
     return render(request, "project.html", context)
@@ -355,10 +356,9 @@ def jetzt_spenden_view(request):
 
 
 def ueber_uns_view(request):
-    breadcrumbs = [
-        {"label": "Start", "url": reverse("index")},
+    breadcrumbs = _get_breadcrumbs(
         {"label": "Über uns", "url": reverse("ueber-uns")},
-    ]
+    )
     context = _get_base_context(request)
     context.update({"breadcrumbs": breadcrumbs})
     return render(request, "ueber-uns.html", context)
