@@ -56,7 +56,8 @@ services:
 
 networks:
   nginx_network:
-    driver: bridge
+    name: ${ENVIRONMENT_NAME}_nginx_network
+    external: true
 
 volumes:
   # just declare the volumes so nginx and django can share them

@@ -11,8 +11,8 @@ services:
       - ./conf.d:/etc/nginx/conf.d
       - ${CERTIFICATES_PATH}:/etc/letsencrypt
     networks:
-      - production
-      - testing
+      - production_nginx_network
+      - testing_nginx_network
       - reverse_proxy_network
     depends_on:
       - acme-sh
@@ -27,11 +27,12 @@ services:
       - reverse_proxy_network
 
 networks:
-  production:
+  production_nginx_network:
     name: production_nginx_network
-    external: true
-  testing:
+    driver: bridge
+  testing_nginx_network:
     name: testing_nginx_network
-    external: true
+    driver: bridge
   reverse_proxy_network:
+    name: reverse_proxy_network
     driver: bridge
