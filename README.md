@@ -448,8 +448,7 @@ docker compose up -d
     exit
     # use the latest docker-compose.yml to start the app using the new image
     mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-    # explicitly define the compose file so that the overrides for local development are not applied
-    docker-compose -f docker-compose.yml up --detach --no-build
+    docker-compose up --detach --no-build
     ```
 10. Install certificate renewal cron job:
     ```sh
