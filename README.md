@@ -415,7 +415,7 @@ docker compose up -d
     ```
 5. Copy the images, the compose files, the certificate renewal cron job and the reverse proxy settings to the server:
     ```sh
-    scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab renew-cert.sh monitoring@monitoring.localzero.net:/tmp/
+    scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab renew-cert.sh docker/reverseproxy/ monitoring@monitoring.localzero.net:/tmp/
     ```
 6. Login to the server:
     ```sh
@@ -448,10 +448,17 @@ docker compose up -d
     exit
     # use the latest docker-compose.yml to start the app using the new image
     mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-    # explicitly define the compose file so that the overrides for local development are not applied
-    docker-compose -f docker-compose.yml up --detach --no-build
+    docker-compose up --detach --no-build
     ```
-10. Install certificate renewal cron job:
+10. Update the reverse proxy config
+    ```sh
+    cd ~/reverseproxy
+    docker-compose down
+    mv docker-compose.yml docker-compose.yml.bak
+    cp -r /tmp/reverseproxy/* .
+    docker-compose up --detach --no-build
+    ```
+11. Install certificate renewal cron job:
     ```sh
     crontab /tmp/crontab
     cp /tmp/renew-cert.sh /home/monitoring/
