@@ -9,7 +9,7 @@ from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 
-from .models import Chart, City, Task, CapChecklist, AdministrationChecklist
+from .models import Chart, City, Task, CapChecklist, AdministrationChecklist, LocalGroup
 
 _city_filter_query = "city__id__exact"
 """The query parameter used by the city filter."""
@@ -41,6 +41,11 @@ class ChartInline(admin.StackedInline):
     model = Chart
     extra = 0
 
+    formfield_overrides = {
+        models.CharField: {"widget": TextInput(attrs={"size": "100"})},
+        models.TextField: {"widget": AdminMartorWidget},
+    }
+
 
 class CapChecklistInline(admin.TabularInline):
     model = CapChecklist
@@ -48,6 +53,15 @@ class CapChecklistInline(admin.TabularInline):
 
 class AdministrationChecklistInline(admin.TabularInline):
     model = AdministrationChecklist
+
+
+class LocalGroupInline(admin.StackedInline):
+    model = LocalGroup
+
+    formfield_overrides = {
+        models.CharField: {"widget": TextInput(attrs={"size": "100"})},
+        models.TextField: {"widget": AdminMartorWidget},
+    }
 
 
 class CityAdmin(admin.ModelAdmin):
@@ -69,6 +83,7 @@ class CityAdmin(admin.ModelAdmin):
 
     inlines = [
         ChartInline,
+        LocalGroupInline,
         CapChecklistInline,
         AdministrationChecklistInline,
     ]

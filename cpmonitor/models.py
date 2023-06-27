@@ -161,9 +161,7 @@ class CapChecklist(models.Model):
         verbose_name = "KAP Checkliste"
 
     city = models.OneToOneField(
-        City,
-        models.PROTECT,
-        related_name="cap_checklist",
+        City, on_delete=models.PROTECT, related_name="cap_checklist"
     )
 
     cap_exists = models.BooleanField("Gibt es einen KAP?", default=False)
@@ -224,9 +222,7 @@ class AdministrationChecklist(models.Model):
         verbose_name = "Verwaltungsstrukturen Checkliste"
 
     city = models.OneToOneField(
-        City,
-        models.PROTECT,
-        related_name="administration_checklist",
+        City, on_delete=models.PROTECT, related_name="administration_checklist"
     )
 
     climate_protection_management_exists = models.BooleanField(
@@ -298,10 +294,7 @@ class Task(MP_Node):
             )
         ]
 
-    city = models.ForeignKey(
-        City,
-        on_delete=models.PROTECT,
-    )
+    city = models.ForeignKey(City, on_delete=models.PROTECT)
 
     draft_mode = models.BooleanField(
         "Entwurfs-Modus",
@@ -589,7 +582,7 @@ class Chart(models.Model):
         verbose_name = "Diagramm"
         verbose_name_plural = "Diagramme"
 
-    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="charts")
+    city = models.ForeignKey(City, on_delete=models.PROTECT, related_name="charts")
     image = models.ImageField("Bilddatei", upload_to="uploads/%Y/%m/%d/")
     alt_description = models.CharField(
         "Beschreibung (für Menschen, die das Bild nicht sehen können)", max_length=255
@@ -600,6 +593,54 @@ class Chart(models.Model):
 
     def __str__(self) -> str:
         return self.alt_description + " - Quelle: " + self.source
+
+
+class LocalGroup(models.Model):
+    class Meta:
+        verbose_name = "Lokalgruppe"
+        verbose_name_plural = "Lokalgruppen"
+
+    city = models.OneToOneField(
+        City, on_delete=models.PROTECT, related_name="local_group"
+    )
+    name = models.CharField(
+        max_length=100,
+        help_text="""
+            <p>Offizieller Name der Lokalgruppe. Maximal 100 Zeichen.</p>
+        """,
+    )
+    website = models.URLField(
+        blank=True,
+        help_text="""
+            <p>URL der Website der Lokalgruppe.</p>
+        """,
+    )
+    teaser = models.CharField(
+        "Teaser",
+        max_length=200,
+        blank=True,
+        help_text="""
+            <p>Eine kurze Beschreibung der Lokalgruppe. Maximal 200 Zeichen. Keine Formatierungen.</p>
+        """,
+    )
+    description = models.TextField(
+        "Beschreibung",
+        blank=True,
+        help_text="""
+            <p>Details über die Lokalgruppe. Sollte mindestens eine Kontaktmöglichkeit enthalten sowie
+            Angaben darüber, wie die Gruppe das Monitoring durchführt (Datenquellen? Gesprächspartner?
+            Als Geschichte erzählt). Mögliche weitere Infos (sofern das nicht alles ohnehin schon
+            auf der Website der Gruppe steht):</p>
+            <ul>
+            <li>Ehrenamtliche, Aktuelle Zahl, Zur Verfügung stehende Zeit. (Ziel: Erwartungsmanagement)</li>
+            <li>Beteiligungsmöglichkeiten</li>
+            <li>ggf. Hintergrund zum Klimaaktionsplan? Wie war unser Weg dahin?</li>
+            </ul>
+        """,
+    )
+    featured_image = models.ImageField(
+        "Bild der Lokalgruppe", blank=True, upload_to="uploads/local_groups"
+    )
 
 
 # Tables for comparing and connecting the plans of all cities

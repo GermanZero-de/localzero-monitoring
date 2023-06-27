@@ -9,7 +9,7 @@
       <h1>Monitoring für {{ city.name }}</h1>
     </div>
     <div class="col-auto">
-      <span class="align-middle">von <a href="">Lokalteam</a></span>
+      <span class="align-middle">von <a href="{% url 'local_group' city.slug %}">{{ local_group.name }}</a></span>
     </div>
   </div>
   <div class="row row-deck row-cards">

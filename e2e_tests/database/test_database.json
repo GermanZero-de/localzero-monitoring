@@ -861,8 +861,8 @@
     "url": "",
     "resolution_date": "2021-03-18",
     "target_year": 2035,
-    "teaser": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type a",
-    "description": "",
+    "teaser": "Teaser. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+    "description": "Beschreibung. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type a",
     "co2e_budget": 0,
     "assessment_administration": "Wie bewertet ihr die **Nachhaltigkeitsarchitektur der Verwaltung**? Dieser Text fasst die wichtigsten Punkte zusammen.",
     "assessment_action_plan": "Hier soll die Bewertung des **Klimaaktionsplans** stehen. Was haltet ihr von dem Plan?",
@@ -1685,6 +1685,18 @@
     "source": "Seattle Municipal Archives",
     "license": "CC BY 2.0",
     "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
+  }
+},
+{
+  "model": "cpmonitor.localgroup",
+  "pk": 1,
+  "fields": {
+    "city": 1,
+    "name": "BeispielLos",
+    "website": "https://www.beispiel-los.de",
+    "teaser": "Eine beispiellos gute Initiative für eine klimaneutrale Zukunft in unserer Stadt.",
+    "description": "Wenn Du mitmachen willst, wendest du Dich am besten an Maxi Mustermensch unter maxi@beispiel-los.de.\r\n\r\nUnser Monitoring basiert auf öffentlich zugänglichen Informationen aus dem lokalen BeispielBlatt, dere Website der Stadtverwaltung, dem Klimaaktionsplan, dem Ratsinformationssystem und dem Marktstammdatenregister. Und wir haben auch mit dem Bürgermeister gesprochen. Weitergehende Informationen zum Monitoring bekommst Du bei Dina Durchblick unter dina@beispiel-los.de.",
+    "featured_image": "uploads/local_groups/Fotos-alle-1024x683_SEEJ1JR.jpeg"
   }
 }
 ]
