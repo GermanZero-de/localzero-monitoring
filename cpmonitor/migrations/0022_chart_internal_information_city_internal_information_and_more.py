@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cpmonitor", "0019_alter_city_introduction_alter_city_name_and_more"),
+        ("cpmonitor", "0021_alter_chart_city_localgroup"),
     ]
 
     operations = [
