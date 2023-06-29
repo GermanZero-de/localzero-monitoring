@@ -390,6 +390,32 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2023-06-16T14:07:01.361Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "12345 Beispielstadt",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Interne Informationen\"]}}, {\"changed\": {\"name\": \"Diagramm\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: Matt Lemmon\", \"fields\": [\"Interne Informationen\"]}}, {\"changed\": {\"name\": \"Diagramm\", \"object\": \"Graph: Ben\\u00f6tigte Leistung (in Anzahl Pferden) in Abh\\u00e4ngigkeit von der Steigung - Quelle: Seattle Municipal Archives\", \"fields\": [\"Interne Informationen\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2023-06-16T14:11:13.945Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "99999 Mitallem",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Interne Informationen\"]}}, {\"changed\": {\"name\": \"Diagramm\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: Matt Lemmon\", \"fields\": [\"Interne Informationen\"]}}, {\"changed\": {\"name\": \"Diagramm\", \"object\": \"Graph: Ben\\u00f6tigte Leistung (in Anzahl Pferden) in Abh\\u00e4ngigkeit von der Steigung - Quelle: Seattle Municipal Archives\", \"fields\": [\"Interne Informationen\"]}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -867,9 +893,10 @@
     "assessment_administration": "Wie bewertet ihr die **Nachhaltigkeitsarchitektur der Verwaltung**? Dieser Text fasst die wichtigsten Punkte zusammen.",
     "assessment_action_plan": "Hier soll die Bewertung des **Klimaaktionsplans** stehen. Was haltet ihr von dem Plan?",
     "assessment_status": "### Wie sieht es aus? \r\n\r\nEine einleitende Übersicht in die Bewertung des Umsetzungsstandes.\r\nHält die Kommune sich im Wesentlichen an ihren eigenen Plan?",
-    "last_update": "2023-06-12",
+    "last_update": "2023-06-16",
     "contact_name": "",
     "contact_email": "",
+    "internal_information": "Dies ist eine total wichtige interne Info!",
     "slug": "beispielstadt"
   }
 },
@@ -892,6 +919,7 @@
     "last_update": "2023-05-03",
     "contact_name": "",
     "contact_email": "",
+    "internal_information": "",
     "slug": "ohnenix"
   }
 },
@@ -911,9 +939,10 @@
     "assessment_administration": "Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_action_plan": "Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_status": "Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
-    "last_update": "2023-06-02",
+    "last_update": "2023-06-16",
     "contact_name": "Maxime Musterfrau",
     "contact_email": "maxime@muster.frau",
+    "internal_information": "Dies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!",
     "slug": "mitallem"
   }
 },
@@ -1012,6 +1041,7 @@
     "execution_completion": 0,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat"
   }
 },
@@ -1036,6 +1066,7 @@
     "execution_completion": 0,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/radwege-ausbauen"
   }
 },
@@ -1060,6 +1091,7 @@
     "execution_completion": 0,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/u-bahn-strecke-verlangern"
   }
 },
@@ -1084,6 +1116,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/carsharing-einfuhren"
   }
 },
@@ -1108,6 +1141,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/parkraumbewirtschaftung"
   }
 },
@@ -1132,6 +1166,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/jobtickets-fur-verwaltung"
   }
 },
@@ -1156,6 +1191,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen"
   }
 },
@@ -1180,6 +1216,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/personal-einstellen"
   }
 },
@@ -1204,6 +1241,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/klimaaktionsplan"
   }
 },
@@ -1228,6 +1266,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/burgerbeteiligung"
   }
 },
@@ -1252,6 +1291,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/monitoring"
   }
 },
@@ -1276,6 +1316,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/european-energy-award"
   }
 },
@@ -1300,6 +1341,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/klimarelevanzprufung"
   }
 },
@@ -1324,6 +1366,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/burgerbeteiligung/beteiligungswerkstatt"
   }
 },
@@ -1348,6 +1391,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/burgerbeteiligung/marke-schaffen"
   }
 },
@@ -1372,6 +1416,7 @@
     "execution_completion": null,
     "actual_start": "2023-04-19",
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "umstellung-fernwarme-auf-geothermie"
   }
 },
@@ -1396,6 +1441,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "energie"
   }
 },
@@ -1420,6 +1466,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat"
   }
 },
@@ -1444,6 +1491,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "gebaude"
   }
 },
@@ -1468,6 +1516,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen"
   }
 },
@@ -1492,6 +1541,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "landwirtschaft"
   }
 },
@@ -1516,6 +1566,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "energie/pv-auf-alle-offentlichen-dacher"
   }
 },
@@ -1540,6 +1591,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "gebaude/sanierungsprogramm-dammung"
   }
 },
@@ -1564,6 +1616,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/ladesaulen-flachendeckend"
   }
 },
@@ -1588,6 +1641,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "landwirtschaft/forderung-okologischer-landbau"
   }
 },
@@ -1612,6 +1666,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/zukunftswerkstatt"
   }
 },
@@ -1636,6 +1691,7 @@
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/expertenrat"
   }
 },
@@ -1648,7 +1704,8 @@
     "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
     "source": "Matt Lemmon",
     "license": "CC BY-SA 2.0",
-    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden."
+    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden.",
+    "internal_information": "Dies ist eine total wichtige interne Info!"
   }
 },
 {
@@ -1660,7 +1717,8 @@
     "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
     "source": "Seattle Municipal Archives",
     "license": "CC BY 2.0",
-    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
+    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden.",
+    "internal_information": "Dies ist eine total wichtige interne Info!"
   }
 },
 {
@@ -1672,7 +1730,8 @@
     "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
     "source": "Matt Lemmon",
     "license": "CC BY-SA 2.0",
-    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden."
+    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden.",
+    "internal_information": "Dies ist eine total wichtige interne Info zu CO2-Emissionen!\r\n\r\nDies ist eine total wichtige interne Info zu CO2-Emissionen!\r\n\r\nDies ist eine total wichtige interne Info zu CO2-Emissionen!"
   }
 },
 {
@@ -1684,7 +1743,8 @@
     "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
     "source": "Seattle Municipal Archives",
     "license": "CC BY 2.0",
-    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden."
+    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden.",
+    "internal_information": "Dies ist eine total wichtige interne Info zu Pferden!\r\n\r\nDies ist eine total wichtige interne Info zu Pferden!\r\n\r\nDies ist eine total wichtige interne Info zu Pferden!"
   }
 },
 {

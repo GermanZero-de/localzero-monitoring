@@ -118,6 +118,15 @@ class City(models.Model):
         help_text="E-Mail Adresse, über die das Lokalteam erreicht werden kann.",
     )
 
+    internal_information = models.TextField(
+        "Interne Informationen",
+        blank=True,
+        help_text="""
+            <p>Interne Informationen, Notizen, Referenzen etc.</p>
+            <p>Die hier angegebenen Informationen werden nur in der Admin-Oberfläche angezeigt und nicht im Frontend.</p>
+        """,
+    )
+
     def __str__(self) -> str:
         return self.zipcode + " " + self.name
 
@@ -436,10 +445,19 @@ class Task(MP_Node):
     )
 
     actual_completion = models.DateField(
-        "Tatsächlicher Ende",
+        "Tatsächliches Ende",
         blank=True,
         null=True,
         help_text="Nur falls bekannt.",
+    )
+
+    internal_information = models.TextField(
+        "Interne Informationen",
+        blank=True,
+        help_text="""
+            <p>Interne Informationen, Notizen, Referenzen etc.</p>
+            <p>Die hier angegebenen Informationen werden nur in der Admin-Oberfläche angezeigt und nicht im Frontend.</p>
+        """,
     )
 
     def __str__(self) -> str:
@@ -590,6 +608,15 @@ class Chart(models.Model):
     source = models.CharField("Quelle", max_length=255)
     license = models.CharField("Lizenz", max_length=255)
     caption = models.TextField("Bildunterschrift")
+
+    internal_information = models.TextField(
+        "Interne Informationen",
+        blank=True,
+        help_text="""
+            <p>Interne Informationen, Notizen, Referenzen etc.</p>
+            <p>Die hier angegebenen Informationen werden nur in der Admin-Oberfläche angezeigt und nicht im Frontend.</p>
+        """,
+    )
 
     def __str__(self) -> str:
         return self.alt_description + " - Quelle: " + self.source

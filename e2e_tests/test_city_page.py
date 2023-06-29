@@ -21,6 +21,14 @@ def test_city_page_should_have_city_name_in_title(live_server, page: Page):
     expect(page).to_have_title("LocalZero Monitoring - Beispielstadt")
 
 
+def test_city_page_should_not_contain_internal_information(live_server, page: Page):
+    page.goto(live_server.url + "/beispielstadt/")
+
+    expect(page.locator(".page-body")).not_to_contain_text(
+        "Dies ist eine total wichtige interne Info!"
+    )
+
+
 def test_should_go_to_tasks_view_when_clicking_on_the_tasks_card(
     live_server, page: Page
 ):
