@@ -414,54 +414,6 @@
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "3h80mfs0kjjxfectgn3a0x6c6zz3esme",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1pqsJm:hu2RvPJFpyb4Ol67nhIuVCNJNtMnKa2vY8HwkwCnWSk",
-    "expire_date": "2023-05-08T09:17:06.922Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "9c6kfe113j1gjo81zp029vk6hcvmw0co",
-  "fields": {
-    "session_data": ".eJxVjEEOgjAQRe_StWkYasuMS_ecoRk6U4saSCisjHdXEha6_e-9_zKRt7XEreoSRzEXA-b0uw2cHjrtQO483Wab5mldxsHuij1otf0s-rwe7t9B4Vq-NYNnCtAGxyrUoIhLmIkzIkHIqGFISB7VN0ySOugAHPhW8lmcUjbvD-UtN_M:1pxOUA:X8ty0yL20MTQz29j3ydhkBZGCi3WcuAQ6lBFma4WP4o",
-    "expire_date": "2023-05-26T08:50:46.855Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "dqcocxnefhypjhbl9ak7aw6vhsiqltaa",
-  "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGFbqF49N5vIMsuSNVAUtqT8d9tkx50jvPezFt43NbstxYXP7O4CiUuv11AesZyAH5guVdJtazLHOShyJM2OVWOr9vp_h1kbHlfu9h3bCgZAyMnSmlgBKsGhQoBVEeWaNQ9sGXHzpBzGnSf9jgMwEZ8vvZWOHg:1q58Ul:HGNABZYGt5rapxcqgZ8bVDSAE4PAfvMmdFuJbVQNOQA",
-    "expire_date": "2023-06-16T17:23:23.347Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "la9ytgclqprfil35c6lp5f8k5ukpssbd",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pBCGbEu3fcMZIYZpGogKe3KeHfbpAvd_vfef6uA65LD2mQOE6urMur0uxHGp5Qd8APLvepYyzJPpHdFH7TpsbK8bof7d5Cx5a2GeBbp2HpIYAb0xgk7K8k6tJSM5f6CQw_EBphc7Hwv7C0BCaSNO_X5AvDnOIM:1q8nsg:EXnRO_tnvPQVApEuszmwxUyXfjcDdfsdKTuCTWg7wdw",
-    "expire_date": "2023-06-26T20:11:14.442Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "wf24d94ueyo0r1i0362ql9fufmz16uxt",
-  "fields": {
-    "session_data": ".eJxVjMsOwiAQRf-FtSFAebp07zeQYRikaiAp7cr479qkC93ec859sQjbWuM2aIlzZmcm2el3S4APajvId2i3zrG3dZkT3xV-0MGvPdPzcrh_BxVG_dbWEeVp0kVIo8AqyiUZICpBIHpQWRQyqK3RXkAK1iavEUKhIMlNLrD3BwXLOKM:1q5iEw:z6fTxHGg-Ly6WLbbTwSL6jeo_-ak3b1mvII5bs4h_dQ",
-    "expire_date": "2023-06-18T07:33:26.326Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "zkid91ej61wejh07li8fcfuu1qmod8ez",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1puDPA:Jguzk4JKh04XzB8JsWIvIuCgQmPgM298j2hqDWflYng",
-    "expire_date": "2023-05-17T14:24:28.097Z"
-  }
-},
-{
   "model": "cpmonitor.city",
   "pk": 1,
   "fields": {
