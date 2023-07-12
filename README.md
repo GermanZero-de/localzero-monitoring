@@ -426,13 +426,17 @@ docker compose up -d
     docker load -i /tmp/cpmonitor.tar
     docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
     ```
-(Docker should print "Loading layer" for both images.)
-8. Tag the images with the current date in case we want to roll back:
+    (Docker should print "Loading layer" for both images.)
+8. Tag the images with the current date in case we want to roll back, as well as with the environment you're deploying to (to prevent affecting the other environment):
 
     ```sh
     DATESTR=$(date +%Y-%b-%d) && echo ${DATESTR}
+
     docker tag cpmonitor:latest cpmonitor:${DATESTR}
+    docker tag cpmonitor:latest cpmonitor:<testing|production>
+
     docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${DATESTR}
+    docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:<testing|production>
     ```
 9. Stop the server, apply the migrations, start the server:
     ```sh
