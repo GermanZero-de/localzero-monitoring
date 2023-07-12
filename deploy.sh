@@ -39,7 +39,10 @@ docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
 
 # 8
 docker tag cpmonitor:latest cpmonitor:${date}${tag_suffix}
+docker tag cpmonitor:latest cpmonitor:${env}
+
 docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${date}${tag_suffix}
+docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${env}
 
 # 9
 cd ~/${env}/
@@ -52,6 +55,9 @@ docker run --user=1007:1007 --rm -it -v /home/monitoring/${env}/db:/db cpmonitor
 DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
 # exit and stop the temporary container
 exit
+
+# TODO: it stops here for some reason..
+
 # use the latest docker-compose.yml to start the app using the new image
 mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
 docker-compose up --detach --no-build
