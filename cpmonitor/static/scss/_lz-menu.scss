@@ -1,0 +1,269 @@
+@use 'lz-variables';
+
+#site-header {
+
+    /*#region ******* Site Menu  ***********/
+
+    .site-navigation {
+        justify-content: space-evenly;
+        grid-area: nav-menu;
+        display: flex;
+        align-items: flex-start;
+        flex-grow: 1;
+
+        @media screen and (max-width: lz-variables.$screen-width-medium) {
+            flex-direction: row-reverse;
+        }
+
+        #site-menu {
+            @media screen and (max-width: lz-variables.$screen-width-medium) {
+
+                display: none;
+                position: absolute;
+                align-self: stretch;
+                overflow-y: visible;
+                background: var(--lz-yellow);
+                box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.5);
+                border-radius: 2px 2px 10px 10px;
+                top: 0px;
+                right: 70px;
+                z-index: 900; //over spendenbutton.
+
+                .menu {
+                    display: block;
+                    background: var(--lz-yellow);
+
+                    .menu-item {
+                        padding: 15px 20px 15px 20px;
+                    }
+                }
+
+            }
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            list-style-type: none;
+            margin-top: 3px; //align text with first line from Logo
+            column-gap: lz-variables.$menu-column-gap;
+            padding-inline-start: 0px;
+
+            @media screen and (max-width: lz-variables.$screen-width-medium) {
+                display: block;
+            }
+
+            li {
+
+
+                a {
+                    @include lz-variables.link-defaults();
+
+                    &:hover {
+                        border-bottom: 3px solid black;
+                    }
+                }
+
+            }
+
+            .menu-item {
+                font-family: FabrikatNormal, sans-serif;
+                font-size: 1rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+
+                background: url('nav_down.png') no-repeat center;
+                background-position-x: center;
+                background-position-y: 29px; //adjust to second row of logo
+                background-size: 20px;
+                padding-bottom: 20px;
+                text-align: center;
+                position: relative;
+
+
+                @mixin animatesubmenu {
+
+                    animation: slideIn 0.3s forwards;
+
+                    @media screen and (max-width: lz-variables.$screen-width-medium) {
+                        animation: unset;
+                    }
+
+                }
+
+
+                &:hover .sub-menu {
+                    display: block;
+                    @include animatesubmenu();
+                }
+
+                .show-sub-menu {
+                    display: block !important;
+                    @include animatesubmenu();
+                }
+
+                .sub-menu {
+                    display: none;
+                    position: absolute;
+                    left: calc(-1*lz-variables.$menu-column-gap + 2px);
+                    width: calc(100% + 2*lz-variables.$menu-column-gap - 4px);
+                    background-color: var(--lz-yellow);
+                    list-style-type: none;
+
+                    margin-top: 2rem;
+                    padding-top: 1rem;
+                    padding-inline-start: 0px;
+
+                    /*yellow background behind menu-item.
+                    Must be a separate ::before-element to avoid sub menu closing to fast on mouse move*/
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: calc(-1* var(--header-height));
+                        left: 0;
+                        height: var(--header-height);
+                        width: 100%;
+                        background-color: var(--lz-yellow);
+                        z-index: -100;
+                    }
+
+                    @media screen and (max-width: lz-variables.$screen-width-medium) {
+                        z-index: 1;
+                        box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.5);
+                        margin-top: 0rem;
+
+                        &::before {
+                            all: unset;
+                        }
+                    }
+
+                    li {
+                        background: unset;
+                        opacity: 0;
+                        animation: fadeIn 0.1s forwards;
+                        animation-delay: 0.25s;
+
+
+                        &:first-child {
+                            padding-top: 2rem;
+
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                width: 50%;
+                                height: 5px;
+                                background-color: white;
+                            }
+                        }
+                    }
+                }
+
+                @keyframes slideIn {
+                    from {
+                        top: -200px;
+                    }
+
+                    to {
+                        top: auto;
+                    }
+                }
+
+                @keyframes fadeIn {
+                    to {
+                        opacity: 1;
+                        display: inline;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+    .nav-spenden-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        a.nav-spenden {
+            @include lz-variables.link-defaults();
+            flex-shrink: 0;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            font-family: FabrikatNormal, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+
+            text-align: center;
+            line-height: 1.2;
+            color: #011633;
+            height: auto;
+            width: 100px;
+            padding: 7px 20px;
+            border-radius: 0 25px 25px 25px;
+            border: solid 0 var(--lz-green);
+            background-color: var(--lz-green);
+
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        a.nav-spenden:hover {
+            background: var(--lz-yellow);
+        }
+    }
+
+    .nav-burger {
+        display: none;
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 25px;
+        border: 0;
+        background-color: var(--lz-yellow);
+        z-index: 1;
+        cursor: pointer;
+
+        justify-content: center;
+        align-items: center;
+
+        @media screen and (max-width: lz-variables.$screen-width-medium) {
+            display: flex;
+
+        }
+
+
+        &>div {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 16px;
+            width: 20px;
+        }
+
+        & .hamburger {
+            width: 100%;
+            height: 5px;
+            background-color: #fff;
+            transition: transform 0.2s ease-out;
+        }
+
+    }
+
+}
+
+
+@media screen and (max-width: lz-variables.$screen-width-medium) {
+    .shownow {
+        display: block !important;
+    }
+}
