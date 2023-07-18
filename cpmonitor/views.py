@@ -132,7 +132,7 @@ def city_view(request, city_slug):
             "asmt_admin": city.assessment_administration,
             "asmt_plan": city.assessment_action_plan,
             "asmt_status": city.assessment_status,
-            "local_group": city.local_group,
+            "local_group": getattr(city, "local_group", None),
         }
     )
 
