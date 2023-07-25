@@ -315,6 +315,16 @@ class Task(MP_Node):
         ),
     )
 
+    frontpage = models.BooleanField(
+        "Startseite",
+        default=False,
+        help_text=(
+            "Die Maßahme soll auf der Startseite angezeigt werden, um sie besonders hervorzuheben."
+            " Dies funktioniert nur für Maßnahmen und nicht für Handlungsfelder, also nur, wenn"
+            " es keine weiteren Untermaßnahmen mehr gibt."
+        ),
+    )
+
     title = models.CharField(
         "Titel",
         max_length=50,

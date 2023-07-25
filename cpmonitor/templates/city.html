@@ -129,8 +129,15 @@
       {{ city.description | safe_markdown }}
     </div>
   </div>
-  <div class="row row-deck row-cards">
-    {% if charts %}
+  {% if tasks %}
+    <div class="row row-deck row-cards">
+      {% for task in tasks %}
+        <div class="col-sm-12 col-lg-6">{% include "snippets/taskcard.html" %}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if charts %}
+    <div class="row row-deck row-cards">
       {% for chart in charts %}
         <div class="col-sm-12 col-lg-6">
           <div class="card">
@@ -150,8 +157,8 @@
           </div>
         </div>
       {% endfor %}
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
 </div>
 </div>
 {% endblock content %}
