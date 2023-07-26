@@ -16,7 +16,7 @@ urlpatterns = [
     path("ueber-uns/", views.ueber_uns_view, name="ueber-uns"),
     path(
         "favicon.ico",
-        RedirectView.as_view(url=settings.STATIC_URL + "favicon.png", permanent=True),
+        RedirectView.as_view(url=settings.STATIC_URL + "favicon.svg", permanent=True),
     ),
     path("admin/", admin.site.urls),
     path("martor/", include("martor.urls")),
