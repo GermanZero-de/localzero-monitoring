@@ -18,7 +18,7 @@ def test_should_go_to_city_view_when_clicking_city_select_dropdown_item(
 def test_city_page_should_have_city_name_in_title(live_server, page: Page):
     page.goto(live_server.url + "/beispielstadt/")
 
-    expect(page).to_have_title("Beispielstadt - Monitoring Localzero")
+    expect(page).to_have_title("Beispielstadt - Monitoring LocalZero")
 
 
 def test_city_page_should_not_contain_internal_information(live_server, page: Page):
