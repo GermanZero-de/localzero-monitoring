@@ -209,6 +209,7 @@ class TaskAdmin(TreeAdmin):
     fields = (
         "city",
         "draft_mode",
+        "frontpage",
         "title",
         "teaser",
         "description",

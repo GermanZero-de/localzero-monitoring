@@ -55,6 +55,17 @@ def _calculate_summary(request, node):
     node.incomplete_proportion = 100 - node.complete_proportion
 
 
+def _get_frontpage_tasks(request, city):
+    tasks = Task.objects.filter(city=city, numchild=0, frontpage=1)
+    if not _show_drafts(request):
+        if city.draft_mode:
+            tasks = tasks.none()
+        else:
+            tasks = tasks.filter(draft_mode=False)
+
+    return tasks
+
+
 def _get_children(request, city, node=None):
     if not node:
         children = Task.get_root_nodes().filter(city=city)
@@ -133,6 +144,7 @@ def city_view(request, city_slug):
             "asmt_plan": city.assessment_action_plan,
             "asmt_status": city.assessment_status,
             "local_group": getattr(city, "local_group", None),
+            "tasks": _get_frontpage_tasks(request, city),
         }
     )
 

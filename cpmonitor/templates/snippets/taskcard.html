@@ -1,0 +1,8 @@
+<a href="{% url 'task' city.slug task.slugs %}"
+   class="card card-link card-link-popup">
+  <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
+  <div class="card-body">
+    <div class="h2 mb-3">{{ task.title }}</div>
+    <div class="lz-card-summary lines-8">{{ task.teaser }}</div>
+  </div>
+</a>
