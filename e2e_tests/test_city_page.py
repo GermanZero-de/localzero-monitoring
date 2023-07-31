@@ -9,7 +9,7 @@ def test_should_go_to_city_view_when_clicking_city_select_dropdown_item(
     city_select_button = page.get_by_role("button", name="Kommunen")
     city_select_button.click()
 
-    city_button = page.locator(".dropdown-item", has_text="Beispielstadt")
+    city_button = page.locator(".sub-menu .menu-item", has_text="Beispielstadt")
     city_button.click()
 
     expect(page).to_have_url(live_server.url + "/beispielstadt/")
@@ -18,7 +18,7 @@ def test_should_go_to_city_view_when_clicking_city_select_dropdown_item(
 def test_city_page_should_have_city_name_in_title(live_server, page: Page):
     page.goto(live_server.url + "/beispielstadt/")
 
-    expect(page).to_have_title("LocalZero Monitoring - Beispielstadt")
+    expect(page).to_have_title("Beispielstadt - Monitoring LocalZero")
 
 
 def test_city_page_should_not_contain_internal_information(live_server, page: Page):

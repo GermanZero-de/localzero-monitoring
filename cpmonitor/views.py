@@ -144,6 +144,7 @@ def city_view(request, city_slug):
             "asmt_plan": city.assessment_action_plan,
             "asmt_status": city.assessment_status,
             "local_group": city.local_group,
+            "local_group": getattr(city, "local_group", None),
             "tasks": _get_frontpage_tasks(request, city),
         }
     )

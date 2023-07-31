@@ -1,0 +1,45 @@
+@use 'lz-variables';
+
+#site-footer {
+    padding: 2rem 1rem 1.5rem 1rem;
+    margin-top: 8rem;
+    color: white;
+    background-color: var(--lz-dark-blue);
+
+    .site-footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: var(--content-maxwidth);
+        width: var(--content-width-percent);
+        padding-left: var(--viewport-padding);
+        padding-right: var(--viewport-padding);
+    }
+
+    p {
+        text-align: center;
+        vertical-align: middle;
+        margin: unset;
+    }
+
+    nav {
+
+        ul {
+            display: flex;
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+            column-gap: 1.2rem;
+            text-transform: uppercase;
+        }
+    }
+
+    a {
+        @include lz-variables.unset-all();
+        @include lz-variables.link-defaults();
+        @include lz-variables.lz-link-hover();
+
+    }
+}

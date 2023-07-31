@@ -10,10 +10,12 @@
           content="{% block description %}Monitoring von Klimaschutz-Maßnahmen in LocalZero-Kommunen{% endblock description %}">
     <title>
       {% block title %}
-        LocalZero Monitoring
+        Monitoring LocalZero
       {% endblock title %}
     </title>
     <link rel="stylesheet" href="{% static 'tabler/css/tabler.css' %}">
+    <link rel="stylesheet" href="{% static 'css/localzero.css' %}">
+    <script src="{% static 'js/localzero.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="{% static 'jquery/jquery.min.js' %}"></script>
     <script src="{% static 'tabler/js/tabler.min.js' %}" defer></script>
@@ -25,55 +27,44 @@
           Vorab-Version. Die Software befindet sich noch in Entwicklung. <a href="https://github.com/GermanZero-de/klimaschutzmonitor">Github-Projekt</a>
         </div>
       </header>
-      <header id="site-header"
-              class="navbar navbar-expand-md d-print-none sticky-top">
-        <div class="container-xl">
-          <a href="{% url 'index' %}">
-            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-              <img src="{% static 'Logo_Text.svg' %}"
-                   alt="LocalZero Logo"
-                   width="98"
-                   height="35"
-                   class="d-inline-block align-middle">
-              <p>Monitoring</p>
-            </h1>
+      <header id="site-header">
+        <div class="site-header-inner">
+          <a class="site-branding" href="{% url 'index' %}" title="Home">
+            <div class="site-logo">&nbsp;</div>
+            <p class="site-title">LocalZero Monitoring</p>
           </a>
-          <div class="collapse navbar-collapse" id="navbar-menu">
-            <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'project' %}">
-                    <span class="nav-link-title">Das Projekt</span>
-                  </a>
+          <nav class="site-navigation">
+            <div id="site-menu">
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="{% url 'project' %}">Das Projekt</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'ueber-uns' %}">
-                    <span class="nav-link-title">Über uns</span>
-                  </a>
+                <li class="menu-item">
+                  <a href="{% url 'ueber-uns' %}">Über uns</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link"
-                     data-bs-toggle="dropdown"
-                     data-bs-auto-close="outside"
-                     role="button"
-                     aria-expanded="false">
-                    <span class="nav-link-title">Kommunen</span>
-                  </a>
-                  <div class="dropdown-menu">
+                <li class="menu-item" onclick="toggleSubmenu(event)">
+                  <a role="button">Kommunen</a>
+                  <ul class="sub-menu">
                     {% for city in cities %}
-                      <a class="dropdown-item" href="{% url 'city' city.slug %}">{{ city.name }}</a>
+                      <li class="menu-item">
+                        <a href="{% url 'city' city.slug %}">{{ city.name }}</a>
+                      </li>
                     {% endfor %}
-                  </div>
+                  </ul>
                 </li>
               </ul>
             </div>
-          </div>
-          <div class="nav-spenden-container">
-            <a class="btn nav-spenden"
-               href="{% url 'jetzt-spenden' %}"
-               type="button">Jetzt
-              <br>
-            spenden</a>
+            <div class="nav-spenden-container">
+              <a class="btn nav-spenden"
+                 href="{% url 'jetzt-spenden' %}"
+                 type="button">Jetzt spenden</a>
+            </div>
+          </nav>
+          <div id="nav-burger" class="nav-burger" onclick="toggleMobile()">
+            <div>
+              <div class="hamburger"></div>
+              <div class="hamburger"></div>
+            </div>
           </div>
         </div>
       </header>
@@ -102,27 +93,21 @@
           </div>
         </div>
       </div>
-      <footer class="footer d-print-none">
-        <div class="container-xl">
-          <div class="row text-center align-items-center flex-row-reverse">
-            <div class="col-lg-auto ms-lg-auto">
-              <ul class="list-inline list-inline-dots mb-0">
-                <li class="list-inline-item">
-                  <a href="{% url 'impressum' %}">Impressum</a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="{% url 'datenschutz' %}">Datenschutz</a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-              <ul class="list-inline list-inline-dots mb-0">
-                <li class="list-inline-item">
-                  Copyright © <a href="https://localzero.net/">LocalZero.net</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+      <footer id="site-footer">
+        <div class="site-footer-inner">
+          <p>
+            Copyright © <a href="https://localzero.net/">LocalZero.net</a>
+          </p>
+          <nav>
+            <ul>
+              <li>
+                <a href="{% url 'impressum' %}">Impressum</a>
+              </li>
+              <li>
+                <a href="{% url 'datenschutz' %}">Datenschutz</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </footer>
     </div>
