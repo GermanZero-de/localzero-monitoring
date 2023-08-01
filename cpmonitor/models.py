@@ -374,12 +374,14 @@ class Task(MP_Node):
         "Verantwortliches Organ",
         blank=True,
         max_length=200,
+        help_text="Name oder gebräuchliche Abkürzung des verantwortlichen Gremiums oder Behörde",
     )
 
     responsible_organ_explanation = models.TextField(
         "Erklärungstext zum verantwortlichen Organ",
         blank=True,
         help_text="""
+            <p>Ausgeschriebener Name, falls eine Abkürzung für das verantwortliche Organ verwendet wurde.</p>
             <p>Eventuell Ansprechperson oder Kontaktdaten, wenn diese öffentlich zugänglich sind.</p>
             <p>Gegebenenfalls eine Begründung, warum es an diesem Organ hängt.</p>
         """,
