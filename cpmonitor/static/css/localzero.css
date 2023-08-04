@@ -1,12 +1,26 @@
+/*use same screen sizes as tablar*/
+:root {
+  --content-maxwidth: 100%;
+}
+@media (min-width: 1200px) {
+  :root {
+    --content-maxwidth: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  :root {
+    --content-maxwidth: 1320px;
+  }
+}
+
 :root {
   --lz-yellow: #FFC80C;
   --lz-yellow-light: #FFF9E5;
   --lz-dark-blue: #011633;
   --lz-green: #a3d869;
   --backgroundcolor: white;
-  --content-maxwidth: 1320px;
   --content-width-percent: 100%;
-  --viewport-padding: 0px;
+  --viewport-padding: 0.5rem;
   --screen-width-medium: 900px;
   --screen-width-small: 600px;
   --header-height: 70px;
@@ -15,37 +29,6 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-body {
-  min-height: 100vh;
-  /* set a minimum height for the body element */
-  display: flex;
-  flex-direction: column;
-  hyphens: auto;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #333;
-  background-color: #fff;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-main {
-  flex: 1;
-  /* use flex-grow to fill the remaining space */
-  max-width: var(--content-maxwidth);
-  min-height: 100%;
-  width: var(--content-width-percent);
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 100px;
-  padding-left: var(--viewport-padding);
-  padding-right: var(--viewport-padding);
-}
-
-/*#endregion*/
 #site-header {
   display: flex;
   justify-content: center;
@@ -142,12 +125,12 @@ main {
   flex-grow: 1;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation {
+  #site-header {
     flex-direction: row-reverse;
   }
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation #site-menu {
+  #site-header #site-menu {
     display: none;
     position: absolute;
     align-self: stretch;
@@ -159,15 +142,15 @@ main {
     right: 70px;
     z-index: 900;
   }
-  #site-header .site-navigation #site-menu .menu {
+  #site-header #site-menu .menu {
     display: block;
     background: var(--lz-yellow);
   }
-  #site-header .site-navigation #site-menu .menu .menu-item {
+  #site-header #site-menu .menu .menu-item {
     padding: 15px 20px 15px 20px;
   }
 }
-#site-header .site-navigation .menu {
+#site-header .menu {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
@@ -176,20 +159,20 @@ main {
   padding-inline-start: 0px;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation .menu {
+  #site-header .menu {
     display: block;
   }
 }
-#site-header .site-navigation .menu li a {
+#site-header .menu li a {
   cursor: pointer;
 }
-#site-header .site-navigation .menu li a:hover {
+#site-header .menu li a:hover {
   text-decoration: none;
 }
-#site-header .site-navigation .menu li a:hover {
+#site-header .menu li a:hover {
   border-bottom: 3px solid black;
 }
-#site-header .site-navigation .menu .menu-item {
+#site-header .menu .menu-item {
   font-family: FabrikatNormal, sans-serif;
   font-size: 1rem;
   font-weight: bold;
@@ -203,25 +186,25 @@ main {
   text-align: center;
   position: relative;
 }
-#site-header .site-navigation .menu .menu-item:hover .sub-menu {
+#site-header .menu .menu-item:hover .sub-menu {
   display: block;
   animation: slideIn 0.3s forwards;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation .menu .menu-item:hover .sub-menu {
+  #site-header .menu .menu-item:hover .sub-menu {
     animation: unset;
   }
 }
-#site-header .site-navigation .menu .menu-item .show-sub-menu {
+#site-header .menu .menu-item .show-sub-menu {
   display: block !important;
   animation: slideIn 0.3s forwards;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation .menu .menu-item .show-sub-menu {
+  #site-header .menu .menu-item .show-sub-menu {
     animation: unset;
   }
 }
-#site-header .site-navigation .menu .menu-item .sub-menu {
+#site-header .menu .menu-item .sub-menu {
   display: none;
   position: absolute;
   left: calc(-2rem + 2px);
@@ -232,9 +215,9 @@ main {
   padding-top: 1rem;
   padding-inline-start: 0px;
   /*yellow background behind menu-item.
-  Must be a separate ::before-element to avoid sub menu closing to fast on mouse move*/
+      Must be a separate ::before-element to avoid sub menu closing to fast on mouse move*/
 }
-#site-header .site-navigation .menu .menu-item .sub-menu::before {
+#site-header .menu .menu-item .sub-menu::before {
   content: "";
   position: absolute;
   top: calc(-1 * var(--header-height));
@@ -245,25 +228,25 @@ main {
   z-index: -100;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation .menu .menu-item .sub-menu {
+  #site-header .menu .menu-item .sub-menu {
     z-index: 1;
     box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.5);
     margin-top: 0rem;
   }
-  #site-header .site-navigation .menu .menu-item .sub-menu::before {
+  #site-header .menu .menu-item .sub-menu::before {
     all: unset;
   }
 }
-#site-header .site-navigation .menu .menu-item .sub-menu li {
+#site-header .menu .menu-item .sub-menu li {
   background: unset;
   opacity: 0;
   animation: fadeIn 0.1s forwards;
   animation-delay: 0.25s;
 }
-#site-header .site-navigation .menu .menu-item .sub-menu li:first-child {
+#site-header .menu .menu-item .sub-menu li:first-child {
   padding-top: 2rem;
 }
-#site-header .site-navigation .menu .menu-item .sub-menu li:first-child::before {
+#site-header .menu .menu-item .sub-menu li:first-child::before {
   content: "";
   position: absolute;
   top: 0;
@@ -284,7 +267,6 @@ main {
 @keyframes fadeIn {
   to {
     opacity: 1;
-    display: inline;
   }
 }
 #site-header .nav-spenden-container {
