@@ -125,12 +125,12 @@
   flex-grow: 1;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation {
+  #site-header {
     flex-direction: row-reverse;
   }
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation #site-menu {
+  #site-header #site-menu {
     display: none;
     position: absolute;
     align-self: stretch;
@@ -142,15 +142,15 @@
     right: 70px;
     z-index: 900;
   }
-  #site-header .site-navigation #site-menu .menu {
+  #site-header #site-menu .menu {
     display: block;
     background: var(--lz-yellow);
   }
-  #site-header .site-navigation #site-menu .menu .menu-item {
+  #site-header #site-menu .menu .menu-item {
     padding: 15px 20px 15px 20px;
   }
 }
-#site-header .site-navigation .menu {
+#site-header .menu {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
@@ -159,20 +159,20 @@
   padding-inline-start: 0px;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation .menu {
+  #site-header .menu {
     display: block;
   }
 }
-#site-header .site-navigation .menu li a {
+#site-header .menu li a {
   cursor: pointer;
 }
-#site-header .site-navigation .menu li a:hover {
+#site-header .menu li a:hover {
   text-decoration: none;
 }
-#site-header .site-navigation .menu li a:hover {
+#site-header .menu li a:hover {
   border-bottom: 3px solid black;
 }
-#site-header .site-navigation .menu .menu-item {
+#site-header .menu .menu-item {
   font-family: FabrikatNormal, sans-serif;
   font-size: 1rem;
   font-weight: bold;
@@ -186,25 +186,25 @@
   text-align: center;
   position: relative;
 }
-#site-header .site-navigation .menu .menu-item:hover .sub-menu {
+#site-header .menu .menu-item:hover .sub-menu {
   display: block;
   animation: slideIn 0.3s forwards;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation .menu .menu-item:hover .sub-menu {
+  #site-header .menu .menu-item:hover .sub-menu {
     animation: unset;
   }
 }
-#site-header .site-navigation .menu .menu-item .show-sub-menu {
+#site-header .menu .menu-item .show-sub-menu {
   display: block !important;
   animation: slideIn 0.3s forwards;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation .menu .menu-item .show-sub-menu {
+  #site-header .menu .menu-item .show-sub-menu {
     animation: unset;
   }
 }
-#site-header .site-navigation .menu .menu-item .sub-menu {
+#site-header .menu .menu-item .sub-menu {
   display: none;
   position: absolute;
   left: calc(-2rem + 2px);
@@ -215,9 +215,9 @@
   padding-top: 1rem;
   padding-inline-start: 0px;
   /*yellow background behind menu-item.
-  Must be a separate ::before-element to avoid sub menu closing to fast on mouse move*/
+      Must be a separate ::before-element to avoid sub menu closing to fast on mouse move*/
 }
-#site-header .site-navigation .menu .menu-item .sub-menu::before {
+#site-header .menu .menu-item .sub-menu::before {
   content: "";
   position: absolute;
   top: calc(-1 * var(--header-height));
@@ -228,25 +228,25 @@
   z-index: -100;
 }
 @media screen and (max-width: 900px) {
-  #site-header .site-navigation .menu .menu-item .sub-menu {
+  #site-header .menu .menu-item .sub-menu {
     z-index: 1;
     box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.5);
     margin-top: 0rem;
   }
-  #site-header .site-navigation .menu .menu-item .sub-menu::before {
+  #site-header .menu .menu-item .sub-menu::before {
     all: unset;
   }
 }
-#site-header .site-navigation .menu .menu-item .sub-menu li {
+#site-header .menu .menu-item .sub-menu li {
   background: unset;
   opacity: 0;
   animation: fadeIn 0.1s forwards;
   animation-delay: 0.25s;
 }
-#site-header .site-navigation .menu .menu-item .sub-menu li:first-child {
+#site-header .menu .menu-item .sub-menu li:first-child {
   padding-top: 2rem;
 }
-#site-header .site-navigation .menu .menu-item .sub-menu li:first-child::before {
+#site-header .menu .menu-item .sub-menu li:first-child::before {
   content: "";
   position: absolute;
   top: 0;
