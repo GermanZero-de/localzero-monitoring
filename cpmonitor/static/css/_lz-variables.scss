@@ -5,33 +5,33 @@ $screen-width-small: 600px;
 $menu-column-gap: 2rem;
 
 
-@mixin unset-all{
+@mixin unset-all {
 
-    all:unset;
+    all: unset;
 
     &:hover::before {
         all: unset;
-        width:unset;
+        width: unset;
         background: unset;
     }
 
     &::before {
         all: unset;
-        width:auto;
+        width: auto;
         background: none;
 
     }
 }
 
-@mixin link-defaults{
-    cursor:pointer;
+@mixin link-defaults {
+    cursor: pointer;
 
-    &:hover{
+    &:hover {
         text-decoration: none;
     }
 }
 
-@mixin lz-link-hover{
+@mixin lz-link-hover {
     &:hover {
         border-bottom: 6px solid var(--lz-yellow);
         position: relative;

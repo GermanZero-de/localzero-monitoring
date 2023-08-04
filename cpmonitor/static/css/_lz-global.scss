@@ -1,14 +1,31 @@
 @use 'lz-variables';
 
+
+/*use same screen sizes as tablar*/
+:root {
+    --content-maxwidth: 100%;
+
+    @media (min-width: 1200px) {
+        --content-maxwidth: 1140px;
+    }
+
+    @media (min-width: 1400px) {
+        --content-maxwidth: 1320px;
+    }
+}
+
+
+
+
 :root {
     --lz-yellow: #FFC80C;
     --lz-yellow-light: #FFF9E5;
     --lz-dark-blue: #011633;
     --lz-green: #a3d869;
     --backgroundcolor: white;
-    --content-maxwidth: 1320px;
+
     --content-width-percent: 100%;
-    --viewport-padding: 0px;
+    --viewport-padding: 0.5rem;
     --screen-width-medium: #{lz-variables.$screen-width-medium};
     --screen-width-small: #{lz-variables.$screen-width-small};
     --header-height: 70px;

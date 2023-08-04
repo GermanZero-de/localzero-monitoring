@@ -1,12 +1,26 @@
+/*use same screen sizes as tablar*/
+:root {
+  --content-maxwidth: 100%;
+}
+@media (min-width: 1200px) {
+  :root {
+    --content-maxwidth: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  :root {
+    --content-maxwidth: 1320px;
+  }
+}
+
 :root {
   --lz-yellow: #FFC80C;
   --lz-yellow-light: #FFF9E5;
   --lz-dark-blue: #011633;
   --lz-green: #a3d869;
   --backgroundcolor: white;
-  --content-maxwidth: 1320px;
   --content-width-percent: 100%;
-  --viewport-padding: 0px;
+  --viewport-padding: 0.5rem;
   --screen-width-medium: 900px;
   --screen-width-small: 600px;
   --header-height: 70px;
@@ -15,37 +29,6 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-body {
-  min-height: 100vh;
-  /* set a minimum height for the body element */
-  display: flex;
-  flex-direction: column;
-  hyphens: auto;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #333;
-  background-color: #fff;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-main {
-  flex: 1;
-  /* use flex-grow to fill the remaining space */
-  max-width: var(--content-maxwidth);
-  min-height: 100%;
-  width: var(--content-width-percent);
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 100px;
-  padding-left: var(--viewport-padding);
-  padding-right: var(--viewport-padding);
-}
-
-/*#endregion*/
 #site-header {
   display: flex;
   justify-content: center;
@@ -284,7 +267,6 @@ main {
 @keyframes fadeIn {
   to {
     opacity: 1;
-    display: inline;
   }
 }
 #site-header .nav-spenden-container {
