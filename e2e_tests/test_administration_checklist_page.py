@@ -22,4 +22,4 @@ def test_should_show_the_administration_assessment_and_the_checklist(
         page.locator(
             'td:text("Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?") + td'
         ).locator("svg")
-    ).to_have_class("lz-icon CROSSED")
+    ).to_have_class("lz-icon EMPTY")

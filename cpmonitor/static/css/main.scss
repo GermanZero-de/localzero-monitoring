@@ -69,8 +69,8 @@ $lz-yellow: #ffc80c;
     color: var(--lz-color-complete);
   }
 
-  &.CROSSED {
-    color: var(--lz-color-delayed);
+  &.EMPTY {
+    color: var(--lz-color-unknown);
   }
 }
 

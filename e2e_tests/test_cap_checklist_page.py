@@ -20,4 +20,4 @@ def test_should_show_the_cap_assessment_and_the_checklist(live_server, page: Pag
         page.locator(
             'td:text("Enthält der KAP ein Szenario mit dem Ziel Klimaneutralität bis 2035?") + td'
         ).locator("svg")
-    ).to_have_class("lz-icon CROSSED")
+    ).to_have_class("lz-icon EMPTY")
