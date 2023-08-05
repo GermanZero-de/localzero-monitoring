@@ -4,6 +4,11 @@ set -euo pipefail
 
 if [[ "${1:-}" != "testing" && "${1:-}" != "production" ]]; then
     echo "Please provide an environment as the first argument - either \"testing\" or \"production\"!"
+    echo "You may additionally pass in a tag suffix as second parameter that will be appended to today's date in the git and docker tags."
+    echo
+    echo "For example,"
+    echo "$ ./deploy.sh testing bugfix"
+    echo "will create tags like \"deploy-testing-2023-Aug-05-bugfix\"."
     exit 1
 fi
 
