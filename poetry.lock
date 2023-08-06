@@ -1140,6 +1140,18 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
+name = "rules"
+version = "3.3"
+description = "Awesome Django authorization, without the database"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "rules-3.3-py2.py3-none-any.whl", hash = "sha256:12c8bbab5f54560e68528fcca7abc0e162c35ac882e3cc0daed40ac49c963070"},
+    {file = "rules-3.3.tar.gz", hash = "sha256:bf7bea8b724b73c36a622714c1b3557620c187a2ee05321a2ac8ab7472dc4464"},
+]
+
+[[package]]
 name = "setuptools"
 version = "67.4.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
@@ -1302,4 +1314,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "fb2a4a024580d14803a487168afbc42ce90bb5c59bf3d18c127e73aec75b65cf"
+content-hash = "a9a55fdcf69558f05af6c1100583d1a89e38605d1348fd789be4be2f8d71f0c9"

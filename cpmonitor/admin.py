@@ -1,14 +1,23 @@
-from django.contrib import admin
+from collections.abc import Sequence
+from django.contrib import admin, auth
 from django.db import models
 from django.forms import TextInput
 from django.forms.models import ErrorList
 from django.http import HttpRequest, HttpResponseRedirect, QueryDict
+from django.http.request import HttpRequest
 from django.urls import reverse
 from django.utils.html import format_html
 from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
+from rules.contrib.admin import ObjectPermissionsModelAdminMixin
+from rules.permissions import perm_exists
 
+from .rules import (
+    filter_editable,
+    is_allowed_to_change_site_admins,
+    is_allowed_to_change_site_editors,
+)
 from .models import Chart, City, Task, CapChecklist, AdministrationChecklist, LocalGroup
 
 _city_filter_query = "city__id__exact"
@@ -37,7 +46,7 @@ def _admin_url(model, type, city_id):
         return base
 
 
-class ChartInline(admin.StackedInline):
+class ChartInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
     model = Chart
     extra = 0
 
@@ -47,15 +56,17 @@ class ChartInline(admin.StackedInline):
     }
 
 
-class CapChecklistInline(admin.TabularInline):
+class CapChecklistInline(ObjectPermissionsModelAdminMixin, admin.TabularInline):
     model = CapChecklist
 
 
-class AdministrationChecklistInline(admin.TabularInline):
+class AdministrationChecklistInline(
+    ObjectPermissionsModelAdminMixin, admin.TabularInline
+):
     model = AdministrationChecklist
 
 
-class LocalGroupInline(admin.StackedInline):
+class LocalGroupInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
     model = LocalGroup
 
     formfield_overrides = {
@@ -64,11 +75,31 @@ class LocalGroupInline(admin.StackedInline):
     }
 
 
-class CityAdmin(admin.ModelAdmin):
+class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     list_display = ("zipcode", "name", "teaser", "edit_tasks")
     list_display_links = ("name",)
     ordering = ("name",)
     search_fields = ["zipcode", "name"]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        user = request.user
+        if user.is_superuser:
+            return qs
+        return filter_editable(user, qs)
+
+    save_on_top = True
+
+    filter_horizontal = ["city_editors", "city_admins"]
+
+    def get_readonly_fields(self, request: HttpRequest, obj=None) -> Sequence[str]:
+        user = request.user
+        result = []
+        if not is_allowed_to_change_site_editors(user, obj):
+            result.append("city_editors")
+        if not is_allowed_to_change_site_admins(user, obj):
+            result.append("city_admins")
+        return result
 
     formfield_overrides = {
         models.CharField: {"widget": TextInput(attrs={"size": "170"})},
@@ -164,7 +195,7 @@ class TaskForm(MoveNodeForm):
         return super().clean()
 
 
-class TaskAdmin(TreeAdmin):
+class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
     # ------ change list page ------
     change_list_template = "admin/task_changelist.html"
 
@@ -206,6 +237,8 @@ class TaskAdmin(TreeAdmin):
     search_help_text = "Suche im Titel"
 
     # ------ add and change task page ------
+    save_on_top = True
+
     fields = (
         "city",
         "draft_mode",

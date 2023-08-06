@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "treebeard",
     "martor",
+    "rules.apps.AutodiscoverRulesConfig",
     "cpmonitor.apps.CpmonitorConfig",
 ]
 
@@ -59,6 +60,11 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+AUTHENTICATION_BACKENDS = (
+    "rules.permissions.ObjectPermissionBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
 
 ROOT_URLCONF = "cpmonitor.urls"
 

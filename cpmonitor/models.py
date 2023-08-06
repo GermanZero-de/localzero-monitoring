@@ -1,5 +1,6 @@
 from datetime import date
 
+from django.conf import settings
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -34,6 +35,27 @@ class City(models.Model):
     )
     zipcode = models.CharField("PLZ", max_length=5)
     url = models.URLField("Homepage", blank=True)
+
+    city_editors = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        verbose_name="Kommunen Bearbeiter",
+        related_name="edited_cities",
+        help_text="""
+            <p>Diese Benutzer können alle Inhalte der Kommune bearbeiten.</p>
+        """,
+    )
+
+    city_admins = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        verbose_name="Kommunen Admins",
+        related_name="administered_cities",
+        help_text="""
+            <p>Diese Benutzer können zusätzlich andere Benutzter als Admins und Bearbeiter eintragen.</p>
+            <p>Sie brauchen nicht als "Bearbeiter" eingetragen zu werden.</p>
+        """,
+    )
 
     resolution_date = models.DateField(
         "Datum des Klimaneutralitäts-Beschlusses",
