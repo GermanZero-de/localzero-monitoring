@@ -199,20 +199,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
     # ------ change list page ------
     change_list_template = "admin/task_changelist.html"
 
-    @admin.display(description="Struktur")
-    def structure(self, task: Task):
-        """Additional read-only field showing the tree structure."""
-
-        def add_parents(current: Task, substructure: str):
-            parent = current.get_parent()
-            if parent == None:
-                return substructure
-            else:
-                return add_parents(parent, "%s --> %s" % (parent.title, substructure))
-
-        return add_parents(task, task.title)
-
-    @admin.display(description="Public page")
+    @admin.display(description="Öffentliche Seite")
     def slug_link(self, task: Task):
         """Additional link to the public page and also showing the slugs."""
         url = reverse(
@@ -220,7 +207,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         )
         return format_html('<a href="{}" target="_blank">{}</a>', url, task.slugs)
 
-    list_display = ("title", "structure", "slug_link")
+    list_display = ("title", "slug_link")
     form = movenodeform_factory(Task, TaskForm)
 
     list_filter = ("city",)
