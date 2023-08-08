@@ -43,6 +43,7 @@ docker load -i /tmp/cpmonitor.tar
 docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
 
 # 8
+# TODO something about the tagging doesn't work as it should, do local tags not match what we expect here?
 docker tag cpmonitor:${env} cpmonitor:${date}${tag_suffix}
 docker tag klimaschutzmonitor-dbeaver:${env} klimaschutzmonitor-dbeaver:${date}${tag_suffix}
 
@@ -51,11 +52,10 @@ cd ~/${env}/
 docker-compose down --volumes
 # backup the db
 cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/${env}/db.sqlite3.${date}${tag_suffix}
-cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/testing/uploads.${date}${tag_suffix}
+cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/${env}/uploads.${date}${tag_suffix}
 # apply migrations using a temporary container
+# this doesn't seem to work like it should; migrations were not applied last time
 docker run --user=1007:1007 --rm -v /home/monitoring/${env}/db:/db cpmonitor:${env} sh -c "DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container"
-
-# TODO: it stops here for some reason..
 
 # use the latest docker-compose.yml to start the app using the new image
 mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
@@ -65,5 +65,9 @@ docker-compose up --detach --no-build
 crontab /tmp/crontab
 cp /tmp/renew-cert.sh /home/monitoring/
 chmod +x /home/monitoring/renew-cert.sh
+
+echo
+echo 'FINISHED SUCCESSFULLY!'
+echo
 
 EOF
