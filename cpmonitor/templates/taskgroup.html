@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load martortags %}
 {% block title %}
   LocalZero Monitoring - {{ city.name }}
@@ -55,6 +56,11 @@
                   </div>
                 {% endfor %}
               </div>
+            </div>
+            <div class="card-details">
+              <svg width="20" height="20">
+                <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
+              </svg>
             </div>
           </a>
         </div>

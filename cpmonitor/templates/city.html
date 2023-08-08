@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load martortags %}
+{% load static %}
 {% block title %}
   {{ city.name }} - Monitoring LocalZero
 {% endblock title %}
@@ -46,7 +47,7 @@
       <div class="col-sm-6 col-lg-3">
         <a href="{% url 'task' city.slug %}"
            class="card card-link card-link-popup">
-          <div class="card-body">
+          <div class="card-body ">
             <div class="d-flex align-items-center">
               <div class="subheader">Maßnahmen offen</div>
             </div>
@@ -67,6 +68,11 @@
                 </div>
               {% endfor %}
             </div>
+          </div>
+          <div class="card-details">
+            <svg width="20" height="20">
+              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
+            </svg>
           </div>
         </a>
       </div>
@@ -94,6 +100,11 @@
               </div>
             </div>
           </div>
+          <div class="card-details">
+            <svg width="20" height="20">
+              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
+            </svg>
+          </div>
         </a>
       </div>
     {% endif %}
@@ -119,6 +130,11 @@
                    aria-valuemax="100">
               </div>
             </div>
+          </div>
+          <div class="card-details">
+            <svg width="20" height="20">
+              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
+            </svg>
           </div>
         </a>
       </div>
