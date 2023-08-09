@@ -1,57 +1,69 @@
 from django.contrib.auth.models import User
-from django.db.models import QuerySet, Q
+from django.db.models import Q, Model
 import rules
 from types import NoneType
-from typing import TypeVar
 
 from .models import City, Task, Chart
 
-CityObject = City | Task | Chart | NoneType
-T = TypeVar("T", City, Task)
+CityType = City | Task | Chart | int
+CityOrNoneType = CityType | NoneType
 
 
-def filter_editable(user: User, qs: QuerySet[T]) -> QuerySet[T]:
-    if qs.model == City:
-        return qs.filter(Q(city_editors=user) | Q(city_admins=user))
+def is_allowed_to_edit_q(user: User, model: Model) -> Q:
+    if not user.is_staff or not user.is_active:
+        return Q(pk__in=[])  # Always false -> Empty QuerySet
+    if user.is_superuser:
+        return ~Q(pk__in=[])  # Always true -> All objects
+    if model == City:
+        return Q(city_editors=user) | Q(city_admins=user)
     else:
-        return qs.filter(Q(city__city_editors=user) | Q(city__city_admins=user))
+        return Q(city__city_editors=user) | Q(city__city_admins=user)
 
 
-def _get_city(object: CityObject) -> City | NoneType:
-    # print(object)
+def _get_city(object: CityOrNoneType) -> City | NoneType:
     if isinstance(object, City):
         return object
+    elif isinstance(object, int):
+        return City.objects.filter(id=object).first()
     else:
         return getattr(object, "city", None)
 
 
 @rules.predicate
-def is_city_editor(user: User, object: CityObject) -> bool:
+def is_city_editor(user: User, object: CityOrNoneType) -> bool:
+    if not user.is_staff or not user.is_active:
+        return False
     city = _get_city(object)
     if isinstance(city, City):
         return city.city_editors.filter(pk=user.pk).exists()
-    else:
-        return False
+    return False
 
 
 @rules.predicate
-def is_city_admin(user: User, object: CityObject) -> bool:
+def is_city_admin(user: User, object: CityOrNoneType) -> bool:
+    if not user.is_staff or not user.is_active:
+        return False
     city = _get_city(object)
     if isinstance(city, City):
         return city.city_admins.filter(pk=user.pk).exists()
-    else:
+    return False
+
+
+@rules.predicate
+def is_site_admin(user: User, object: CityOrNoneType) -> bool:
+    if not user.is_superuser or not user.is_active:
         return False
-
-
-@rules.predicate
-def is_site_admin(user: User, object: CityObject) -> bool:
-    return user.is_superuser
-
-
-@rules.predicate
-def no_object(user: User, object: CityObject) -> bool:
-    if object is None:
+    city = _get_city(object)
+    if isinstance(city, City):
         return True
+    return False
+
+
+@rules.predicate
+def no_object(user: User, object: CityOrNoneType) -> bool:
+    if object is None and user.is_active and user.is_staff:
+        return True
+    return False
 
 
 is_allowed_to_edit = is_city_editor | is_city_admin | is_site_admin
