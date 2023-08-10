@@ -216,6 +216,7 @@ class TaskAdmin(TreeAdmin):
         "planned_start",
         "planned_completion",
         "responsible_organ",
+        "responsible_organ_explanation",
         "plan_assessment",
         "execution_status",
         "execution_justification",
