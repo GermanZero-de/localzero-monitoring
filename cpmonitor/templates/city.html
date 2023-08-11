@@ -57,14 +57,14 @@
               <div class="ms-auto"></div>
             </div>
             <div class="progress progress-lg progress-separated">
-              {% for value, label, name in city.status_proportions %}
-                <div class="progress-bar lz-status {{ name }}"
+              {% for value, status in city.status_proportions %}
+                <div class="progress-bar lz-status {{ status.name }}"
                      role="progressbar"
                      data-bs-toggle="tooltip"
                      data-bs-placement="top"
                      data-value="{{ value }}"
-                     title="{{ value }}% {{ label }}"
-                     aria-label="{{ label }}">
+                     title="{{ value }}% {{ status.label }}"
+                     aria-label="{{ status.label }}">
                 </div>
               {% endfor %}
             </div>

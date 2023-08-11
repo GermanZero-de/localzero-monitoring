@@ -45,14 +45,14 @@
               <div class="h2 mb-3">{{ group.title }}</div>
               <div class="col">{{ group.subtasks_count }} Maßnahmen</div>
               <div class="progress progress-lg progress-separated mb-3">
-                {% for value, label, name in group.status_proportions %}
-                  <div class="progress-bar lz-status {{ name }}"
+                {% for value, status in group.status_proportions %}
+                  <div class="progress-bar lz-status {{ status.name }}"
                        role="progressbar"
                        data-value="{{ value }}"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       title="{{ value }} % {{ label }}"
-                       aria-label="{{ label }}">
+                       title="{{ value }} % {{ status.label }}"
+                       aria-label="{{ status.label }}">
                   </div>
                 {% endfor %}
               </div>

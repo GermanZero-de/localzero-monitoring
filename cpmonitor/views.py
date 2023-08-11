@@ -24,6 +24,16 @@ from .models import (
     AdministrationChecklist,
 )
 
+STATUS_ORDER = [
+    ExecutionStatus.FAILED,
+    ExecutionStatus.DELAYED,
+    ExecutionStatus.AS_PLANNED,
+    ExecutionStatus.COMPLETE,
+    ExecutionStatus.UNKNOWN,
+]
+
+TO_STATUS = {status.value: status for status in ExecutionStatus}
+
 
 def _show_drafts(request):
     return request.user.is_authenticated
@@ -32,7 +42,6 @@ def _show_drafts(request):
 def _calculate_summary(request, node):
     """calculate summarized status for a given node or a whole city"""
 
-    statuses = {s.value: s for s in ExecutionStatus}
     if isinstance(node, City):
         subtasks = Task.objects.filter(city=node, numchild=0)
     else:
@@ -41,18 +50,28 @@ def _calculate_summary(request, node):
         subtasks = subtasks.filter(draft_mode=False)
 
     subtasks_count = len(subtasks)
-    status_counts = Counter([s.execution_status for s in subtasks])
+    status_counts = Counter(
+        [TO_STATUS[subtask.execution_status] for subtask in subtasks]
+    )
     status_proportions = {
-        s: round(c / subtasks_count * 100) for s, c in status_counts.items()
+        status: round(count / subtasks_count * 100)
+        for status, count in status_counts.items()
     }
 
-    node.status_proportions = [
-        (v, statuses[k].label, statuses[k].name)
-        for k, v in sorted(status_proportions.items(), reverse=True)
-    ]
+    node.status_proportions = _sort_status_proportions(status_proportions, STATUS_ORDER)
     node.subtasks_count = subtasks_count
     node.complete_proportion = status_proportions.get(ExecutionStatus.COMPLETE, 0)
     node.incomplete_proportion = 100 - node.complete_proportion
+
+
+def _sort_status_proportions(
+    status_proportions: dict[ExecutionStatus, int], order: list[ExecutionStatus]
+) -> list[tuple[int, ExecutionStatus]]:
+    status_proportions_sorted = []
+    for status in order:
+        if status in status_proportions.keys():
+            status_proportions_sorted.append((status_proportions[status], status))
+    return status_proportions_sorted
 
 
 def _get_frontpage_tasks(request, city):
