@@ -47,12 +47,20 @@ class ChartInline(admin.StackedInline):
     }
 
 
-class CapChecklistInline(admin.TabularInline):
+class CapChecklistInline(admin.StackedInline):
     model = CapChecklist
 
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
 
-class AdministrationChecklistInline(admin.TabularInline):
+
+class AdministrationChecklistInline(admin.StackedInline):
     model = AdministrationChecklist
+
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
 
 
 class LocalGroupInline(admin.StackedInline):

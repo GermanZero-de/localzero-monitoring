@@ -174,55 +174,111 @@ class CapChecklist(models.Model):
     )
 
     cap_exists = models.BooleanField("Gibt es einen KAP?", default=False)
+    cap_rationale = models.TextField(
+        "Begründung zu: Gibt es einen KAP?",
+        blank=True,
+    )
     target_date_exists = models.BooleanField(
         "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten"
         " kommunalen Gremium beschlossen?",
         default=False,
     )
+    target_date_rationale = models.TextField(
+        "Begründung zu: Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten"
+        " kommunalen Gremium beschlossen?",
+        blank=True,
+    )
     based_on_remaining_co2_budget = models.BooleanField(
         "Sind die Einsparziele im KAP auf Grundlage des Restbudgets berechnet?",
         default=False,
     )
+    based_on_remaining_co2_budget_rationale = models.TextField(
+        "Begründung zu: Sind die Einsparziele im KAP auf Grundlage des Restbudgets berechnet?",
+        blank=True,
+    )
     sectors_of_climate_vision_used = models.BooleanField(
-        "Bilanziert der KAP in den Sektoren der Klimavision (inkl. LULUCF und Landwirtschaft)",
+        "Bilanziert der KAP in den Sektoren der Klimavision (inkl. LULUCF und Landwirtschaft)?",
         default=False,
+    )
+    sectors_of_climate_vision_used_rationale = models.TextField(
+        "Begründung zu: Bilanziert der KAP in den Sektoren der Klimavision (inkl. LULUCF und Landwirtschaft)?",
+        blank=True,
     )
     scenario_for_climate_neutrality_till_2035_exists = models.BooleanField(
         "Enthält der KAP ein Szenario mit dem Ziel Klimaneutralität bis 2035?",
         default=False,
+    )
+    scenario_for_climate_neutrality_till_2035_rationale = models.TextField(
+        "Begründung zu: Enthält der KAP ein Szenario mit dem Ziel Klimaneutralität bis 2035?",
+        blank=True,
     )
     scenario_for_business_as_usual_exists = models.BooleanField(
         "Ist ein Trendszenario hinterlegt (wie entwickeln sich die THG-Emissionen, wenn alles so"
         " weiterläuft wie bisher)?",
         default=False,
     )
+    scenario_for_business_as_usual_rationale = models.TextField(
+        "Begründung zu: Ist ein Trendszenario hinterlegt (wie entwickeln sich die THG-Emissionen, wenn alles so"
+        " weiterläuft wie bisher)?",
+        blank=True,
+    )
     annual_costs_are_specified = models.BooleanField(
         "Sind die jährlichen Kosten und der jährliche Personalbedarf der Maßnahmen ausgewiesen?",
         default=False,
     )
+    annual_costs_are_specified_rationale = models.TextField(
+        "Begründung zu: Sind die jährlichen Kosten und der jährliche Personalbedarf der Maßnahmen ausgewiesen?",
+        blank=True,
+    )
     tasks_are_planned_yearly = models.BooleanField(
         "Haben die Maßnahmen eine jahresscharfe Planung?", default=False
+    )
+    tasks_are_planned_yearly_rationale = models.TextField(
+        "Begründung zu: Haben die Maßnahmen eine jahresscharfe Planung?",
+        blank=True,
     )
     tasks_have_responsible_entity = models.BooleanField(
         "Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen"
         " hinterlegt?",
         default=False,
     )
+    tasks_have_responsible_entity_rationale = models.TextField(
+        "Begründung zu: Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen"
+        " hinterlegt?",
+        blank=True,
+    )
     annual_reduction_of_emissions_can_be_predicted = models.BooleanField(
         "Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der"
         " THG-Emissionen ersichtlich?",
         default=False,
     )
+    annual_reduction_of_emissions_can_be_predicted_rationale = models.TextField(
+        "Begründung zu: Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der"
+        " THG-Emissionen ersichtlich?",
+        blank=True,
+    )
     concept_for_participation_specified = models.BooleanField(
         "Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
         default=False,
+    )
+    concept_for_participation_specified_rationale = models.TextField(
+        "Begründung zu: Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
+        blank=True,
     )
     sustainability_architecture_in_administration_exists = models.BooleanField(
         "Gibt es eine gute Nachhaltigkeitsarchitektur in der Verwaltung?",
         default=False,
     )
+    sustainability_architecture_in_administration_rationale = models.TextField(
+        "Begründung zu: Gibt es eine gute Nachhaltigkeitsarchitektur in der Verwaltung?",
+        blank=True,
+    )
     climate_council_exists = models.BooleanField(
         "Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat?", default=False
+    )
+    climate_council_rationale = models.TextField(
+        "Begründung zu: Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat?",
+        blank=True,
     )
 
 
@@ -239,44 +295,89 @@ class AdministrationChecklist(models.Model):
         " Haushaltsmittel hinterlegt?",
         default=False,
     )
+    climate_protection_management_rationale = models.TextField(
+        "Begründung zu: Gibt es ein Klimaschutzmanagement? Ist dieses befugt, Entscheidungen zu treffen? Sind"
+        " Haushaltsmittel hinterlegt?",
+        blank=True,
+    )
     climate_technical_committee_exists = models.BooleanField(
         "Gibt es einen Fachausschuss mit dem Fokus auf Klimaschutz? Ist dieser befugt,"
         " Haushaltsentscheidungen zu treffen?",
         default=False,
+    )
+    climate_technical_committee_rationale = models.TextField(
+        "Begründung zu: Gibt es einen Fachausschuss mit dem Fokus auf Klimaschutz? Ist dieser befugt,"
+        " Haushaltsentscheidungen zu treffen?",
+        blank=True,
     )
     climate_relevance_check_exists = models.BooleanField(
         "Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
         " Auswirkungen auf das Klima geprüft?",
         default=False,
     )
+    climate_relevance_check_rationale = models.TextField(
+        "Begründung zu: Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
+        " Auswirkungen auf das Klima geprüft?",
+        blank=True,
+    )
     interdisciplinary_climate_protection_exists = models.BooleanField(
         "Ist Klimaschutz als Querschnittsaufgabe über alle Fachbereiche etabliert?",
         default=False,
     )
+    interdisciplinary_climate_protection_rationale = models.TextField(
+        "Begründung zu: Ist Klimaschutz als Querschnittsaufgabe über alle Fachbereiche etabliert?",
+        blank=True,
+    )
     climate_protection_monitoring_exists = models.BooleanField(
         "Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
         default=False,
+    )
+    climate_protection_monitoring_rationale = models.TextField(
+        "Begründung zu: Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
+        blank=True,
     )
     intersectoral_concepts_exists = models.BooleanField(
         "Gibt es (sektorenübergreifende) Konzepte (siehe Planung und Konzepte bzw."
         " Sektorenübergreifende Konzepte)?",
         default=False,
     )
+    intersectoral_concepts_rationale = models.TextField(
+        "Begründung zu: Gibt es (sektorenübergreifende) Konzepte (siehe Planung und Konzepte bzw."
+        " Sektorenübergreifende Konzepte)?",
+        blank=True,
+    )
     climate_protection_reports_are_continuously_published = models.BooleanField(
         "Werden regelmäßige Klimaschutz- und Energieberichte veröffentlicht?",
         default=False,
     )
+    climate_protection_reports_are_continuously_published_rationale = models.TextField(
+        "Begründung zu: Werden regelmäßige Klimaschutz- und Energieberichte veröffentlicht?",
+        blank=True,
+    )
     guidelines_for_sustainable_procurement_exists = models.BooleanField(
         "Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?", default=False
+    )
+    guidelines_for_sustainable_procurement_rationale = models.TextField(
+        "Begründung zu: Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?",
+        blank=True,
     )
     municipal_office_for_funding_management_exists = models.BooleanField(
         "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung"
         " etc. für den Klimaschutz)?",
         default=False,
     )
+    municipal_office_for_funding_management_rationale = models.TextField(
+        "Begründung zu: Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem "
+        " Beantragung etc. für den Klimaschutz)?",
+        blank=True,
+    )
     public_relation_with_local_actors_exists = models.BooleanField(
         "Vernetzung in der Öffentlichkeitsarbeit mit lokalen Akteuren (Handwerk, Sparkasse...)?",
         default=False,
+    )
+    public_relation_with_local_actors_rationale = models.TextField(
+        "Begründung zu: Vernetzung in der Öffentlichkeitsarbeit mit lokalen Akteuren (Handwerk, Sparkasse...)?",
+        blank=True,
     )
 
 
