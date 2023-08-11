@@ -342,7 +342,8 @@ def task_view(request, city_slug, task_slugs=None):
         task: Task = _get_task(request, city, task_slugs)
     except Task.DoesNotExist:
         raise Http404(
-            "Wir haben keine Daten zu dem Sektor / der Maßnahme '%s'." % task_slugs
+            "Wir haben keine Daten zu dem Handlungsfeld / der Maßnahme '%s'."
+            % task_slugs
         )
 
     breadcrumbs += [

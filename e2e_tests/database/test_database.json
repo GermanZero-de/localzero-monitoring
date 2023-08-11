@@ -8,11 +8,47 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add Lokalgruppe",
+    "content_type": 12,
+    "codename": "add_localgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change Lokalgruppe",
+    "content_type": 12,
+    "codename": "change_localgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete Lokalgruppe",
+    "content_type": 12,
+    "codename": "delete_localgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view Lokalgruppe",
+    "content_type": 12,
+    "codename": "view_localgroup"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-06-12T20:11:14.431Z",
+    "last_login": "2023-08-11T18:58:59.432Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
