@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "treebeard",
     "martor",
     "rules.apps.AutodiscoverRulesConfig",
+    "invitations",
     "cpmonitor.apps.CpmonitorConfig",
 ]
 
@@ -163,3 +164,10 @@ MEDIA_URL = "images/"
 MARTOR_UPLOAD_PATH = "uploads/"
 MARTOR_UPLOAD_URL = "/api/uploader/"
 MAX_IMAGE_UPLOAD_SIZE = 104857600  # 100 MB
+
+LOGIN_URL = "/admin/login/"  # Used by django-invitations for redirect
+
+# django-invitations configuration:
+INVITATIONS_INVITATION_MODEL = "cpmonitor.Invitation"
+INVITATIONS_GONE_ON_ACCEPT_ERROR = False
+# INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True

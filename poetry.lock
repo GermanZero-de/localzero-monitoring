@@ -301,6 +301,21 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-invitations"
+version = "2.0.0"
+description = "Generic invitations app with support for django-allauth"
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "django-invitations-2.0.0.tar.gz", hash = "sha256:49df44fc226234fbf08ad59a937864bc28fa044e0d508b3995a13505faa03a78"},
+    {file = "django_invitations-2.0.0-py3-none-any.whl", hash = "sha256:7dae5ae2b2add311be5f2420d21b5853d4a63fb09f2b6414ee1b6bcb3e4fbf77"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+
+[[package]]
 name = "django-test-migrations"
 version = "1.2.0"
 description = "Test django schema and data migrations, including ordering"
@@ -1314,4 +1329,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "a9a55fdcf69558f05af6c1100583d1a89e38605d1348fd789be4be2f8d71f0c9"
+content-hash = "d2cdee287baad2a183142adbfc90070662cb62221afe4743820e455ded4fbe0d"

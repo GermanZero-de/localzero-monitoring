@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.text import slugify
+import invitations
 from treebeard.exceptions import InvalidPosition
 from treebeard.mp_tree import MP_Node
 
@@ -185,6 +186,11 @@ class City(models.Model):
                     msgs[NON_FIELD_ERRORS] = []
                 msgs[NON_FIELD_ERRORS].extend(slug_errors)
             raise ValidationError(msgs)
+
+    def save(self, *args, **kwargs):
+        """"""
+        super().save(*args, **kwargs)
+        Invitation.ensure_for_city(self)
 
 
 class CapChecklist(models.Model):
@@ -707,6 +713,110 @@ class LocalGroup(models.Model):
     featured_image = models.ImageField(
         "Bild der Lokalgruppe", blank=True, upload_to="uploads/local_groups"
     )
+
+
+import datetime
+from invitations.base_invitation import AbstractBaseInvitation
+from invitations.app_settings import app_settings as invitations_app_settings
+from django.utils import timezone
+from django.utils.crypto import get_random_string
+from django.urls import reverse
+from invitations import signals
+
+
+class AccessRight(models.TextChoices):
+    CITY_ADMIN = "city admin", "Kommunen Administrator"
+    CITY_EDITOR = "city editor", "Kommunen Bearbeiter"
+
+
+class Invitation(AbstractBaseInvitation):
+    class Meta:
+        verbose_name = "Einladungslink"
+        verbose_name_plural = "Einladungslinks"
+
+    city = models.ForeignKey(
+        City,
+        verbose_name="Kommune",
+        on_delete=models.CASCADE,
+        related_name="invitations",
+    )
+    access_right = models.CharField(
+        "Zugriffsrecht",
+        max_length=20,
+        choices=AccessRight.choices,
+        default=AccessRight.CITY_EDITOR,
+    )
+
+    created = models.DateTimeField(
+        verbose_name="Erstellungszeitpunkt", default=timezone.now
+    )
+
+    # Workaround for https://github.com/jazzband/django-invitations/issues/203: Add custom related_name
+    inviter = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name="invitations",
+    )
+
+    @property
+    def email(self):
+        return f"{self.get_access_right_display()} von {self.city.name}"
+
+    @classmethod
+    def create_for_keys(cls, city, access_right):
+        key = get_random_string(64).lower()
+        return cls._default_manager.create(
+            key=key, inviter=None, city=city, access_right=access_right
+        )
+
+    @classmethod
+    def ensure_for_keys(cls, city, access_right):
+        if not cls._default_manager.filter(city=city, access_right=access_right):
+            cls.create_for_keys(city, access_right)
+
+    @classmethod
+    def ensure_for_city(cls, city):
+        cls.ensure_for_keys(city, AccessRight.CITY_EDITOR)
+        cls.ensure_for_keys(city, AccessRight.CITY_ADMIN)
+
+    @classmethod
+    def create(cls, email, inviter=None, **kwargs):
+        "Implementation of required method. Not used."
+        key = get_random_string(64).lower()
+        return cls._default_manager.create(
+            email=email, key=key, inviter=inviter, **kwargs
+        )
+
+    def get_invite_url(self, request):
+        if not self.key:
+            return None
+        url = reverse(invitations_app_settings.CONFIRMATION_URL_NAME, args=[self.key])
+        return request.build_absolute_uri(url)
+
+    def key_expired(self):
+        "Implementation of required method. Never expired."
+        return False
+        # expiration_date = self.sent + datetime.timedelta(
+        #     days=invitations_app_settings.INVITATION_EXPIRY,
+        # )
+        # return expiration_date <= timezone.now()
+
+    def send_invitation(self, request, **kwargs):
+        "Implementation of required method. Pretending to send an email."
+        self.sent = timezone.now()
+        self.save()
+
+        signals.invite_url_sent.send(
+            sender=self.__class__,
+            instance=self,
+            invite_url_sent=self.get_invite_url(request),
+            inviter=self.inviter,
+        )
+
+    def __str__(self):
+        return f"Einladung für {self.get_access_right_display()} von {self.city.name}"
 
 
 # Tables for comparing and connecting the plans of all cities

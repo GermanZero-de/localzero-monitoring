@@ -7,13 +7,22 @@ from django.http import HttpRequest, HttpResponseRedirect, QueryDict
 from django.http.request import HttpRequest
 from django.urls import reverse
 from django.utils.html import format_html
+import invitations
 from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 from rules.contrib.admin import ObjectPermissionsModelAdminMixin
 
-from . import rules
-from .models import Chart, City, Task, CapChecklist, AdministrationChecklist, LocalGroup
+from . import rules, utils
+from .models import (
+    Chart,
+    City,
+    Task,
+    CapChecklist,
+    AdministrationChecklist,
+    LocalGroup,
+    Invitation,
+)
 
 _city_filter_query = "city__id__exact"
 """The query parameter used by the city filter."""
@@ -70,7 +79,22 @@ class LocalGroupInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
     }
 
 
+class InvitationInline(
+    ObjectPermissionsModelAdminMixin, utils.ModelAdminRequestMixin, admin.StackedInline
+):
+    model = Invitation
+    extra = 0
+    fields = ("invitation_link",)
+    readonly_fields = ("invitation_link",)
+
+    @admin.display(description="Einladungslink")
+    def invitation_link(self, invitation: Invitation):
+        url = invitation.get_invite_url(self.get_request())
+        return format_html('<a href="{}" target="_blank">{}</a>', url, url)
+
+
 class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
+    # ------ change list page ------
     list_display = ("zipcode", "name", "teaser", "edit_tasks")
     list_display_links = ("name",)
     ordering = ("name",)
@@ -83,6 +107,13 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
             return qs
         return qs.filter(rules.is_allowed_to_edit_q(user, City))
 
+    @admin.display(description="")
+    def edit_tasks(self, city: City):
+        """For each city, a link to the list (tree, actually) of Tasks for just that city."""
+        list_url = _admin_url(Task, "changelist", city.id)
+        return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
+
+    # ------ change / add page ------
     save_on_top = True
 
     filter_horizontal = ["city_editors", "city_admins"]
@@ -101,17 +132,12 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
         models.TextField: {"widget": AdminMartorWidget},
     }
 
-    @admin.display(description="")
-    def edit_tasks(self, city: City):
-        """For each city, a link to the list (tree, actually) of Tasks for just that city."""
-        list_url = _admin_url(Task, "changelist", city.id)
-        return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
-
     inlines = [
         ChartInline,
         LocalGroupInline,
         CapChecklistInline,
         AdministrationChecklistInline,
+        InvitationInline,
     ]
 
 
@@ -301,3 +327,4 @@ admin.site.index_title = "Dateneingabe"
 
 admin.site.register(City, CityAdmin)
 admin.site.register(Task, TaskAdmin)
+admin.site.unregister(Invitation)

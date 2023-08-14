@@ -20,6 +20,7 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("martor/", include("martor.urls")),
+    path("invitations/", include("invitations.urls", namespace="invitations")),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("", views.index_view, name="index"),
     path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),
