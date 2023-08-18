@@ -145,7 +145,7 @@ pytest --headed <path-to-e2e-test>
 From a local database filled with suitable data, generate a fixture named `example_fixture` with
 
 ```shell
-python -Xutf8 manage.py dumpdata cpmonitor -e contenttypes --indent 2 --settings=config.settings.local > cpmonitor/fixtures/example_fixture.json
+python -Xutf8 manage.py dumpdata cpmonitor -e contenttypes -e admin.logentry -e sessions --indent 2 --settings=config.settings.local > cpmonitor/fixtures/example_fixture.json
 ```
 
 (The `-Xutf8` and `--indent 2` options ensure consistent and readable output on all platforms.)
@@ -244,7 +244,7 @@ Afterwards the test database has to be updated as well. Use the dumpdata command
 currently running database:
 
 ```shell
-python -Xutf8 manage.py dumpdata -e contenttypes --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
+python -Xutf8 manage.py dumpdata -e contenttypes -e admin.logentry -e sessions --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
 Cheat-sheet to make sure the correct data is dumped:
@@ -257,7 +257,7 @@ python manage.py loaddata --settings=config.settings.local e2e_tests/database/te
 cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
 git checkout after-model-change-including-migration
 python manage.py migrate --settings=config.settings.local
-python -Xutf8 manage.py dumpdata -e contenttypes --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
+python -Xutf8 manage.py dumpdata -e contenttypes -e admin.logentry -e sessions --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
 # Only if additional images were uploaded:
 cp -r cpmonitor/images/uploads e2e_tests/database/test_database_uploads
 ```
@@ -374,7 +374,7 @@ Possibly migrate, test the data, and check that the size is reasonable. Then mak
 
 ```sh
 SNAPSHOT_NAME=prod_database_$(date -u +"%FT%H%M%SZ")
-python -Xutf8 manage.py dumpdata -e contenttypes --indent 2 --settings=config.settings.local > e2e_tests/database/${SNAPSHOT_NAME}.json
+python -Xutf8 manage.py dumpdata -e contenttypes -e admin.logentry -e sessions --indent 2 --settings=config.settings.local > e2e_tests/database/${SNAPSHOT_NAME}.json
 cp -r cpmonitor/images/uploads e2e_tests/database/${SNAPSHOT_NAME}_uploads
 echo "Some useful information, e.g. the migration state of the snapshot" > e2e_tests/database/${SNAPSHOT_NAME}.README
 du -hs e2e_tests/database/${SNAPSHOT_NAME}*
@@ -449,7 +449,7 @@ docker compose up -d
     cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.${DATESTR}
     cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/<testing|production>/uploads.${DATESTR}
     # apply migrations using a temporary container
-    docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:latest sh
+    docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:<testing|production> sh
     DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
     # exit and stop the temporary container
     exit

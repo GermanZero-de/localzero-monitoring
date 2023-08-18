@@ -1,421 +1,5 @@
 [
 {
-  "model": "admin.logentry",
-  "pk": 1,
-  "fields": {
-    "action_time": "2023-02-26T18:26:19.109Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 2,
-  "fields": {
-    "action_time": "2023-02-26T18:26:29.897Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "1",
-    "object_repr": "Verkehr",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 3,
-  "fields": {
-    "action_time": "2023-02-26T18:27:03.032Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "2",
-    "object_repr": "Radwege ausbauen",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 4,
-  "fields": {
-    "action_time": "2023-02-26T18:27:36.579Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "3",
-    "object_repr": "U-Bahn Strecke verlängern",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 5,
-  "fields": {
-    "action_time": "2023-03-05T17:03:22.852Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "2",
-    "object_repr": "Radwege ausbauen",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"description\", \"Relative to\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 6,
-  "fields": {
-    "action_time": "2023-05-03T14:27:51.992Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 7,
-  "fields": {
-    "action_time": "2023-05-03T14:29:27.783Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: Matt Lemmon\", \"fields\": [\"Quelle\", \"Lizenz\", \"Bildunterschrift\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 8,
-  "fields": {
-    "action_time": "2023-05-03T14:50:43.496Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Ben\\u00f6tigte Leistung (in Anzahl Pferden) in Abh\\u00e4ngigkeit von der Steigung - Quelle: Seattle Municipal Archives\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 9,
-  "fields": {
-    "action_time": "2023-05-03T14:56:40.061Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "2",
-    "object_repr": "00000 Ohnenix",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 10,
-  "fields": {
-    "action_time": "2023-05-03T15:01:33.898Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "99999 Mitallem",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: Matt Lemmon\"}}, {\"added\": {\"name\": \" KPI Graph\", \"object\": \"Graph: Ben\\u00f6tigte Leistung (in Anzahl Pferden) in Abh\\u00e4ngigkeit von der Steigung - Quelle: Seattle Municipal Archives\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 11,
-  "fields": {
-    "action_time": "2023-05-03T15:01:51.380Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "17",
-    "object_repr": "Energie",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 12,
-  "fields": {
-    "action_time": "2023-05-03T15:02:00.533Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "18",
-    "object_repr": "Mobilität",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 13,
-  "fields": {
-    "action_time": "2023-05-03T15:02:09.646Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "19",
-    "object_repr": "Gebäude",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 14,
-  "fields": {
-    "action_time": "2023-05-03T15:02:29.345Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "20",
-    "object_repr": "Strukturen",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 15,
-  "fields": {
-    "action_time": "2023-05-03T15:02:42.740Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "21",
-    "object_repr": "Landwirtschaft",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 16,
-  "fields": {
-    "action_time": "2023-05-03T15:03:00.256Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "22",
-    "object_repr": "PF auf alle öffentlichen Dächer",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 17,
-  "fields": {
-    "action_time": "2023-05-03T15:03:15.759Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "22",
-    "object_repr": "PV auf alle öffentlichen Dächer",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Titel\", \"Relative to\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 18,
-  "fields": {
-    "action_time": "2023-05-03T15:04:04.872Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "23",
-    "object_repr": "Sanierungsprogramm: Dämmung",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 19,
-  "fields": {
-    "action_time": "2023-05-03T15:04:31.096Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "22",
-    "object_repr": "PV auf alle öffentlichen Dächer",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 20,
-  "fields": {
-    "action_time": "2023-05-03T15:05:33.401Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "24",
-    "object_repr": "Ladesäulen flächendeckend",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 21,
-  "fields": {
-    "action_time": "2023-05-03T15:06:05.064Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "25",
-    "object_repr": "Förderung Ökologischer Landbau",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 22,
-  "fields": {
-    "action_time": "2023-05-03T15:06:50.514Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "26",
-    "object_repr": "Zukunftswerkstatt",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 23,
-  "fields": {
-    "action_time": "2023-05-03T15:07:13.155Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "26",
-    "object_repr": "Zukunftswerkstatt",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Umsetzungsstand\", \"Relative to\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 24,
-  "fields": {
-    "action_time": "2023-05-03T15:07:55.866Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "27",
-    "object_repr": "Expertenrat",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 25,
-  "fields": {
-    "action_time": "2023-05-14T12:18:23.453Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"cap checklist\", \"object\": \"CapChecklist object (1)\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 26,
-  "fields": {
-    "action_time": "2023-05-14T12:18:41.323Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "99999 Mitallem",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"cap checklist\", \"object\": \"CapChecklist object (2)\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 27,
-  "fields": {
-    "action_time": "2023-06-02T17:23:41.654Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "99999 Mitallem",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"Verwaltungsstrukturen Checkliste\", \"object\": \"AdministrationChecklist object (1)\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 28,
-  "fields": {
-    "action_time": "2023-06-02T17:24:04.672Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 2,
-    "change_message": "[{\"added\": {\"name\": \"Verwaltungsstrukturen Checkliste\", \"object\": \"AdministrationChecklist object (2)\"}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 29,
-  "fields": {
-    "action_time": "2023-06-04T07:36:20.253Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Bewertung Verwaltung\", \"Bewertung Klimaaktionsplan\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 30,
-  "fields": {
-    "action_time": "2023-06-12T20:12:31.438Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Bewertung Klimaaktionsplan\", \"Bewertung Umsetzungsstand\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 31,
-  "fields": {
-    "action_time": "2023-06-16T14:07:01.361Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Interne Informationen\"]}}, {\"changed\": {\"name\": \"Diagramm\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: Matt Lemmon\", \"fields\": [\"Interne Informationen\"]}}, {\"changed\": {\"name\": \"Diagramm\", \"object\": \"Graph: Ben\\u00f6tigte Leistung (in Anzahl Pferden) in Abh\\u00e4ngigkeit von der Steigung - Quelle: Seattle Municipal Archives\", \"fields\": [\"Interne Informationen\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 32,
-  "fields": {
-    "action_time": "2023-06-16T14:11:13.945Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "99999 Mitallem",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Interne Informationen\"]}}, {\"changed\": {\"name\": \"Diagramm\", \"object\": \"Graph: Weltbev\\u00f6lkerung und CO2-Emissionen - Quelle: Matt Lemmon\", \"fields\": [\"Interne Informationen\"]}}, {\"changed\": {\"name\": \"Diagramm\", \"object\": \"Graph: Ben\\u00f6tigte Leistung (in Anzahl Pferden) in Abh\\u00e4ngigkeit von der Steigung - Quelle: Seattle Municipal Archives\", \"fields\": [\"Interne Informationen\"]}}]"
-  }
-},
-{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -816,7 +400,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-06-12T20:11:14.431Z",
+    "last_login": "2023-06-24T17:17:39.431Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -827,54 +411,6 @@
     "date_joined": "2023-02-26T18:25:59.346Z",
     "groups": [],
     "user_permissions": []
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "3h80mfs0kjjxfectgn3a0x6c6zz3esme",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1pqsJm:hu2RvPJFpyb4Ol67nhIuVCNJNtMnKa2vY8HwkwCnWSk",
-    "expire_date": "2023-05-08T09:17:06.922Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "9c6kfe113j1gjo81zp029vk6hcvmw0co",
-  "fields": {
-    "session_data": ".eJxVjEEOgjAQRe_StWkYasuMS_ecoRk6U4saSCisjHdXEha6_e-9_zKRt7XEreoSRzEXA-b0uw2cHjrtQO483Wab5mldxsHuij1otf0s-rwe7t9B4Vq-NYNnCtAGxyrUoIhLmIkzIkHIqGFISB7VN0ySOugAHPhW8lmcUjbvD-UtN_M:1pxOUA:X8ty0yL20MTQz29j3ydhkBZGCi3WcuAQ6lBFma4WP4o",
-    "expire_date": "2023-05-26T08:50:46.855Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "dqcocxnefhypjhbl9ak7aw6vhsiqltaa",
-  "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGFbqF49N5vIMsuSNVAUtqT8d9tkx50jvPezFt43NbstxYXP7O4CiUuv11AesZyAH5guVdJtazLHOShyJM2OVWOr9vp_h1kbHlfu9h3bCgZAyMnSmlgBKsGhQoBVEeWaNQ9sGXHzpBzGnSf9jgMwEZ8vvZWOHg:1q58Ul:HGNABZYGt5rapxcqgZ8bVDSAE4PAfvMmdFuJbVQNOQA",
-    "expire_date": "2023-06-16T17:23:23.347Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "la9ytgclqprfil35c6lp5f8k5ukpssbd",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pBCGbEu3fcMZIYZpGogKe3KeHfbpAvd_vfef6uA65LD2mQOE6urMur0uxHGp5Qd8APLvepYyzJPpHdFH7TpsbK8bof7d5Cx5a2GeBbp2HpIYAb0xgk7K8k6tJSM5f6CQw_EBphc7Hwv7C0BCaSNO_X5AvDnOIM:1q8nsg:EXnRO_tnvPQVApEuszmwxUyXfjcDdfsdKTuCTWg7wdw",
-    "expire_date": "2023-06-26T20:11:14.442Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "wf24d94ueyo0r1i0362ql9fufmz16uxt",
-  "fields": {
-    "session_data": ".eJxVjMsOwiAQRf-FtSFAebp07zeQYRikaiAp7cr479qkC93ec859sQjbWuM2aIlzZmcm2el3S4APajvId2i3zrG3dZkT3xV-0MGvPdPzcrh_BxVG_dbWEeVp0kVIo8AqyiUZICpBIHpQWRQyqK3RXkAK1iavEUKhIMlNLrD3BwXLOKM:1q5iEw:z6fTxHGg-Ly6WLbbTwSL6jeo_-ak3b1mvII5bs4h_dQ",
-    "expire_date": "2023-06-18T07:33:26.326Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "zkid91ej61wejh07li8fcfuu1qmod8ez",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1puDPA:Jguzk4JKh04XzB8JsWIvIuCgQmPgM298j2hqDWflYng",
-    "expire_date": "2023-05-17T14:24:28.097Z"
   }
 },
 {
@@ -1036,6 +572,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1062,6 +599,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
@@ -1088,6 +626,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 8,
     "execution_justification": "",
@@ -1114,6 +653,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1140,6 +680,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1166,6 +707,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 4,
     "execution_justification": "",
@@ -1192,6 +734,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1218,6 +761,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1243,7 +787,8 @@
     "description": "",
     "planned_start": null,
     "planned_completion": null,
-    "responsible_organ": "",
+    "responsible_organ": "Stadtrat",
+    "responsible_organ_explanation": "Warum hängt es am Stadtrat.",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1270,6 +815,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1296,6 +842,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1322,6 +869,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
@@ -1348,6 +896,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1374,6 +923,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1400,6 +950,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1426,6 +977,7 @@
     "planned_start": "2023-04-19",
     "planned_completion": "2022-12-31",
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "Die Bewertung der geplanten Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
     "execution_status": 2,
     "execution_justification": "",
@@ -1452,6 +1004,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1478,6 +1031,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1504,6 +1058,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1530,6 +1085,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1556,6 +1112,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1582,6 +1139,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
@@ -1608,6 +1166,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -1634,6 +1193,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 4,
     "execution_justification": "",
@@ -1660,6 +1220,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1686,6 +1247,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 8,
     "execution_justification": "",
@@ -1712,6 +1274,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
