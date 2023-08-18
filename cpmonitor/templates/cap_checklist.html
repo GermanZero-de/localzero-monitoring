@@ -17,11 +17,11 @@
         <div class="card-body">
           <table class="table table-sm table-borderless">
             <tbody>
-              {% for key, value in cap_checklist.items %}
+              {% for checklist_items, rationale_items in cap_checklist %}
                 <tr>
-                  <td>{{ key }}</td>
+                  <td>{{ checklist_items.0 }}</td>
                   <td>
-                    {% if value %}
+                    {% if checklist_items.1 %}
                       <svg width="20" height="20" class="lz-icon CHECKED">
                         <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check"/>
                       </svg>
@@ -32,6 +32,12 @@
                     {% endif %}
                   </td>
                 </tr>
+                {% if rationale_items.1.strip %}
+                  <tr>
+                    <td>Kommentar / Begründung: {{ rationale_items.1 | safe_markdown }}</td>
+                    <td></td>
+                  </tr>
+                {% endif %}
               {% endfor %}
             </tbody>
           </table>
