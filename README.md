@@ -74,7 +74,7 @@ python manage.py migrate --settings=config.settings.local
 
 # (optional) install example data
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
-cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
+cp -r e2e_tests/database/test_database_uploads/. cpmonitor/images/uploads
 
 # install css and javascript libraries
 yarn install
@@ -119,7 +119,7 @@ pytest --ignore e2e_tests/test_deployed.py
 rm db/db.sqlite3
 poetry run python manage.py migrate --settings=config.settings.local
 poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
-cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
+cp -r e2e_tests/database/test_database_uploads/. cpmonitor/images/uploads
 docker compose up -d --build
 docker compose -f docker/reverseproxy/docker-compose.yml up -d --build
 pytest e2e_tests/test_deployed.py
@@ -251,7 +251,7 @@ git checkout right-before-model-change
 rm db/db.sqlite3
 python manage.py migrate --settings=config.settings.local
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
-cp -r e2e_tests/database/test_database_uploads cpmonitor/images/uploads
+cp -r e2e_tests/database/test_database_uploads/. cpmonitor/images/uploads
 git checkout after-model-change-including-migration
 python manage.py migrate --settings=config.settings.local
 python -Xutf8 manage.py dumpdata -e contenttypes -e admin.logentry -e sessions --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
