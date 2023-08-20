@@ -48,3 +48,21 @@ class ModelAdminRequestMixin(object):
     def get_formset(self, request, *args, **kwargs):
         self.set_request(request)
         return super(ModelAdminRequestMixin, self).get_formset(request, *args, **kwargs)
+
+
+from types import NoneType
+from django.http import HttpRequest
+
+from .models import Invitation
+
+
+def get_invitation(request: HttpRequest) -> Invitation | NoneType:
+    if not hasattr(request, "session"):
+        return None
+    key = request.session.get("invitation_key")
+    if not key:
+        return None
+    invitation_qs = Invitation.objects.filter(key=key.lower())
+    if not invitation_qs:
+        return None
+    return invitation_qs.first()

@@ -4,6 +4,28 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
+from django.utils.crypto import get_random_string
+
+
+class AccessRight(models.TextChoices):
+    CITY_ADMIN = "city admin", "Kommunen Administrator"
+    CITY_EDITOR = "city editor", "Kommunen Bearbeiter"
+
+
+def ensure_invitation(inv_mgr, city, access_right):
+    if not inv_mgr.filter(city=city, access_right=access_right):
+        key = get_random_string(64).lower()
+        inv_mgr.create(key=key, inviter=None, city=city, access_right=access_right)
+
+
+def add_invitations(apps, schema_editor):
+    City = apps.get_model("cpmonitor", "City")
+    Invitation = apps.get_model("cpmonitor", "Invitation")
+    inv_mgr = Invitation._default_manager
+    db_alias = schema_editor.connection.alias
+    for city in City.objects.using(db_alias).all():
+        ensure_invitation(inv_mgr, city, AccessRight.CITY_ADMIN)
+        ensure_invitation(inv_mgr, city, AccessRight.CITY_EDITOR)
 
 
 class Migration(migrations.Migration):
@@ -78,4 +100,5 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Einladungslinks",
             },
         ),
+        migrations.RunPython(add_invitations, migrations.RunPython.noop),
     ]

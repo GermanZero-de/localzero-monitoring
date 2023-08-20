@@ -432,6 +432,474 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add Kommune",
+    "content_type": 13,
+    "codename": "add_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change Kommune",
+    "content_type": 13,
+    "codename": "change_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete Kommune",
+    "content_type": 13,
+    "codename": "delete_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view Kommune",
+    "content_type": 13,
+    "codename": "view_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add Sektor / Maßnahme",
+    "content_type": 14,
+    "codename": "add_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change Sektor / Maßnahme",
+    "content_type": 14,
+    "codename": "change_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete Sektor / Maßnahme",
+    "content_type": 14,
+    "codename": "delete_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view Sektor / Maßnahme",
+    "content_type": 14,
+    "codename": "view_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add Diagramm",
+    "content_type": 15,
+    "codename": "add_chart"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change Diagramm",
+    "content_type": 15,
+    "codename": "change_chart"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete Diagramm",
+    "content_type": 15,
+    "codename": "delete_chart"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view Diagramm",
+    "content_type": 15,
+    "codename": "view_chart"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add KAP Checkliste",
+    "content_type": 16,
+    "codename": "add_capchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change KAP Checkliste",
+    "content_type": 16,
+    "codename": "change_capchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete KAP Checkliste",
+    "content_type": 16,
+    "codename": "delete_capchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view KAP Checkliste",
+    "content_type": 16,
+    "codename": "view_capchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add Verwaltungsstrukturen Checkliste",
+    "content_type": 17,
+    "codename": "add_administrationchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change Verwaltungsstrukturen Checkliste",
+    "content_type": 17,
+    "codename": "change_administrationchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete Verwaltungsstrukturen Checkliste",
+    "content_type": 17,
+    "codename": "delete_administrationchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view Verwaltungsstrukturen Checkliste",
+    "content_type": 17,
+    "codename": "view_administrationchecklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add Lokalgruppe",
+    "content_type": 18,
+    "codename": "add_localgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change Lokalgruppe",
+    "content_type": 18,
+    "codename": "change_localgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete Lokalgruppe",
+    "content_type": 18,
+    "codename": "delete_localgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view Lokalgruppe",
+    "content_type": 18,
+    "codename": "view_localgroup"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add Einladungslink",
+    "content_type": 19,
+    "codename": "add_invitation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change Einladungslink",
+    "content_type": 19,
+    "codename": "change_invitation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete Einladungslink",
+    "content_type": 19,
+    "codename": "delete_invitation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view Einladungslink",
+    "content_type": 19,
+    "codename": "view_invitation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add email address",
+    "content_type": 7,
+    "codename": "add_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change email address",
+    "content_type": 7,
+    "codename": "change_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete email address",
+    "content_type": 7,
+    "codename": "delete_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view email address",
+    "content_type": 7,
+    "codename": "view_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add email confirmation",
+    "content_type": 8,
+    "codename": "add_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change email confirmation",
+    "content_type": 8,
+    "codename": "change_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete email confirmation",
+    "content_type": 8,
+    "codename": "delete_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view email confirmation",
+    "content_type": 8,
+    "codename": "view_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 85,
+  "fields": {
+    "name": "Can add social account",
+    "content_type": 9,
+    "codename": "add_socialaccount"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 86,
+  "fields": {
+    "name": "Can change social account",
+    "content_type": 9,
+    "codename": "change_socialaccount"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 87,
+  "fields": {
+    "name": "Can delete social account",
+    "content_type": 9,
+    "codename": "delete_socialaccount"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 88,
+  "fields": {
+    "name": "Can view social account",
+    "content_type": 9,
+    "codename": "view_socialaccount"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 89,
+  "fields": {
+    "name": "Can add social application",
+    "content_type": 10,
+    "codename": "add_socialapp"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 90,
+  "fields": {
+    "name": "Can change social application",
+    "content_type": 10,
+    "codename": "change_socialapp"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 91,
+  "fields": {
+    "name": "Can delete social application",
+    "content_type": 10,
+    "codename": "delete_socialapp"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 92,
+  "fields": {
+    "name": "Can view social application",
+    "content_type": 10,
+    "codename": "view_socialapp"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 93,
+  "fields": {
+    "name": "Can add social application token",
+    "content_type": 11,
+    "codename": "add_socialtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 94,
+  "fields": {
+    "name": "Can change social application token",
+    "content_type": 11,
+    "codename": "change_socialtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 95,
+  "fields": {
+    "name": "Can delete social application token",
+    "content_type": 11,
+    "codename": "delete_socialtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 96,
+  "fields": {
+    "name": "Can view social application token",
+    "content_type": 11,
+    "codename": "view_socialtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 97,
+  "fields": {
+    "name": "Can add invitation",
+    "content_type": 12,
+    "codename": "add_invitation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 98,
+  "fields": {
+    "name": "Can change invitation",
+    "content_type": 12,
+    "codename": "change_invitation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 99,
+  "fields": {
+    "name": "Can delete invitation",
+    "content_type": 12,
+    "codename": "delete_invitation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 100,
+  "fields": {
+    "name": "Can view invitation",
+    "content_type": 12,
+    "codename": "view_invitation"
+  }
+},
+{
   "model": "auth.group",
   "pk": 1,
   "fields": {
@@ -1444,6 +1912,84 @@
     "teaser": "Eine beispiellos gute Initiative für eine klimaneutrale Zukunft in unserer Stadt.",
     "description": "Wenn Du mitmachen willst, wendest du Dich am besten an Maxi Mustermensch unter maxi@beispiel-los.de.\r\n\r\nUnser Monitoring basiert auf öffentlich zugänglichen Informationen aus dem lokalen BeispielBlatt, dere Website der Stadtverwaltung, dem Klimaaktionsplan, dem Ratsinformationssystem und dem Marktstammdatenregister. Und wir haben auch mit dem Bürgermeister gesprochen. Weitergehende Informationen zum Monitoring bekommst Du bei Dina Durchblick unter dina@beispiel-los.de.",
     "featured_image": "uploads/local_groups/Fotos-alle-1024x683_SEEJ1JR.jpeg"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 2,
+  "fields": {
+    "accepted": false,
+    "key": "bkneutb8zck96tjknok7hpwwybuif0a1pgny8txer0dqixbexryfntojnhzlddwk",
+    "sent": null,
+    "city": 1,
+    "access_right": "city editor",
+    "created": "2023-08-20T10:45:21.211Z",
+    "inviter": null
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 3,
+  "fields": {
+    "accepted": false,
+    "key": "lpm5qyqcvyblh2bbjve7jgxnh7ezsutlab1dcqi4ogvseqnqj0qflfvxcct9hsmz",
+    "sent": null,
+    "city": 2,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:45:21.213Z",
+    "inviter": null
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 4,
+  "fields": {
+    "accepted": false,
+    "key": "wr6ikslxkvhhoaqqjj7jb7qjqpgonfpolsgmgdvhp6ny9nm7qfgpjycokhucg3ow",
+    "sent": null,
+    "city": 2,
+    "access_right": "city editor",
+    "created": "2023-08-20T10:45:21.216Z",
+    "inviter": null
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 5,
+  "fields": {
+    "accepted": false,
+    "key": "qfdubrzfl6ddobcqlr1rlehwb0ay8rngl9m6bshazjtdiob3chr1qnh7fs4zos4f",
+    "sent": null,
+    "city": 3,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:45:21.219Z",
+    "inviter": null
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 6,
+  "fields": {
+    "accepted": false,
+    "key": "x1ymexf6lnq0tow1nh8bandsurfz87wiy0vk6o6vjaoxny9hgk3oif13oyfmvicn",
+    "sent": null,
+    "city": 3,
+    "access_right": "city editor",
+    "created": "2023-08-20T10:45:21.220Z",
+    "inviter": null
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 7,
+  "fields": {
+    "accepted": false,
+    "key": "o1gg3wkdtmv5nlccvdjeewqn3yrp3cw5rxweifquqbovrwiwvmnx6kgo2i4p0t0d",
+    "sent": null,
+    "city": 1,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:51:54.210Z",
+    "inviter": null
   }
 }
 ]

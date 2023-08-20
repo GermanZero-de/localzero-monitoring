@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.views.generic import RedirectView
+from invitations import views as iviews
 
 from . import views
 
@@ -20,7 +21,12 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("martor/", include("martor.urls")),
-    path("invitations/", include("invitations.urls", namespace="invitations")),
+    path("accounts/", include("allauth.urls")),
+    re_path(
+        r"^invitations/accept-invite/(?P<key>\w+)/?$",
+        views.AcceptInvite.as_view(),
+        name="accept-invite",
+    ),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("", views.index_view, name="index"),
     path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),

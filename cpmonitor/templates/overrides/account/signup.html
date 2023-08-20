@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+{% block title %}
+  Registrierung | LocalZero Monitoring
+{% endblock title %}
+{% block branding %}
+  <h1 id="site-name">
+    <a href="{% url 'index' %}">LocalZero Monitoring</a>
+  </h1>
+{% endblock branding %}
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static "admin/css/login.css" %}">
+  {{ form.media }}
+{% endblock extrastyle %}
+{% block bodyclass %}
+  {{ block.super }} login
+{% endblock bodyclass %}
+{% block usertools %}
+{% endblock usertools %}
+{% block nav-global %}
+{% endblock nav-global %}
+{% block nav-sidebar %}
+{% endblock nav-sidebar %}
+{% block content_title %}
+{% endblock content_title %}
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+{% block content %}
+  <h1>{% trans "Sign Up" %}</h1>
+  {% if form.errors and not form.non_field_errors %}
+    <p class="errornote">
+      {% if form.errors.items|length == 1 %}
+        {% translate "Please correct the error below." %}
+      {% else %}
+        {% translate "Please correct the errors below." %}
+      {% endif %}
+    </p>
+  {% endif %}
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}<p class="errornote">{{ error }}</p>{% endfor %}
+  {% endif %}
+  <div id="content-main">
+    <p>
+      {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+    </p>
+    <form class="signup"
+          id="signup_form"
+          method="post"
+          action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+        <input type="hidden"
+               name="{{ redirect_field_name }}"
+               value="{{ redirect_field_value }}"/>
+      {% endif %}
+      <div class="submit-row">
+        <input type="submit" value='{% translate "Sign Up" %}'>
+      </div>
+    </form>
+  </div>
+{% endblock content %}

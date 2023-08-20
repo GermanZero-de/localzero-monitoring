@@ -67,17 +67,18 @@ def no_object(user: User, object: CityOrNoneType) -> bool:
 
 
 is_allowed_to_edit = is_city_editor | is_city_admin | is_site_admin
-is_allowed_to_change_site_editors = is_city_admin | is_site_admin
-is_allowed_to_change_site_admins = is_city_admin | is_site_admin
+is_allowed_to_change_city_users = is_city_admin | is_site_admin
 
 
 # The actual permissions:
+
+rules.add_perm("cpmonitor", rules.always_true)
 
 # City:
 # Only add and change permissions are given to city editors and admins.
 # Site admins are superusers and can change everything, anyway.
 rules.add_perm("cpmonitor.view_city", is_allowed_to_edit)
-rules.add_perm("cpmonitor.change_city", is_allowed_to_edit)
+rules.add_perm("cpmonitor.change_city", is_allowed_to_edit | no_object)
 
 # Inlines in city mask:
 # For some reason, "change" is requested with "None" once by inlines.
@@ -103,8 +104,10 @@ rules.add_perm("cpmonitor.view_capchecklist", is_allowed_to_edit)
 rules.add_perm("cpmonitor.delete_capchecklist", is_allowed_to_edit)
 rules.add_perm("cpmonitor.change_capchecklist", is_allowed_to_edit | no_object)
 
-# TODO: This currently does not ensure that tasks are not added to other cities:
 rules.add_perm("cpmonitor.add_task", is_allowed_to_edit | no_object)
 rules.add_perm("cpmonitor.view_task", is_allowed_to_edit)
 rules.add_perm("cpmonitor.delete_task", is_allowed_to_edit)
-rules.add_perm("cpmonitor.change_task", is_allowed_to_edit)
+rules.add_perm("cpmonitor.change_task", is_allowed_to_edit | no_object)
+
+rules.add_perm("cpmonitor.view_invitation", is_allowed_to_change_city_users | no_object)
+rules.add_perm("cpmonitor.delete_invitation", is_allowed_to_change_city_users)

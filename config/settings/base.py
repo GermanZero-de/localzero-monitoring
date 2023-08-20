@@ -45,9 +45,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # "django.contrib.sites",
     "treebeard",
     "martor",
     "rules.apps.AutodiscoverRulesConfig",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     "invitations",
     "cpmonitor.apps.CpmonitorConfig",
 ]
@@ -65,6 +69,7 @@ MIDDLEWARE = [
 AUTHENTICATION_BACKENDS = (
     "rules.permissions.ObjectPermissionBackend",
     "django.contrib.auth.backends.ModelBackend",
+    # "allauth.account.auth_backends.AuthenticationBackend",
 )
 
 ROOT_URLCONF = "cpmonitor.urls"
@@ -72,7 +77,7 @@ ROOT_URLCONF = "cpmonitor.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "cpmonitor" / "templates" / "overrides"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -146,6 +151,11 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# The "sites" framework configuration
+# https://docs.djangoproject.com/en/4.2/ref/contrib/sites/
+# Required by django-allauth and django-invitations
+# SITE_ID = 1
+
 # Martor (markdown editor)
 MARTOR_ENABLE_CONFIGS = {
     "emoji": "true",
@@ -165,9 +175,20 @@ MARTOR_UPLOAD_PATH = "uploads/"
 MARTOR_UPLOAD_URL = "/api/uploader/"
 MAX_IMAGE_UPLOAD_SIZE = 104857600  # 100 MB
 
+# django-allauth configuration:
+# https://django-allauth.readthedocs.io/en/latest/installation.html
+ACCOUNT_ADAPTER = "cpmonitor.adapters.AllauthInvitationsAdapter"
+SOCIALACCOUNT_PROVIDERS = {}
+ACCOUNT_EMAIL_VERIFICATION = "none"  # This would need a working email config.
+
 LOGIN_URL = "/admin/login/"  # Used by django-invitations for redirect
+LOGIN_REDIRECT_URL = "/admin/"
 
 # django-invitations configuration:
+# https://django-invitations.readthedocs.io/en/latest/installation.html
+INVITATIONS_ADAPTER = "cpmonitor.adapters.AllauthInvitationsAdapter"
 INVITATIONS_INVITATION_MODEL = "cpmonitor.Invitation"
 INVITATIONS_GONE_ON_ACCEPT_ERROR = False
-# INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
+INVITATIONS_INVITATION_ONLY = True
+INVITATIONS_CONFIRMATION_URL_NAME = "accept-invite"
+INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True

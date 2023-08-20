@@ -430,3 +430,98 @@ def markdown_uploader_view(request):
 
     data = json.dumps({"status": 200, "link": img_url, "name": image.name})
     return HttpResponse(data, content_type="application/json")
+
+
+from django.contrib import messages
+from django.shortcuts import redirect
+from invitations import views as invitations_views
+from invitations.app_settings import app_settings as invitations_settings
+from invitations.adapters import get_invitations_adapter
+from invitations.signals import invite_accepted
+
+from .utils import get_invitation
+from .models import Invitation
+
+
+class AcceptInvite(invitations_views.AcceptInvite):
+    # def get(self, *args, **kwargs):
+    #     if invitations_settings.CONFIRM_INVITE_ON_GET:
+    #         return self.post(*args, **kwargs)
+    #     else:
+    #         raise Http404()
+
+    def post(self, *args, **kwargs):
+        "Identical to base implementation, except where noted."
+        self.object = invitation = self.get_object()
+
+        if invitations_settings.GONE_ON_ACCEPT_ERROR and (
+            not invitation
+            or (invitation and (invitation.accepted or invitation.key_expired()))
+        ):
+            return HttpResponse(status=410)
+
+        if not invitation:
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_invalid.txt",
+            )
+            return redirect(invitations_settings.LOGIN_REDIRECT)
+
+        if invitation.accepted:
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_already_accepted.txt",
+                {"email": invitation.email},
+            )
+            return redirect(invitations_settings.LOGIN_REDIRECT)
+
+        if invitation.key_expired():
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_expired.txt",
+                {"email": invitation.email},
+            )
+            return redirect(self.get_signup_redirect())
+
+        # Difference 1 to base: Not calling accept_invitation().
+
+        # Difference 2 to base: Saving key and not email.
+        self.request.session["invitation_key"] = invitation.key
+
+        return redirect(self.get_signup_redirect())
+
+
+def accept_invitation(invitation, request, signal_sender):
+    # Difference: Not setting accepted to True, here.
+
+    invite_accepted.send(
+        sender=signal_sender,
+        email=invitation.email,
+        request=request,
+        invitation=invitation,
+    )
+
+    get_invitations_adapter().add_message(
+        request,
+        messages.SUCCESS,
+        "invitations/messages/invite_accepted.txt",
+        {"email": invitation.email},
+    )
+
+
+def accept_invite_after_signup(sender, request, user, **kwargs):
+    invitation = get_invitation(request)
+    if invitation:
+        accept_invitation(
+            invitation=invitation,
+            request=request,
+            signal_sender=Invitation,
+        )
+
+
+if invitations_settings.ACCEPT_INVITE_AFTER_SIGNUP:
+    signed_up_signal = get_invitations_adapter().get_user_signed_up_signal()
+    signed_up_signal.connect(accept_invite_after_signup)

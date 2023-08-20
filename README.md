@@ -147,6 +147,9 @@ python -Xutf8 manage.py dumpdata cpmonitor -e contenttypes -e admin.logentry -e 
 
 (The `-Xutf8` and `--indent 2` options ensure consistent and readable output on all platforms.)
 
+Specifying `cpmonitor` restricts to data within the cpmonitor app. Depending on the test, data
+form other apps might be needed.
+
 This fixture may be loaded in a test with. (Similar in a pytest fixture.)
 
 ```python

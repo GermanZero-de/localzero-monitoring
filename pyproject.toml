@@ -18,6 +18,7 @@ martor = "^1.6.19"
 pillow = "^9.5.0"
 rules = "^3.3"
 django-invitations = "^2.0.0"
+django-allauth = "^0.54.0"
 
 [tool.pyright]
 venvPath = "."

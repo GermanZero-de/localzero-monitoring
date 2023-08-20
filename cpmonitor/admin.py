@@ -121,9 +121,8 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     def get_readonly_fields(self, request: HttpRequest, obj=None) -> Sequence[str]:
         user = request.user
         result = []
-        if not rules.is_allowed_to_change_site_editors(user, obj):
+        if not rules.is_allowed_to_change_city_users(user, obj):
             result.append("city_editors")
-        if not rules.is_allowed_to_change_site_admins(user, obj):
             result.append("city_admins")
         return result
 
