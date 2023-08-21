@@ -478,13 +478,16 @@ the environment) and the credentials can be found in the .env.local file. For te
 configured in the respective .env files on the server.
 
 ### TLS Certificate and Renewal
+#### Overview
 We currently use a single TLS certificate for both monitoring.localzero.org and monitoring-test.localzero.org. The certificate is issued by letsencrypt.org and requesting and renewal is performed using [acme.sh](https://github.com/acmesh-official/acme.sh), which runs in a container. This solution allows us to have almost all necessary code and config in the repo instead of only on the server.
 
+#### Initial Issuance
 The initial certificate was issued using the following command:
 ```sh
 docker exec acme-sh  --issue -d monitoring-test.localzero.net  -d monitoring.localzero.net --standalone --server https://acme-v02.api.letsencrypt.org/directory --fullchain-file /acme.sh/fullchain.cer --key-file /acme.sh/ssl-cert.key
 ```
 
+#### Renewal
 Renewal is performed automatically by acme.sh's internal cron job, which...
 - checks if a renewal is necessary, and if so:
 - requests a new certificate from letsencrypt,
@@ -497,4 +500,19 @@ crontab -l
 ```
 This job runs [a script](reload-cert.sh) which applies the latest certificate that acme.sh has produced. This means there can be some delay between renewal and application of the certificate, but since acme.sh performs renewal a few days before expiry, there should be enough time for nginx to reload the certificate.
 
+#### acme-sh Configuration and Debugging
+
+The configuration used by acme-sh's cronjob (not our nginx reload cronjob!), e.g. renewal interval, can be changed in `reverseproxy/ssl_certificates/monitoring-test.localzero.net_ecc/`` on the server.
+
+The following commands might be useful to debug and test the acme-sh configuration:
+```shell
+# tell acme-sh to run its cronjob now, using letsencrypt's test environment (to bypass rate limiting)
+docker exec acme-sh --cron --staging
+# tell acme-sh to run its cronjob now, using letsencrypt's PROD environment (affected by rate limiting - 5 certs every couple weeks...)
+docker exec acme-sh --cron
+# force a renewal via letsencrypt's PROD environment, even if renewal time hasn't been reached yet
+docker exec acme-sh --cron --force
+```
+
+#### TLS Certificates and Running Locally
 When running locally, we instead use a [certificate created for localhost](ssl_certificates_localhost). Since ownership of localhost cannot be certified, this is a single self-signed certificate instead of a full chain signed by a CA like on the server, and an exception must be added to your browser to trust it.
