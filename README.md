@@ -415,7 +415,7 @@ docker compose up -d
     ```
 5. Copy the images, the compose files, the certificate renewal cron job and the reverse proxy settings to the server:
     ```sh
-    scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab renew-cert.sh docker/reverseproxy/ monitoring@monitoring.localzero.net:/tmp/
+    scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab reload-cert.sh docker/reverseproxy/ monitoring@monitoring.localzero.net:/tmp/
     ```
 6. Login to the server:
     ```sh
@@ -465,8 +465,8 @@ docker compose up -d
 11. Install certificate renewal cron job:
     ```sh
     crontab /tmp/crontab
-    cp /tmp/renew-cert.sh /home/monitoring/
-    chmod +x /home/monitoring/renew-cert.sh
+    cp /tmp/reload-cert.sh /home/monitoring/
+    chmod +x /home/monitoring/reload-cert.sh
     ```
 
 ### Database Client
@@ -495,6 +495,6 @@ A reload of the nginx config is independently triggered every four hours by our 
 ```sh
 crontab -l
 ```
-This job runs [a script](renew-cert.sh) which applies the latest certificate that acme.sh has produced. This means there can be some delay between renewal and application of the certificate, but since acme.sh performs renewal a few days before expiry, there should be enough time for nginx to reload the certificate.
+This job runs [a script](reload-cert.sh) which applies the latest certificate that acme.sh has produced. This means there can be some delay between renewal and application of the certificate, but since acme.sh performs renewal a few days before expiry, there should be enough time for nginx to reload the certificate.
 
 When running locally, we instead use a [certificate created for localhost](ssl_certificates_localhost). Since ownership of localhost cannot be certified, this is a single self-signed certificate instead of a full chain signed by a CA like on the server, and an exception must be added to your browser to trust it.
