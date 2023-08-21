@@ -38,28 +38,28 @@ def _login(client: Client, django_user_model: User, username: str):
 @pytest.fixture
 def unprivileged_client(permissions_db, client: Client, django_user_model: User):
     "Client fixture with data loaded and unprivileged user logged in."
-    _login(client, django_user_model, "christian")
+    _login(client, django_user_model, "christian")  # password: derehring
     return client
 
 
 @pytest.fixture
 def site_admin_client(permissions_db, client: Client, django_user_model: User):
     "Client fixture with data loaded and site admin user logged in."
-    _login(client, django_user_model, "admin")
+    _login(client, django_user_model, "admin")  # password: password
     return client
 
 
 @pytest.fixture
 def city_admin_client(permissions_db, client: Client, django_user_model: User):
     "Client fixture with data loaded and city admin user logged in."
-    _login(client, django_user_model, "sarah")
+    _login(client, django_user_model, "sarah")  # passowrd: diebrosetti
     return client
 
 
 @pytest.fixture
 def city_editor_client(permissions_db, client: Client, django_user_model: User):
     "Client fixture with data loaded and city editor user logged in."
-    _login(client, django_user_model, "heinz")
+    _login(client, django_user_model, "heinz")  # password: derstrunk
     return client
 
 
@@ -67,7 +67,7 @@ def city_editor_client(permissions_db, client: Client, django_user_model: User):
 
 
 def test_admin_login_should_fail_fail_for_non_existing_user(
-    permissions_db, client: Client, django_user_model: User
+    permissions_db, client: Client, db
 ):
     client.login(username="asdf", password="ghjk")
     response = client.get("/admin/")
@@ -694,3 +694,161 @@ def test_site_admin_should_not_be_allowed_to_change_task_of_other_city(
     response = site_admin_client.get("/admin/cpmonitor/task/27/change/")
 
     assert response.status_code == 200
+
+
+# Invitation links
+
+city_admin_key = "ercizfqjtsqbv5xap4uvlkpswjivqnjiephfxdbhjett8jah0z0ynnfpqrqxjcjg"
+city_editor_key = "lypvs6fb6qxk8ylskkckwp3g3djilpsiiunm1fuz68rdwg1emuwhnsuxexpbgjel"
+
+
+def test_city_editor_should_be_able_to_see_invitation_links(
+    city_editor_client: Client,
+):
+    response = city_editor_client.get("/admin/cpmonitor/city/1/change/")
+
+    assertNotContains(response, city_admin_key)
+    assertNotContains(response, city_editor_key)
+
+
+def test_city_admin_should_be_able_to_see_invitation_links(
+    city_admin_client: Client,
+):
+    response = city_admin_client.get("/admin/cpmonitor/city/1/change/")
+
+    assertContains(response, city_admin_key)
+    assertContains(response, city_editor_key)
+
+
+def test_site_admin_should_be_able_to_see_invitation_links(
+    site_admin_client: Client,
+):
+    response = site_admin_client.get("/admin/cpmonitor/city/1/change/")
+
+    assertContains(response, city_admin_key)
+    assertContains(response, city_editor_key)
+
+
+# This is poor-mans parametrization, since pytest-django does not support it:
+
+
+def _assert_not_logged_in(client: Client):
+    response = client.get("/admin/", follow=True)
+    assertTemplateNotUsed(response, "admin/index.html")
+
+
+def _assert_logged_in(client: Client):
+    response = client.get("/admin/", follow=True)
+    assertTemplateUsed(response, "admin/index.html")
+
+
+def _register_with_registration_link(key, client: Client):
+    _assert_not_logged_in(client)
+
+    response = client.get(f"/invitations/accept-invite/{key}")
+    assert response.status_code == 302
+    assert response.url == "/accounts/signup/"
+
+    response = client.get(f"/invitations/accept-invite/{key}", follow=True)
+    assert response.status_code == 200
+    assertTemplateUsed(response, "account/signup.html")
+    assertNotContains(response, "Fehler")
+
+    response = client.post(
+        "/accounts/signup/",
+        {
+            "username": "kirstin",
+            "email": "",
+            "password1": "diewarnke",
+            "password2": "diewarnkr",
+        },
+    )
+    assert response.status_code == 200
+    assertTemplateUsed(response, "account/signup.html")
+    assertContains(response, "Fehler")
+
+    response = client.post(
+        "/accounts/signup/",
+        {
+            "username": "kirstin",
+            "email": "",
+            "password1": "diewarnke",
+            "password2": "diewarnke",
+        },
+    )
+    assert response.status_code == 302
+    assert response.url == "/admin/"
+
+    _assert_logged_in(client)
+
+    client.logout()
+
+
+def _login_with_new_account(client: Client):
+    _assert_not_logged_in(client)
+
+    client.login(username="kirstin", password="diewarnke")
+
+    _assert_logged_in(client)
+
+
+def _assert_city_changelist_contains_only_allowed(client: Client):
+    response = client.get("/admin/cpmonitor/city/")
+    assertTemplateUsed(response, "admin/change_list.html")
+    result_list = response.context["results"]
+    assert isinstance(result_list, list) and len(result_list) == 1
+    assertContains(response, "Beispielstadt")
+    assertNotContains(response, "Mitallem")
+
+    assertNotContains(response, "Kommune hinzufügen")
+
+
+def _assert_other_city_cannot_be_changed(client: Client):
+    response = client.get("/admin/cpmonitor/city/2/change/")
+    assert response.status_code == 302
+    assert response.url == "/admin/"
+
+
+def _assert_city_can_be_changed(client: Client):
+    response = client.get("/admin/cpmonitor/city/1/change/")
+
+    assert response.status_code == 200
+
+    assertTemplateUsed(response, "admin/change_form.html")
+
+    assert not response.context["show_delete_link"]
+    assert not response.context["show_save_and_add_another"]
+
+
+def test_can_register_with_city_editor_registration_link(
+    permissions_db, db, client: Client
+):
+    _register_with_registration_link(city_editor_key, client)
+    _login_with_new_account(client)
+    _assert_city_changelist_contains_only_allowed(client)
+    _assert_other_city_cannot_be_changed(client)
+    _assert_city_can_be_changed(client)
+
+    response = client.get("/admin/cpmonitor/city/1/change/")
+    adminform = response.context["adminform"]
+    assert "city_editors" in adminform.readonly_fields
+    assert "city_admins" in adminform.readonly_fields
+    assertNotContains(response, city_admin_key)
+    assertNotContains(response, city_editor_key)
+
+
+def test_can_register_with_city_admin_registration_link(
+    permissions_db, db, client: Client
+):
+    _register_with_registration_link(city_admin_key, client)
+    _login_with_new_account(client)
+    _assert_city_changelist_contains_only_allowed(client)
+    _assert_other_city_cannot_be_changed(client)
+    _assert_city_can_be_changed(client)
+
+    response = client.get("/admin/cpmonitor/city/1/change/")
+    adminform = response.context["adminform"]
+    assert not "city_editors" in adminform.readonly_fields
+    assert not "city_admins" in adminform.readonly_fields
+    assertContains(response, city_admin_key)
+    assertContains(response, city_editor_key)

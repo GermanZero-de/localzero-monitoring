@@ -486,16 +486,21 @@ class AcceptInvite(invitations_views.AcceptInvite):
             )
             return redirect(self.get_signup_redirect())
 
-        # Difference 1 to base: Not calling accept_invitation().
+        if not invitations_settings.ACCEPT_INVITE_AFTER_SIGNUP:
+            accept_invitation(
+                invitation=invitation,
+                request=self.request,
+                signal_sender=self.__class__,
+            )
 
-        # Difference 2 to base: Saving key and not email.
+        # Difference to base: Saving key and not email.
         self.request.session["invitation_key"] = invitation.key
 
         return redirect(self.get_signup_redirect())
 
 
 def accept_invitation(invitation, request, signal_sender):
-    # Difference: Not setting accepted to True, here.
+    # Difference to base: Not setting accepted to True, here.
 
     invite_accepted.send(
         sender=signal_sender,
@@ -510,18 +515,3 @@ def accept_invitation(invitation, request, signal_sender):
         "invitations/messages/invite_accepted.txt",
         {"email": invitation.email},
     )
-
-
-def accept_invite_after_signup(sender, request, user, **kwargs):
-    invitation = get_invitation(request)
-    if invitation:
-        accept_invitation(
-            invitation=invitation,
-            request=request,
-            signal_sender=Invitation,
-        )
-
-
-if invitations_settings.ACCEPT_INVITE_AFTER_SIGNUP:
-    signed_up_signal = get_invitations_adapter().get_user_signed_up_signal()
-    signed_up_signal.connect(accept_invite_after_signup)
