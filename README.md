@@ -504,12 +504,17 @@ This job runs [a script](reload-cert.sh) which applies the latest certificate th
 
 The configuration used by acme-sh's cronjob (not our nginx reload cronjob!), e.g. renewal interval, can be changed in `reverseproxy/ssl_certificates/monitoring-test.localzero.net_ecc/`` on the server.
 
-The following commands might be useful to debug and test the acme-sh configuration:
+The following commands might be executed on the server to debug and test the acme-sh configuration:
 ```shell
+# view certificate creation date and next renew date
+docker exec acme-sh --list
+
 # tell acme-sh to run its cronjob now, using letsencrypt's test environment (to bypass rate limiting)
 docker exec acme-sh --cron --staging
+
 # tell acme-sh to run its cronjob now, using letsencrypt's PROD environment (affected by rate limiting - 5 certs every couple weeks...)
 docker exec acme-sh --cron
+
 # force a renewal via letsencrypt's PROD environment, even if renewal time hasn't been reached yet
 docker exec acme-sh --cron --force
 ```
