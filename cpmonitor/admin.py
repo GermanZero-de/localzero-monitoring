@@ -326,4 +326,3 @@ admin.site.index_title = "Dateneingabe"
 
 admin.site.register(City, CityAdmin)
 admin.site.register(Task, TaskAdmin)
-admin.site.unregister(Invitation)

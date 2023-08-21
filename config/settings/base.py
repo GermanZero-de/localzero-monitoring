@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "invitations",
+    # "invitations", We do not use its model and therefore do not want its migrations.
     "cpmonitor.apps.CpmonitorConfig",
 ]
 
