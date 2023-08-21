@@ -1,2 +1,2 @@
 #!/bin/bash
-docker exec nginx-testing nginx -s reload
+docker exec reverse-proxy nginx -s reload
