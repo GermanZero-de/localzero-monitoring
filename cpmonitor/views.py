@@ -439,19 +439,15 @@ from invitations.app_settings import app_settings as invitations_settings
 from invitations.adapters import get_invitations_adapter
 from invitations.signals import invite_accepted
 
-from .utils import get_invitation
-from .models import Invitation
-
 
 class AcceptInvite(invitations_views.AcceptInvite):
-    # def get(self, *args, **kwargs):
-    #     if invitations_settings.CONFIRM_INVITE_ON_GET:
-    #         return self.post(*args, **kwargs)
-    #     else:
-    #         raise Http404()
+    "Overwrite handling of invitation link."
 
     def post(self, *args, **kwargs):
-        "Identical to base implementation, except where noted."
+        """
+        Unfortunately, the whole method had to be copied.
+        Identical to base implementation, except where noted.
+        """
         self.object = invitation = self.get_object()
 
         if invitations_settings.GONE_ON_ACCEPT_ERROR and (
@@ -487,20 +483,23 @@ class AcceptInvite(invitations_views.AcceptInvite):
             return redirect(self.get_signup_redirect())
 
         if not invitations_settings.ACCEPT_INVITE_AFTER_SIGNUP:
+            # Difference: Calling own function.
             accept_invitation(
                 invitation=invitation,
                 request=self.request,
                 signal_sender=self.__class__,
             )
 
-        # Difference to base: Saving key and not email.
+        # Difference: Saving key and not email.
         self.request.session["invitation_key"] = invitation.key
 
         return redirect(self.get_signup_redirect())
 
 
 def accept_invitation(invitation, request, signal_sender):
-    # Difference to base: Not setting accepted to True, here.
+    "Copy of function from django-invitations. Identical, except where noted."
+
+    # Difference: Not setting accepted to True, here.
 
     invite_accepted.send(
         sender=signal_sender,

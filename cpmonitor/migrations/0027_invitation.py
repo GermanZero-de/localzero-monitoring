@@ -8,30 +8,35 @@ from django.utils.crypto import get_random_string
 
 
 class AccessRight(models.TextChoices):
+    "Copy from state matching this migration."
     CITY_ADMIN = "city admin", "Kommunen Administrator"
     CITY_EDITOR = "city editor", "Kommunen Bearbeiter"
 
 
-def ensure_invitation(inv_mgr, city, access_right):
-    if not inv_mgr.filter(city=city, access_right=access_right):
+def ensure_invitation(invitation_manager, city, access_right):
+    "Check if invitation exists and create it, if not."
+    if not invitation_manager.filter(city=city, access_right=access_right):
         key = get_random_string(64).lower()
-        inv_mgr.create(key=key, inviter=None, city=city, access_right=access_right)
+        invitation_manager.create(
+            key=key, inviter=None, city=city, access_right=access_right
+        )
 
 
 def add_invitations(apps, schema_editor):
+    "Add missing invitations to all cities."
     City = apps.get_model("cpmonitor", "City")
     Invitation = apps.get_model("cpmonitor", "Invitation")
-    inv_mgr = Invitation._default_manager
+    invitation_manager = Invitation._default_manager
     db_alias = schema_editor.connection.alias
     for city in City.objects.using(db_alias).all():
-        ensure_invitation(inv_mgr, city, AccessRight.CITY_ADMIN)
-        ensure_invitation(inv_mgr, city, AccessRight.CITY_EDITOR)
+        ensure_invitation(invitation_manager, city, AccessRight.CITY_ADMIN)
+        ensure_invitation(invitation_manager, city, AccessRight.CITY_EDITOR)
 
 
 class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("cpmonitor", "0024_city_city_admins_city_city_editors"),
+        ("cpmonitor", "0026_city_city_admins_city_city_editors"),
     ]
 
     operations = [

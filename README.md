@@ -147,10 +147,11 @@ python -Xutf8 manage.py dumpdata -e contenttypes -e auth.Permission -e admin.Log
 
 (The `-Xutf8` and `--indent 2` options ensure consistent and readable output on all platforms.)
 
-The arguments `-e contenttypes -e auth.Permission` exclude tables which are pre-filled by django and whose content may
-changes depending on the models in the project. If they are included, everything works fine at first, since loaddata
-will silently accept data already there. However, as soon as the data to load clashes with existing content, it will fail.
-`-e admin.LogEntry` contains references to content types and is therefore also excluded.
+The arguments `-e contenttypes -e auth.Permission -e admin.LogEntry -e sessions` exclude tables which are pre-filled
+by django or during usage by djangoand whose content may change depending on the models in the project. If they are
+included, everything works fine at first, since loaddata will silently accept data already there. However, as soon as
+the data to load clashes with existing content, it will fail. `-e admin.LogEntry` excludes references to content types
+which may otherwise be inconsistent.`-e sessions` excludes unneeded data which otherwise would clog the JSON file.
 
 This fixture may be loaded in a test with. (Similar in a pytest fixture.)
 

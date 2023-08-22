@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("cpmonitor", "0023_task_frontpage"),
+        ("cpmonitor", "0025_alter_task_responsible_organ_and_more"),
     ]
 
     operations = [

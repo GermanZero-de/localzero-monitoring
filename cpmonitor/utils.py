@@ -1,8 +1,15 @@
 import threading
 
 
-# From https://stackoverflow.com/a/50380461/6159921
 class ModelAdminRequestMixin(object):
+    """
+    Mixin for Admin classes.
+    Provides the request object in methods without it in the signature.
+    Use `get_request()` to retrieve the request object. All other methods
+    are internal and ensure, the request object is set.
+    From https://stackoverflow.com/a/50380461/6159921
+    """
+
     def __init__(self, *args, **kwargs):
         # let's define this so there's no chance of AttributeErrors
         self._request_local = threading.local()
@@ -10,6 +17,7 @@ class ModelAdminRequestMixin(object):
         super(ModelAdminRequestMixin, self).__init__(*args, **kwargs)
 
     def get_request(self):
+        "get the request or None if this is not in the view context."
         return self._request_local.request
 
     def set_request(self, request):
@@ -48,21 +56,3 @@ class ModelAdminRequestMixin(object):
     def get_formset(self, request, *args, **kwargs):
         self.set_request(request)
         return super(ModelAdminRequestMixin, self).get_formset(request, *args, **kwargs)
-
-
-from types import NoneType
-from django.http import HttpRequest
-
-from .models import Invitation
-
-
-def get_invitation(request: HttpRequest) -> Invitation | NoneType:
-    if not hasattr(request, "session"):
-        return None
-    key = request.session.get("invitation_key")
-    if not key:
-        return None
-    invitation_qs = Invitation.objects.filter(key=key.lower())
-    if not invitation_qs:
-        return None
-    return invitation_qs.first()

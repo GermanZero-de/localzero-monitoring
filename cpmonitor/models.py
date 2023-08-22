@@ -1,14 +1,19 @@
 from datetime import date
-
 from django.conf import settings
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.http import HttpRequest
+from django.urls import reverse
+from django.utils.crypto import get_random_string
 from django.utils.text import slugify
-import invitations
+from django.utils import timezone
+from invitations.app_settings import app_settings as invitations_app_settings
+from invitations.base_invitation import AbstractBaseInvitation
+from invitations import signals
 from treebeard.exceptions import InvalidPosition
 from treebeard.mp_tree import MP_Node
-
+from types import NoneType
 
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
 
@@ -188,7 +193,7 @@ class City(models.Model):
             raise ValidationError(msgs)
 
     def save(self, *args, **kwargs):
-        """"""
+        "Ensure there are all needed invitation links for the city."
         super().save(*args, **kwargs)
         Invitation.ensure_for_city(self)
 
@@ -715,21 +720,19 @@ class LocalGroup(models.Model):
     )
 
 
-import datetime
-from invitations.base_invitation import AbstractBaseInvitation
-from invitations.app_settings import app_settings as invitations_app_settings
-from django.utils import timezone
-from django.utils.crypto import get_random_string
-from django.urls import reverse
-from invitations import signals
-
-
 class AccessRight(models.TextChoices):
     CITY_ADMIN = "city admin", "Kommunen Administrator"
     CITY_EDITOR = "city editor", "Kommunen Bearbeiter"
 
 
 class Invitation(AbstractBaseInvitation):
+    """
+    Invitation suitable to be send as link without email, but with rights attached.
+    Invitations will be created automatically, whenever a city is saved. No user will
+    have to add invitations by hand. They can only be deleted to invalidate links.
+    New links will be created upon the next save of the city.
+    """
+
     class Meta:
         verbose_name = "Einladungslink"
         verbose_name_plural = "Einladungslinks"
@@ -762,24 +765,28 @@ class Invitation(AbstractBaseInvitation):
 
     @property
     def email(self):
+        "Satisfy expected interface."
         return f"{self.get_access_right_display()} von {self.city.name}"
 
     @classmethod
-    def create_for_keys(cls, city, access_right):
+    def create_for_right(cls, city, access_right):
+        "Create a new invitation for a city with a given right."
         key = get_random_string(64).lower()
         return cls._default_manager.create(
             key=key, inviter=None, city=city, access_right=access_right
         )
 
     @classmethod
-    def ensure_for_keys(cls, city, access_right):
+    def ensure_for_right(cls, city, access_right):
+        "Ensure there exists an invitation for a city with a given right."
         if not cls._default_manager.filter(city=city, access_right=access_right):
-            cls.create_for_keys(city, access_right)
+            cls.create_for_right(city, access_right)
 
     @classmethod
     def ensure_for_city(cls, city):
-        cls.ensure_for_keys(city, AccessRight.CITY_EDITOR)
-        cls.ensure_for_keys(city, AccessRight.CITY_ADMIN)
+        "Ensure there exist the needed invitations for a city."
+        cls.ensure_for_right(city, AccessRight.CITY_EDITOR)
+        cls.ensure_for_right(city, AccessRight.CITY_ADMIN)
 
     @classmethod
     def create(cls, email, inviter=None, **kwargs):
@@ -790,6 +797,7 @@ class Invitation(AbstractBaseInvitation):
         )
 
     def get_invite_url(self, request):
+        "Build correct URL to be sent to invited users. Extracted from django-invitations."
         if not self.key:
             return None
         url = reverse(invitations_app_settings.CONFIRMATION_URL_NAME, args=[self.key])
@@ -798,10 +806,6 @@ class Invitation(AbstractBaseInvitation):
     def key_expired(self):
         "Implementation of required method. Never expired."
         return False
-        # expiration_date = self.sent + datetime.timedelta(
-        #     days=invitations_app_settings.INVITATION_EXPIRY,
-        # )
-        # return expiration_date <= timezone.now()
 
     def send_invitation(self, request, **kwargs):
         "Implementation of required method. Pretending to send an email."
@@ -817,6 +821,19 @@ class Invitation(AbstractBaseInvitation):
 
     def __str__(self):
         return f"Einladung für {self.get_access_right_display()} von {self.city.name}"
+
+
+def get_invitation(request: HttpRequest) -> Invitation | NoneType:
+    "Retrieve an invitation based on the key in the current session."
+    if not hasattr(request, "session"):
+        return None
+    key = request.session.get("invitation_key")
+    if not key:
+        return None
+    invitation_qs = Invitation.objects.filter(key=key.lower())
+    if not invitation_qs:
+        return None
+    return invitation_qs.first()
 
 
 # Tables for comparing and connecting the plans of all cities

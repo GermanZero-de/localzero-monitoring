@@ -1,38 +1,34 @@
 from allauth.account.adapter import DefaultAccountAdapter
-from allauth.account.signals import user_signed_up
-from django.contrib import messages
 from invitations.app_settings import app_settings
 
-from .models import AccessRight, City, Invitation
-from .utils import get_invitation
+from .models import AccessRight, City, get_invitation
 
 
 class AllauthInvitationsAdapter(DefaultAccountAdapter):
     def is_open_for_signup(self, request):
+        """
+        Overwrites django-invitations.
+        Checks that there exists an invitation instead of email.
+        """
         if get_invitation(request):
             return True
-        elif app_settings.INVITATION_ONLY is True:
-            # Site is ONLY open for invites
+        elif app_settings.INVITATION_ONLY:
             return False
         else:
-            # Site is open to signup
             return True
 
-    def get_user_signed_up_signal(self):
-        return user_signed_up
-
     def save_user(self, request, user, form, commit=True):
-        "Check there is an invitation and set the appropriate access rights. Swallow the user object, if not."
+        """
+        Overwrites django-allauth.
+        Check there is an invitation and set the appropriate access rights.
+        Swallow the user object already created, if not.
+        Otherwise, set access rights according to invitation.
+        """
         invitation = get_invitation(request)
-        print("Got invitation: " + str(invitation))
         if not invitation:
             self.add_error(
                 None,
-                "Die Registrierung ist nur möglich über einen gültigen Einladungslink.1",
-            )
-            messages.error(
-                request,
-                "Die Registrierung ist nur möglich über einen gültigen Einladungslink.2",
+                "Die Registrierung ist nur möglich über einen gültigen Einladungslink.",
             )
             return
 

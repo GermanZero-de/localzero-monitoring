@@ -3,7 +3,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.views.generic import RedirectView
-from invitations import views as iviews
 
 from . import views
 

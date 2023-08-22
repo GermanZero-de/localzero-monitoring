@@ -1,13 +1,12 @@
 from collections.abc import Sequence
-from django.contrib import admin, auth, messages
+from django.contrib import admin, messages
 from django.db import models
-from django.forms import ModelChoiceField, TextInput
+from django.forms import TextInput
 from django.forms.models import ErrorList
 from django.http import HttpRequest, HttpResponseRedirect, QueryDict
 from django.http.request import HttpRequest
 from django.urls import reverse
 from django.utils.html import format_html
-import invitations
 from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
@@ -82,15 +81,22 @@ class LocalGroupInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
 class InvitationInline(
     ObjectPermissionsModelAdminMixin, utils.ModelAdminRequestMixin, admin.StackedInline
 ):
+    "Only show the invitation link and offer to delete them. Will be recreated upon next save."
     model = Invitation
     extra = 0
     fields = ("invitation_link",)
     readonly_fields = ("invitation_link",)
 
-    @admin.display(description="Einladungslink")
+    @admin.display(description="Link")
     def invitation_link(self, invitation: Invitation):
         url = invitation.get_invite_url(self.get_request())
-        return format_html('<a href="{}" target="_blank">{}</a>', url, url)
+        role = str(invitation)
+        return format_html(
+            '{}:<br/>Diesen Link bitte nur an Menschen schicken, die mit dieser Rolle mitarbeiten sollen:<br/><a href="{}" target="_blank">{}</a>',
+            role,
+            url,
+            url,
+        )
 
 
 class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
@@ -101,6 +107,7 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     search_fields = ["zipcode", "name"]
 
     def get_queryset(self, request):
+        "Restrict cities shown in changelist to those the user has access to."
         qs = super().get_queryset(request)
         user = request.user
         if user.is_superuser:
@@ -216,8 +223,15 @@ class TaskForm(MoveNodeForm):
 
 
 class CityPermissionFilter(admin.RelatedFieldListFilter):
+    """
+    In the Task changelist (tree of tasks) on the right in the filter settings
+    show only the cities for which the user has permission.
+    By default, for a `list_filter` on a ForeignKey field, a RelatedFieldListFilter
+    would be used.
+    """
+
     def field_choices(self, field, request, model_admin):
-        "Limit to cities the user is allowed to edit."
+        "Limit to cities the user is allowed to edit by using `limit_choices_to`."
         return field.get_choices(
             include_blank=False,
             ordering=self.field_admin_ordering(field, request, model_admin),
@@ -295,6 +309,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
     }
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        "In the add form show only the cities the user has access to for the city the task belongs to."
         if db_field.name == "city":
             kwargs["queryset"] = City.objects.filter(
                 rules.is_allowed_to_edit_q(request.user, City)
@@ -309,6 +324,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         return {"city": city_id}
 
     def add_view(self, request, form_url="", extra_context=None):
+        "Only show the add form if a city is selected to which the user has access."
         query_string = self.get_preserved_filters(request)
         filters = QueryDict(query_string).get("_changelist_filters")
         city_id = QueryDict(filters).get(_city_filter_query)

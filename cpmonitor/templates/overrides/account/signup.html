@@ -1,3 +1,5 @@
+{# This is based on the admin login screen         #}
+{# and mixes in the signup form of django-allauth. #}
 {% extends "admin/base.html" %}
 {% load i18n static %}
 {% block title %}
@@ -49,7 +51,9 @@
           method="post"
           action="{% url 'account_signup' %}">
       {% csrf_token %}
-      {{ form.as_p }}
+      <table>
+        {{ form.as_table }}
+      </table>
       {% if redirect_field_value %}
         <input type="hidden"
                name="{{ redirect_field_name }}"
