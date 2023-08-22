@@ -11,3 +11,4 @@ SECRET_KEY = get_env("DJANGO_SECRET_KEY")
 CSRF_TRUSTED_ORIGINS = get_env("DJANGO_CSRF_TRUSTED_ORIGINS").split(",")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_env("DJANGO_DEBUG") == "True"
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
