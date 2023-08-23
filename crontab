@@ -1,2 +1,2 @@
-# renew certificate around every midnight and noon, if necessary
-0 */4 * * * sleep 3109 && /home/monitoring/renew-cert.sh > /home/monitoring/last_cert_renewal.log 2>&1
+# reload SSL certificate around every four hours, in case it was renewed by acme.sh
+0 */4 * * * /home/monitoring/reload-cert.sh > /home/monitoring/last_cert_reload.log 2>&1
