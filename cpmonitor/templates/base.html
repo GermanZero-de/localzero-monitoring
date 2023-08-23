@@ -85,12 +85,24 @@
       {% endblock breadcrumbs %}
       <div class="page-wrapper">
         <div class="page-body">
-          <div class="container-xl">
-            <div class="space-y">
-              {% block content %}
-              {% endblock content %}
-            </div>
-          </div>
+          {% block content %}
+            {% block text-content-container %}
+              <div class="container">
+                {% block text-content %}
+                {% endblock text-content %}
+              </div>
+            {% endblock text-content-container %}
+            {% block cards-container %}
+              <div class="container-fluid lz-cards-background">
+                <div class="container">
+                  <div class="space-y">
+                    {% block cards %}
+                    {% endblock cards %}
+                  </div>
+                </div>
+              </div>
+            {% endblock cards-container %}
+          {% endblock content %}
         </div>
       </div>
       <footer id="site-footer">
