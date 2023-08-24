@@ -7,6 +7,7 @@ import uuid
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import Http404
@@ -14,6 +15,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import redirect
+from invitations import views as invitations_views
+from invitations.app_settings import app_settings as invitations_settings
+from invitations.adapters import get_invitations_adapter
+from invitations.signals import invite_accepted
+from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
 
 from .models import (
@@ -432,14 +439,6 @@ def markdown_uploader_view(request):
     return HttpResponse(data, content_type="application/json")
 
 
-from django.contrib import messages
-from django.shortcuts import redirect
-from invitations import views as invitations_views
-from invitations.app_settings import app_settings as invitations_settings
-from invitations.adapters import get_invitations_adapter
-from invitations.signals import invite_accepted
-
-
 class AcceptInvite(invitations_views.AcceptInvite):
     "Overwrite handling of invitation link."
 
@@ -483,34 +482,16 @@ class AcceptInvite(invitations_views.AcceptInvite):
             return redirect(self.get_signup_redirect())
 
         if not invitations_settings.ACCEPT_INVITE_AFTER_SIGNUP:
-            # Difference: Calling own function.
             accept_invitation(
                 invitation=invitation,
                 request=self.request,
                 signal_sender=self.__class__,
             )
+            # Difference: Revert accepted to allow reuse of link.
+            invitation.accepted = False
+            invitation.save()
 
         # Difference: Saving key and not email.
         self.request.session["invitation_key"] = invitation.key
 
         return redirect(self.get_signup_redirect())
-
-
-def accept_invitation(invitation, request, signal_sender):
-    "Copy of function from django-invitations. Identical, except where noted."
-
-    # Difference: Not setting accepted to True, here.
-
-    invite_accepted.send(
-        sender=signal_sender,
-        email=invitation.email,
-        request=request,
-        invitation=invitation,
-    )
-
-    get_invitations_adapter().add_message(
-        request,
-        messages.SUCCESS,
-        "invitations/messages/invite_accepted.txt",
-        {"email": invitation.email},
-    )

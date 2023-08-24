@@ -12,15 +12,19 @@ CityType = (
 CityOrNoneType = CityType | NoneType
 
 
+_always_false_q: Q = Q(pk__in=[])
+_always_true_q: Q = ~_always_false_q
+
+
 def is_allowed_to_edit_q(user: User, model: Model) -> Q:
     """
     Return a Q object to filter objects to which a user has access.
     This may be used with `QuerySet.filter`, but also with `limit_choices_to`.
     """
     if not user.is_staff or not user.is_active:
-        return Q(pk__in=[])  # Always false -> Empty QuerySet
+        return _always_false_q
     if user.is_superuser:
-        return ~Q(pk__in=[])  # Always true -> All objects
+        return _always_true_q
     if model == City:
         return Q(city_editors=user) | Q(city_admins=user)
     else:

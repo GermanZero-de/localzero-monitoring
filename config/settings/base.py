@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    # "invitations", We do not use invitations.Invitatoin and therefore do not want its migrations.
+    # "invitations", We do not use invitations.Invitation and therefore do not want its migrations.
     "cpmonitor.apps.CpmonitorConfig",
 ]
 
@@ -194,6 +194,6 @@ INVITATIONS_CONFIRMATION_URL_NAME = "accept-invite"
 # would try to access the email field of an invitation and fail on the custom model.
 INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = False
 
-# django core configuration used by django-invitations
+# django core configuration used by django-invitations, django-allauth
 LOGIN_URL = "/admin/login/"
 LOGIN_REDIRECT_URL = "/admin/"

@@ -1,0 +1,1 @@
+These templates override default templates from external django apps.

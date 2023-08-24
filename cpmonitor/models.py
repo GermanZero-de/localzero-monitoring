@@ -797,7 +797,10 @@ class Invitation(AbstractBaseInvitation):
         )
 
     def get_invite_url(self, request):
-        "Build correct URL to be sent to invited users. Extracted from django-invitations."
+        """
+        Build correct URL to be sent to invited users.
+        Extracted from django-invitations, which generates it for the email and forgets it.
+        """
         if not self.key:
             return None
         url = reverse(invitations_app_settings.CONFIRMATION_URL_NAME, args=[self.key])
