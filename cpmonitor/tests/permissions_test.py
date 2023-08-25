@@ -181,8 +181,10 @@ def test_city_editor_should_not_be_allowed_to_delete_add_and_change_editors_and_
 
     adminform = response.context["adminform"]
     fields = _fields_from_form(adminform)
+    assert "draft_mode" in fields
     assert "city_editors" in fields
     assert "city_admins" in fields
+    assert "draft_mode" in adminform.readonly_fields
     assert "city_editors" in adminform.readonly_fields
     assert "city_admins" in adminform.readonly_fields
 
@@ -201,8 +203,10 @@ def test_city_admin_should_not_be_allowed_to_delete_add_but_to_change_editors_an
 
     adminform = response.context["adminform"]
     fields = _fields_from_form(adminform)
+    assert "draft_mode" in fields
     assert "city_editors" in fields
     assert "city_admins" in fields
+    assert not "draft_mode" in adminform.readonly_fields
     assert not "city_editors" in adminform.readonly_fields
     assert not "city_admins" in adminform.readonly_fields
 
@@ -221,8 +225,10 @@ def test_site_admin_should_be_allowed_to_delete_add_and_to_change_editors_and_ad
 
     adminform = response.context["adminform"]
     fields = _fields_from_form(adminform)
+    assert "draft_mode" in fields
     assert "city_editors" in fields
     assert "city_admins" in fields
+    assert not "draft_mode" in adminform.readonly_fields
     assert not "city_editors" in adminform.readonly_fields
     assert not "city_admins" in adminform.readonly_fields
 
@@ -831,6 +837,7 @@ def test_can_register_with_city_editor_registration_link(
 
     response = client.get("/admin/cpmonitor/city/1/change/")
     adminform = response.context["adminform"]
+    assert "draft_mode" in adminform.readonly_fields
     assert "city_editors" in adminform.readonly_fields
     assert "city_admins" in adminform.readonly_fields
     assertNotContains(response, city_admin_key)
@@ -848,6 +855,7 @@ def test_can_register_with_city_admin_registration_link(
 
     response = client.get("/admin/cpmonitor/city/1/change/")
     adminform = response.context["adminform"]
+    assert not "draft_mode" in adminform.readonly_fields
     assert not "city_editors" in adminform.readonly_fields
     assert not "city_admins" in adminform.readonly_fields
     assertContains(response, city_admin_key)

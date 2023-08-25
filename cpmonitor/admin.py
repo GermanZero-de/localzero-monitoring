@@ -136,6 +136,7 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
         user = request.user
         result = []
         if not rules.is_allowed_to_change_city_users(user, obj):
+            result.append("draft_mode")
             result.append("city_editors")
             result.append("city_admins")
         return result
