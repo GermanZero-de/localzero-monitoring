@@ -754,15 +754,6 @@ class Invitation(AbstractBaseInvitation):
         verbose_name="Erstellungszeitpunkt", default=timezone.now
     )
 
-    # Workaround for https://github.com/jazzband/django-invitations/issues/203: Add custom related_name
-    inviter = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
-        related_name="invitations",
-    )
-
     @property
     def email(self):
         "Satisfy expected interface."
