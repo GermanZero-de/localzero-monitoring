@@ -1,5 +1,5 @@
 :root {
-  --tblr-body-bg: #fff9d5;
+  --tblr-body-bg: white;
   --tblr-font-weight-bold: 700;
   --tblr-primary: #ffc80c;
   --tblr-primary-rgb: 255,
@@ -14,11 +14,19 @@
   --lz-color-failed: black;
 }
 
+.card {
+  --tblr-card-border-color: #777;
+}
+
 .progress {
   --tblr-progress-height: 0.85rem;
 }
 .progress .progress-bar.neutral {
   background-color: #011633;
+}
+
+header.page-header {
+  margin-bottom: 1rem !important;
 }
 
 .lz-breadcrumbs-bar {
@@ -28,25 +36,6 @@
 .lz-breadcrumbs-bar .breadcrumb-item.active {
   font-weight: normal;
   color: var(--tblr-muted);
-}
-
-.card-title {
-  font-size: 2rem;
-}
-
-.card-details {
-  position: absolute;
-  background: rgba(1, 1, 1, 0.2);
-  border: 0;
-  bottom: 0;
-  right: 0;
-  padding: 3px 1px 1px 6px;
-  border-radius: 30px 0 0 0;
-}
-.card-details svg {
-  width: 18px;
-  height: 18px;
-  opacity: 1;
 }
 
 .lz-date-missed {
@@ -76,6 +65,14 @@
   color: var(--lz-color-unknown);
 }
 
+.lz-cards-background {
+  background: #f7efd2;
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
 figure.lz-chart {
   height: 400px;
   display: flex;
@@ -101,11 +98,36 @@ figure.lz-chart img {
   -webkit-line-clamp: 8;
 }
 
+.lz-card-details {
+  position: absolute;
+  background: rgba(1, 1, 1, 0.2);
+  border: 0;
+  bottom: 0;
+  right: 0;
+  padding: 3px 1px 1px 6px;
+  border-radius: 30px 0 0 0;
+}
+.lz-card-details svg {
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+}
+
 .lz-construction-banner {
   background: #ffc80c;
   font-weight: bold;
   padding-top: 3px;
   padding-bottom: 3px;
+}
+
+.lz-teaser {
+  font-weight: bold;
+}
+
+.hr-text {
+  font-size: 0.8rem !important;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 /*# sourceMappingURL=main.css.map */

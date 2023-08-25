@@ -4,29 +4,26 @@
 {% block title %}
   LocalZero Monitoring - {{ city.name }}
 {% endblock title %}
-{% block content %}
-  {% if not node and city.assessment_status %}
-    <div class="card col-sm-12 col-lg-12">
-      <div class="card-body">{{ city.assessment_status | safe_markdown }}</div>
-    </div>
+{% block text-content %}
+  {% if not node %}
+    <h1>Maßnahmen</h1>
+    {% if city.assessment_status %}
+      <p class="lz-description">
+        {{ city.assessment_status | safe_markdown }}
+      {% endif %}
+    </p>
   {% endif %}
   {% if node %}
-    <div class="col">
-      <!-- Page pre-title -->
-      <div class="page-pretitle">Handlungsfeld</div>
-      <h1>{{ node.title }}</h1>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <div class="row align-items-center">
-          {% if node.teaser %}<strong>{{ node.teaser }}</strong>{% endif %}
-          <div class="markdown text-muted">
-            {{ node.description | safe_markdown | default:"Dieses Handlungsfeld hat keine Beschreibung" }}
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Page pre-title -->
+    <div class="page-pretitle">Handlungsfeld</div>
+    <h1>{{ node.title }}</h1>
+    {% if node.teaser %}<p class="lz-teaser">{{ node.teaser }}</p>{% endif %}
+    <p class="lz-description">
+      {{ node.description | safe_markdown | default:"Dieses Handlungsfeld hat keine Beschreibung" }}
+    </p>
   {% endif %}
+{% endblock text-content %}
+{% block cards %}
   {% if tasks %}
     <div class="row row-deck row-cards">
       {% for task in tasks %}
@@ -35,14 +32,19 @@
     </div>
   {% endif %}
   {% if groups %}
-    <h3>Weitere Handlungsfelder</h3>
+    {% if node or tasks %}
+      <div class="hr-text hr-text-left">
+        {% if node %}Weitere{% endif %}
+        Handlungsfelder
+      </div>
+    {% endif %}
     <div class="row row-deck row-cards">
       {% for group in groups %}
         <div class="col-sm-6 col-lg-3">
           <a href="{% url 'task' city.slug group.slugs %}"
              class="card card-link card-link-pop">
             <div class="card-body">
-              <div class="h2 mb-3">{{ group.title }}</div>
+              <div class="h3 mb-3">{{ group.title }}</div>
               <div class="col">{{ group.subtasks_count }} Maßnahmen</div>
               <div class="progress progress-lg progress-separated mb-3">
                 {% for value, status in group.status_proportions %}
@@ -57,7 +59,7 @@
                 {% endfor %}
               </div>
             </div>
-            <div class="card-details">
+            <div class="lz-card-details">
               <svg width="20" height="20">
                 <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
               </svg>
@@ -67,4 +69,4 @@
       {% endfor %}
     </div>
   {% endif %}
-{% endblock content %}
+{% endblock cards %}

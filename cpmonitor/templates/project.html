@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% load martortags %}
-{% block content %}
-  <header class="page-header">
-    <h1>LocalZero Monitoring</h1>
-  </header>
+{% block text-content %}
+  <h1>LocalZero Monitoring</h1>
   <p>Städte und Kommunen leisten einen wichtigen Beitrag zur Klimaneutralität.</p>
   <p>
     LocalZero Monitoring ist eine Initiative von Localzero, um mehr Transparenz
@@ -14,4 +12,6 @@
   <p>
     Du findest deine Kommune nicht? Dann <a href="https://localzero.net/mitmachen/lokal">finde Mitstreiter:innen</a> und gründe ein neues Team bei dir vor Ort!
   </p>
-{% endblock content %}
+{% endblock text-content %}
+{% block cards-container %}
+{% endblock cards-container %}

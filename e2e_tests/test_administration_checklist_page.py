@@ -8,7 +8,7 @@ def test_should_show_the_administration_assessment_and_the_checklist(
 
     expect(
         page.locator(
-            ".card",
+            "p",
             has_text="Wie bewertet ihr die Nachhaltigkeitsarchitektur der Verwaltung? Dieser Text fasst die wichtigsten Punkte zusammen.",
         )
     ).to_be_visible()

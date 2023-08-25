@@ -4,39 +4,33 @@
 {% block title %}
   LocalZero Monitoring - {{ city.name }}
 {% endblock title %}
-{% block content %}
-  <div class="container-xl">
-    <div class="space-y">
-      <h3>Nachhaltigkeitsarchitektur in der Verwaltung Checkliste</h3>
-      {% if city.assessment_administration %}
-        <div class="card col-sm-12 col-lg-6">
-          <div class="card-body">{{ city.assessment_administration | safe_markdown }}</div>
-        </div>
-      {% endif %}
-      <div class="card col-sm-12 col-lg-6">
-        <div class="card-body">
-          <table class="table table-sm table-borderless">
-            <tbody>
-              {% for key, value in administration_checklist.items %}
-                <tr>
-                  <td>{{ key }}</td>
-                  <td>
-                    {% if value %}
-                      <svg width="20" height="20" class="lz-icon CHECKED">
-                        <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check"/>
-                      </svg>
-                    {% else %}
-                      <svg width="20" height="20" class="lz-icon EMPTY">
-                        <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle"/>
-                      </svg>
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+{% block text-content %}
+  <h1>Nachhaltigkeitsarchitektur in der Verwaltung</h1>
+  {% if city.assessment_administration %}<p>{{ city.assessment_administration | safe_markdown }}</p>{% endif %}
+{% endblock text-content %}
+{% block cards %}
+  <div class="card col-sm-12 col-lg-6">
+    <div class="card-body">
+      <table class="table table-sm table-borderless">
+        <tbody>
+          {% for key, value in administration_checklist.items %}
+            <tr>
+              <td>{{ key }}</td>
+              <td>
+                {% if value %}
+                  <svg width="20" height="20" class="lz-icon CHECKED">
+                    <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check"/>
+                  </svg>
+                {% else %}
+                  <svg width="20" height="20" class="lz-icon EMPTY">
+                    <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle"/>
+                  </svg>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
-{% endblock content %}
+{% endblock cards %}

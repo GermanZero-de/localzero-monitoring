@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% load martortags %}
-{% block content %}
+{% block text-content %}
   <h1>Willkommen</h1>
   <p>
     <a href="https://localzero.net/">LocalZero</a> Monitoring ist eine Initiative von <a href="https://germanzero.de">GermanZero</a>, um mehr Transparenz
     zum Fortschritt der Klimaneutralität deutscher Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den
     jeweiligen Kommunen regelmäßig aktualisiert.
   </p>
+{% endblock text-content %}
+{% block cards %}
   <div class="row row-deck row-cards">
     {% for city in cities %}
       <div class="col-sm-6 col-lg-3">
@@ -22,4 +24,4 @@
       </div>
     {% endfor %}
   </div>
-{% endblock content %}
+{% endblock cards %}

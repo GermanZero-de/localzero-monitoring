@@ -6,7 +6,7 @@ def test_should_show_the_cap_assessment_and_the_checklist(live_server, page: Pag
 
     expect(
         page.locator(
-            ".card",
+            "p",
             has_text="Hier soll die Bewertung des Klimaaktionsplans stehen. Was haltet ihr von dem Plan?",
         )
     ).to_be_visible()

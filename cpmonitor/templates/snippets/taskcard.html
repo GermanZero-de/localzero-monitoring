@@ -3,10 +3,10 @@
    class="card card-link card-link-popup">
   <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
   <div class="card-body">
-    <div class="h2 mb-3">{{ task.title }}</div>
+    <div class="h3 mb-3">{{ task.title }}</div>
     <div class="lz-card-summary lines-8">{{ task.teaser }}</div>
   </div>
-  <div class="card-details">
+  <div class="lz-card-details">
     <svg width="20" height="20">
       <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
     </svg>
