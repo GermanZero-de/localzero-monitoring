@@ -92,7 +92,14 @@ class InvitationInline(
         url = invitation.get_invite_url(self.get_request())
         role = str(invitation)
         return format_html(
-            '{}:<br/>Diesen Link bitte nur an Menschen schicken, die mit dieser Rolle mitarbeiten sollen:<br/><a href="{}" target="_blank">{}</a>',
+            """
+            <p>Diesen Link bitte nur an Menschen schicken, die mit dieser Rolle mitarbeiten sollen:</p>
+            <p><a href="{}" target="_blank">{}</a></p>
+            <p>Der Einladungslink ist so lange gültig, bis er gelöscht wird.</p>
+            <p>Nach dem Löschen wird automatisch ein neuer Link erzeugt und hier angezeigt, wenn die
+              Stadt das nächste Mal gespeichert wird.</p>
+            <p>Sollte er nicht gleich sichtbar sein, bitte ein weiteres Mal speichern.</p>
+            """,
             role,
             url,
             url,
