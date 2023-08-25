@@ -9,8 +9,8 @@ from django.utils.crypto import get_random_string
 
 class AccessRight(models.TextChoices):
     "Copy from state matching this migration."
-    CITY_ADMIN = "city admin", "Kommunen Administrator"
-    CITY_EDITOR = "city editor", "Kommunen Bearbeiter"
+    CITY_ADMIN = "city admin", "Kommunen-Administrator"
+    CITY_EDITOR = "city editor", "Kommunen-Bearbeiter"
 
 
 def ensure_invitation(invitation_manager, city, access_right):
@@ -65,8 +65,8 @@ class Migration(migrations.Migration):
                     "access_right",
                     models.CharField(
                         choices=[
-                            ("city admin", "Kommunen Administrator"),
-                            ("city editor", "Kommunen Bearbeiter"),
+                            ("city admin", "Kommunen-Administrator"),
+                            ("city editor", "Kommunen-Bearbeiter"),
                         ],
                         default="city editor",
                         max_length=20,

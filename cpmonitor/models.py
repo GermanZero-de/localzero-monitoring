@@ -45,7 +45,7 @@ class City(models.Model):
     city_editors = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
-        verbose_name="Kommunen Bearbeiter",
+        verbose_name="Kommunen-Bearbeiter",
         related_name="edited_cities",
         help_text="""
             <p>Diese Benutzer können alle Inhalte der Kommune bearbeiten.</p>
@@ -55,7 +55,7 @@ class City(models.Model):
     city_admins = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
-        verbose_name="Kommunen Admins",
+        verbose_name="Kommunen-Admins",
         related_name="administered_cities",
         help_text="""
             <p>Diese Benutzer können zusätzlich andere Benutzter als Admins und Bearbeiter eintragen.</p>
@@ -721,8 +721,8 @@ class LocalGroup(models.Model):
 
 
 class AccessRight(models.TextChoices):
-    CITY_ADMIN = "city admin", "Kommunen Administrator"
-    CITY_EDITOR = "city editor", "Kommunen Bearbeiter"
+    CITY_ADMIN = "city admin", "Kommunen-Administrator"
+    CITY_EDITOR = "city editor", "Kommunen-Bearbeiter"
 
 
 class Invitation(AbstractBaseInvitation):

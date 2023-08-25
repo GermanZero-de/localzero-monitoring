@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 help_text='\n            <p>Diese Benutzer können zusätzlich andere Benutzter als Admins und Bearbeiter eintragen.</p>\n            <p>Sie brauchen nicht als "Bearbeiter" eingetragen zu werden.</p>\n        ',
                 related_name="administered_cities",
                 to=settings.AUTH_USER_MODEL,
-                verbose_name="Kommunen Admins",
+                verbose_name="Kommunen-Admins",
             ),
         ),
         migrations.AddField(
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 help_text="\n            <p>Diese Benutzer können alle Inhalte der Kommune bearbeiten.</p>\n        ",
                 related_name="edited_cities",
                 to=settings.AUTH_USER_MODEL,
-                verbose_name="Kommunen Bearbeiter",
+                verbose_name="Kommunen-Bearbeiter",
             ),
         ),
     ]
