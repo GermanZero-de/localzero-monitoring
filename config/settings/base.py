@@ -172,6 +172,7 @@ MAX_IMAGE_UPLOAD_SIZE = 104857600  # 100 MB
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 # Most customization is done in the adapter:
 ACCOUNT_ADAPTER = "cpmonitor.adapters.AllauthInvitationsAdapter"
+# django-allauth needs allauth.socialaccount to really work, but we don't use its OAuth parts
 SOCIALACCOUNT_PROVIDERS = {}
 ACCOUNT_EMAIL_VERIFICATION = "none"  # Would need a working email config.
 
