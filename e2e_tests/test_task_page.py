@@ -12,8 +12,8 @@ def test_should_show_the_task_assessment(live_server, page: Page):
 
     expect(
         page.locator(
-            ".card",
-            has_text="Wie sieht es aus? Eine einleitende Übersicht in die Bewertung des Umsetzungsstandes. Hält die Kommune sich im Wesentlichen an ihren eigenen Plan?",
+            "p",
+            has_text="Eine einleitende Übersicht in die Bewertung des Umsetzungsstandes. Hält die Kommune sich im Wesentlichen an ihren eigenen Plan?",
         )
     ).to_be_visible()
 
