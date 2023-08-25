@@ -1,12 +1,19 @@
 from datetime import date
-
+from django.conf import settings
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.http import HttpRequest
+from django.urls import reverse
+from django.utils.crypto import get_random_string
 from django.utils.text import slugify
+from django.utils import timezone
+from invitations.app_settings import app_settings as invitations_app_settings
+from invitations.base_invitation import AbstractBaseInvitation
+from invitations import signals
 from treebeard.exceptions import InvalidPosition
 from treebeard.mp_tree import MP_Node
-
+from types import NoneType
 
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
 
@@ -34,6 +41,27 @@ class City(models.Model):
     )
     zipcode = models.CharField("PLZ", max_length=5)
     url = models.URLField("Homepage", blank=True)
+
+    city_editors = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        verbose_name="Kommunen-Bearbeiter",
+        related_name="edited_cities",
+        help_text="""
+            <p>Diese Benutzer können alle Inhalte der Kommune bearbeiten.</p>
+        """,
+    )
+
+    city_admins = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        verbose_name="Kommunen-Admins",
+        related_name="administered_cities",
+        help_text="""
+            <p>Diese Benutzer können zusätzlich andere Benutzter als Admins und Bearbeiter eintragen.</p>
+            <p>Sie brauchen nicht als "Bearbeiter" eingetragen zu werden.</p>
+        """,
+    )
 
     resolution_date = models.DateField(
         "Datum des Klimaneutralitäts-Beschlusses",
@@ -163,6 +191,11 @@ class City(models.Model):
                     msgs[NON_FIELD_ERRORS] = []
                 msgs[NON_FIELD_ERRORS].extend(slug_errors)
             raise ValidationError(msgs)
+
+    def save(self, *args, **kwargs):
+        "Ensure there are all needed invitation links for the city."
+        super().save(*args, **kwargs)
+        Invitation.ensure_for_city(self)
 
 
 class CapChecklist(models.Model):
@@ -685,6 +718,116 @@ class LocalGroup(models.Model):
     featured_image = models.ImageField(
         "Bild der Lokalgruppe", blank=True, upload_to="uploads/local_groups"
     )
+
+
+class AccessRight(models.TextChoices):
+    CITY_ADMIN = "city admin", "Kommunen-Administrator"
+    CITY_EDITOR = "city editor", "Kommunen-Bearbeiter"
+
+
+class Invitation(AbstractBaseInvitation):
+    """
+    Invitation suitable to be send as link without email, but with rights attached.
+    Invitations will be created automatically, whenever a city is saved. No user will
+    have to add invitations by hand. They can only be deleted to invalidate links.
+    New links will be created upon the next save of the city.
+    """
+
+    class Meta:
+        verbose_name = "Einladungslink"
+        verbose_name_plural = "Einladungslinks"
+
+    city = models.ForeignKey(
+        City,
+        verbose_name="Kommune",
+        on_delete=models.CASCADE,
+        related_name="invitations",
+    )
+    access_right = models.CharField(
+        "Zugriffsrecht",
+        max_length=20,
+        choices=AccessRight.choices,
+        default=AccessRight.CITY_EDITOR,
+    )
+
+    created = models.DateTimeField(
+        verbose_name="Erstellungszeitpunkt", default=timezone.now
+    )
+
+    @property
+    def email(self):
+        "Satisfy expected interface."
+        return f"{self.get_access_right_display()} von {self.city.name}"
+
+    @classmethod
+    def create_for_right(cls, city, access_right):
+        "Create a new invitation for a city with a given right."
+        key = get_random_string(64).lower()
+        return cls._default_manager.create(
+            key=key, inviter=None, city=city, access_right=access_right
+        )
+
+    @classmethod
+    def ensure_for_right(cls, city, access_right):
+        "Ensure there exists an invitation for a city with a given right."
+        if not cls._default_manager.filter(city=city, access_right=access_right):
+            cls.create_for_right(city, access_right)
+
+    @classmethod
+    def ensure_for_city(cls, city):
+        "Ensure there exist the needed invitations for a city."
+        cls.ensure_for_right(city, AccessRight.CITY_EDITOR)
+        cls.ensure_for_right(city, AccessRight.CITY_ADMIN)
+
+    @classmethod
+    def create(cls, email, inviter=None, **kwargs):
+        "Implementation of required method. Not used."
+        key = get_random_string(64).lower()
+        return cls._default_manager.create(
+            email=email, key=key, inviter=inviter, **kwargs
+        )
+
+    def get_invite_url(self, request):
+        """
+        Build correct URL to be sent to invited users.
+        Extracted from django-invitations, which generates it for the email and forgets it.
+        """
+        if not self.key:
+            return None
+        url = reverse(invitations_app_settings.CONFIRMATION_URL_NAME, args=[self.key])
+        return request.build_absolute_uri(url)
+
+    def key_expired(self):
+        "Implementation of required method. Never expired."
+        return False
+
+    def send_invitation(self, request, **kwargs):
+        "Implementation of required method. Pretending to send an email."
+        self.sent = timezone.now()
+        self.save()
+
+        signals.invite_url_sent.send(
+            sender=self.__class__,
+            instance=self,
+            invite_url_sent=self.get_invite_url(request),
+            inviter=self.inviter,
+        )
+
+    def __str__(self):
+        return f"Einladung für {self.get_access_right_display()} von {self.city.name}"
+
+
+def get_invitation(request: HttpRequest) -> Invitation | NoneType:
+    "Retrieve an invitation based on the key in the current session."
+    if not hasattr(request, "session"):
+        return None
+    key = request.session.get("invitation_key")
+    if not key:
+        return None
+    invitation_qs = Invitation.objects.filter(key=key.lower())
+    if not invitation_qs:
+        return None
+    return invitation_qs.first()
 
 
 # Tables for comparing and connecting the plans of all cities

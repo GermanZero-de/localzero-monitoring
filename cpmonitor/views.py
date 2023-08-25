@@ -7,6 +7,7 @@ import uuid
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import Http404
@@ -14,6 +15,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import redirect
+from invitations import views as invitations_views
+from invitations.app_settings import app_settings as invitations_settings
+from invitations.adapters import get_invitations_adapter
+from invitations.signals import invite_accepted
+from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
 
 from .models import (
@@ -449,3 +456,61 @@ def markdown_uploader_view(request):
 
     data = json.dumps({"status": 200, "link": img_url, "name": image.name})
     return HttpResponse(data, content_type="application/json")
+
+
+class AcceptInvite(invitations_views.AcceptInvite):
+    "Overwrite handling of invitation link."
+
+    def post(self, *args, **kwargs):
+        """
+        Unfortunately, the whole method had to be copied.
+        Identical to base implementation, except where noted.
+        """
+        self.object = invitation = self.get_object()
+
+        if invitations_settings.GONE_ON_ACCEPT_ERROR and (
+            not invitation
+            or (invitation and (invitation.accepted or invitation.key_expired()))
+        ):
+            return HttpResponse(status=410)
+
+        if not invitation:
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_invalid.txt",
+            )
+            return redirect(invitations_settings.LOGIN_REDIRECT)
+
+        if invitation.accepted:
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_already_accepted.txt",
+                {"email": invitation.email},
+            )
+            return redirect(invitations_settings.LOGIN_REDIRECT)
+
+        if invitation.key_expired():
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_expired.txt",
+                {"email": invitation.email},
+            )
+            return redirect(self.get_signup_redirect())
+
+        if not invitations_settings.ACCEPT_INVITE_AFTER_SIGNUP:
+            accept_invitation(
+                invitation=invitation,
+                request=self.request,
+                signal_sender=self.__class__,
+            )
+            # Difference: Revert accepted to allow reuse of link.
+            invitation.accepted = False
+            invitation.save()
+
+        # Difference: Saving key and not email.
+        self.request.session["invitation_key"] = invitation.key
+
+        return redirect(self.get_signup_redirect())
