@@ -1,3 +1,6 @@
+document.getElementById("nav-burger").addEventListener("click", toggleMobile);
+document.getElementById("menu-item-toggleable").addEventListener("click", toggleSubmenu);
+
 function toggleMobile() {
     document.getElementById('site-menu').classList.toggle('shownow');
 }
