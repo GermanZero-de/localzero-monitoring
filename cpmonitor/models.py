@@ -174,7 +174,7 @@ class CapChecklist(models.Model):
     )
 
     cap_exists = models.BooleanField("Gibt es einen KAP?", default=False)
-    cap_rationale = models.TextField(
+    cap_exists_rationale = models.TextField(
         "Begründung zu: Gibt es einen KAP?",
         blank=True,
     )
@@ -183,7 +183,7 @@ class CapChecklist(models.Model):
         " kommunalen Gremium beschlossen?",
         default=False,
     )
-    target_date_rationale = models.TextField(
+    target_date_exists_rationale = models.TextField(
         "Begründung zu: Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten"
         " kommunalen Gremium beschlossen?",
         blank=True,
@@ -208,7 +208,7 @@ class CapChecklist(models.Model):
         "Enthält der KAP ein Szenario mit dem Ziel Klimaneutralität bis 2035?",
         default=False,
     )
-    scenario_for_climate_neutrality_till_2035_rationale = models.TextField(
+    scenario_for_climate_neutrality_till_2035_exists_rationale = models.TextField(
         "Begründung zu: Enthält der KAP ein Szenario mit dem Ziel Klimaneutralität bis 2035?",
         blank=True,
     )
@@ -217,7 +217,7 @@ class CapChecklist(models.Model):
         " weiterläuft wie bisher)?",
         default=False,
     )
-    scenario_for_business_as_usual_rationale = models.TextField(
+    scenario_for_business_as_usual_exists_rationale = models.TextField(
         "Begründung zu: Ist ein Trendszenario hinterlegt (wie entwickeln sich die THG-Emissionen, wenn alles so"
         " weiterläuft wie bisher)?",
         blank=True,
@@ -269,14 +269,14 @@ class CapChecklist(models.Model):
         "Gibt es eine gute Nachhaltigkeitsarchitektur in der Verwaltung?",
         default=False,
     )
-    sustainability_architecture_in_administration_rationale = models.TextField(
+    sustainability_architecture_in_administration_exists_rationale = models.TextField(
         "Begründung zu: Gibt es eine gute Nachhaltigkeitsarchitektur in der Verwaltung?",
         blank=True,
     )
     climate_council_exists = models.BooleanField(
         "Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat?", default=False
     )
-    climate_council_rationale = models.TextField(
+    climate_council_exists_rationale = models.TextField(
         "Begründung zu: Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat?",
         blank=True,
     )
@@ -295,7 +295,7 @@ class AdministrationChecklist(models.Model):
         " Haushaltsmittel hinterlegt?",
         default=False,
     )
-    climate_protection_management_rationale = models.TextField(
+    climate_protection_management_exists_rationale = models.TextField(
         "Begründung zu: Gibt es ein Klimaschutzmanagement? Ist dieses befugt, Entscheidungen zu treffen? Sind"
         " Haushaltsmittel hinterlegt?",
         blank=True,
@@ -305,7 +305,7 @@ class AdministrationChecklist(models.Model):
         " Haushaltsentscheidungen zu treffen?",
         default=False,
     )
-    climate_technical_committee_rationale = models.TextField(
+    climate_technical_committee_exists_rationale = models.TextField(
         "Begründung zu: Gibt es einen Fachausschuss mit dem Fokus auf Klimaschutz? Ist dieser befugt,"
         " Haushaltsentscheidungen zu treffen?",
         blank=True,
@@ -315,7 +315,7 @@ class AdministrationChecklist(models.Model):
         " Auswirkungen auf das Klima geprüft?",
         default=False,
     )
-    climate_relevance_check_rationale = models.TextField(
+    climate_relevance_check_exists_rationale = models.TextField(
         "Begründung zu: Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
         " Auswirkungen auf das Klima geprüft?",
         blank=True,
@@ -324,7 +324,7 @@ class AdministrationChecklist(models.Model):
         "Ist Klimaschutz als Querschnittsaufgabe über alle Fachbereiche etabliert?",
         default=False,
     )
-    interdisciplinary_climate_protection_rationale = models.TextField(
+    interdisciplinary_climate_protection_exists_rationale = models.TextField(
         "Begründung zu: Ist Klimaschutz als Querschnittsaufgabe über alle Fachbereiche etabliert?",
         blank=True,
     )
@@ -332,7 +332,7 @@ class AdministrationChecklist(models.Model):
         "Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
         default=False,
     )
-    climate_protection_monitoring_rationale = models.TextField(
+    climate_protection_monitoring_exists_rationale = models.TextField(
         "Begründung zu: Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
         blank=True,
     )
@@ -341,7 +341,7 @@ class AdministrationChecklist(models.Model):
         " Sektorenübergreifende Konzepte)?",
         default=False,
     )
-    intersectoral_concepts_rationale = models.TextField(
+    intersectoral_concepts_exists_rationale = models.TextField(
         "Begründung zu: Gibt es (sektorenübergreifende) Konzepte (siehe Planung und Konzepte bzw."
         " Sektorenübergreifende Konzepte)?",
         blank=True,
@@ -357,7 +357,7 @@ class AdministrationChecklist(models.Model):
     guidelines_for_sustainable_procurement_exists = models.BooleanField(
         "Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?", default=False
     )
-    guidelines_for_sustainable_procurement_rationale = models.TextField(
+    guidelines_for_sustainable_procurement_exists_rationale = models.TextField(
         "Begründung zu: Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?",
         blank=True,
     )
@@ -366,7 +366,7 @@ class AdministrationChecklist(models.Model):
         " etc. für den Klimaschutz)?",
         default=False,
     )
-    municipal_office_for_funding_management_rationale = models.TextField(
+    municipal_office_for_funding_management_exists_rationale = models.TextField(
         "Begründung zu: Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem "
         " Beantragung etc. für den Klimaschutz)?",
         blank=True,
@@ -375,7 +375,7 @@ class AdministrationChecklist(models.Model):
         "Vernetzung in der Öffentlichkeitsarbeit mit lokalen Akteuren (Handwerk, Sparkasse...)?",
         default=False,
     )
-    public_relation_with_local_actors_rationale = models.TextField(
+    public_relation_with_local_actors_exists_rationale = models.TextField(
         "Begründung zu: Vernetzung in der Öffentlichkeitsarbeit mit lokalen Akteuren (Handwerk, Sparkasse...)?",
         blank=True,
     )

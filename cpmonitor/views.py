@@ -124,10 +124,10 @@ def city_view(request, city_slug):
     _calculate_summary(request, city)
 
     cap_checklist = _get_cap_checklist(city)
-    cap_checklist_exists = cap_checklist != []
+    cap_checklist_exists = cap_checklist != {}
 
     administration_checklist = _get_administration_checklist(city)
-    administration_checklist_exists = administration_checklist != []
+    administration_checklist_exists = administration_checklist != {}
 
     breadcrumbs = _get_breadcrumbs(
         {"label": city.name, "url": reverse("city", args=[city_slug])},
@@ -224,27 +224,29 @@ def cap_checklist_view(request, city_slug):
     return render(request, "cap_checklist.html", context)
 
 
-def _get_cap_checklist(city) -> list[tuple[tuple[str, bool], tuple[str, str]]]:
+def _get_cap_checklist(city) -> dict:
     try:
-        checklist_fields = city.cap_checklist._meta.get_fields()
+        checklist = city.cap_checklist
     except CapChecklist.DoesNotExist:
-        return []
+        return {}
 
-    checklist_items = [
-        (field.verbose_name, getattr(city.cap_checklist, field.attname))
-        for field in checklist_fields
+    return _as_formatted_checklist(checklist)
+
+
+def _as_formatted_checklist(checklist):
+    checkbox_items = [
+        field
+        for field in checklist._meta.get_fields()
         if field.attname not in ["city_id", "id"] and "_rationale" not in field.attname
     ]
 
-    rationale_items = [
-        (field.verbose_name, getattr(city.cap_checklist, field.attname))
-        for field in checklist_fields
-        if "_rationale" in field.attname
-    ]
-
-    return [
-        (checklist_items[i], rationale_items[i]) for i in range(0, len(checklist_items))
-    ]
+    return {
+        checkbox_item.verbose_name: {
+            "is_checked": getattr(checklist, checkbox_item.attname),
+            "rationale": getattr(checklist, checkbox_item.attname + "_rationale"),
+        }
+        for checkbox_item in checkbox_items
+    }
 
 
 def administration_checklist_view(request, city_slug):
@@ -272,39 +274,22 @@ def administration_checklist_view(request, city_slug):
     return render(request, "administration_checklist.html", context)
 
 
-def _get_administration_checklist(
-    city,
-) -> list[tuple[tuple[str, bool], tuple[str, str]]]:
+def _get_administration_checklist(city) -> dict:
     try:
-        checklist_fields = city.administration_checklist._meta.get_fields()
+        checklist = city.administration_checklist
     except AdministrationChecklist.DoesNotExist:
-        return []
+        return {}
 
-    checklist_items = [
-        (field.verbose_name, getattr(city.administration_checklist, field.attname))
-        for field in checklist_fields
-        if field.attname not in ["city_id", "id"] and "_rationale" not in field.attname
-    ]
-
-    rationale_items = [
-        (field.verbose_name, getattr(city.administration_checklist, field.attname))
-        for field in checklist_fields
-        if "_rationale" in field.attname
-    ]
-
-    return [
-        (checklist_items[i], rationale_items[i]) for i in range(0, len(checklist_items))
-    ]
+    return _as_formatted_checklist(checklist)
 
 
-def _count_checklist_number_fulfilled(
-    checklist_items: list[tuple[tuple[str, bool], tuple[str, str]]]
-):
+def _count_checklist_number_fulfilled(checklist_items: dict):
     count = 0
 
-    for (_, checklist_value), (_, _) in checklist_items:
-        if checklist_value:
-            count += 1
+    for _, values in checklist_items.items():
+        for _, is_checked in values.items():
+            if is_checked is True:
+                count += 1
 
     return count
 

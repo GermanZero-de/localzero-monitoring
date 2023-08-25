@@ -15,32 +15,47 @@
       {% endif %}
       <div class="card col-sm-12 col-lg-6">
         <div class="card-body">
-          <table class="table table-sm table-borderless">
-            <tbody>
-              {% for checklist_items, rationale_items in cap_checklist %}
-                <tr>
-                  <td>{{ checklist_items.0 }}</td>
-                  <td>
-                    {% if checklist_items.1 %}
-                      <svg width="20" height="20" class="lz-icon CHECKED">
-                        <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check"/>
-                      </svg>
-                    {% else %}
-                      <svg width="20" height="20" class="lz-icon EMPTY">
-                        <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle"/>
-                      </svg>
-                    {% endif %}
-                  </td>
-                </tr>
-                {% if rationale_items.1.strip %}
-                  <tr>
-                    <td>Kommentar / Begründung: {{ rationale_items.1 | safe_markdown }}</td>
-                    <td></td>
-                  </tr>
-                {% endif %}
-              {% endfor %}
-            </tbody>
-          </table>
+          <div class="accordion" id="accordionCapChecklist">
+            {% for question, values in cap_checklist.items %}
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                  <button class="accordion-button"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse{{ forloop.counter }}"
+                          aria-expanded="false"
+                          aria-controls="collapse{{ forloop.counter }}">
+                    <table class="table table-sm table-borderless">
+                      <tbody>
+                        <tr>
+                          <td>
+                            {% if values.is_checked %}
+                              <svg width="20" height="20" class="lz-icon CHECKED">
+                                <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check"/>
+                              </svg>
+                            {% else %}
+                              <svg width="20" height="20" class="lz-icon EMPTY">
+                                <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle"/>
+                              </svg>
+                            {% endif %}
+                          </td>
+                          <td>{{ question }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </button>
+                </h2>
+                <div id="collapse{{ forloop.counter }}"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="heading{{ forloop.counter }}"
+                     data-bs-parent="#accordionCapChecklist">
+                  <div class="accordion-body">
+                    {% if values.rationale.strip %}Kommentar / Begründung: {{ values.rationale | safe_markdown }}{% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
