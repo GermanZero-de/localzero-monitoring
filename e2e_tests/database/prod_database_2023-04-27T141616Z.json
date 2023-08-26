@@ -137,7 +137,7 @@
     "user": 1,
     "content_type": 8,
     "object_id": "6",
-    "object_repr": "Neues Handlungsfeld",
+    "object_repr": "Neuer Sektor",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
@@ -527,7 +527,7 @@
     "user": 1,
     "content_type": 8,
     "object_id": "6",
-    "object_repr": "Neues Handlungsfeld",
+    "object_repr": "Neuer Sektor",
     "action_flag": 3,
     "change_message": ""
   }
@@ -2297,7 +2297,7 @@
     "name": "Beispielstadt",
     "zipcode": "12345",
     "url": "",
-    "introduction": "# Ein Beispiel für eine Kleinstadt\r\n\r\nHier gibt es nicht besonders gut durchdachte Maßnahmen, weil keine Zeit war, sie sich auszudenken.\r\n\r\nDie Hierarchie ist: Handlungsfeld -> Maßnahme. Für eine Kleinstadt sollte das ausreichen.\r\n\r\n## Beispiel für einen Abschnitt\r\n\r\n...mit einer Auflistung:\r\n\r\n- Ein Punkt\r\n- Noch ein Punkt\r\n- Ein Dritter\r\n- \r\n![wurmsham_01_800pxbreite.jpg](/images/uploads/2023/04/07/ffbefe7647-wurmsham_01_800pxbreite.jpg)",
+    "introduction": "# Ein Beispiel für eine Kleinstadt\r\n\r\nHier gibt es nicht besonders gut durchdachte Maßnahmen, weil keine Zeit war, sie sich auszudenken.\r\n\r\nDie Hierarchie ist: Sektor -> Maßnahme. Für eine Kleinstadt sollte das ausreichen.\r\n\r\n## Beispiel für einen Abschnitt\r\n\r\n...mit einer Auflistung:\r\n\r\n- Ein Punkt\r\n- Noch ein Punkt\r\n- Ein Dritter\r\n- \r\n![wurmsham_01_800pxbreite.jpg](/images/uploads/2023/04/07/ffbefe7647-wurmsham_01_800pxbreite.jpg)",
     "co2e_budget": 0,
     "assessment_administration": "",
     "assessment_action_plan": "",
