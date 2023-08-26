@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             name="assessment_action_plan",
             field=models.TextField(
                 blank=True,
-                help_text="\n            <p>Eine einleitende Übersicht in die Bewertung des Klimaaktionsplans der Kommune.</p>\n            <p>Hier könnt Ihr zusammenfassen, was ihr als Ganzes von dem Plan haltet.</p>\n            <p>Auf Handlungsfelderebene und bis zu den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>",
+                help_text="\n            <p>Eine einleitende Übersicht in die Bewertung des Klimaaktionsplans der Kommune.</p>\n            <p>Hier könnt Ihr zusammenfassen, was ihr als Ganzes von dem Plan haltet.</p>\n            <p>Auf Ebene der Handlungsfelder und bei den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>",
                 verbose_name="Bewertung Klimaaktionsplan",
             ),
         ),
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             name="assessment_status",
             field=models.TextField(
                 blank=True,
-                help_text="\n            <p>Eine einleitende Übersicht in die Bewertung des Umsetzungsstandes.</p>\n            <p>Hält die Kommune sich im Wesentlichen an ihren eigenen Plan?</p>\n            <p>Auf Handlungsfelderebene und bis zu den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>",
+                help_text="\n            <p>Eine einleitende Übersicht in die Bewertung des Umsetzungsstandes.</p>\n            <p>Hält die Kommune sich im Wesentlichen an ihren eigenen Plan?</p>\n            <p>Auf Ebene der Handlungsfelder und bei den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>",
                 verbose_name="Bewertung Umsetzungsstand",
             ),
         ),

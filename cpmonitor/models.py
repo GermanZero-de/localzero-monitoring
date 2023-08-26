@@ -117,7 +117,7 @@ class City(models.Model):
         help_text="""
             <p>Eine einleitende Übersicht in die Bewertung des Klimaaktionsplans der Kommune.</p>
             <p>Hier könnt Ihr zusammenfassen, was ihr als Ganzes von dem Plan haltet.</p>
-            <p>Auf Handlungsfelderebene und bis zu den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
+            <p>Auf Ebene der Handlungsfelder und bei den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
     )
 
     assessment_status = models.TextField(
@@ -126,7 +126,7 @@ class City(models.Model):
         help_text="""
             <p>Eine einleitende Übersicht in die Bewertung des Umsetzungsstandes.</p>
             <p>Hält die Kommune sich im Wesentlichen an ihren eigenen Plan?</p>
-            <p>Auf Handlungsfelderebene und bis zu den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
+            <p>Auf Ebene der Handlungsfelder und bei den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
     )
 
     last_update = models.DateField("Letzte Aktualisierung", auto_now=True)
