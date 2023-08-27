@@ -178,7 +178,10 @@ def city_view(request, city_slug):
 
     if cap_checklist_exists:
         cap_checklist_total = len(cap_checklist)
-        cap_checklist_number_fulfilled = list(cap_checklist.values()).count(True)
+        cap_checklist_fulfilled_list = list(
+            map(lambda x: x["check"], cap_checklist.values())
+        )
+        cap_checklist_number_fulfilled = cap_checklist_fulfilled_list.count(True)
         cap_checklist_proportion_fulfilled = round(
             cap_checklist_number_fulfilled / cap_checklist_total * 100
         )
@@ -193,9 +196,12 @@ def city_view(request, city_slug):
 
     if administration_checklist_exists:
         administration_checklist_total = len(administration_checklist)
-        administration_checklist_number_fulfilled = list(
-            administration_checklist.values()
-        ).count(True)
+        administration_checklist_fulfilled_list = list(
+            map(lambda x: x["check"], administration_checklist.values())
+        )
+        administration_checklist_number_fulfilled = (
+            administration_checklist_fulfilled_list.count(True)
+        )
         administration_checklist_proportion_fulfilled = round(
             administration_checklist_number_fulfilled
             / administration_checklist_total
@@ -260,7 +266,10 @@ def _get_cap_checklist(city) -> dict:
     ]
 
     return {
-        item.verbose_name: getattr(city.cap_checklist, item.attname)
+        item.verbose_name: {
+            "check": getattr(city.cap_checklist, item.attname),
+            "help_text": item.help_text,
+        }  # I think this could be improved regarding legibility if we returned a list containing dictionaries instead of one dictionary, would make the template easier to understand
         for item in checklist_items
     }
 
@@ -301,7 +310,10 @@ def _get_administration_checklist(city) -> dict:
     ]
 
     return {
-        item.verbose_name: getattr(city.administration_checklist, item.attname)
+        item.verbose_name: {
+            "check": getattr(city.administration_checklist, item.attname),
+            "help_text": item.help_text,
+        }  # I think this could be improved regarding legibility if we returned a list containing dictionaries instead of one dictionary, would make the template easier to understand
         for item in checklist_items
     }
 
