@@ -206,56 +206,98 @@ class CapChecklist(models.Model):
         City, on_delete=models.PROTECT, related_name="cap_checklist"
     )
 
-    cap_exists = models.BooleanField("Gibt es einen KAP?", default=False)
-    target_date_exists = models.BooleanField(
-        "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt und wurde das vom höchsten"
-        " kommunalen Gremium beschlossen?",
+    cap_exists = models.BooleanField(
+        "Gibt es einen Klima-Aktionsplan?",
         default=False,
+        help_text="Ein Klima-Aktionsplan (auch KAP/Klimaschutzkonzept/integriertes Klimaschutzkonzept)"
+        " ist ein von einer Kommune beschlossener Plan/Konzept, in dem beispielhaft oder auch in mehreren Szenarien festgelegt ist,"
+        " wie die Kommune bis 2035 / 20XX klimaneutral wird. Dieses Ziel der Klimaneutralität wird auf Maßnahmen zur Erreichung heruntergebrochen."
+        " Dabei ist nicht nur Emissionsreduktion sondern die Erreichung der Klimaneutralität in allen Bereichen der Kommune von Bedeutung.",
+    )
+    target_date_exists = models.BooleanField(
+        "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten"
+        " kommunalen Gremium beschlossen wurde?",
+        default=False,
+        help_text="Dies sorgt dafür, dass nicht nur Emissionen gemindert werden,"
+        " sondern, ein klares Ziel bis z.B. 2035 gesetzt wird bis wann die Kommune"
+        " möglichst ohne Kompensation klimaneutral (keine Emissionen vom Gebiet der Gemeinde) werden soll.\n"
+        "Mit höchstes Gremium ist hier gemeint z.B. der Stadtrat oder Gemeinderat.",
     )
     based_on_remaining_co2_budget = models.BooleanField(
-        "Sind die Einsparziele im KAP auf Grundlage des Restbudgets berechnet?",
+        "Sind die Einsparziele im Klima-Aktionsplan auf Grundlage des Restbudgets berechnet?",
         default=False,
+        help_text="Das Restbudget beschreibt das globale Kontingent an Treibhausgasen (THG),"
+        " das für die Einhaltung des Pariser Klimaabkommens zukünftig noch emittiert werden kann."
+        " Dieses THG-Kontingent kann auf einzelne Nationen und wiederum auf Kommunen heruntergebrochen werden."
+        " Die Kommune kann dies als Richtwert nutzen, den es nicht zu überschreiten gilt.",
     )
     sectors_of_climate_vision_used = models.BooleanField(
-        "Bilanziert der KAP in den Sektoren der Klimavision (inkl. LULUCF und Landwirtschaft)",
+        "Bilanziert der Klima-Aktionsplan in den Sektoren der Klimavision?",
         default=False,
+        help_text="Die Klimavision beinhaltet die Sektoren Strom, Wärme, Verkehr, Industrie, Gebäude,"
+        " Abfall, Landwirtschaft, LULUCF (Landnutzung, Landnutzungsänderungen und Forstwirtschaft)."
+        " Die letzten 3 sind besonders selten in KAPs enthalten, nichtsdestotrotz wichtig für die Bilanz der Kommune.",
     )
     scenario_for_climate_neutrality_till_2035_exists = models.BooleanField(
-        "Enthält der KAP ein Szenario mit dem Ziel Klimaneutralität bis 2035?",
+        "Enthält der Klima-Aktionsplan ein Szenario mit dem Ziel Klimaneutralität bis 2035?",
         default=False,
+        help_text="Das Szenario soll zeigen wie die Kommune unter realistischen Bedinungen"
+        " (politischer Entwicklung, Dauer der Maßnahmen etc.) ihre Emissionen auf Netto-Null"
+        " reduzieren kann, oder wie weit eine Reduktion realistisch aber ambitioniert möglich ist.",
     )
     scenario_for_business_as_usual_exists = models.BooleanField(
-        "Ist ein Trendszenario hinterlegt (wie entwickeln sich die THG-Emissionen, wenn alles so"
-        " weiterläuft wie bisher)?",
+        "Ist ein Trendszenario hinterlegt?",
         default=False,
+        help_text="Ein Trendszenario ist ein Szenario, welches die Treibhausgas-Emissionen der Kommune"
+        " in den Folgejahren darstellt. Dieses soll die Notwendigkeit des Handelns deutlich machen"
+        " und Erfolge bei der Umsetzung und damit einhergehenden Reduktion von Emissionen sichtbar machen.",
     )
     annual_costs_are_specified = models.BooleanField(
         "Sind die jährlichen Kosten und der jährliche Personalbedarf der Maßnahmen ausgewiesen?",
         default=False,
+        help_text="Die jährlichen Kosten für Maßnahmen, sowie Kosten für den Personalbedarf für die Umsetzung"
+        " dieser sollen den Aufwand einschätzbar machen und Sicherheit für die Planung der Umsetzung liefern.",
     )
     tasks_are_planned_yearly = models.BooleanField(
-        "Haben die Maßnahmen eine jahresscharfe Planung?", default=False
+        "Haben die Maßnahmen eine jahresscharfe Planung?",
+        default=False,
+        help_text="Eine genaue Planung der Fertigstellung der Maßnahmen ist die Grundvoraussetzung,"
+        " um den Erfolg / Fortschritt der Umsetzung des Klima-Aktionsplans zu messen.",
     )
     tasks_have_responsible_entity = models.BooleanField(
         "Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen"
         " hinterlegt?",
         default=False,
+        help_text="Ohne klar verteilte Verantwortlichkeiten können Maßnahmen nicht umgesetzt werden."
+        " Die Verantwortlichen können sowohl in der Kommunalverwaltung (z.B. Abteilungen)"
+        " oder außerhalb (z.B. Stadtwerke) sein.",
     )
     annual_reduction_of_emissions_can_be_predicted = models.BooleanField(
         "Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der"
         " THG-Emissionen ersichtlich?",
         default=False,
+        help_text="Aus dem genauen Zeitplan der Maßnahmenplanung kann ab jetzt bis zum Jahr"
+        " der Klimaneutralität (2030/35) die THG-Emissionen und der Endenergiebedarf jährlich"
+        " prognostiziert werden in allen Sektoren. Wird z.B. ein Braunkohlewerk im Jahr X geschlossen,"
+        " sinken die Emissionen um Y. Dadurch wird der Weg zur Treibhausgasneutralität klar erkennbar und"
+        " zu kompensierende Emissionen sichtbar.",
     )
     concept_for_participation_specified = models.BooleanField(
         "Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
         default=False,
+        help_text="Alle Akteur:innen in einer Kommune sollten bei der Erstellung / Umsetzung eines KAPs beteiligt werden."
+        " Unterschiedliche Akteur:innen der Kommune sind: Bürger:innen (z.B. LocalZero-Teams), Verwaltung der Kommune,"
+        " höchste politische Gremien der Kommune, Stakeholder:innen in der Kommune (z.B. kommunale Unternehmen oder Vereine)",
     )
-    sustainability_architecture_in_administration_exists = models.BooleanField(
-        "Gibt es eine gute Nachhaltigkeitsarchitektur in der Verwaltung?",
+    sustainability_architecture_in_administration_exists = (
+        models.BooleanField(  # TODO Delete or add explanation?
+            "Gibt es eine gute Nachhaltigkeitsarchitektur in der Verwaltung?",
+            default=False,
+        )
+    )
+    climate_council_exists = models.BooleanField(  # TODO Delete or add explanation?
+        "Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat?",
         default=False,
-    )
-    climate_council_exists = models.BooleanField(
-        "Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat?", default=False
     )
 
 
@@ -268,48 +310,61 @@ class AdministrationChecklist(models.Model):
     )
 
     climate_protection_management_exists = models.BooleanField(
-        "Gibt es ein Klimaschutzmanagement? Ist dieses befugt, Entscheidungen zu treffen? Sind"
-        " Haushaltsmittel hinterlegt?",
+        "Gibt es ein Klimaschutzmanagement, das befugt ist, Entscheidungen zu treffen und über Haushaltsmittel verfügt?",
         default=False,
-    )
-    climate_technical_committee_exists = models.BooleanField(
-        "Gibt es einen Fachausschuss mit dem Fokus auf Klimaschutz? Ist dieser befugt,"
-        " Haushaltsentscheidungen zu treffen?",
-        default=False,
+        help_text="Klimaschutzmanager:innen können von der Nationalen Initiative für Klimaschutz (NKI) gefördert werden."
+        " Allerdings ist wichtig, dass das Klimaschutzmanagement an einer Stelle in der Verwaltung angesiedelt ist"
+        " wo es Entscheidungen treffen und möglichst frei agieren kann sowie über finanzielle Mittel verfügt.",
     )
     climate_relevance_check_exists = models.BooleanField(
         "Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
         " Auswirkungen auf das Klima geprüft?",
         default=False,
-    )
-    interdisciplinary_climate_protection_exists = models.BooleanField(
-        "Ist Klimaschutz als Querschnittsaufgabe über alle Fachbereiche etabliert?",
-        default=False,
+        help_text="Aufgrund der enormen Dringlichkeit von Klimaschutzmaßnahmen zur Bekämpfung der Klimakrise,"
+        " ist es wesentlich alle kommunalen Beschlüsse hinsichtlich ihrer Verträglichkeit mit Klimaschutz zu bewerten."
+        " Dies erfolgt durch eine Integration eines „Klima-Checks“ / Klimarelevanzprüfung / Klimaschutzrelevanzprüfung"
+        " in jegliche Beschlussvorlage: Beschlüsse werden somit bereits während der Erstellung durch die Fachbereiche auf"
+        " ihre Klimarelevanz hin (vor-)bewertet und Aspekte des Klimaschutzes sind automatisch integraler"
+        " Bestandteil jeder Beschlussfassung. Klimafolgen werden somit transparent. Langfristig baut die Kommune Kompetenzen"
+        " auf, um die Auswirkung auf das Klima bei allen relevanten Entscheidungen zu berücksichtigen.",
     )
     climate_protection_monitoring_exists = models.BooleanField(
         "Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
         default=False,
+        help_text="Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen."
+        " Dieser kann in eingespaarten Emissionen sichtbar gemacht werden und ist wichtig um das Ziel der Klimaneutralität"
+        " und notwendige Schritte im Auge zu behalten.",
     )
     intersectoral_concepts_exists = models.BooleanField(
-        "Gibt es (sektorenübergreifende) Konzepte (siehe Planung und Konzepte bzw."
-        " Sektorenübergreifende Konzepte)?",
+        "Beziehen (sektorenübergreifende) Konzepte und Planungspapiere die Klimaschutz mit ein?",
         default=False,
-    )
-    climate_protection_reports_are_continuously_published = models.BooleanField(
-        "Werden regelmäßige Klimaschutz- und Energieberichte veröffentlicht?",
-        default=False,
+        help_text="Sektorenübergreifende Konzepte umfassen unter anderem Klimaanpassungs- Quatierskonzepte, die Klimaschutzaspekte"
+        " über mehrere Sektoren hinweg in der Kommune verankern sollen. Es werden also Energieerzeugung, Mobilität, Wärmeversorung etc. mitbedacht.\n"
+        "Planungspapiere sind unter anderem Bauleitplanungen, Flächennutzungspläne, Wärmeleitplanung etc. Auch hier soll sichergestellt werden,"
+        " dass Klimaschutz in Bauvorhaben zukünftig umgesetzt wird z.B. in der Form von ausgeschriebenen Windeigungsflächen, Festlegung von"
+        " klimaneutraler Fernwärmenutzung etc.",
     )
     guidelines_for_sustainable_procurement_exists = models.BooleanField(
-        "Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?", default=False
+        "Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?",
+        default=False,
+        help_text="Die Kommunalverwaltung kann aufgrund ihres großen Beschaffungsvolumens mit ihrer Nachfrage energieeffiziente Produkte fördern"
+        " und damit einen wichtigen Beitrag zum Klimaschutz leisten. Wichtig ist, möglichst nur Produkte und Dienstleistungen zu erwerben,"
+        " die wirklich benötigt werden und im Sinne der Nachhaltigkeit neben einer hohen Umweltverträglichkeit auch sozialen wie ökonomischen"
+        " Aspekten entsprechen. Umweltfreundliche Beschaffung sollte in grundlegenden Dokumenten der Behörde wie dem eigenen Leitbild,"
+        " verpflichtenden Dienstanweisungen oder einem Beschaffungsleitfaden als Organisationsziel definiert werden.",
     )
     municipal_office_for_funding_management_exists = models.BooleanField(
         "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung"
         " etc. für den Klimaschutz)?",
         default=False,
+        help_text="Beantragung für Fördermittel ist oft sehr zeitintensiv, und somit werden für Klimaschutz notwendige personelle Kapazitäten oft"
+        " hierauf verwendet. Eigene Stellen sollen Entlastung schaffen und dafür sorgen, dass effizient an Klimaschutz gearbeitet werden kann.",
     )
     public_relation_with_local_actors_exists = models.BooleanField(
-        "Vernetzung in der Öffentlichkeitsarbeit mit lokalen Akteuren (Handwerk, Sparkasse...)?",
+        "Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat? Ist so ein Gremium in der Kommune eingerichtet und tagt regelmäßig?",
         default=False,
+        help_text="Mit Klimabeirat/Klimarat/Bürger:innenrat sind Gremien gemeint, die aus Betroffenen / Bürgerperspektive die Lokalpolitik beraten."
+        " Um politischen Einfluss auszuüben sollten diese regelmäßig tagen.",
     )
 
 

@@ -11,26 +11,45 @@
 {% block cards %}
   <div class="card col-sm-12 col-lg-6">
     <div class="card-body">
-      <table class="table table-sm table-borderless">
-        <tbody>
-          {% for key, value in administration_checklist.items %}
-            <tr>
-              <td>{{ key }}</td>
-              <td>
-                {% if value %}
-                  <svg width="20" height="20" class="lz-icon CHECKED">
-                    <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check"/>
-                  </svg>
-                {% else %}
-                  <svg width="20" height="20" class="lz-icon EMPTY">
-                    <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle"/>
-                  </svg>
-                {% endif %}
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="accordion accordion-flush" id="accordionFlushKAP">
+        {% for key, value in administration_checklist.items %}
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapse{{ forloop.counter0 }}"
+                      aria-expanded="false"
+                      aria-controls="flush-collapse{{ forloop.counter0 }}">
+                <table class="table table-sm table-borderless table-no-bottom-padding">
+                  <tbody>
+                    <tr>
+                      <td width="20">
+                        {% if value.check %}
+                          <svg width="20" height="20" class="lz-icon CHECKED">
+                            <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check" />
+                          </svg>
+                        {% else %}
+                          <svg width="20" height="20" class="lz-icon EMPTY">
+                            <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle" />
+                          </svg>
+                        {% endif %}
+                      </td>
+                      <td>{{ key }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </button>
+            </h2>
+            <div id="flush-collapse{{ forloop.counter0 }}"
+                 class="accordion-collapse collapse"
+                 aria-labelledby="flush-heading{{ forloop.counter0 }}"
+                 data-bs-parent="#accordionFlushKAP">
+              <div class="accordion-body">{{ value.help_text }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endblock cards %}
