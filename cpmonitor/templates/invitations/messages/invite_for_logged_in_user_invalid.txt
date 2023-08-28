@@ -1,0 +1,3 @@
+{% autoescape off %}
+Nutzer {{username}} ist eingeloggt aber inaktiv. Bitte einen neuen Nutzer anlegen.
+{% endautoescape %}
