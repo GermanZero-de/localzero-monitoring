@@ -10,6 +10,7 @@ from pytest_django.asserts import (
     assertTemplateNotUsed,
     assertContains,
     assertNotContains,
+    assertRedirects,
 )
 
 
@@ -708,7 +709,7 @@ city_admin_key = "ercizfqjtsqbv5xap4uvlkpswjivqnjiephfxdbhjett8jah0z0ynnfpqrqxjc
 city_editor_key = "lypvs6fb6qxk8ylskkckwp3g3djilpsiiunm1fuz68rdwg1emuwhnsuxexpbgjel"
 
 
-def test_city_editor_should_be_able_to_see_invitation_links(
+def test_city_editor_should_not_be_able_to_see_invitation_links(
     city_editor_client: Client,
 ):
     response = city_editor_client.get("/admin/cpmonitor/city/1/change/")
@@ -860,3 +861,28 @@ def test_can_register_with_city_admin_registration_link(
     assert not "city_admins" in adminform.readonly_fields
     assertContains(response, city_admin_key)
     assertContains(response, city_editor_key)
+
+
+def test_city_editor_should_be_able_to_accept_invitation_link_for_city_admin(
+    city_editor_client: Client,
+):
+    response = city_editor_client.get(
+        f"/invitations/accept-invite/{city_admin_key}", follow=True
+    )
+    assertTemplateUsed(response, "admin/index.html")
+    assertContains(
+        response,
+        "Nutzer heinz ist eingeloggt und ist jetzt auch Kommunen-Administrator von Beispielstadt",
+    )
+
+    response = city_editor_client.get("/admin/cpmonitor/city/1/change/")
+    assertTemplateUsed(response, "admin/change_form.html")
+
+    adminform = response.context["adminform"]
+    fields = _fields_from_form(adminform)
+    assert "draft_mode" in fields
+    assert "city_editors" in fields
+    assert "city_admins" in fields
+    assert not "draft_mode" in adminform.readonly_fields
+    assert not "city_editors" in adminform.readonly_fields
+    assert not "city_admins" in adminform.readonly_fields

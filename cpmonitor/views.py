@@ -6,6 +6,7 @@ import time
 import uuid
 
 from django.conf import settings
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.files.base import ContentFile
@@ -24,6 +25,7 @@ from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
 
 from .models import (
+    AccessRight,
     City,
     ExecutionStatus,
     Task,
@@ -509,6 +511,34 @@ class AcceptInvite(invitations_views.AcceptInvite):
             # Difference: Revert accepted to allow reuse of link.
             invitation.accepted = False
             invitation.save()
+
+        user: auth.models.User = self.request.user
+        if user.is_authenticated:
+            if user.is_active and user.is_staff:
+                get_invitations_adapter().add_message(
+                    self.request,
+                    messages.SUCCESS,
+                    "invitations/messages/invite_for_logged_in_user.txt",
+                    {
+                        "role": invitation.get_access_right_display(),
+                        "city": invitation.city.name,
+                        "username": user.username,
+                    },
+                )
+                city: City = invitation.city
+                if invitation.access_right == AccessRight.CITY_EDITOR:
+                    city.city_editors.add(user.pk)
+                elif invitation.access_right == AccessRight.CITY_ADMIN:
+                    city.city_admins.add(user.pk)
+                return redirect(invitations_settings.LOGIN_REDIRECT)
+            else:
+                get_invitations_adapter().add_message(
+                    self.request,
+                    messages.ERROR,
+                    "invitations/messages/invite_for_logged_in_user_invalid.txt",
+                    {"role": str(invitation), "username": user.username},
+                )
+                auth.logout(self.request)
 
         # Difference: Saving key and not email.
         self.request.session["invitation_key"] = invitation.key
