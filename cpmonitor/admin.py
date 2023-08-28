@@ -100,7 +100,6 @@ class InvitationInline(
               Stadt das nächste Mal gespeichert wird.</p>
             <p>Sollte er nicht gleich sichtbar sein, bitte ein weiteres Mal speichern.</p>
             """,
-            role,
             url,
             url,
         )
