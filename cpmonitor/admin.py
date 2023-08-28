@@ -118,7 +118,7 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
         user = request.user
         if user.is_superuser:
             return qs
-        return qs.filter(rules.is_allowed_to_edit_q(user, City))
+        return qs.filter(rules.is_allowed_to_edit_q(user, City)).distinct()
 
     @admin.display(description="")
     def edit_tasks(self, city: City):
@@ -320,7 +320,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         if db_field.name == "city":
             kwargs["queryset"] = City.objects.filter(
                 rules.is_allowed_to_edit_q(request.user, City)
-            )
+            ).distinct()
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_changeform_initial_data(self, request: HttpRequest):
