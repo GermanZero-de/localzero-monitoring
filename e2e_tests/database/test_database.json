@@ -8,47 +8,11 @@
   }
 },
 {
-  "model": "auth.permission",
-  "pk": 45,
-  "fields": {
-    "name": "Can add Lokalgruppe",
-    "content_type": 12,
-    "codename": "add_localgroup"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 46,
-  "fields": {
-    "name": "Can change Lokalgruppe",
-    "content_type": 12,
-    "codename": "change_localgroup"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 47,
-  "fields": {
-    "name": "Can delete Lokalgruppe",
-    "content_type": 12,
-    "codename": "delete_localgroup"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 48,
-  "fields": {
-    "name": "Can view Lokalgruppe",
-    "content_type": 12,
-    "codename": "view_localgroup"
-  }
-},
-{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-08-11T18:58:59.432Z",
+    "last_login": "2023-06-12T20:11:14.431Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -1054,10 +1018,10 @@
     "accepted": false,
     "key": "bkneutb8zck96tjknok7hpwwybuif0a1pgny8txer0dqixbexryfntojnhzlddwk",
     "sent": null,
+    "inviter": null,
     "city": 1,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.211Z",
-    "inviter": null
+    "created": "2023-08-20T10:45:21.211Z"
   }
 },
 {
@@ -1067,10 +1031,10 @@
     "accepted": false,
     "key": "lpm5qyqcvyblh2bbjve7jgxnh7ezsutlab1dcqi4ogvseqnqj0qflfvxcct9hsmz",
     "sent": null,
+    "inviter": null,
     "city": 2,
     "access_right": "city admin",
-    "created": "2023-08-20T10:45:21.213Z",
-    "inviter": null
+    "created": "2023-08-20T10:45:21.213Z"
   }
 },
 {
@@ -1080,10 +1044,10 @@
     "accepted": false,
     "key": "wr6ikslxkvhhoaqqjj7jb7qjqpgonfpolsgmgdvhp6ny9nm7qfgpjycokhucg3ow",
     "sent": null,
+    "inviter": null,
     "city": 2,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.216Z",
-    "inviter": null
+    "created": "2023-08-20T10:45:21.216Z"
   }
 },
 {
@@ -1093,10 +1057,10 @@
     "accepted": false,
     "key": "qfdubrzfl6ddobcqlr1rlehwb0ay8rngl9m6bshazjtdiob3chr1qnh7fs4zos4f",
     "sent": null,
+    "inviter": null,
     "city": 3,
     "access_right": "city admin",
-    "created": "2023-08-20T10:45:21.219Z",
-    "inviter": null
+    "created": "2023-08-20T10:45:21.219Z"
   }
 },
 {
@@ -1106,10 +1070,10 @@
     "accepted": false,
     "key": "x1ymexf6lnq0tow1nh8bandsurfz87wiy0vk6o6vjaoxny9hgk3oif13oyfmvicn",
     "sent": null,
+    "inviter": null,
     "city": 3,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.220Z",
-    "inviter": null
+    "created": "2023-08-20T10:45:21.220Z"
   }
 },
 {
@@ -1119,10 +1083,10 @@
     "accepted": false,
     "key": "o1gg3wkdtmv5nlccvdjeewqn3yrp3cw5rxweifquqbovrwiwvmnx6kgo2i4p0t0d",
     "sent": null,
+    "inviter": null,
     "city": 1,
     "access_right": "city admin",
-    "created": "2023-08-20T10:51:54.210Z",
-    "inviter": null
+    "created": "2023-08-20T10:51:54.210Z"
   }
 }
 ]
