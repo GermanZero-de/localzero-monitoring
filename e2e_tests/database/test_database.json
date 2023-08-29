@@ -1007,19 +1007,6 @@
 },
 {
   "model": "cpmonitor.invitation",
-  "pk": 1,
-  "fields": {
-    "accepted": false,
-    "key": "hudixqnlsxrsdkx0ibzdvmybsrdwonlswtcadrahwhdct8kspqb0jk3xwpjio05r",
-    "sent": null,
-    "inviter": null,
-    "city": 1,
-    "access_right": "city admin",
-    "created": "2023-08-26T10:48:57.427Z"
-  }
-},
-{
-  "model": "cpmonitor.invitation",
   "pk": 2,
   "fields": {
     "accepted": false,
