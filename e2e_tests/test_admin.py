@@ -168,7 +168,7 @@ def test_should_not_allow_move_when_same_case_ignored_title_in_same_sector(
     drag_task_to(page, task2, sector1)
 
     expect(page.locator(".messagelist")).to_contain_text(
-        "Es gibt bereits einen Sektor / eine Maßnahme mit der URL "
+        "Es gibt bereits ein Handlungsfeld / eine Maßnahme mit der URL "
     )
 
     page.close()

@@ -117,7 +117,7 @@ class City(models.Model):
         help_text="""
             <p>Eine einleitende Übersicht in die Bewertung des Klimaaktionsplans der Kommune.</p>
             <p>Hier könnt Ihr zusammenfassen, was ihr als Ganzes von dem Plan haltet.</p>
-            <p>Auf Sektorebene und bis zu den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
+            <p>Auf Ebene der Handlungsfelder und bei den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
     )
 
     assessment_status = models.TextField(
@@ -126,7 +126,7 @@ class City(models.Model):
         help_text="""
             <p>Eine einleitende Übersicht in die Bewertung des Umsetzungsstandes.</p>
             <p>Hält die Kommune sich im Wesentlichen an ihren eigenen Plan?</p>
-            <p>Auf Sektorebene und bis zu den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
+            <p>Auf Ebene der Handlungsfelder und bei den einzelnen Maßnahmen könnt Ihr weiter Details ergänzen.</p>""",
     )
 
     last_update = models.DateField("Letzte Aktualisierung", auto_now=True)
@@ -326,8 +326,8 @@ TASK_UNIQUE_CONSTRAINT_NAME = "unique_urls"
 
 class Task(MP_Node):
     class Meta:
-        verbose_name = "Sektor / Maßnahme"
-        verbose_name_plural = "Sektoren und Maßnahmen"
+        verbose_name = "Handlungsfeld / Maßnahme"
+        verbose_name_plural = "Handlungsfelder und Maßnahmen"
         constraints = [
             models.UniqueConstraint(
                 models.F("city"),
@@ -342,7 +342,7 @@ class Task(MP_Node):
         "Entwurfs-Modus",
         default=True,
         help_text=(
-            "Im Entwurfs-Modus ist der Sektor/die Maßnahme für normale Besucher im Frontend"
+            "Im Entwurfs-Modus ist das Handlungsfeld/die Maßnahme für normale Besucher im Frontend"
             " unsichtbar. Nur wenn im gleichen Browser ein User im Admin angemeldet ist, wird"
             " er/sie angezeigt."
         ),
@@ -362,7 +362,7 @@ class Task(MP_Node):
         "Titel",
         max_length=50,
         help_text="""
-            <p>Überschrift des Sektors / der Maßnahme.</p>
+            <p>Überschrift des Handlungsfelds / der Maßnahme.</p>
             <p>Wie im Klimaaktionsplan angegeben oder verkürzt. Maximal 50 Zeichen.</p>
         """,
     )
@@ -372,8 +372,8 @@ class Task(MP_Node):
         max_length=200,
         blank=True,
         help_text="""
-            <p>Eine kurze Beschreibung des Sektors / der Maßnahme. Maximal 200 Zeichen. Keine Formatierungen.</p>
-            <p>Kann in einer Übersicht mehrerer Sektoren / Maßnahmen oder als Vorschau eines Links dargestellt werden.</p>
+            <p>Eine kurze Beschreibung des Handlungsfelds / der Maßnahme. Maximal 200 Zeichen. Keine Formatierungen.</p>
+            <p>Kann in einer Übersicht mehrerer Handlungsfelder / Maßnahmen oder als Vorschau eines Links dargestellt werden.</p>
         """,
     )
 
@@ -384,7 +384,7 @@ class Task(MP_Node):
         blank=True,
         help_text="""
             <p>Texte aus dem Klimaaktionsplan können hier eins-zu-eins eingegeben werden.</p>
-            <p>Für Sektoren und Maßnahmengruppen sind Einleitungstexte aus dem Plan geeignet.</p>
+            <p>Für Handlungsfelder sind Einleitungstexte aus dem Plan geeignet.</p>
             <p>Für Maßnahmen sollte hier die genaue Beschreibung stehen.</p>
         """,
     )
@@ -464,8 +464,8 @@ class Task(MP_Node):
                     <li>Sowohl für Maßnahmen aus dem KAP, als auch Dinge, die gar nich im KAP aufgeführt waren.</li>
                 </ul></dd>
             </dl>
-            <p>Bei Sektoren / Maßnahmengruppen:</p>
-            <p>Wenn hier "unbekannt" ausgewählt wird, werden die Umsetzungsstände der Maßnahmen in diesem Sektor / dieser Gruppe zusammengefasst.</p>
+            <p>Bei Handlungsfeldern:</p>
+            <p>Wenn hier "unbekannt" ausgewählt wird, werden die Umsetzungsstände der Maßnahmen in diesem Handlungsfeld zusammengefasst.</p>
             <p>Bei anderen Auswahlen wird diese Zusammenfassung überschrieben. Das sollte nur passieren, wenn sie unpassend oder irreführend ist.</p>
         """,
     )
@@ -557,7 +557,7 @@ class Task(MP_Node):
             super().validate_constraints(exclude=exclude)
         except ValidationError as e:
             new_msg = (
-                "Der Sektor / die Maßnahme wird in der URL als '%(slugs)s' geschrieben."
+                "Das Handlungsfeld / die Maßnahme wird in der URL als '%(slugs)s' geschrieben."
                 " Das kollidiert mit einem anderen Eintrag." % {"slugs": self.slugs}
             )
             msgs: dict[str, str] = e.message_dict
@@ -580,7 +580,7 @@ class Task(MP_Node):
         except ValidationError as e:
             raise InvalidPosition(
                 "Diese Verschiebung ist nicht möglich."
-                " Es gibt bereits einen Sektor / eine Maßnahme"
+                " Es gibt bereits ein Handlungsfeld / eine Maßnahme"
                 " mit der URL '%s'." % self.slugs
             )
         super().move(target, pos)
