@@ -1,18 +1,10 @@
 [
 {
-  "model": "auth.group",
-  "pk": 1,
-  "fields": {
-    "name": "Alle",
-    "permissions": []
-  }
-},
-{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-06-12T20:11:14.431Z",
+    "last_login": "2023-08-02T08:49:58.725Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -39,9 +31,7 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2023-08-01T06:50:55Z",
-    "groups": [
-      1
-    ],
+    "groups": [],
     "user_permissions": []
   }
 },
@@ -59,9 +49,25 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2023-08-01T10:19:25Z",
-    "groups": [
-      1
-    ],
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$bOR4wt2ycK5GSTLtsfpMgf$wvmE4imsaXkMDHlyvI/EYy1yu3mTWNCr9qUB9Y13QOc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "christian",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-08-03T10:39:16Z",
+    "groups": [],
     "user_permissions": []
   }
 },
@@ -443,8 +449,8 @@
     "description": "",
     "planned_start": null,
     "planned_completion": null,
-    "responsible_organ": "Stadtrat",
-    "responsible_organ_explanation": "Warum hängt es am Stadtrat.",
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1007,15 +1013,28 @@
 },
 {
   "model": "cpmonitor.invitation",
+  "pk": 1,
+  "fields": {
+    "accepted": false,
+    "key": "ercizfqjtsqbv5xap4uvlkpswjivqnjiephfxdbhjett8jah0z0ynnfpqrqxjcjg",
+    "sent": null,
+    "inviter": null,
+    "city": 1,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:36:55.384Z"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
   "pk": 2,
   "fields": {
     "accepted": false,
-    "key": "bkneutb8zck96tjknok7hpwwybuif0a1pgny8txer0dqixbexryfntojnhzlddwk",
+    "key": "lypvs6fb6qxk8ylskkckwp3g3djilpsiiunm1fuz68rdwg1emuwhnsuxexpbgjel",
     "sent": null,
     "inviter": null,
     "city": 1,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.211Z"
+    "created": "2023-08-20T10:36:55.386Z"
   }
 },
 {
@@ -1023,12 +1042,12 @@
   "pk": 3,
   "fields": {
     "accepted": false,
-    "key": "lpm5qyqcvyblh2bbjve7jgxnh7ezsutlab1dcqi4ogvseqnqj0qflfvxcct9hsmz",
+    "key": "aaadfye92pbjn2iswjgejj2q4uifhcgk8goeqqj55uan8qcvrle58om8oheybmcs",
     "sent": null,
     "inviter": null,
     "city": 2,
     "access_right": "city admin",
-    "created": "2023-08-20T10:45:21.213Z"
+    "created": "2023-08-20T10:36:55.388Z"
   }
 },
 {
@@ -1036,12 +1055,12 @@
   "pk": 4,
   "fields": {
     "accepted": false,
-    "key": "wr6ikslxkvhhoaqqjj7jb7qjqpgonfpolsgmgdvhp6ny9nm7qfgpjycokhucg3ow",
+    "key": "i3qzwfy8pqfk9gpirmgygovm6rr6yijsfvckbmhizzxcjtd482i7zaqcqyt4u1qq",
     "sent": null,
     "inviter": null,
     "city": 2,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.216Z"
+    "created": "2023-08-20T10:36:55.390Z"
   }
 },
 {
@@ -1049,12 +1068,12 @@
   "pk": 5,
   "fields": {
     "accepted": false,
-    "key": "qfdubrzfl6ddobcqlr1rlehwb0ay8rngl9m6bshazjtdiob3chr1qnh7fs4zos4f",
+    "key": "a7vv8zugeonysvg4vt5hk7404u5s50plid5jywaifqr1ob0tbhcuxyvsem6lf7xu",
     "sent": null,
     "inviter": null,
     "city": 3,
     "access_right": "city admin",
-    "created": "2023-08-20T10:45:21.219Z"
+    "created": "2023-08-20T10:36:55.392Z"
   }
 },
 {
@@ -1062,25 +1081,12 @@
   "pk": 6,
   "fields": {
     "accepted": false,
-    "key": "x1ymexf6lnq0tow1nh8bandsurfz87wiy0vk6o6vjaoxny9hgk3oif13oyfmvicn",
+    "key": "vybe7t3qwc5vwca6punkbnu3t9qlxh5ysqrz7izy7farrwzbw0dpk8adlu43kdbj",
     "sent": null,
     "inviter": null,
     "city": 3,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.220Z"
-  }
-},
-{
-  "model": "cpmonitor.invitation",
-  "pk": 7,
-  "fields": {
-    "accepted": false,
-    "key": "o1gg3wkdtmv5nlccvdjeewqn3yrp3cw5rxweifquqbovrwiwvmnx6kgo2i4p0t0d",
-    "sent": null,
-    "inviter": null,
-    "city": 1,
-    "access_right": "city admin",
-    "created": "2023-08-20T10:51:54.210Z"
+    "created": "2023-08-20T10:36:55.393Z"
   }
 }
 ]
