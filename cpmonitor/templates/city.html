@@ -29,7 +29,13 @@
             </div>
             <div class="h1 mb-3">{{ days_left_proportion }}%</div>
             <div class="d-flex mb-2">
-              <div>Noch {{ days_left }} Tage</div>
+              <div>
+                {% if days_left < 365 %}
+                  Noch {{ days_left }} Tage
+                {% else %}
+                  Noch {{ years_left }} Jahre und {{ days_remain }} Tage
+                {% endif %}
+              </div>
               <div class="ms-auto"></div>
             </div>
             <div class="progress" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" aria-label="{{ days_gone }} Tage seit Beschluss,{{ days_left }} Tage bis zum Zieljahr" title="{{ days_gone }} Tage seit Beschluss
