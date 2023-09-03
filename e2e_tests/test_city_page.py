@@ -59,3 +59,15 @@ def test_should_go_to_the_administration_checklist_view_when_clicking_the_checkl
     expect(page).to_have_url(
         live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/"
     )
+
+
+def test_should_display_years_and_days_when_more_than_365_days(live_server, page: Page):
+    page.goto(live_server.url + "/beispielstadt/")
+
+    expect(page.get_by_text("Noch 12 Jahre und 123 Tage")).to_be_visible()
+
+
+def test_should_display_only_days_when_less_than_365_days(live_server, page: Page):
+    page.goto(live_server.url + "/mitallem/")
+
+    expect(page.get_by_text("Noch 120 Tage")).to_be_visible()
