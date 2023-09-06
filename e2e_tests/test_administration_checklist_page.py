@@ -36,54 +36,52 @@ def test_should_show_the_administration_assessment_and_the_checklist(
     ).to_have_class("lz-icon EMPTY")
 
 
-def test_should_show_the_correct_helptext_for_administration_assessment(
+def test_should_expand_and_unexpand_the_help_text_when_clicking_on_a_checklist_item(
     live_server, page: Page
 ):
     page.goto(live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/")
-    checked_question_button = page.locator(
+
+    checklist_item = page.get_by_role(
         "button",
-        has=page.locator('td:text("Gibt es ein Monitoring von Kimaschutzmaßnahmen?")'),
+        name="Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
     )
-    checked_question_help_text_locator = page.locator(
-        checked_question_button.get_attribute("data-bs-target")
+    help_text = page.locator(
+        ".accordion-collapse",
+        has_text="Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen.",
     )
-    unchecked_question_button = page.locator(
+
+    expect(help_text).not_to_be_visible()
+
+    checklist_item.click()
+
+    expect(help_text).to_be_visible()
+
+
+def test_should_only_expand_the_latest_helptext_when_clicking_on_two_different_checklist_items(
+    live_server, page: Page
+):
+    page.goto(live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/")
+
+    checklist_item1 = page.get_by_role(
         "button",
-        has=page.locator(
-            'td:text("Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?")'
-        ),
+        name="Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
     )
-    unchecked_question_help_text_locator = page.locator(
-        unchecked_question_button.get_attribute("data-bs-target")
-    )
-
-    expect(checked_question_help_text_locator).to_contain_text(
-        "Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen."
-        " Dieser kann in eingespaarten Emissionen sichtbar gemacht werden und ist wichtig um das Ziel der Klimaneutralität"
-        " und notwendige Schritte im Auge zu behalten."
+    help_text1 = page.locator(
+        ".accordion-collapse",
+        has_text="Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen.",
     )
 
-    # Help-Text not visible before clicking for CHECKED
-    expect(checked_question_help_text_locator).to_be_hidden()
-
-    # Help-Text visible after clicking for CHECKED
-    checked_question_button.click()
-    expect(checked_question_help_text_locator).to_be_visible()
-
-    expect(unchecked_question_help_text_locator).to_contain_text(
-        "Die Kommunalverwaltung kann aufgrund ihres großen Beschaffungsvolumens mit ihrer Nachfrage energieeffiziente Produkte fördern"
-        " und damit einen wichtigen Beitrag zum Klimaschutz leisten. Wichtig ist, möglichst nur Produkte und Dienstleistungen zu erwerben,"
-        " die wirklich benötigt werden und im Sinne der Nachhaltigkeit neben einer hohen Umweltverträglichkeit auch sozialen wie ökonomischen"
-        " Aspekten entsprechen. Umweltfreundliche Beschaffung sollte in grundlegenden Dokumenten der Behörde wie dem eigenen Leitbild,"
-        " verpflichtenden Dienstanweisungen oder einem Beschaffungsleitfaden als Organisationsziel definiert werden."
+    checklist_item2 = page.get_by_role(
+        "button",
+        name="Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?",
+    )
+    help_text2 = page.locator(
+        ".accordion-collapse",
+        has_text="Die Kommunalverwaltung kann aufgrund ihres großen Beschaffungsvolumens mit ihrer Nachfrage energieeffiziente Produkte fördern",
     )
 
-    # Other Help-Text not visible for UNCHECKED
-    expect(unchecked_question_help_text_locator).to_be_hidden()
+    checklist_item1.click()
+    checklist_item2.click()
 
-    # After Click Help-Text for UNCHECKED visible
-    unchecked_question_button.click()
-    expect(unchecked_question_help_text_locator).to_be_visible()
-
-    # First one should be not visible again
-    expect(checked_question_help_text_locator).to_be_hidden()
+    expect(help_text1).not_to_be_visible()
+    expect(help_text2).to_be_visible()
