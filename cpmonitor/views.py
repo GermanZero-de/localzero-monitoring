@@ -390,10 +390,6 @@ def datenschutz_view(request):
     return render(request, "datenschutz.html", _get_base_context(request))
 
 
-def jetzt_spenden_view(request):
-    return render(request, "jetzt-spenden.html", _get_base_context(request))
-
-
 def ueber_uns_view(request):
     breadcrumbs = _get_breadcrumbs(
         {"label": "Über uns", "url": reverse("ueber-uns")},
