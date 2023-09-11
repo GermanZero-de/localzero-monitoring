@@ -22,7 +22,7 @@
 - Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command.
 - Install Yarn version 3 as described here: <https://yarnpkg.com/getting-started/install>.
 - Install node.js from <https://nodejs.org/en/download>.
-- Install [Docker Desktop](https://www.docker.com/) or [Docker Engine and Docker Compose without Docker Desktop](https://docs.docker.com/engine/install/), if you prefer and are on Linux.
+- Install [Docker Desktop](https://www.docker.com/) or [Docker Engine and Docker Compose without Docker Desktop](https://docs.docker.com/engine/install/), if you prefer and are on Linux/macOS.
 
 The above steps are needed only once per machine.
 
@@ -301,6 +301,14 @@ To build the image, run the following command in the repository root directory (
 ```shell
 docker compose build
 ```
+
+#### Issues when building the Docker image on Apple CPU Macs (M1, M2)
+
+You might run into errors building the Docker image on a Mac, getting messages like `No working compiler found` and `Building wheel for cffi (setup.py): finished with status 'error'`.
+
+This is usually caused by certain Python packages not being available prebuilt for download for arm64-based macOS, because the macOS version gets encoded into package names on pypi. This leads to packages not being found after macOS updates until the package authors update their files.
+
+A workaround is to add `--platform linux/amd64` to the failing Docker command to simulate an amd64 architecture, so that generic linux packages are downloaded instead of the Apple CPU specific ones.
 
 ### Deployment including nginx
 
