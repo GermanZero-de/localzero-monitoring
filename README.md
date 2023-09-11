@@ -310,6 +310,8 @@ This is usually caused by certain Python packages not being available prebuilt f
 
 A workaround is to add `--platform linux/amd64` to the failing Docker command to simulate an amd64 architecture, so that generic linux packages are downloaded instead of the Apple CPU specific ones.
 
+See also [#45](https://github.com/GermanZero-de/klimaschutzmonitor/issues/45).
+
 ### Deployment including nginx
 
 To run both containers together, run the following command in the repository root directory (the app container will be built automatically if necessary):
