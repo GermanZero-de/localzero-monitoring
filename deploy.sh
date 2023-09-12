@@ -29,7 +29,7 @@ git tag -a $tag -m "Deployment to ${env}" && git push origin $tag
 docker compose --env-file .env.${env} build
 
 # 4
-docker save cpmonitor -o cpmonitor.tar
+docker save cpmonitor:${env} -o cpmonitor.tar
 docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
 
 # 5
@@ -64,8 +64,8 @@ crontab /tmp/crontab
 cp /tmp/reload-cert.sh /home/monitoring/
 chmod +x /home/monitoring/reload-cert.sh
 
-echo
 echo 'FINISHED SUCCESSFULLY!'
-echo
+
+exit
 
 EOF
