@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+import re
 
 
 def test_should_go_to_city_view_when_clicking_city_select_dropdown_item(
@@ -64,10 +65,15 @@ def test_should_go_to_the_administration_checklist_view_when_clicking_the_checkl
 def test_should_display_years_and_days_when_more_than_365_days(live_server, page: Page):
     page.goto(live_server.url + "/beispielstadt/")
 
-    expect(page.get_by_text("Noch 12 Jahre und 123 Tage")).to_be_visible()
+    expect(
+        page.get_by_text(re.compile("Noch [0-9]+ Jahre und [0-9]+ Tage"))
+    ).to_be_visible()
 
 
 def test_should_display_only_days_when_less_than_365_days(live_server, page: Page):
     page.goto(live_server.url + "/mitallem/")
 
-    expect(page.get_by_text("Noch 120 Tage")).to_be_visible()
+    expect(page.get_by_text(re.compile("Noch [0-9]+ Tage"))).to_be_visible()
+    expect(
+        page.get_by_text(re.compile("Noch [0-9]+ Jahre und [0-9]+ Tage"))
+    ).not_to_be_visible()
