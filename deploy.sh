@@ -33,7 +33,7 @@ docker save cpmonitor -o cpmonitor.tar
 docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
 
 # 5
-scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab renew-cert.sh monitoring@monitoring.localzero.net:/tmp/
+scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab reload-cert.sh monitoring@monitoring.localzero.net:/tmp/
 
 ssh -tt lzm /bin/bash << EOF
 set -euo pipefail
@@ -63,8 +63,8 @@ docker-compose up --detach --no-build
 
 # 10
 crontab /tmp/crontab
-cp /tmp/renew-cert.sh /home/monitoring/
-chmod +x /home/monitoring/renew-cert.sh
+cp /tmp/reload-cert.sh /home/monitoring/
+chmod +x /home/monitoring/reload-cert.sh
 
 echo
 echo 'FINISHED SUCCESSFULLY!'
