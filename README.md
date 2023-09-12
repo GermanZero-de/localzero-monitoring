@@ -414,79 +414,21 @@ docker compose up -d
 
 ### Deploying a new version
 
-1. Checkout the commit you want to deploy (usually the latest commit of main).
-2. Tag that revision with
+Requirement: SSH access to the server.
 
-    ```sh
-    DATESTR=$(date +%Y-%b-%d) && echo ${DATESTR}
-    git tag -a deploy-prod-${DATESTR} -m "Deployment to production" && git push origin deploy-prod-${DATESTR}
-    # and / or
-    git tag -a deploy-test-${DATESTR} -m "Deployment to test" && git push origin deploy-test-${DATESTR}
-    ```
-3. Build the image for the Django app:
-    ```sh
-    docker compose build
-    ```
-4. Export the images:
-    ```
-    docker save cpmonitor -o cpmonitor.tar
-    docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
-    ```
-5. Copy the images, the compose files, the certificate renewal cron job and the reverse proxy settings to the server:
-    ```sh
-    scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab reload-cert.sh docker/reverseproxy/ monitoring@monitoring.localzero.net:/tmp/
-    ```
-6. Login to the server:
-    ```sh
-    ssh monitoring@monitoring.localzero.net
-    ```
-7. Import the images into Docker on the server:
-    ```
-    docker load -i /tmp/cpmonitor.tar
-    docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
-    ```
-    (Docker should print "Loading layer" for both images.)
-8. Tag the images with the current date in case we want to roll back, as well as with the environment you're deploying to (to prevent affecting the other environment):
+Run [.github/workflows/deploy.sh](.github/workflows/deploy.sh) and provide the environment to deploy to as an argument:
 
-    ```sh
-    DATESTR=$(date +%Y-%b-%d) && echo ${DATESTR}
+```shell
+./deploy.sh testing
+```
 
-    docker tag cpmonitor:latest cpmonitor:${DATESTR}
-    docker tag cpmonitor:latest cpmonitor:<testing|production>
+Optionally, you can specify a suffix for the tags that will be created, e.g. to differentiate multiple deployments on the same day:
 
-    docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${DATESTR}
-    docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:<testing|production>
-    ```
-9. Stop the server, apply the migrations, start the server:
-    ```sh
-    cd ~/<testing|production>/
-    docker-compose down --volumes
-    # backup the db
-    cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.${DATESTR}
-    cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/<testing|production>/uploads.${DATESTR}
-    # apply migrations using a temporary container
-    docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:<testing|production> sh
-    DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
-    # exit and stop the temporary container
-    exit
-    # use the latest docker-compose.yml to start the app using the new image
-    mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-    docker-compose up --detach --no-build
-    ```
-10. Update the reverse proxy config
-    ```sh
-    cd ~/reverseproxy
-    docker-compose down
-    mv docker-compose.yml docker-compose.yml.bak
-    cp -r /tmp/reverseproxy/* .
-    docker-compose up --detach --no-build
-    ```
-11. Install certificate renewal cron job:
-    ```sh
-    crontab /tmp/crontab
-    cp /tmp/reload-cert.sh /home/monitoring/
-    chmod +x /home/monitoring/reload-cert.sh
-    ```
+```shell
+./deploy.sh testing hotfix-for-issue-123
+```
+
+View the script to see the exact steps that are executed.
 
 ### Database Client
 In order to view, manipulate and export the database in any of the environments (local, testing, production), the database webclient
