@@ -19,34 +19,36 @@ if [[ -n "$tag_suffix" ]]; then
     tag_suffix=${tag_suffix/#/-}
 fi
 
-# 2
+# Tag the currently checked-out revision with in GitHub
 date=$(date +%Y-%b-%d)
 tag="deploy-${env}-${date}${tag_suffix}"
 echo "Tagging version as $tag in git."
 git tag -a $tag -m "Deployment to ${env}" && git push origin $tag
 
-#3
+# Build the image for the Django app
 docker compose --env-file .env.${env} build
 
-# 4
+# Export the images
 docker save cpmonitor:${env} -o cpmonitor.tar
 docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
 
-# 5
+# Copy the images, the compose files, the certificate renewal cron job and the reverse proxy settings to the server
 scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab reload-cert.sh monitoring@monitoring.localzero.net:/tmp/
 
+# Login to the server and execute everything that follows there
 ssh -tt lzm /bin/bash << EOF
 set -euo pipefail
 
-# 7
+# Import the images into Docker on the server
 docker load -i /tmp/cpmonitor.tar
 docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
 
-# 8
+# Tag the images with the current date in case we want to roll back,
+# as well as with the environment you're deploying to (to prevent affecting the other environment)
 docker tag cpmonitor:${env} cpmonitor:${date}${tag_suffix}
 docker tag klimaschutzmonitor-dbeaver:${env} klimaschutzmonitor-dbeaver:${date}${tag_suffix}
 
-# 9
+# Stop the server, apply the migrations, start the server
 cd ~/${env}/
 docker-compose down --volumes
 # backup the db
@@ -59,7 +61,14 @@ docker run --user=1007:1007 --rm -v /home/monitoring/${env}/db:/db cpmonitor:${e
 mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
 docker-compose up --detach --no-build
 
-# 10
+# Update the reverse proxy config
+cd ~/reverseproxy
+docker-compose down
+mv docker-compose.yml docker-compose.yml.bak
+cp -r /tmp/reverseproxy/* .
+docker-compose up --detach --no-build
+
+# Install certificate renewal cron job
 crontab /tmp/crontab
 cp /tmp/reload-cert.sh /home/monitoring/
 chmod +x /home/monitoring/reload-cert.sh
