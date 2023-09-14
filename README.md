@@ -280,14 +280,41 @@ SKIP=check-untracked-migrations git commit
 
 ## Containerization and Deployment
 
-The application is deployed to the server as a pair of Docker containers:
+```mermaid
+flowchart TB
+    user-device([visitor's device])-- visit site -->reverse-proxy
+    subgraph localzero-monitoring-vm
+        subgraph testing
+            nginx-testing-- forward -->djangoapp-testing
+            nginx-testing-- forward -->dbeaver-testing
+            dbeaver-testing
+        end
+        subgraph production
+            nginx-production-- forward -->djangoapp-production
+            nginx-production-- forward -->dbeaver-production
+            dbeaver-production
+        end
+        subgraph exposed [exposed to web]
+            reverse-proxy-- forward if HOST==monitoring-test.localzero.net -->nginx-testing
+            reverse-proxy-- forward if HOST==monitoring.localzero.net -->nginx-production
+            acme.sh-. configure updated certs .->reverse-proxy
+        end
+    end
+```
 
-- container 1 runs the gunicorn webserver to host the django app itself,
-- container 2 runs nginx, a proxy that hosts the static files while providing stability and security,
-- container 3 runs the server for the database web client (Cloudbeaver),
-- container 4 runs acme.sh, which handles SSL certificate renewal.
+The application is deployed to the server in the form of three Docker compositions:
+- reverse-proxy
+- testing environment
+- production environment
 
-Only the port of nginx is exposed, which will forward requests to the django app or provide any requested static files directly.
+Each environment consists of:
+- the "djangoapp" container that run the gunicorn webserver to host the django app itself,
+- its own nginx (a proxy that hosts the static files while providing stability and security),
+- a server for the database web client (DBeaver),
+
+Outside the environments and exposed to the web, there's a third "reverse-proxy" composition containing:
+- acme.sh, which handles SSL certificate renewal ([see further down](#tls-certificate-and-renewal)),
+- the top-level reverse proxy nginx, which forwards requests to the environments based on the HOST header, or to acme.sh.
 
 ### Building the Django app Docker image and running the container
 
