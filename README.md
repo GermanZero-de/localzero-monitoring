@@ -83,8 +83,8 @@ yarn install
 python manage.py runserver --settings=config.settings.local
 ```
 
-Whenever you have problems make sure that you have activated the virtual environment with
-"`source .venv/bin/activate`" (Windows "`.venv/bin/activate.bat`").
+Whenever you have problems make sure that you have activated the virtual environment correctly. You may have to
+deactivate it with "`deactivate`" and activate it with "`source .venv/bin/activate`" (Windows "`.venv/bin/activate.bat`").
 
 The admin user for development is:
 
