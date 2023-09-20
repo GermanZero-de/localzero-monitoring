@@ -220,12 +220,16 @@ def city_view(request, city_slug):
         days_total = (target_date - city.resolution_date).days + 1
         days_gone = (date.today() - city.resolution_date).days
         days_left = days_total - days_gone
+        years_left = round(days_left / 365)
+        days_remain = days_left % 365
         days_gone_proportion = round(days_gone / days_total * 100)
         days_left_proportion = round(days_left / days_total * 100)
         context.update(
             {
                 "days_gone": days_gone,
                 "days_left": days_left,
+                "years_left": years_left,
+                "days_remain": days_remain,
                 "days_gone_proportion": days_gone_proportion,
                 "days_left_proportion": days_left_proportion,
             }
@@ -400,10 +404,6 @@ def impressum_view(request):
 
 def datenschutz_view(request):
     return render(request, "datenschutz.html", _get_base_context(request))
-
-
-def jetzt_spenden_view(request):
-    return render(request, "jetzt-spenden.html", _get_base_context(request))
 
 
 def ueber_uns_view(request):
