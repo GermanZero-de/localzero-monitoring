@@ -137,4 +137,8 @@ figure.lz-chart img {
   margin-bottom: 1rem;
 }
 
+.table-no-bottom-padding {
+  margin-bottom: 0px;
+}
+
 /*# sourceMappingURL=main.css.map */

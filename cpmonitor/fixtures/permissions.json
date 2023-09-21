@@ -165,9 +165,7 @@
     "tasks_are_planned_yearly": false,
     "tasks_have_responsible_entity": false,
     "annual_reduction_of_emissions_can_be_predicted": false,
-    "concept_for_participation_specified": true,
-    "sustainability_architecture_in_administration_exists": true,
-    "climate_council_exists": false
+    "concept_for_participation_specified": true
   }
 },
 {
@@ -185,9 +183,7 @@
     "tasks_are_planned_yearly": true,
     "tasks_have_responsible_entity": true,
     "annual_reduction_of_emissions_can_be_predicted": true,
-    "concept_for_participation_specified": false,
-    "sustainability_architecture_in_administration_exists": false,
-    "climate_council_exists": true
+    "concept_for_participation_specified": false
   }
 },
 {
@@ -196,12 +192,9 @@
   "fields": {
     "city": 3,
     "climate_protection_management_exists": true,
-    "climate_technical_committee_exists": true,
     "climate_relevance_check_exists": true,
-    "interdisciplinary_climate_protection_exists": true,
     "climate_protection_monitoring_exists": true,
     "intersectoral_concepts_exists": true,
-    "climate_protection_reports_are_continuously_published": true,
     "guidelines_for_sustainable_procurement_exists": true,
     "municipal_office_for_funding_management_exists": true,
     "public_relation_with_local_actors_exists": true
@@ -213,12 +206,9 @@
   "fields": {
     "city": 1,
     "climate_protection_management_exists": true,
-    "climate_technical_committee_exists": true,
     "climate_relevance_check_exists": true,
-    "interdisciplinary_climate_protection_exists": true,
     "climate_protection_monitoring_exists": true,
     "intersectoral_concepts_exists": false,
-    "climate_protection_reports_are_continuously_published": false,
     "guidelines_for_sustainable_procurement_exists": false,
     "municipal_office_for_funding_management_exists": false,
     "public_relation_with_local_actors_exists": false
@@ -240,6 +230,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -266,6 +257,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
@@ -292,6 +284,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 8,
     "execution_justification": "",
@@ -318,6 +311,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -344,6 +338,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -370,6 +365,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 4,
     "execution_justification": "",
@@ -396,6 +392,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -422,6 +419,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -448,6 +446,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -474,6 +473,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -500,6 +500,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -526,6 +527,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
@@ -552,6 +554,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -578,6 +581,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -604,6 +608,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -630,6 +635,7 @@
     "planned_start": "2023-04-19",
     "planned_completion": "2022-12-31",
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "Die Bewertung der geplanten Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
     "execution_status": 2,
     "execution_justification": "",
@@ -656,6 +662,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -682,6 +689,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -708,6 +716,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -734,6 +743,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -760,6 +770,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -786,6 +797,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
@@ -812,6 +824,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
@@ -838,6 +851,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 4,
     "execution_justification": "",
@@ -864,6 +878,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -890,6 +905,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 8,
     "execution_justification": "",
@@ -916,6 +932,7 @@
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
@@ -997,10 +1014,10 @@
     "accepted": false,
     "key": "ercizfqjtsqbv5xap4uvlkpswjivqnjiephfxdbhjett8jah0z0ynnfpqrqxjcjg",
     "sent": null,
+    "inviter": null,
     "city": 1,
     "access_right": "city admin",
-    "created": "2023-08-20T10:36:55.384Z",
-    "inviter": null
+    "created": "2023-08-20T10:36:55.384Z"
   }
 },
 {
@@ -1010,10 +1027,10 @@
     "accepted": false,
     "key": "lypvs6fb6qxk8ylskkckwp3g3djilpsiiunm1fuz68rdwg1emuwhnsuxexpbgjel",
     "sent": null,
+    "inviter": null,
     "city": 1,
     "access_right": "city editor",
-    "created": "2023-08-20T10:36:55.386Z",
-    "inviter": null
+    "created": "2023-08-20T10:36:55.386Z"
   }
 },
 {
@@ -1023,10 +1040,10 @@
     "accepted": false,
     "key": "aaadfye92pbjn2iswjgejj2q4uifhcgk8goeqqj55uan8qcvrle58om8oheybmcs",
     "sent": null,
+    "inviter": null,
     "city": 2,
     "access_right": "city admin",
-    "created": "2023-08-20T10:36:55.388Z",
-    "inviter": null
+    "created": "2023-08-20T10:36:55.388Z"
   }
 },
 {
@@ -1036,10 +1053,10 @@
     "accepted": false,
     "key": "i3qzwfy8pqfk9gpirmgygovm6rr6yijsfvckbmhizzxcjtd482i7zaqcqyt4u1qq",
     "sent": null,
+    "inviter": null,
     "city": 2,
     "access_right": "city editor",
-    "created": "2023-08-20T10:36:55.390Z",
-    "inviter": null
+    "created": "2023-08-20T10:36:55.390Z"
   }
 },
 {
@@ -1049,10 +1066,10 @@
     "accepted": false,
     "key": "a7vv8zugeonysvg4vt5hk7404u5s50plid5jywaifqr1ob0tbhcuxyvsem6lf7xu",
     "sent": null,
+    "inviter": null,
     "city": 3,
     "access_right": "city admin",
-    "created": "2023-08-20T10:36:55.392Z",
-    "inviter": null
+    "created": "2023-08-20T10:36:55.392Z"
   }
 },
 {
@@ -1062,10 +1079,10 @@
     "accepted": false,
     "key": "vybe7t3qwc5vwca6punkbnu3t9qlxh5ysqrz7izy7farrwzbw0dpk8adlu43kdbj",
     "sent": null,
+    "inviter": null,
     "city": 3,
     "access_right": "city editor",
-    "created": "2023-08-20T10:36:55.393Z",
-    "inviter": null
+    "created": "2023-08-20T10:36:55.393Z"
   }
 }
 ]

@@ -159,9 +159,7 @@
     "tasks_are_planned_yearly": false,
     "tasks_have_responsible_entity": false,
     "annual_reduction_of_emissions_can_be_predicted": false,
-    "concept_for_participation_specified": true,
-    "sustainability_architecture_in_administration_exists": true,
-    "climate_council_exists": false
+    "concept_for_participation_specified": true
   }
 },
 {
@@ -179,9 +177,7 @@
     "tasks_are_planned_yearly": true,
     "tasks_have_responsible_entity": true,
     "annual_reduction_of_emissions_can_be_predicted": true,
-    "concept_for_participation_specified": false,
-    "sustainability_architecture_in_administration_exists": false,
-    "climate_council_exists": true
+    "concept_for_participation_specified": false
   }
 },
 {
@@ -190,12 +186,9 @@
   "fields": {
     "city": 3,
     "climate_protection_management_exists": true,
-    "climate_technical_committee_exists": true,
     "climate_relevance_check_exists": true,
-    "interdisciplinary_climate_protection_exists": true,
     "climate_protection_monitoring_exists": true,
     "intersectoral_concepts_exists": true,
-    "climate_protection_reports_are_continuously_published": true,
     "guidelines_for_sustainable_procurement_exists": true,
     "municipal_office_for_funding_management_exists": true,
     "public_relation_with_local_actors_exists": true
@@ -207,12 +200,9 @@
   "fields": {
     "city": 1,
     "climate_protection_management_exists": true,
-    "climate_technical_committee_exists": true,
     "climate_relevance_check_exists": true,
-    "interdisciplinary_climate_protection_exists": true,
     "climate_protection_monitoring_exists": true,
     "intersectoral_concepts_exists": false,
-    "climate_protection_reports_are_continuously_published": false,
     "guidelines_for_sustainable_procurement_exists": false,
     "municipal_office_for_funding_management_exists": false,
     "public_relation_with_local_actors_exists": false
