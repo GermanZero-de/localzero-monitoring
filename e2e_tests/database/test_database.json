@@ -66,24 +66,6 @@
   }
 },
 {
-  "model": "auth.user",
-  "pk": 4,
-  "fields": {
-    "password": "pbkdf2_sha256$390000$bOR4wt2ycK5GSTLtsfpMgf$wvmE4imsaXkMDHlyvI/EYy1yu3mTWNCr9qUB9Y13QOc=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "christian",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2023-08-03T10:39:16Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
   "model": "cpmonitor.city",
   "pk": 1,
   "fields": {
@@ -177,9 +159,7 @@
     "tasks_are_planned_yearly": false,
     "tasks_have_responsible_entity": false,
     "annual_reduction_of_emissions_can_be_predicted": false,
-    "concept_for_participation_specified": true,
-    "sustainability_architecture_in_administration_exists": true,
-    "climate_council_exists": false
+    "concept_for_participation_specified": true
   }
 },
 {
@@ -197,9 +177,7 @@
     "tasks_are_planned_yearly": true,
     "tasks_have_responsible_entity": true,
     "annual_reduction_of_emissions_can_be_predicted": true,
-    "concept_for_participation_specified": false,
-    "sustainability_architecture_in_administration_exists": false,
-    "climate_council_exists": true
+    "concept_for_participation_specified": false
   }
 },
 {
@@ -1021,19 +999,6 @@
     "teaser": "Eine beispiellos gute Initiative für eine klimaneutrale Zukunft in unserer Stadt.",
     "description": "Wenn Du mitmachen willst, wendest du Dich am besten an Maxi Mustermensch unter maxi@beispiel-los.de.\r\n\r\nUnser Monitoring basiert auf öffentlich zugänglichen Informationen aus dem lokalen BeispielBlatt, dere Website der Stadtverwaltung, dem Klimaaktionsplan, dem Ratsinformationssystem und dem Marktstammdatenregister. Und wir haben auch mit dem Bürgermeister gesprochen. Weitergehende Informationen zum Monitoring bekommst Du bei Dina Durchblick unter dina@beispiel-los.de.",
     "featured_image": "uploads/local_groups/Fotos-alle-1024x683_SEEJ1JR.jpeg"
-  }
-},
-{
-  "model": "cpmonitor.invitation",
-  "pk": 1,
-  "fields": {
-    "accepted": false,
-    "key": "ercizfqjtsqbv5xap4uvlkpswjivqnjiephfxdbhjett8jah0z0ynnfpqrqxjcjg",
-    "sent": null,
-    "inviter": null,
-    "city": 1,
-    "access_right": "city admin",
-    "created": "2023-08-20T10:36:55.384Z"
   }
 },
 {

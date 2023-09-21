@@ -215,7 +215,7 @@ class CapChecklist(models.Model):
         " Dabei ist nicht nur Emissionsreduktion sondern die Erreichung der Klimaneutralität in allen Bereichen der Kommune von Bedeutung.",
     )
     target_date_exists = models.BooleanField(
-        "Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten"
+        "Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten"
         " kommunalen Gremium beschlossen wurde?",
         default=False,
         help_text="Dies sorgt dafür, dass nicht nur Emissionen gemindert werden,"
@@ -288,16 +288,6 @@ class CapChecklist(models.Model):
         help_text="Alle Akteur:innen in einer Kommune sollten bei der Erstellung / Umsetzung eines KAPs beteiligt werden."
         " Unterschiedliche Akteur:innen der Kommune sind: Bürger:innen (z.B. LocalZero-Teams), Verwaltung der Kommune,"
         " höchste politische Gremien der Kommune, Stakeholder:innen in der Kommune (z.B. kommunale Unternehmen oder Vereine)",
-    )
-    sustainability_architecture_in_administration_exists = (
-        models.BooleanField(  # TODO Delete or add explanation?
-            "Gibt es eine gute Nachhaltigkeitsarchitektur in der Verwaltung?",
-            default=False,
-        )
-    )
-    climate_council_exists = models.BooleanField(  # TODO Delete or add explanation?
-        "Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat?",
-        default=False,
     )
 
 

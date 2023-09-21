@@ -178,9 +178,7 @@ def city_view(request, city_slug):
 
     if cap_checklist_exists:
         cap_checklist_total = len(cap_checklist)
-        cap_checklist_fulfilled_list = list(
-            map(lambda x: x["check"], cap_checklist.values())
-        )
+        cap_checklist_fulfilled_list = list(map(lambda x: x["check"], cap_checklist))
         cap_checklist_number_fulfilled = cap_checklist_fulfilled_list.count(True)
         cap_checklist_proportion_fulfilled = round(
             cap_checklist_number_fulfilled / cap_checklist_total * 100
@@ -197,7 +195,7 @@ def city_view(request, city_slug):
     if administration_checklist_exists:
         administration_checklist_total = len(administration_checklist)
         administration_checklist_fulfilled_list = list(
-            map(lambda x: x["check"], administration_checklist.values())
+            map(lambda x: x["check"], administration_checklist)
         )
         administration_checklist_number_fulfilled = (
             administration_checklist_fulfilled_list.count(True)
@@ -259,7 +257,7 @@ def cap_checklist_view(request, city_slug):
     return render(request, "cap_checklist.html", context)
 
 
-def _get_cap_checklist(city) -> dict:
+def _get_cap_checklist(city) -> list:
     try:
         checklist_items = city.cap_checklist._meta.get_fields()
     except CapChecklist.DoesNotExist:
@@ -269,13 +267,14 @@ def _get_cap_checklist(city) -> dict:
         item for item in checklist_items if item.attname not in ["city_id", "id"]
     ]
 
-    return {
-        item.verbose_name: {
+    return [
+        {
+            "question": item.verbose_name,
             "check": getattr(city.cap_checklist, item.attname),
             "help_text": item.help_text,
-        }  # I think this could be improved regarding legibility if we returned a list containing dictionaries instead of one dictionary, would make the template easier to understand
+        }
         for item in checklist_items
-    }
+    ]
 
 
 def administration_checklist_view(request, city_slug):
@@ -303,7 +302,7 @@ def administration_checklist_view(request, city_slug):
     return render(request, "administration_checklist.html", context)
 
 
-def _get_administration_checklist(city) -> dict:
+def _get_administration_checklist(city) -> list:
     try:
         checklist_items = city.administration_checklist._meta.get_fields()
     except AdministrationChecklist.DoesNotExist:
@@ -313,13 +312,14 @@ def _get_administration_checklist(city) -> dict:
         item for item in checklist_items if item.attname not in ["city_id", "id"]
     ]
 
-    return {
-        item.verbose_name: {
+    return [
+        {
+            "question": item.verbose_name,
             "check": getattr(city.administration_checklist, item.attname),
             "help_text": item.help_text,
-        }  # I think this could be improved regarding legibility if we returned a list containing dictionaries instead of one dictionary, would make the template easier to understand
+        }
         for item in checklist_items
-    }
+    ]
 
 
 def _get_task(request, city, task_slugs):

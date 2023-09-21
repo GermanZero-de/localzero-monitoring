@@ -12,7 +12,7 @@
   <div class="card col-sm-12 col-lg-6">
     <div class="card-body">
       <div class="accordion accordion-flush" id="accordionFlushKAP">
-        {% for key, value in administration_checklist.items %}
+        {% for item in administration_checklist %}
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed"
@@ -25,7 +25,7 @@
                   <tbody>
                     <tr>
                       <td width="20">
-                        {% if value.check %}
+                        {% if item.check %}
                           <svg width="20" height="20" class="lz-icon CHECKED">
                             <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check" />
                           </svg>
@@ -35,7 +35,7 @@
                           </svg>
                         {% endif %}
                       </td>
-                      <td>{{ key }}</td>
+                      <td>{{ item.question }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -45,7 +45,7 @@
                  class="accordion-collapse collapse"
                  aria-labelledby="flush-heading{{ forloop.counter0 }}"
                  data-bs-parent="#accordionFlushKAP">
-              <div class="accordion-body">{{ value.help_text }}</div>
+              <div class="accordion-body">{{ item.help_text }}</div>
             </div>
           </div>
         {% endfor %}

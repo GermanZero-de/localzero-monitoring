@@ -15,7 +15,7 @@ def test_should_show_the_cap_assessment_and_the_checklist(live_server, page: Pag
         page.locator(
             "tr",
             has=page.locator(
-                'td:text("Ist im KAP ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten kommunalen Gremium beschlossen wurde?")'
+                'td:text("Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten kommunalen Gremium beschlossen wurde?")'
             ),
         )
         .locator("td", has=page.locator("svg"))
