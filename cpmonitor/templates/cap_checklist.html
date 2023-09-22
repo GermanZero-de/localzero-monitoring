@@ -4,60 +4,64 @@
 {% block title %}
   LocalZero Monitoring - {{ city.name }}
 {% endblock title %}
-{% block content %}
-  <div class="container-xl">
-    <div class="space-y">
-      <h3>Klimaaktionsplan (KAP) Checkliste</h3>
-      {% if city.assessment_action_plan %}
-        <div class="card col-sm-12 col-lg-6">
-          <div class="card-body">{{ city.assessment_action_plan | safe_markdown }}</div>
-        </div>
-      {% endif %}
-      <div class="card col-sm-12 col-lg-6">
-        <div class="card-body">
-          <div class="accordion" id="accordionCapChecklist">
-            {% for question, values in cap_checklist.items %}
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="heading{{ forloop.counter }}">
-                  <button class="accordion-button"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapse{{ forloop.counter }}"
-                          aria-expanded="false"
-                          aria-controls="collapse{{ forloop.counter }}">
-                    <table class="table table-sm table-borderless">
-                      <tbody>
-                        <tr>
-                          <td>
-                            {% if values.is_checked %}
-                              <svg width="20" height="20" class="lz-icon CHECKED">
-                                <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check"/>
-                              </svg>
-                            {% else %}
-                              <svg width="20" height="20" class="lz-icon EMPTY">
-                                <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle"/>
-                              </svg>
-                            {% endif %}
-                          </td>
-                          <td>{{ question }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </button>
-                </h2>
-                <div id="collapse{{ forloop.counter }}"
-                     class="accordion-collapse collapse"
-                     aria-labelledby="heading{{ forloop.counter }}"
-                     data-bs-parent="#accordionCapChecklist">
-                  <div class="accordion-body">
-                    {% if values.rationale.strip %}Kommentar / Begründung: {{ values.rationale | safe_markdown }}{% endif %}
-                  </div>
+{% block text-content %}
+  <h1>Klimaaktionsplan (KAP)</h1>
+  {% if city.assessment_action_plan %}<p>{{ city.assessment_action_plan | safe_markdown }}</p>{% endif %}
+{% endblock text-content %}
+{% block cards %}
+  <div class="row">
+    <div class="card col-sm-12 col-lg-6">
+      <div class="card-body">
+        <div class="accordion accordion-flush" id="accordionFlushKAP">
+          {% for question, values in cap_checklist.items %}
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapse{{ forloop.counter0 }}"
+                        aria-expanded="false"
+                        aria-controls="flush-collapse{{ forloop.counter0 }}">
+                  <table class="table table-sm table-borderless table-no-bottom-padding">
+                    <tbody>
+                      <tr>
+                        <td width="20">
+                          {% if values.is_checked %}
+                            <svg width="20" height="20" class="lz-icon CHECKED">
+                              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check" />
+                            </svg>
+                          {% else %}
+                            <svg width="20" height="20" class="lz-icon EMPTY">
+                              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle" />
+                            </svg>
+                          {% endif %}
+                        </td>
+                        <td>{{ question }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </button>
+              </h2>
+              <div id="flush-collapse{{ forloop.counter0 }}"
+                   class="accordion-collapse collapse"
+                   aria-labelledby="flush-heading{{ forloop.counter0 }}"
+                   data-bs-parent="#accordionFlushKAP">
+                <div class="accordion-body">
+                  <p>
+                    <strong>Erklärung:</strong>
+                  </p>
+                  <p>{{ values.help_text }}</p>
+                  {% if values.rationale.strip %}
+                    <p>
+                      <strong>Anmerkung / Begründung:</strong> {{ values.rationale | safe_markdown }}
+                    </p>
+                  {% endif %}
                 </div>
               </div>
-            {% endfor %}
-          </div>
+            </div>
+          {% endfor %}
         </div>
       </div>
     </div>
   </div>
-{% endblock content %}
+{% endblock cards %}

@@ -1,18 +1,10 @@
 [
 {
-  "model": "auth.group",
-  "pk": 1,
-  "fields": {
-    "name": "Alle",
-    "permissions": []
-  }
-},
-{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-06-12T20:11:14.431Z",
+    "last_login": "2023-08-02T08:49:58.725Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -39,9 +31,7 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2023-08-01T06:50:55Z",
-    "groups": [
-      1
-    ],
+    "groups": [],
     "user_permissions": []
   }
 },
@@ -59,9 +49,25 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2023-08-01T10:19:25Z",
-    "groups": [
-      1
-    ],
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$bOR4wt2ycK5GSTLtsfpMgf$wvmE4imsaXkMDHlyvI/EYy1yu3mTWNCr9qUB9Y13QOc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "christian",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-08-03T10:39:16Z",
+    "groups": [],
     "user_permissions": []
   }
 },
@@ -81,7 +87,7 @@
     "assessment_administration": "Wie bewertet ihr die **Nachhaltigkeitsarchitektur der Verwaltung**? Dieser Text fasst die wichtigsten Punkte zusammen.",
     "assessment_action_plan": "Hier soll die Bewertung des **Klimaaktionsplans** stehen. Was haltet ihr von dem Plan?",
     "assessment_status": "### Wie sieht es aus? \r\n\r\nEine einleitende Übersicht in die Bewertung des Umsetzungsstandes.\r\nHält die Kommune sich im Wesentlichen an ihren eigenen Plan?",
-    "last_update": "2023-08-18",
+    "last_update": "2023-08-03",
     "contact_name": "",
     "contact_email": "",
     "internal_information": "Dies ist eine total wichtige interne Info!",
@@ -128,14 +134,14 @@
     "zipcode": "99999",
     "url": "https://mitallem.de/",
     "resolution_date": "2023-05-03",
-    "target_year": 2023,
+    "target_year": 2035,
     "teaser": "Diese Kommune hat gaaanz viele Daten.",
     "description": "",
     "co2e_budget": 3,
     "assessment_administration": "Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_action_plan": "Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_status": "Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
-    "last_update": "2023-08-18",
+    "last_update": "2023-06-16",
     "contact_name": "Maxime Musterfrau",
     "contact_email": "maxime@muster.frau",
     "internal_information": "Dies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!",
@@ -150,26 +156,16 @@
   "fields": {
     "city": 1,
     "cap_exists": true,
-    "cap_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "target_date_exists": true,
-    "target_date_exists_rationale": "Das Zieljahr ist 2030.",
     "based_on_remaining_co2_budget": true,
-    "based_on_remaining_co2_budget_rationale": "",
     "sectors_of_climate_vision_used": false,
-    "sectors_of_climate_vision_used_rationale": "",
     "scenario_for_climate_neutrality_till_2035_exists": false,
-    "scenario_for_climate_neutrality_till_2035_exists_rationale": "",
     "scenario_for_business_as_usual_exists": false,
-    "scenario_for_business_as_usual_exists_rationale": "Trendszenario ist in Arbeit.",
     "annual_costs_are_specified": false,
-    "annual_costs_are_specified_rationale": "",
     "tasks_are_planned_yearly": false,
-    "tasks_are_planned_yearly_rationale": "",
     "tasks_have_responsible_entity": false,
-    "tasks_have_responsible_entity_rationale": "",
     "annual_reduction_of_emissions_can_be_predicted": false,
-    "concept_for_participation_specified": true,
-    "concept_for_participation_specified_rationale": "Das Konzept kann hier abgerufen werden: [Link](https://monitoring.localzero.net/)"
+    "concept_for_participation_specified": true
   }
 },
 {
@@ -178,26 +174,16 @@
   "fields": {
     "city": 3,
     "cap_exists": true,
-    "cap_exists_rationale": "Super!",
     "target_date_exists": true,
-    "target_date_exists_rationale": "Zieljahr ist 2030.",
     "based_on_remaining_co2_budget": true,
-    "based_on_remaining_co2_budget_rationale": "",
     "sectors_of_climate_vision_used": true,
-    "sectors_of_climate_vision_used_rationale": "Der KAP bilanziert darüberhinaus sogar im Sektor XY.",
     "scenario_for_climate_neutrality_till_2035_exists": true,
-    "scenario_for_climate_neutrality_till_2035_exists_rationale": "Sogar bis 2030!",
     "scenario_for_business_as_usual_exists": true,
-    "scenario_for_business_as_usual_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "annual_costs_are_specified": true,
-    "annual_costs_are_specified_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "tasks_are_planned_yearly": true,
-    "tasks_are_planned_yearly_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "tasks_have_responsible_entity": true,
-    "tasks_have_responsible_entity_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "annual_reduction_of_emissions_can_be_predicted": true,
-    "concept_for_participation_specified": false,
-    "concept_for_participation_specified_rationale": "Ist in Arbeit."
+    "concept_for_participation_specified": false
   }
 },
 {
@@ -206,19 +192,12 @@
   "fields": {
     "city": 3,
     "climate_protection_management_exists": true,
-    "climate_protection_management_exists_rationale": "Das Klimaschutzmanagement kann hier eingesehen werden:  [Link](https://monitoring.localzero.net/)",
     "climate_relevance_check_exists": true,
-    "climate_relevance_check_exists_rationale": "",
     "climate_protection_monitoring_exists": true,
-    "climate_protection_monitoring_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "intersectoral_concepts_exists": true,
-    "intersectoral_concepts_exists_rationale": "",
     "guidelines_for_sustainable_procurement_exists": true,
-    "guidelines_for_sustainable_procurement_exists_rationale": "",
     "municipal_office_for_funding_management_exists": true,
-    "municipal_office_for_funding_management_exists_rationale": "",
-    "public_relation_with_local_actors_exists": true,
-    "public_relation_with_local_actors_exists_rationale": "Handwerksbetrieb XY und Sparkasse arbeiten zusammen."
+    "public_relation_with_local_actors_exists": true
   }
 },
 {
@@ -227,19 +206,12 @@
   "fields": {
     "city": 1,
     "climate_protection_management_exists": true,
-    "climate_protection_management_exists_rationale": "",
     "climate_relevance_check_exists": true,
-    "climate_relevance_check_exists_rationale": "",
     "climate_protection_monitoring_exists": true,
-    "climate_protection_monitoring_exists_rationale": "Das Monitoring kann hier eingesehen werden:  [Link](https://monitoring.localzero.net/)",
     "intersectoral_concepts_exists": false,
-    "intersectoral_concepts_exists_rationale": "Konzepte wurde angefangen und Ende 2023 fertig.",
     "guidelines_for_sustainable_procurement_exists": false,
-    "guidelines_for_sustainable_procurement_exists_rationale": "",
     "municipal_office_for_funding_management_exists": false,
-    "municipal_office_for_funding_management_exists_rationale": "",
-    "public_relation_with_local_actors_exists": false,
-    "public_relation_with_local_actors_exists_rationale": ""
+    "public_relation_with_local_actors_exists": false
   }
 },
 {
@@ -473,8 +445,8 @@
     "description": "",
     "planned_start": null,
     "planned_completion": null,
-    "responsible_organ": "Stadtrat",
-    "responsible_organ_explanation": "Warum hängt es am Stadtrat.",
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
@@ -1037,15 +1009,28 @@
 },
 {
   "model": "cpmonitor.invitation",
+  "pk": 1,
+  "fields": {
+    "accepted": false,
+    "key": "ercizfqjtsqbv5xap4uvlkpswjivqnjiephfxdbhjett8jah0z0ynnfpqrqxjcjg",
+    "sent": null,
+    "inviter": null,
+    "city": 1,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:36:55.384Z"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
   "pk": 2,
   "fields": {
     "accepted": false,
-    "key": "bkneutb8zck96tjknok7hpwwybuif0a1pgny8txer0dqixbexryfntojnhzlddwk",
+    "key": "lypvs6fb6qxk8ylskkckwp3g3djilpsiiunm1fuz68rdwg1emuwhnsuxexpbgjel",
     "sent": null,
     "inviter": null,
     "city": 1,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.211Z"
+    "created": "2023-08-20T10:36:55.386Z"
   }
 },
 {
@@ -1053,12 +1038,12 @@
   "pk": 3,
   "fields": {
     "accepted": false,
-    "key": "lpm5qyqcvyblh2bbjve7jgxnh7ezsutlab1dcqi4ogvseqnqj0qflfvxcct9hsmz",
+    "key": "aaadfye92pbjn2iswjgejj2q4uifhcgk8goeqqj55uan8qcvrle58om8oheybmcs",
     "sent": null,
     "inviter": null,
     "city": 2,
     "access_right": "city admin",
-    "created": "2023-08-20T10:45:21.213Z"
+    "created": "2023-08-20T10:36:55.388Z"
   }
 },
 {
@@ -1066,12 +1051,12 @@
   "pk": 4,
   "fields": {
     "accepted": false,
-    "key": "wr6ikslxkvhhoaqqjj7jb7qjqpgonfpolsgmgdvhp6ny9nm7qfgpjycokhucg3ow",
+    "key": "i3qzwfy8pqfk9gpirmgygovm6rr6yijsfvckbmhizzxcjtd482i7zaqcqyt4u1qq",
     "sent": null,
     "inviter": null,
     "city": 2,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.216Z"
+    "created": "2023-08-20T10:36:55.390Z"
   }
 },
 {
@@ -1079,12 +1064,12 @@
   "pk": 5,
   "fields": {
     "accepted": false,
-    "key": "qfdubrzfl6ddobcqlr1rlehwb0ay8rngl9m6bshazjtdiob3chr1qnh7fs4zos4f",
+    "key": "a7vv8zugeonysvg4vt5hk7404u5s50plid5jywaifqr1ob0tbhcuxyvsem6lf7xu",
     "sent": null,
     "inviter": null,
     "city": 3,
     "access_right": "city admin",
-    "created": "2023-08-20T10:45:21.219Z"
+    "created": "2023-08-20T10:36:55.392Z"
   }
 },
 {
@@ -1092,25 +1077,12 @@
   "pk": 6,
   "fields": {
     "accepted": false,
-    "key": "x1ymexf6lnq0tow1nh8bandsurfz87wiy0vk6o6vjaoxny9hgk3oif13oyfmvicn",
+    "key": "vybe7t3qwc5vwca6punkbnu3t9qlxh5ysqrz7izy7farrwzbw0dpk8adlu43kdbj",
     "sent": null,
     "inviter": null,
     "city": 3,
     "access_right": "city editor",
-    "created": "2023-08-20T10:45:21.220Z"
-  }
-},
-{
-  "model": "cpmonitor.invitation",
-  "pk": 7,
-  "fields": {
-    "accepted": false,
-    "key": "o1gg3wkdtmv5nlccvdjeewqn3yrp3cw5rxweifquqbovrwiwvmnx6kgo2i4p0t0d",
-    "sent": null,
-    "inviter": null,
-    "city": 1,
-    "access_right": "city admin",
-    "created": "2023-08-20T10:51:54.210Z"
+    "created": "2023-08-20T10:36:55.393Z"
   }
 }
 ]

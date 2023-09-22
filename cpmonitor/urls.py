@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
 from . import views
@@ -12,7 +12,6 @@ urlpatterns = [
     path("projekt/", views.project_view, name="project"),
     path("impressum/", views.impressum_view, name="impressum"),
     path("datenschutz/", views.datenschutz_view, name="datenschutz"),
-    path("jetzt-spenden/", views.jetzt_spenden_view, name="jetzt-spenden"),
     path("ueber-uns/", views.ueber_uns_view, name="ueber-uns"),
     path(
         "favicon.ico",
@@ -20,6 +19,12 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("martor/", include("martor.urls")),
+    path("accounts/", include("allauth.urls")),
+    re_path(
+        r"^invitations/accept-invite/(?P<key>\w+)/?$",
+        views.AcceptInvite.as_view(),
+        name="accept-invite",
+    ),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("", views.index_view, name="index"),
     path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),

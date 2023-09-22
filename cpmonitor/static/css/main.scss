@@ -1,7 +1,7 @@
 $lz-yellow: #ffc80c;
 
 :root {
-  --tblr-body-bg: #fff9d5;
+  --tblr-body-bg: white;
   --tblr-font-weight-bold: 700;
   --tblr-primary: #{$lz-yellow};
   --tblr-primary-rgb: #{red($lz-yellow)},
@@ -9,11 +9,17 @@ $lz-yellow: #ffc80c;
   #{blue($lz-yellow)};
   --lz-yellow: #{$lz-yellow};
   --lz-dark-blue: #011633;
-  --lz-color-complete: #9ec422;
+  --lz-color-complete: #8daf1c;
   --lz-color-delayed: #ca3922;
-  --lz-color-as-planned: #f9b31a;
+  --lz-color-as-planned: #ffb82a;
   --lz-color-unknown: grey;
   --lz-color-failed: black;
+  --lz-color-text-dark: black;
+  --lz-color-text-light: white;
+}
+
+.card {
+  --tblr-card-border-color: #777;
 }
 
 .progress {
@@ -22,6 +28,10 @@ $lz-yellow: #ffc80c;
   .progress-bar.neutral {
     background-color: #011633;
   }
+}
+
+header.page-header {
+  margin-bottom: 1rem !important;
 }
 
 .lz-breadcrumbs-bar {
@@ -34,26 +44,6 @@ $lz-yellow: #ffc80c;
   }
 }
 
-.card-title {
-  font-size: 2rem;
-}
-
-.card-details {
-  position:absolute;
-  background:rgba(1,1,1,.2);
-  border:0;
-  bottom:0;
-  right:0;
-  padding: 3px 1px 1px 6px;
-  border-radius:30px 0 0 0;
-
-  svg {
-    width: 18px;
-    height: 18px;
-    opacity: 1
-  }
-}
-
 .lz-date-missed {
   color: red !important;
 }
@@ -61,22 +51,27 @@ $lz-yellow: #ffc80c;
 .lz-status {
   &.UNKNOWN {
     background-color: var(--lz-color-unknown);
+    color: var(--lz-color-text-light);
   }
 
   &.AS_PLANNED {
     background-color: var(--lz-color-as-planned);
+    color: var(--lz-color-text-dark);
   }
 
   &.COMPLETE {
     background-color: var(--lz-color-complete);
+    color: var(--lz-color-text-light);
   }
 
   &.DELAYED {
     background-color: var(--lz-color-delayed);
+    color: var(--lz-color-text-light);
   }
 
   &.FAILED {
     background-color: var(--lz-color-failed);
+    color: var(--lz-color-text-light);
   }
 }
 
@@ -88,6 +83,14 @@ $lz-yellow: #ffc80c;
   &.EMPTY {
     color: var(--lz-color-unknown);
   }
+}
+
+.lz-cards-background {
+  background: #f7efd2;
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
 }
 
 figure.lz-chart {
@@ -118,9 +121,39 @@ figure.lz-chart {
   }
 }
 
+.lz-card-details {
+  position:absolute;
+  background:rgba(1,1,1,.2);
+  border:0;
+  bottom:0;
+  right:0;
+  padding: 3px 1px 1px 6px;
+  border-radius:30px 0 0 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    opacity: 1
+  }
+}
+
 .lz-construction-banner {
   background: $lz-yellow;
   font-weight: bold;
   padding-top: 3px;
   padding-bottom: 3px;
+}
+
+.lz-teaser {
+  font-weight:bold;
+}
+
+.hr-text {
+    font-size: 0.8rem !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.table-no-bottom-padding {
+  margin-bottom: 0px
 }

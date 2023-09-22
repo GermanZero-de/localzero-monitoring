@@ -4,7 +4,7 @@
 {% block title %}
   {{ city.name }} - Monitoring LocalZero
 {% endblock title %}
-{% block content %}
+{% block text-content %}
   <div class="row">
     <div class="col">
       <h1>Monitoring für {{ city.name }}</h1>
@@ -15,6 +15,10 @@
       {% endif %}
     </div>
   </div>
+  {% if city.teaser %}<p class="lz-teaser">{{ city.teaser }}</p>{% endif %}
+  <p class="lz-description">{{ city.description | safe_markdown }}</p>
+{% endblock text-content %}
+{% block cards %}
   <div class="row row-deck row-cards">
     {% if days_gone %}
       <div class="col-sm-6 col-lg-3">
@@ -25,7 +29,13 @@
             </div>
             <div class="h1 mb-3">{{ days_left_proportion }}%</div>
             <div class="d-flex mb-2">
-              <div>Noch {{ days_left }} Tage</div>
+              <div>
+                {% if days_left < 365 %}
+                  Noch {{ days_left }} Tage
+                {% else %}
+                  Noch {{ years_left }} Jahre und {{ days_remain }} Tage
+                {% endif %}
+              </div>
               <div class="ms-auto"></div>
             </div>
             <div class="progress" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" aria-label="{{ days_gone }} Tage seit Beschluss,{{ days_left }} Tage bis zum Zieljahr" title="{{ days_gone }} Tage seit Beschluss
@@ -57,19 +67,19 @@
               <div class="ms-auto"></div>
             </div>
             <div class="progress progress-lg progress-separated">
-              {% for value, label, name in city.status_proportions %}
-                <div class="progress-bar lz-status {{ name }}"
+              {% for value, status in city.status_proportions %}
+                <div class="progress-bar lz-status {{ status.name }}"
                      role="progressbar"
                      data-bs-toggle="tooltip"
                      data-bs-placement="top"
                      data-value="{{ value }}"
-                     title="{{ value }}% {{ label }}"
-                     aria-label="{{ label }}">
+                     title="{{ value }}% {{ status.label }}"
+                     aria-label="{{ status.label }}">
                 </div>
               {% endfor %}
             </div>
           </div>
-          <div class="card-details">
+          <div class="lz-card-details">
             <svg width="20" height="20">
               <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
             </svg>
@@ -100,7 +110,7 @@
               </div>
             </div>
           </div>
-          <div class="card-details">
+          <div class="lz-card-details">
             <svg width="20" height="20">
               <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
             </svg>
@@ -131,7 +141,7 @@
               </div>
             </div>
           </div>
-          <div class="card-details">
+          <div class="lz-card-details">
             <svg width="20" height="20">
               <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
             </svg>
@@ -139,13 +149,6 @@
         </a>
       </div>
     {% endif %}
-  </div>
-  <div class="row">
-    <div class="col-3"></div>
-    <div class="col-6">
-      {% if city.teaser %}<strong>{{ city.teaser }}</strong>{% endif %}
-      {{ city.description | safe_markdown }}
-    </div>
   </div>
   {% if tasks %}
     <div class="row row-deck row-cards">
@@ -177,6 +180,4 @@
       {% endfor %}
     </div>
   {% endif %}
-</div>
-</div>
-{% endblock content %}
+{% endblock cards %}

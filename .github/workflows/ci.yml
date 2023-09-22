@@ -22,6 +22,9 @@ jobs:
           pip install poetry==${{ env.POETRY_VERSION }}
           poetry install --with dev
           poetry run playwright install --with-deps chromium
+      - name: install javascript dependencies
+        run: |
+          yarn install
       - name: Run pre-commit hooks on all files
         run: SKIP=no-commit-to-branch poetry run pre-commit run --all-files
       - name: create database

@@ -1,15 +1,27 @@
-from django.contrib import admin
+from collections.abc import Sequence
+from django.contrib import admin, messages
 from django.db import models
 from django.forms import TextInput
 from django.forms.models import ErrorList
 from django.http import HttpRequest, HttpResponseRedirect, QueryDict
+from django.http.request import HttpRequest
 from django.urls import reverse
 from django.utils.html import format_html
 from martor.widgets import AdminMartorWidget
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
+from rules.contrib.admin import ObjectPermissionsModelAdminMixin
 
-from .models import Chart, City, Task, CapChecklist, AdministrationChecklist, LocalGroup
+from . import rules, utils
+from .models import (
+    Chart,
+    City,
+    Task,
+    CapChecklist,
+    AdministrationChecklist,
+    LocalGroup,
+    Invitation,
+)
 
 _city_filter_query = "city__id__exact"
 """The query parameter used by the city filter."""
@@ -37,7 +49,7 @@ def _admin_url(model, type, city_id):
         return base
 
 
-class ChartInline(admin.StackedInline):
+class ChartInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
     model = Chart
     extra = 0
 
@@ -47,7 +59,7 @@ class ChartInline(admin.StackedInline):
     }
 
 
-class CapChecklistInline(admin.StackedInline):
+class CapChecklistInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
     model = CapChecklist
 
     formfield_overrides = {
@@ -55,7 +67,9 @@ class CapChecklistInline(admin.StackedInline):
     }
 
 
-class AdministrationChecklistInline(admin.StackedInline):
+class AdministrationChecklistInline(
+    ObjectPermissionsModelAdminMixin, admin.StackedInline
+):
     model = AdministrationChecklist
 
     formfield_overrides = {
@@ -63,7 +77,7 @@ class AdministrationChecklistInline(admin.StackedInline):
     }
 
 
-class LocalGroupInline(admin.StackedInline):
+class LocalGroupInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
     model = LocalGroup
 
     formfield_overrides = {
@@ -72,16 +86,47 @@ class LocalGroupInline(admin.StackedInline):
     }
 
 
-class CityAdmin(admin.ModelAdmin):
+class InvitationInline(
+    ObjectPermissionsModelAdminMixin, utils.ModelAdminRequestMixin, admin.StackedInline
+):
+    "Only show the invitation link and offer to delete them. Will be recreated upon next save."
+    model = Invitation
+    extra = 0
+    fields = ("invitation_link",)
+    readonly_fields = ("invitation_link",)
+
+    @admin.display(description="Link")
+    def invitation_link(self, invitation: Invitation):
+        url = invitation.get_invite_url(self.get_request())
+        role = str(invitation)
+        return format_html(
+            """
+            <p>Diesen Link bitte nur an Menschen schicken, die mit dieser Rolle mitarbeiten sollen:</p>
+            <p><a href="{}" target="_blank">{}</a></p>
+            <p>Der Einladungslink ist so lange gültig, bis er gelöscht wird.</p>
+            <p>Nach dem Löschen wird automatisch ein neuer Link erzeugt und hier angezeigt, wenn die
+              Stadt das nächste Mal gespeichert wird.</p>
+            <p>Sollte er nicht gleich sichtbar sein, bitte ein weiteres Mal speichern.</p>
+            """,
+            url,
+            url,
+        )
+
+
+class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
+    # ------ change list page ------
     list_display = ("zipcode", "name", "teaser", "edit_tasks")
     list_display_links = ("name",)
     ordering = ("name",)
     search_fields = ["zipcode", "name"]
 
-    formfield_overrides = {
-        models.CharField: {"widget": TextInput(attrs={"size": "170"})},
-        models.TextField: {"widget": AdminMartorWidget},
-    }
+    def get_queryset(self, request):
+        "Restrict cities shown in changelist to those the user has access to."
+        qs = super().get_queryset(request)
+        user = request.user
+        if user.is_superuser:
+            return qs
+        return qs.filter(rules.is_allowed_to_edit_q(user, City)).distinct()
 
     @admin.display(description="")
     def edit_tasks(self, city: City):
@@ -89,11 +134,31 @@ class CityAdmin(admin.ModelAdmin):
         list_url = _admin_url(Task, "changelist", city.id)
         return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
 
+    # ------ change / add page ------
+    save_on_top = True
+
+    filter_horizontal = ["city_editors", "city_admins"]
+
+    def get_readonly_fields(self, request: HttpRequest, obj=None) -> Sequence[str]:
+        user = request.user
+        result = []
+        if not rules.is_allowed_to_change_city_users(user, obj):
+            result.append("draft_mode")
+            result.append("city_editors")
+            result.append("city_admins")
+        return result
+
+    formfield_overrides = {
+        models.CharField: {"widget": TextInput(attrs={"size": "170"})},
+        models.TextField: {"widget": AdminMartorWidget},
+    }
+
     inlines = [
         ChartInline,
         LocalGroupInline,
         CapChecklistInline,
         AdministrationChecklistInline,
+        InvitationInline,
     ]
 
 
@@ -172,24 +237,32 @@ class TaskForm(MoveNodeForm):
         return super().clean()
 
 
-class TaskAdmin(TreeAdmin):
+class CityPermissionFilter(admin.RelatedFieldListFilter):
+    """
+    In the Task changelist (tree of tasks) on the right in the filter settings
+    show only the cities for which the user has permission.
+    By default, for a `list_filter` on a ForeignKey field, a RelatedFieldListFilter
+    would be used.
+    """
+
+    def field_choices(self, field, request, model_admin):
+        "Limit to cities the user is allowed to edit by using `limit_choices_to`."
+        return field.get_choices(
+            include_blank=False,
+            ordering=self.field_admin_ordering(field, request, model_admin),
+            limit_choices_to=rules.is_allowed_to_edit_q(request.user, City),
+        )
+
+    def has_output(self):
+        "Show even a single possibility. Otherwise, the tasks will not be filtered."
+        return len(self.lookup_choices) > 0
+
+
+class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
     # ------ change list page ------
     change_list_template = "admin/task_changelist.html"
 
-    @admin.display(description="Struktur")
-    def structure(self, task: Task):
-        """Additional read-only field showing the tree structure."""
-
-        def add_parents(current: Task, substructure: str):
-            parent = current.get_parent()
-            if parent == None:
-                return substructure
-            else:
-                return add_parents(parent, "%s --> %s" % (parent.title, substructure))
-
-        return add_parents(task, task.title)
-
-    @admin.display(description="Public page")
+    @admin.display(description="Öffentliche Seite")
     def slug_link(self, task: Task):
         """Additional link to the public page and also showing the slugs."""
         url = reverse(
@@ -197,23 +270,27 @@ class TaskAdmin(TreeAdmin):
         )
         return format_html('<a href="{}" target="_blank">{}</a>', url, task.slugs)
 
-    list_display = ("title", "structure", "slug_link")
+    list_display = ("title", "slug_link")
     form = movenodeform_factory(Task, TaskForm)
 
-    list_filter = ("city",)
+    list_filter = (("city", CityPermissionFilter),)
 
     def changelist_view(self, request):
         """Redirect to city changelist if no city filter is given."""
         city_id = request.GET.get(_city_filter_query)
-        if not city_id:
-            return HttpResponseRedirect(_admin_url(City, "changelist", None))
-        else:
+        if city_id and rules.is_allowed_to_edit(request.user, int(city_id)):
             return super().changelist_view(request)
+
+        msg = "Bitte eine Stadt auswählen, für die Sektoren / Maßnahmen geändert werden sollen. Rechts davon 'KAP bearbeiten' wählen."
+        self.message_user(request, msg, messages.INFO)
+        return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
     search_fields = ("title",)
     search_help_text = "Suche im Titel"
 
     # ------ add and change task page ------
+    save_on_top = True
+
     fields = (
         "city",
         "draft_mode",
@@ -246,12 +323,32 @@ class TaskAdmin(TreeAdmin):
         models.TextField: {"widget": AdminMartorWidget},
     }
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        "In the add form show only the cities the user has access to for the city the task belongs to."
+        if db_field.name == "city":
+            kwargs["queryset"] = City.objects.filter(
+                rules.is_allowed_to_edit_q(request.user, City)
+            ).distinct()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
     def get_changeform_initial_data(self, request: HttpRequest):
         """Prefill the city based on the filter preserved from the changelist view."""
         query_string = self.get_preserved_filters(request)
         filters = QueryDict(query_string).get("_changelist_filters")
         city_id = QueryDict(filters).get(_city_filter_query)
         return {"city": city_id}
+
+    def add_view(self, request, form_url="", extra_context=None):
+        "Only show the add form if a city is selected to which the user has access."
+        query_string = self.get_preserved_filters(request)
+        filters = QueryDict(query_string).get("_changelist_filters")
+        city_id = QueryDict(filters).get(_city_filter_query)
+        if city_id and rules.is_allowed_to_edit(request.user, int(city_id)):
+            return super().add_view(request, form_url, extra_context)
+
+        msg = "Bitte eine Stadt auswählen, für die ein Sektor / eine Maßnahme hinzugefügt werden soll. Rechts davon 'KAP bearbeiten' wählen."
+        self.message_user(request, msg, messages.INFO)
+        return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
 
 admin.site.site_header = "LocalZero Monitoring"

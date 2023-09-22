@@ -15,7 +15,6 @@
     </title>
     <link rel="stylesheet" href="{% static 'tabler/css/tabler.css' %}">
     <link rel="stylesheet" href="{% static 'css/localzero.css' %}">
-    <script src="{% static 'js/localzero.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="{% static 'jquery/jquery.min.js' %}"></script>
     <script src="{% static 'tabler/js/tabler.min.js' %}" defer></script>
@@ -42,7 +41,7 @@
                 <li class="menu-item">
                   <a href="{% url 'ueber-uns' %}">Über uns</a>
                 </li>
-                <li class="menu-item" onclick="toggleSubmenu(event)">
+                <li class="menu-item" id="menu-item-toggleable">
                   <a role="button">Kommunen</a>
                   <ul class="sub-menu">
                     {% for city in cities %}
@@ -57,10 +56,11 @@
           </div>
           <div class="nav-spenden-container">
             <a class="btn nav-spenden"
-               href="{% url 'jetzt-spenden' %}"
+               href="https://localzero.net/jetzt-spenden"
+               target="_blank"
                type="button">Jetzt spenden</a>
           </div>
-          <div id="nav-burger" class="nav-burger" onclick="toggleMobile()">
+          <div id="nav-burger" class="nav-burger">
             <div>
               <div class="hamburger"></div>
               <div class="hamburger"></div>
@@ -85,12 +85,24 @@
       {% endblock breadcrumbs %}
       <div class="page-wrapper">
         <div class="page-body">
-          <div class="container-xl">
-            <div class="space-y">
-              {% block content %}
-              {% endblock content %}
-            </div>
-          </div>
+          {% block content %}
+            {% block text-content-container %}
+              <div class="container">
+                {% block text-content %}
+                {% endblock text-content %}
+              </div>
+            {% endblock text-content-container %}
+            {% block cards-container %}
+              <div class="container-fluid lz-cards-background">
+                <div class="container">
+                  <div class="space-y">
+                    {% block cards %}
+                    {% endblock cards %}
+                  </div>
+                </div>
+              </div>
+            {% endblock cards-container %}
+          {% endblock content %}
         </div>
       </div>
       <footer id="site-footer">
@@ -112,5 +124,6 @@
       </footer>
     </div>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/localzero.js' %}"></script>
   </body>
 </html>

@@ -7,7 +7,9 @@ import uuid
 from typing import List, Tuple, Any
 
 from django.conf import settings
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import Http404
@@ -15,15 +17,32 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import redirect
+from invitations import views as invitations_views
+from invitations.app_settings import app_settings as invitations_settings
+from invitations.adapters import get_invitations_adapter
+from invitations.signals import invite_accepted
+from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
 
 from .models import (
+    AccessRight,
     City,
     ExecutionStatus,
     Task,
     CapChecklist,
     AdministrationChecklist,
 )
+
+STATUS_ORDER = [
+    ExecutionStatus.FAILED,
+    ExecutionStatus.DELAYED,
+    ExecutionStatus.AS_PLANNED,
+    ExecutionStatus.COMPLETE,
+    ExecutionStatus.UNKNOWN,
+]
+
+TO_STATUS = {status.value: status for status in ExecutionStatus}
 
 
 def _show_drafts(request):
@@ -33,7 +52,6 @@ def _show_drafts(request):
 def _calculate_summary(request, node):
     """calculate summarized status for a given node or a whole city"""
 
-    statuses = {s.value: s for s in ExecutionStatus}
     if isinstance(node, City):
         subtasks = Task.objects.filter(city=node, numchild=0)
     else:
@@ -42,18 +60,28 @@ def _calculate_summary(request, node):
         subtasks = subtasks.filter(draft_mode=False)
 
     subtasks_count = len(subtasks)
-    status_counts = Counter([s.execution_status for s in subtasks])
+    status_counts = Counter(
+        [TO_STATUS[subtask.execution_status] for subtask in subtasks]
+    )
     status_proportions = {
-        s: round(c / subtasks_count * 100) for s, c in status_counts.items()
+        status: round(count / subtasks_count * 100)
+        for status, count in status_counts.items()
     }
 
-    node.status_proportions = [
-        (v, statuses[k].label, statuses[k].name)
-        for k, v in sorted(status_proportions.items(), reverse=True)
-    ]
+    node.status_proportions = _sort_status_proportions(status_proportions, STATUS_ORDER)
     node.subtasks_count = subtasks_count
     node.complete_proportion = status_proportions.get(ExecutionStatus.COMPLETE, 0)
     node.incomplete_proportion = 100 - node.complete_proportion
+
+
+def _sort_status_proportions(
+    status_proportions: dict[ExecutionStatus, int], order: list[ExecutionStatus]
+) -> list[tuple[int, ExecutionStatus]]:
+    status_proportions_sorted = []
+    for status in order:
+        if status in status_proportions.keys():
+            status_proportions_sorted.append((status_proportions[status], status))
+    return status_proportions_sorted
 
 
 def _get_frontpage_tasks(request, city):
@@ -189,12 +217,16 @@ def city_view(request, city_slug):
         days_total = (target_date - city.resolution_date).days + 1
         days_gone = (date.today() - city.resolution_date).days
         days_left = days_total - days_gone
+        years_left = round(days_left / 365)
+        days_remain = days_left % 365
         days_gone_proportion = round(days_gone / days_total * 100)
         days_left_proportion = round(days_left / days_total * 100)
         context.update(
             {
                 "days_gone": days_gone,
                 "days_left": days_left,
+                "years_left": years_left,
+                "days_remain": days_remain,
                 "days_gone_proportion": days_gone_proportion,
                 "days_left_proportion": days_left_proportion,
             }
@@ -243,6 +275,7 @@ def _as_formatted_checklist(checklist):
     return {
         checkbox_item.verbose_name: {
             "is_checked": getattr(checklist, checkbox_item.attname),
+            "help_text": checkbox_item.help_text,
             "rationale": getattr(checklist, checkbox_item.attname + "_rationale"),
         }
         for checkbox_item in checkbox_items
@@ -330,7 +363,8 @@ def task_view(request, city_slug, task_slugs=None):
         task: Task = _get_task(request, city, task_slugs)
     except Task.DoesNotExist:
         raise Http404(
-            "Wir haben keine Daten zu dem Sektor / der Maßnahme '%s'." % task_slugs
+            "Wir haben keine Daten zu dem Handlungsfeld / der Maßnahme '%s'."
+            % task_slugs
         )
 
     breadcrumbs += [
@@ -375,10 +409,6 @@ def impressum_view(request):
 
 def datenschutz_view(request):
     return render(request, "datenschutz.html", _get_base_context(request))
-
-
-def jetzt_spenden_view(request):
-    return render(request, "jetzt-spenden.html", _get_base_context(request))
 
 
 def ueber_uns_view(request):
@@ -446,3 +476,89 @@ def markdown_uploader_view(request):
 
     data = json.dumps({"status": 200, "link": img_url, "name": image.name})
     return HttpResponse(data, content_type="application/json")
+
+
+class AcceptInvite(invitations_views.AcceptInvite):
+    "Overwrite handling of invitation link."
+
+    def post(self, *args, **kwargs):
+        """
+        Unfortunately, the whole method had to be copied.
+        Identical to base implementation, except where noted.
+        """
+        self.object = invitation = self.get_object()
+
+        if invitations_settings.GONE_ON_ACCEPT_ERROR and (
+            not invitation
+            or (invitation and (invitation.accepted or invitation.key_expired()))
+        ):
+            return HttpResponse(status=410)
+
+        if not invitation:
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_invalid.txt",
+            )
+            return redirect(invitations_settings.LOGIN_REDIRECT)
+
+        if invitation.accepted:
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_already_accepted.txt",
+                {"email": invitation.email},
+            )
+            return redirect(invitations_settings.LOGIN_REDIRECT)
+
+        if invitation.key_expired():
+            get_invitations_adapter().add_message(
+                self.request,
+                messages.ERROR,
+                "invitations/messages/invite_expired.txt",
+                {"email": invitation.email},
+            )
+            return redirect(self.get_signup_redirect())
+
+        if not invitations_settings.ACCEPT_INVITE_AFTER_SIGNUP:
+            accept_invitation(
+                invitation=invitation,
+                request=self.request,
+                signal_sender=self.__class__,
+            )
+            # Difference: Revert accepted to allow reuse of link.
+            invitation.accepted = False
+            invitation.save()
+
+        user: auth.models.User = self.request.user
+        if user.is_authenticated:
+            if user.is_active and user.is_staff:
+                get_invitations_adapter().add_message(
+                    self.request,
+                    messages.SUCCESS,
+                    "invitations/messages/invite_for_logged_in_user.txt",
+                    {
+                        "role": invitation.get_access_right_display(),
+                        "city": invitation.city.name,
+                        "username": user.username,
+                    },
+                )
+                city: City = invitation.city
+                if invitation.access_right == AccessRight.CITY_EDITOR:
+                    city.city_editors.add(user.pk)
+                elif invitation.access_right == AccessRight.CITY_ADMIN:
+                    city.city_admins.add(user.pk)
+                return redirect(invitations_settings.LOGIN_REDIRECT)
+            else:
+                get_invitations_adapter().add_message(
+                    self.request,
+                    messages.ERROR,
+                    "invitations/messages/invite_for_logged_in_user_invalid.txt",
+                    {"role": str(invitation), "username": user.username},
+                )
+                auth.logout(self.request)
+
+        # Difference: Saving key and not email.
+        self.request.session["invitation_key"] = invitation.key
+
+        return redirect(self.get_signup_redirect())
