@@ -533,6 +533,9 @@ docker exec acme-sh --cron
 
 # force a renewal via letsencrypt's PROD environment, even if renewal time hasn't been reached yet
 docker exec acme-sh --cron --force
+
+# change mail address that will receive expiry warnings (only one address supported as of acme.sh v3.0.6)
+docker exec acme-sh --update-account --accountemail '<the-new-address@somewhere.net>' --debug 2 --server https://acme-v02.api.letsencrypt.org/directory
 ```
 
 #### TLS Certificates and Running Locally
