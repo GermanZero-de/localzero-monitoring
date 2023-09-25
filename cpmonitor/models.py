@@ -333,7 +333,7 @@ class CapChecklist(models.Model):
         " höchste politische Gremien der Kommune, Stakeholder:innen in der Kommune (z.B. kommunale Unternehmen oder Vereine)",
     )
     concept_for_participation_specified_rationale = models.TextField(
-        "Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
+        "Begründung zu: Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
         blank=True,
     )
 

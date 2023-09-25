@@ -105,7 +105,7 @@ class Migration(migrations.Migration):
             name="concept_for_participation_specified_rationale",
             field=models.TextField(
                 blank=True,
-                verbose_name="Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
+                verbose_name="Begründung zu: Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
             ),
         ),
         migrations.AddField(

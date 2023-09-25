@@ -168,6 +168,7 @@
     "tasks_have_responsible_entity": false,
     "tasks_have_responsible_entity_rationale": "",
     "annual_reduction_of_emissions_can_be_predicted": false,
+    "annual_reduction_of_emissions_can_be_predicted_rationale": "",
     "concept_for_participation_specified": true,
     "concept_for_participation_specified_rationale": "Das Konzept kann hier abgerufen werden: [Link](https://monitoring.localzero.net/)"
   }
@@ -196,6 +197,7 @@
     "tasks_have_responsible_entity": true,
     "tasks_have_responsible_entity_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "annual_reduction_of_emissions_can_be_predicted": true,
+    "annual_reduction_of_emissions_can_be_predicted_rationale": "",
     "concept_for_participation_specified": false,
     "concept_for_participation_specified_rationale": "Ist in Arbeit."
   }
