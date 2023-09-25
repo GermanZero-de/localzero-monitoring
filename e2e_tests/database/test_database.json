@@ -99,7 +99,7 @@
     "assessment_administration": "Wie bewertet ihr die **Nachhaltigkeitsarchitektur der Verwaltung**? Dieser Text fasst die wichtigsten Punkte zusammen.",
     "assessment_action_plan": "Hier soll die Bewertung des **Klimaaktionsplans** stehen. Was haltet ihr von dem Plan?",
     "assessment_status": "### Wie sieht es aus? \r\n\r\nEine einleitende Übersicht in die Bewertung des Umsetzungsstandes.\r\nHält die Kommune sich im Wesentlichen an ihren eigenen Plan?",
-    "last_update": "2023-08-03",
+    "last_update": "2023-08-18",
     "contact_name": "",
     "contact_email": "",
     "internal_information": "Dies ist eine total wichtige interne Info!",
@@ -153,7 +153,7 @@
     "assessment_administration": "Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_action_plan": "Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
     "assessment_status": "Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
-    "last_update": "2023-06-16",
+    "last_update": "2023-08-18",
     "contact_name": "Maxime Musterfrau",
     "contact_email": "maxime@muster.frau",
     "internal_information": "Dies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!",
@@ -168,16 +168,27 @@
   "fields": {
     "city": 1,
     "cap_exists": true,
+    "cap_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "target_date_exists": true,
+    "target_date_exists_rationale": "Das Zieljahr ist 2030.",
     "based_on_remaining_co2_budget": true,
+    "based_on_remaining_co2_budget_rationale": "",
     "sectors_of_climate_vision_used": false,
+    "sectors_of_climate_vision_used_rationale": "",
     "scenario_for_climate_neutrality_till_2035_exists": false,
+    "scenario_for_climate_neutrality_till_2035_exists_rationale": "",
     "scenario_for_business_as_usual_exists": false,
+    "scenario_for_business_as_usual_exists_rationale": "Trendszenario ist in Arbeit.",
     "annual_costs_are_specified": false,
+    "annual_costs_are_specified_rationale": "",
     "tasks_are_planned_yearly": false,
+    "tasks_are_planned_yearly_rationale": "",
     "tasks_have_responsible_entity": false,
+    "tasks_have_responsible_entity_rationale": "",
     "annual_reduction_of_emissions_can_be_predicted": false,
-    "concept_for_participation_specified": true
+    "annual_reduction_of_emissions_can_be_predicted_rationale": "",
+    "concept_for_participation_specified": true,
+    "concept_for_participation_specified_rationale": "Das Konzept kann hier abgerufen werden: [Link](https://monitoring.localzero.net/)"
   }
 },
 {
@@ -186,16 +197,27 @@
   "fields": {
     "city": 3,
     "cap_exists": true,
+    "cap_exists_rationale": "Super!",
     "target_date_exists": true,
+    "target_date_exists_rationale": "Zieljahr ist 2030.",
     "based_on_remaining_co2_budget": true,
+    "based_on_remaining_co2_budget_rationale": "",
     "sectors_of_climate_vision_used": true,
+    "sectors_of_climate_vision_used_rationale": "Der KAP bilanziert darüberhinaus sogar im Sektor XY.",
     "scenario_for_climate_neutrality_till_2035_exists": true,
+    "scenario_for_climate_neutrality_till_2035_exists_rationale": "Sogar bis 2030!",
     "scenario_for_business_as_usual_exists": true,
+    "scenario_for_business_as_usual_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "annual_costs_are_specified": true,
+    "annual_costs_are_specified_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "tasks_are_planned_yearly": true,
+    "tasks_are_planned_yearly_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "tasks_have_responsible_entity": true,
+    "tasks_have_responsible_entity_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "annual_reduction_of_emissions_can_be_predicted": true,
-    "concept_for_participation_specified": false
+    "annual_reduction_of_emissions_can_be_predicted_rationale": "",
+    "concept_for_participation_specified": false,
+    "concept_for_participation_specified_rationale": "Ist in Arbeit."
   }
 },
 {
@@ -204,12 +226,19 @@
   "fields": {
     "city": 3,
     "climate_protection_management_exists": true,
+    "climate_protection_management_exists_rationale": "Das Klimaschutzmanagement kann hier eingesehen werden:  [Link](https://monitoring.localzero.net/)",
     "climate_relevance_check_exists": true,
+    "climate_relevance_check_exists_rationale": "",
     "climate_protection_monitoring_exists": true,
+    "climate_protection_monitoring_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
     "intersectoral_concepts_exists": true,
+    "intersectoral_concepts_exists_rationale": "",
     "guidelines_for_sustainable_procurement_exists": true,
+    "guidelines_for_sustainable_procurement_exists_rationale": "",
     "municipal_office_for_funding_management_exists": true,
-    "public_relation_with_local_actors_exists": true
+    "municipal_office_for_funding_management_exists_rationale": "",
+    "public_relation_with_local_actors_exists": true,
+    "public_relation_with_local_actors_exists_rationale": "Handwerksbetrieb XY und Sparkasse arbeiten zusammen."
   }
 },
 {
@@ -218,12 +247,19 @@
   "fields": {
     "city": 1,
     "climate_protection_management_exists": true,
+    "climate_protection_management_exists_rationale": "",
     "climate_relevance_check_exists": true,
+    "climate_relevance_check_exists_rationale": "",
     "climate_protection_monitoring_exists": true,
+    "climate_protection_monitoring_exists_rationale": "Das Monitoring kann hier eingesehen werden:  [Link](https://monitoring.localzero.net/)",
     "intersectoral_concepts_exists": false,
+    "intersectoral_concepts_exists_rationale": "Konzepte wurde angefangen und Ende 2023 fertig.",
     "guidelines_for_sustainable_procurement_exists": false,
+    "guidelines_for_sustainable_procurement_exists_rationale": "",
     "municipal_office_for_funding_management_exists": false,
-    "public_relation_with_local_actors_exists": false
+    "municipal_office_for_funding_management_exists_rationale": "",
+    "public_relation_with_local_actors_exists": false,
+    "public_relation_with_local_actors_exists_rationale": ""
   }
 },
 {

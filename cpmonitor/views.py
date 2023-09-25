@@ -4,6 +4,7 @@ import json
 import os
 import time
 import uuid
+from typing import List, Tuple, Any
 
 from django.conf import settings
 from django.contrib import auth
@@ -178,8 +179,9 @@ def city_view(request, city_slug):
 
     if cap_checklist_exists:
         cap_checklist_total = len(cap_checklist)
-        cap_checklist_fulfilled_list = list(map(lambda x: x["check"], cap_checklist))
-        cap_checklist_number_fulfilled = cap_checklist_fulfilled_list.count(True)
+        cap_checklist_number_fulfilled = _count_checklist_number_fulfilled(
+            cap_checklist
+        )
         cap_checklist_proportion_fulfilled = round(
             cap_checklist_number_fulfilled / cap_checklist_total * 100
         )
@@ -194,11 +196,8 @@ def city_view(request, city_slug):
 
     if administration_checklist_exists:
         administration_checklist_total = len(administration_checklist)
-        administration_checklist_fulfilled_list = list(
-            map(lambda x: x["check"], administration_checklist)
-        )
-        administration_checklist_number_fulfilled = (
-            administration_checklist_fulfilled_list.count(True)
+        administration_checklist_number_fulfilled = _count_checklist_number_fulfilled(
+            administration_checklist
         )
         administration_checklist_proportion_fulfilled = round(
             administration_checklist_number_fulfilled
@@ -257,24 +256,30 @@ def cap_checklist_view(request, city_slug):
     return render(request, "cap_checklist.html", context)
 
 
-def _get_cap_checklist(city) -> list:
+def _get_cap_checklist(city) -> dict:
     try:
-        checklist_items = city.cap_checklist._meta.get_fields()
+        checklist = city.cap_checklist
     except CapChecklist.DoesNotExist:
         return {}
 
-    checklist_items = [
-        item for item in checklist_items if item.attname not in ["city_id", "id"]
+    return _as_formatted_checklist(checklist)
+
+
+def _as_formatted_checklist(checklist):
+    checkbox_items = [
+        field
+        for field in checklist._meta.get_fields()
+        if field.attname not in ["city_id", "id"] and "_rationale" not in field.attname
     ]
 
-    return [
-        {
-            "question": item.verbose_name,
-            "check": getattr(city.cap_checklist, item.attname),
-            "help_text": item.help_text,
+    return {
+        checkbox_item.verbose_name: {
+            "is_checked": getattr(checklist, checkbox_item.attname),
+            "help_text": checkbox_item.help_text,
+            "rationale": getattr(checklist, checkbox_item.attname + "_rationale"),
         }
-        for item in checklist_items
-    ]
+        for checkbox_item in checkbox_items
+    }
 
 
 def administration_checklist_view(request, city_slug):
@@ -302,24 +307,24 @@ def administration_checklist_view(request, city_slug):
     return render(request, "administration_checklist.html", context)
 
 
-def _get_administration_checklist(city) -> list:
+def _get_administration_checklist(city) -> dict:
     try:
-        checklist_items = city.administration_checklist._meta.get_fields()
+        checklist = city.administration_checklist
     except AdministrationChecklist.DoesNotExist:
         return {}
 
-    checklist_items = [
-        item for item in checklist_items if item.attname not in ["city_id", "id"]
-    ]
+    return _as_formatted_checklist(checklist)
 
-    return [
-        {
-            "question": item.verbose_name,
-            "check": getattr(city.administration_checklist, item.attname),
-            "help_text": item.help_text,
-        }
-        for item in checklist_items
-    ]
+
+def _count_checklist_number_fulfilled(checklist_items: dict):
+    count = 0
+
+    for _, values in checklist_items.items():
+        for _, is_checked in values.items():
+            if is_checked is True:
+                count += 1
+
+    return count
 
 
 def _get_task(request, city, task_slugs):

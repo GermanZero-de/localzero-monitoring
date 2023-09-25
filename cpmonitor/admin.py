@@ -59,14 +59,22 @@ class ChartInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
     }
 
 
-class CapChecklistInline(ObjectPermissionsModelAdminMixin, admin.TabularInline):
+class CapChecklistInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
     model = CapChecklist
+
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
 
 
 class AdministrationChecklistInline(
-    ObjectPermissionsModelAdminMixin, admin.TabularInline
+    ObjectPermissionsModelAdminMixin, admin.StackedInline
 ):
     model = AdministrationChecklist
+
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
 
 
 class LocalGroupInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
