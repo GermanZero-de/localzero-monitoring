@@ -35,6 +35,8 @@ python -m venv .venv
 poetry shell
 poetry install --sync
 pre-commit install
+docker network create testing_nginx_network
+docker network create production_nginx_network
 ```
 
 This will
