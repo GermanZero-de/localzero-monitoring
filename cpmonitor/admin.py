@@ -298,6 +298,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         "title",
         "teaser",
         "description",
+        "source",
         "planned_start",
         "planned_completion",
         "responsible_organ",
