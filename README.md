@@ -443,21 +443,14 @@ docker compose up -d
 
 ### Deploying a new version
 
-Requirement: SSH access to the server.
-
-Run [.github/workflows/deploy.sh](.github/workflows/deploy.sh) and provide the environment to deploy to as an argument:
-
-```shell
-./deploy.sh testing
+To deploy a new version to the testing or production environments, merge or push the commit you want to deploy to the corresponding branch:
 ```
-
-Optionally, you can specify a suffix for the tags that will be created, e.g. to differentiate multiple deployments on the same day:
-
-```shell
-./deploy.sh testing hotfix-for-issue-123
+deploy-to-testing
+deploy-to-production
 ```
+Note that only maintainers and admins may merge/push to those branches.
 
-View the script to see the exact steps that are executed.
+View the [workflow](.github/workflows/deploy.yml) and [script](deploy.sh) to see the exact steps that are executed.
 
 ### Database Client
 In order to view, manipulate and export the database in any of the environments (local, testing, production), the database webclient
