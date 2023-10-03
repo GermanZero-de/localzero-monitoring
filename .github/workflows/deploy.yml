@@ -1,30 +1,32 @@
 name: Deploy
 on:
   push:
-    branches: [deploy-to-production, deploy-to-test]
+    branches: [deploy-to-testing, deploy-to-production]
   workflow_dispatch:
 
 jobs:
   get-environment:
-    name: Get GitHub Environment
-    # Determine the GitHub "Environment" to be used by the "deploy" job.
+    name:  Determine the environment for the deployment from the branch name
     runs-on: ubuntu-latest
     outputs:
-      environment: ${{ steps.do-it.outputs.environment }}
-      url:         ${{ steps.do-it.outputs.url }}
+      environment: ${{ steps.determine-environment.outputs.environment }}
+      url:         ${{ steps.determine-environment.outputs.url }}
     steps:
-      - id: do-it
+      - id: determine-environment
         name: Determine environment
         run: |
           case $GITHUB_REF in
           refs/heads/deploy-to-production)
             echo "environment=production"
-            echo "url=https://monitoring.localzero.net/";;
-          refs/heads/deploy-to-test)
-            echo "environment=test"
-            echo "url=https://monitoring-test.localzero.net/";;
+            echo "url=https://monitoring.localzero.net/"
+            ;;
+          refs/heads/deploy-to-testing)
+            echo "environment=testing"
+            echo "url=https://monitoring-test.localzero.net/"
+            ;;
           *)
-            echo "";;
+            echo "not an environment: $GITHUB_REF - should be refs/heads/deploy-to-{testing|production}"
+            ;;
           esac >> $GITHUB_OUTPUT
 
   deploy:
@@ -42,8 +44,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # TODO: Build whatever is needed for the deployment here.
-
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -56,13 +56,8 @@ jobs:
                 User monitoring
                 IdentityFile ~/.ssh/id_lzm
 
-      # TODO: Do the actual deployment here and remove the test steps below.
-
-      - name: Test ssh connection (to be removed)
-        run: ssh lzm "echo \"$DIR - $URL - $GITHUB_REF - $GITHUB_SHA\" >> auto_deploy_test_file"
-      - name: Test conditional deployment 1 (to be removed)
-        if: ${{ env.ENVIRONMENT == 'production' }}
-        run: echo 'TODO Deploy production system'
-      - name: Test conditional deployment 2 (to be removed)
-        if: ${{ env.ENVIRONMENT == '' }}
-        run: echo 'Not really a true deployment'
+      - name: Run deploy script
+        shell: bash
+        run: |
+          chmod u+x deploy.sh
+          ./deploy.sh "$ENVIRONMENT"

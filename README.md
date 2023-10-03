@@ -35,6 +35,8 @@ python -m venv .venv
 poetry shell
 poetry install --sync
 pre-commit install
+docker network create testing_nginx_network
+docker network create production_nginx_network
 ```
 
 This will
@@ -280,14 +282,41 @@ SKIP=check-untracked-migrations git commit
 
 ## Containerization and Deployment
 
-The application is deployed to the server as a pair of Docker containers:
+```mermaid
+flowchart TB
+    user-device([visitor's device])-- visit site -->reverse-proxy
+    subgraph localzero-monitoring-vm
+        subgraph testing
+            nginx-testing-- forward -->djangoapp-testing
+            nginx-testing-- forward -->dbeaver-testing
+            dbeaver-testing
+        end
+        subgraph production
+            nginx-production-- forward -->djangoapp-production
+            nginx-production-- forward -->dbeaver-production
+            dbeaver-production
+        end
+        subgraph exposed [exposed to web]
+            reverse-proxy-- forward if HOST==monitoring-test.localzero.net -->nginx-testing
+            reverse-proxy-- forward if HOST==monitoring.localzero.net -->nginx-production
+            acme.sh-. configure updated certs .->reverse-proxy
+        end
+    end
+```
 
-- container 1 runs the gunicorn webserver to host the django app itself,
-- container 2 runs nginx, a proxy that hosts the static files while providing stability and security,
-- container 3 runs the server for the database web client (Cloudbeaver),
-- container 4 runs acme.sh, which handles SSL certificate renewal.
+The application is deployed to the server in the form of three Docker compositions:
+- reverse-proxy
+- testing environment
+- production environment
 
-Only the port of nginx is exposed, which will forward requests to the django app or provide any requested static files directly.
+Each environment consists of:
+- the "djangoapp" container that run the gunicorn webserver to host the django app itself,
+- its own nginx (a proxy that hosts the static files while providing stability and security),
+- a server for the database web client (DBeaver),
+
+Outside the environments and exposed to the web, there's a third "reverse-proxy" composition containing:
+- acme.sh, which handles SSL certificate renewal ([see further down](#tls-certificate-and-renewal)),
+- the top-level reverse proxy nginx, which forwards requests to the environments based on the HOST header, or to acme.sh.
 
 ### Building the Django app Docker image and running the container
 
@@ -414,79 +443,14 @@ docker compose up -d
 
 ### Deploying a new version
 
-1. Checkout the commit you want to deploy (usually the latest commit of main).
-2. Tag that revision with
+To deploy a new version to the testing or production environments, merge or push the commit you want to deploy to the corresponding branch:
+```
+deploy-to-testing
+deploy-to-production
+```
+Note that only maintainers and admins may merge/push to those branches.
 
-    ```sh
-    DATESTR=$(date +%Y-%b-%d) && echo ${DATESTR}
-    git tag -a deploy-prod-${DATESTR} -m "Deployment to production" && git push origin deploy-prod-${DATESTR}
-    # and / or
-    git tag -a deploy-test-${DATESTR} -m "Deployment to test" && git push origin deploy-test-${DATESTR}
-    ```
-3. Build the image for the Django app:
-    ```sh
-    docker compose build
-    ```
-4. Export the images:
-    ```
-    docker save cpmonitor -o cpmonitor.tar
-    docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
-    ```
-5. Copy the images, the compose files, the certificate renewal cron job and the reverse proxy settings to the server:
-    ```sh
-    scp -C cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab reload-cert.sh docker/reverseproxy/ monitoring@monitoring.localzero.net:/tmp/
-    ```
-6. Login to the server:
-    ```sh
-    ssh monitoring@monitoring.localzero.net
-    ```
-7. Import the images into Docker on the server:
-    ```
-    docker load -i /tmp/cpmonitor.tar
-    docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
-    ```
-    (Docker should print "Loading layer" for both images.)
-8. Tag the images with the current date in case we want to roll back, as well as with the environment you're deploying to (to prevent affecting the other environment):
-
-    ```sh
-    DATESTR=$(date +%Y-%b-%d) && echo ${DATESTR}
-
-    docker tag cpmonitor:latest cpmonitor:${DATESTR}
-    docker tag cpmonitor:latest cpmonitor:<testing|production>
-
-    docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:${DATESTR}
-    docker tag klimaschutzmonitor-dbeaver:latest klimaschutzmonitor-dbeaver:<testing|production>
-    ```
-9. Stop the server, apply the migrations, start the server:
-    ```sh
-    cd ~/<testing|production>/
-    docker-compose down --volumes
-    # backup the db
-    cp -v db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.${DATESTR}
-    cp -vr cpmonitor/images/uploads /data/LocalZero/DB_BACKUPS/<testing|production>/uploads.${DATESTR}
-    # apply migrations using a temporary container
-    docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:<testing|production> sh
-    DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
-    # exit and stop the temporary container
-    exit
-    # use the latest docker-compose.yml to start the app using the new image
-    mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-    docker-compose up --detach --no-build
-    ```
-10. Update the reverse proxy config
-    ```sh
-    cd ~/reverseproxy
-    docker-compose down
-    mv docker-compose.yml docker-compose.yml.bak
-    cp -r /tmp/reverseproxy/* .
-    docker-compose up --detach --no-build
-    ```
-11. Install certificate renewal cron job:
-    ```sh
-    crontab /tmp/crontab
-    cp /tmp/reload-cert.sh /home/monitoring/
-    chmod +x /home/monitoring/reload-cert.sh
-    ```
+View the [workflow](.github/workflows/deploy.yml) and [script](deploy.sh) to see the exact steps that are executed.
 
 ### Database Client
 In order to view, manipulate and export the database in any of the environments (local, testing, production), the database webclient
