@@ -6,8 +6,7 @@ on:
 
 jobs:
   get-environment:
-    name: Get GitHub Environment
-    # Determine the GitHub "Environment" to be used by the "deploy" job.
+    name:  Determine the environment for the deployment from the branch name
     runs-on: ubuntu-latest
     outputs:
       environment: ${{ steps.determine-environment.outputs.environment }}

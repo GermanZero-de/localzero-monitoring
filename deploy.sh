@@ -30,7 +30,7 @@ docker compose --env-file .env.${env} build
 
 # Export the images
 docker save cpmonitor:${env} -o cpmonitor.tar
-docker save klimaschutzmonitor-dbeaver -o klimaschutzmonitor-dbeaver.tar
+docker save klimaschutzmonitor-dbeaver:${env} -o klimaschutzmonitor-dbeaver.tar
 
 # Copy the images, the compose files, the certificate renewal cron job and the reverse proxy settings to the server
 scp -C -r cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab reload-cert.sh docker/reverseproxy/ monitoring@monitoring.localzero.net:/tmp/
@@ -45,8 +45,8 @@ docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
 
 # Tag the images with the current date in case we want to roll back,
 # as well as with the environment you're deploying to (to prevent affecting the other environment)
-docker tag cpmonitor:${env} cpmonitor:${date}${tag_suffix}
-docker tag klimaschutzmonitor-dbeaver:${env} klimaschutzmonitor-dbeaver:${date}${tag_suffix}
+docker tag cpmonitor:${env} cpmonitor:${env}-${date}${tag_suffix}
+docker tag klimaschutzmonitor-dbeaver:${env} klimaschutzmonitor-dbeaver:${env}-${date}${tag_suffix}
 
 # Stop the server, apply the migrations, start the server
 cd ~/${env}/
