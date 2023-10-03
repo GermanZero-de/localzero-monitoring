@@ -45,7 +45,10 @@
              class="card card-link card-link-pop">
             <div class="card-body">
               <div class="h3 mb-3">{{ group.title }}</div>
-              <div class="col">{{ group.subtasks_count }} Maßnahmen</div>
+              <div class="col">
+                {{ group.subtasks_count }} Maßnahmen
+                {% if group.sugg_subtasks_count %}+ {{ group.sugg_subtasks_count }} vorgeschlagene Maßnahmen{% endif %}
+              </div>
               <div class="progress progress-lg progress-separated mb-3">
                 {% for value, status in group.status_proportions %}
                   <div class="progress-bar lz-status {{ status.name }}"

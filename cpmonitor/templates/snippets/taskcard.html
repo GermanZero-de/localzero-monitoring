@@ -4,7 +4,7 @@
   <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
   <div class="card-body">
     {% if task.is_suggestion %}
-      <div class="h3 mb-3">{{ task.title }} [VORSCHLAG]</div>
+      <div class="h3 mb-3 text-secondary">{{ task.title }} [VORSCHLAG]</div>
     {% else %}
       <div class="h3 mb-3">{{ task.title }}</div>
     {% endif %}

@@ -658,7 +658,7 @@
   "model": "cpmonitor.task",
   "pk": 15,
   "fields": {
-    "path": "000100030002",
+    "path": "000100030003",
     "depth": 3,
     "numchild": 0,
     "city": 1,
@@ -966,12 +966,12 @@
   "model": "cpmonitor.task",
   "pk": 26,
   "fields": {
-    "path": "00040002",
+    "path": "00040003",
     "depth": 2,
     "numchild": 0,
     "city": 3,
     "draft_mode": true,
-    "source": 0,
+    "source": 1,
     "frontpage": false,
     "title": "Zukunftswerkstatt",
     "teaser": "",
