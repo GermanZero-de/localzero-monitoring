@@ -19,6 +19,7 @@ pillow = "^9.5.0"
 rules = "^3.3"
 django-invitations = "^2.0.0"
 django-allauth = "^0.54.0"
+django-dbbackup = "^4.0.2"
 
 [tool.pyright]
 venvPath = "."

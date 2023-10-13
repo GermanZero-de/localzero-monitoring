@@ -454,6 +454,22 @@ requests = "*"
 requests-oauthlib = ">=0.3.0"
 
 [[package]]
+name = "django-dbbackup"
+version = "4.0.2"
+description = "Management commands to help backup and restore a project database and media."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "django-dbbackup-4.0.2.tar.gz", hash = "sha256:1874d684abc22260972a67668a6db3331b24d7e1e8af89eaffdcd61eb27dbc2a"},
+    {file = "django_dbbackup-4.0.2-py3-none-any.whl", hash = "sha256:3ccde831f1a8268fb031b37a8e7e2de3abb556623023af1e859cd7104c09ea2a"},
+]
+
+[package.dependencies]
+django = ">=2.2"
+pytz = "*"
+
+[[package]]
 name = "django-invitations"
 version = "2.0.0"
 description = "Generic invitations app with support for django-allauth"
@@ -1207,6 +1223,18 @@ mysql = ["mysql-connector-python"]
 postgresql = ["psycopg2"]
 
 [[package]]
+name = "pytz"
+version = "2023.3.post1"
+description = "World timezone definitions, modern and historical"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pytz-2023.3.post1-py2.py3-none-any.whl", hash = "sha256:ce42d816b81b68506614c11e8937d3aa9e41007ceb50bfdcb0749b921bf646c7"},
+    {file = "pytz-2023.3.post1.tar.gz", hash = "sha256:7b4fddbeb94a1eba4b557da24f19fdf9db575192544270a9101d8509f9f43d7b"},
+]
+
+[[package]]
 name = "pyyaml"
 version = "6.0"
 description = "YAML parser and emitter for Python"
@@ -1570,4 +1598,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f193666a39ca47f6ce7ba8a08c1de6327f74eb21c9580f2bda6bc77c812079c4"
+content-hash = "984d6f4e882c2d7fc75917debca253ac789cff4a2d25455e02b7d3f1d3c04f92"

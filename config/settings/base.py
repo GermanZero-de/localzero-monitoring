@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "dbbackup",
     # "invitations", We do not use invitations.Invitation and therefore do not want its migrations.
     "cpmonitor.apps.CpmonitorConfig",
 ]
@@ -198,3 +199,7 @@ INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = False
 # django core configuration used by django-invitations, django-allauth
 LOGIN_URL = "/admin/login/"
 LOGIN_REDIRECT_URL = "/admin/"
+
+# dbbackup
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE_OPTIONS = {"location": BASE_DIR / "backup"}
