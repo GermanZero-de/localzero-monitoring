@@ -507,3 +507,11 @@ docker exec acme-sh --update-account --accountemail '<the-new-address@somewhere.
 
 #### TLS Certificates and Running Locally
 When running locally, we instead use a [certificate created for localhost](ssl_certificates_localhost). Since ownership of localhost cannot be certified, this is a single self-signed certificate instead of a full chain signed by a CA like on the server, and an exception must be added to your browser to trust it.
+
+
+## Backups
+A backup of the database and media files is created each day.
+You can also manually trigger a backup on the server by running
+```shell
+/home/monitoring/backup.sh production
+```
