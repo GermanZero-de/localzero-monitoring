@@ -19,7 +19,9 @@ maxNumberOfBackups=7
 date=$(date +%Y-%m-%d-%H-%M-%S)
 
 # create a new backup
-docker exec djangoapp-testing mkdir /backup/$date
+docker exec djangoapp-testing cd /backup
+docker exec djangoapp-testing mkdir /$date
+docker exec djangoapp-testing sqlite3 db.sqlite3 ".backup 'backup_file.sq3'"
 docker exec djangoapp-testing /bin/sh -c "python -Xutf8 manage.py dumpdata -e contenttypes -e auth.Permission -e admin.LogEntry -e sessions --indent 2 --settings=config.settings.container > $directoryOfBackupInContainer/$date/database.json"
 docker exec djangoapp-testing /bin/sh -c "python manage.py mediabackup --settings=config.settings.container -O $directoryOfBackupInContainer/$date/media.tar"
 
