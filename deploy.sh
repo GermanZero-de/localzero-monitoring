@@ -23,7 +23,9 @@ fi
 date=$(date +%Y-%b-%d)
 tag="deploy-${env}-${date}${tag_suffix}"
 echo "Tagging version as $tag in git."
-git tag -a $tag -m "Deployment to ${env}" && git push origin $tag
+git tag -a $tag -m "Deployment to ${env}"
+echo "Pushing tag $tag to github."
+git push origin $tag
 
 # Build the image for the Django app
 docker compose --env-file .env.${env} build
