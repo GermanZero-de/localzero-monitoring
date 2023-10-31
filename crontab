@@ -1,3 +1,2 @@
 # reload SSL certificate around every four hours, in case it was renewed by acme.sh
 0 */4 * * * /home/monitoring/reload-cert.sh > /home/monitoring/last_cert_reload.log 2>&1
-0 */4 * * * /home/monitoring/backup.sh production
