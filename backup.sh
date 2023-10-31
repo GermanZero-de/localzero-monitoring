@@ -20,11 +20,9 @@ maxNumberOfBackups=7
 date=$(date +%Y-%m-%d-%H-%M-%S)
 
 # create a new backup
-mkdir -m a+rw "$directoryOfBackup"/"$date"
+mkdir "$directoryOfBackup"/"$date"
 docker exec djangoapp-testing sqlite3 /db/db.sqlite3 ".backup '$directoryOfBackupInContainer/$date/backup_db.sqlite3'"
 docker exec djangoapp-testing /bin/sh -c "tar -C $mediaDirectoryInContainer -cz -f $directoryOfBackupInContainer/$date/uploads.tar.gz ."
-docker exec djangoapp-testing chmod a+rw "$directoryOfBackupInContainer"/"$date"/backup_db.sqlite3
-docker exec djangoapp-testing chmod a+rw "$directoryOfBackupInContainer"/"$date"/uploads.tar.gz
 
 printf "Created a new backup in %s \n" "$directoryOfBackup"/"$date"
 
