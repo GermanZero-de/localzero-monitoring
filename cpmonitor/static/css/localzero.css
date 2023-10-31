@@ -14,8 +14,8 @@
 }
 
 :root {
-  --lz-yellow: #FFC80C;
-  --lz-yellow-light: #FFF9E5;
+  --lz-yellow: #ffc80c;
+  --lz-yellow-light: #fff9e5;
   --lz-dark-blue: #011633;
   --lz-green: #a3d869;
   --backgroundcolor: white;
@@ -25,8 +25,11 @@
   --screen-width-small: 600px;
   --header-height: 70px;
   --font-header: FabrikatNormal, sans-serif;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 #site-header {
