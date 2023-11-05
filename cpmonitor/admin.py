@@ -130,7 +130,10 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
 
     @admin.display(description="")
     def edit_tasks(self, city: City):
-        """For each city, a link to the list (tree, actually) of Tasks for just that city."""
+        """For each city, a link to the list (tree, actually) of Tasks for just that city.
+
+        This is the only entry point to reach the changelist for the tasks.
+        """
         list_url = _admin_url(Task, "changelist", city.id)
         return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
 
@@ -163,7 +166,7 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
 
 
 class TaskForm(MoveNodeForm):
-    """Restrict the positions to move to the same city."""
+    """Fixed django-treebeard form to restrict the positions to move to the same city."""
 
     def __init__(
         self,
