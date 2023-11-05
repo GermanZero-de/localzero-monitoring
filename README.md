@@ -272,13 +272,6 @@ cp -r cpmonitor/images/uploads e2e_tests/database/test_database_uploads
 
 Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
 
-## When pre-commit hooks make trouble
-
-E.g. the hook `check-untracked-migrations` is known to make trouble with detachted HEAD, e.g. during a rebase. Then it can be skipped:
-
-```shell
-SKIP=check-untracked-migrations git commit
-```
 
 ## Containerization and Deployment
 
