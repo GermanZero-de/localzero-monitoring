@@ -73,6 +73,10 @@ crontab /tmp/crontab
 cp /tmp/reload-cert.sh /home/monitoring/
 chmod +x /home/monitoring/reload-cert.sh
 
+# make backup script available
+cp /tmp/backup.sh /home/monitoring/
+chmod +x /home/monitoring/backup.sh
+
 echo 'FINISHED SUCCESSFULLY!'
 
 exit
