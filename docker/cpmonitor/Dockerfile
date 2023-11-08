@@ -51,6 +51,10 @@ FROM python-base as final
 ENV PATH="/venv/bin:${PATH}"
 ENV VIRTUAL_ENV="/venv"
 
+# install the sqlite cli for backup creation
+RUN apk update && apk upgrade
+RUN apk add --no-cache sqlite
+
 # run as unprivileged user instead of root
 RUN adduser -D user
 USER user

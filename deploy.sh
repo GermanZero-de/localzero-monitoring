@@ -35,7 +35,7 @@ docker save cpmonitor:${env} -o cpmonitor.tar
 docker save klimaschutzmonitor-dbeaver:${env} -o klimaschutzmonitor-dbeaver.tar
 
 # Copy the images, the compose files, the certificate renewal cron job and the reverse proxy settings to the server
-scp -C -r cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab reload-cert.sh docker/reverseproxy/ monitoring@monitoring.localzero.net:/tmp/
+scp -C -r cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml crontab reload-cert.sh backup.sh docker/reverseproxy/ monitoring@monitoring.localzero.net:/tmp/
 
 # Login to the server and execute everything that follows there
 ssh -tt lzm /bin/bash << EOF
@@ -74,6 +74,10 @@ docker-compose up --detach --no-build
 crontab /tmp/crontab
 cp /tmp/reload-cert.sh /home/monitoring/
 chmod +x /home/monitoring/reload-cert.sh
+
+# make backup script available
+cp /tmp/backup.sh /home/monitoring/
+chmod +x /home/monitoring/backup.sh
 
 echo 'FINISHED SUCCESSFULLY!'
 
