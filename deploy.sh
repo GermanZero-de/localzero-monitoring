@@ -54,11 +54,12 @@ docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
 docker tag cpmonitor:${env} cpmonitor:${env}-${date}${tag_suffix}
 docker tag klimaschutzmonitor-dbeaver:${env} klimaschutzmonitor-dbeaver:${env}-${date}${tag_suffix}
 
+# backup the db and images
+~/backup.sh $env
+
 # Stop the server, apply the migrations, start the server
 cd ~/${env}/
 docker-compose down --volumes
-# backup the db
-~/backup.sh $env
 
 # apply migrations using a temporary container
 docker run --user=1007:1007 --rm -v /home/monitoring/${env}/db:/db cpmonitor:${env} sh -c "DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container"
