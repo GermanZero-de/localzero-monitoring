@@ -16,15 +16,15 @@ jobs:
           key: ${{ secrets.LZM_SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.LZM_SSH_KNOWN_HOSTS }}
           config: |
-            Host lzm
-                HostName monitoring.localzero.net
-                User monitoring
-                IdentityFile ~/.ssh/id_lzm
+            Host monitoring.localzero.net monitoring-test.localzero.net lzm
+            HostName monitoring.localzero.net
+            User monitoring
+            IdentityFile ~/.ssh/id_lzm
 
       - name: Run backup script
         shell: bash
         run: |
-          ssh -tt lzm /bin/bash << EOF
+          ssh -tt monitoring.localzero.net /bin/bash << EOF
           set -euo pipefail
           ./backup.sh production
           exit
