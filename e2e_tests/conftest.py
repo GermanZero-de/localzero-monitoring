@@ -7,6 +7,12 @@ from playwright.sync_api import Page, BrowserContext
 from config.settings.base import BASE_DIR
 
 
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args):
+    # ignore complaints that our self-signed localhost cert isn't trusted by playwright
+    return {**browser_context_args, "ignore_https_errors": True}
+
+
 @pytest.fixture(scope="function")
 def django_db_setup(django_db_setup, django_db_blocker):
     with django_db_blocker.unblock():

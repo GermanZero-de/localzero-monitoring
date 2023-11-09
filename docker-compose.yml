@@ -3,9 +3,10 @@ version: '3'
 services:
   djangoapp:
     container_name: djangoapp-${ENVIRONMENT_NAME}
-    # find a way so we dont have to toggle this on the server
-    build: .
-    image: cpmonitor
+    build:
+      context: ./
+      dockerfile: ./docker/cpmonitor/Dockerfile
+    image: cpmonitor:${ENVIRONMENT_NAME}
     user: "1007"
     volumes:
       - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
@@ -13,6 +14,7 @@ services:
       - ${IMAGES_PATH?:Please set the IMAGES_PATH environment variable.}:/images
       - nginx_config_volume:/nginx/conf.d
       - nginx_extras_volume:/nginx/extras-${ENVIRONMENT_NAME}
+      - ${BACKUP_PATH?:Please set the BACKUP_PATH environment variable.}:/backup
     networks:
       - nginx_network
     environment:
@@ -25,22 +27,38 @@ services:
     container_name: nginx-${ENVIRONMENT_NAME}
     image: nginxinc/nginx-unprivileged:alpine
     ports:
-      - 80:8080
-      - 443:8443
+      - 8080
     volumes:
       - nginx_config_volume:/etc/nginx/conf.d
       - nginx_extras_volume:/etc/nginx/conf.d/extras
       - static_volume:/cpmonitor/static
       - ${IMAGES_PATH}:/cpmonitor/images
-      - ${CERTIFICATES_PATH?:Please set the CERTIFICATES_PATH environment variable.}:/etc/letsencrypt
     depends_on:
       - djangoapp
     networks:
       - nginx_network
 
+  dbeaver:
+    build: ./docker/dbeaver
+    container_name: dbeaver-${ENVIRONMENT_NAME}
+    image: klimaschutzmonitor-dbeaver:${ENVIRONMENT_NAME}
+    volumes:
+      - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
+    networks:
+      - nginx_network
+    ports:
+      - 8978
+    environment:
+      CB_SERVER_NAME: CloudBeaver CE Server
+      CB_ADMIN_NAME: ${CB_ADMIN_NAME}
+      CB_ADMIN_PASSWORD: ${CB_ADMIN_PASSWORD}
+    depends_on:
+      - djangoapp
+
 networks:
   nginx_network:
-    driver: bridge
+    name: ${ENVIRONMENT_NAME}_nginx_network
+    external: true
 
 volumes:
   # just declare the volumes so nginx and django can share them

@@ -3,7 +3,7 @@ FROM node:19-alpine AS frontend-builder
 
 WORKDIR /cpmonitor
 
-COPY package.json yarn.lock .
+COPY package.json yarn.lock ./
 COPY cpmonitor/static/css cpmonitor/static/css
 RUN yarn install && \
     yarn run compile:css
@@ -37,6 +37,7 @@ RUN poetry export --without dev --format requirements.txt \
 
 COPY . .
 COPY --from=frontend-builder /cpmonitor/cpmonitor/static/css ./cpmonitor/static/css
+COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/icons ./node_modules/@tabler/icons
 COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/core/dist ./node_modules/@tabler/core/dist
 COPY --from=frontend-builder /cpmonitor/node_modules/jquery/dist ./node_modules/jquery/dist
 RUN DJANGO_SECRET_KEY="dummy" DJANGO_CSRF_TRUSTED_ORIGINS="dummy" DJANGO_DEBUG="False" \
@@ -49,6 +50,10 @@ FROM python-base as final
 
 ENV PATH="/venv/bin:${PATH}"
 ENV VIRTUAL_ENV="/venv"
+
+# install the sqlite cli for backup creation
+RUN apk update && apk upgrade
+RUN apk add --no-cache sqlite
 
 # run as unprivileged user instead of root
 RUN adduser -D user

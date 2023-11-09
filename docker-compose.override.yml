@@ -1,0 +1,12 @@
+version: '3'
+
+# Bind to HTTP port to allow local development without reverse proxy.
+services:
+  nginx-unprivileged:
+    ports:
+      - 80:8080
+
+networks:
+  nginx_network:
+    driver: bridge
+    external: false

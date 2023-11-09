@@ -1,11 +1,15 @@
+.env
+.env.*
 .git
 .gitignore
 .pre-commit-config.yaml
 .venv
 .yarn
+*.tar
 **/*.css
 **/*.css.map
-db.sqlite3
+cpmonitor/images
+db/db.sqlite3
 docker-compose.yml
 LICENSE
 node_modules

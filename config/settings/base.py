@@ -47,6 +47,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "treebeard",
     "martor",
+    "rules.apps.AutodiscoverRulesConfig",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    # "invitations", We do not use invitations.Invitation and therefore do not want its migrations.
     "cpmonitor.apps.CpmonitorConfig",
 ]
 
@@ -60,12 +65,17 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+AUTHENTICATION_BACKENDS = (
+    "rules.permissions.ObjectPermissionBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
 ROOT_URLCONF = "cpmonitor.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "cpmonitor" / "templates" / "overrides"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -87,7 +97,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "db" / "db.sqlite3",
     }
 }
 
@@ -131,6 +141,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "cpmonitor" / "static",
     ("jquery", os.path.join(BASE_DIR, "node_modules", "jquery", "dist")),
     ("tabler", os.path.join(BASE_DIR, "node_modules", "@tabler", "core", "dist")),
+    ("tabler-icons", os.path.join(BASE_DIR, "node_modules", "@tabler", "icons")),
 ]
 
 # Default primary key field type
@@ -156,3 +167,34 @@ MEDIA_URL = "images/"
 MARTOR_UPLOAD_PATH = "uploads/"
 MARTOR_UPLOAD_URL = "/api/uploader/"
 MAX_IMAGE_UPLOAD_SIZE = 104857600  # 100 MB
+
+# django-allauth configuration:
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+# Most customization is done in the adapter:
+ACCOUNT_ADAPTER = "cpmonitor.adapters.AllauthInvitationsAdapter"
+# django-allauth needs allauth.socialaccount to really work, but we don't use its OAuth parts
+SOCIALACCOUNT_PROVIDERS = {}
+ACCOUNT_EMAIL_VERIFICATION = "none"  # Would need a working email config.
+
+# django-invitations configuration:
+# https://django-invitations.readthedocs.io/en/latest/configuration.html
+# django-invitations is closely coupled to django-allauth and uses
+# the same adapter.
+INVITATIONS_ADAPTER = "cpmonitor.adapters.AllauthInvitationsAdapter"
+# To couple an invitation to a city and access right (either admin or editor)
+# a custom model is needed. To prevent `invitations.Invitation` from being
+# used, django-invitations does not appear in `INSTALLED_APPS` above.
+INVITATIONS_INVITATION_MODEL = "cpmonitor.Invitation"
+INVITATIONS_GONE_ON_ACCEPT_ERROR = False
+INVITATIONS_INVITATION_ONLY = True
+# In order to use our custom view instead of the one from django-invitations,
+# `invitations.urls` could not be used. This parameters default value points
+# to that and had to be replaced by our own:
+INVITATIONS_CONFIRMATION_URL_NAME = "accept-invite"
+# Setting this to true would cause a signal handler to be installed, which
+# would try to access the email field of an invitation and fail on the custom model.
+INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = False
+
+# django core configuration used by django-invitations, django-allauth
+LOGIN_URL = "/admin/login/"
+LOGIN_REDIRECT_URL = "/admin/"

@@ -1,4 +1,5 @@
 {% load static %}
+{% load martortags %}
 <!DOCTYPE HTML>
 <html lang="de">
   <head>
@@ -9,16 +10,120 @@
           content="{% block description %}Monitoring von Klimaschutz-Maßnahmen in LocalZero-Kommunen{% endblock description %}">
     <title>
       {% block title %}
-        LocalZero Monitoring
+        Monitoring LocalZero
       {% endblock title %}
     </title>
     <link rel="stylesheet" href="{% static 'tabler/css/tabler.css' %}">
+    <link rel="stylesheet" href="{% static 'css/localzero.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="{% static 'jquery/jquery.min.js' %}"></script>
     <script src="{% static 'tabler/js/tabler.min.js' %}" defer></script>
   </head>
   <body>
-    {% block content %}
-    {% endblock content %}
+    <div class="page">
+      <header class="lz-construction-banner">
+        <div class="container-xl">
+          Vorab-Version. Die Software befindet sich noch in Entwicklung. <a href="https://github.com/GermanZero-de/klimaschutzmonitor">Github-Projekt</a>
+        </div>
+      </header>
+      <header id="site-header">
+        <div class="site-header-inner">
+          <a class="site-branding" href="{% url 'index' %}" title="Home">
+            <div class="site-logo">&nbsp;</div>
+            <p class="site-title">LocalZero Monitoring</p>
+          </a>
+          <div id="site-menu">
+            <nav class="site-navigation">
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="{% url 'project' %}">Das Projekt</a>
+                </li>
+                <li class="menu-item">
+                  <a href="{% url 'ueber-uns' %}">Über uns</a>
+                </li>
+                <li class="menu-item" id="menu-item-toggleable">
+                  <a role="button">Kommunen</a>
+                  <ul class="sub-menu">
+                    {% for city in cities %}
+                      <li class="menu-item">
+                        <a href="{% url 'city' city.slug %}">{{ city.name }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="nav-spenden-container">
+            <a class="btn nav-spenden"
+               href="https://localzero.net/jetzt-spenden"
+               target="_blank"
+               type="button">Jetzt spenden</a>
+          </div>
+          <div id="nav-burger" class="nav-burger">
+            <div>
+              <div class="hamburger"></div>
+              <div class="hamburger"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+      {% block breadcrumbs %}
+        {% if breadcrumbs %}
+          <header class="lz-breadcrumbs-bar">
+            <div class="container-xl">
+              <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+                {% for breadcrumb in breadcrumbs %}
+                  <li class="breadcrumb-item {% if forloop.last %}active{% endif %}">
+                    <a href="{{ breadcrumb.url }}">{{ breadcrumb.label }}</a>
+                  </li>
+                {% endfor %}
+              </ol>
+            </div>
+          </header>
+        {% endif %}
+      {% endblock breadcrumbs %}
+      <div class="page-wrapper">
+        <div class="page-body">
+          {% block content %}
+            {% block text-content-container %}
+              <div class="container">
+                {% block text-content %}
+                {% endblock text-content %}
+              </div>
+            {% endblock text-content-container %}
+            {% block cards-container %}
+              <div class="container-fluid lz-cards-background">
+                <div class="container">
+                  <div class="space-y">
+                    {% block cards %}
+                    {% endblock cards %}
+                  </div>
+                </div>
+              </div>
+            {% endblock cards-container %}
+          {% endblock content %}
+        </div>
+      </div>
+      <footer id="site-footer">
+        <div class="site-footer-inner">
+          <p>
+            Copyright © <a href="https://localzero.net/">LocalZero.net</a>
+          </p>
+          <nav>
+            <ul>
+              <li>
+                <a href="{% url 'impressum' %}">Impressum</a>
+              </li>
+              <li>
+                <a href="{% url 'datenschutz' %}">Datenschutz</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </footer>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/localzero.js' %}"></script>
   </body>
 </html>

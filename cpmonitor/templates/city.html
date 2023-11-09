@@ -1,111 +1,183 @@
-{% extends "pageframe.html" %}
+{% extends "base.html" %}
 {% load martortags %}
-{% block page_body %}
-  <div class="container-xl">
-    <div class="space-y">
-      {% block introduction %}
-        <div class="card col-7 mx-auto">
-          <div class="card-body">
-            <div class="align-items-center d-flex mb-2">
-              <div class="text-nowrap">
-                <h4 class="my-0">{{ city.subtasks_count }} Maßnahmen</h4>
-                <div class="text-muted">{{ city.completed_proportion }}% abgeschlossen</div>
-              </div>
-              <div class="progress progress-lg progress-separated ms-2">
-                {% for value, label, name in city.status_proportions %}
-                  <div class="progress-bar lz-status {{ name }}"
-                       role="progressbar"
-                       style="width: {{ value }}%"
-                       data-bs-toggle="tooltip"
-                       data-bs-placement="top"
-                       title="{{ value }}% {{ label }}"
-                       aria-label="{{ valu }}% {{ label }}">
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-            <div class="row mb-3">
-              {% for value, label, name in city.status_proportions %}
-                <div class="col-auto d-flex align-items-center pe-2">
-                  <span class="legend me-2 lz-status {{ name }}"></span>
-                  <span>{{ label }}</span>
-                </div>
-              {% endfor %}
-            </div>
-            {% if days_gone %}
-              <div class="align-items-center d-flex mb-2">
-                <div class="text-nowrap">
-                  <h4 class="my-0">Noch {{ days_left }} Tage</h4>
-                  <div class="text-muted">{{ days_gone_proportion }}% verstrichen</div>
-                </div>
-                <div class="progress ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" aria-label="{{ days_gone }} Tage seit Beschluss,{{ days_left }} Tage bis zum Zieljahr" title="{{ days_gone }} Tage seit Beschluss
-                  <br>
-                  {{ days_left }} Tage bis zum Zieljahr">
-                  <div class="progress-bar days-left"
-                       style="width: {{ days_gone_proportion }}%"
-                       role="progressbar"
-                       aria-valuenow="{{ days_gone_proportion }}"
-                       aria-valuemin="0"
-                       aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-          </div>
-        </div>
-      {% endblock introduction %}
-      {% if tasks %}
-        <h3>Maßnahmen</h3>
-        <div class="row row-deck row-cards">
-          {% for task in tasks %}
-            <div class="col-sm-6 col-lg-3">
-              <a href="{% url 'task' city.slug task.slugs %}"
-                 class="card card-link card-link-popup">
-                <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
-                <div class="card-body">
-                  <div class="h2 mb-3">{{ task.title }}</div>
-                  <div style="-webkit-line-clamp:8;
-                              display: -webkit-box;
-                              -webkit-box-orient: vertical;
-                              overflow:hidden">
-                    {{ task.summary }}
-                  </div>
-                </div>
-              </a>
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-      {% if groups %}
-        <h3>Weitere Handlungsfelder</h3>
-        <div class="row row-deck row-cards">
-          {% for group in groups %}
-            <div class="col-sm-6 col-lg-3">
-              <a href="{% url 'task' city.slug group.slugs %}"
-                 class="card card-link card-link-pop">
-                <div class="card-body">
-                  <div class="h2 mb-3">{{ group.title }}</div>
-                  <div class="col">{{ group.subtasks_count }} Maßnahmen</div>
-                  <div class="progress progress-lg progress-separated mb-3">
-                    {% for value, label, name in group.status_proportions %}
-                      <div class="progress-bar lz-status {{ name }}"
-                           role="progressbar"
-                           style="width: {{ value }}%"
-                           data-bs-toggle="tooltip"
-                           data-bs-placement="top"
-                           title="{{ value }} % {{ label }}"
-                           aria-label="{{ label }}">
-                      </div>
-                    {% endfor %}
-                  </div>
-                  <!--
-                  -->
-                </div>
-              </a>
-            </div>
-          {% endfor %}
-        </div>
+{% load static %}
+{% block title %}
+  {{ city.name }} - Monitoring LocalZero
+{% endblock title %}
+{% block text-content %}
+  <div class="row">
+    <div class="col">
+      <h1>Monitoring für {{ city.name }}</h1>
+    </div>
+    <div class="col-auto">
+      {% if local_group %}
+        <span class="align-middle">von <a href="{% url 'local_group' city.slug %}">{{ local_group.name }}</a></span>
       {% endif %}
     </div>
   </div>
-{% endblock page_body %}
+  {% if city.teaser %}<p class="lz-teaser">{{ city.teaser }}</p>{% endif %}
+  <p class="lz-description">{{ city.description | safe_markdown }}</p>
+{% endblock text-content %}
+{% block cards %}
+  <div class="row row-deck row-cards">
+    {% if days_gone %}
+      <div class="col-sm-6 col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">Restzeit</div>
+            </div>
+            <div class="h1 mb-3">{{ days_left_proportion }}%</div>
+            <div class="d-flex mb-2">
+              <div>
+                {% if days_left < 365 %}
+                  Noch {{ days_left }} Tage
+                {% else %}
+                  Noch {{ years_left }} Jahre und {{ days_remain }} Tage
+                {% endif %}
+              </div>
+              <div class="ms-auto"></div>
+            </div>
+            <div class="progress" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" aria-label="{{ days_gone }} Tage seit Beschluss,{{ days_left }} Tage bis zum Zieljahr" title="{{ days_gone }} Tage seit Beschluss
+              <br>
+              {{ days_left }} Tage bis zum Zieljahr">
+              <div class="progress-bar neutral"
+                   role="progressbar"
+                   data-value="{{ days_gone_proportion }}"
+                   aria-valuenow="{{ days_gone_proportion }}"
+                   aria-valuemin="0"
+                   aria-valuemax="100">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% if city.subtasks_count %}
+      <div class="col-sm-6 col-lg-3">
+        <a href="{% url 'task' city.slug %}"
+           class="card card-link card-link-popup">
+          <div class="card-body ">
+            <div class="d-flex align-items-center">
+              <div class="subheader">Maßnahmen offen</div>
+            </div>
+            <div class="h1 mb-3">{{ city.incomplete_proportion }}%</div>
+            <div class="d-flex mb-2">
+              <div>{{ city.subtasks_count }} Maßnahmen insgesamt</div>
+              <div class="ms-auto"></div>
+            </div>
+            <div class="progress progress-lg progress-separated">
+              {% for value, status in city.status_proportions %}
+                <div class="progress-bar lz-status {{ status.name }}"
+                     role="progressbar"
+                     data-bs-toggle="tooltip"
+                     data-bs-placement="top"
+                     data-value="{{ value }}"
+                     title="{{ value }}% {{ status.label }}"
+                     aria-label="{{ status.label }}">
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="lz-card-details">
+            <svg width="20" height="20">
+              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    {% endif %}
+    {% if cap_checklist_exists %}
+      <div class="col-sm-6 col-lg-3">
+        <a href="{% url 'cap_checklist' city.slug %}"
+           class="card card-link card-link-popup">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">Klimaaktionsplan</div>
+            </div>
+            <div class="h1 mb-3">{{ cap_checklist_number_fulfilled }}/{{ cap_checklist_total }}</div>
+            <div class="d-flex mb-2">
+              <div>Qualitätskriterien erfüllt</div>
+              <div class="ms-auto"></div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar neutral"
+                   role="progressbar"
+                   data-value="{{ cap_checklist_proportion_fulfilled }}"
+                   aria-valuenow="{{ cap_checklist_proportion_fulfilled }}"
+                   aria-valuemin="0"
+                   aria-valuemax="100">
+              </div>
+            </div>
+          </div>
+          <div class="lz-card-details">
+            <svg width="20" height="20">
+              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    {% endif %}
+    {% if administration_checklist_exists %}
+      <div class="col-sm-6 col-lg-3">
+        <a href="{% url 'administration_checklist' city.slug %}"
+           class="card card-link card-link-popup">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">Verwaltungsstrukturen</div>
+            </div>
+            <div class="h1 mb-3">{{ administration_checklist_number_fulfilled }}/{{ administration_checklist_total }}</div>
+            <div class="d-flex mb-2">
+              <div>Qualitätskriterien erfüllt</div>
+              <div class="ms-auto"></div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar neutral"
+                   role="progressbar"
+                   data-value="{{ administration_checklist_proportion_fulfilled }}"
+                   aria-valuenow="{{ administration_checklist_proportion_fulfilled }}"
+                   aria-valuemin="0"
+                   aria-valuemax="100">
+              </div>
+            </div>
+          </div>
+          <div class="lz-card-details">
+            <svg width="20" height="20">
+              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+  {% if tasks %}
+    <div class="row row-deck row-cards">
+      {% for task in tasks %}
+        <div class="col-sm-12 col-lg-6">{% include "snippets/taskcard.html" %}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if charts %}
+    <div class="row row-deck row-cards">
+      {% for chart in charts %}
+        <div class="col-sm-12 col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <figure class="lz-chart">
+                <img class="d-block w-100 border"
+                     height="0"
+                     width="100%"
+                     alt="{{ chart.alt_description }}"
+                     src="{{ chart.image.url }}"/>
+                <figcaption>
+                  {{ chart.caption | safe_markdown }}
+                  <span class="text-muted">Quelle: {{ chart.source }} - Lizenz: {{ chart.license }}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock cards %}

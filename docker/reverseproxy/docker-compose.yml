@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    container_name: reverse-proxy
+    image: nginxinc/nginx-unprivileged:alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - ${CERTIFICATES_PATH}:/etc/letsencrypt
+    networks:
+      - production_nginx_network
+      - testing_nginx_network
+      - reverse_proxy_network
+    depends_on:
+      - acme-sh
+
+  acme-sh:
+    image: neilpang/acme.sh
+    container_name: acme-sh
+    command: daemon
+    volumes:
+      - ${CERTIFICATES_PATH}:/acme.sh
+    networks:
+      - reverse_proxy_network
+
+networks:
+  production_nginx_network:
+    name: production_nginx_network
+    driver: bridge
+    external: true
+  testing_nginx_network:
+    name: testing_nginx_network
+    driver: bridge
+    external: true
+  reverse_proxy_network:
+    name: reverse_proxy_network
+    driver: bridge

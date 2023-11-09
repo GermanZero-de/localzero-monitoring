@@ -21,7 +21,8 @@
 - Windows: Add the shown path in the `PATH` variable. (Search fpr "env" in Windows settings.)
 - Install `sudo apt install python-is-python3` so that poetry can run python3 with the python command.
 - Install Yarn version 3 as described here: <https://yarnpkg.com/getting-started/install>.
-- Install [Docker Desktop](https://www.docker.com/) or [Docker Engine and Docker Compose without Docker Desktop](https://docs.docker.com/engine/install/), if you prefer and are on Linux.
+- Install node.js from <https://nodejs.org/en/download>.
+- Install [Docker Desktop](https://www.docker.com/) or [Docker Engine and Docker Compose without Docker Desktop](https://docs.docker.com/engine/install/), if you prefer and are on Linux/macOS.
 
 The above steps are needed only once per machine.
 
@@ -34,6 +35,8 @@ python -m venv .venv
 poetry shell
 poetry install --sync
 pre-commit install
+docker network create testing_nginx_network
+docker network create production_nginx_network
 ```
 
 This will
@@ -73,6 +76,7 @@ python manage.py migrate --settings=config.settings.local
 
 # (optional) install example data
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+cp -r e2e_tests/database/test_database_uploads/. cpmonitor/images/uploads
 
 # install css and javascript libraries
 yarn install
@@ -80,6 +84,9 @@ yarn install
 # start the server
 python manage.py runserver --settings=config.settings.local
 ```
+
+Whenever you have problems make sure that you have activated the virtual environment correctly. You may have to
+deactivate it with "`deactivate`" and activate it with "`source .venv/bin/activate`" (Windows "`.venv/bin/activate.bat`").
 
 The admin user for development is:
 
@@ -114,11 +121,15 @@ playwright install
 pytest --ignore e2e_tests/test_deployed.py
 
 # prepare external server and run smoke test against it (deletes DB):
-rm db.sqlite3
+rm db/db.sqlite3
 poetry run python manage.py migrate --settings=config.settings.local
 poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+cp -r e2e_tests/database/test_database_uploads/. cpmonitor/images/uploads
 docker compose up -d --build
+docker compose -f docker/reverseproxy/docker-compose.yml up -d --build
 pytest e2e_tests/test_deployed.py
+docker compose -f docker/reverseproxy/docker-compose.yml down --volumes
+docker compose down --volumes
 
 # run a single test
 pytest <path-to-test>
@@ -136,10 +147,16 @@ pytest --headed <path-to-e2e-test>
 From a local database filled with suitable data, generate a fixture named `example_fixture` with
 
 ```shell
-python -Xutf8 manage.py dumpdata cpmonitor --indent 2 --settings=config.settings.local > cpmonitor/fixtures/example_fixture.json
+python -Xutf8 manage.py dumpdata -e contenttypes -e auth.Permission -e admin.LogEntry -e sessions --indent 2 --settings=config.settings.local > cpmonitor/fixtures/example_fixture.json
 ```
 
 (The `-Xutf8` and `--indent 2` options ensure consistent and readable output on all platforms.)
+
+The arguments `-e contenttypes -e auth.Permission -e admin.LogEntry -e sessions` exclude tables which are pre-filled
+by django or during usage by django and whose content may change depending on the models in the project. If they are
+included, everything works fine at first, since loaddata will silently accept data already there. However, as soon as
+the data to load clashes with existing content, it will fail. `-e admin.LogEntry` excludes references to content types
+which may otherwise be inconsistent.`-e sessions` excludes unneeded data which otherwise would clog the JSON file.
 
 This fixture may be loaded in a test with. (Similar in a pytest fixture.)
 
@@ -163,7 +180,7 @@ This may be used as follows:
 SNAPSHOT_NAME=prod_database_<some date found in e2e_tests/database/>
 
 # Remove previous data
-rm db.sqlite3
+rm db/db.sqlite3
 rm -r cpmonitor/images/uploads
 
 # Create DB
@@ -235,39 +252,64 @@ Afterwards the test database has to be updated as well. Use the dumpdata command
 currently running database:
 
 ```shell
-python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
+python -Xutf8 manage.py dumpdata -e contenttypes -e auth.Permission -e admin.LogEntry -e sessions --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
 ```
 
 Cheat-sheet to make sure the correct data is dumped:
 
 ```shell
 git checkout right-before-model-change
-rm db.sqlite3
+rm db/db.sqlite3
 python manage.py migrate --settings=config.settings.local
 python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
+cp -r e2e_tests/database/test_database_uploads/. cpmonitor/images/uploads
 git checkout after-model-change-including-migration
 python manage.py migrate --settings=config.settings.local
-python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
+python -Xutf8 manage.py dumpdata -e contenttypes -e auth.Permission -e admin.LogEntry -e sessions --indent 2 --settings=config.settings.local > e2e_tests/database/test_database.json
+# Only if additional images were uploaded:
+cp -r cpmonitor/images/uploads e2e_tests/database/test_database_uploads
 ```
 
 Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
 
-## When pre-commit hooks make trouble
-
-E.g. the hook `check-untracked-migrations` is known to make trouble with detachted HEAD, e.g. during a rebase. Then it can be skipped:
-
-```shell
-SKIP=check-untracked-migrations git commit
-```
 
 ## Containerization and Deployment
 
-The application is deployed to the server as a pair of Docker containers:
+```mermaid
+flowchart TB
+    user-device([visitor's device])-- visit site -->reverse-proxy
+    subgraph localzero-monitoring-vm
+        subgraph testing
+            nginx-testing-- forward -->djangoapp-testing
+            nginx-testing-- forward -->dbeaver-testing
+            dbeaver-testing
+        end
+        subgraph production
+            nginx-production-- forward -->djangoapp-production
+            nginx-production-- forward -->dbeaver-production
+            dbeaver-production
+        end
+        subgraph exposed [exposed to web]
+            reverse-proxy-- forward if HOST==monitoring-test.localzero.net -->nginx-testing
+            reverse-proxy-- forward if HOST==monitoring.localzero.net -->nginx-production
+            acme.sh-. configure updated certs .->reverse-proxy
+        end
+    end
+```
 
-- container 1 runs the gunicorn webserver to host the django app itself,
-- container 2 runs nginx, a proxy that hosts the static files while providing stability and security.
+The application is deployed to the server in the form of three Docker compositions:
+- reverse-proxy
+- testing environment
+- production environment
 
-Only the port of nginx is exposed, which will forward requests to the django app or provide any requested static files directly.
+Each environment consists of:
+- the "djangoapp" container that run the gunicorn webserver to host the django app itself,
+- its own nginx (a proxy that hosts the static files while providing stability and security),
+- a server for the database web client (DBeaver),
+
+Outside the environments and exposed to the web, there's a third "reverse-proxy" composition containing:
+- acme.sh, which handles SSL certificate renewal ([see further down](#tls-certificate-and-renewal)),
+- the top-level reverse proxy nginx, which forwards requests to the environments based on the HOST header, or to acme.sh.
 
 ### Building the Django app Docker image and running the container
 
@@ -284,6 +326,16 @@ To build the image, run the following command in the repository root directory (
 ```shell
 docker compose build
 ```
+
+#### Issues when building the Docker image on Apple CPU Macs (M1, M2)
+
+You might run into errors building the Docker image on a Mac, getting messages like `No working compiler found` and `Building wheel for cffi (setup.py): finished with status 'error'`.
+
+This is usually caused by certain Python packages not being available prebuilt for download for arm64-based macOS, because the macOS version gets encoded into package names on pypi. This leads to packages not being found after macOS updates until the package authors update their files.
+
+A workaround is to add `--platform linux/amd64` to the failing Docker command to simulate an amd64 architecture, so that generic linux packages are downloaded instead of the Apple CPU specific ones.
+
+See also [#45](https://github.com/GermanZero-de/klimaschutzmonitor/issues/45).
 
 ### Deployment including nginx
 
@@ -342,8 +394,8 @@ ssh lzm
 Replace your local DB with the current DB from the server with:
 
 ```sh
-rm db.sqlite3
-scp lzm:testing/db/db.sqlite3 .
+rm db/db.sqlite3
+scp lzm:testing/db/db.sqlite3 db/
 rm -r cpmonitor/images/uploads
 scp -r lzm:testing/cpmonitor/images/uploads cpmonitor/images/
 ```
@@ -351,14 +403,16 @@ scp -r lzm:testing/cpmonitor/images/uploads cpmonitor/images/
 To find out, on which migration version this database is based use:
 
 ```sh
-ssh -tt lzm docker exec -it djangoapp python manage.py showmigrations --settings=config.settings.production-container
+ssh -tt lzm docker exec -it djangoapp-testing python manage.py showmigrations --settings=config.settings.container
+# or
+ssh -tt lzm docker exec -it djangoapp-production python manage.py showmigrations --settings=config.settings.container
 ```
 
 Possibly migrate, test the data, and check that the size is reasonable. Then make it available to others with:
 
 ```sh
 SNAPSHOT_NAME=prod_database_$(date -u +"%FT%H%M%SZ")
-python -Xutf8 manage.py dumpdata --indent 2 --settings=config.settings.local > e2e_tests/database/${SNAPSHOT_NAME}.json
+python -Xutf8 manage.py dumpdata -e contenttypes -e auth.Permission -e admin.LogEntry -e sessions --indent 2 --settings=config.settings.local > e2e_tests/database/${SNAPSHOT_NAME}.json
 cp -r cpmonitor/images/uploads e2e_tests/database/${SNAPSHOT_NAME}_uploads
 echo "Some useful information, e.g. the migration state of the snapshot" > e2e_tests/database/${SNAPSHOT_NAME}.README
 du -hs e2e_tests/database/${SNAPSHOT_NAME}*
@@ -366,30 +420,91 @@ du -hs e2e_tests/database/${SNAPSHOT_NAME}*
 
 Commit the result.
 
+### Deploying the reverse proxy initially
+
+```sh
+scp -C -r docker/reverseproxy/conf.d/ docker/reverseproxy/docker-compose.yml docker/reverseproxy/.env.server monitoring@monitoring.localzero.net:/tmp/reverseproxy
+
+# Run the remaining commands on the server:
+
+cd ~/reverseproxy
+cp -r /tmp/reverseproxy .
+mv .env.server .env
+
+docker compose up -d
+```
+
 ### Deploying a new version
 
-1. Checkout the commit you want to deploy (usually the latest commit of main).
-2. Build the image for the Django app: `docker compose build`
-3. Export the image: `docker save cpmonitor -o img.tar`
-4. Copy the image and the compose file to the server: `scp -C img.tar docker-compose.yml monitoring@monitoring.localzero.net:/tmp/`
-5. Login to the server: `ssh monitoring@monitoring.localzero.net`
-6. Import the image into Docker on the server: `docker load -i /tmp/img.tar` (Docker should print "Loading layer".)
-7. Tag the image with the current date in case we want to roll back:
-    ```sh
-    docker tag klimaschutzmonitor-djangoapp:latest klimaschutzmonitor-djangoapp:<current date in format YYYY-mon-DD>
-    ```
-8. Stop the server, apply the migrations, start the server:
+To deploy a new version to the testing or production environments, merge or push the commit you want to deploy to the corresponding branch:
+```
+deploy-to-testing
+deploy-to-production
+```
+Note that only maintainers and admins may merge/push to those branches.
+
+View the [workflow](.github/workflows/deploy.yml) and [script](deploy.sh) to see the exact steps that are executed.
+
+### Database Client
+In order to view, manipulate and export the database in any of the environments (local, testing, production), the database webclient
+[Cloudbeaver](https://github.com/dbeaver/cloudbeaver) is started automatically together with the application.
+
+The client can be accessed at http://localhost/dbeaver (or http://monitoring-test.localzero.net/dbeaver, http://monitoring.localzero.net/dbeaver depending on
+the environment) and the credentials can be found in the .env.local file. For testing and production, the credentials should be
+configured in the respective .env files on the server.
+
+### TLS Certificate and Renewal
+#### Overview
+We currently use a single TLS certificate for both monitoring.localzero.org and monitoring-test.localzero.org. The certificate is issued by letsencrypt.org and requesting and renewal is performed using [acme.sh](https://github.com/acmesh-official/acme.sh), which runs in a container. This solution allows us to have almost all necessary code and config in the repo instead of only on the server.
+
+#### Initial Issuance
+The initial certificate was issued using the following command:
 ```sh
-cd ~/<testing|production>/
-docker-compose down --volumes
-# backup the db
-cp db/db.sqlite3 /data/LocalZero/DB_BACKUPS/<testing|production>/db.sqlite3.<current date in format YYYY-mon-DD>
-# apply migrations using a temporary container
-docker run --user=1007:1007 --rm -it -v $(pwd)/db:/db cpmonitor:latest sh
-DJANGO_SECRET_KEY=whatever DJANGO_CSRF_TRUSTED_ORIGINS=https://whatever DJANGO_DEBUG=False python manage.py migrate --settings=config.settings.container
-# exit and stop the temporary container
-exit
-# use the latest docker-compose.yml to start the app using the new image
-mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-docker-compose up --detach
+docker exec acme-sh  --issue -d monitoring-test.localzero.net  -d monitoring.localzero.net --standalone --server https://acme-v02.api.letsencrypt.org/directory --fullchain-file /acme.sh/fullchain.cer --key-file /acme.sh/ssl-cert.key
+```
+
+#### Renewal
+Renewal is performed automatically by acme.sh's internal cron job, which...
+- checks if a renewal is necessary, and if so:
+- requests a new certificate from letsencrypt,
+- performs the challenge-response-mechanism to verify ownership of the domain
+- and exports the full certificate chain and key to where nginx can find it.
+
+A reload of the nginx config is independently triggered every four hours by our own cron job which can be found in [crontab](crontab) or by executing the following on the server:
+```sh
+crontab -l
+```
+This job runs [a script](reload-cert.sh) which applies the latest certificate that acme.sh has produced. This means there can be some delay between renewal and application of the certificate, but since acme.sh performs renewal a few days before expiry, there should be enough time for nginx to reload the certificate.
+
+#### acme-sh Configuration and Debugging
+
+The configuration used by acme-sh's cronjob (not our nginx reload cronjob!), e.g. renewal interval, can be changed in `reverseproxy/ssl_certificates/monitoring-test.localzero.net_ecc/`` on the server.
+
+The following commands might be executed on the server to debug and test the acme-sh configuration:
+```shell
+# view certificate creation date and next renew date
+docker exec acme-sh --list
+
+# tell acme-sh to run its cronjob now, using letsencrypt's test environment (to bypass rate limiting)
+docker exec acme-sh --cron --staging
+
+# tell acme-sh to run its cronjob now, using letsencrypt's PROD environment (affected by rate limiting - 5 certs every couple weeks...)
+docker exec acme-sh --cron
+
+# force a renewal via letsencrypt's PROD environment, even if renewal time hasn't been reached yet
+docker exec acme-sh --cron --force
+
+# change mail address that will receive expiry warnings (only one address supported as of acme.sh v3.0.6)
+docker exec acme-sh --update-account --accountemail '<the-new-address@somewhere.net>' --debug 2 --server https://acme-v02.api.letsencrypt.org/directory
+```
+
+#### TLS Certificates and Running Locally
+When running locally, we instead use a [certificate created for localhost](ssl_certificates_localhost). Since ownership of localhost cannot be certified, this is a single self-signed certificate instead of a full chain signed by a CA like on the server, and an exception must be added to your browser to trust it.
+
+
+## Backups
+A backup of the database and media files is created each day.
+You can also manually trigger a backup on the server by running
+```shell
+/home/monitoring/backup.sh production
 ```

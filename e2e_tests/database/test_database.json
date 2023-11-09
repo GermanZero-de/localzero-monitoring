@@ -1,355 +1,10 @@
 [
 {
-  "model": "admin.logentry",
+  "model": "auth.group",
   "pk": 1,
   "fields": {
-    "action_time": "2023-02-26T18:26:19.109Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "12345 Beispielstadt",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 2,
-  "fields": {
-    "action_time": "2023-02-26T18:26:29.897Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "1",
-    "object_repr": "Verkehr",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 3,
-  "fields": {
-    "action_time": "2023-02-26T18:27:03.032Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "2",
-    "object_repr": "Radwege ausbauen",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 4,
-  "fields": {
-    "action_time": "2023-02-26T18:27:36.579Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "3",
-    "object_repr": "U-Bahn Strecke verlängern",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 5,
-  "fields": {
-    "action_time": "2023-03-05T17:03:22.852Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "2",
-    "object_repr": "Radwege ausbauen",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"description\", \"Relative to\"]}}]"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 1,
-  "fields": {
-    "name": "Can add log entry",
-    "content_type": 1,
-    "codename": "add_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 2,
-  "fields": {
-    "name": "Can change log entry",
-    "content_type": 1,
-    "codename": "change_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 3,
-  "fields": {
-    "name": "Can delete log entry",
-    "content_type": 1,
-    "codename": "delete_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 4,
-  "fields": {
-    "name": "Can view log entry",
-    "content_type": 1,
-    "codename": "view_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 5,
-  "fields": {
-    "name": "Can add permission",
-    "content_type": 2,
-    "codename": "add_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 6,
-  "fields": {
-    "name": "Can change permission",
-    "content_type": 2,
-    "codename": "change_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 7,
-  "fields": {
-    "name": "Can delete permission",
-    "content_type": 2,
-    "codename": "delete_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 8,
-  "fields": {
-    "name": "Can view permission",
-    "content_type": 2,
-    "codename": "view_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 9,
-  "fields": {
-    "name": "Can add group",
-    "content_type": 3,
-    "codename": "add_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 10,
-  "fields": {
-    "name": "Can change group",
-    "content_type": 3,
-    "codename": "change_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 11,
-  "fields": {
-    "name": "Can delete group",
-    "content_type": 3,
-    "codename": "delete_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 12,
-  "fields": {
-    "name": "Can view group",
-    "content_type": 3,
-    "codename": "view_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 13,
-  "fields": {
-    "name": "Can add user",
-    "content_type": 4,
-    "codename": "add_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 14,
-  "fields": {
-    "name": "Can change user",
-    "content_type": 4,
-    "codename": "change_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 15,
-  "fields": {
-    "name": "Can delete user",
-    "content_type": 4,
-    "codename": "delete_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 16,
-  "fields": {
-    "name": "Can view user",
-    "content_type": 4,
-    "codename": "view_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 17,
-  "fields": {
-    "name": "Can add content type",
-    "content_type": 5,
-    "codename": "add_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 18,
-  "fields": {
-    "name": "Can change content type",
-    "content_type": 5,
-    "codename": "change_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 19,
-  "fields": {
-    "name": "Can delete content type",
-    "content_type": 5,
-    "codename": "delete_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 20,
-  "fields": {
-    "name": "Can view content type",
-    "content_type": 5,
-    "codename": "view_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 21,
-  "fields": {
-    "name": "Can add session",
-    "content_type": 6,
-    "codename": "add_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 22,
-  "fields": {
-    "name": "Can change session",
-    "content_type": 6,
-    "codename": "change_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 23,
-  "fields": {
-    "name": "Can delete session",
-    "content_type": 6,
-    "codename": "delete_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 24,
-  "fields": {
-    "name": "Can view session",
-    "content_type": 6,
-    "codename": "view_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 25,
-  "fields": {
-    "name": "Can add city",
-    "content_type": 7,
-    "codename": "add_city"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 26,
-  "fields": {
-    "name": "Can change city",
-    "content_type": 7,
-    "codename": "change_city"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 27,
-  "fields": {
-    "name": "Can delete city",
-    "content_type": 7,
-    "codename": "delete_city"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 28,
-  "fields": {
-    "name": "Can view city",
-    "content_type": 7,
-    "codename": "view_city"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 29,
-  "fields": {
-    "name": "Can add task",
-    "content_type": 8,
-    "codename": "add_task"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 30,
-  "fields": {
-    "name": "Can change task",
-    "content_type": 8,
-    "codename": "change_task"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 31,
-  "fields": {
-    "name": "Can delete task",
-    "content_type": 8,
-    "codename": "delete_task"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 32,
-  "fields": {
-    "name": "Can view task",
-    "content_type": 8,
-    "codename": "view_task"
+    "name": "Alle",
+    "permissions": []
   }
 },
 {
@@ -357,7 +12,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$LhtVLCSacVFhgrmY76MEcl$kGjF/lJDI/u2ONODcz+sN+Gc71vgg2pcGMxGrXb+IqM=",
-    "last_login": "2023-05-01T11:10:27.388Z",
+    "last_login": "2023-06-12T20:11:14.431Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -371,95 +26,240 @@
   }
 },
 {
-  "model": "contenttypes.contenttype",
-  "pk": 1,
-  "fields": {
-    "app_label": "admin",
-    "model": "logentry"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 2,
   "fields": {
-    "app_label": "auth",
-    "model": "permission"
+    "password": "pbkdf2_sha256$390000$G4rrXlpXdRuKkawMKn9nmm$QYmR1/Jp16VNQRFLfDr0Kt2JPuicXZ1EGD+EsF2aFrE=",
+    "last_login": "2023-08-03T08:41:23.794Z",
+    "is_superuser": false,
+    "username": "heinz",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-08-01T06:50:55Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 3,
   "fields": {
-    "app_label": "auth",
-    "model": "group"
+    "password": "pbkdf2_sha256$390000$Y8L8lSp9YhsgH1ZZvchQE9$XHI/U2h4QwRn1ssNJoX623Ga0u4HXKurzRtw4f4DdXk=",
+    "last_login": "2023-08-03T08:41:08.520Z",
+    "is_superuser": false,
+    "username": "sarah",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-08-01T10:19:25Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 4,
   "fields": {
-    "app_label": "auth",
-    "model": "user"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 5,
-  "fields": {
-    "app_label": "contenttypes",
-    "model": "contenttype"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 6,
-  "fields": {
-    "app_label": "sessions",
-    "model": "session"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 7,
-  "fields": {
-    "app_label": "cpmonitor",
-    "model": "city"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 8,
-  "fields": {
-    "app_label": "cpmonitor",
-    "model": "task"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "3h80mfs0kjjxfectgn3a0x6c6zz3esme",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pACHQGX7j0DGWZAqgaS0q6Md7dNutDtf-_9twi4LiWsPc1hYnERSpx-t4j0THUH_MB6b5JaXeYpyl2RB-3y1ji9rof7d1Cwl612SGDGDOAoe6MjoyIdk0WVrbcugydDzKAhjUOmtGns7BlsdISD8-LzBQBbOLM:1pqsJm:hu2RvPJFpyb4Ol67nhIuVCNJNtMnKa2vY8HwkwCnWSk",
-    "expire_date": "2023-05-08T09:17:06.922Z"
+    "password": "pbkdf2_sha256$390000$bOR4wt2ycK5GSTLtsfpMgf$wvmE4imsaXkMDHlyvI/EYy1yu3mTWNCr9qUB9Y13QOc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "christian",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-08-03T10:39:16Z",
+    "groups": [],
+    "user_permissions": []
   }
 },
 {
   "model": "cpmonitor.city",
   "pk": 1,
   "fields": {
+    "draft_mode": false,
     "name": "Beispielstadt",
     "zipcode": "12345",
     "url": "",
     "resolution_date": "2021-03-18",
     "target_year": 2035,
-    "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. **Lorem Ipsum** has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
+    "teaser": "Teaser. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+    "description": "Beschreibung. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type a",
+    "co2e_budget": 0,
+    "assessment_administration": "Wie bewertet ihr die **Nachhaltigkeitsarchitektur der Verwaltung**? Dieser Text fasst die wichtigsten Punkte zusammen.",
+    "assessment_action_plan": "Hier soll die Bewertung des **Klimaaktionsplans** stehen. Was haltet ihr von dem Plan?",
+    "assessment_status": "### Wie sieht es aus? \r\n\r\nEine einleitende Übersicht in die Bewertung des Umsetzungsstandes.\r\nHält die Kommune sich im Wesentlichen an ihren eigenen Plan?",
+    "last_update": "2023-08-18",
+    "contact_name": "",
+    "contact_email": "",
+    "internal_information": "Dies ist eine total wichtige interne Info!",
+    "slug": "beispielstadt",
+    "city_editors": [
+      2
+    ],
+    "city_admins": [
+      3
+    ]
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 2,
+  "fields": {
+    "draft_mode": false,
+    "name": "Ohnenix",
+    "zipcode": "00000",
+    "url": "",
+    "resolution_date": null,
+    "target_year": null,
+    "teaser": "Eine Kommune ohne jegliche Infos. Muss ja auch getestet werden.",
+    "description": "",
     "co2e_budget": 0,
     "assessment_administration": "",
     "assessment_action_plan": "",
     "assessment_status": "",
-    "last_update": "2023-05-01",
+    "last_update": "2023-05-03",
     "contact_name": "",
     "contact_email": "",
-    "slug": "beispielstadt"
+    "internal_information": "",
+    "slug": "ohnenix",
+    "city_editors": [],
+    "city_admins": []
+  }
+},
+{
+  "model": "cpmonitor.city",
+  "pk": 3,
+  "fields": {
+    "draft_mode": false,
+    "name": "Mitallem",
+    "zipcode": "99999",
+    "url": "https://mitallem.de/",
+    "resolution_date": "2023-05-03",
+    "target_year": 2023,
+    "teaser": "Diese Kommune hat gaaanz viele Daten.",
+    "description": "",
+    "co2e_budget": 3,
+    "assessment_administration": "Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktive Verwaltung ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
+    "assessment_action_plan": "Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Klimaaktionsplan ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
+    "assessment_status": "Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal. Eine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.\r\n\r\nEine fiktiver Umsetzungsstand ist schwer zu bewerten, deswegen steht hier nichts Sinnvolles. Und das wiederholt sich jetzt noch ein paar Mal.",
+    "last_update": "2023-08-18",
+    "contact_name": "Maxime Musterfrau",
+    "contact_email": "maxime@muster.frau",
+    "internal_information": "Dies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!",
+    "slug": "mitallem",
+    "city_editors": [],
+    "city_admins": []
+  }
+},
+{
+  "model": "cpmonitor.capchecklist",
+  "pk": 1,
+  "fields": {
+    "city": 1,
+    "cap_exists": true,
+    "cap_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
+    "target_date_exists": true,
+    "target_date_exists_rationale": "Das Zieljahr ist 2030.",
+    "based_on_remaining_co2_budget": true,
+    "based_on_remaining_co2_budget_rationale": "",
+    "sectors_of_climate_vision_used": false,
+    "sectors_of_climate_vision_used_rationale": "",
+    "scenario_for_climate_neutrality_till_2035_exists": false,
+    "scenario_for_climate_neutrality_till_2035_exists_rationale": "",
+    "scenario_for_business_as_usual_exists": false,
+    "scenario_for_business_as_usual_exists_rationale": "Trendszenario ist in Arbeit.",
+    "annual_costs_are_specified": false,
+    "annual_costs_are_specified_rationale": "",
+    "tasks_are_planned_yearly": false,
+    "tasks_are_planned_yearly_rationale": "",
+    "tasks_have_responsible_entity": false,
+    "tasks_have_responsible_entity_rationale": "",
+    "annual_reduction_of_emissions_can_be_predicted": false,
+    "annual_reduction_of_emissions_can_be_predicted_rationale": "",
+    "concept_for_participation_specified": true,
+    "concept_for_participation_specified_rationale": "Das Konzept kann hier abgerufen werden: [Link](https://monitoring.localzero.net/)"
+  }
+},
+{
+  "model": "cpmonitor.capchecklist",
+  "pk": 2,
+  "fields": {
+    "city": 3,
+    "cap_exists": true,
+    "cap_exists_rationale": "Super!",
+    "target_date_exists": true,
+    "target_date_exists_rationale": "Zieljahr ist 2030.",
+    "based_on_remaining_co2_budget": true,
+    "based_on_remaining_co2_budget_rationale": "",
+    "sectors_of_climate_vision_used": true,
+    "sectors_of_climate_vision_used_rationale": "Der KAP bilanziert darüberhinaus sogar im Sektor XY.",
+    "scenario_for_climate_neutrality_till_2035_exists": true,
+    "scenario_for_climate_neutrality_till_2035_exists_rationale": "Sogar bis 2030!",
+    "scenario_for_business_as_usual_exists": true,
+    "scenario_for_business_as_usual_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
+    "annual_costs_are_specified": true,
+    "annual_costs_are_specified_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
+    "tasks_are_planned_yearly": true,
+    "tasks_are_planned_yearly_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
+    "tasks_have_responsible_entity": true,
+    "tasks_have_responsible_entity_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
+    "annual_reduction_of_emissions_can_be_predicted": true,
+    "annual_reduction_of_emissions_can_be_predicted_rationale": "",
+    "concept_for_participation_specified": false,
+    "concept_for_participation_specified_rationale": "Ist in Arbeit."
+  }
+},
+{
+  "model": "cpmonitor.administrationchecklist",
+  "pk": 1,
+  "fields": {
+    "city": 3,
+    "climate_protection_management_exists": true,
+    "climate_protection_management_exists_rationale": "Das Klimaschutzmanagement kann hier eingesehen werden:  [Link](https://monitoring.localzero.net/)",
+    "climate_relevance_check_exists": true,
+    "climate_relevance_check_exists_rationale": "",
+    "climate_protection_monitoring_exists": true,
+    "climate_protection_monitoring_exists_rationale": "Ist hier abrufbar:  [Link](https://monitoring.localzero.net/)",
+    "intersectoral_concepts_exists": true,
+    "intersectoral_concepts_exists_rationale": "",
+    "guidelines_for_sustainable_procurement_exists": true,
+    "guidelines_for_sustainable_procurement_exists_rationale": "",
+    "municipal_office_for_funding_management_exists": true,
+    "municipal_office_for_funding_management_exists_rationale": "",
+    "public_relation_with_local_actors_exists": true,
+    "public_relation_with_local_actors_exists_rationale": "Handwerksbetrieb XY und Sparkasse arbeiten zusammen."
+  }
+},
+{
+  "model": "cpmonitor.administrationchecklist",
+  "pk": 2,
+  "fields": {
+    "city": 1,
+    "climate_protection_management_exists": true,
+    "climate_protection_management_exists_rationale": "",
+    "climate_relevance_check_exists": true,
+    "climate_relevance_check_exists_rationale": "",
+    "climate_protection_monitoring_exists": true,
+    "climate_protection_monitoring_exists_rationale": "Das Monitoring kann hier eingesehen werden:  [Link](https://monitoring.localzero.net/)",
+    "intersectoral_concepts_exists": false,
+    "intersectoral_concepts_exists_rationale": "Konzepte wurde angefangen und Ende 2023 fertig.",
+    "guidelines_for_sustainable_procurement_exists": false,
+    "guidelines_for_sustainable_procurement_exists_rationale": "",
+    "municipal_office_for_funding_management_exists": false,
+    "municipal_office_for_funding_management_exists_rationale": "",
+    "public_relation_with_local_actors_exists": false,
+    "public_relation_with_local_actors_exists_rationale": ""
   }
 },
 {
@@ -470,18 +270,22 @@
     "depth": 1,
     "numchild": 5,
     "city": 1,
+    "draft_mode": false,
+    "frontpage": false,
     "title": "Mobilität",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
     "execution_completion": 0,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat"
   }
 },
@@ -493,18 +297,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": false,
+    "frontpage": false,
     "title": "Radwege ausbauen",
-    "summary": "",
+    "teaser": "",
     "description": "## Vorhaben\r\n\r\n* Radspuren mit einer Mindestbreite von 2,30 Metern\r\n* mehr Abstellanlagen für Fahrräder\r\n* optisch hervorgehobene Abschnitte mit Radvorrang \r\n* sicherere Kreuzungen für Radler",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
     "execution_completion": 0,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/radwege-ausbauen"
   }
 },
@@ -516,18 +324,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": false,
+    "frontpage": false,
     "title": "U-Bahn Strecke verlängern",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 8,
     "execution_justification": "",
     "execution_completion": 0,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/u-bahn-strecke-verlangern"
   }
 },
@@ -539,18 +351,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": false,
+    "frontpage": false,
     "title": "Carsharing einführen",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/carsharing-einfuhren"
   }
 },
@@ -562,18 +378,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Parkraumbewirtschaftung",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/parkraumbewirtschaftung"
   }
 },
@@ -585,18 +405,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Jobtickets für Verwaltung",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 4,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "mobilitat/jobtickets-fur-verwaltung"
   }
 },
@@ -608,18 +432,22 @@
     "depth": 1,
     "numchild": 6,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Strukturen",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen"
   }
 },
@@ -631,18 +459,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Personal einstellen",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/personal-einstellen"
   }
 },
@@ -654,18 +486,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Klimaaktionsplan",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
-    "responsible_organ": "",
+    "responsible_organ": "Stadtrat",
+    "responsible_organ_explanation": "Warum hängt es am Stadtrat.",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/klimaaktionsplan"
   }
 },
@@ -677,18 +513,22 @@
     "depth": 2,
     "numchild": 2,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Bürgerbeteiligung",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/burgerbeteiligung"
   }
 },
@@ -700,18 +540,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Monitoring",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 6,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/monitoring"
   }
 },
@@ -723,18 +567,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "European Energy Award",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 2,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/european-energy-award"
   }
 },
@@ -746,18 +594,22 @@
     "depth": 2,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Klimarelevanzprüfung",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/klimarelevanzprufung"
   }
 },
@@ -769,18 +621,22 @@
     "depth": 3,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Beteiligungswerkstatt",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/burgerbeteiligung/beteiligungswerkstatt"
   }
 },
@@ -792,18 +648,22 @@
     "depth": 3,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": false,
     "title": "Marke schaffen",
-    "summary": "",
+    "teaser": "",
     "description": "",
     "planned_start": null,
     "planned_completion": null,
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "",
     "execution_status": 0,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": null,
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "strukturen/burgerbeteiligung/marke-schaffen"
   }
 },
@@ -815,19 +675,475 @@
     "depth": 1,
     "numchild": 0,
     "city": 1,
+    "draft_mode": true,
+    "frontpage": true,
     "title": "Umstellung Fernwärme auf Geothermie",
-    "summary": "Der Kurztext der Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
+    "teaser": "Der Kurztext der Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
     "description": "Die Beschreibung der Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem",
     "planned_start": "2023-04-19",
     "planned_completion": "2022-12-31",
     "responsible_organ": "",
+    "responsible_organ_explanation": "",
     "plan_assessment": "Die Bewertung der geplanten Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
     "execution_status": 2,
     "execution_justification": "",
     "execution_completion": null,
     "actual_start": "2023-04-19",
     "actual_completion": null,
+    "internal_information": "",
     "slugs": "umstellung-fernwarme-auf-geothermie"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 17,
+  "fields": {
+    "path": "0005",
+    "depth": 1,
+    "numchild": 1,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Energie",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "energie"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 18,
+  "fields": {
+    "path": "0006",
+    "depth": 1,
+    "numchild": 1,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Mobilität",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "mobilitat"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 19,
+  "fields": {
+    "path": "0007",
+    "depth": 1,
+    "numchild": 1,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Gebäude",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "gebaude"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 20,
+  "fields": {
+    "path": "0004",
+    "depth": 1,
+    "numchild": 2,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Strukturen",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "strukturen"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 21,
+  "fields": {
+    "path": "0009",
+    "depth": 1,
+    "numchild": 1,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Landwirtschaft",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "landwirtschaft"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 22,
+  "fields": {
+    "path": "00050001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "PV auf alle öffentlichen Dächer",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "energie/pv-auf-alle-offentlichen-dacher"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 23,
+  "fields": {
+    "path": "00070001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Sanierungsprogramm: Dämmung",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 0,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "gebaude/sanierungsprogramm-dammung"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 24,
+  "fields": {
+    "path": "00060001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Ladesäulen flächendeckend",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 4,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "mobilitat/ladesaulen-flachendeckend"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 25,
+  "fields": {
+    "path": "00090001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Förderung Ökologischer Landbau",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 6,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "landwirtschaft/forderung-okologischer-landbau"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 26,
+  "fields": {
+    "path": "00040002",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Zukunftswerkstatt",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 8,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "strukturen/zukunftswerkstatt"
+  }
+},
+{
+  "model": "cpmonitor.task",
+  "pk": 27,
+  "fields": {
+    "path": "00040001",
+    "depth": 2,
+    "numchild": 0,
+    "city": 3,
+    "draft_mode": true,
+    "frontpage": false,
+    "title": "Expertenrat",
+    "teaser": "",
+    "description": "",
+    "planned_start": null,
+    "planned_completion": null,
+    "responsible_organ": "",
+    "responsible_organ_explanation": "",
+    "plan_assessment": "",
+    "execution_status": 2,
+    "execution_justification": "",
+    "execution_completion": null,
+    "actual_start": null,
+    "actual_completion": null,
+    "internal_information": "",
+    "slugs": "strukturen/expertenrat"
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 1,
+  "fields": {
+    "city": 1,
+    "image": "uploads/2023/05/03/3202552975_cdafe46620_o.jpg",
+    "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
+    "source": "Matt Lemmon",
+    "license": "CC BY-SA 2.0",
+    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden.",
+    "internal_information": "Dies ist eine total wichtige interne Info!"
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 2,
+  "fields": {
+    "city": 1,
+    "image": "uploads/2023/05/03/52563572761_b724d0fd88_o.jpg",
+    "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
+    "source": "Seattle Municipal Archives",
+    "license": "CC BY 2.0",
+    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden.",
+    "internal_information": "Dies ist eine total wichtige interne Info!"
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 3,
+  "fields": {
+    "city": 3,
+    "image": "uploads/2023/05/03/3202552975_cdafe46620_o.jpg",
+    "alt_description": "Graph: Weltbevölkerung und CO2-Emissionen",
+    "source": "Matt Lemmon",
+    "license": "CC BY-SA 2.0",
+    "caption": "Dies ist nur ein **Beispiel** KPI Graph, weil es sich hier ja auch nur um eine Beispielkommune handelt. Wurde [hier](https://openverse.org/image/f6a4ca33-b1fc-488d-9f2a-dd6ef9f1426f) gefunden.",
+    "internal_information": "Dies ist eine total wichtige interne Info zu CO2-Emissionen!\r\n\r\nDies ist eine total wichtige interne Info zu CO2-Emissionen!\r\n\r\nDies ist eine total wichtige interne Info zu CO2-Emissionen!"
+  }
+},
+{
+  "model": "cpmonitor.chart",
+  "pk": 4,
+  "fields": {
+    "city": 3,
+    "image": "uploads/2023/05/03/52563572761_b724d0fd88_o.jpg",
+    "alt_description": "Graph: Benötigte Leistung (in Anzahl Pferden) in Abhängigkeit von der Steigung",
+    "source": "Seattle Municipal Archives",
+    "license": "CC BY 2.0",
+    "caption": "Und dieses schöne Bild habe ich [hier](https://openverse.org/image/c5aaa76a-dd8f-4cd0-8b5d-30d874a747ff) gefunden.",
+    "internal_information": "Dies ist eine total wichtige interne Info zu Pferden!\r\n\r\nDies ist eine total wichtige interne Info zu Pferden!\r\n\r\nDies ist eine total wichtige interne Info zu Pferden!"
+  }
+},
+{
+  "model": "cpmonitor.localgroup",
+  "pk": 1,
+  "fields": {
+    "city": 1,
+    "name": "BeispielLos",
+    "website": "https://www.beispiel-los.de",
+    "teaser": "Eine beispiellos gute Initiative für eine klimaneutrale Zukunft in unserer Stadt.",
+    "description": "Wenn Du mitmachen willst, wendest du Dich am besten an Maxi Mustermensch unter maxi@beispiel-los.de.\r\n\r\nUnser Monitoring basiert auf öffentlich zugänglichen Informationen aus dem lokalen BeispielBlatt, dere Website der Stadtverwaltung, dem Klimaaktionsplan, dem Ratsinformationssystem und dem Marktstammdatenregister. Und wir haben auch mit dem Bürgermeister gesprochen. Weitergehende Informationen zum Monitoring bekommst Du bei Dina Durchblick unter dina@beispiel-los.de.",
+    "featured_image": "uploads/2023/09/01/Fotos-alle-1024x683_SEEJ1JR.jpeg"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 1,
+  "fields": {
+    "accepted": false,
+    "key": "ercizfqjtsqbv5xap4uvlkpswjivqnjiephfxdbhjett8jah0z0ynnfpqrqxjcjg",
+    "sent": null,
+    "inviter": null,
+    "city": 1,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:36:55.384Z"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 2,
+  "fields": {
+    "accepted": false,
+    "key": "bkneutb8zck96tjknok7hpwwybuif0a1pgny8txer0dqixbexryfntojnhzlddwk",
+    "sent": null,
+    "inviter": null,
+    "city": 1,
+    "access_right": "city editor",
+    "created": "2023-08-20T10:45:21.211Z"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 3,
+  "fields": {
+    "accepted": false,
+    "key": "lpm5qyqcvyblh2bbjve7jgxnh7ezsutlab1dcqi4ogvseqnqj0qflfvxcct9hsmz",
+    "sent": null,
+    "inviter": null,
+    "city": 2,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:45:21.213Z"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 4,
+  "fields": {
+    "accepted": false,
+    "key": "wr6ikslxkvhhoaqqjj7jb7qjqpgonfpolsgmgdvhp6ny9nm7qfgpjycokhucg3ow",
+    "sent": null,
+    "inviter": null,
+    "city": 2,
+    "access_right": "city editor",
+    "created": "2023-08-20T10:45:21.216Z"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 5,
+  "fields": {
+    "accepted": false,
+    "key": "qfdubrzfl6ddobcqlr1rlehwb0ay8rngl9m6bshazjtdiob3chr1qnh7fs4zos4f",
+    "sent": null,
+    "inviter": null,
+    "city": 3,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:45:21.219Z"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 6,
+  "fields": {
+    "accepted": false,
+    "key": "x1ymexf6lnq0tow1nh8bandsurfz87wiy0vk6o6vjaoxny9hgk3oif13oyfmvicn",
+    "sent": null,
+    "inviter": null,
+    "city": 3,
+    "access_right": "city editor",
+    "created": "2023-08-20T10:45:21.220Z"
+  }
+},
+{
+  "model": "cpmonitor.invitation",
+  "pk": 7,
+  "fields": {
+    "accepted": false,
+    "key": "o1gg3wkdtmv5nlccvdjeewqn3yrp3cw5rxweifquqbovrwiwvmnx6kgo2i4p0t0d",
+    "sent": null,
+    "inviter": null,
+    "city": 1,
+    "access_right": "city admin",
+    "created": "2023-08-20T10:51:54.210Z"
   }
 }
 ]

@@ -96,6 +96,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tabler/icons@npm:^2.30.0":
+  version: 2.30.0
+  resolution: "@tabler/icons@npm:2.30.0"
+  checksum: d89255ea6bb0a5280f9d23ab85005ef0f7c7c0198904db7d7d6cbc0289c7ba108c433c6f9fb6531fc127619ed61452c6c5832e7c7cc49a5889faad412636e618
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:2":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -313,7 +320,9 @@ __metadata:
   dependencies:
     "@popperjs/core": ^2.11.2
     "@tabler/core": ^1.0.0-beta17
+    "@tabler/icons": ^2.30.0
     jquery: ^3.6.3
+    prettier: ^3.0.3
     sass: ^1.58.3
   languageName: unknown
   linkType: soft
@@ -886,6 +895,15 @@ __metadata:
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 050c865ce81119c4822c45d3c84f1ced46f93a0126febae20737bd05ca20589c564d6e9226977df859ed5e03dc73f02584a2b0faad36e896936238238b0446cf
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "prettier@npm:3.0.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: e10b9af02b281f6c617362ebd2571b1d7fc9fb8a3bd17e371754428cda992e5e8d8b7a046e8f7d3e2da1dcd21aa001e2e3c797402ebb6111b5cd19609dd228e0
   languageName: node
   linkType: hard
 

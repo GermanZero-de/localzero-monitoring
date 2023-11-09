@@ -23,12 +23,6 @@ repos:
     hooks:
       - id: djlint-django
         args: ['--reformat', '--lint']
--   repo: https://github.com/ecugol/pre-commit-hooks-django
-    rev: v0.4.0
-    hooks:
-      # This does not behave well during a rebase. Work-around: Temporarily put `exit 0` in .git/hooks/pre-commit.
-      - id: check-untracked-migrations
-      # - id: check-absent-migrations  # Unfortunately, broken since it uses find and finds in ".venv"... Done locally:
 -   repo: local
     hooks:
       - id: check-absent-migrations
@@ -37,6 +31,12 @@ repos:
         pass_filenames: false
         language: system
         always_run: true
+-   repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.0.3
+    hooks:
+      - id: prettier
+        files: ^cpmonitor/static/.*$
+        types_or: [css, scss, javascript]
 
 # - repo: https://github.com/RobertCraigie/pyright-python
   # rev: v1.1.292

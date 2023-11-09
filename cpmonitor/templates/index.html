@@ -1,41 +1,27 @@
-{% extends "pageframe.html" %}
+{% extends "base.html" %}
 {% load static %}
-{% block page_body %}
-  <div class="container">
-    <div class="row">
-      <div class="col-7 card">
-        <div class="card-body">
-          <h2 class="card-title">Klimaneutrale Städte und Kommunen</h2>
-          <p>Städte und Kommunen leisten einen wichtigen Beitrag zur Klimaneutralität</p>
-          <p>
-            <a href="https://localzero.net/">LocalZero</a> Monitoring ist eine Initiative von <a href="https://germanzero.de">GermanZero</a>, um mehr Transparenz
-            zum Fortschritt der Klimaneutralität deutscher Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den
-            jeweiligen Kommunen regelmäßig aktualisiert.
-          </p>
-          <p>
-            Wähle oben rechts deine Kommune aus, und finde heraus, welche Maßnahmen sie bereits geplant und unternommen hat, um klimaneutral zu werden!
-          </p>
-          <p>
-            Du findest deine Kommune nicht? Dann <a href="https://germanzero.de/mitmachen/localzero-teams">finde Mitstreiter:innen</a> und gründe ein neues Team
-            bei dir vor Ort!
-          </p>
-        </div>
+{% load martortags %}
+{% block text-content %}
+  <h1>Willkommen</h1>
+  <p>
+    <a href="https://localzero.net/">LocalZero</a> Monitoring ist eine Initiative von <a href="https://germanzero.de">GermanZero</a>, um mehr Transparenz
+    zum Fortschritt der Klimaneutralität deutscher Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den
+    jeweiligen Kommunen regelmäßig aktualisiert.
+  </p>
+{% endblock text-content %}
+{% block cards %}
+  <div class="row row-deck row-cards">
+    {% for city in cities %}
+      <div class="col-sm-6 col-lg-3">
+        <a class="card" href="{% url 'city' city.slug %}">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="h2 mb-3">{{ city.name }}</div>
+            </div>
+            <div class="lz-card-summary lines-3">{{ city.teaser }}</div>
+          </div>
+        </a>
       </div>
-      <div class="col-5">
-        <img src="https://localzero.net/lz-media/pages/assets/50ff6a8922-1672312437/wurmsham_01_800pxbreite.jpg"
-             alt="Ein Lokalteam"
-             width="100%"
-             height="100%">
-      </div>
-    </div>
+    {% endfor %}
   </div>
-  <div class="container fixed-bottom">
-    <footer class="py-2 my-2 border-top">
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link px-2 text-muted" href="{% url 'admin:index' %}">Admin-Login</a>
-        </li>
-      </ul>
-    </footer>
-  </div>
-{% endblock page_body %}
+{% endblock cards %}
