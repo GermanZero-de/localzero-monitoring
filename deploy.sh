@@ -20,7 +20,7 @@ if [[ -n "$tag_suffix" ]]; then
 fi
 
 # Tag the currently checked-out revision with in GitHub
-date=$(date +%Y-%b-%d)
+date=$(date +%Y-%m-%d-%H-%M-%S)
 tag="deploy-${env}-${date}${tag_suffix}"
 echo "Tagging version as $tag in git."
 git tag -a $tag -m "Deployment to ${env}"
