@@ -24,6 +24,7 @@ from invitations.adapters import get_invitations_adapter
 from invitations.signals import invite_accepted
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
+from PIL import Image
 
 from .models import (
     AccessRight,
@@ -472,6 +473,14 @@ def markdown_uploader_view(request):
         settings.MARTOR_UPLOAD_PATH, time.strftime("%Y/%m/%d/"), img_uuid
     )
     def_path = default_storage.save(tmp_file, ContentFile(image.read()))
+
+    # restrict size to max 2000 width or height
+    img_path = os.path.join(settings.MEDIA_ROOT, def_path)
+    img = Image.open(img_path)
+    if img.width > 2000 or img.height > 2000:
+        img.thumbnail((2000, 2000))
+        img.save(img_path)
+
     img_url = os.path.join(settings.MEDIA_URL, def_path)
 
     data = json.dumps({"status": 200, "link": img_url, "name": image.name})

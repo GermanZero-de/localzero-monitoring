@@ -15,6 +15,9 @@ from treebeard.exceptions import InvalidPosition
 from treebeard.mp_tree import MP_Node
 from types import NoneType
 
+from PIL import Image
+
+
 # Note PEP-8 naming conventions for class names apply. So use the singular and CamelCase
 
 
@@ -794,6 +797,15 @@ class Chart(models.Model):
     def __str__(self) -> str:
         return self.alt_description + " - Quelle: " + self.source
 
+    def save(self):
+        super().save()
+
+        # limit image size to max 2000 width or height (keeps aspect ratio)
+        img = Image.open(self.image.path)
+        if img.width > 2000 or img.height > 2000:
+            img.thumbnail((2000, 2000))
+            img.save(self.image.path)
+
 
 class LocalGroup(models.Model):
     class Meta:
@@ -839,8 +851,19 @@ class LocalGroup(models.Model):
         """,
     )
     featured_image = models.ImageField(
-        "Bild der Lokalgruppe", blank=True, upload_to="uploads/local_groups"
+        "Bild der Lokalgruppe",
+        blank=True,
+        upload_to="uploads/%Y/%m/%d/",
     )
+
+    def save(self):
+        super().save()
+
+        # limit featured_image size to max 1000 width or height (keeps aspect ratio)
+        img = Image.open(self.featured_image.path)
+        if img.width > 1000 or img.height > 1000:
+            img.thumbnail((1000, 1000))
+            img.save(self.featured_image.path)
 
 
 class AccessRight(models.TextChoices):
