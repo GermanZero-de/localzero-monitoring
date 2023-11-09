@@ -21,8 +21,8 @@ date=$(date +%Y-%m-%d-%H-%M-%S)
 
 # create a new backup
 mkdir "$directoryOfBackup"/"$date"
-docker exec djangoapp-testing sqlite3 /db/db.sqlite3 ".backup '$directoryOfBackupInContainer/$date/backup_db.sqlite3'"
-docker exec djangoapp-testing /bin/sh -c "tar -C $mediaDirectoryInContainer -cz -f $directoryOfBackupInContainer/$date/uploads.tar.gz ."
+docker exec djangoapp-${env} sqlite3 /db/db.sqlite3 ".backup '$directoryOfBackupInContainer/$date/backup_db.sqlite3'"
+docker exec djangoapp-${env} /bin/sh -c "tar -C $mediaDirectoryInContainer -cz -f $directoryOfBackupInContainer/$date/uploads.tar.gz ."
 
 printf "Created a new backup in %s \n" "$directoryOfBackup"/"$date"
 
