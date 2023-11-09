@@ -9,7 +9,7 @@ if [[ "${1:-}" != "testing" && "${1:-}" != "production" ]]; then
 fi
 
 env="${1:-}"
-source .env.${env}
+source ${env}/.env
 
 # define place and number of backups
 mediaDirectoryInContainer="/images/uploads"
