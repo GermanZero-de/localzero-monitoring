@@ -172,6 +172,13 @@ This does not work when testing migrations, but there is a way: Use `read_fixtur
 
 ## Manual tests with data from production
 
+### On the test server
+To start the testing app with production data from some backup run the script
+```sh
+/home/monitoring/start-testing-with-prod-data.sh [backup-folder]
+```
+
+### Locally
 Occasionally, someone with access may provide a copy of the current production database. (See "Server Administration", below.)
 This may be used as follows:
 
