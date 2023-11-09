@@ -26,7 +26,7 @@ jobs:
         shell: bash
         run: |
           ssh -tt monitoring.localzero.net /bin/bash << EOF
-          set -euo pipefail
+          set -e
           ./backup.sh production
           exit
           EOF

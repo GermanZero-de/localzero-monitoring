@@ -63,3 +63,13 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
           ./deploy.sh "$ENVIRONMENT"
+
+      - name: Restore last production backup to testing if we deployed to testing
+        if: needs.get-environment.outputs.environment == 'testing'
+        shell: bash
+        run: |
+          ssh -tt monitoring.localzero.net /bin/bash << EOF
+          set -e
+          ./start-testing-with-prod-data.sh
+          exit
+          EOF
