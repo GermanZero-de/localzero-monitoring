@@ -5,7 +5,7 @@ set -euo pipefail
 backup_folder=$1
 
 if [[ -z "$backup_folder" ]]; then
-  latest_backup=$( ls -r -d *-*-*-*-*-* | head -1 )
+  latest_backup=$( ls -r -d /data/production/*-*-*-*-*-* | head -1 )
   backup_folder=$latest_backup
 fi
 
