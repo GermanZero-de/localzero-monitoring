@@ -41,6 +41,10 @@ scp -C -r cpmonitor.tar klimaschutzmonitor-dbeaver.tar docker-compose.yml cronta
 ssh -tt monitoring.localzero.net /bin/bash << EOF
 set -euo pipefail
 
+# make scripts available
+cp /tmp/backup.sh /tmp/start-testing-with-prod-data.sh /home/monitoring/
+chmod +x /home/monitoring/backup.sh /home/monitoring/start-testing-with-prod-data.sh
+
 # Import the images into Docker on the server
 docker load -i /tmp/cpmonitor.tar
 docker load -i /tmp/klimaschutzmonitor-dbeaver.tar
@@ -74,10 +78,6 @@ docker-compose up --detach --no-build
 crontab /tmp/crontab
 cp /tmp/reload-cert.sh /home/monitoring/
 chmod +x /home/monitoring/reload-cert.sh
-
-# make scripts available
-cp /tmp/backup.sh /tmp/start-testing-with-prod-data.sh /home/monitoring/
-chmod +x /home/monitoring/backup.sh /home/monitoring/start-testing-with-prod-data.sh
 
 echo 'FINISHED SUCCESSFULLY!'
 
