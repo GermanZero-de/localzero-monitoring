@@ -13,6 +13,7 @@
     "jquery": "^3.6.3"
   },
   "devDependencies": {
+    "prettier": "^3.0.3",
     "sass": "^1.58.3"
   }
 }

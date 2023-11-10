@@ -1,0 +1,32 @@
+on:
+  schedule:
+    - cron:  '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    name: Backup production
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          name: id_lzm
+          key: ${{ secrets.LZM_SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.LZM_SSH_KNOWN_HOSTS }}
+          config: |
+            Host monitoring.localzero.net monitoring-test.localzero.net lzm
+            HostName monitoring.localzero.net
+            User monitoring
+            IdentityFile ~/.ssh/id_lzm
+
+      - name: Run backup script
+        shell: bash
+        run: |
+          ssh -tt monitoring.localzero.net /bin/bash << EOF
+          set -e
+          ./backup.sh production
+          exit
+          EOF

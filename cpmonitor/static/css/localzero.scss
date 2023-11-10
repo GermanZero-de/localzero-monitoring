@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
-@use 'lz-variables';
-@use 'lz-global';
+@use "lz-variables";
+@use "lz-global";
 // body-defaults are provided by main.css @use 'lz-body';
-@use 'lz-header';
-@use 'lz-menu';
-@use 'lz-footer';
-
+@use "lz-header";
+@use "lz-menu";
+@use "lz-footer";

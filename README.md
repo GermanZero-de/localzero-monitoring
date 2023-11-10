@@ -172,6 +172,13 @@ This does not work when testing migrations, but there is a way: Use `read_fixtur
 
 ## Manual tests with data from production
 
+### On the test server
+To start the testing app with production data from some backup run the script
+```sh
+/home/monitoring/start-testing-with-prod-data.sh [backup-folder]
+```
+
+### Locally
 Occasionally, someone with access may provide a copy of the current production database. (See "Server Administration", below.)
 This may be used as follows:
 
@@ -272,13 +279,6 @@ cp -r cpmonitor/images/uploads e2e_tests/database/test_database_uploads
 
 Check the diff of `e2e_tests/database/test_database.json` for any unexpected parts and adjust as necessary.
 
-## When pre-commit hooks make trouble
-
-E.g. the hook `check-untracked-migrations` is known to make trouble with detachted HEAD, e.g. during a rebase. Then it can be skipped:
-
-```shell
-SKIP=check-untracked-migrations git commit
-```
 
 ## Containerization and Deployment
 
@@ -507,3 +507,11 @@ docker exec acme-sh --update-account --accountemail '<the-new-address@somewhere.
 
 #### TLS Certificates and Running Locally
 When running locally, we instead use a [certificate created for localhost](ssl_certificates_localhost). Since ownership of localhost cannot be certified, this is a single self-signed certificate instead of a full chain signed by a CA like on the server, and an exception must be added to your browser to trust it.
+
+
+## Backups
+A backup of the database and media files is created each day.
+You can also manually trigger a backup on the server by running
+```shell
+/home/monitoring/backup.sh production
+```
