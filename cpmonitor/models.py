@@ -485,6 +485,7 @@ class Task(MP_Node):
         help_text=(
             "Stammt dieses Handlungsfeld / diese Maßnahme aus dem bereits vorhandenen Klimaaktions-Plan"
             " oder handelt es sich hierbei um einen Vorschlag eures Lokalteams?"
+            " Hinweis: Bei Handlungsfeldern hat dieses Feld aktuell keine Auswirkungen auf die Darstellung und wird ignoriert."
         ),
     )
 

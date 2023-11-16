@@ -54,16 +54,12 @@ def _calculate_summary(request, node):
     """calculate summarized status for a given node or a whole city"""
 
     if isinstance(node, City):
-        subtasks = Task.objects.filter(
-            city=node, numchild=0, source=Task.TaskSource.CLIMATE_ACTION_PLAN
-        )
+        subtasks = Task.objects.filter(city=node, numchild=0)
         sugg_subtasks = Task.objects.filter(
             city=node, numchild=0, source=Task.TaskSource.SUGGESTED
         )
     else:
-        subtasks = node.get_descendants().filter(
-            numchild=0, source=Task.TaskSource.CLIMATE_ACTION_PLAN
-        )
+        subtasks = node.get_descendants().filter(numchild=0)
         sugg_subtasks = node.get_descendants().filter(
             numchild=0, source=Task.TaskSource.SUGGESTED
         )

@@ -64,11 +64,6 @@
             <div class="h1 mb-3">{{ city.incomplete_proportion }}%</div>
             <div class="d-flex mb-2">
               <div>{{ city.subtasks_count }} Maßnahmen insgesamt</div>
-              {% if city.sugg_subtasks_count %}
-                <div>+ {{ city.sugg_subtasks_count }} vorgeschlagene Maßnahmen</div>
-              {% else %}
-                <div class="ms-auto"></div>
-              {% endif %}
             </div>
             <div class="progress progress-lg progress-separated">
               {% for value, status in city.status_proportions %}
