@@ -474,6 +474,21 @@ class Task(MP_Node):
         ),
     )
 
+    class TaskSource(models.IntegerChoices):
+        CLIMATE_ACTION_PLAN = 0, "KAP"
+        SUGGESTED = 1, "Vorschlag"
+
+    source = models.IntegerField(
+        "KAP oder eigener Vorschlag?",
+        choices=TaskSource.choices,
+        default=TaskSource.CLIMATE_ACTION_PLAN,
+        help_text=(
+            "Stammt dieses Handlungsfeld / diese Maßnahme aus dem bereits vorhandenen Klimaaktions-Plan"
+            " oder handelt es sich hierbei um einen Vorschlag eures Lokalteams?"
+            " Hinweis: Bei Handlungsfeldern hat dieses Feld aktuell keine Auswirkungen auf die Darstellung und wird ignoriert."
+        ),
+    )
+
     frontpage = models.BooleanField(
         "Startseite",
         default=False,
@@ -747,6 +762,10 @@ class Task(MP_Node):
             or self.actual_completion
             and self.planned_completion < self.actual_completion
         )
+
+    @property
+    def is_suggestion(self):
+        return self.source == self.TaskSource.SUGGESTED
 
     # Maybe later. Not part of the MVP:
 

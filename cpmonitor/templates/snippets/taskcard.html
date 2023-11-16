@@ -3,7 +3,11 @@
    class="card card-link card-link-popup">
   <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
   <div class="card-body">
-    <div class="h3 mb-3">{{ task.title }}</div>
+    {% if task.is_suggestion %}
+      <div class="h3 mb-3 text-secondary">{{ task.title }} [VORSCHLAG]</div>
+    {% else %}
+      <div class="h3 mb-3">{{ task.title }}</div>
+    {% endif %}
     <div class="lz-card-summary lines-8">{{ task.teaser }}</div>
   </div>
   <div class="lz-card-details">
