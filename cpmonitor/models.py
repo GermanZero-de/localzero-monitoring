@@ -22,6 +22,17 @@ from PIL import Image
 
 
 class City(models.Model):
+    """Base data for a city or municipality.
+
+    Some background for the handling of the `slug` field:
+    The slug is used in all URLs for the city. Therefore it has to be unique.
+    Usually, e.g. in a blog system, slugs are never updated.
+    Here it is updated, since it is quite important to have an URL with the slug based on the current name.
+    When the slug is updated, the uniqueness has to be checked again.
+    However, when `editable=False` is set, django admin prevents that.
+    See clean() and vallidate_unique() for technical details.
+    """
+
     class Meta:
         verbose_name = "Kommune"
         verbose_name_plural = "Kommunen"
@@ -451,6 +462,30 @@ TASK_UNIQUE_CONSTRAINT_NAME = "unique_urls"
 
 
 class Task(MP_Node):
+    """A task to be done to reach climate neutrality or a group of such tasks.
+
+    Tasks form a tree. We use django-treebeard for this.
+    `MP_Node` is treebeards base class for all nodes in the tree.
+
+    A group is a node with children and a task is a node without children.
+
+    Some background for the handling of the `slugs` field:
+    The tree structure is expected to be reflected in the URL as the directory structure.
+    E.g. a task "Windpower" in the task group "Electricity" shall have an
+    URL "https://.../electricity/windpower".
+    In order to retrieve the required data based on the URL, the complete directory
+    is stored in the `slugs` field, e.g. "electricity/windpower".
+    The `slugs` field is used together with the `slug` of the city in the URL,
+    e.g. "https://.../hamburg/electricity/windpower".
+    Therefore it has to be unique per city.
+
+    Usually, e.g. in a blog system, slugs are never updated.
+    Here they are updated, since it is quite important to have an URL with the slug based on the current name.
+    When the slug is updated, the uniqueness has to be checked again.
+    However, when `editable=False` is set, django admin prevents that.
+    See clean() and vallidate_unique() for technical details.
+    """
+
     class Meta:
         verbose_name = "Handlungsfeld / Maßnahme"
         verbose_name_plural = "Handlungsfelder und Maßnahmen"
@@ -670,14 +705,16 @@ class Task(MP_Node):
 
     @staticmethod
     def get_slugs_for_move(ref_node, pos, title):
-        """Determine the `slugs` field given treebeards reference data.
+        """Determine the `slugs` field given treebeards reference data `ref_node` and `pos`.
 
         Some values of `pos` mean a position as sibling of ref_node and others
         as child. The latter all end with "-child".
         """
         if ref_node and isinstance(pos, str) and not pos.endswith("-child"):
+            # The (new) position is not child of `ref_node`, it is a sibling.
             new_parent = ref_node.get_parent()
         else:
+            # The (new) position is a child of `ref_node` -> `ref_node` is the parent.
             new_parent = ref_node
         return Task._get_slugs_with_parent(new_parent, title)
 
@@ -711,6 +748,10 @@ class Task(MP_Node):
     def move(self, target, pos=None):
         """Override to validate uniqueness of slugs field in case of move in changelist.
 
+        It is necessary to update the `slugs` field of the moved node (but not its chilrden)
+        in order to ensure the uniqueness is fulfilled at the new position, before the move is
+        performed.
+
         It might also be possible to override `treebeard.admin.TreeAdmin.try_to_move_node()`,
         instead. This would possibly catch more cases.
         """
@@ -730,8 +771,10 @@ class Task(MP_Node):
         """Override to correct `slugs` of whole sub-tree after move or rename.
 
         Calls itself recursively for all descendants after the regular save.
+        It is important to do the recursion after `super().save()`: This way
+        the children can use the `slugs` field of the parent to update their `slugs` field.
 
-        Any move within the tree structure has to happen before such that
+        Any move within the tree structure has to happen before, such that
         `get_parent()` returns the correct parent. Treebeard first moves, then saves.
         """
 
