@@ -1119,21 +1119,22 @@ testing = ["Django", "django-configurations (>=2.0)"]
 
 [[package]]
 name = "pytest-env"
-version = "0.8.1"
-description = "py.test plugin that allows you to add environment variables."
+version = "1.1.1"
+description = "pytest plugin that allows you to add environment variables."
 category = "dev"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "pytest_env-0.8.1-py3-none-any.whl", hash = "sha256:8c0605ae09a5b7e41c20ebcc44f2c906eea9654095b4b0c342b3814bcc3a8492"},
-    {file = "pytest_env-0.8.1.tar.gz", hash = "sha256:d7b2f5273ec6d1e221757998bc2f50d2474ed7d0b9331b92556011fadc4e9abf"},
+    {file = "pytest_env-1.1.1-py3-none-any.whl", hash = "sha256:2b71b37c6810f28bec790a7b373c777af87352b3a359b3de0edb9d24df5cf8b3"},
+    {file = "pytest_env-1.1.1.tar.gz", hash = "sha256:1efb8acce1f6431196150f3b30673443ff05a6fabff64539a9495cd2248adf9e"},
 ]
 
 [package.dependencies]
-pytest = ">=7.1.3"
+pytest = ">=7.4.3"
+tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
 
 [package.extras]
-test = ["coverage (>=6.5)", "pytest-mock (>=3.10)"]
+test = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "pytest-mock (>=3.12)"]
 
 [[package]]
 name = "pytest-playwright"
@@ -1570,4 +1571,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f1de218c3cb81ff27d374c7bd23cc9629baefe7baaf471c061d8b407852c72fc"
+content-hash = "976099eb51c36ef317fcd473febecc3a726a1a69d0d44c3d41bb1c279fb95511"
