@@ -9,7 +9,7 @@ def admin_login(base_url: str, page: Page):
     page.wait_for_selector("text=LocalZero Monitoring")
     page.locator("#id_username").fill("admin")
     page.locator("#id_password").fill("password")
-    page.get_by_role("button").click()
+    page.get_by_text("Anmelden").click()
 
 
 def add_task(base_url: str, page: Page, title, parent=None):
