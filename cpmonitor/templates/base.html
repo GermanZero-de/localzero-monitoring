@@ -107,11 +107,36 @@
       </div>
       <footer id="site-footer">
         <div class="site-footer-inner">
-          <p>
-            Copyright © <a href="https://localzero.net/">LocalZero.net</a>
-          </p>
+          <div>
+            <p>
+              Website und Software von LocalZero Monitoring sind unter der
+              <a href="https://github.com/GermanZero-de/klimaschutzmonitor/blob/main/LICENSE">MIT-Lizenz</a>
+              verfügbar.
+            </p>
+            <p xmlns
+               cc="https://creativecommons.org/ns#"
+               xmlns
+               dct="https://purl.org/dc/terms/">
+              <span property="dct:title">Monitoring-Inhalte</span>
+              von
+              <span property="cc:attributionName">LocalZero</span>
+              sind unter
+              {# djlint:off #}
+              {# djlint moves the end of the a tag to the next line, causing the following space to be highlighted on hover #}
+              <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer">
+                CC BY-SA 4.0
+                <img class="cc-license-img" height="18" width="auto" alt="" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1">
+                <img class="cc-license-img" height="18" width="auto" alt="" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1">
+                <img class="cc-license-img" height="18" width="auto" alt="" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
+              {# djlint:on #}
+              verfügbar, wenn nicht anders angegeben.
+            </p>
+          </div>
           <nav>
             <ul>
+              <li>
+                <a href="https://github.com/GermanZero-de/klimaschutzmonitor">GitHub</a>
+              </li>
               <li>
                 <a href="{% url 'impressum' %}">Impressum</a>
               </li>

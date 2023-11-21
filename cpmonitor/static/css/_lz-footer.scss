@@ -18,8 +18,13 @@
     padding-right: var(--viewport-padding);
   }
 
+  .cc-license-img {
+    margin-left: 3px;
+    vertical-align: text-bottom;
+  }
+
   p {
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     margin: unset;
   }
@@ -32,12 +37,16 @@
       margin: 0px;
       column-gap: 1.2rem;
       text-transform: uppercase;
+
+      a {
+        @include lz-variables.lz-link-hover-thick();
+      }
     }
   }
 
   a {
     @include lz-variables.unset-all();
     @include lz-variables.link-defaults();
-    @include lz-variables.lz-link-hover();
+    @include lz-variables.lz-link-hover-thin();
   }
 }
