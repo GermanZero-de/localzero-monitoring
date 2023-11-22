@@ -383,9 +383,12 @@ class AdministrationChecklist(models.Model):
     climate_protection_management_exists = models.BooleanField(
         "Gibt es ein Klimaschutzmanagement, das befugt ist, Entscheidungen zu treffen und über Haushaltsmittel verfügt?",
         default=False,
-        help_text="Klimaschutzmanager:innen können von der Nationalen Initiative für Klimaschutz (NKI) gefördert werden."
-        " Allerdings ist wichtig, dass das Klimaschutzmanagement an einer Stelle in der Verwaltung angesiedelt ist"
-        " wo es Entscheidungen treffen und möglichst frei agieren kann sowie über finanzielle Mittel verfügt.",
+        help_text="Klimaschutzmanager:innen können von der Nationalen Initiative für Klimaschutz (NKI) gefördert "
+        "werden. Allerdings ist wichtig, dass das Klimaschutzmanagement an einer Stelle in der Verwaltung "
+        "angesiedelt ist, wo es Entscheidungen treffen und möglichst frei agieren kann sowie über "
+        "finanzielle Mittel verfügt. Im Besten Falle ist das Klimaschutzmanagement als Stabsstelle "
+        "organisiert, die Klimaschutzmanagerin ist also keine Sachbearbeiterin, die einer Fachdienstleitung "
+        "unterstellt ist, sondern selber ein Fachdienst.",
     )
     climate_protection_management_exists_rationale = models.TextField(
         "Begründung zu: Gibt es ein Klimaschutzmanagement, das befugt ist, Entscheidungen zu treffen und"
@@ -396,13 +399,17 @@ class AdministrationChecklist(models.Model):
         "Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
         " Auswirkungen auf das Klima geprüft?",
         default=False,
-        help_text="Aufgrund der enormen Dringlichkeit von Klimaschutzmaßnahmen zur Bekämpfung der Klimakrise,"
-        " ist es wesentlich alle kommunalen Beschlüsse hinsichtlich ihrer Verträglichkeit mit Klimaschutz zu bewerten."
-        " Dies erfolgt durch eine Integration eines „Klima-Checks“ / Klimarelevanzprüfung / Klimaschutzrelevanzprüfung"
-        " in jegliche Beschlussvorlage: Beschlüsse werden somit bereits während der Erstellung durch die Fachbereiche auf"
-        " ihre Klimarelevanz hin (vor-)bewertet und Aspekte des Klimaschutzes sind automatisch integraler"
-        " Bestandteil jeder Beschlussfassung. Klimafolgen werden somit transparent. Langfristig baut die Kommune Kompetenzen"
-        " auf, um die Auswirkung auf das Klima bei allen relevanten Entscheidungen zu berücksichtigen.",
+        help_text="Klimaschutz ist wichtig und muss als Querschnittsaufgabe umgesetzt werden. Alle "
+        "Sachbearbeiterinnen, die Leitungsebene und auch die Politik muss – um Klimaneutralität zu erreiche "
+        "– in allen Planungen Klimaschutz berücksichtigen!\n\n"
+        "Daher ist es wesentlich, alle kommunalen Beschlüsse hinsichtlich ihrer Verträglichkeit mit Klimaschutz zu "
+        "bewerten. Dies erfolgt durch eine Integration eines „Klima-Checks“ / Klimarelevanzprüfung / "
+        "Klimaschutzrelevanzprüfung in alle Beschlussvorlagen. Gesetzlich geregelt ist bisher nur, "
+        "dass alle Beschlüsse auf ihre finanziellen Auswirkungen hin geprüft werden müssen. Unter jedem "
+        "kommunalen Beschluss steht also ein kurzer Absatz über die Höhe der Kosten und eine Information,"
+        "ob dies wiederkehrende Kosten sind.\n\n"
+        "Hier würden mit der Einführung einer Klimarelevanzprüfung weitere Informationen angefügt: Hat der Beschluss negative oder positive Auswirkungen auf den Klimaschutz, wurden Alternativen geprüft, warum wurden diese verworfen etc.\n\n"
+        "Beschlüsse werden somit bereits während der Erstellung durch die Sachbearbeiter:innen in den Fachbereichen auf ihre Klimarelevanz hin (vor-)bewertet und Aspekte des Klimaschutzes sind automatisch integraler Bestandteil jeder Beschlussfassung. Klimafolgen werden somit transparent, Politiker:innen können fundierter entscheiden. Langfristig baut die Kommune Kompetenzen auf, um die Auswirkung auf das Klima bei allen relevanten Entscheidungen zu berücksichtigen.",
     )
     climate_relevance_check_exists_rationale = models.TextField(
         "Begründung zu: Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
@@ -412,9 +419,12 @@ class AdministrationChecklist(models.Model):
     climate_protection_monitoring_exists = models.BooleanField(
         "Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
         default=False,
-        help_text="Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen."
-        " Dieser kann in eingespaarten Emissionen sichtbar gemacht werden und ist wichtig um das Ziel der Klimaneutralität"
-        " und notwendige Schritte im Auge zu behalten.",
+        help_text="Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen. In einem "
+        "kommunalen Monitoring sollten die eingesparten Emissionen sichtbar gemacht werden und mit den "
+        "Prognosen aus dem Klimaschutzkonzept verglichen werden. Falls die Kommune nicht im Zeitplan liegt: "
+        "Wie soll nachgesteuert werden?\n\n"
+        "Das Monitoring ist wichtig, um das Ziel der Klimaneutralität und notwendige Schritte im Auge zu "
+        "behalten.",
     )
     climate_protection_monitoring_exists_rationale = models.TextField(
         "Begründung zu: Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
@@ -423,11 +433,12 @@ class AdministrationChecklist(models.Model):
     intersectoral_concepts_exists = models.BooleanField(
         "Beziehen (sektorenübergreifende) Konzepte und Planungspapiere die Klimaschutz mit ein?",
         default=False,
-        help_text="Sektorenübergreifende Konzepte umfassen unter anderem Klimaanpassungs- Quatierskonzepte, die Klimaschutzaspekte"
-        " über mehrere Sektoren hinweg in der Kommune verankern sollen. Es werden also Energieerzeugung, Mobilität, Wärmeversorung etc. mitbedacht.\n"
-        "Planungspapiere sind unter anderem Bauleitplanungen, Flächennutzungspläne, Wärmeleitplanung etc. Auch hier soll sichergestellt werden,"
-        " dass Klimaschutz in Bauvorhaben zukünftig umgesetzt wird z.B. in der Form von ausgeschriebenen Windeigungsflächen, Festlegung von"
-        " klimaneutraler Fernwärmenutzung etc.",
+        help_text="Sektorenübergreifende Konzepte sind zum Beispiel Kimaanpassungs- , Konzepte der Städtebauförderung "
+        "oder Quartierskonzepte. Diese Konzepte betrachten Maßnahmen, die über mehrere Sektoren gehen, "
+        "das Quartierskonzept betrachtet zum Beispiel die Gebäudesanierung, die Wärmeversorgung, "
+        "Energieerzeugung und Aspekte der Stadtplanung.\n\n"
+        "In solchen Sektorenübergreifenden Konzepten, die neben dem Klimaschutzkonzept existieren ist es wichtig, "
+        "das Kimaschutz eine zentrale Rolle spielt.",
     )
     intersectoral_concepts_exists_rationale = models.TextField(
         "Begründung zu: Beziehen (sektorenübergreifende) Konzepte und Planungspapiere die Klimaschutz mit ein?",
@@ -436,11 +447,13 @@ class AdministrationChecklist(models.Model):
     guidelines_for_sustainable_procurement_exists = models.BooleanField(
         "Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?",
         default=False,
-        help_text="Die Kommunalverwaltung kann aufgrund ihres großen Beschaffungsvolumens mit ihrer Nachfrage energieeffiziente Produkte fördern"
-        " und damit einen wichtigen Beitrag zum Klimaschutz leisten. Wichtig ist, möglichst nur Produkte und Dienstleistungen zu erwerben,"
-        " die wirklich benötigt werden und im Sinne der Nachhaltigkeit neben einer hohen Umweltverträglichkeit auch sozialen wie ökonomischen"
-        " Aspekten entsprechen. Umweltfreundliche Beschaffung sollte in grundlegenden Dokumenten der Behörde wie dem eigenen Leitbild,"
-        " verpflichtenden Dienstanweisungen oder einem Beschaffungsleitfaden als Organisationsziel definiert werden.",
+        help_text="Die Kommunalverwaltung kann aufgrund ihres großen Beschaffungsvolumens mit ihrer Nachfrage "
+        "energieeffiziente Produkte fördern und damit einen wichtigen Beitrag zum Klimaschutz leisten. "
+        "Wichtig ist, möglichst nur Produkte und Dienstleistungen zu erwerben, die wirklich benötigt werden "
+        "und im Sinne der Nachhaltigkeit neben einer hohen Umweltverträglichkeit auch sozialen wie "
+        "ökonomischen Aspekten entsprechen. Umweltfreundliche Beschaffung sollte in grundlegenden "
+        "Dokumenten der Behörde wie dem eigenen Leitbild, verpflichtenden Dienstanweisungen oder einem "
+        "Beschaffungsleitfaden als Organisationsziel definiert werden.",
     )
     guidelines_for_sustainable_procurement_exists_rationale = models.TextField(
         "Begründung zu: Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?",
@@ -450,8 +463,9 @@ class AdministrationChecklist(models.Model):
         "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung"
         " etc. für den Klimaschutz)?",
         default=False,
-        help_text="Beantragung für Fördermittel ist oft sehr zeitintensiv, und somit werden für Klimaschutz notwendige personelle Kapazitäten oft"
-        " hierauf verwendet. Eigene Stellen sollen Entlastung schaffen und dafür sorgen, dass effizient an Klimaschutz gearbeitet werden kann.",
+        help_text="Beantragung für Fördermittel ist oft sehr zeitintensiv, und somit werden für Klimaschutz "
+        "notwendige personelle Kapazitäten oft hierauf verwendet. Eigene Stellen sollen Entlastung schaffen "
+        "und dafür sorgen, dass effizient an Klimaschutz gearbeitet werden kann.",
     )
     municipal_office_for_funding_management_exists_rationale = models.TextField(
         "Begründung zu: Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung"
@@ -461,8 +475,8 @@ class AdministrationChecklist(models.Model):
     public_relation_with_local_actors_exists = models.BooleanField(
         "Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat? Ist so ein Gremium in der Kommune eingerichtet und tagt regelmäßig?",
         default=False,
-        help_text="Mit Klimabeirat/Klimarat/Bürger:innenrat sind Gremien gemeint, die aus Betroffenen / Bürgerperspektive die Lokalpolitik beraten."
-        " Um politischen Einfluss auszuüben sollten diese regelmäßig tagen.",
+        help_text="Mit Klimabeirat/Klimarat/Bürger:innenrat sind Gremien gemeint, die ausBürgerperspektive die "
+        "Lokalpolitik beraten. Um politischen Einfluss auszuüben sollten diese regelmäßig tagen.",
     )
     public_relation_with_local_actors_exists_rationale = models.TextField(
         "Begründung zu: Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat? Ist so ein Gremium in der Kommune eingerichtet und tagt regelmäßig?",
