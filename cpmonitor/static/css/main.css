@@ -140,4 +140,8 @@ figure.lz-chart img {
   margin-bottom: 0px;
 }
 
+.pre-formatted-text {
+  white-space: pre-wrap;
+}
+
 /*# sourceMappingURL=main.css.map */
