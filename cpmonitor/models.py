@@ -223,9 +223,9 @@ class CapChecklist(models.Model):
     cap_exists = models.BooleanField(
         "Gibt es einen Klima-Aktionsplan?",
         default=False,
-        help_text="Ein Klima-Aktionsplan (auch KAP/Klimaschutzkonzept/integriertes Klimaschutzkonzept) ist ein von "
+        help_text="Ein Klima-Aktionsplan (auch KAP / Klimaschutzkonzept / integriertes Klimaschutzkonzept) ist ein von "
         "einer Kommune beschlossener Plan/Konzept, in dem beispielhaft oder auch in mehreren Szenarien "
-        "festgelegt ist, wie die Kommune bis 2035 / 20XX klimaneutral wird.\n\n"
+        "festgelegt ist, wie die Kommune bis 2035/20XX klimaneutral wird.\n\n"
         "Im ersten Teil des KAPs wird bilanziert: Wieviel Treibhausgase emittiert die Kommune derzeit?\n\n"
         "Im zweiten Teil des KAPs werden Maßnahmen aufgelistet, mit denen die Kommune klimaneutral werden "
         "kann. Dabei ist nicht nur Emissionsreduktion sondern die Erreichung der Klimaneutralität in allen "
@@ -239,10 +239,10 @@ class CapChecklist(models.Model):
         "Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten"
         " kommunalen Gremium beschlossen wurde?",
         default=False,
-        help_text="Die Jahreszahl (2035 / 20XX…) definiert, bis wann die Kommune – möglichst ohne Kompensation – "
+        help_text="Die Jahreszahl (2035/20XX…) definiert, bis wann die Kommune – möglichst ohne Kompensation – "
         "klimaneutral werden will.\n\n"
         "Das bedeutet, dass allen Maßnahmen nachweisliche THG-Einsparmengen zugerechnet werden müssen, um dann als "
-        "Ergebnis nachzuweisen, dass mit den geplanten Maßnahmen alle bilanzierten kommunalen THG Emissionen "
+        "Ergebnis nachzuweisen, dass mit den geplanten Maßnahmen alle bilanzierten kommunalen THG-Emissionen "
         "eingespart werden.",
     )
     target_date_exists_rationale = models.TextField(
@@ -318,10 +318,10 @@ class CapChecklist(models.Model):
     tasks_are_planned_yearly = models.BooleanField(
         "Haben die Maßnahmen eine jahresscharfe Planung?",
         default=False,
-        help_text="Eine genaue Planung der Maßnahmen ist eine Grundvoraussetzung, um den Erfolg / Fortschritt der "
+        help_text="Eine genaue Planung der Maßnahmen ist eine Grundvoraussetzung, um den Erfolg/Fortschritt der "
         "Umsetzung des Klima-Aktionsplans zu messen. Optimal ist ein Ablaufplan, in dem die Reihenfolge und "
         "die zeitliche Überschneidung aller Maßnahmen genau aufgeschlüsselt ist.\n\n"
-        "Mit einem solchen Ablaufplan kann die Kommune die Reduktion der THG Emissionen für jedes kommende Jahr "
+        "Mit einem solchen Ablaufplan kann die Kommune die Reduktion der THG-Emissionen für jedes kommende Jahr "
         "prognostizieren und so nachweisen, dass sie das 1,5 Grad Ziel einhält.\n\n"
         "Wichtig ist natürlich, dass zuerst die großen Emittenden auf Klimaneutralität umgestellt werden und danach bei "
         "den kleinen Emissionsquellen Maßnahmen ergriffen werden.",
@@ -331,7 +331,7 @@ class CapChecklist(models.Model):
         blank=True,
     )
     tasks_have_responsible_entity = models.BooleanField(
-        "Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen"
+        "Sind verantwortliche Personen / Fachbereiche / kommunale Gesellschaften für alle Maßnahmen"
         " hinterlegt?",
         default=False,
         help_text="Ohne klar verteilte Verantwortlichkeiten können Maßnahmen nicht umgesetzt werden. Die "
@@ -340,7 +340,7 @@ class CapChecklist(models.Model):
         "die kommunale Tochter oder sogar die zuständige Sachbearbeitung genannt werden.",
     )
     tasks_have_responsible_entity_rationale = models.TextField(
-        "Begründung zu: Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen"
+        "Begründung zu: Sind verantwortliche Personen / Fachbereiche / kommunale Gesellschaften für alle Maßnahmen"
         " hinterlegt?",
         blank=True,
     )
@@ -349,7 +349,7 @@ class CapChecklist(models.Model):
         " THG-Emissionen ersichtlich?",
         default=False,
         help_text="Aus dem genauen Zeitplan der Maßnahmenplanung kann ab jetzt bis zum Jahr der Klimaneutralität ("
-        "2030/35) die THG-Emissionen und der Endenergiebedarf jährlich prognostiziert werden in allen "
+        "2035/20XX) die THG-Emissionen und der Endenergiebedarf jährlich prognostiziert werden in allen "
         "Sektoren. Wird z.B. ein Braunkohlewerk im Jahr X geschlossen, sinken die Emissionen um Y. Dadurch "
         "wird der Weg zur Treibhausgasneutralität klar erkennbar und zu kompensierende Emissionen sichtbar.",
     )
@@ -361,7 +361,7 @@ class CapChecklist(models.Model):
     concept_for_participation_specified = models.BooleanField(
         "Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
         default=False,
-        help_text="Alle Akteur:innen in einer Kommune sollten bei der Erstellung / Umsetzung eines KAPs beteiligt "
+        help_text="Alle Akteur:innen in einer Kommune sollten bei der Erstellung/Umsetzung eines KAPs beteiligt "
         "werden. Unterschiedliche Akteur:innen der Kommune sind: Bürger:innen (z.B. LocalZero-Teams), "
         "Verwaltung der Kommune, höchste politische Gremien der Kommune, Stakeholder:innen in der Kommune ("
         "z.B. kommunale Unternehmen oder Vereine).",
@@ -400,10 +400,10 @@ class AdministrationChecklist(models.Model):
         " Auswirkungen auf das Klima geprüft?",
         default=False,
         help_text="Klimaschutz ist wichtig und muss als Querschnittsaufgabe umgesetzt werden. Alle "
-        "Sachbearbeiterinnen, die Leitungsebene und auch die Politik muss – um Klimaneutralität zu erreiche "
+        "Sachbearbeiterinnen, die Leitungsebene und auch die Politik muss – um Klimaneutralität zu erreichen "
         "– in allen Planungen Klimaschutz berücksichtigen!\n\n"
         "Daher ist es wesentlich, alle kommunalen Beschlüsse hinsichtlich ihrer Verträglichkeit mit Klimaschutz zu "
-        "bewerten. Dies erfolgt durch eine Integration eines „Klima-Checks“ / Klimarelevanzprüfung / "
+        "bewerten. Dies erfolgt durch eine Integration eines „Klima-Checks“/Klimarelevanzprüfung/"
         "Klimaschutzrelevanzprüfung in alle Beschlussvorlagen. Gesetzlich geregelt ist bisher nur, "
         "dass alle Beschlüsse auf ihre finanziellen Auswirkungen hin geprüft werden müssen. Unter jedem "
         "kommunalen Beschluss steht also ein kurzer Absatz über die Höhe der Kosten und eine Information,"
@@ -419,7 +419,7 @@ class AdministrationChecklist(models.Model):
     climate_protection_monitoring_exists = models.BooleanField(
         "Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
         default=False,
-        help_text="Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen. In einem "
+        help_text="Monitoring bedeutet ein Überwachen/Überblick über den Erfolg von Klimaschutzmaßnahmen. In einem "
         "kommunalen Monitoring sollten die eingesparten Emissionen sichtbar gemacht werden und mit den "
         "Prognosen aus dem Klimaschutzkonzept verglichen werden. Falls die Kommune nicht im Zeitplan liegt: "
         "Wie soll nachgesteuert werden?\n\n"

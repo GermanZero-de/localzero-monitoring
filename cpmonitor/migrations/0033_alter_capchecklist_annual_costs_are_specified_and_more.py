@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             name="cap_exists",
             field=models.BooleanField(
                 default=False,
-                help_text="Ein Klima-Aktionsplan (auch KAP/Klimaschutzkonzept/integriertes Klimaschutzkonzept) ist ein von einer Kommune beschlossener Plan/Konzept, in dem beispielhaft oder auch in mehreren Szenarien festgelegt ist, wie die Kommune bis 2035 / 20XX klimaneutral wird.\n\nIm ersten Teil des KAPs wird bilanziert: Wieviel Treibhausgase emittiert die Kommune derzeit?\n\nIm zweiten Teil des KAPs werden Maßnahmen aufgelistet, mit denen die Kommune klimaneutral werden kann. Dabei ist nicht nur Emissionsreduktion sondern die Erreichung der Klimaneutralität in allen Bereichen der Kommune von Bedeutung.",
+                help_text="Ein Klima-Aktionsplan (auch KAP / Klimaschutzkonzept / integriertes Klimaschutzkonzept) ist ein von einer Kommune beschlossener Plan/Konzept, in dem beispielhaft oder auch in mehreren Szenarien festgelegt ist, wie die Kommune bis 2035/20XX klimaneutral wird.\n\nIm ersten Teil des KAPs wird bilanziert: Wieviel Treibhausgase emittiert die Kommune derzeit?\n\nIm zweiten Teil des KAPs werden Maßnahmen aufgelistet, mit denen die Kommune klimaneutral werden kann. Dabei ist nicht nur Emissionsreduktion sondern die Erreichung der Klimaneutralität in allen Bereichen der Kommune von Bedeutung.",
                 verbose_name="Gibt es einen Klima-Aktionsplan?",
             ),
         ),
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
             name="concept_for_participation_specified",
             field=models.BooleanField(
                 default=False,
-                help_text="Alle Akteur:innen in einer Kommune sollten bei der Erstellung / Umsetzung eines KAPs beteiligt werden. Unterschiedliche Akteur:innen der Kommune sind: Bürger:innen (z.B. LocalZero-Teams), Verwaltung der Kommune, höchste politische Gremien der Kommune, Stakeholder:innen in der Kommune (z.B. kommunale Unternehmen oder Vereine).",
+                help_text="Alle Akteur:innen in einer Kommune sollten bei der Erstellung/Umsetzung eines KAPs beteiligt werden. Unterschiedliche Akteur:innen der Kommune sind: Bürger:innen (z.B. LocalZero-Teams), Verwaltung der Kommune, höchste politische Gremien der Kommune, Stakeholder:innen in der Kommune (z.B. kommunale Unternehmen oder Vereine).",
                 verbose_name="Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
             ),
         ),
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
             name="target_date_exists",
             field=models.BooleanField(
                 default=False,
-                help_text="Die Jahreszahl (2035 / 20XX…) definiert, bis wann die Kommune – möglichst ohne Kompensation – klimaneutral werden will.\n\nDas bedeutet, dass allen Maßnahmen nachweisliche THG-Einsparmengen zugerechnet werden müssen, um dann als Ergebnis nachzuweisen, dass mit den geplanten Maßnahmen alle bilanzierten kommunalen THG Emissionen eingespart werden.",
+                help_text="Die Jahreszahl (2035/20XX…) definiert, bis wann die Kommune – möglichst ohne Kompensation – klimaneutral werden will.\n\nDas bedeutet, dass allen Maßnahmen nachweisliche THG-Einsparmengen zugerechnet werden müssen, um dann als Ergebnis nachzuweisen, dass mit den geplanten Maßnahmen alle bilanzierten kommunalen THG-Emissionen eingespart werden.",
                 verbose_name="Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten kommunalen Gremium beschlossen wurde?",
             ),
         ),
@@ -86,7 +86,7 @@ class Migration(migrations.Migration):
             name="tasks_are_planned_yearly",
             field=models.BooleanField(
                 default=False,
-                help_text="Eine genaue Planung der Maßnahmen ist eine Grundvoraussetzung, um den Erfolg / Fortschritt der Umsetzung des Klima-Aktionsplans zu messen. Optimal ist ein Ablaufplan, in dem die Reihenfolge und die zeitliche Überschneidung aller Maßnahmen genau aufgeschlüsselt ist.\n\nMit einem solchen Ablaufplan kann die Kommune die Reduktion der THG Emissionen für jedes kommende Jahr prognostizieren und so nachweisen, dass sie das 1,5 Grad Ziel einhält.\n\nWichtig ist natürlich, dass zuerst die großen Emittenden auf Klimaneutralität umgestellt werden und danach bei den kleinen Emissionsquellen Maßnahmen ergriffen werden.",
+                help_text="Eine genaue Planung der Maßnahmen ist eine Grundvoraussetzung, um den Erfolg/Fortschritt der Umsetzung des Klima-Aktionsplans zu messen. Optimal ist ein Ablaufplan, in dem die Reihenfolge und die zeitliche Überschneidung aller Maßnahmen genau aufgeschlüsselt ist.\n\nMit einem solchen Ablaufplan kann die Kommune die Reduktion der THG-Emissionen für jedes kommende Jahr prognostizieren und so nachweisen, dass sie das 1,5 Grad Ziel einhält.\n\nWichtig ist natürlich, dass zuerst die großen Emittenden auf Klimaneutralität umgestellt werden und danach bei den kleinen Emissionsquellen Maßnahmen ergriffen werden.",
                 verbose_name="Haben die Maßnahmen eine jahresscharfe Planung?",
             ),
         ),
@@ -96,7 +96,24 @@ class Migration(migrations.Migration):
             field=models.BooleanField(
                 default=False,
                 help_text="Ohne klar verteilte Verantwortlichkeiten können Maßnahmen nicht umgesetzt werden. Die Verantwortlichen können sowohl in der Kommunalverwaltung (z.B. Abteilungen) oder außerhalb (z.B. Stadtwerke) sein. Bei jeder vorgeschlagenen Maßnahme sollte die zuständige Fachabteilung, die kommunale Tochter oder sogar die zuständige Sachbearbeitung genannt werden.",
-                verbose_name="Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen hinterlegt?",
+                verbose_name="Sind verantwortliche Personen / Fachbereiche / kommunale Gesellschaften für alle Maßnahmen hinterlegt?",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="capchecklist",
+            name="tasks_have_responsible_entity_rationale",
+            field=models.TextField(
+                blank=True,
+                verbose_name="Begründung zu: Sind verantwortliche Personen / Fachbereiche / kommunale Gesellschaften für alle Maßnahmen hinterlegt?",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="capchecklist",
+            name="annual_reduction_of_emissions_can_be_predicted",
+            field=models.BooleanField(
+                default=False,
+                help_text="Aus dem genauen Zeitplan der Maßnahmenplanung kann ab jetzt bis zum Jahr der Klimaneutralität (2035/20XX) die THG-Emissionen und der Endenergiebedarf jährlich prognostiziert werden in allen Sektoren. Wird z.B. ein Braunkohlewerk im Jahr X geschlossen, sinken die Emissionen um Y. Dadurch wird der Weg zur Treibhausgasneutralität klar erkennbar und zu kompensierende Emissionen sichtbar.",
+                verbose_name="Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der THG-Emissionen ersichtlich?",
             ),
         ),
     ]
