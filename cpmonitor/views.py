@@ -394,9 +394,10 @@ def task_view(request, city_slug, task_slugs=None):
         for ancestor in task.get_ancestors()
     ] + [{"label": task.title, "url": reverse("task", args=[city_slug, task.slugs])}]
 
-    context.update({"breadcrumbs": breadcrumbs, "city": city, "task": task})
+    context.update({"breadcrumbs": breadcrumbs, "city": city})
 
     if task.is_leaf():
+        context.update({"task": task})
         return render(
             request,
             "task.html",
@@ -405,7 +406,7 @@ def task_view(request, city_slug, task_slugs=None):
     else:
         groups, tasks = _get_children(request, city, task)
 
-        context.update({"groups": groups, "tasks": tasks})
+        context.update({"node": task, "groups": groups, "tasks": tasks})
         return render(
             request,
             "taskgroup.html",
