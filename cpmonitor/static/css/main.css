@@ -2,7 +2,8 @@
   --tblr-body-bg: white;
   --tblr-font-weight-bold: 700;
   --tblr-primary: #ffc80c;
-  --tblr-primary-rgb: 255, 200, 12;
+  --tblr-primary-rgb: 255, 200,
+    12;
   --lz-yellow: #ffc80c;
   --lz-dark-blue: #011633;
   --lz-color-complete: #8daf1c;
@@ -137,6 +138,10 @@ figure.lz-chart img {
 
 .table-no-bottom-padding {
   margin-bottom: 0px;
+}
+
+.pre-formatted-text {
+  white-space: pre-wrap;
 }
 
 /*# sourceMappingURL=main.css.map */

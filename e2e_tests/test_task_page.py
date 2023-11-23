@@ -18,6 +18,26 @@ def test_should_show_the_task_assessment(live_server, page: Page):
     ).to_be_visible()
 
 
+def test_should_show_the_taskgroup_description(live_server, page: Page):
+    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+    expect(
+        page.locator(
+            "p",
+            has_text="Auch in der Mobilität muss sich einiges ändern.",
+        )
+    ).to_be_visible()
+
+
+def test_should_show_the_taskgroup_teaser(live_server, page: Page):
+    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+    expect(
+        page.locator(
+            "p",
+            has_text="Die Maßnahmen in diesem Sektor dienen der Darstellung der verschiedenen Möglichkeiten.",
+        )
+    ).to_be_visible()
+
+
 def test_should_go_to_subtask_view_when_clicking_task_item(live_server, page: Page):
     page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
 

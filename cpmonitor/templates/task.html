@@ -7,8 +7,15 @@
   <div class="row">
     <div class="col">
       <!-- Page  pre-title -->
-      <div class="page-pretitle">Maßnahme</div>
-      <h1>{{ node.title }}</h1>
+      <div class="page-pretitle">
+        {% if task.is_suggestion %}Vorgeschlagene{% endif %}
+        Maßnahme
+      </div>
+      {% if task.is_suggestion %}
+        <h1 class="text-secondary">{{ task.title }} [VORSCHLAG]</h1>
+      {% else %}
+        <h1>{{ task.title }}</h1>
+      {% endif %}
     </div>
   </div>
   <div class="row">
@@ -18,29 +25,29 @@
           <div>
             <h4 class="my-0">Status</h4>
           </div>
-          <span class="badge lz-status {{ node.get_execution_status_name }}">{{ node.get_execution_status_display }}</span>
+          <span class="badge lz-status {{ task.get_execution_status_name }}">{{ task.get_execution_status_display }}</span>
         </li>
         <li class="list-group-item">
           <div class="justify-content-between d-flex">
             <h4 class="my-0">Beginn</h4>
-            <span class="text-muted">{{ node.actual_start|date:"d.m.Y"|default:"--" }}</span>
+            <span class="text-muted">{{ task.actual_start|date:"d.m.Y"|default:"--" }}</span>
           </div>
-          {% if node.planned_start %}
+          {% if task.planned_start %}
             <div class="justify-content-between d-flex">
               <span class="text-muted">geplant</span>
-              <span class="text-muted  {{ node.started_late|yesno:'lz-date-missed,' }}">{{ node.planned_start|date:"d.m.Y" }}</span>
+              <span class="text-muted  {{ task.started_late|yesno:'lz-date-missed,' }}">{{ task.planned_start|date:"d.m.Y" }}</span>
             </div>
           {% endif %}
         </li>
         <li class="list-group-item">
           <div class="justify-content-between d-flex">
             <h4 class="my-0">Ende</h4>
-            <span class="text-muted">{{ node.actual_completion|date:"d.m.Y"|default:"--" }}</span>
+            <span class="text-muted">{{ task.actual_completion|date:"d.m.Y"|default:"--" }}</span>
           </div>
-          {% if node.planned_completion %}
+          {% if task.planned_completion %}
             <div class="justify-content-between d-flex">
               <span class="text-muted">geplant</span>
-              <span class="text-muted {{ node.completed_late|yesno:'lz-date-missed,' }}">{{ node.planned_completion|date:"d.m.Y" }}</span>
+              <span class="text-muted {{ task.completed_late|yesno:'lz-date-missed,' }}">{{ task.planned_completion|date:"d.m.Y" }}</span>
             </div>
           {% endif %}
         </li>
@@ -48,24 +55,24 @@
             data-bs-container="body"
             data-bs-toggle="popover"
             data-bs-placement="bottom"
-            data-bs-content="{{ node.responsible_organ_explanation }}">
+            data-bs-content="{{ task.responsible_organ_explanation }}">
           <div>
             <h4 class="my-0">Zuständige Instanz</h4>
           </div>
-          <span>{{ node.responsible_organ | default:"--" }}</span>
+          <span>{{ task.responsible_organ | default:"--" }}</span>
         </li>
       </ul>
     </div>
     <div class="col-sm-9">
-      {% if node.teaser %}
+      {% if task.teaser %}
         <p>
-          <strong>{{ node.teaser }}</strong>
+          <strong>{{ task.teaser }}</strong>
         </p>
       {% endif %}
-      {{ node.description | safe_markdown | default:"Diese Maßnahme hat keine Beschreibung" }}
-      {% if node.plan_assessment %}
+      {{ task.description | safe_markdown | default:"Diese Maßnahme hat keine Beschreibung" }}
+      {% if task.plan_assessment %}
         <h3>Bewertung der geplanten Maßnahme</h3>
-        {{ node.plan_assessment | safe_markdown }}
+        {{ task.plan_assessment | safe_markdown }}
       {% endif %}
     </div>
   </div>

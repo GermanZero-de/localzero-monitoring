@@ -218,7 +218,7 @@
   padding-top: 1rem;
   padding-inline-start: 0px;
   /*yellow background behind menu-item.
-      Must be a separate ::before-element to avoid sub menu closing to fast on mouse move*/
+              Must be a separate ::before-element to avoid sub menu closing to fast on mouse move*/
 }
 #site-header .menu .menu-item .sub-menu::before {
   content: "";
@@ -361,8 +361,12 @@
   padding-left: var(--viewport-padding);
   padding-right: var(--viewport-padding);
 }
+#site-footer .cc-license-img {
+  margin-left: 3px;
+  vertical-align: text-bottom;
+}
 #site-footer p {
-  text-align: center;
+  text-align: left;
   vertical-align: middle;
   margin: unset;
 }
@@ -373,6 +377,10 @@
   margin: 0px;
   column-gap: 1.2rem;
   text-transform: uppercase;
+}
+#site-footer nav ul a:hover {
+  border-bottom: 6px solid var(--lz-yellow);
+  position: relative;
 }
 #site-footer a {
   all: unset;
@@ -392,7 +400,7 @@
   text-decoration: none;
 }
 #site-footer a:hover {
-  border-bottom: 6px solid var(--lz-yellow);
+  border-bottom: 2px solid var(--lz-yellow);
   position: relative;
 }
 
