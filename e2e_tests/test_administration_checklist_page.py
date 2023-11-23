@@ -47,7 +47,7 @@ def test_should_expand_the_help_text_and_rationale_when_clicking_on_a_checklist_
     )
     help_text = page.locator(
         ".accordion-collapse",
-        has_text="Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen.",
+        has_text="Monitoring bedeutet ein Überwachen/Überblick über den Erfolg von Klimaschutzmaßnahmen.",
     )
     rationale = page.locator(
         ".accordion-collapse",
@@ -74,7 +74,7 @@ def test_should_only_expand_the_latest_helptext_when_clicking_on_two_different_c
     )
     help_text1 = page.locator(
         ".accordion-collapse",
-        has_text="Monitoring bedeutet ein Überwachen / Überblick über den Erfolg von Klimaschutzmaßnahmen.",
+        has_text="Monitoring bedeutet ein Überwachen/Überblick über den Erfolg von Klimaschutzmaßnahmen.",
     )
 
     checklist_item2 = page.get_by_role(
