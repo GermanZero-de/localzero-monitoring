@@ -460,14 +460,14 @@ typing_extensions = ">=3.6,<5"
 
 [[package]]
 name = "django-treebeard"
-version = "4.6.1"
+version = "4.7"
 description = "Efficient tree implementations for Django"
 category = "main"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django-treebeard-4.6.1.tar.gz", hash = "sha256:84ab35040277d524eb77939e235568c9c856cb523cc9655793b66fe9a3ef468b"},
-    {file = "django_treebeard-4.6.1-py3-none-any.whl", hash = "sha256:89bc79a7d9ae62e8071ff1f866c83b1484c408d6082ce11cf3eca689240712f6"},
+    {file = "django-treebeard-4.7.tar.gz", hash = "sha256:c751a3f924158c288fea89afc25a7151979faf01bf11fdc7be3b858099dfa56d"},
+    {file = "django_treebeard-4.7-py3-none-any.whl", hash = "sha256:787117995ff985d98e6c2b241ef6b9d37fe8ff7051cd7535c283616a0b5b2645"},
 ]
 
 [package.dependencies]
