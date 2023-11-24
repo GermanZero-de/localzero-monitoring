@@ -430,14 +430,14 @@ requests-oauthlib = ">=0.3.0"
 
 [[package]]
 name = "django-invitations"
-version = "2.0.0"
+version = "2.1.0"
 description = "Generic invitations app with support for django-allauth"
 category = "main"
 optional = false
-python-versions = ">=3.7,<4.0"
+python-versions = ">=3.8,<4.0"
 files = [
-    {file = "django-invitations-2.0.0.tar.gz", hash = "sha256:49df44fc226234fbf08ad59a937864bc28fa044e0d508b3995a13505faa03a78"},
-    {file = "django_invitations-2.0.0-py3-none-any.whl", hash = "sha256:7dae5ae2b2add311be5f2420d21b5853d4a63fb09f2b6414ee1b6bcb3e4fbf77"},
+    {file = "django_invitations-2.1.0-py3-none-any.whl", hash = "sha256:321d4430f06927be146f82c15ba153872d75185e7accd387bfe1773c1130d30f"},
+    {file = "django_invitations-2.1.0.tar.gz", hash = "sha256:88df42bfc20aa846116c5216d81ce916c303303c0249a74f1b1867e260e6814c"},
 ]
 
 [package.dependencies]
