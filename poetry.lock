@@ -1138,14 +1138,14 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "pytest-mock (>=3.12)"]
 
 [[package]]
 name = "pytest-playwright"
-version = "0.3.3"
+version = "0.4.3"
 description = "A pytest wrapper with fixtures for Playwright to automate web browsers"
 category = "dev"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "pytest-playwright-0.3.3.tar.gz", hash = "sha256:9bf79c633c97dd1405308b8d3600e6c8c2a200a733e2f36c5a150ba4701936f8"},
-    {file = "pytest_playwright-0.3.3-py3-none-any.whl", hash = "sha256:83a896b1b28bfaa081ca9ea27229a06a114e106e2e62fb3d5f06544748fbc1fe"},
+    {file = "pytest-playwright-0.4.3.tar.gz", hash = "sha256:699e2c47fbb1e6a57895454693eba278cf55d04d44c15017709b00e1de1d9ccd"},
+    {file = "pytest_playwright-0.4.3-py3-none-any.whl", hash = "sha256:c9ff6e7ebfd967b562f5c3d67f1ae6b45a061d6ea51ad304fdd95aca9db20774"},
 ]
 
 [package.dependencies]
@@ -1571,4 +1571,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "976099eb51c36ef317fcd473febecc3a726a1a69d0d44c3d41bb1c279fb95511"
+content-hash = "86c39f46085973c5cd0d71231b868474726ea06d34e88c48bdaa29de10e200ba"
