@@ -53,22 +53,40 @@ def _calculate_summary(request, node):
 
     if isinstance(node, City):
         subtasks = Task.objects.filter(city=node, numchild=0)
+        sugg_subtasks = Task.objects.filter(
+            city=node, numchild=0, source=Task.TaskSource.SUGGESTED
+        )
     else:
         subtasks = node.get_descendants().filter(numchild=0)
+        sugg_subtasks = node.get_descendants().filter(
+            numchild=0, source=Task.TaskSource.SUGGESTED
+        )
     if not _show_drafts(request):
         subtasks = subtasks.filter(draft_mode=False)
 
     subtasks_count = len(subtasks)
+    sugg_subtasks_count = len(sugg_subtasks)
     status_counts = Counter(
         [TO_STATUS[subtask.execution_status] for subtask in subtasks]
+    )
+    sugg_status_counts = Counter(
+        [TO_STATUS[sugg_subtask.execution_status] for sugg_subtask in sugg_subtasks]
     )
     status_proportions = {
         status: round(count / subtasks_count * 100)
         for status, count in status_counts.items()
     }
+    sugg_status_proportions = {
+        status: round(count / sugg_subtasks_count * 100)
+        for status, count in sugg_status_counts.items()
+    }
 
     node.status_proportions = _sort_status_proportions(status_proportions, STATUS_ORDER)
+    node.sugg_status_proportions = _sort_status_proportions(
+        sugg_status_proportions, STATUS_ORDER
+    )
     node.subtasks_count = subtasks_count
+    node.sugg_subtasks_count = sugg_subtasks_count
     node.complete_proportion = status_proportions.get(ExecutionStatus.COMPLETE, 0)
     node.incomplete_proportion = 100 - node.complete_proportion
 
@@ -374,9 +392,10 @@ def task_view(request, city_slug, task_slugs=None):
         for ancestor in task.get_ancestors()
     ] + [{"label": task.title, "url": reverse("task", args=[city_slug, task.slugs])}]
 
-    context.update({"breadcrumbs": breadcrumbs, "city": city, "node": task})
+    context.update({"breadcrumbs": breadcrumbs, "city": city})
 
     if task.is_leaf():
+        context.update({"task": task})
         return render(
             request,
             "task.html",
@@ -385,7 +404,7 @@ def task_view(request, city_slug, task_slugs=None):
     else:
         groups, tasks = _get_children(request, city, task)
 
-        context.update({"groups": groups, "tasks": tasks})
+        context.update({"node": task, "groups": groups, "tasks": tasks})
         return render(
             request,
             "taskgroup.html",

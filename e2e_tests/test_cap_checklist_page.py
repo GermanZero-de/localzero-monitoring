@@ -45,7 +45,7 @@ def test_should_expand_the_help_text_and_rationale_when_clicking_on_a_checklist_
     )
     help_text = page.locator(
         ".accordion-collapse",
-        has_text="Ein Trendszenario ist ein Szenario, welches die Treibhausgas-Emissionen",
+        has_text="Ein Trendszenario zeigt auf, wie sich die kommunalen Emissionen entwickeln",
     )
     rationale = page.locator(
         ".accordion-collapse",

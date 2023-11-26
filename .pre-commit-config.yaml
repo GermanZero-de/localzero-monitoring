@@ -36,7 +36,7 @@ repos:
     hooks:
       - id: prettier
         files: ^cpmonitor/static/.*$
-        types_or: [css, scss, javascript]
+        types_or: [scss, javascript]
 
 # - repo: https://github.com/RobertCraigie/pyright-python
   # rev: v1.1.292

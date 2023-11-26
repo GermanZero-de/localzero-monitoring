@@ -27,7 +27,14 @@ $menu-column-gap: 2rem;
   }
 }
 
-@mixin lz-link-hover {
+@mixin lz-link-hover-thin {
+  &:hover {
+    border-bottom: 2px solid var(--lz-yellow);
+    position: relative;
+  }
+}
+
+@mixin lz-link-hover-thick {
   &:hover {
     border-bottom: 6px solid var(--lz-yellow);
     position: relative;
