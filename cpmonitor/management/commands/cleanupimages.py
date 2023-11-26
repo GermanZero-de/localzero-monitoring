@@ -3,17 +3,17 @@ import re
 
 from django.apps import apps
 from django.core.management.base import BaseCommand, CommandError
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.validators import URLValidator
 from django.db import models as DjangoModels
-
-APP_NAME = __package__.split(".")[0]
-BASE_PATH = os.environ.get("BASE_PATH")
-IMAGES_PATH = os.environ.get("IMAGES_PATH")
 
 
 class Command(BaseCommand):
     help = "Cleans up orphan images that are no longer used but are still linked in Markdown or file fields"
+
+    app_name = None
+    base_path = None
+    uploads_path = None
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -26,7 +26,8 @@ class Command(BaseCommand):
         is_dry_run = options["dry"]
 
         try:
-            orphan_images = self.resolve_orphan_images()
+            self._initialize_variables()
+            orphan_images = self._resolve_orphan_images()
         except Exception as exception:
             raise CommandError("Error occurred by cleaning up images: %s" % exception)
 
@@ -36,7 +37,7 @@ class Command(BaseCommand):
                     "Dry run: '%d' images will be cleaned up in directory '%s': '%s'"
                     % (
                         len(orphan_images),
-                        os.path.abspath(IMAGES_PATH),
+                        os.path.abspath(self.uploads_path),
                         orphan_images,
                     )
                 )
@@ -53,7 +54,7 @@ class Command(BaseCommand):
                     "Cleaned up '%d' images in directory '%s': '%s'"
                     % (
                         len(orphan_images),
-                        os.path.abspath(IMAGES_PATH),
+                        os.path.abspath(self.uploads_path),
                         orphan_images,
                     )
                 )
@@ -61,9 +62,19 @@ class Command(BaseCommand):
         else:
             self.stdout.write(self.style.SUCCESS("No images found to clean up"))
 
-    def resolve_orphan_images(self) -> list[str]:
+    def _initialize_variables(self):
+        if os.environ.get("BASE_PATH") is None or os.environ.get("IMAGES_PATH") is None:
+            raise ImproperlyConfigured(
+                "Environment variable BASE_PATH or IMAGES_PATH is not configured"
+            )
+
+        self.app_name = __package__.split(".")[0]
+        self.base_path = os.environ.get("BASE_PATH")
+        self.uploads_path = os.path.join(os.environ.get("IMAGES_PATH"), "uploads")
+
+    def _resolve_orphan_images(self) -> list[str]:
         referenced_images = self._fetch_referenced_images()
-        saved_images = self.resolve_saved_images()
+        saved_images = self._resolve_saved_images()
 
         orphan_images = []
         for saved_image in saved_images:
@@ -92,7 +103,7 @@ class Command(BaseCommand):
                     )
 
         absolute_paths = []
-        base_path = os.path.abspath(BASE_PATH)
+        base_path = os.path.abspath(self.base_path)
 
         for relative_path in relative_paths:
             absolute_paths.append(os.path.join(base_path, relative_path.strip("/")))
@@ -105,7 +116,7 @@ class Command(BaseCommand):
         )
 
     def _is_domain_model(self, field) -> bool:
-        return field.model._meta.app_label == APP_NAME
+        return field.model._meta.app_label == self.app_name
 
     def _extract_file_paths_from_models(self, field, models) -> list[str]:
         file_paths = []
@@ -181,7 +192,7 @@ class Command(BaseCommand):
         )
 
     def _extract_file_field_file_path(self, field_value) -> list[str]:
-        return re.findall(r"".join(["^.*", IMAGES_PATH, ".*$"]), field_value)
+        return re.findall(r"".join(["^.*", self.uploads_path, ".*$"]), field_value)
 
     def _resolve_image_paths_from_file_fields(self) -> list[str]:
         file_paths = []
@@ -195,18 +206,12 @@ class Command(BaseCommand):
 
         return file_paths
 
-    def resolve_saved_images(self) -> list[str]:
+    def _resolve_saved_images(self) -> list[str]:
         saved_images = []
 
-        for sub_directory, _, images in os.walk(IMAGES_PATH):
+        for sub_directory, _, images in os.walk(self.uploads_path):
             for image in images:
-                if self._is_ignored(image, sub_directory):
-                    continue
-
                 relative_path = os.path.join(sub_directory, image)
                 saved_images.append(os.path.abspath(relative_path))
 
         return saved_images
-
-    def _is_ignored(self, image, sub_directory) -> bool:
-        return ".gitkeep" in image or "test_database_uploads" in sub_directory
