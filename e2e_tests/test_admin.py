@@ -172,3 +172,11 @@ def test_should_not_allow_move_when_same_case_ignored_title_in_same_sector(
     )
 
     page.close()
+
+
+def test_should_allow_local_groups_without_image(live_server, page: Page):
+    admin_login(live_server.url, page)
+    page.goto(live_server.url + "/admin/cpmonitor/city/2/change/")
+    page.fill("[name=local_group-0-name]", "OhnenixZero")
+    page.click("[name=_save]")
+    expect(page.get_by_text("erfolgreich geändert")).to_be_visible()

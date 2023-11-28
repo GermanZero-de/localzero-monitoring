@@ -955,11 +955,12 @@ class LocalGroup(models.Model):
     def save(self):
         super().save()
 
-        # limit featured_image size to max 1000 width or height (keeps aspect ratio)
-        img = Image.open(self.featured_image.path)
-        if img.width > 1000 or img.height > 1000:
-            img.thumbnail((1000, 1000))
-            img.save(self.featured_image.path)
+        if self.featured_image:
+            # limit featured_image size to max 1000 width or height (keeps aspect ratio)
+            img = Image.open(self.featured_image.path)
+            if img.width > 1000 or img.height > 1000:
+                img.thumbnail((1000, 1000))
+                img.save(self.featured_image.path)
 
 
 class AccessRight(models.TextChoices):
