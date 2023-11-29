@@ -950,6 +950,7 @@ class LocalGroup(models.Model):
         "Bild der Lokalgruppe",
         blank=True,
         upload_to="uploads/%Y/%m/%d/",
+        help_text="Ein Foto oder Logo der Lokalgruppe, mindestens 500 Pixel breit und 300 Pixel hoch.",
     )
 
     def save(self):
