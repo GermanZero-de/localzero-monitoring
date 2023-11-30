@@ -54,6 +54,9 @@ class City(models.Model):
         """,
     )
     zipcode = models.CharField("PLZ", max_length=5)
+    municipality_key = models.CharField(
+        "Gemeindeschlüssel", max_length=8, blank=True, null=True
+    )
     url = models.URLField("Homepage", blank=True)
 
     city_editors = models.ManyToManyField(
@@ -85,6 +88,15 @@ class City(models.Model):
 
     target_year = models.IntegerField(
         "Zieljahr Klimaneutralität", blank=True, null=True, help_text="z.B. 2035"
+    )
+
+    show_roof_pv_indicator = models.BooleanField(
+        "Graphik Entwicklung Dach-PV",
+        default=False,
+        help_text="""
+            Graphik zur Entwicklung der Dach-PV anzeigen. Daten werden automatisch aus dem
+            Marktstammdatenregister bezogen. Der Gemeindeschlüssel muss dazu ausgefüllt sein.
+        """,
     )
 
     teaser = models.CharField(
