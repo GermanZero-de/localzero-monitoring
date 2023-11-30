@@ -442,15 +442,18 @@ docker compose up -d
 ```
 
 ### Deploying a new version
+Note that only project maintainers and admins are authorized to deploy.
 
-To deploy a new version to the testing or production environments, merge or push the commit you want to deploy to the corresponding branch:
-```
-deploy-to-testing
-deploy-to-production
-```
-Note that only maintainers and admins may merge/push to those branches.
+#### Testing
+To deploy a new version to the *testing* environment, [create a pull request from main to `deploy-to-testing`](https://github.com/GermanZero-de/klimaschutzmonitor/compare/deploy-to-testing...main).
+Merging the PR will trigger a [deployment workflow](https://github.com/GermanZero-de/klimaschutzmonitor/actions/workflows/deploy.yml) that deploys the new version, imports the latest production data to the testing environment and applies migrations.
 
-View the [workflow](.github/workflows/deploy.yml) and [script](deploy.sh) to see the exact steps that are executed.
+#### Production
+After deploying to testing, verify that the testing environment can be accessed in a browser, admin login and changing data works as expected, and new features work when deployed on the server.
+If everything looks good, deploy to *production*: [create a PR from deploy-to-testing to deploy-to-production](https://github.com/GermanZero-de/klimaschutzmonitor/compare/deploy-to-production...deploy-to-testing) and merge it.
+
+> [!IMPORTANT]
+> Check that everything works in production after every deployment!
 
 ### Database Client
 In order to view, manipulate and export the database in any of the environments (local, testing, production), the database webclient
