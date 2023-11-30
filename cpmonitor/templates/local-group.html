@@ -4,7 +4,7 @@
 {% block title %}
   LocalZero Monitoring - {{ city.name }}
 {% endblock title %}
-{% block content %}
+{% block text-content %}
   <div class="row">
     <div class="col">
       <!-- Page  pre-title -->
@@ -37,4 +37,6 @@
       {{ local_group.description | safe_markdown | default:"Die Lokalgruppe hat keine Beschreibung eingegeben" }}
     </div>
   </div>
-{% endblock content %}
+{% endblock text-content %}
+{% block cards-container %}
+{% endblock cards-container %}

@@ -172,3 +172,13 @@ def test_should_not_allow_move_when_same_case_ignored_title_in_same_sector(
     )
 
     page.close()
+
+
+def test_should_allow_local_groups_without_image(live_server, page: Page):
+    admin_login(live_server.url, page)
+    page.get_by_role("link", name="Kommunen").click()
+    page.get_by_role("link", name="Ohnenix").click()
+
+    page.locator("#id_local_group-0-name").fill("OhnenixZero")
+    page.get_by_role("button", name="Sichern", exact=True).first.click()
+    expect(page.get_by_text("erfolgreich geändert")).to_be_visible()
