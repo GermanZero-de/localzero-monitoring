@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponseBadRequest
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.text import slugify

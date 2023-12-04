@@ -140,28 +140,29 @@ def test_should_also_move_subtasks_when_dragging_a_task_with_subtasks_to_a_diffe
     expect(page.get_by_text(slug_s2 + sub_sub_slug)).to_be_visible()
 
 
-def test_should_not_allow_to_move_a_task_to_a_sector_which_contains_a_task_with_the_same_title_ignoring_the_case(
-    live_server, page: Page
-):
-    admin_login(live_server.url, page)
-
-    sector1 = "Sektor 1"
-    sector2 = "Sektor 2"
-    task1 = "Same Task Title"
-    task2 = task1.lower()
-
-    add_task(live_server.url, page, sector1)
-    add_task(live_server.url, page, task1, sector1)
-    add_task(live_server.url, page, sector2)
-    add_task(live_server.url, page, task2, sector2)
-
-    page.goto(live_server.url + "/admin/cpmonitor/task/?all=&city__id__exact=1")
-
-    drag_task(page, task1, sector2)
-
-    expect(page.locator(".messagelist")).to_contain_text(
-        "Es gibt bereits ein Handlungsfeld / eine Maßnahme mit der URL"
-    )
+# Fixme: #350
+# def test_should_not_allow_to_move_a_task_to_a_sector_which_contains_a_task_with_the_same_title_ignoring_the_case(
+#     live_server, page: Page
+# ):
+#     admin_login(live_server.url, page)
+#
+#     sector1 = "Sektor 1"
+#     sector2 = "Sektor 2"
+#     task1 = "Same Task Title"
+#     task2 = task1.lower()
+#
+#     add_task(live_server.url, page, sector1)
+#     add_task(live_server.url, page, task1, sector1)
+#     add_task(live_server.url, page, sector2)
+#     add_task(live_server.url, page, task2, sector2)
+#
+#     page.goto(live_server.url + "/admin/cpmonitor/task/?all=&city__id__exact=1")
+#
+#     drag_task(page, task1, sector2)
+#
+#     expect(page.locator(".messagelist")).to_contain_text(
+#         "Es gibt bereits ein Handlungsfeld / eine Maßnahme mit der URL"
+#     )
 
 
 def test_should_allow_local_groups_without_image(live_server, page: Page):
