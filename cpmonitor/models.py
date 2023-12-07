@@ -236,8 +236,7 @@ class CapChecklist(models.Model):
         blank=True,
     )
     target_date_exists = models.BooleanField(
-        "Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten"
-        " kommunalen Gremium beschlossen wurde?",
+        "Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt?",
         default=False,
         help_text="Die Jahreszahl (2035/20XX…) definiert, bis wann die Kommune – möglichst ohne Kompensation – "
         "klimaneutral werden will.\n\n"
@@ -246,8 +245,7 @@ class CapChecklist(models.Model):
         "eingespart werden.",
     )
     target_date_exists_rationale = models.TextField(
-        "Begründung zu: Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten"
-        " kommunalen Gremium beschlossen wurde?",
+        "Begründung zu: Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt",
         blank=True,
     )
     based_on_remaining_co2_budget = models.BooleanField(
@@ -264,7 +262,7 @@ class CapChecklist(models.Model):
         blank=True,
     )
     sectors_of_climate_vision_used = models.BooleanField(
-        "Bilanziert der Klima-Aktionsplan in den Sektoren der Klimavision?",
+        "Bilanziert der Klima-Aktionsplan vollständig, zum Beispiel in den Sektoren der Klimavision?",
         default=False,
         help_text="Fast alle Kommunen führen ihre Treibhausgasbilanz mit BISKO (Bilanzierungs-Systematik Kommunal) "
         "durch. In dieser Systematik wird nur ein Teil der Industrie bilanziert, die Sektoren Abfall, "
@@ -275,7 +273,7 @@ class CapChecklist(models.Model):
         "muss und vor allem in den fehlenden Sektoren trotzdem Maßnahmen entwickelt werden sollten.",
     )
     sectors_of_climate_vision_used_rationale = models.TextField(
-        "Begründung zu: Bilanziert der Klima-Aktionsplan in den Sektoren der Klimavision?",
+        "Begründung zu: Bilanziert der Klima-Aktionsplan vollständig, zum Beispiel in den Sektoren der Klimavision?",
         blank=True,
     )
     scenario_for_climate_neutrality_till_2035_exists = models.BooleanField(
@@ -331,8 +329,7 @@ class CapChecklist(models.Model):
         blank=True,
     )
     tasks_have_responsible_entity = models.BooleanField(
-        "Sind verantwortliche Personen / Fachbereiche / kommunale Gesellschaften für alle Maßnahmen"
-        " hinterlegt?",
+        "Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen hinterlegt?",
         default=False,
         help_text="Ohne klar verteilte Verantwortlichkeiten können Maßnahmen nicht umgesetzt werden. Die "
         "Verantwortlichen können sowohl in der Kommunalverwaltung (z.B. Abteilungen) oder außerhalb (z.B. "
@@ -340,13 +337,11 @@ class CapChecklist(models.Model):
         "die kommunale Tochter oder sogar die zuständige Sachbearbeitung genannt werden.",
     )
     tasks_have_responsible_entity_rationale = models.TextField(
-        "Begründung zu: Sind verantwortliche Personen / Fachbereiche / kommunale Gesellschaften für alle Maßnahmen"
-        " hinterlegt?",
+        "Begründung zu: Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen hinterlegt?",
         blank=True,
     )
     annual_reduction_of_emissions_can_be_predicted = models.BooleanField(
-        "Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der"
-        " THG-Emissionen ersichtlich?",
+        "Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der THG-Emissionen ersichtlich?",
         default=False,
         help_text="Aus dem genauen Zeitplan der Maßnahmenplanung kann ab jetzt bis zum Jahr der Klimaneutralität ("
         "2035/20XX) die THG-Emissionen und der Endenergiebedarf jährlich prognostiziert werden in allen "
@@ -354,8 +349,7 @@ class CapChecklist(models.Model):
         "wird der Weg zur Treibhausgasneutralität klar erkennbar und zu kompensierende Emissionen sichtbar.",
     )
     annual_reduction_of_emissions_can_be_predicted_rationale = models.TextField(
-        "Begründung zu: Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der"
-        " THG-Emissionen ersichtlich?",
+        "Begründung zu: Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der THG-Emissionen ersichtlich?",
         blank=True,
     )
     concept_for_participation_specified = models.BooleanField(
@@ -396,8 +390,7 @@ class AdministrationChecklist(models.Model):
         blank=True,
     )
     climate_relevance_check_exists = models.BooleanField(
-        "Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
-        " Auswirkungen auf das Klima geprüft?",
+        "Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die Auswirkungen auf das Klima geprüft?",
         default=False,
         help_text="Klimaschutz ist wichtig und muss als Querschnittsaufgabe umgesetzt werden. Alle "
         "Sachbearbeiterinnen, die Leitungsebene und auch die Politik muss – um Klimaneutralität zu erreichen "
@@ -412,8 +405,7 @@ class AdministrationChecklist(models.Model):
         "Beschlüsse werden somit bereits während der Erstellung durch die Sachbearbeiter:innen in den Fachbereichen auf ihre Klimarelevanz hin (vor-)bewertet und Aspekte des Klimaschutzes sind automatisch integraler Bestandteil jeder Beschlussfassung. Klimafolgen werden somit transparent, Politiker:innen können fundierter entscheiden. Langfristig baut die Kommune Kompetenzen auf, um die Auswirkung auf das Klima bei allen relevanten Entscheidungen zu berücksichtigen.",
     )
     climate_relevance_check_exists_rationale = models.TextField(
-        "Begründung zu: Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die"
-        " Auswirkungen auf das Klima geprüft?",
+        "Begründung zu: Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die Auswirkungen auf das Klima geprüft?",
         blank=True,
     )
     climate_protection_monitoring_exists = models.BooleanField(
@@ -431,7 +423,7 @@ class AdministrationChecklist(models.Model):
         blank=True,
     )
     intersectoral_concepts_exists = models.BooleanField(
-        "Beziehen (sektorenübergreifende) Konzepte und Planungspapiere die Klimaschutz mit ein?",
+        "Beziehen (sektorenübergreifende) Konzepte und Planungspapiere Klimaschutz mit ein?",
         default=False,
         help_text="Sektorenübergreifende Konzepte sind zum Beispiel Kimaanpassungs- , Konzepte der Städtebauförderung "
         "oder Quartierskonzepte. Diese Konzepte betrachten Maßnahmen, die über mehrere Sektoren gehen, "
@@ -441,7 +433,7 @@ class AdministrationChecklist(models.Model):
         "das Kimaschutz eine zentrale Rolle spielt.",
     )
     intersectoral_concepts_exists_rationale = models.TextField(
-        "Begründung zu: Beziehen (sektorenübergreifende) Konzepte und Planungspapiere die Klimaschutz mit ein?",
+        "Begründung zu: Beziehen (sektorenübergreifende) Konzepte und Planungspapiere Klimaschutz mit ein?",
         blank=True,
     )
     guidelines_for_sustainable_procurement_exists = models.BooleanField(
@@ -460,16 +452,14 @@ class AdministrationChecklist(models.Model):
         blank=True,
     )
     municipal_office_for_funding_management_exists = models.BooleanField(
-        "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung"
-        " etc. für den Klimaschutz)?",
+        "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
         default=False,
         help_text="Beantragung für Fördermittel ist oft sehr zeitintensiv, und somit werden für Klimaschutz "
         "notwendige personelle Kapazitäten oft hierauf verwendet. Eigene Stellen sollen Entlastung schaffen "
         "und dafür sorgen, dass effizient an Klimaschutz gearbeitet werden kann.",
     )
     municipal_office_for_funding_management_exists_rationale = models.TextField(
-        "Begründung zu: Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung"
-        " etc. für den Klimaschutz)?",
+        "Begründung zu: Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
         blank=True,
     )
     public_relation_with_local_actors_exists = models.BooleanField(

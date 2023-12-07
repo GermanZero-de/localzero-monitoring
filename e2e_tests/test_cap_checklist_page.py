@@ -15,7 +15,7 @@ def test_should_show_the_cap_assessment_and_the_checklist(live_server, page: Pag
         page.locator(
             "tr",
             has=page.locator(
-                'td:text("Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt, das vom höchsten kommunalen Gremium beschlossen wurde?")'
+                'td:text("Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt?")'
             ),
         )
         .locator("td", has=page.locator("svg"))
@@ -68,7 +68,7 @@ def test_should_only_expand_the_latest_helptext_when_clicking_on_two_different_c
 
     checklist_item1 = page.get_by_role(
         "button",
-        name="Bilanziert der Klima-Aktionsplan in den Sektoren der Klimavision?",
+        name="Bilanziert der Klima-Aktionsplan vollständig, zum Beispiel in den Sektoren der Klimavision?",
     )
     help_text1 = page.locator(
         ".accordion-collapse",
