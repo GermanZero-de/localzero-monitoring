@@ -2,6 +2,7 @@ import os
 import re
 
 from django.apps import apps
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.validators import URLValidator
@@ -63,14 +64,20 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS("No images found to clean up"))
 
     def _initialize_variables(self):
-        if os.environ.get("BASE_PATH") is None or os.environ.get("IMAGES_PATH") is None:
+        if (
+            settings.BASE_DIR is None
+            or settings.MEDIA_ROOT is None
+            or settings.MARTOR_UPLOAD_PATH is None
+        ):
             raise ImproperlyConfigured(
-                "Environment variable BASE_PATH or IMAGES_PATH is not configured"
+                "Variable BASE_DIR, MEDIA_ROOT or MARTOR_UPLOAD_PATH is not configured in settings"
             )
 
         self.app_name = __package__.split(".")[0]
-        self.base_path = os.environ.get("BASE_PATH")
-        self.uploads_path = os.path.join(os.environ.get("IMAGES_PATH"), "uploads")
+        self.base_path = settings.BASE_DIR
+        self.uploads_path = os.path.join(
+            settings.MEDIA_ROOT, settings.MARTOR_UPLOAD_PATH
+        )
 
     def _resolve_orphan_images(self) -> list[str]:
         referenced_images = self._fetch_referenced_images()
@@ -123,9 +130,9 @@ class Command(BaseCommand):
         field_values = self._extract_values_from_models(field, models)
 
         for field_value in field_values:
-            if self._contains_text_field_file_path(field, field_value):
+            if self._is_domain_text_field(field):
                 file_paths += self._extract_text_field_file_paths(field_value)
-            elif self._contains_file_field_file_path(field, field_value):
+            elif self._is_domain_file_field(field):
                 file_paths += self._extract_file_field_file_path(field_value)
 
         return file_paths
@@ -152,12 +159,6 @@ class Command(BaseCommand):
     def _is_path_object(self, field_value) -> bool:
         return not isinstance(field_value, str)
 
-    def _contains_text_field_file_path(self, field, field_value) -> bool:
-        if not self._is_domain_text_field(field):
-            return False
-
-        return len(self._extract_text_field_file_paths(field_value)) > 0
-
     def _extract_text_field_file_paths(self, field_value) -> list[str]:
         real_file_paths = []
         potential_file_paths = re.findall(
@@ -179,12 +180,6 @@ class Command(BaseCommand):
             return False
 
         return True
-
-    def _contains_file_field_file_path(self, field, field_value) -> bool:
-        if not self._is_domain_file_field(field):
-            return False
-
-        return len(self._extract_file_field_file_path(field_value)) > 0
 
     def _is_domain_file_field(self, field) -> bool:
         return self._is_domain_model(field) and isinstance(

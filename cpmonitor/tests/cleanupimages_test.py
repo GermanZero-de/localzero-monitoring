@@ -2,36 +2,18 @@ import os
 import shutil
 import tempfile
 from io import StringIO
-from unittest.mock import patch
 
+from django.conf import settings
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from cpmonitor.models import City
 
 
 class CleanupImagesTest(TestCase):
-    base_path = None
-    images_path = None
-    uploads_path = None
-
-    @classmethod
-    def setUpClass(cls):
-        cls.base_path = tempfile.mkdtemp()
-        cls.images_path = os.path.join(cls.base_path, "images")
-        cls.uploads_path = os.path.join(cls.images_path, "uploads")
-
-        cls.env_patcher = patch.dict(
-            os.environ,
-            {
-                "BASE_PATH": cls.base_path,
-                "IMAGES_PATH": cls.images_path,
-                "UPLOADS_PATH": cls.uploads_path,
-            },
-        )
-        cls.env_patcher.start()
-
-        super().setUpClass()
+    base_path = tempfile.mkdtemp()
+    images_path = os.path.join(base_path, "images")
+    uploads_path = os.path.join(images_path, "uploads")
 
     @classmethod
     def tearDownClass(cls):
@@ -39,21 +21,19 @@ class CleanupImagesTest(TestCase):
 
         shutil.rmtree(cls.base_path, True)
 
-        cls.env_patcher.stop()
-
+    @override_settings(BASE_DIR=base_path, MEDIA_ROOT=images_path)
     def setUp(self):
         super().setUp()
 
-        os.mkdir(self.images_path)
-        os.mkdir(self.uploads_path)
+        os.makedirs(self.images_path, exist_ok=True)
+        os.makedirs(self.uploads_path, exist_ok=True)
 
         self.assertTrue(os.path.isdir(self.base_path))
         self.assertTrue(os.path.isdir(self.uploads_path))
         self.assertTrue(len(os.listdir(self.uploads_path)) == 0)
 
-        self.assertEqual(os.environ["BASE_PATH"], self.base_path)
-        self.assertEqual(os.environ["IMAGES_PATH"], self.images_path)
-        self.assertEqual(os.environ["UPLOADS_PATH"], self.uploads_path)
+        self.assertEqual(settings.BASE_DIR, self.base_path)
+        self.assertEqual(settings.MEDIA_ROOT, self.images_path)
 
     def tearDown(self):
         super().tearDown()
@@ -63,6 +43,7 @@ class CleanupImagesTest(TestCase):
         self.assertFalse(os.path.isdir(self.uploads_path))
         self.assertTrue(os.path.isdir(self.base_path))
 
+    @override_settings(BASE_DIR=base_path, MEDIA_ROOT=images_path)
     def test_when_dry_run_then_do_not_delete_orphan_images(self):
         orphan_image = self._create_orphan_image()
 
@@ -76,12 +57,14 @@ class CleanupImagesTest(TestCase):
         )
         self.assertTrue(os.path.isfile(orphan_image))
 
+    @override_settings(BASE_DIR=base_path, MEDIA_ROOT=images_path)
     def test_when_no_images_exist_in_images_path_then_do_not_delete_anything(self):
         output = StringIO()
         call_command("cleanupimages", stdout=output)
 
         self.assertIn("No images found to clean up", output.getvalue())
 
+    @override_settings(BASE_DIR=base_path, MEDIA_ROOT=images_path)
     def test_when_orphan_and_referenced_image_exist_then_only_delete_orphan_image(self):
         orphan_image = self._create_orphan_image()
         referenced_image = self._create_referenced_image("test.png")
@@ -98,6 +81,7 @@ class CleanupImagesTest(TestCase):
         self.assertFalse(os.path.isfile(orphan_image))
         self.assertTrue(os.path.isfile(referenced_image))
 
+    @override_settings(BASE_DIR=base_path, MEDIA_ROOT=images_path)
     def test_when_only_referenced_image_exists_then_do_not_delete_it(self):
         referenced_image = self._create_referenced_image("test.png")
         self.persist_model_referencing_to_image("test.png")
