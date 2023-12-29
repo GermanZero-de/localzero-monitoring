@@ -9,23 +9,23 @@ from . import views
 prefix_kommune = ""
 
 urlpatterns = [
-    path("info/projekt/", views.project_view, name="project"),
-    path("info/impressum/", views.impressum_view, name="impressum"),
-    path("info/datenschutz/", views.datenschutz_view, name="datenschutz"),
-    path("info/ueber-uns/", views.ueber_uns_view, name="ueber-uns"),
+    path("projekt/", views.project_view, name="project"),
+    path("impressum/", views.impressum_view, name="impressum"),
+    path("datenschutz/", views.datenschutz_view, name="datenschutz"),
+    path("ueber-uns/", views.ueber_uns_view, name="ueber-uns"),
     path(
         "favicon.ico",
         RedirectView.as_view(url=settings.STATIC_URL + "favicon.svg", permanent=True),
     ),
-    path("info/admin/", admin.site.urls),
-    path("info/martor/", include("martor.urls")),
-    path("info/accounts/", include("allauth.urls")),
+    path("admin/", admin.site.urls),
+    path("martor/", include("martor.urls")),
+    path("accounts/", include("allauth.urls")),
     re_path(
         r"^invitations/accept-invite/(?P<key>\w+)/?$",
         views.AcceptInvite.as_view(),
         name="accept-invite",
     ),
-    path("info/api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
+    path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("", views.index_view, name="index"),
     path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),
     path(
