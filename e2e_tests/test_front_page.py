@@ -46,4 +46,4 @@ def test_should_show_go_to_the_respective_city_page_when_clicking_on_a_city_card
 
     page.locator(".card", has_text="Beispielstadt").click()
 
-    expect(page).to_have_url(live_server.url + "/beispielstadt/")
+    expect(page).to_have_url(live_server.url + "/deutschland/beispielstadt/")

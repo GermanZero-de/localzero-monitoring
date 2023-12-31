@@ -2,13 +2,13 @@ from playwright.sync_api import Page, expect
 
 
 def test_the_task_page_should_have_the_city_name_in_the_title(live_server, page: Page):
-    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+    page.goto(live_server.url + "/deutschland/beispielstadt/massnahmen/mobilitat/")
 
     expect(page).to_have_title("LocalZero Monitoring - Beispielstadt")
 
 
 def test_should_show_the_task_assessment(live_server, page: Page):
-    page.goto(live_server.url + "/beispielstadt/massnahmen/")
+    page.goto(live_server.url + "/deutschland/beispielstadt/massnahmen/")
 
     expect(
         page.locator(
@@ -19,7 +19,7 @@ def test_should_show_the_task_assessment(live_server, page: Page):
 
 
 def test_should_show_the_taskgroup_description(live_server, page: Page):
-    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+    page.goto(live_server.url + "/deutschland/beispielstadt/massnahmen/mobilitat/")
     expect(
         page.locator(
             "p",
@@ -29,7 +29,7 @@ def test_should_show_the_taskgroup_description(live_server, page: Page):
 
 
 def test_should_show_the_taskgroup_teaser(live_server, page: Page):
-    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+    page.goto(live_server.url + "/deutschland/beispielstadt/massnahmen/mobilitat/")
     expect(
         page.locator(
             "p",
@@ -39,37 +39,43 @@ def test_should_show_the_taskgroup_teaser(live_server, page: Page):
 
 
 def test_should_go_to_subtask_view_when_clicking_task_item(live_server, page: Page):
-    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+    page.goto(live_server.url + "/deutschland/beispielstadt/massnahmen/mobilitat/")
 
     page.get_by_text("Radwege ausbauen").click()
 
     expect(page).to_have_url(
-        live_server.url + "/beispielstadt/massnahmen/mobilitat/radwege-ausbauen/"
+        live_server.url
+        + "/deutschland/beispielstadt/massnahmen/mobilitat/radwege-ausbauen/"
     )
 
 
 def test_should_go_to_the_linked_page_when_clicking_on_a_breadcrumb(
     live_server, page: Page
 ):
-    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/radwege-ausbauen/")
+    page.goto(
+        live_server.url
+        + "/deutschland/beispielstadt/massnahmen/mobilitat/radwege-ausbauen/"
+    )
 
     page.get_by_role("list", name="breadcrumbs").get_by_role(
         "link", name="Mobilität"
     ).click()
 
-    expect(page).to_have_url(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+    expect(page).to_have_url(
+        live_server.url + "/deutschland/beispielstadt/massnahmen/mobilitat/"
+    )
 
     page.get_by_role("list", name="breadcrumbs").get_by_role(
         "link", name="Maßnahmen"
     ).click()
 
-    expect(page).to_have_url(live_server.url + "/beispielstadt/massnahmen/")
+    expect(page).to_have_url(live_server.url + "/deutschland/beispielstadt/massnahmen/")
 
     page.get_by_role("list", name="breadcrumbs").get_by_role(
         "link", name="Beispielstadt"
     ).click()
 
-    expect(page).to_have_url(live_server.url + "/beispielstadt/")
+    expect(page).to_have_url(live_server.url + "/deutschland/beispielstadt/")
 
     page.get_by_role("list", name="breadcrumbs").get_by_role(
         "link", name="Start"

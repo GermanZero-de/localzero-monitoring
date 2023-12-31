@@ -27,25 +27,32 @@ urlpatterns = [
     ),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("", views.index_view, name="index"),
-    path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),
     path(
-        prefix_kommune + "<slug:city_slug>/lokalgruppe/",
+        prefix_kommune + "deutschland/<slug:city_slug>/", views.city_view, name="city"
+    ),
+    path(
+        prefix_kommune + "deutschland/<slug:city_slug>/lokalgruppe/",
         views.local_group_view,
         name="local_group",
     ),
     path(
-        prefix_kommune + "<slug:city_slug>/kap_checkliste/",
+        prefix_kommune + "deutschland/<slug:city_slug>/kap_checkliste/",
         views.cap_checklist_view,
         name="cap_checklist",
     ),
     path(
-        prefix_kommune + "<slug:city_slug>/verwaltungsstrukturen_checkliste/",
+        prefix_kommune
+        + "deutschland/<slug:city_slug>/verwaltungsstrukturen_checkliste/",
         views.administration_checklist_view,
         name="administration_checklist",
     ),
-    path(prefix_kommune + "<slug:city_slug>/massnahmen/", views.task_view, name="task"),
     path(
-        prefix_kommune + "<slug:city_slug>/massnahmen/<path:task_slugs>/",
+        prefix_kommune + "deutschland/<slug:city_slug>/massnahmen/",
+        views.task_view,
+        name="task",
+    ),
+    path(
+        prefix_kommune + "deutschland/<slug:city_slug>/massnahmen/<path:task_slugs>/",
         views.task_view,
         name="task",
     ),
