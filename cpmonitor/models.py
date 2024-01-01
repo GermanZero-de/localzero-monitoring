@@ -452,14 +452,14 @@ class AdministrationChecklist(models.Model):
         blank=True,
     )
     municipal_office_for_funding_management_exists = models.BooleanField(
-        "Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
+        "Gibt es eine eigene kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
         default=False,
         help_text="Beantragung für Fördermittel ist oft sehr zeitintensiv, und somit werden für Klimaschutz "
         "notwendige personelle Kapazitäten oft hierauf verwendet. Eigene Stellen sollen Entlastung schaffen "
         "und dafür sorgen, dass effizient an Klimaschutz gearbeitet werden kann.",
     )
     municipal_office_for_funding_management_exists_rationale = models.TextField(
-        "Begründung zu: Gibt es eine eigene Kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
+        "Begründung zu: Gibt es eine eigene kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
         blank=True,
     )
     public_relation_with_local_actors_exists = models.BooleanField(
