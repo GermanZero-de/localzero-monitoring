@@ -1,7 +1,15 @@
 {% load static %}
+{% load filters %}
 <a href="{% url 'task' city.slug task.slugs %}"
    class="card card-link card-link-popup">
-  <div class="ribbon lz-status {{ task.get_execution_status_name }}">&nbsp</div>
+  <div class="ribbon lz-status {{ task.get_execution_status_name }}"
+       data-bs-toggle="tooltip"
+       data-bs-placement="right"
+       title="{{ task.get_execution_status_display }}">
+    <svg width="20" height="20">
+      <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-{{ task.get_execution_status_name | task_execution_status_to_icon }}" />
+    </svg>
+  </div>
   <div class="card-body">
     {% if task.is_suggestion %}
       <div class="h3 mb-3 text-secondary">{{ task.title }} [VORSCHLAG]</div>
