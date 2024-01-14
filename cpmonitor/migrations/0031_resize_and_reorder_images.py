@@ -17,9 +17,9 @@ def resize_and_reorder_images(apps, schema_editor):
         return
 
     # backup
-    backup_path = str(upload_path) + "-backup-migration-0029"
+    backup_path = str(upload_path) + "-backup-migration-0030"
     if os.path.exists(backup_path):
-        raise migrations.exceptions.InconsistentMigrationHistory("backup already exist")
+        shutil.rmtree(backup_path)
     shutil.copytree(upload_path, backup_path)
 
     # resize images
@@ -35,9 +35,10 @@ def resize_and_reorder_images(apps, schema_editor):
     now = datetime.now()
     target_folder = upload_path / "2023" / "09" / "01"
     os.makedirs(target_folder, exist_ok=True)
-    for img_file in os.listdir(upload_path / "local_groups"):
-        shutil.move(upload_path / "local_groups" / img_file, target_folder)
-    shutil.rmtree(upload_path / "local_groups")
+    if os.path.exists(upload_path / "local_groups"):
+        for img_file in os.listdir(upload_path / "local_groups"):
+            shutil.move(upload_path / "local_groups" / img_file, target_folder)
+        shutil.rmtree(upload_path / "local_groups")
 
     # update local_group paths in database
     LocalGroup = apps.get_model("cpmonitor", "LocalGroup")
@@ -55,7 +56,7 @@ def revert_resize_and_reorder_images(apps, schema_editor):
     if not os.path.exists(upload_path):
         return
 
-    backup_path = str(upload_path) + "-backup-migration-0029"
+    backup_path = str(upload_path) + "-backup-migration-0030"
     if not os.path.exists(backup_path):
         raise migrations.exceptions.IrreversibleError(
             "backup does not exist, cannot revert"
@@ -63,7 +64,7 @@ def revert_resize_and_reorder_images(apps, schema_editor):
 
     # restore files
     shutil.rmtree(upload_path)
-    shutil.move(str(upload_path) + "-backup-migration-0029", upload_path)
+    shutil.move(str(upload_path) + "-backup-migration-0030", upload_path)
 
     # revert local_group paths in database
     LocalGroup = apps.get_model("cpmonitor", "LocalGroup")
