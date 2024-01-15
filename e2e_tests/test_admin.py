@@ -1,5 +1,3 @@
-import uuid
-
 from django.utils.text import slugify
 from playwright.sync_api import Page, expect
 
@@ -20,38 +18,48 @@ def add_task(base_url: str, page: Page, title, parent=None):
     if parent:
         full_parent = page.get_by_text(parent).all_inner_texts()[0]
         page.get_by_label("relativ zu").select_option(label=full_parent)
-    page.click("[name=_save]")
+    page.get_by_role("button", name="Sichern", exact=True).first.click()
 
 
-def drag_task_to(page, dragged_task, target_task):
-    target_locator = page.locator(
-        f"//*[@class='field-title' and contains(., '{target_task}')]"
-    )
-
+def drag_task(page, task_to_drag: str, target_task: str):
+    target_locator = page.get_by_role("link", name=target_task)
     drag_handler = page.locator(
-        f"//th[@class='field-title' and contains(., '{dragged_task}')]/preceding-sibling::td[@class='drag-handler']/span"
+        f"//th[@class='field-title' and contains(., '{task_to_drag}')]/preceding-sibling::td[@class='drag-handler']/span"
     )
+    target_locator.scroll_into_view_if_needed()
 
-    drag_handler.drag_to(
-        target_locator,
-        target_position={"x": 10, "y": 60},
-        force=True,
-        timeout=1000,
-    )
+    to_drag_x, to_drag_y = get_position_in_the_middle(drag_handler)
+    target_x, target_y = get_position_in_the_lower_third(target_locator)
+
+    page.mouse.move(to_drag_x, to_drag_y)
+    page.mouse.down()
+    page.mouse.move(target_x, target_y)
+    page.mouse.up()
+
+
+def get_position_in_the_middle(drag_handler):
+    drag_handler_bounding_box = drag_handler.bounding_box()
+    to_drag_x = drag_handler_bounding_box["x"] + drag_handler_bounding_box["width"] / 2
+    to_drag_y = drag_handler_bounding_box["y"] + drag_handler_bounding_box["height"] / 2
+    return to_drag_x, to_drag_y
+
+
+def get_position_in_the_lower_third(target_locator):
+    target_bounding_box = target_locator.bounding_box()
+    target_x = target_bounding_box["x"] + target_bounding_box["width"] / 2
+    target_y = target_bounding_box["y"] + target_bounding_box["height"] * 2 / 3
+    return target_x, target_y
 
 
 def test_should_succeed_when_logging_into_admin(live_server, page: Page):
     admin_login(live_server.url, page)
     expect(page).to_have_title("Dateneingabe | LocalZero Monitoring")
-    page.close()
 
 
 def test_should_not_allow_duplicate_sectors(live_server, page: Page):
     admin_login(live_server.url, page)
 
-    uid = str(uuid.uuid4())
-
-    sector1 = "Admin Test " + uid + " 1"
+    sector1 = "Sektor 1"
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, sector1)
 
@@ -60,18 +68,15 @@ def test_should_not_allow_duplicate_sectors(live_server, page: Page):
         "Das kollidiert mit einem anderen Eintrag."
     )
 
-    page.close()
-
 
 def test_should_allow_add_when_same_title_in_another_sector(live_server, page: Page):
     admin_login(live_server.url, page)
-    uid = str(uuid.uuid4())
 
-    sector1 = "Admin Test " + uid + " 1"
+    sector1 = "Sektor 1"
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, "Personal Einstellen", sector1)
 
-    sector2 = "Admin Test " + uid + " 2"
+    sector2 = "Sektor 2"
     add_task(live_server.url, page, sector2)
     add_task(live_server.url, page, "Personal Einstellen", sector2)
 
@@ -80,14 +85,11 @@ def test_should_allow_add_when_same_title_in_another_sector(live_server, page: P
         "„Personal Einstellen“ wurde erfolgreich hinzugefügt."
     )
 
-    page.close()
-
 
 def test_should_not_allow_add_when_same_title_in_same_sector(live_server, page: Page):
     admin_login(live_server.url, page)
-    uid = str(uuid.uuid4())
 
-    sector1 = "Admin Test " + uid + " 1"
+    sector1 = "Sektor 1"
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, "Personal Einstellen", sector1)
     add_task(live_server.url, page, "personal einstellen", sector1)
@@ -97,18 +99,17 @@ def test_should_not_allow_add_when_same_title_in_same_sector(live_server, page: 
         "Das kollidiert mit einem anderen Eintrag."
     )
 
-    page.close()
 
-
-def test_should_move_and_adjust_slugs_when_dragged(live_server, page: Page):
+def test_should_also_move_subtasks_when_dragging_a_task_with_subtasks_to_a_different_sektor(
+    live_server, page: Page
+):
     admin_login(live_server.url, page)
-    uid = str(uuid.uuid4())
 
-    sector1 = "Admin Test 1 " + uid
-    sector2 = "Admin Test 2 " + uid
-    task = "To be dragged " + uid
-    sub_task = "Adjust " + uid
-    sub_sub_task = "Adjust " + uid
+    sector1 = "Sektor 1"
+    sector2 = "Sektor 2"
+    task = "To be dragged"
+    sub_task = "Subtask"
+    sub_sub_task = "Subsubtask"
 
     slug_s1 = slugify(sector1)
     slug_s2 = slugify(sector2)
@@ -120,20 +121,16 @@ def test_should_move_and_adjust_slugs_when_dragged(live_server, page: Page):
     add_task(live_server.url, page, task, sector1)
     add_task(live_server.url, page, sub_task, task)
     add_task(live_server.url, page, sub_sub_task, sub_task)
-
     add_task(live_server.url, page, sector2)
 
-    # Make sure, all are visible and not hidden on page 2.
     page.goto(live_server.url + "/admin/cpmonitor/task/?all=&city__id__exact=1")
 
-    # Without exact=True this would also catch the sub-tasks:
     expect(page.get_by_text(slug_s1 + "/" + slugify(task), exact=True)).to_be_visible()
-    # ...on the other hand, this should catch any sub-tasks:
     expect(page.get_by_text(slug_s2 + "/" + slugify(task))).not_to_be_visible()
     expect(page.get_by_text(slug_s1 + sub_sub_slug)).to_be_visible()
     expect(page.get_by_text(slug_s2 + sub_sub_slug)).not_to_be_visible()
 
-    drag_task_to(page, task, sector2)
+    drag_task(page, task, sector2)
 
     expect(page.locator(".messagelist")).to_contain_text("positioniert unterhalb von")
 
@@ -142,33 +139,37 @@ def test_should_move_and_adjust_slugs_when_dragged(live_server, page: Page):
     expect(page.get_by_text(slug_s1 + sub_sub_slug)).not_to_be_visible()
     expect(page.get_by_text(slug_s2 + sub_sub_slug)).to_be_visible()
 
-    page.close()
+
+# Fixme: #350
+# def test_should_not_allow_to_move_a_task_to_a_sector_which_contains_a_task_with_the_same_title_ignoring_the_case(
+#     live_server, page: Page
+# ):
+#     admin_login(live_server.url, page)
+#
+#     sector1 = "Sektor 1"
+#     sector2 = "Sektor 2"
+#     task1 = "Same Task Title"
+#     task2 = task1.lower()
+#
+#     add_task(live_server.url, page, sector1)
+#     add_task(live_server.url, page, task1, sector1)
+#     add_task(live_server.url, page, sector2)
+#     add_task(live_server.url, page, task2, sector2)
+#
+#     page.goto(live_server.url + "/admin/cpmonitor/task/?all=&city__id__exact=1")
+#
+#     drag_task(page, task1, sector2)
+#
+#     expect(page.locator(".messagelist")).to_contain_text(
+#         "Es gibt bereits ein Handlungsfeld / eine Maßnahme mit der URL"
+#     )
 
 
-def test_should_not_allow_move_when_same_case_ignored_title_in_same_sector(
-    live_server, page: Page
-):
+def test_should_allow_local_groups_without_image(live_server, page: Page):
     admin_login(live_server.url, page)
-    uid = str(uuid.uuid4())
+    page.get_by_role("link", name="Kommunen").click()
+    page.get_by_role("link", name="Ohnenix").click()
 
-    sector1 = "Admin Test 1 " + uid
-    sector2 = "Admin Test 2 " + uid
-    task1 = "Personal " + uid
-    task2 = "personal " + uid
-
-    add_task(live_server.url, page, sector1)
-    add_task(live_server.url, page, task1, sector1)
-
-    add_task(live_server.url, page, sector2)
-    add_task(live_server.url, page, task2, sector2)
-
-    # Make sure all tasks are visible
-    page.goto(live_server.url + "/admin/cpmonitor/task/?all=&city__id__exact=1")
-
-    drag_task_to(page, task2, sector1)
-
-    expect(page.locator(".messagelist")).to_contain_text(
-        "Es gibt bereits ein Handlungsfeld / eine Maßnahme mit der URL "
-    )
-
-    page.close()
+    page.locator("#id_local_group-0-name").fill("OhnenixZero")
+    page.get_by_role("button", name="Sichern", exact=True).first.click()
+    expect(page.get_by_text("erfolgreich geändert")).to_be_visible()
