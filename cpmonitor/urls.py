@@ -18,9 +18,7 @@ urlpatterns = [
         RedirectView.as_view(url=settings.STATIC_URL + "favicon.svg", permanent=True),
     ),
     path("admin/", admin.site.urls),
-    path(
-        "api/uploader/", views.markdown_uploader_view, name="markdown_uploader"
-    ),  # needs to be before the martor urls, so that our image uplaoder and not the imgur uploader is used
+    path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("martor/", include("martor.urls")),
     path("accounts/", include("allauth.urls")),
     re_path(
