@@ -18,6 +18,7 @@ urlpatterns = [
         RedirectView.as_view(url=settings.STATIC_URL + "favicon.svg", permanent=True),
     ),
     path("admin/", admin.site.urls),
+    path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("martor/", include("martor.urls")),
     path("accounts/", include("allauth.urls")),
     re_path(
@@ -25,7 +26,6 @@ urlpatterns = [
         views.AcceptInvite.as_view(),
         name="accept-invite",
     ),
-    path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("", views.index_view, name="index"),
     path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),
     path(
