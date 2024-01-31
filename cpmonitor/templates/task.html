@@ -51,11 +51,7 @@
             </div>
           {% endif %}
         </li>
-        <li class="list-group-item d-flex justify-content-between"
-            data-bs-container="body"
-            data-bs-toggle="popover"
-            data-bs-placement="bottom"
-            data-bs-content="{{ task.responsible_organ_explanation }}">
+        <li class="list-group-item d-flex justify-content-between">
           <div>
             <h4 class="my-0">Zuständige Instanz</h4>
           </div>
@@ -73,6 +69,14 @@
       {% if task.plan_assessment %}
         <h3>Bewertung der geplanten Maßnahme</h3>
         {{ task.plan_assessment | safe_markdown }}
+      {% endif %}
+      {% if task.execution_justification %}
+        <h3>Begründung Umsetzungsstand</h3>
+        {{ task.execution_justification | safe_markdown }}
+      {% endif %}
+      {% if task.responsible_organ_explanation %}
+        <h3>Zuständige Instanz</h3>
+        {{ task.responsible_organ_explanation | safe_markdown }}
       {% endif %}
     </div>
   </div>
