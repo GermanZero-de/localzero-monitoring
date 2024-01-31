@@ -48,6 +48,31 @@ def test_should_go_to_subtask_view_when_clicking_task_item(live_server, page: Pa
     )
 
 
+def test_should_show_the_plan_assessment_and_execution_justification_and_responsible_organ_explanation(
+    live_server, page: Page
+):
+    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/radwege-ausbauen/")
+
+    expect(
+        page.locator("h3").filter(has_text="Bewertung der geplanten Maßnahme")
+    ).to_be_visible()
+    expect(
+        page.get_by_text("Bisher sind 12% der geplanten Radwege gebaut.")
+    ).to_be_visible()
+
+    expect(
+        page.locator("h3").filter(has_text="Begründung Umsetzungsstand")
+    ).to_be_visible()
+    expect(
+        page.get_by_text(
+            "Straßen werden nur umgebaut, wenn auch andere bauliche Maßnahmen geplant sind."
+        )
+    ).to_be_visible()
+
+    expect(page.locator("h3").filter(has_text="Zuständige Instanz")).to_be_visible()
+    expect(page.get_by_text("Anschrift Baureferat")).to_be_visible()
+
+
 def test_should_go_to_the_linked_page_when_clicking_on_a_breadcrumb(
     live_server, page: Page
 ):
