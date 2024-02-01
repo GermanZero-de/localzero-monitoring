@@ -4,7 +4,6 @@ import json
 import os
 import time
 import uuid
-from typing import List, Tuple, Any
 
 from django.conf import settings
 from django.contrib import auth
@@ -21,7 +20,6 @@ from django.shortcuts import redirect
 from invitations import views as invitations_views
 from invitations.app_settings import app_settings as invitations_settings
 from invitations.adapters import get_invitations_adapter
-from invitations.signals import invite_accepted
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
 from PIL import Image
