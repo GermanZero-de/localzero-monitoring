@@ -26,6 +26,7 @@ urlpatterns = [
         name="accept-invite",
     ),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
+    path("api/mstr/<slug:municipality_key>", views.mstr_view, name="mstr"),
     path("", views.index_view, name="index"),
     path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),
     path(
