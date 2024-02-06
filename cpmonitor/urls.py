@@ -28,6 +28,7 @@ urlpatterns = [
     path("admin/cap/task/move/<int:pk>/", login_required(move_task)),
     path("admin/", admin.site.urls),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
+    path("api/mstr/<slug:municipality_key>", views.mstr_view, name="mstr"),
     path("martor/", include("martor.urls")),
     path("accounts/", include("allauth.urls")),
     re_path(
@@ -35,6 +36,7 @@ urlpatterns = [
         views.AcceptInvite.as_view(),
         name="accept-invite",
     ),
+    path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("", views.index_view, name="index"),
     path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),
     path(

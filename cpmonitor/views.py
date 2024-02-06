@@ -1,9 +1,11 @@
 import json
 import os
+import re
+import requests
 import time
 import uuid
 from collections import Counter
-from datetime import date
+from datetime import date, datetime
 
 from PIL import Image
 from django.conf import settings
@@ -601,6 +603,49 @@ def markdown_uploader_view(request):
     img_url = os.path.join(settings.MEDIA_URL, def_path)
 
     data = json.dumps({"status": 200, "link": img_url, "name": image.name})
+    return HttpResponse(data, content_type="application/json")
+
+
+def mstr_view(request, municipality_key):
+    url = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetVerkleinerteOeffentlicheEinheitStromerzeugung"
+    params = {
+        "sort": "EinheitMeldeDatum-desc",
+        "page": 1,
+        "pageSize": 10000,
+        "filter": f"Energieträger~eq~'2495'~and~Gemeindeschlüssel~eq~'{municipality_key}'",
+    }
+    r = requests.get(url, params)
+    data = r.json()["Data"]
+
+    installed_by_year = dict()
+
+    for entry in data:
+        if not entry["InbetriebnahmeDatum"]:
+            continue
+
+        m = re.match("/Date\((-?\d*)\)/", entry["InbetriebnahmeDatum"])
+        install_date = datetime.fromtimestamp(int(m.group(1)) / 1000)
+
+        if not install_date.year in installed_by_year:
+            installed_by_year[install_date.year] = 0
+
+        installed_by_year[install_date.year] += entry["Bruttoleistung"]
+
+    START_YEAR = 2019
+    current_year = date.today().year
+    installed_accumulated = 0
+    years = []
+    installed = []
+    for year, installed_in_year in sorted(installed_by_year.items()):
+        if year == current_year:
+            break
+        installed_accumulated += round(installed_in_year)
+        if year < START_YEAR:
+            continue
+        years.append(year)
+        installed.append(installed_accumulated)
+
+    data = json.dumps({"years": years, "installed": installed})
     return HttpResponse(data, content_type="application/json")
 
 
