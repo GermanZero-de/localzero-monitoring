@@ -147,6 +147,16 @@ figure.lz-chart {
   font-weight: bold;
 }
 
+.lz-chart {
+  .card-body {
+    padding-bottom: 0;
+  }
+
+  .canvas {
+    aspect-ratio: 1.5;
+  }
+}
+
 .hr-text {
   font-size: 0.8rem !important;
   margin-top: 1rem;
