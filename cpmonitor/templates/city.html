@@ -186,6 +186,26 @@
       {% endfor %}
     </div>
   {% endif %}
+  {% if city.show_roof_pv_indicator and city.municipality_key %}
+    <div class="row row-deck row-cards">
+      <div class="col-sm-12 col-lg-6">
+        <div class="card lz-chart" id="kpiPV">
+          <div class="card-body">
+            <div class="h3 mb-3">Entwicklung Dach-Photovoltaik</div>
+            <div class="canvas"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      window.LZM = window.LZM || {};
+      LZM.city = {
+        municipalityKey: "{{ city.municipality_key }}",
+        resolutionYear: {{ city.resolution_date.year }}
+      }
+    </script>
+    <script src="{% static 'js/mstr.js' %}"></script>
+  {% endif %}
   {% if charts %}
     <div class="row row-deck row-cards">
       {% for chart in charts %}
