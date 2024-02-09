@@ -1,16 +1,17 @@
 from collections.abc import Sequence
+
 from django.contrib import admin, messages
 from django.db import models
 from django.forms import TextInput
 from django.forms.models import ErrorList
-from django.http import HttpRequest, HttpResponseRedirect, QueryDict
+from django.http import HttpResponseRedirect, QueryDict
 from django.http.request import HttpRequest
 from django.urls import reverse
 from django.utils.html import format_html
 from martor.widgets import AdminMartorWidget
+from rules.contrib.admin import ObjectPermissionsModelAdminMixin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
-from rules.contrib.admin import ObjectPermissionsModelAdminMixin
 
 from . import rules, utils
 from .models import (
@@ -22,6 +23,19 @@ from .models import (
     LocalGroup,
     Invitation,
 )
+
+
+class CapEditSite(admin.AdminSite):
+    def get_urls(self):
+        urlpatterns = super().get_urls()
+        urlpatterns += [
+            # TODO
+        ]
+        return urlpatterns
+
+
+admin.site = CapEditSite()
+
 
 _city_filter_query = "city__id__exact"
 """The query parameter used by the city filter."""

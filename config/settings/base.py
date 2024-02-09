@@ -17,6 +17,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -39,7 +40,7 @@ ALLOWED_HOSTS = [".localzero.net", "localhost", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    "cpmonitor.apps.MyAdminConfig",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
