@@ -621,6 +621,7 @@ class CapEditView(DetailView, admin.ModelAdmin):
         context = super().get_context_data(**kwargs)
         groups = _get_task_groups(self.object)
         context["title"] = self.object.name
+        context["city_id"] = str(self.object.pk)
         context["has_permission"] = True
         context["groups"] = groups
         return context

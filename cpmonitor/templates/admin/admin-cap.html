@@ -6,7 +6,8 @@
 {% endblock extrastyle %}
 {% block content %}
   <div>
-    <a href="">Add new column</a>
+    <a href="{% admin_reverse 'task' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
+       class="addlink">Handlungsfeld hinzufügen</a>
   </div>
   <div class="cap_board">
     <div class="cap_board__wrapper">
@@ -14,21 +15,22 @@
         <div class="cap_board__column">
           <div class="cap_board__column-wrapper">
             <div class="cap_board__column-title">
-              {{ column.title }} <a href="" class="changelink">Change</a> <a href="" class="deletelink">Delete</a>
+              {{ column.title }} <a href="" class="changelink">Editieren</a> <a href="" class="deletelink">Löschen</a>
             </div>
             <div class="cap_board__task-area" id="column-{{ column.pk }}">
               {% with tasks=column|task_children %}
                 {% for task in tasks %}
                   <div class="cap_board__task-item" id="drag-{{ task.pk }}">
                     <div>{{ task.title }}</div>
-                    <a href="" class="changelink">Change</a>
-                    <a href="" class="deletelink">Delete</a>
+                    <a href="{% admin_reverse 'task' 'change' task.pk %}" class="changelink">Editieren</a>
+                    <a href="{% admin_reverse 'task' 'delete' task.pk %}" class="deletelink">Löschen</a>
                   </div>
                 {% endfor %}
+                <div class="cap_board__task-item">
+                  <a href="{% admin_reverse 'task' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
+                     class="addlink">Neue Maßnahme hinzufügen</a>
+                </div>
               {% endwith %}
-            </div>
-            <div class="cap_board__footer">
-              <a href="" class="default">Add new task</a>
             </div>
           </div>
         </div>

@@ -1,5 +1,8 @@
+from urllib.parse import urlencode
+
 from django import template
 from django.template.defaultfilters import stringfilter
+from django.urls import reverse
 
 from cpmonitor.models import ExecutionStatus
 
@@ -25,3 +28,16 @@ def task_execution_status_to_icon(execution_status: str) -> str:
 @register.filter(name="task_children")
 def task_children(group):
     return group.get_children()
+
+
+@register.simple_tag()
+def admin_reverse(model, action, pk=None, **kwargs):
+    reverse_str = f"admin:cpmonitor_{model}_{action}"
+    if pk:
+        url = reverse(reverse_str, args=[pk])
+    else:
+        url = reverse(reverse_str)
+    if kwargs:
+        query_str = urlencode(kwargs, safe="%")
+        url += f"?{query_str}"
+    return url
