@@ -26,7 +26,6 @@ from invitations.app_settings import app_settings as invitations_settings
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
 
-from .forms import CapForm
 from .models import (
     AccessRight,
     City,
@@ -132,6 +131,14 @@ def _get_children(request, city, node=None):
         _calculate_summary(request, group)
 
     return groups, tasks
+
+
+def _get_task_groups(city):
+    children = Task.get_root_nodes().filter(city=city)
+    groups = children.filter(
+        numchild__gt=0
+    )  # TODO these are not only the ones from the highest level
+    return groups
 
 
 def _get_cities(request, slug=None):
@@ -612,6 +619,8 @@ class CapEditView(DetailView, admin.ModelAdmin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        groups = _get_task_groups(self.object)
         context["title"] = self.object.name
         context["has_permission"] = True
+        context["groups"] = groups
         return context

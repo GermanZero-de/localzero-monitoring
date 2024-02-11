@@ -1,4 +1,38 @@
 {% extends "admin/base_site.html" %}
+{% load static %}
+{% load filters %}
+{% block extrastyle %}
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock extrastyle %}
 {% block content %}
-  TODO
+  <div>
+    <a href="">Add new column</a>
+  </div>
+  <div class="cap_board">
+    <div class="cap_board__wrapper">
+      {% for column in groups %}
+        <div class="cap_board__column">
+          <div class="cap_board__column-wrapper">
+            <div class="cap_board__column-title">
+              {{ column.title }} <a href="" class="changelink">Change</a> <a href="" class="deletelink">Delete</a>
+            </div>
+            <div class="cap_board__task-area" id="column-{{ column.pk }}">
+              {% with tasks=column|task_children %}
+                {% for task in tasks %}
+                  <div class="cap_board__task-item" id="drag-{{ task.pk }}">
+                    <div>{{ task.title }}</div>
+                    <a href="" class="changelink">Change</a>
+                    <a href="" class="deletelink">Delete</a>
+                  </div>
+                {% endfor %}
+              {% endwith %}
+            </div>
+            <div class="cap_board__footer">
+              <a href="" class="default">Add new task</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock content %}

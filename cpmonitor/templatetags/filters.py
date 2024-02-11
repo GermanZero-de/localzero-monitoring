@@ -20,3 +20,8 @@ def task_execution_status_to_icon(execution_status: str) -> str:
             return "progress-alert"
         case ExecutionStatus.FAILED.name:
             return "circle-x"
+
+
+@register.filter(name="task_children")
+def task_children(group):
+    return group.get_children()
