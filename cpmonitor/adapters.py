@@ -36,7 +36,10 @@ class AllauthInvitationsAdapter(DefaultAccountAdapter):
         user = super().save_user(request, user, form, commit)
 
         city: City = invitation.city
-        if invitation.access_right == AccessRight.CITY_EDITOR:
+        if invitation.access_right == AccessRight.CITY_VIEWER:
+            city.city_viewers.add(user)
+            city.save()
+        elif invitation.access_right == AccessRight.CITY_EDITOR:
             city.city_editors.add(user)
             city.save()
         elif invitation.access_right == AccessRight.CITY_ADMIN:

@@ -140,13 +140,14 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     # ------ change / add page ------
     save_on_top = True
 
-    filter_horizontal = ["city_editors", "city_admins"]
+    filter_horizontal = ["city_viewers", "city_editors", "city_admins"]
 
     def get_readonly_fields(self, request: HttpRequest, obj=None) -> Sequence[str]:
         user = request.user
         result = []
         if not rules.is_allowed_to_change_city_users(user, obj):
             result.append("draft_mode")
+            result.append("city_viewers")
             result.append("city_editors")
             result.append("city_admins")
         return result

@@ -64,6 +64,13 @@ def city_editor_client(permissions_db, client: Client, django_user_model: User):
     return client
 
 
+@pytest.fixture
+def city_viewer_client(permissions_db, client: Client, django_user_model: User):
+    "Client fixture with data loaded and city editor user logged in."
+    _login(client, django_user_model, "heinz")  # password: derstrunk
+    return client
+
+
 # Tests for plain login to admin site
 
 

@@ -570,7 +570,9 @@ class AcceptInvite(invitations_views.AcceptInvite):
                     },
                 )
                 city: City = invitation.city
-                if invitation.access_right == AccessRight.CITY_EDITOR:
+                if invitation.access_right == AccessRight.CITY_VIEWER:
+                    city.city_viewers.add(user.pk)
+                elif invitation.access_right == AccessRight.CITY_EDITOR:
                     city.city_editors.add(user.pk)
                 elif invitation.access_right == AccessRight.CITY_ADMIN:
                     city.city_admins.add(user.pk)

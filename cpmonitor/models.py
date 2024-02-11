@@ -56,6 +56,16 @@ class City(models.Model):
     zipcode = models.CharField("PLZ", max_length=5)
     url = models.URLField("Homepage", blank=True)
 
+    city_viewers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        verbose_name="Kommunen-Betrachter",
+        related_name="viewed_cities",
+        help_text="""
+            <p>Diese Benutzer können alle Inhalte der Kommune sehen - auch die im Entwurfsmodus.</p>
+        """,
+    )
+
     city_editors = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
@@ -957,6 +967,7 @@ class LocalGroup(models.Model):
 class AccessRight(models.TextChoices):
     CITY_ADMIN = "city admin", "Kommunen-Administrator"
     CITY_EDITOR = "city editor", "Kommunen-Bearbeiter"
+    CITY_VIEWER = "city viewer", "Kommunen-Betrachter"
 
 
 class Invitation(AbstractBaseInvitation):
@@ -981,7 +992,7 @@ class Invitation(AbstractBaseInvitation):
         "Zugriffsrecht",
         max_length=20,
         choices=AccessRight.choices,
-        default=AccessRight.CITY_EDITOR,
+        default=AccessRight.CITY_VIEWER,
     )
 
     created = models.DateTimeField(
@@ -1010,6 +1021,7 @@ class Invitation(AbstractBaseInvitation):
     @classmethod
     def ensure_for_city(cls, city):
         "Ensure there exist the needed invitations for a city."
+        cls.ensure_for_right(city, AccessRight.CITY_VIEWER)
         cls.ensure_for_right(city, AccessRight.CITY_EDITOR)
         cls.ensure_for_right(city, AccessRight.CITY_ADMIN)
 

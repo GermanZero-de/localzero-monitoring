@@ -42,8 +42,19 @@ def _get_city(object: CityOrNoneType) -> City | NoneType:
 
 
 @rules.predicate
+def is_city_viewer(user: User, object: CityOrNoneType) -> bool:
+    "True, if user is city viewer of the city the object belongs to. False, if no object specified."
+    if not user.is_active:
+        return False
+    city = _get_city(object)
+    if isinstance(city, City):
+        return city.city_viewers.filter(pk=user.pk).exists()
+    return False
+
+
+@rules.predicate
 def is_city_editor(user: User, object: CityOrNoneType) -> bool:
-    "True, if user is city editor of the city object belongs to. False, if no object specified."
+    "True, if user is city editor of the city the object belongs to. False, if no object specified."
     if not user.is_staff or not user.is_active:
         return False
     city = _get_city(object)
@@ -54,7 +65,7 @@ def is_city_editor(user: User, object: CityOrNoneType) -> bool:
 
 @rules.predicate
 def is_city_admin(user: User, object: CityOrNoneType) -> bool:
-    "True, if user is city admin of the city object belongs to. False, if no object specified."
+    "True, if user is city admin of the city the object belongs to. False, if no object specified."
     if not user.is_staff or not user.is_active:
         return False
     city = _get_city(object)
@@ -65,7 +76,7 @@ def is_city_admin(user: User, object: CityOrNoneType) -> bool:
 
 @rules.predicate
 def is_site_admin(user: User, object: CityOrNoneType) -> bool:
-    "True, if user is site admin of the city object belongs to. False, if no object specified."
+    "True, if user is site admin of the city the object belongs to. False, if no object specified."
     if not user.is_superuser or not user.is_active:
         return False
     city = _get_city(object)
@@ -83,6 +94,7 @@ def no_object(user: User, object: CityOrNoneType) -> bool:
 
 
 # Composed predicates:
+is_allowed_to_view = is_city_viewer | is_city_editor | is_city_admin | is_site_admin
 is_allowed_to_edit = is_city_editor | is_city_admin | is_site_admin
 is_allowed_to_change_city_users = is_city_admin | is_site_admin
 
@@ -100,36 +112,36 @@ rules.add_perm("cpmonitor", rules.always_true)
 # City:
 # Only add and change permissions are given to city editors and admins.
 # Site admins are superusers and can change everything, anyway.
-rules.add_perm("cpmonitor.view_city", is_allowed_to_edit)
+rules.add_perm("cpmonitor.view_city", is_allowed_to_view)
 rules.add_perm("cpmonitor.change_city", is_allowed_to_edit | no_object)
 
 # Task:
 rules.add_perm("cpmonitor.add_task", is_allowed_to_edit | no_object)
-rules.add_perm("cpmonitor.view_task", is_allowed_to_edit)
+rules.add_perm("cpmonitor.view_task", is_allowed_to_view)
 rules.add_perm("cpmonitor.delete_task", is_allowed_to_edit)
 rules.add_perm("cpmonitor.change_task", is_allowed_to_edit | no_object)
 
 # Inlines in city mask:
 # For some reason, "change" is requested with "None" once by inlines.
 rules.add_perm("cpmonitor.add_chart", is_allowed_to_edit | no_object)
-rules.add_perm("cpmonitor.view_chart", is_allowed_to_edit)
+rules.add_perm("cpmonitor.view_chart", is_allowed_to_view)
 rules.add_perm("cpmonitor.delete_chart", is_allowed_to_edit)
 rules.add_perm("cpmonitor.change_chart", is_allowed_to_edit | no_object)
 
 rules.add_perm("cpmonitor.add_localgroup", is_allowed_to_edit | no_object)
-rules.add_perm("cpmonitor.view_localgroup", is_allowed_to_edit)
+rules.add_perm("cpmonitor.view_localgroup", is_allowed_to_view)
 rules.add_perm("cpmonitor.delete_localgroup", is_allowed_to_edit)
 rules.add_perm("cpmonitor.change_localgroup", is_allowed_to_edit | no_object)
 
 rules.add_perm("cpmonitor.add_administrationchecklist", is_allowed_to_edit | no_object)
-rules.add_perm("cpmonitor.view_administrationchecklist", is_allowed_to_edit)
+rules.add_perm("cpmonitor.view_administrationchecklist", is_allowed_to_view)
 rules.add_perm("cpmonitor.delete_administrationchecklist", is_allowed_to_edit)
 rules.add_perm(
     "cpmonitor.change_administrationchecklist", is_allowed_to_edit | no_object
 )
 
 rules.add_perm("cpmonitor.add_capchecklist", is_allowed_to_edit | no_object)
-rules.add_perm("cpmonitor.view_capchecklist", is_allowed_to_edit)
+rules.add_perm("cpmonitor.view_capchecklist", is_allowed_to_view)
 rules.add_perm("cpmonitor.delete_capchecklist", is_allowed_to_edit)
 rules.add_perm("cpmonitor.change_capchecklist", is_allowed_to_edit | no_object)
 

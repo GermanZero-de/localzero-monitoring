@@ -104,6 +104,7 @@
     "contact_email": "",
     "internal_information": "Dies ist eine total wichtige interne Info!",
     "slug": "beispielstadt",
+    "city_viewers": [],
     "city_editors": [
       2
     ],
@@ -133,6 +134,7 @@
     "contact_email": "",
     "internal_information": "",
     "slug": "ohnenix",
+    "city_viewers": [],
     "city_editors": [],
     "city_admins": []
   }
@@ -158,6 +160,7 @@
     "contact_email": "maxime@muster.frau",
     "internal_information": "Dies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!\r\n\r\nDies ist eine total wichtige interne Info zu dieser Stadt!",
     "slug": "mitallem",
+    "city_viewers": [],
     "city_editors": [],
     "city_admins": []
   }

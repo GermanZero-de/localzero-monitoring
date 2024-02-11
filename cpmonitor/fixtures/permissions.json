@@ -92,6 +92,7 @@
     "contact_email": "",
     "internal_information": "Dies ist eine total wichtige interne Info!",
     "slug": "beispielstadt",
+    "city_viewers": [],
     "city_editors": [
       2
     ],
@@ -121,6 +122,7 @@
     "contact_email": "",
     "internal_information": "",
     "slug": "ohnenix",
+    "city_viewers": [],
     "city_editors": [],
     "city_admins": []
   }
