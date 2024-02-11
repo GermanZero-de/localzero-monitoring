@@ -5,6 +5,7 @@ from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
 from . import views
+from .views import SelectCityView, CapEditView
 
 prefix_kommune = ""
 
@@ -16,6 +17,12 @@ urlpatterns = [
     path(
         "favicon.ico",
         RedirectView.as_view(url=settings.STATIC_URL + "favicon.svg", permanent=True),
+    ),
+    path("admin/cap/", SelectCityView.as_view(), name="select-city"),
+    path(
+        "admin/cap/<int:pk>/",
+        CapEditView.as_view(),
+        name="edit-cap",
     ),
     path("admin/", admin.site.urls),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),

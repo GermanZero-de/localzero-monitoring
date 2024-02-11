@@ -77,7 +77,10 @@ ROOT_URLCONF = "cpmonitor.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "cpmonitor" / "templates" / "overrides"],
+        "DIRS": [
+            BASE_DIR / "cpmonitor" / "templates",
+            BASE_DIR / "cpmonitor" / "templates" / "overrides",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

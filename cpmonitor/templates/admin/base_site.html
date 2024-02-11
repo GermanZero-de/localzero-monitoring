@@ -1,0 +1,6 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block userlinks %}
+  <a href="{% url 'admin:select-city' %}">KAP editieren</a>
+  {{ block.super }}
+{% endblock userlinks %}

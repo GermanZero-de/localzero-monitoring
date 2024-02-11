@@ -6,7 +6,7 @@ from django.forms import TextInput
 from django.forms.models import ErrorList
 from django.http import HttpResponseRedirect, QueryDict
 from django.http.request import HttpRequest
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils.html import format_html
 from martor.widgets import AdminMartorWidget
 from rules.contrib.admin import ObjectPermissionsModelAdminMixin
@@ -23,13 +23,19 @@ from .models import (
     LocalGroup,
     Invitation,
 )
+from .views import SelectCityView, CapEditView
 
 
 class CapEditSite(admin.AdminSite):
     def get_urls(self):
         urlpatterns = super().get_urls()
         urlpatterns += [
-            # TODO
+            path("cap/", SelectCityView.as_view(), name="select-city"),
+            path(
+                "cap/<int:pk>/",
+                CapEditView.as_view(),
+                name="edit-cap",
+            ),
         ]
         return urlpatterns
 
