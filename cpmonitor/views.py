@@ -136,9 +136,7 @@ def _get_children(request, city, node=None):
 
 def _get_task_groups(city):
     children = Task.get_root_nodes().filter(city=city)
-    groups = children.filter(
-        numchild__gt=0
-    )  # TODO these are not only the ones from the highest level
+    groups = children.filter(depth=1)
     return groups
 
 
