@@ -11,21 +11,23 @@ from django.contrib import admin
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from invitations import views as invitations_views
 from invitations.adapters import get_invitations_adapter
 from invitations.app_settings import app_settings as invitations_settings
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
 
+from .forms import TaskForm
 from .models import (
     AccessRight,
     City,
@@ -624,4 +626,26 @@ class CapEditView(DetailView, admin.ModelAdmin):
         context["city_id"] = str(self.object.pk)
         context["has_permission"] = True
         context["groups"] = groups
+        context["task_form"] = TaskForm()
         return context
+
+
+class TaskUpdate(UpdateView):
+    model = Task
+    fields = ["path", "depth"]
+    success_url = "/"
+
+    def form_invalid(self, form):  # TODO
+        response = super().form_invalid(form)
+        # if self.request.is_ajax():
+        return JsonResponse(form.errors, status=400)
+        # else:
+        # return response
+
+    def form_valid(self, form):  # TODO
+        response = super().form_valid(form)
+        # if self.request.is_ajax():
+        data = serializers.serialize("json", [self.object])
+        return JsonResponse(data, safe=False)
+        # else:
+        #    return response

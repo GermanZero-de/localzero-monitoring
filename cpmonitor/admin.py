@@ -23,7 +23,7 @@ from .models import (
     LocalGroup,
     Invitation,
 )
-from .views import SelectCityView, CapEditView
+from .views import SelectCityView, CapEditView, TaskUpdate
 
 
 class CapEditSite(admin.AdminSite):
@@ -36,6 +36,7 @@ class CapEditSite(admin.AdminSite):
                 CapEditView.as_view(),
                 name="edit-cap",
             ),
+            path("cap/task/update/<int:pk>/", TaskUpdate.as_view(), name="update_task"),
         ]
         return urlpatterns
 

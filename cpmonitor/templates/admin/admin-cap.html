@@ -4,6 +4,11 @@
 {% block extrastyle %}
   <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 {% endblock extrastyle %}
+{% block extrahead %}
+  {{ block.super }}
+  <script src="{% static 'jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'js/drag-n-drop.js' %}"></script>
+{% endblock extrahead %}
 {% block content %}
   <div>
     <a href="{% admin_reverse 'task' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
@@ -20,10 +25,16 @@
             <div class="cap_board__task-area" id="column-{{ column.pk }}">
               {% with tasks=column|task_children %}
                 {% for task in tasks %}
-                  <div class="cap_board__task-item" id="drag-{{ task.pk }}">
+                  <div class="cap_board__task-item" id="drag-{{ task.pk }}" draggable="true">
                     <div>{{ task.title }}</div>
                     <a href="{% admin_reverse 'task' 'change' task.pk %}" class="changelink">Editieren</a>
                     <a href="{% admin_reverse 'task' 'delete' task.pk %}" class="deletelink">Löschen</a>
+                    <form action="" method="post" id="task-{{ task.pk }}" class="task-form">
+                      {% csrf_token %}
+                      <div class="form-data">
+                        <input type="hidden" name="task_input">
+                      </div>
+                    </form>
                   </div>
                 {% endfor %}
                 <div class="cap_board__task-item">
