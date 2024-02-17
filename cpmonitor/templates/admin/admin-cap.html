@@ -1,9 +1,6 @@
 {% extends "admin/base_site.html" %}
 {% load static %}
 {% load filters %}
-{% block extrastyle %}
-  <link rel="stylesheet" href="{% static 'css/admin.css' %}">
-{% endblock extrastyle %}
 {% block extrahead %}
   {{ block.super }}
   <script src="{% static 'jquery/jquery.min.js' %}"></script>
@@ -25,11 +22,24 @@
             <div class="cap_board__task-area" id="column-{{ column.pk }}">
               {% with tasks=column|task_children %}
                 {% for task in tasks %}
-                  <div class="cap_board__task-item" id="drag-{{ task.pk }}" draggable="true">
-                    <div>{{ task.title }}</div>
-                    <a href="{% admin_reverse 'task' 'change' task.pk %}" class="changelink">Editieren</a>
-                    <a href="{% admin_reverse 'task' 'delete' task.pk %}" class="deletelink">Löschen</a>
-                  </div>
+                  {% with margin_left=task|depth_to_margin_left %}
+                    <div>
+                      <svg width="15" height="15" class="inline {{ margin_left }}">
+                        {% if task.numchild == 0 %}
+                          <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-chevron-right" />
+                        {% else %}
+                          <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-chevron-down" />
+                        {% endif %}
+                      </svg>
+                      <div class="cap_board__task-item inline"
+                           id="drag-{{ task.pk }}"
+                           draggable="true">
+                        <div>{{ task.title }}</div>
+                        <a href="{% admin_reverse 'task' 'change' task.pk %}" class="changelink">Editieren</a>
+                        <a href="{% admin_reverse 'task' 'delete' task.pk %}" class="deletelink">Löschen</a>
+                      </div>
+                    </div>
+                  {% endwith %}
                 {% endfor %}
                 <div class="cap_board__task-item">
                   <a href="{% admin_reverse 'task' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"

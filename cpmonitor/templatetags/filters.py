@@ -4,7 +4,7 @@ from django import template
 from django.template.defaultfilters import stringfilter
 from django.urls import reverse
 
-from cpmonitor.models import ExecutionStatus
+from cpmonitor.models import ExecutionStatus, Task
 
 register = template.Library()
 
@@ -26,8 +26,14 @@ def task_execution_status_to_icon(execution_status: str) -> str:
 
 
 @register.filter(name="task_children")
-def task_children(group):
-    return group.get_children()
+def task_children(group: Task):
+    group_children = Task.get_tree(group)[1:]
+    return group_children
+
+
+@register.filter(name="depth_to_margin_left")
+def depth_to_margin_left(task: Task):
+    return "marginleft-" + str(task.depth - 2)
 
 
 @register.simple_tag()

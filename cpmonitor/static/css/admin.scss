@@ -1,3 +1,5 @@
+$spacer: 10rem;
+
 html,
 body,
 #container {
@@ -5,12 +7,13 @@ body,
 }
 
 #container {
-  display: flex;
-  flex-direction: column;
-
   #content {
     height: calc(80% - 100px);
   }
+}
+
+.main {
+  background: white;
 }
 
 .cap_board {
@@ -71,18 +74,21 @@ body,
 }
 
 .cap_board__task-item {
-  background-color: #ececec;
   padding: 5px 10px;
   border-radius: 2px;
   margin-bottom: 5px;
   -webkit-user-drag: element;
   -webkit-user-select: none;
   position: relative;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 
   &:hover {
     cursor: grab;
   }
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .cap_board__task-title {
@@ -96,4 +102,35 @@ body,
 
 .cap_board__add-column {
   margin-bottom: 20px;
+}
+
+$myspacer: 3rem !default;
+$myspacers: () !default;
+$myspacers: map-merge(
+  (
+    0: 0,
+    1: (
+      $myspacer * 0.25,
+    ),
+    2: (
+      $myspacer * 0.5,
+    ),
+    3: $myspacer * 0.75,
+    4: (
+      $myspacer * 1,
+    ),
+    5: (
+      $myspacer * 1.25,
+    ),
+  ),
+  $myspacers
+);
+
+.marginleft-1 {
+  margin-left: ($myspacer * 0.25) !important;
+}
+@each $size, $value in $myspacers {
+  .marginleft-#{$size} {
+    margin-left: $value;
+  }
 }
