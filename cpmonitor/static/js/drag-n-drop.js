@@ -42,7 +42,7 @@ $(document).ready(function () {
       mode: "same-origin", // do not send the CSRF token to another domain
       data: { task_pk: task_pk, new_parent_pk: column_pk },
     }).done(function (data) {
-      console.log(data);
+      location.reload();
     });
   }
 });
