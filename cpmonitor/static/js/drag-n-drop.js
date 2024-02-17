@@ -17,10 +17,6 @@ $(document).ready(function () {
 
   function drag(ev) {
     ev.originalEvent.dataTransfer.setData("text", ev.target.id);
-    ev.originalEvent.dataTransfer.setData(
-      "form",
-      ev.target.getElementsByTagName("form"),
-    );
   }
 
   function drop(ev) {
@@ -28,24 +24,23 @@ $(document).ready(function () {
     const task_id = ev.originalEvent.dataTransfer.getData("text");
     const column_id = ev.target.id;
 
-    console.log(task_id + " " + column_id);
-
     const task_pk = task_id.split("-")[1];
-    updateTask(task_pk);
+    const column_pk = column_id.split("-")[1];
+
+    updateTask(task_pk, column_pk);
   }
 
-  function updateTask(pk) {
-    const form_data = $("#task-" + pk).serialize();
+  function updateTask(task_pk, column_pk) {
     const csrftoken = document.querySelector(
       "[name=csrfmiddlewaretoken]",
     ).value;
 
     $.ajax({
-      url: "/admin/cap/task/update/" + pk + "/",
+      url: "/admin/cap/task/update/" + task_pk + "/",
       method: "POST",
       headers: { "X-CSRFToken": csrftoken },
       mode: "same-origin", // do not send the CSRF token to another domain
-      data: { path: "00060002", depth: 2 }, // TODO
+      data: { task_pk: task_pk, new_parent_pk: column_pk },
     }).done(function (data) {
       console.log(data);
     });

@@ -27,7 +27,6 @@ from invitations.app_settings import app_settings as invitations_settings
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
 
-from .forms import TaskForm
 from .models import (
     AccessRight,
     City,
@@ -626,26 +625,13 @@ class CapEditView(DetailView, admin.ModelAdmin):
         context["city_id"] = str(self.object.pk)
         context["has_permission"] = True
         context["groups"] = groups
-        context["task_form"] = TaskForm()
         return context
 
 
-class TaskUpdate(UpdateView):
-    model = Task
-    fields = ["path", "depth"]
-    success_url = "/"
-
-    def form_invalid(self, form):  # TODO
-        response = super().form_invalid(form)
-        # if self.request.is_ajax():
-        return JsonResponse(form.errors, status=400)
-        # else:
-        # return response
-
-    def form_valid(self, form):  # TODO
-        response = super().form_valid(form)
-        # if self.request.is_ajax():
-        data = serializers.serialize("json", [self.object])
-        return JsonResponse(data, safe=False)
-        # else:
-        #    return response
+def move_task(request, pk):
+    # task_pk = request.POST.get("task_pk")
+    new_parent_pk = request.POST.get("new_parent_pk")
+    task = Task.objects.get(pk=pk)
+    new_parent = Task.objects.get(pk=new_parent_pk)
+    task.move(new_parent, "last-child")
+    return JsonResponse({"success": True})

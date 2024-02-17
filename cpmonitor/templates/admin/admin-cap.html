@@ -29,12 +29,6 @@
                     <div>{{ task.title }}</div>
                     <a href="{% admin_reverse 'task' 'change' task.pk %}" class="changelink">Editieren</a>
                     <a href="{% admin_reverse 'task' 'delete' task.pk %}" class="deletelink">Löschen</a>
-                    <form action="" method="post" id="task-{{ task.pk }}" class="task-form">
-                      {% csrf_token %}
-                      <div class="form-data">
-                        <input type="hidden" name="task_input">
-                      </div>
-                    </form>
                   </div>
                 {% endfor %}
                 <div class="cap_board__task-item">

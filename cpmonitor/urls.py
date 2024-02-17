@@ -5,7 +5,7 @@ from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
 from . import views
-from .views import SelectCityView, CapEditView, TaskUpdate
+from .views import SelectCityView, CapEditView, move_task
 
 prefix_kommune = ""
 
@@ -24,7 +24,7 @@ urlpatterns = [
         CapEditView.as_view(),
         name="edit-cap",
     ),
-    path("admin/cap/task/update/<int:pk>/", TaskUpdate.as_view(), name="update_task"),
+    path("admin/cap/task/update/<int:pk>/", move_task, name="update_task"),
     path("admin/", admin.site.urls),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("martor/", include("martor.urls")),
