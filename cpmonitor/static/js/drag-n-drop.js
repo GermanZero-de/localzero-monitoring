@@ -36,10 +36,15 @@ $(document).ready(function () {
 
   function updateTask(pk) {
     const form_data = $("#task-" + pk).serialize();
+    const csrftoken = document.querySelector(
+      "[name=csrfmiddlewaretoken]",
+    ).value;
 
     $.ajax({
       url: "/admin/cap/task/update/" + pk + "/",
       method: "POST",
+      headers: { "X-CSRFToken": csrftoken },
+      mode: "same-origin", // do not send the CSRF token to another domain
       data: { path: "00060002", depth: 2 }, // TODO
     }).done(function (data) {
       console.log(data);
