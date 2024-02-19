@@ -10,36 +10,43 @@ $(document).ready(function () {
       onDragLeave(ev);
     })
     .on("drop", function (ev) {
-      dropLeftOf(ev, this);
+      drop(ev, this);
     });
-
-  // $(".cap_board__task-area")
-  //   .on("dragover", function (ev) {
-  //     allowDrop(ev);
-  //   })
-  //   .on("drop", function (ev) {
-  //     dropOnColumn(ev, this);
-  //   });
 
   function onDragOver(ev) {
     ev.preventDefault();
     const targetTaskId = ev.currentTarget.id;
     const target = document.getElementById(targetTaskId);
-    target.classList.add("drag-over");
+
+    if (isUpperHalf(event.clientY, target)) {
+      target.classList.add("drag-over-top");
+      target.classList.remove("drag-over-middle");
+    } else {
+      target.classList.add("drag-over-middle");
+      target.classList.remove("drag-over-top");
+    }
+  }
+
+  function isUpperHalf(mouseY, target) {
+    const targetRect = target.getBoundingClientRect();
+    const targetTop = targetRect.top;
+    const targetHeight = targetRect.height;
+
+    return mouseY < targetTop + targetHeight / 2;
   }
 
   function onDragLeave(ev) {
     ev.preventDefault();
     const targetTaskId = ev.currentTarget.id;
     const target = document.getElementById(targetTaskId);
-    target.classList.remove("drag-over");
+    target.classList.remove("drag-over-top", "drag-over-middle");
   }
 
   function onDragStart(ev) {
     ev.originalEvent.dataTransfer.setData("text", ev.currentTarget.id);
   }
 
-  function dropLeftOf(ev) {
+  function drop(ev) {
     ev.preventDefault();
     const task_id = ev.originalEvent.dataTransfer.getData("text");
     const new_parent_id = ev.currentTarget.id;
@@ -47,7 +54,13 @@ $(document).ready(function () {
     const task_pk = task_id.split("-")[1];
     const new_parent_pk = new_parent_id.split("-")[1];
 
-    moveTask(task_pk, new_parent_pk, "left");
+    const target = document.getElementById(new_parent_id);
+    if (target.classList.contains("drag-over-top")) {
+      moveTask(task_pk, new_parent_pk, "left");
+    }
+    if (target.classList.contains("drag-over-middle")) {
+      moveTask(task_pk, new_parent_pk, "last-child");
+    }
   }
 
   function dropOnColumn(ev) {

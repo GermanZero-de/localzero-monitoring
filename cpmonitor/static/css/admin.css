@@ -12,11 +12,6 @@ body,
   background: white;
 }
 
-.drag-over {
-  border-top: solid;
-  border-top-color: #777777;
-}
-
 .cap_board {
   position: relative;
   height: 100%;
@@ -75,14 +70,22 @@ body,
 
 .cap_board__task-item {
   padding: 5px 10px;
-  border-radius: 2px;
   margin-bottom: 5px;
   -webkit-user-drag: element;
   -webkit-user-select: none;
   position: relative;
+  border-top-width: 5px !important;
+  border-top: solid;
+  border-top-color: transparent;
 }
 .cap_board__task-item:hover {
   cursor: grab;
+}
+.cap_board__task-item.drag-over-top {
+  border-top-color: #e4e4e4;
+}
+.cap_board__task-item.drag-over-middle {
+  background-color: #e4e4e4;
 }
 
 .inline {
