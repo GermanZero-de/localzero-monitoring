@@ -32,7 +32,7 @@
                         {% endif %}
                       </svg>
                       <div class="cap_board__task-item inline"
-                           id="drag-{{ task.pk }}"
+                           id="task-{{ task.pk }}"
                            draggable="true">
                         <div>{{ task.title }}</div>
                         <a href="{% admin_reverse 'task' 'change' task.pk %}" class="changelink">Editieren</a>
@@ -41,7 +41,7 @@
                     </div>
                   {% endwith %}
                 {% endfor %}
-                <div class="cap_board__task-item">
+                <div>
                   <a href="{% admin_reverse 'task' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
                      class="addlink">Neue Maßnahme hinzufügen</a>
                 </div>

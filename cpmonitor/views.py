@@ -627,9 +627,9 @@ class CapEditView(DetailView, admin.ModelAdmin):
 
 
 def move_task(request, pk):
-    # task_pk = request.POST.get("task_pk")
     new_parent_pk = request.POST.get("new_parent_pk")
     task = Task.objects.get(pk=pk)
     new_parent = Task.objects.get(pk=new_parent_pk)
-    task.move(new_parent, "last-child")
+    position = request.POST.get("position")
+    task.move(new_parent, position)
     return JsonResponse({"success": True})

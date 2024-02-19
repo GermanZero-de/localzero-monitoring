@@ -24,7 +24,7 @@ urlpatterns = [
         CapEditView.as_view(),
         name="edit-cap",
     ),
-    path("admin/cap/task/update/<int:pk>/", move_task, name="update_task"),
+    path("admin/cap/task/move/<int:pk>/", move_task),
     path("admin/", admin.site.urls),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("martor/", include("martor.urls")),

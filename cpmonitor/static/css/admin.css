@@ -12,6 +12,11 @@ body,
   background: white;
 }
 
+.drag-over {
+  border-top: solid;
+  border-top-color: #777777;
+}
+
 .cap_board {
   position: relative;
   height: 100%;
