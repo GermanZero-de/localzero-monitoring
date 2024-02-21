@@ -17,7 +17,7 @@
         <div class="cap_board__column">
           <div class="cap_board__column-wrapper">
             <div class="cap_board__column-title">
-              {{ column.title }} <a href="{% admin_reverse 'task' 'change' column.pk %}"
+              {{ column.title | truncatechars:20 }} <a href="{% admin_reverse 'task' 'change' column.pk %}"
     class="changelink">Editieren</a> <a href="{% admin_reverse 'task' 'delete' column.pk %}"
     class="deletelink">Löschen</a>
             </div>
@@ -36,7 +36,7 @@
                       <div class="cap_board__task-item inline"
                            id="task-{{ task.pk }}"
                            draggable="true">
-                        <div>{{ task.title }}</div>
+                        <div>{{ task.title | truncatechars:30 }}</div>
                         <a href="{% admin_reverse 'task' 'change' task.pk %}" class="changelink">Editieren</a>
                         <a href="{% admin_reverse 'task' 'delete' task.pk %}" class="deletelink">Löschen</a>
                       </div>
