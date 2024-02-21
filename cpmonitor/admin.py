@@ -361,7 +361,11 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         query_string = self.get_preserved_filters(request)
         filters = QueryDict(query_string).get("_changelist_filters")
         city_id = QueryDict(filters).get(_city_filter_query)
-        return {"city": city_id}
+        return {
+            "city": city_id,
+            "_position": request.GET.get("position"),
+            "_ref_node_id": request.GET.get("relative_to"),
+        }
 
     def add_view(self, request, form_url="", extra_context=None):
         "Only show the add form if a city is selected to which the user has access."

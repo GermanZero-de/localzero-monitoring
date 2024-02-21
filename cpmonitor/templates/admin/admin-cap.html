@@ -42,7 +42,7 @@
                   {% endwith %}
                 {% endfor %}
                 <div>
-                  <a href="{% admin_reverse 'task' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
+                  <a href="{% admin_reverse 'task' 'add' %}?_changelist_filters=city__id__exact={{ city_id }}&position=last-child&relative_to={{ column.pk }}"
                      class="addlink">Neue Maßnahme hinzufügen</a>
                 </div>
               {% endwith %}
