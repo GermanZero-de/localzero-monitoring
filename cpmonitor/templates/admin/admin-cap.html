@@ -17,7 +17,9 @@
         <div class="cap_board__column">
           <div class="cap_board__column-wrapper">
             <div class="cap_board__column-title">
-              {{ column.title }} <a href="" class="changelink">Editieren</a> <a href="" class="deletelink">Löschen</a>
+              {{ column.title }} <a href="{% admin_reverse 'task' 'change' column.pk %}"
+    class="changelink">Editieren</a> <a href="{% admin_reverse 'task' 'delete' column.pk %}"
+    class="deletelink">Löschen</a>
             </div>
             <div class="cap_board__task-area" id="column-{{ column.pk }}">
               {% with tasks=column|task_children %}
