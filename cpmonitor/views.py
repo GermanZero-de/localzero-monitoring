@@ -608,7 +608,6 @@ class SelectCityView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["title"] = "Städte"
-        context["has_permission"] = True
         return context
 
 
@@ -621,7 +620,6 @@ class CapEditView(DetailView, admin.ModelAdmin):
         groups = _get_task_groups(self.object)
         context["title"] = self.object.name
         context["city_id"] = str(self.object.pk)
-        context["has_permission"] = True
         context["groups"] = groups
         return context
 

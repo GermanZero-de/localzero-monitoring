@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
@@ -18,13 +19,13 @@ urlpatterns = [
         "favicon.ico",
         RedirectView.as_view(url=settings.STATIC_URL + "favicon.svg", permanent=True),
     ),
-    path("admin/cap/", SelectCityView.as_view(), name="select-city"),
+    path("admin/cap/", login_required(SelectCityView.as_view()), name="select-city"),
     path(
         "admin/cap/<int:pk>/",
-        CapEditView.as_view(),
+        login_required(CapEditView.as_view()),
         name="edit-cap",
     ),
-    path("admin/cap/task/move/<int:pk>/", move_task),
+    path("admin/cap/task/move/<int:pk>/", login_required(move_task)),
     path("admin/", admin.site.urls),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("martor/", include("martor.urls")),
