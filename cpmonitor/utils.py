@@ -1,4 +1,5 @@
 from datetime import date
+import math
 import threading
 
 
@@ -65,7 +66,7 @@ class RemainingTimeInfo:
         days_total = (target_date - resolution_date).days + 1
         self.days_gone = (date.today() - resolution_date).days
         self.days_left = days_total - self.days_gone
-        self.years_left = round(self.days_left / 365)
+        self.years_left = math.floor(self.days_left / 365)
         self.days_in_year_left = self.days_left % 365
         self.days_gone_proportion = round(self.days_gone / days_total * 100)
         self.days_left_proportion = round(self.days_left / days_total * 100)
