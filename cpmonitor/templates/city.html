@@ -20,7 +20,7 @@
 {% endblock text-content %}
 {% block cards %}
   <div class="row row-deck row-cards">
-    {% if days_gone %}
+    {% if days_gone >= 0 %}
       <div class="col-sm-6 col-lg-3">
         <div class="card">
           <div class="card-body">
