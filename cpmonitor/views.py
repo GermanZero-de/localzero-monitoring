@@ -33,6 +33,8 @@ from .models import (
     AdministrationChecklist,
 )
 
+from .utils import RemainingTimeInfo
+
 STATUS_ORDER = [
     ExecutionStatus.FAILED,
     ExecutionStatus.DELAYED,
@@ -230,22 +232,15 @@ def city_view(request, city_slug):
         )
 
     if city.resolution_date and city.target_year:
-        target_date = date(city.target_year, 12, 31)
-        days_total = (target_date - city.resolution_date).days + 1
-        days_gone = (date.today() - city.resolution_date).days
-        days_left = days_total - days_gone
-        years_left = round(days_left / 365)
-        days_remain = days_left % 365
-        days_gone_proportion = round(days_gone / days_total * 100)
-        days_left_proportion = round(days_left / days_total * 100)
+        time_info = RemainingTimeInfo(city.resolution_date, city.target_year)
         context.update(
             {
-                "days_gone": days_gone,
-                "days_left": days_left,
-                "years_left": years_left,
-                "days_remain": days_remain,
-                "days_gone_proportion": days_gone_proportion,
-                "days_left_proportion": days_left_proportion,
+                "days_gone": time_info.days_gone,
+                "days_left": time_info.days_left,
+                "years_left": time_info.years_left,
+                "days_in_year_left": time_info.days_in_year_left,
+                "days_gone_proportion": time_info.days_gone_proportion,
+                "days_left_proportion": time_info.days_left_proportion,
             }
         )
 
