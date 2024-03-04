@@ -614,7 +614,11 @@ def mstr_view(request, municipality_key):
         "pageSize": 10000,
         "filter": f"Energieträger~eq~'2495'~and~Gemeindeschlüssel~eq~'{municipality_key}'",
     }
-    r = requests.get(url, params)
+    try:
+        r = requests.get(url, params)
+    except:
+        return HttpResponseServerError(500)
+
     data = r.json()["Data"]
 
     installed_by_year = dict()
