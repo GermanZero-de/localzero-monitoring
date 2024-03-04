@@ -1,9 +1,16 @@
-async function getMStRData() {
+(async () => {
   const response = await fetch("/api/mstr/" + LZM.city.municipalityKey);
-  return response.json();
-}
 
-getMStRData().then((data) => {
+  const el = document.querySelector("#kpiPV .canvas");
+  if (!el) return;
+
+  if (!response.ok) {
+    el.innerHTML =
+      "Fehler beim Laden der Daten aus dem Marktstammdatenregister.";
+    return;
+  }
+
+  const data = await response.json();
   const options = {
     annotations: {
       xaxis: [
@@ -59,9 +66,7 @@ getMStRData().then((data) => {
     xaxis: {},
   };
 
-  const el = document.querySelector("#kpiPV .canvas");
-  if (el) {
-    const chart = new ApexCharts(el, options);
-    chart.render();
-  }
-});
+  el.innerHTML = null;
+  const chart = new ApexCharts(el, options);
+  chart.render();
+})();
