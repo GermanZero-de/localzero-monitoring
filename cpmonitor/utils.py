@@ -1,3 +1,5 @@
+from datetime import date
+import math
 import threading
 
 
@@ -56,3 +58,15 @@ class ModelAdminRequestMixin(object):
     def get_formset(self, request, *args, **kwargs):
         self.set_request(request)
         return super(ModelAdminRequestMixin, self).get_formset(request, *args, **kwargs)
+
+
+class RemainingTimeInfo:
+    def __init__(self, resolution_date, target_year):
+        target_date = date(target_year, 12, 31)
+        days_total = (target_date - resolution_date).days + 1
+        self.days_gone = (date.today() - resolution_date).days
+        self.days_left = days_total - self.days_gone
+        self.years_left = math.floor(self.days_left / 365)
+        self.days_in_year_left = self.days_left % 365
+        self.days_gone_proportion = round(self.days_gone / days_total * 100)
+        self.days_left_proportion = round(self.days_left / days_total * 100)
