@@ -1,0 +1,146 @@
+$spacer: 10rem;
+
+html,
+body,
+#container {
+  height: 100%;
+}
+
+#container {
+  #content {
+    height: calc(80% - 100px);
+  }
+}
+
+.main {
+  background: white;
+}
+
+.cap_board {
+  position: relative;
+  height: 100%;
+}
+
+.cap_board__wrapper {
+  white-space: nowrap;
+  margin-bottom: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+.cap_board__column {
+  min-width: 250px;
+  margin: 0 10px;
+  height: 100%;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  border-radius: 4px;
+  border: 1px solid #e4e4e4;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.cap_board__column-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cap_board__column-title {
+  background-color: #eee;
+  padding: 10px;
+  text-align: center;
+}
+
+.cap_board__task-area {
+  background-color: #fff;
+  flex-grow: 1;
+  padding: 10px;
+  min-height: 150px;
+  overflow-x: auto;
+}
+
+.cap_board__task-item {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  -webkit-user-drag: element;
+  -webkit-user-select: none;
+  position: relative;
+  border-top-width: 5px !important;
+  border-top: solid;
+  border-top-color: transparent;
+
+  &:hover {
+    cursor: grab;
+  }
+
+  &.drag-over-top {
+    border-top-color: #e4e4e4;
+  }
+
+  &.drag-over-middle {
+    background-color: #e4e4e4;
+  }
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cap_board__task-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cap_board__task-description {
+  white-space: break-spaces;
+}
+
+.cap_board__add-column {
+  margin-bottom: 20px;
+}
+
+$myspacer: 3rem !default;
+$myspacers: () !default;
+$myspacers: map-merge(
+  (
+    0: 0,
+    1: (
+      $myspacer * 0.25,
+    ),
+    2: (
+      $myspacer * 0.5,
+    ),
+    3: $myspacer * 0.75,
+    4: (
+      $myspacer * 1,
+    ),
+    5: (
+      $myspacer * 1.25,
+    ),
+  ),
+  $myspacers
+);
+
+.marginleft-1 {
+  margin-left: ($myspacer * 0.25) !important;
+}
+@each $size, $value in $myspacers {
+  .marginleft-#{$size} {
+    margin-left: $value;
+  }
+}
