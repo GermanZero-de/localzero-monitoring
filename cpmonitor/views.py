@@ -1,28 +1,31 @@
-from collections import Counter
-from datetime import date
 import json
 import os
 import time
 import uuid
+from collections import Counter
+from datetime import date
 
+from PIL import Image
 from django.conf import settings
+from django.contrib import admin
 from django.contrib import auth
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.shortcuts import redirect
+from django.views.generic import ListView, DetailView, UpdateView
 from invitations import views as invitations_views
-from invitations.app_settings import app_settings as invitations_settings
 from invitations.adapters import get_invitations_adapter
+from invitations.app_settings import app_settings as invitations_settings
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
-from PIL import Image
 
 from .models import (
     AccessRight,
@@ -131,6 +134,12 @@ def _get_children(request, city, node=None):
         _calculate_summary(request, group)
 
     return groups, tasks
+
+
+def _get_task_groups(city):
+    children = Task.get_root_nodes().filter(city=city)
+    groups = children.filter(depth=1)
+    return groups
 
 
 def _get_cities(request, slug=None):
@@ -583,3 +592,37 @@ class AcceptInvite(invitations_views.AcceptInvite):
         self.request.session["invitation_key"] = invitation.key
 
         return redirect(self.get_signup_redirect())
+
+
+# Admin
+class SelectCityView(ListView):
+    model = City
+    template_name = "admin/admin-city.html"
+    ordering = "name"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["title"] = "Städte"
+        return context
+
+
+class CapEditView(DetailView, admin.ModelAdmin):
+    model = City
+    template_name = "admin/admin-cap.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        groups = _get_task_groups(self.object)
+        context["title"] = self.object.name
+        context["city_id"] = str(self.object.pk)
+        context["groups"] = groups
+        return context
+
+
+def move_task(request, pk):
+    new_parent_pk = request.POST.get("new_parent_pk")
+    task = Task.objects.get(pk=pk)
+    new_parent = Task.objects.get(pk=new_parent_pk)
+    position = request.POST.get("position")
+    task.move(new_parent, position)
+    return JsonResponse({"success": True})

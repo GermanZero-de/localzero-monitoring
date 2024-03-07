@@ -1,0 +1,137 @@
+html,
+body,
+#container {
+  height: 100%;
+}
+
+#container #content {
+  height: calc(80% - 100px);
+}
+
+.main {
+  background: white;
+}
+
+.cap_board {
+  position: relative;
+  height: 100%;
+}
+
+.cap_board__wrapper {
+  white-space: nowrap;
+  margin-bottom: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+.cap_board__column {
+  min-width: 250px;
+  margin: 0 10px;
+  height: 100%;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  border-radius: 4px;
+  border: 1px solid #e4e4e4;
+}
+.cap_board__column:first-child {
+  margin-left: 0;
+}
+
+.cap_board__column-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cap_board__column-title {
+  background-color: #eee;
+  padding: 10px;
+  text-align: center;
+}
+
+.cap_board__task-area {
+  background-color: #fff;
+  flex-grow: 1;
+  padding: 10px;
+  min-height: 150px;
+  overflow-x: auto;
+}
+
+.cap_board__task-item {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  -webkit-user-drag: element;
+  -webkit-user-select: none;
+  position: relative;
+  border-top-width: 5px !important;
+  border-top: solid;
+  border-top-color: transparent;
+}
+.cap_board__task-item:hover {
+  cursor: grab;
+}
+.cap_board__task-item.drag-over-top {
+  border-top-color: #e4e4e4;
+}
+.cap_board__task-item.drag-over-middle {
+  background-color: #e4e4e4;
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cap_board__task-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cap_board__task-description {
+  white-space: break-spaces;
+}
+
+.cap_board__add-column {
+  margin-bottom: 20px;
+}
+
+.marginleft-1 {
+  margin-left: 0.75rem !important;
+}
+
+.marginleft-0 {
+  margin-left: 0;
+}
+
+.marginleft-1 {
+  margin-left: 0.75rem;
+}
+
+.marginleft-2 {
+  margin-left: 1.5rem;
+}
+
+.marginleft-3 {
+  margin-left: 2.25rem;
+}
+
+.marginleft-4 {
+  margin-left: 3rem;
+}
+
+.marginleft-5 {
+  margin-left: 3.75rem;
+}
+
+/*# sourceMappingURL=admin.css.map */

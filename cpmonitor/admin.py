@@ -1,16 +1,19 @@
 from collections.abc import Sequence
+
 from django.contrib import admin, messages
 from django.db import models
 from django.forms import TextInput
 from django.forms.models import ErrorList
-from django.http import HttpRequest, HttpResponseRedirect, QueryDict
+from django.http import HttpResponseRedirect, QueryDict
 from django.http.request import HttpRequest
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils.html import format_html
 from martor.widgets import AdminMartorWidget
+from rules.contrib.admin import ObjectPermissionsModelAdminMixin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
-from rules.contrib.admin import ObjectPermissionsModelAdminMixin
+
+from cpmonitor.views import SelectCityView, CapEditView
 
 from . import rules, utils
 from .models import (
@@ -22,6 +25,24 @@ from .models import (
     LocalGroup,
     Invitation,
 )
+
+
+class CapEditSite(admin.AdminSite):
+    def get_urls(self):
+        urlpatterns = super().get_urls()
+        urlpatterns += [
+            path("cap/", SelectCityView.as_view(), name="select-city"),
+            path(
+                "cap/<int:pk>/",
+                CapEditView.as_view(),
+                name="edit-cap",
+            ),
+        ]
+        return urlpatterns
+
+
+admin.site = CapEditSite()
+
 
 _city_filter_query = "city__id__exact"
 """The query parameter used by the city filter."""
@@ -340,7 +361,11 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         query_string = self.get_preserved_filters(request)
         filters = QueryDict(query_string).get("_changelist_filters")
         city_id = QueryDict(filters).get(_city_filter_query)
-        return {"city": city_id}
+        return {
+            "city": city_id,
+            "_position": request.GET.get("position"),
+            "_ref_node_id": request.GET.get("relative_to"),
+        }
 
     def add_view(self, request, form_url="", extra_context=None):
         "Only show the add form if a city is selected to which the user has access."
