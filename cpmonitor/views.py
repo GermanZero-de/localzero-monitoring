@@ -623,19 +623,20 @@ def mstr_view(request, municipality_key):
 
     installed_by_year = dict()
 
+    START_YEAR = 2019
     for entry in data:
         if not entry["InbetriebnahmeDatum"]:
             continue
 
         m = re.match("/Date\((-?\d*)\)/", entry["InbetriebnahmeDatum"])
         install_date = datetime.fromtimestamp(int(m.group(1)) / 1000)
+        year = START_YEAR if install_date.year < START_YEAR else install_date.year
 
-        if not install_date.year in installed_by_year:
-            installed_by_year[install_date.year] = 0
+        if not year in installed_by_year:
+            installed_by_year[year] = 0
 
-        installed_by_year[install_date.year] += entry["Bruttoleistung"]
+        installed_by_year[year] += entry["Bruttoleistung"]
 
-    START_YEAR = 2019
     current_year = date.today().year
     installed_accumulated = 0
     years = []
@@ -644,8 +645,6 @@ def mstr_view(request, municipality_key):
         if year == current_year:
             break
         installed_accumulated += round(installed_in_year)
-        if year < START_YEAR:
-            continue
         years.append(year)
         installed.append(installed_accumulated)
 
