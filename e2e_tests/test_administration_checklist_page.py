@@ -4,7 +4,9 @@ from playwright.sync_api import Page, expect
 def test_should_show_the_administration_assessment_and_the_checklist(
     live_server, page: Page
 ):
-    page.goto(live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/")
+    page.goto(
+        live_server.url + "/deutschland/beispielstadt/verwaltungsstrukturen_checkliste/"
+    )
 
     expect(
         page.locator(
@@ -39,7 +41,9 @@ def test_should_show_the_administration_assessment_and_the_checklist(
 def test_should_expand_the_help_text_and_rationale_when_clicking_on_a_checklist_item(
     live_server, page: Page
 ):
-    page.goto(live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/")
+    page.goto(
+        live_server.url + "/deutschland/beispielstadt/verwaltungsstrukturen_checkliste/"
+    )
 
     checklist_item = page.get_by_role(
         "button",
@@ -66,7 +70,9 @@ def test_should_expand_the_help_text_and_rationale_when_clicking_on_a_checklist_
 def test_should_only_expand_the_latest_helptext_when_clicking_on_two_different_checklist_items(
     live_server, page: Page
 ):
-    page.goto(live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/")
+    page.goto(
+        live_server.url + "/deutschland/beispielstadt/verwaltungsstrukturen_checkliste/"
+    )
 
     checklist_item1 = page.get_by_role(
         "button",

@@ -12,4 +12,4 @@ def test_should_provide_basic_website_functionality_when_using_the_deployed_appl
 
     page.locator(".card", has_text="Beispielstadt").click()
 
-    expect(page).to_have_url("https://localhost/beispielstadt/")
+    expect(page).to_have_url("https://localhost/deutschland/beispielstadt/")

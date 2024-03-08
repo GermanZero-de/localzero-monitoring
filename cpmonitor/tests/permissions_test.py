@@ -373,8 +373,8 @@ def test_city_editor_should_be_allowed_to_view_and_add_tasks_of_city(
 
     assertContains(response, "Maßnahme hinzufügen")
 
-    assertContains(response, "/beispielstadt/massnahmen/")
-    assertNotContains(response, "/mitallem/massnahmen/")
+    assertContains(response, "/deutschland/beispielstadt/massnahmen/")
+    assertNotContains(response, "/deutschland/mitallem/massnahmen/")
 
 
 def test_city_admin_should_be_allowed_to_view_and_add_tasks_of_city(
@@ -387,8 +387,8 @@ def test_city_admin_should_be_allowed_to_view_and_add_tasks_of_city(
 
     assertContains(response, "Maßnahme hinzufügen")
 
-    assertContains(response, "/beispielstadt/massnahmen/")
-    assertNotContains(response, "/mitallem/massnahmen/")
+    assertContains(response, "/deutschland/beispielstadt/massnahmen/")
+    assertNotContains(response, "/deutschland/mitallem/massnahmen/")
 
 
 def test_site_admin_should_be_allowed_to_view_and_add_tasks_of_city(
@@ -401,8 +401,8 @@ def test_site_admin_should_be_allowed_to_view_and_add_tasks_of_city(
 
     assertContains(response, "Maßnahme hinzufügen")
 
-    assertContains(response, "/beispielstadt/massnahmen/")
-    assertNotContains(response, "/mitallem/massnahmen/")
+    assertContains(response, "/deutschland/beispielstadt/massnahmen/")
+    assertNotContains(response, "/deutschland/mitallem/massnahmen/")
 
 
 def test_city_editor_should_only_see_his_city_in_filter_list(
