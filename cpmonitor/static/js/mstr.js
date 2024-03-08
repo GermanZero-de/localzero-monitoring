@@ -1,11 +1,11 @@
 (async () => {
   const response = await fetch("/api/mstr/" + LZM.city.municipalityKey);
 
-  const el = document.querySelector("#kpiPV .canvas");
-  if (!el) return;
+  const canvasEl = document.querySelector("#kpiPV .canvas");
+  if (!canvasEl) return;
 
   if (!response.ok) {
-    el.innerHTML =
+    canvasEl.innerHTML =
       "Fehler beim Laden der Daten aus dem Marktstammdatenregister.";
     return;
   }
@@ -66,7 +66,7 @@
     xaxis: {},
   };
 
-  el.innerHTML = null;
-  const chart = new ApexCharts(el, options);
+  canvasEl.innerHTML = null;
+  const chart = new ApexCharts(canvasEl, options);
   chart.render();
 })();
