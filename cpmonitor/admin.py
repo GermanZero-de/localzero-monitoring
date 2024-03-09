@@ -315,7 +315,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         if city_id and rules.is_allowed_to_edit(request.user, int(city_id)):
             return super().changelist_view(request)
 
-        msg = "Bitte eine Stadt auswählen, für die Sektoren / Maßnahmen geändert werden sollen. Rechts davon 'KAP bearbeiten' wählen."
+        msg = "Bitte eine Stadt auswählen, für die Handlungsfelder / Maßnahmen geändert werden sollen. Rechts davon 'KAP bearbeiten' wählen."
         self.message_user(request, msg, messages.INFO)
         return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
@@ -386,7 +386,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         if city_id and rules.is_allowed_to_edit(request.user, int(city_id)):
             return super().add_view(request, form_url, extra_context)
 
-        msg = "Bitte eine Stadt auswählen, für die ein Sektor / eine Maßnahme hinzugefügt werden soll. Rechts davon 'KAP bearbeiten' wählen."
+        msg = "Bitte eine Stadt auswählen, für die Handlungsfelder / Maßnahmen geändert werden sollen. Rechts davon 'KAP bearbeiten' wählen."
         self.message_user(request, msg, messages.INFO)
         return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
