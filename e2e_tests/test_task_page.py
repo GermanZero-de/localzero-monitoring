@@ -33,7 +33,7 @@ def test_should_show_the_taskgroup_teaser(live_server, page: Page):
     expect(
         page.locator(
             "p",
-            has_text="Die Maßnahmen in diesem Sektor dienen der Darstellung der verschiedenen Möglichkeiten.",
+            has_text="Die Maßnahmen in diesem Handlungsfeld dienen der Darstellung der verschiedenen Möglichkeiten.",
         )
     ).to_be_visible()
 
