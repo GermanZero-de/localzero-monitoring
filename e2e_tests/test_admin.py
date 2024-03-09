@@ -59,7 +59,7 @@ def test_should_succeed_when_logging_into_admin(live_server, page: Page):
 def test_should_not_allow_duplicate_sectors(live_server, page: Page):
     admin_login(live_server.url, page)
 
-    sector1 = "Sektor 1"
+    sector1 = "Handlungsfeld 1"
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, sector1)
 
@@ -72,11 +72,11 @@ def test_should_not_allow_duplicate_sectors(live_server, page: Page):
 def test_should_allow_add_when_same_title_in_another_sector(live_server, page: Page):
     admin_login(live_server.url, page)
 
-    sector1 = "Sektor 1"
+    sector1 = "Handlungsfeld 1"
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, "Personal Einstellen", sector1)
 
-    sector2 = "Sektor 2"
+    sector2 = "Handlungsfeld 2"
     add_task(live_server.url, page, sector2)
     add_task(live_server.url, page, "Personal Einstellen", sector2)
 
@@ -89,7 +89,7 @@ def test_should_allow_add_when_same_title_in_another_sector(live_server, page: P
 def test_should_not_allow_add_when_same_title_in_same_sector(live_server, page: Page):
     admin_login(live_server.url, page)
 
-    sector1 = "Sektor 1"
+    sector1 = "Handlungsfeld 1"
     add_task(live_server.url, page, sector1)
     add_task(live_server.url, page, "Personal Einstellen", sector1)
     add_task(live_server.url, page, "personal einstellen", sector1)
@@ -105,8 +105,8 @@ def test_should_also_move_subtasks_when_dragging_a_task_with_subtasks_to_a_diffe
 ):
     admin_login(live_server.url, page)
 
-    sector1 = "Sektor 1"
-    sector2 = "Sektor 2"
+    sector1 = "Handlungsfeld 1"
+    sector2 = "Handlungsfeld 2"
     task = "To be dragged"
     sub_task = "Subtask"
     sub_sub_task = "Subsubtask"
@@ -146,8 +146,8 @@ def test_should_also_move_subtasks_when_dragging_a_task_with_subtasks_to_a_diffe
 # ):
 #     admin_login(live_server.url, page)
 #
-#     sector1 = "Sektor 1"
-#     sector2 = "Sektor 2"
+#     sector1 = "Handlungsfeld 1"
+#     sector2 = "Handlungsfeld 2"
 #     task1 = "Same Task Title"
 #     task2 = task1.lower()
 #
