@@ -88,6 +88,10 @@ body,
   background-color: #e4e4e4;
 }
 
+.column-drop-area.drag-over-middle {
+  background-color: #e4e4e4;
+}
+
 .inline {
   display: inline-block;
   vertical-align: middle;
