@@ -44,6 +44,7 @@
                     </div>
                   {% endwith %}
                 {% endfor %}
+                <div class="column-drop-area" id="column_drop_area-{{ column.pk }}">&nbsp;</div>
                 <div>
                   <a href="{% admin_reverse 'task' 'add' %}?_changelist_filters=city__id__exact={{ city_id }}&position=last-child&relative_to={{ column.pk }}"
                      class="addlink">Neue Maßnahme hinzufügen</a>
