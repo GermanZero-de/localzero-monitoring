@@ -24,6 +24,7 @@ from .models import (
     AdministrationChecklist,
     LocalGroup,
     Invitation,
+    EnergyPlanChecklist,
 )
 
 
@@ -92,6 +93,14 @@ class AdministrationChecklistInline(
     ObjectPermissionsModelAdminMixin, admin.StackedInline
 ):
     model = AdministrationChecklist
+
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
+
+
+class EnergyPlanChecklistInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
+    model = EnergyPlanChecklist
 
     formfield_overrides = {
         models.TextField: {"widget": AdminMartorWidget},
@@ -182,6 +191,7 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
         LocalGroupInline,
         CapChecklistInline,
         AdministrationChecklistInline,
+        EnergyPlanChecklistInline,
         InvitationInline,
     ]
 

@@ -52,6 +52,11 @@ urlpatterns = [
         views.administration_checklist_view,
         name="administration_checklist",
     ),
+    path(
+        prefix_kommune + "<slug:city_slug>/waermeplanung_checkliste/",
+        views.energy_plan_checklist_view,
+        name="energy_plan_checklist",
+    ),
     path(prefix_kommune + "<slug:city_slug>/massnahmen/", views.task_view, name="task"),
     path(
         prefix_kommune + "<slug:city_slug>/massnahmen/<path:task_slugs>/",

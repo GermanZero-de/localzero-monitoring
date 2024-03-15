@@ -34,6 +34,7 @@ from .models import (
     Task,
     CapChecklist,
     AdministrationChecklist,
+    EnergyPlanChecklist,
 )
 
 from .utils import RemainingTimeInfo
@@ -185,6 +186,9 @@ def city_view(request, city_slug):
     administration_checklist = _get_administration_checklist(city)
     administration_checklist_exists = administration_checklist != {}
 
+    energy_plan_checklist = _get_energy_plan_checklist(city)
+    energy_plan_checklist_exists = energy_plan_checklist != {}
+
     breadcrumbs = _get_breadcrumbs(
         {"label": city.name, "url": reverse("city", args=[city_slug])},
     )
@@ -197,6 +201,7 @@ def city_view(request, city_slug):
             "charts": city.charts.all,
             "cap_checklist_exists": cap_checklist_exists,
             "administration_checklist_exists": administration_checklist_exists,
+            "energy_plan_checklist_exists": energy_plan_checklist_exists,
             "asmt_admin": city.assessment_administration,
             "asmt_plan": city.assessment_action_plan,
             "asmt_status": city.assessment_status,
@@ -333,6 +338,40 @@ def _get_administration_checklist(city) -> dict:
     try:
         checklist = city.administration_checklist
     except AdministrationChecklist.DoesNotExist:
+        return {}
+
+    return _as_formatted_checklist(checklist)
+
+
+def energy_plan_checklist_view(request, city_slug):
+    city = _get_cities(request, city_slug)
+    if not city:
+        raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
+
+    breadcrumbs = _get_breadcrumbs(
+        {"label": city.name, "url": reverse("city", args=[city_slug])},
+        {
+            "label": "Wärmeplanung Checkliste",
+            "url": reverse("energy_plan_checklist", args=[city_slug]),
+        },
+    )
+
+    context = _get_base_context(request)
+    context.update(
+        {
+            "breadcrumbs": breadcrumbs,
+            "city": city,
+            "energy_plan_checklist": _get_energy_plan_checklist(city),
+        }
+    )
+
+    return render(request, "energy_plan_checklist.html", context)
+
+
+def _get_energy_plan_checklist(city) -> dict:
+    try:
+        checklist = city.energy_plan_checklist
+    except EnergyPlanChecklist.DoesNotExist:
         return {}
 
     return _as_formatted_checklist(checklist)

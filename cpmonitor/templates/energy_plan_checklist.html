@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% load martortags %}
+{% block title %}
+  LocalZero Monitoring - {{ city.name }}
+{% endblock title %}
+{% block text-content %}
+  <h1>Wärmeplanung</h1>
+  TODO: Einleitungstext zur WärmePlanung
+{% endblock text-content %}
+{% block cards %}
+  <div class="row">
+    <div class="card col-sm-12 col-lg-6">
+      <div class="card-body">
+        <div class="accordion accordion-flush" id="accordionFlushKAP">
+          <h2>1. Beschluss zur Durchführung</h2>
+          <p>Kommunaler Beschluss zur Durchführung der Wärmeplanung inkl. öffentlicher Bekanntmachung</p>
+          <h2>2. Eignungsprüfung und verkürztes Verfahren (§ 14)</h2>
+          <p>
+            Frühzeitiges Ausschlussverfahren: Ausschluss von nicht geeigneten Quartieren/Gebieten für Wärmenetz oder Wasserstoffnetz (z.B. für ländliche, zersiedelte Räume)
+          </p>
+          <h2>3. Bestandsaufnahme inkl. Wärmebedarfe Status quo (§ 15)</h2>
+          <h2>4. Erstellung der Potenzialberechnungen (§ 16)</h2>
+          <h2>5. Erstellung der Zielszenarien (§ 17)</h2>
+          <h2>6. Einteilung in Wärmeversorgungsgebiete und -arten (§18 und 19)</h2>
+          <h2>7. Umsetzungsstrategie und konkrete Umsetzungsmaßnahmen (§ 20)</h2>
+          {% for question, values in cap_checklist.items %}
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapse{{ forloop.counter0 }}"
+                        aria-expanded="false"
+                        aria-controls="flush-collapse{{ forloop.counter0 }}">
+                  <table class="table table-sm table-borderless table-no-bottom-padding">
+                    <tbody>
+                      <tr>
+                        <td width="20">
+                          {% if values.is_checked %}
+                            <svg width="20" height="20" class="lz-icon CHECKED">
+                              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check" />
+                            </svg>
+                          {% else %}
+                            <svg width="20" height="20" class="lz-icon EMPTY">
+                              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle" />
+                            </svg>
+                          {% endif %}
+                        </td>
+                        <td>{{ question }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </button>
+              </h2>
+              <div id="flush-collapse{{ forloop.counter0 }}"
+                   class="accordion-collapse collapse"
+                   aria-labelledby="flush-heading{{ forloop.counter0 }}"
+                   data-bs-parent="#accordionFlushKAP">
+                <div class="accordion-body">
+                  <p>
+                    <strong>Erklärung:</strong>
+                  </p>
+                  <p class="pre-formatted-text">{{ values.help_text }}</p>
+                  {% if values.rationale.strip %}
+                    <p>
+                      <strong>Anmerkung / Begründung:</strong> {{ values.rationale | safe_markdown }}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock cards %}

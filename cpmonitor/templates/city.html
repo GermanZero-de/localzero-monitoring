@@ -148,11 +148,44 @@
         </a>
       </div>
     {% endif %}
+    {% if energy_plan_checklist_exists %}
+      <div class="col-sm-6 col-lg-3">
+        <a href="{% url 'energy_plan_checklist' city.slug %}"
+           class="card card-link card-link-popup">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">Wärmeplanung</div>
+            </div>
+            <div class="h1 mb-3">{{ administration_checklist_number_fulfilled }}/{{ administration_checklist_total }}</div>
+            <div class="d-flex mb-2">
+              <div>Qualitätskriterien erfüllt</div>
+              <div class="ms-auto"></div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar neutral"
+                   role="progressbar"
+                   data-value="{{ administration_checklist_proportion_fulfilled }}"
+                   aria-valuenow="{{ administration_checklist_proportion_fulfilled }}"
+                   aria-valuemin="0"
+                   aria-valuemax="100">
+              </div>
+            </div>
+          </div>
+          <div class="lz-card-details">
+            <svg width="20" height="20">
+              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-plus"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    {% endif %}
   </div>
   {% if tasks %}
     <div class="row row-deck row-cards">
       {% for task in tasks %}
-        <div class="col-sm-12 col-lg-6">{% include "snippets/taskcard.html" %}</div>
+        <div class="col-sm-12 col-lg-6">
+          {% include "snippets/taskcard.html" %}
+        </div>
       {% endfor %}
     </div>
   {% endif %}
