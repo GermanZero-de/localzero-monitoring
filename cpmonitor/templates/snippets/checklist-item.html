@@ -3,10 +3,10 @@
 {% load martortags %}
 <div class="accordion-item">
   <h2 class="accordion-header">
-    <button aria-controls="flush-collapse{{ forloop.counter0 }}"
+    <button aria-controls="flush-collapse{{ checklist_item.id }}"
             aria-expanded="false"
             class="accordion-button collapsed"
-            data-bs-target="#flush-collapse{{ forloop.counter0 }}"
+            data-bs-target="#flush-collapse{{ checklist_item.id }}"
             data-bs-toggle="collapse"
             type="button">
       <table class="table table-sm table-borderless table-no-bottom-padding">
@@ -29,10 +29,10 @@
       </table>
     </button>
   </h2>
-  <div aria-labelledby="flush-heading{{ forloop.counter0 }}"
+  <div aria-labelledby="flush-heading{{ checklist_item.id }}"
        class="accordion-collapse collapse"
        data-bs-parent="#accordionFlushKAP"
-       id="flush-collapse{{ forloop.counter0 }}">
+       id="flush-collapse{{ checklist_item.id }}">
     <div class="accordion-body">
       {% if checklist_item.help_text.strip %}
         <p>

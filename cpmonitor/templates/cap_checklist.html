@@ -13,7 +13,7 @@
     <div class="card col-sm-12 col-lg-6">
       <div class="card-body">
         <div class="accordion accordion-flush" id="accordionFlushKAP">
-          {% for question, checklist_item in cap_checklist.items %}
+          {% for checklist_item in cap_checklist %}
             {% include "snippets/checklist-item.html" %}
           {% endfor %}
         </div>

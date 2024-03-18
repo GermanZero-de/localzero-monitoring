@@ -15,62 +15,66 @@
         <div class="accordion accordion-flush" id="accordionFlushKAP">
           <h2>1. Beschluss zur Durchführung</h2>
           <p>Kommunaler Beschluss zur Durchführung der Wärmeplanung inkl. öffentlicher Bekanntmachung</p>
+          {% with checklist_item=energy_plan_checklist.0 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.1 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
           <h2>2. Eignungsprüfung und verkürztes Verfahren (§ 14)</h2>
           <p>
             Frühzeitiges Ausschlussverfahren: Ausschluss von nicht geeigneten Quartieren/Gebieten für Wärmenetz oder Wasserstoffnetz (z.B. für ländliche, zersiedelte Räume)
           </p>
+          {% with checklist_item=energy_plan_checklist.2 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.3 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
           <h2>3. Bestandsaufnahme inkl. Wärmebedarfe Status quo (§ 15)</h2>
+          {% with checklist_item=energy_plan_checklist.4 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.5 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
           <h2>4. Erstellung der Potenzialberechnungen (§ 16)</h2>
+          {% with checklist_item=energy_plan_checklist.6 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.7 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
           <h2>5. Erstellung der Zielszenarien (§ 17)</h2>
+          {% with checklist_item=energy_plan_checklist.8 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.9 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.10 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.11 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
           <h2>6. Einteilung in Wärmeversorgungsgebiete und -arten (§18 und 19)</h2>
+          {% with checklist_item=energy_plan_checklist.12 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.13 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.14 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
           <h2>7. Umsetzungsstrategie und konkrete Umsetzungsmaßnahmen (§ 20)</h2>
-          {% for question, values in cap_checklist.items %}
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapse{{ forloop.counter0 }}"
-                        aria-expanded="false"
-                        aria-controls="flush-collapse{{ forloop.counter0 }}">
-                  <table class="table table-sm table-borderless table-no-bottom-padding">
-                    <tbody>
-                      <tr>
-                        <td width="20">
-                          {% if values.is_checked %}
-                            <svg width="20" height="20" class="lz-icon CHECKED">
-                              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check" />
-                            </svg>
-                          {% else %}
-                            <svg width="20" height="20" class="lz-icon EMPTY">
-                              <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle" />
-                            </svg>
-                          {% endif %}
-                        </td>
-                        <td>{{ question }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </button>
-              </h2>
-              <div id="flush-collapse{{ forloop.counter0 }}"
-                   class="accordion-collapse collapse"
-                   aria-labelledby="flush-heading{{ forloop.counter0 }}"
-                   data-bs-parent="#accordionFlushKAP">
-                <div class="accordion-body">
-                  <p>
-                    <strong>Erklärung:</strong>
-                  </p>
-                  <p class="pre-formatted-text">{{ values.help_text }}</p>
-                  {% if values.rationale.strip %}
-                    <p>
-                      <strong>Anmerkung / Begründung:</strong> {{ values.rationale | safe_markdown }}
-                    </p>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          {% endfor %}
+          {% with checklist_item=energy_plan_checklist.15 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
+          {% with checklist_item=energy_plan_checklist.16 %}
+            {% include "snippets/checklist-item.html" %}
+          {% endwith %}
         </div>
       </div>
     </div>
