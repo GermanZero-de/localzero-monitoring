@@ -10,7 +10,7 @@ def test_should_show_the_heading_and_subheadings_regarding_the_energy_plan(
     expect(page.get_by_text("1. Beschluss zur Durchführung")).to_be_visible()
     expect(
         page.get_by_text(
-            "7. Umsetzungsstrategie und konkrete Umsetzungsmaßnahmen (§ 20)"
+            "7. Umsetzungsstrategie und konkrete Umsetzungsmaßnahmen (§ 20 WPG)"
         )
     ).to_be_visible()
 
