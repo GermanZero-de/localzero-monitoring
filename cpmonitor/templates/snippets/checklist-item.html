@@ -1,0 +1,50 @@
+{% load static %}
+{% load filters %}
+{% load martortags %}
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button aria-controls="flush-collapse{{ forloop.counter0 }}"
+            aria-expanded="false"
+            class="accordion-button collapsed"
+            data-bs-target="#flush-collapse{{ forloop.counter0 }}"
+            data-bs-toggle="collapse"
+            type="button">
+      <table class="table table-sm table-borderless table-no-bottom-padding">
+        <tbody>
+          <tr>
+            <td width="20">
+              {% if checklist_item.is_checked %}
+                <svg class="lz-icon CHECKED" height="20" width="20">
+                  <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle-check" />
+                </svg>
+              {% else %}
+                <svg class="lz-icon EMPTY" height="20" width="20">
+                  <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-circle" />
+                </svg>
+              {% endif %}
+            </td>
+            <td>{{ checklist_item.question }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </button>
+  </h2>
+  <div aria-labelledby="flush-heading{{ forloop.counter0 }}"
+       class="accordion-collapse collapse"
+       data-bs-parent="#accordionFlushKAP"
+       id="flush-collapse{{ forloop.counter0 }}">
+    <div class="accordion-body">
+      {% if checklist_item.help_text.strip %}
+        <p>
+          <strong>Erklärung:</strong>
+        </p>
+        <p class="pre-formatted-text">{{ checklist_item.help_text }}</p>
+      {% endif %}
+      {% if checklist_item.rationale.strip %}
+        <p>
+          <strong>Anmerkung / Begründung:</strong> {{ checklist_item.rationale | safe_markdown }}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+</div>

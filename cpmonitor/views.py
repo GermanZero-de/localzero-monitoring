@@ -295,6 +295,7 @@ def _as_formatted_checklist(checklist):
 
     return {
         checkbox_item.verbose_name: {
+            "question": checkbox_item.verbose_name,
             "is_checked": getattr(checklist, checkbox_item.attname),
             "help_text": checkbox_item.help_text,
             "rationale": getattr(checklist, checkbox_item.attname + "_rationale"),
