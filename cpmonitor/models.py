@@ -546,19 +546,19 @@ class EnergyPlanChecklist(models.Model):
         "Begründung",
         blank=True,
     )
+    communication_potential = models.BooleanField(
+        "Werden die Ergebnisse der Potenzialanalyse inkl. der Möglichkeit zur Kommentierung zugänglich gemacht? Gibt es eine Möglichkeit die Ergebnisse mit der Kommune zu diskutieren?",
+        default=False,
+    )
+    communication_potential_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
     paris_agreement_compliant = models.BooleanField(
         "Folgt das Zielszenario Paris-konformen Zielsetzungen und Grundsätzen der kommunalen Wärmeplanung?",
         default=False,
     )
     paris_agreement_compliant_rationale = models.TextField(
-        "Begründung",
-        blank=True,
-    )
-    is_efficient = models.BooleanField(
-        "Werden die möglichst effizienten und erneuerbaren Wärmequellen erschlossen?",
-        default=False,
-    )
-    is_efficient_rationale = models.TextField(
         "Begründung",
         blank=True,
     )
@@ -583,6 +583,14 @@ class EnergyPlanChecklist(models.Model):
         default=False,
     )
     effect_on_electricity_demand_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    communication_goals = models.BooleanField(
+        "Werden die Ergebnisse der Zielszenarien inkl. der Möglichkeit zur Kommentierung zugänglich gemacht? Gibt es eine Möglichkeit die Ergebnisse mit der Kommune zu diskutieren?",
+        default=False,
+    )
+    communication_goals_rationale = models.TextField(
         "Begründung",
         blank=True,
     )
