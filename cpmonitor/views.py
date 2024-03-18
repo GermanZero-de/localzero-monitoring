@@ -245,6 +245,22 @@ def city_view(request, city_slug):
             }
         )
 
+    if energy_plan_checklist_exists:
+        energy_plan_checklist_total = len(energy_plan_checklist)
+        energy_plan_checklist_number_fulfilled = _count_checklist_number_fulfilled(
+            energy_plan_checklist
+        )
+        energy_plan_checklist_proportion_fulfilled = round(
+            energy_plan_checklist_number_fulfilled / energy_plan_checklist_total * 100
+        )
+        context.update(
+            {
+                "energy_plan_checklist_total": energy_plan_checklist_total,
+                "energy_plan_checklist_number_fulfilled": energy_plan_checklist_number_fulfilled,
+                "energy_plan_checklist_proportion_fulfilled": energy_plan_checklist_proportion_fulfilled,
+            }
+        )
+
     if city.resolution_date and city.target_year:
         time_info = RemainingTimeInfo(city.resolution_date, city.target_year)
         context.update(
