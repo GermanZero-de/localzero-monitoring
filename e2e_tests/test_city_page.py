@@ -22,6 +22,13 @@ def test_city_page_should_have_city_name_in_title(live_server, page: Page):
     expect(page).to_have_title("Beispielstadt - Monitoring LocalZero")
 
 
+def test_city_page_should_display_supporting_ngos(live_server, page: Page):
+    page.goto(live_server.url + "/beispielstadt/")
+
+    expect(page.get_by_text("Mit Unterstützung von")).to_be_visible()
+    expect(page.get_by_role("link", name="aidfive")).to_be_visible()
+
+
 def test_city_page_should_not_contain_internal_information(live_server, page: Page):
     page.goto(live_server.url + "/beispielstadt/")
 

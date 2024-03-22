@@ -103,7 +103,7 @@
     "contact_name": "",
     "contact_email": "",
     "internal_information": "Dies ist eine total wichtige interne Info!",
-    "supporting_ngos": "![](https://www.aidfive.org/export/system/modules/com.assense.gaming.aidfive.template/resources/images/aidFIVE-logo-paw.svg)",
+    "supporting_ngos": "[aidfive](https://www.aidfive.org/)",
     "slug": "beispielstadt",
     "city_editors": [
       2
@@ -753,7 +753,7 @@
     "depth": 1,
     "numchild": 0,
     "city": 1,
-    "draft_mode": true,
+    "draft_mode": false,
     "source": 0,
     "frontpage": true,
     "title": "Umstellung Fernwärme auf Geothermie",
@@ -766,7 +766,7 @@
     "plan_assessment": "Die Bewertung der geplanten Maßnahme. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
     "execution_status": 2,
     "execution_justification": "",
-    "supporting_ngos": "![](https://www.aidfive.org/export/system/modules/com.assense.gaming.aidfive.template/resources/images/aidFIVE-logo-paw.svg)",
+    "supporting_ngos": "[aidfive](https://www.aidfive.org/)",
     "execution_completion": null,
     "actual_start": "2023-04-19",
     "actual_completion": null,
