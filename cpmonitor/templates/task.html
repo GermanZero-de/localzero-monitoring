@@ -78,6 +78,10 @@
         <h3>Zuständige Instanz</h3>
         {{ task.responsible_organ_explanation | safe_markdown }}
       {% endif %}
+      {% if task.supporting_ngos %}
+        <h3>Mit Unterstützung von</h3>
+        {{ task.supporting_ngos | safe_markdown }}
+      {% endif %}
     </div>
   </div>
 {% endblock text-content %}
