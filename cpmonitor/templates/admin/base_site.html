@@ -1,0 +1,10 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block extrastyle %}
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+  <link rel="stylesheet" href="{% static 'tabler/css/tabler.css' %}">
+{% endblock extrastyle %}
+{% block userlinks %}
+  <a href="{% url 'admin:select-city' %}">KAP editieren</a>
+  {{ block.super }}
+{% endblock userlinks %}

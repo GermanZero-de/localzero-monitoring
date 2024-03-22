@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
 from . import views
+from .views import SelectCityView, CapEditView, move_task
 
 prefix_kommune = ""
 
@@ -17,6 +19,13 @@ urlpatterns = [
         "favicon.ico",
         RedirectView.as_view(url=settings.STATIC_URL + "favicon.svg", permanent=True),
     ),
+    path("admin/cap/", login_required(SelectCityView.as_view()), name="select-city"),
+    path(
+        "admin/cap/<int:pk>/",
+        login_required(CapEditView.as_view()),
+        name="edit-cap",
+    ),
+    path("admin/cap/task/move/<int:pk>/", login_required(move_task)),
     path("admin/", admin.site.urls),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("martor/", include("martor.urls")),
@@ -42,6 +51,11 @@ urlpatterns = [
         prefix_kommune + "<slug:city_slug>/verwaltungsstrukturen_checkliste/",
         views.administration_checklist_view,
         name="administration_checklist",
+    ),
+    path(
+        prefix_kommune + "<slug:city_slug>/waermeplanung_checkliste/",
+        views.energy_plan_checklist_view,
+        name="energy_plan_checklist",
     ),
     path(prefix_kommune + "<slug:city_slug>/massnahmen/", views.task_view, name="task"),
     path(

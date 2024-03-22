@@ -1,28 +1,31 @@
-from collections import Counter
-from datetime import date
 import json
 import os
 import time
 import uuid
+from collections import Counter
+from datetime import date
 
+from PIL import Image
 from django.conf import settings
+from django.contrib import admin
 from django.contrib import auth
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.shortcuts import redirect
+from django.views.generic import ListView, DetailView, UpdateView
 from invitations import views as invitations_views
-from invitations.app_settings import app_settings as invitations_settings
 from invitations.adapters import get_invitations_adapter
+from invitations.app_settings import app_settings as invitations_settings
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
-from PIL import Image
 
 from .models import (
     AccessRight,
@@ -31,6 +34,7 @@ from .models import (
     Task,
     CapChecklist,
     AdministrationChecklist,
+    EnergyPlanChecklist,
 )
 
 from .utils import RemainingTimeInfo
@@ -133,6 +137,12 @@ def _get_children(request, city, node=None):
     return groups, tasks
 
 
+def _get_task_groups(city):
+    children = Task.get_root_nodes().filter(city=city)
+    groups = children.filter(depth=1)
+    return groups
+
+
 def _get_cities(request, slug=None):
     try:
         cities = City.objects.all()
@@ -171,10 +181,13 @@ def city_view(request, city_slug):
     _calculate_summary(request, city)
 
     cap_checklist = _get_cap_checklist(city)
-    cap_checklist_exists = cap_checklist != {}
+    cap_checklist_exists = len(cap_checklist) > 0
 
     administration_checklist = _get_administration_checklist(city)
-    administration_checklist_exists = administration_checklist != {}
+    administration_checklist_exists = len(administration_checklist) > 0
+
+    energy_plan_checklist = _get_energy_plan_checklist(city)
+    energy_plan_checklist_exists = len(energy_plan_checklist) > 0
 
     breadcrumbs = _get_breadcrumbs(
         {"label": city.name, "url": reverse("city", args=[city_slug])},
@@ -188,6 +201,7 @@ def city_view(request, city_slug):
             "charts": city.charts.all,
             "cap_checklist_exists": cap_checklist_exists,
             "administration_checklist_exists": administration_checklist_exists,
+            "energy_plan_checklist_exists": energy_plan_checklist_exists,
             "asmt_admin": city.assessment_administration,
             "asmt_plan": city.assessment_action_plan,
             "asmt_status": city.assessment_status,
@@ -231,6 +245,22 @@ def city_view(request, city_slug):
             }
         )
 
+    if energy_plan_checklist_exists:
+        energy_plan_checklist_total = len(energy_plan_checklist)
+        energy_plan_checklist_number_fulfilled = _count_checklist_number_fulfilled(
+            energy_plan_checklist
+        )
+        energy_plan_checklist_proportion_fulfilled = round(
+            energy_plan_checklist_number_fulfilled / energy_plan_checklist_total * 100
+        )
+        context.update(
+            {
+                "energy_plan_checklist_total": energy_plan_checklist_total,
+                "energy_plan_checklist_number_fulfilled": energy_plan_checklist_number_fulfilled,
+                "energy_plan_checklist_proportion_fulfilled": energy_plan_checklist_proportion_fulfilled,
+            }
+        )
+
     if city.resolution_date and city.target_year:
         time_info = RemainingTimeInfo(city.resolution_date, city.target_year)
         context.update(
@@ -268,30 +298,13 @@ def cap_checklist_view(request, city_slug):
     return render(request, "cap_checklist.html", context)
 
 
-def _get_cap_checklist(city) -> dict:
+def _get_cap_checklist(city) -> list:
     try:
         checklist = city.cap_checklist
     except CapChecklist.DoesNotExist:
-        return {}
+        return []
 
     return _as_formatted_checklist(checklist)
-
-
-def _as_formatted_checklist(checklist):
-    checkbox_items = [
-        field
-        for field in checklist._meta.get_fields()
-        if field.attname not in ["city_id", "id"] and "_rationale" not in field.attname
-    ]
-
-    return {
-        checkbox_item.verbose_name: {
-            "is_checked": getattr(checklist, checkbox_item.attname),
-            "help_text": checkbox_item.help_text,
-            "rationale": getattr(checklist, checkbox_item.attname + "_rationale"),
-        }
-        for checkbox_item in checkbox_items
-    }
 
 
 def administration_checklist_view(request, city_slug):
@@ -319,22 +332,74 @@ def administration_checklist_view(request, city_slug):
     return render(request, "administration_checklist.html", context)
 
 
-def _get_administration_checklist(city) -> dict:
+def _get_administration_checklist(city) -> list:
     try:
         checklist = city.administration_checklist
     except AdministrationChecklist.DoesNotExist:
-        return {}
+        return []
 
     return _as_formatted_checklist(checklist)
 
 
-def _count_checklist_number_fulfilled(checklist_items: dict):
+def energy_plan_checklist_view(request, city_slug):
+    city = _get_cities(request, city_slug)
+    if not city:
+        raise Http404(f"Wir haben keine Daten zu der Kommune '{city_slug}'.")
+
+    breadcrumbs = _get_breadcrumbs(
+        {"label": city.name, "url": reverse("city", args=[city_slug])},
+        {
+            "label": "Wärmeplanung Checkliste",
+            "url": reverse("energy_plan_checklist", args=[city_slug]),
+        },
+    )
+
+    context = _get_base_context(request)
+    context.update(
+        {
+            "breadcrumbs": breadcrumbs,
+            "city": city,
+            "energy_plan_checklist": _get_energy_plan_checklist(city),
+        }
+    )
+
+    return render(request, "energy_plan_checklist.html", context)
+
+
+def _get_energy_plan_checklist(city) -> list:
+    try:
+        checklist = city.energy_plan_checklist
+    except EnergyPlanChecklist.DoesNotExist:
+        return []
+
+    return _as_formatted_checklist(checklist)
+
+
+def _as_formatted_checklist(checklist) -> list:
+    checkbox_items = [
+        field
+        for field in checklist._meta.get_fields()
+        if field.attname not in ["city_id", "id"] and "_rationale" not in field.attname
+    ]
+
+    return [
+        {
+            "id": idx,
+            "question": checkbox_item.verbose_name,
+            "is_checked": getattr(checklist, checkbox_item.attname),
+            "help_text": checkbox_item.help_text,
+            "rationale": getattr(checklist, checkbox_item.attname + "_rationale"),
+        }
+        for idx, checkbox_item in enumerate(checkbox_items)
+    ]
+
+
+def _count_checklist_number_fulfilled(checklist_items: list):
     count = 0
 
-    for _, values in checklist_items.items():
-        for _, is_checked in values.items():
-            if is_checked is True:
-                count += 1
+    for item in checklist_items:
+        if item["is_checked"] is True:
+            count += 1
 
     return count
 
@@ -583,3 +648,37 @@ class AcceptInvite(invitations_views.AcceptInvite):
         self.request.session["invitation_key"] = invitation.key
 
         return redirect(self.get_signup_redirect())
+
+
+# Admin
+class SelectCityView(ListView):
+    model = City
+    template_name = "admin/admin-city.html"
+    ordering = "name"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["title"] = "Städte"
+        return context
+
+
+class CapEditView(DetailView, admin.ModelAdmin):
+    model = City
+    template_name = "admin/admin-cap.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        groups = _get_task_groups(self.object)
+        context["title"] = self.object.name
+        context["city_id"] = str(self.object.pk)
+        context["groups"] = groups
+        return context
+
+
+def move_task(request, pk):
+    new_parent_pk = request.POST.get("new_parent_pk")
+    task = Task.objects.get(pk=pk)
+    new_parent = Task.objects.get(pk=new_parent_pk)
+    position = request.POST.get("position")
+    task.move(new_parent, position)
+    return JsonResponse({"success": True})

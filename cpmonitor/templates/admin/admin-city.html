@@ -1,0 +1,10 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+  <ul>
+    {% for object in object_list %}
+      <li>
+        <a href="{% url 'admin:edit-cap' object.pk %}">{{ object.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

@@ -474,6 +474,168 @@ class AdministrationChecklist(models.Model):
     )
 
 
+class EnergyPlanChecklist(models.Model):
+    class Meta:
+        verbose_name = "Wärmeplanung Checkliste"
+
+    city = models.OneToOneField(
+        City, on_delete=models.PROTECT, related_name="energy_plan_checklist"
+    )
+
+    energy_plan_exists = models.BooleanField(
+        "Liegt ein öffentlich bekannt gemachter Beschluss zur Durchführung der Wärmeplanung vor?",
+        default=False,
+    )
+    energy_plan_exists_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    schedule_exists = models.BooleanField(
+        "Enthält der Beschluss einen Zeitplan für die Durchführung der Wärmeplanung (Ausschreibung, Beauftragung, Durchführung)?",
+        default=False,
+    )
+    schedule_exists_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    hydrogen_grid_examined = models.BooleanField(
+        "Wurde ein frühzeitiger Ausschluss von Wasserstoffnetzen geprüft und das Ergebnis der Prüfung begründet?",
+        default=False,
+    )
+    hydrogen_grid_examined_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    thermal_grid_examined = models.BooleanField(
+        "Wurde ein frühzeitiger Ausschluss von Wärmenetzen geprüft und das Ergebnis der Prüfung begründet?",
+        default=False,
+    )
+    thermal_grid_examined_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    demand_specified = models.BooleanField(
+        "Ergibt sich ein klares gebäudescharfes Bild des Wärmebedarfs und der aktuellen Wärmeversorgungsart?",
+        default=False,
+    )
+    demand_specified_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    demand_specified_on_a_map = models.BooleanField(
+        "Sind die Wärmebedarfe und -versorgungsarten räumlich auf Karten aufgelöst dargestellt (inkl. Netzinfrastrukturen + Wärmedichten in jeder Straße)?",
+        default=False,
+    )
+    demand_specified_on_a_map_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    potential_determined = models.BooleanField(
+        "Wurden alle sinnvollen Potenziale zur erneuerbaren Wärmeerzeugung und -speicherung erfasst?",
+        default=False,
+    )
+    potential_determined_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    demand_reduction_planned = models.BooleanField(
+        "Sind kommunale Maßnahmen zur Senkung des Wärmebedarfs enthalten (siehe sektorübergreifende Maßnahmen)?",
+        default=False,
+    )
+    demand_reduction_planned_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    communication_potential = models.BooleanField(
+        "Werden die Ergebnisse der Potenzialanalyse inkl. der Möglichkeit zur Kommentierung zugänglich gemacht? Gibt es eine Möglichkeit die Ergebnisse mit der Kommune zu diskutieren?",
+        default=False,
+    )
+    communication_potential_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    paris_agreement_compliant = models.BooleanField(
+        "Folgt das Zielszenario Paris-konformen Zielsetzungen und Grundsätzen der kommunalen Wärmeplanung?",
+        default=False,
+    )
+    paris_agreement_compliant_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    is_efficient = models.BooleanField(
+        "Werden die möglichst effizienten und erneuerbaren Wärmequellen erschlossen?",
+        default=False,
+    )
+    is_efficient_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    has_intermediate_goals = models.BooleanField(
+        "Sind Zwischenziele für die Erreichung des Zielszenarios enthalten?",
+        default=False,
+    )
+    has_intermediate_goals_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    effect_on_electricity_demand = models.BooleanField(
+        "Wie verändert sich der Strombedarf durch den veränderten Wärmebedarf? Werden kommunale Maßnahmen getroffen, um den größeren Strombedarf regional bereitzustellen?",
+        default=False,
+    )
+    effect_on_electricity_demand_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    communication_goals = models.BooleanField(
+        "Werden die Ergebnisse der Zielszenarien inkl. der Möglichkeit zur Kommentierung zugänglich gemacht? Gibt es eine Möglichkeit die Ergebnisse mit der Kommune zu diskutieren?",
+        default=False,
+    )
+    communication_goals_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    designation_of_areas = models.BooleanField(
+        "Gibt es eine zeitlich nachvollziehbare Planung für die Ausweisung der Gebiete, d.h. ab wann, welche Gebiete mit welcher Versorgung ausgebaut werden sollen?",
+        default=False,
+    )
+    designation_of_areas_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    criteria_comprehensible = models.BooleanField(
+        "Wird dies erklärt bzw. wird deutlich, warum bzw. basierend auf welchen Kriterien (Topographie, Wärmebedarfsdichte, zentrale erneuerbare Wärmequellen etc.)?",
+        default=False,
+    )
+    criteria_comprehensible_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    based_on_analyses = models.BooleanField(
+        "Ergibt sich die Einteilung in voraussichtliche Wärmeversorgungsgebiete aufgrund der vorherigen Analysen?",
+        default=False,
+    )
+    based_on_analyses_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    effective_measures = models.BooleanField(
+        "Entwickelt die Kommune (bzw. die von ihr beauftragten Akteure) einen aus den Potenzialen und Zielszenario abgeleiteten ambitionierten Transformationspfad mit effektiven Maßnahmen?",
+        default=False,
+    )
+    effective_measures_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+    energy_sources_sustainable = models.BooleanField(
+        "Basieren die darauffolgend entwickelten Transformationspläne auf den von LocalZero empfohlenen Wärmequellen (und z.B. nicht wesentlich auf Wasserstoff oder Biomasse)?",
+        default=False,
+    )
+    energy_sources_sustainable_rationale = models.TextField(
+        "Begründung",
+        blank=True,
+    )
+
+
 class ExecutionStatus(models.IntegerChoices):
     UNKNOWN = 0, "unbekannt"
     AS_PLANNED = 2, "in Arbeit"
