@@ -133,5 +133,10 @@ rules.add_perm("cpmonitor.view_capchecklist", is_allowed_to_edit)
 rules.add_perm("cpmonitor.delete_capchecklist", is_allowed_to_edit)
 rules.add_perm("cpmonitor.change_capchecklist", is_allowed_to_edit | no_object)
 
+rules.add_perm("cpmonitor.add_energyplanchecklist", is_allowed_to_edit | no_object)
+rules.add_perm("cpmonitor.view_energyplanchecklist", is_allowed_to_edit)
+rules.add_perm("cpmonitor.delete_energyplanchecklist", is_allowed_to_edit)
+rules.add_perm("cpmonitor.change_energyplanchecklist", is_allowed_to_edit | no_object)
+
 rules.add_perm("cpmonitor.view_invitation", is_allowed_to_change_city_users | no_object)
 rules.add_perm("cpmonitor.delete_invitation", is_allowed_to_change_city_users)
