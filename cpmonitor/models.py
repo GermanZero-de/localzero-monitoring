@@ -6,6 +6,7 @@ from django.db import models
 from django.http import HttpRequest
 from django.urls import reverse
 from django.utils.crypto import get_random_string
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.utils import timezone
 from invitations.app_settings import app_settings as invitations_app_settings
@@ -501,6 +502,7 @@ class EnergyPlanChecklist(models.Model):
     hydrogen_grid_examined = models.BooleanField(
         "Wurde ein frühzeitiger Ausschluss von Wasserstoffnetzen geprüft und das Ergebnis der Prüfung begründet?",
         default=False,
+        help_text="Ein potenzielles Wasserstoffgebiet kann hier bereits ausgeschlossen werden, wenn eine Eignung als sehr unwahrscheinlich eingestuft wird. Das ist zu dem Zeitpunkt der Wärmeplanung dann möglich, wenn entweder kein Gasnetz besteht oder bereits absehbar ist, dass eine künftige Versorgung mit Wasserstoff nicht wirtschaftlich sein wird. Disclaimer: Wasserstoffnetze sollten grundsätzlich ausgeschlossen werden: Verfügbarkeit und Kosten unsicher. Mit welcher Begründung geschieht dies vor Ort nicht?",
     )
     hydrogen_grid_examined_rationale = models.TextField(
         "Begründung",
@@ -509,6 +511,7 @@ class EnergyPlanChecklist(models.Model):
     thermal_grid_examined = models.BooleanField(
         "Wurde ein frühzeitiger Ausschluss von Wärmenetzen geprüft und das Ergebnis der Prüfung begründet?",
         default=False,
+        help_text="Ein potenzielles Wärmenetz kann hier bereits ausgeschlossen werden, wenn es entweder kein Wärmenetz gibt oder die Siedlungsstruktur (niedrige Wärmebedarfsdichte / hohe Zersiedelung) es nicht sinnvoll erscheinen lässt. Wenn Wärmenetze objektiv schlechte Lösungen sind, sollten sie frühzeitig ausgeschlossen werden um Planungskosten zu sparen und hohe Heizkosten am Ende des Tages zu vermeiden. Mit welcher Begründung geschieht dies vor Ort nicht?",
     )
     thermal_grid_examined_rationale = models.TextField(
         "Begründung",
@@ -517,6 +520,9 @@ class EnergyPlanChecklist(models.Model):
     demand_specified = models.BooleanField(
         "Ergibt sich ein klares gebäudescharfes Bild des Wärmebedarfs und der aktuellen Wärmeversorgungsart?",
         default=False,
+        help_text=mark_safe(
+            'Sind alle oder zumindest die wichtigsten Bilanzen  und Kennzahlen der Gemeinde vorhanden?<br/>Wichtige Bilanzen:<ul><li>Energiebilanz</li><li>Treibhausgasbilanzen</li><li>räumlich aufgelöster Wärmebedarf</li></ul>Mögliche Kenngrößen:<ul><li>Wohnflächen</li><li>Nutzungsarten der Gebäude</li><li>Flächendichten</li><li>Gebäudetypen und Baualtersklassen</li><li>Versorgungs- und Beheizungsstruktur der Gebäude</li></ul><a target="_blank" href="https://www.kea-bw.de/waermewende/wissensportal/leistungsverzeichnis-kwp">Mehr Infos hier</a> (Leistungsverzeichnis A.1.1).'
+        ),
     )
     demand_specified_rationale = models.TextField(
         "Begründung",
@@ -533,6 +539,9 @@ class EnergyPlanChecklist(models.Model):
     potential_determined = models.BooleanField(
         "Wurden alle sinnvollen Potenziale zur erneuerbaren Wärmeerzeugung und -speicherung erfasst?",
         default=False,
+        help_text=mark_safe(
+            'Es ist wichtig, dass sowohl umfangreich als auch priorisiert Wärmequellen berücksichtigt werden. <a target="_blank" href="https://mitmachen-wiki.germanzero.org/w/LocalZero:Empfohlene_Erschlie%C3%9Fung_folgender_erneuerbarer_W%C3%A4rmequellen_und_%E2%80%93_speicher">LocalZero Liste der empfohlenen Wärmequellen.</a>'
+        ),
     )
     potential_determined_rationale = models.TextField(
         "Begründung",
@@ -541,6 +550,9 @@ class EnergyPlanChecklist(models.Model):
     demand_reduction_planned = models.BooleanField(
         "Sind kommunale Maßnahmen zur Senkung des Wärmebedarfs enthalten (siehe sektorübergreifende Maßnahmen)?",
         default=False,
+        help_text=mark_safe(
+            '<a target="blank" href="https://mitmachen-wiki.germanzero.org/w/LocalZero:Integration_betroffener_Sektoren">LocalZero Liste der betroffenen Sektoren</a>'
+        ),
     )
     demand_reduction_planned_rationale = models.TextField(
         "Begründung",
@@ -549,6 +561,9 @@ class EnergyPlanChecklist(models.Model):
     communication_potential = models.BooleanField(
         "Werden die Ergebnisse der Potenzialanalyse inkl. der Möglichkeit zur Kommentierung zugänglich gemacht? Gibt es eine Möglichkeit die Ergebnisse mit der Kommune zu diskutieren?",
         default=False,
+        help_text=mark_safe(
+            "Die Potenzialanalyse sollte inkl. der geplanten Maßnahmen öffentlich vorgestellt werden und zur Kommentierung offengelegt werden. Hier muss die Möglichkeit Feedback zu geben geschaffen werden, um ggf. die Potenzialanalyse noch anzupassen. Das ist wichtig, denn basierend auf der Potenzialanalyse wird das Zielszenario entwickelt.<br/>Gesetzlich vorgeschrieben ist lediglich die einmalige digitale Einsicht in die Pläne nach Erstellung des Entwurfs des Zielszenarios und der Einteilung in voraussichtliche Wärmeversorgunsgebiete inkl. Umsetzungsstrategie (§ 20 WPG, s.u.) für die Dauer von 30 Tagen zur Abgabe von Stellungnahmen."
+        ),
     )
     communication_potential_rationale = models.TextField(
         "Begründung",
@@ -557,6 +572,9 @@ class EnergyPlanChecklist(models.Model):
     paris_agreement_compliant = models.BooleanField(
         "Folgt das Zielszenario Paris-konformen Zielsetzungen und Grundsätzen der kommunalen Wärmeplanung?",
         default=False,
+        help_text=mark_safe(
+            "Damit wir in Deutschland dem Pariser Klimaabkommen entsprechen, müssen wir im Restbudget bleiben. Das bedeutet für jede Kommune:<ul><li>Wird ein möglichst 100% Anteil lokaler Erneuerbarer Energien zur Wärmeerzeugung erreicht?</li><li>Bis 2035?</li><li>Mit den von LocalZero empfohlenen Wärmeanwendungen?</li></ul>"
+        ),
     )
     paris_agreement_compliant_rationale = models.TextField(
         "Begründung",
@@ -565,6 +583,9 @@ class EnergyPlanChecklist(models.Model):
     is_efficient = models.BooleanField(
         "Werden die möglichst effizienten und erneuerbaren Wärmequellen erschlossen?",
         default=False,
+        help_text=mark_safe(
+            '<a target="_blank" href="https://mitmachen-wiki.germanzero.org/w/LocalZero:Empfohlene_Erschlie%C3%9Fung_folgender_erneuerbarer_W%C3%A4rmequellen_und_%E2%80%93_speicher">LocalZero Liste der Wärmequellen</a>'
+        ),
     )
     is_efficient_rationale = models.TextField(
         "Begründung",
@@ -621,6 +642,9 @@ class EnergyPlanChecklist(models.Model):
     effective_measures = models.BooleanField(
         "Entwickelt die Kommune (bzw. die von ihr beauftragten Akteure) einen aus den Potenzialen und Zielszenario abgeleiteten ambitionierten Transformationspfad mit effektiven Maßnahmen?",
         default=False,
+        help_text=mark_safe(
+            "<ul><li>Mit klaren Zuständigkeiten der beteiligten Akteure</li><li>Mit jahresscharfer Aktivität</li><li>Mit Fokus auf die wirksamsten Maßnahmen</li><li>Mit einem langfristigen Zeitplan, sodass die Gesamtheit der Maßnahmen im klimaneutralen Zieljahr abgeschlossen werden können (z.B. die lange dauernden Maßnahmen frühzeitig anschieben)</li></ul>"
+        ),
     )
     effective_measures_rationale = models.TextField(
         "Begründung",
@@ -629,6 +653,7 @@ class EnergyPlanChecklist(models.Model):
     energy_sources_sustainable = models.BooleanField(
         "Basieren die darauffolgend entwickelten Transformationspläne auf den von LocalZero empfohlenen Wärmequellen (und z.B. nicht wesentlich auf Wasserstoff oder Biomasse)?",
         default=False,
+        help_text="Auch hier kann die „Wasserstoff-Falle“ wieder zuschnappen. Denn viele Dekarbonisierungsstrategien z.B. von Stadtwerken basieren stark auf Wasserstoff. D.h. auch nach der Wärmeplanung ist es wichtig darauf zu achten, dass Wasserstoff weiter nicht im großen Stile eingesetzt werden soll (also z.B. als Energieträger in den Transformationsplänen der Stadtwerke).",
     )
     energy_sources_sustainable_rationale = models.TextField(
         "Begründung",
