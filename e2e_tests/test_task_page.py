@@ -101,3 +101,13 @@ def test_should_go_to_the_linked_page_when_clicking_on_a_breadcrumb(
     ).click()
 
     expect(page).to_have_url(live_server.url + "/")
+
+
+def test_task_page_should_display_supporting_ngos(live_server, page: Page):
+    page.goto(
+        live_server.url
+        + "/beispielstadt/massnahmen/umstellung-fernwarme-auf-geothermie/"
+    )
+
+    expect(page.get_by_text("Mit Unterstützung von")).to_be_visible()
+    expect(page.get_by_role("link", name="aidfive")).to_be_visible()

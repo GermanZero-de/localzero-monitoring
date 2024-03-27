@@ -340,6 +340,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         "plan_assessment",
         "execution_status",
         "execution_justification",
+        "supporting_ngos",
         "execution_completion",
         "actual_start",
         "actual_completion",

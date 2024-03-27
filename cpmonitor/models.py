@@ -170,6 +170,12 @@ class City(models.Model):
         """,
     )
 
+    supporting_ngos = models.TextField(
+        "Unterstützung von",
+        blank=True,
+        help_text="hier kann die Unterstüzung von anderen NGOs gewürdigt werden",
+    )
+
     def __str__(self) -> str:
         return self.zipcode + " " + self.name
 
@@ -861,6 +867,12 @@ class Task(MP_Node):
         "Begründung Umsetzungsstand",
         blank=True,
         help_text="Die Auswahl bei Umsetzungsstand kann hier ausführlich begründet werden.",
+    )
+
+    supporting_ngos = models.TextField(
+        "Unterstützung von",
+        blank=True,
+        help_text="hier kann die Unterstüzung von anderen NGOs gewürdigt werden",
     )
 
     execution_completion = models.IntegerField(

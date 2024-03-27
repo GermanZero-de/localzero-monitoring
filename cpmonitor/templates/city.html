@@ -213,3 +213,11 @@
     </div>
   {% endif %}
 {% endblock cards %}
+{% block more-text-content %}
+  {% if city.supporting_ngos %}
+    <h2>
+      Mit Unterstützung von
+    </h2>
+    {{ city.supporting_ngos | safe_markdown }}
+  {% endif %}
+{% endblock more-text-content %}
