@@ -13,6 +13,17 @@ $(document).ready(function () {
       drop(ev, this);
     });
 
+  $(".column-drop-area")
+    .on("dragover", function (ev) {
+      onDragOverColumnDropArea(ev);
+    })
+    .on("dragleave", function (ev) {
+      onDragLeaveColumnDropArea(ev);
+    })
+    .on("drop", function (ev) {
+      drop(ev, this);
+    });
+
   function onDragOver(ev) {
     ev.preventDefault();
     const targetTaskId = ev.currentTarget.id;
@@ -25,6 +36,13 @@ $(document).ready(function () {
       target.classList.add("drag-over-middle");
       target.classList.remove("drag-over-top");
     }
+  }
+
+  function onDragOverColumnDropArea(ev) {
+    ev.preventDefault();
+    const columnDropAreaClass = ev.currentTarget.id;
+    const target = document.getElementById(columnDropAreaClass);
+    target.classList.add("drag-over-middle");
   }
 
   function isUpperHalf(mouseY, target) {
@@ -40,6 +58,13 @@ $(document).ready(function () {
     const targetTaskId = ev.currentTarget.id;
     const target = document.getElementById(targetTaskId);
     target.classList.remove("drag-over-top", "drag-over-middle");
+  }
+
+  function onDragLeaveColumnDropArea(ev) {
+    ev.preventDefault();
+    const columnDropAreaClass = ev.currentTarget.id;
+    const target = document.getElementById(columnDropAreaClass);
+    target.classList.remove("drag-over-middle");
   }
 
   function onDragStart(ev) {
@@ -61,17 +86,6 @@ $(document).ready(function () {
     if (target.classList.contains("drag-over-middle")) {
       moveTask(task_pk, new_parent_pk, "last-child");
     }
-  }
-
-  function dropOnColumn(ev) {
-    ev.preventDefault();
-    const task_id = ev.originalEvent.dataTransfer.getData("text");
-    const column_id = ev.currentTarget.id;
-
-    const task_pk = task_id.split("-")[1];
-    const column_pk = column_id.split("-")[1];
-
-    moveTask(task_pk, column_pk, "last-child");
   }
 
   function moveTask(task_pk, new_parent_pk, position) {
