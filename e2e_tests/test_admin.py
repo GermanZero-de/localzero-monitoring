@@ -26,7 +26,7 @@ def add_task(base_url: str, page: Page, title, parent=None):
     page.get_by_role("button", name="Sichern", exact=True).first.click()
 
 
-def drag_task_on_task_cap_board(
+def drag_task_on_task_on_the_cap_board(
     page: Page, task_to_drag_title: str, target_task_title: str
 ):
     task_to_drag = page.get_by_text(task_to_drag_title)
@@ -42,7 +42,7 @@ def drag_task_on_task_cap_board(
     page.mouse.up()
 
 
-def drag_task_above_task_cap_board(
+def drag_task_above_task_on_the_cap_board(
     page: Page, task_to_drag_title: str, target_task_title: str
 ):
     task_to_drag = page.get_by_text(task_to_drag_title)
@@ -272,7 +272,7 @@ def test_should_move_the_task_to_the_top_level_of_the_chosen_sector_when_moving_
     # when
     admin_login(live_server.url, page)
     go_to_cap_edit_board(page, "Beispielstadt")
-    drag_task_above_task_cap_board(page, task_title, target_task_title)
+    drag_task_above_task_on_the_cap_board(page, task_title, target_task_title)
 
     # then
     column = page.locator(sector_id)
@@ -294,7 +294,7 @@ def test_should_move_the_task_below_the_chosen_task_when_moving_a_task_on_anothe
     # when
     admin_login(live_server.url, page)
     go_to_cap_edit_board(page, "Beispielstadt")
-    drag_task_on_task_cap_board(page, task_title, target_task_title)
+    drag_task_on_task_on_the_cap_board(page, task_title, target_task_title)
 
     # then
     column = page.locator(sector_id)
