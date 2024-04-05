@@ -1,32 +1,32 @@
 $(document).ready(function () {
   $(".cap_board__task-item")
-    .on("dragstart", function (ev) {
-      onDragStart(ev);
+    .on("dragstart", function (event) {
+      onDragStart(event);
     })
-    .on("dragover", function (ev) {
-      onDragOver(ev);
+    .on("dragover", function (event) {
+      onDragOver(event);
     })
-    .on("dragleave", function (ev) {
-      onDragLeave(ev);
+    .on("dragleave", function (event) {
+      onDragLeave(event);
     })
-    .on("drop", function (ev) {
-      drop(ev, this);
+    .on("drop", function (event) {
+      drop(event, this);
     });
 
   $(".column-drop-area")
-    .on("dragover", function (ev) {
-      onDragOverColumnDropArea(ev);
+    .on("dragover", function (event) {
+      onDragOverColumnDropArea(event);
     })
-    .on("dragleave", function (ev) {
-      onDragLeaveColumnDropArea(ev);
+    .on("dragleave", function (event) {
+      onDragLeaveColumnDropArea(event);
     })
-    .on("drop", function (ev) {
-      drop(ev, this);
+    .on("drop", function (event) {
+      drop(event, this);
     });
 
-  function onDragOver(ev) {
-    ev.preventDefault();
-    const targetTaskId = ev.currentTarget.id;
+  function onDragOver(event) {
+    event.preventDefault();
+    const targetTaskId = event.currentTarget.id;
     const target = document.getElementById(targetTaskId);
 
     if (isUpperHalf(event.clientY, target)) {
@@ -38,9 +38,9 @@ $(document).ready(function () {
     }
   }
 
-  function onDragOverColumnDropArea(ev) {
-    ev.preventDefault();
-    const columnDropAreaClass = ev.currentTarget.id;
+  function onDragOverColumnDropArea(event) {
+    event.preventDefault();
+    const columnDropAreaClass = event.currentTarget.id;
     const target = document.getElementById(columnDropAreaClass);
     target.classList.add("drag-over-middle");
   }
@@ -53,28 +53,28 @@ $(document).ready(function () {
     return mouseY < targetTop + targetHeight / 2;
   }
 
-  function onDragLeave(ev) {
-    ev.preventDefault();
-    const targetTaskId = ev.currentTarget.id;
+  function onDragLeave(event) {
+    event.preventDefault();
+    const targetTaskId = event.currentTarget.id;
     const target = document.getElementById(targetTaskId);
     target.classList.remove("drag-over-top", "drag-over-middle");
   }
 
-  function onDragLeaveColumnDropArea(ev) {
-    ev.preventDefault();
-    const columnDropAreaClass = ev.currentTarget.id;
+  function onDragLeaveColumnDropArea(event) {
+    event.preventDefault();
+    const columnDropAreaClass = event.currentTarget.id;
     const target = document.getElementById(columnDropAreaClass);
     target.classList.remove("drag-over-middle");
   }
 
-  function onDragStart(ev) {
-    ev.originalEvent.dataTransfer.setData("text", ev.currentTarget.id);
+  function onDragStart(event) {
+    event.originalEvent.dataTransfer.setData("text", event.currentTarget.id);
   }
 
-  function drop(ev) {
-    ev.preventDefault();
-    const task_id = ev.originalEvent.dataTransfer.getData("text");
-    const new_parent_id = ev.currentTarget.id;
+  function drop(event) {
+    event.preventDefault();
+    const task_id = event.originalEvent.dataTransfer.getData("text");
+    const new_parent_id = event.currentTarget.id;
 
     const task_pk = task_id.split("-")[1];
     const new_parent_pk = new_parent_id.split("-")[1];
