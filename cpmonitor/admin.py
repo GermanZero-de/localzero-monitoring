@@ -165,7 +165,9 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
         This is the only entry point to reach the changelist for the tasks.
         """
         list_url = _admin_url(Task, "changelist", city.id)
-        return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
+        return format_html(
+            '<a href="{}">Handlungsfelder / Maßnahmen bearbeiten</a>', list_url
+        )
 
     # ------ change / add page ------
     save_on_top = True
@@ -315,7 +317,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         if city_id and rules.is_allowed_to_edit(request.user, int(city_id)):
             return super().changelist_view(request)
 
-        msg = "Bitte eine Stadt auswählen, für die Sektoren / Maßnahmen geändert werden sollen. Rechts davon 'KAP bearbeiten' wählen."
+        msg = "Bitte eine Stadt auswählen, für die Handlungsfelder / Maßnahmen geändert werden sollen. Rechts davon 'Handlungsfelder / Maßnahmen bearbeiten' wählen."
         self.message_user(request, msg, messages.INFO)
         return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
@@ -386,7 +388,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         if city_id and rules.is_allowed_to_edit(request.user, int(city_id)):
             return super().add_view(request, form_url, extra_context)
 
-        msg = "Bitte eine Stadt auswählen, für die ein Sektor / eine Maßnahme hinzugefügt werden soll. Rechts davon 'KAP bearbeiten' wählen."
+        msg = "Bitte eine Stadt auswählen, für die Handlungsfelder / Maßnahmen geändert werden sollen. Rechts davon 'Handlungsfelder / Maßnahmen bearbeiten' wählen."
         self.message_user(request, msg, messages.INFO)
         return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
