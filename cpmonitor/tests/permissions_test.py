@@ -242,14 +242,10 @@ def test_city_editor_should_be_allowed_to_modify_inlines(
     formsets = response.context["inline_admin_formsets"]
 
     verbose_names = list(map(lambda formset: formset.opts.verbose_name, formsets))
-    # This will fail when new inlines are added.
-    # If that happens, please extend the list below, accordingly.
-    assert len(formsets) == 5
+
     assert "Diagramm" in verbose_names
     assert "Lokalgruppe" in verbose_names
-    assert "KAP Checkliste" in verbose_names
-    assert "Verwaltungsstrukturen Checkliste" in verbose_names
-    assert "Wärmeplanung Checkliste" in verbose_names
+    assert len(formsets) == 2
 
     for formset in formsets:
         assert formset.has_view_permission
@@ -266,15 +262,11 @@ def test_city_admin_should_be_allowed_to_modify_inlines(
     formsets = response.context["inline_admin_formsets"]
 
     verbose_names = list(map(lambda formset: formset.opts.verbose_name, formsets))
-    # This will fail when new inlines are added.
-    # If that happens, please extend the list below, accordingly.
-    assert len(formsets) == 6
+
     assert "Diagramm" in verbose_names
     assert "Lokalgruppe" in verbose_names
-    assert "KAP Checkliste" in verbose_names
-    assert "Verwaltungsstrukturen Checkliste" in verbose_names
-    assert "Wärmeplanung Checkliste" in verbose_names
     assert "Einladungslink" in verbose_names
+    assert len(formsets) == 3
 
     for formset in formsets:
         assert formset.has_view_permission
@@ -292,15 +284,11 @@ def test_site_admin_should_be_allowed_to_modify_inlines(
     formsets = response.context["inline_admin_formsets"]
 
     verbose_names = list(map(lambda formset: formset.opts.verbose_name, formsets))
-    # This will fail when new inlines are added.
-    # If that happens, please extend the list below, accordingly.
+
     assert "Diagramm" in verbose_names
     assert "Lokalgruppe" in verbose_names
-    assert "KAP Checkliste" in verbose_names
-    assert "Verwaltungsstrukturen Checkliste" in verbose_names
     assert "Einladungslink" in verbose_names
-    assert "Wärmeplanung Checkliste" in verbose_names
-    assert len(formsets) == 6
+    assert len(formsets) == 3
 
     for formset in formsets:
         assert formset.has_view_permission
