@@ -121,6 +121,8 @@ class ChecklistAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
         models.TextField: {"widget": AdminMartorWidget},
     }
 
+    save_on_top = True
+
     def get_readonly_fields(self, request, obj=None):
         if obj:
             return ("city",)
