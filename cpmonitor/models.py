@@ -221,7 +221,11 @@ class City(models.Model):
 
 class CapChecklist(models.Model):
     class Meta:
-        verbose_name = "KAP Checkliste"
+        verbose_name = "Checkliste zum KAP"
+        verbose_name_plural = "Checklisten zum KAP"
+
+    def __str__(self):
+        return "Checkliste zum KAP für " + self.city.name
 
     city = models.OneToOneField(
         City, on_delete=models.PROTECT, related_name="cap_checklist"
@@ -375,7 +379,11 @@ class CapChecklist(models.Model):
 
 class AdministrationChecklist(models.Model):
     class Meta:
-        verbose_name = "Verwaltungsstrukturen Checkliste"
+        verbose_name = "Checkliste zu Verwaltungsstrukturen"
+        verbose_name_plural = "Checklisten zu Verwaltungsstrukturen"
+
+    def __str__(self):
+        return "Checkliste zu Verwaltungsstrukturen für " + self.city.name
 
     city = models.OneToOneField(
         City, on_delete=models.PROTECT, related_name="administration_checklist"
@@ -483,7 +491,11 @@ class AdministrationChecklist(models.Model):
 
 class EnergyPlanChecklist(models.Model):
     class Meta:
-        verbose_name = "Wärmeplanung Checkliste"
+        verbose_name = "Checkliste zur Wärmeplanung"
+        verbose_name_plural = "Checklisten zur Wärmeplanung"
+
+    def __str__(self):
+        return "Checkliste zur Wärmeplanung für " + self.city.name
 
     city = models.OneToOneField(
         City, on_delete=models.PROTECT, related_name="energy_plan_checklist"

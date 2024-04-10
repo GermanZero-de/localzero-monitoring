@@ -14,17 +14,16 @@ from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 
 from cpmonitor.views import SelectCityView, CapEditView
-
 from . import rules, utils
 from .models import (
     Chart,
     City,
     Task,
-    CapChecklist,
     AdministrationChecklist,
     LocalGroup,
     Invitation,
     EnergyPlanChecklist,
+    CapChecklist,
 )
 
 
@@ -77,32 +76,6 @@ class ChartInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
 
     formfield_overrides = {
         models.CharField: {"widget": TextInput(attrs={"size": "100"})},
-        models.TextField: {"widget": AdminMartorWidget},
-    }
-
-
-class CapChecklistInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
-    model = CapChecklist
-
-    formfield_overrides = {
-        models.TextField: {"widget": AdminMartorWidget},
-    }
-
-
-class AdministrationChecklistInline(
-    ObjectPermissionsModelAdminMixin, admin.StackedInline
-):
-    model = AdministrationChecklist
-
-    formfield_overrides = {
-        models.TextField: {"widget": AdminMartorWidget},
-    }
-
-
-class EnergyPlanChecklistInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
-    model = EnergyPlanChecklist
-
-    formfield_overrides = {
         models.TextField: {"widget": AdminMartorWidget},
     }
 
@@ -191,9 +164,6 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     inlines = [
         ChartInline,
         LocalGroupInline,
-        CapChecklistInline,
-        AdministrationChecklistInline,
-        EnergyPlanChecklistInline,
         InvitationInline,
     ]
 
@@ -399,3 +369,6 @@ admin.site.index_title = "Dateneingabe"
 
 admin.site.register(City, CityAdmin)
 admin.site.register(Task, TaskAdmin)
+admin.site.register(CapChecklist)
+admin.site.register(AdministrationChecklist)
+admin.site.register(EnergyPlanChecklist)
