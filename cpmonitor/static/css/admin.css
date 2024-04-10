@@ -8,6 +8,11 @@ body,
   height: calc(80% - 100px);
 }
 
+.admin-h2 {
+  padding-top: 20px;
+  margin-bottom: 5px;
+}
+
 .main {
   background: white;
 }

@@ -143,6 +143,13 @@ def _get_task_groups(city):
     return groups
 
 
+# def _get_cap_checklist(city) -> CapChecklist | None:
+#     cap_checklists = CapChecklist.objects.all().filter(city=city)
+#     if len(cap_checklists) > 0:
+#         return cap_checklists[0]
+#     return None
+
+
 def _get_cities(request, slug=None):
     try:
         cities = City.objects.all()
@@ -180,13 +187,13 @@ def city_view(request, city_slug):
 
     _calculate_summary(request, city)
 
-    cap_checklist = _get_cap_checklist(city)
+    cap_checklist = _get_cap_checklist_items(city)
     cap_checklist_exists = len(cap_checklist) > 0
 
-    administration_checklist = _get_administration_checklist(city)
+    administration_checklist = _get_administration_checklist_items(city)
     administration_checklist_exists = len(administration_checklist) > 0
 
-    energy_plan_checklist = _get_energy_plan_checklist(city)
+    energy_plan_checklist = _get_energy_plan_checklist_items(city)
     energy_plan_checklist_exists = len(energy_plan_checklist) > 0
 
     breadcrumbs = _get_breadcrumbs(
@@ -292,17 +299,23 @@ def cap_checklist_view(request, city_slug):
         {
             "breadcrumbs": breadcrumbs,
             "city": city,
-            "cap_checklist": _get_cap_checklist(city),
+            "cap_checklist": _get_cap_checklist_items(city),
             "local_group": getattr(city, "local_group", None),
         }
     )
     return render(request, "cap_checklist.html", context)
 
 
-def _get_cap_checklist(city) -> list:
+def _get_cap_checklist(city) -> CapChecklist | None:
     try:
-        checklist = city.cap_checklist
+        return city.cap_checklist
     except CapChecklist.DoesNotExist:
+        return None
+
+
+def _get_cap_checklist_items(city) -> list:
+    checklist = _get_cap_checklist(city)
+    if checklist is None:
         return []
 
     return _as_formatted_checklist(checklist)
@@ -326,7 +339,7 @@ def administration_checklist_view(request, city_slug):
         {
             "breadcrumbs": breadcrumbs,
             "city": city,
-            "administration_checklist": _get_administration_checklist(city),
+            "administration_checklist": _get_administration_checklist_items(city),
             "local_group": getattr(city, "local_group", None),
         }
     )
@@ -334,10 +347,16 @@ def administration_checklist_view(request, city_slug):
     return render(request, "administration_checklist.html", context)
 
 
-def _get_administration_checklist(city) -> list:
+def _get_administration_checklist(city) -> AdministrationChecklist | None:
     try:
-        checklist = city.administration_checklist
+        return city.administration_checklist
     except AdministrationChecklist.DoesNotExist:
+        return None
+
+
+def _get_administration_checklist_items(city) -> list:
+    checklist = _get_administration_checklist(city)
+    if checklist is None:
         return []
 
     return _as_formatted_checklist(checklist)
@@ -361,7 +380,7 @@ def energy_plan_checklist_view(request, city_slug):
         {
             "breadcrumbs": breadcrumbs,
             "city": city,
-            "energy_plan_checklist": _get_energy_plan_checklist(city),
+            "energy_plan_checklist": _get_energy_plan_checklist_items(city),
             "local_group": getattr(city, "local_group", None),
         }
     )
@@ -369,10 +388,16 @@ def energy_plan_checklist_view(request, city_slug):
     return render(request, "energy_plan_checklist.html", context)
 
 
-def _get_energy_plan_checklist(city) -> list:
+def _get_energy_plan_checklist(city) -> EnergyPlanChecklist | None:
     try:
-        checklist = city.energy_plan_checklist
+        return city.energy_plan_checklist
     except EnergyPlanChecklist.DoesNotExist:
+        return None
+
+
+def _get_energy_plan_checklist_items(city) -> list:
+    checklist = _get_energy_plan_checklist(city)
+    if checklist is None:
         return []
 
     return _as_formatted_checklist(checklist)
@@ -686,6 +711,11 @@ class CapEditView(DetailView, admin.ModelAdmin):
         groups = _get_task_groups(self.object)
         context["title"] = self.object.name
         context["city_id"] = str(self.object.pk)
+        context["cap_checklist_id"] = _get_cap_checklist(self.object).pk
+        context["administration_checklist_id"] = _get_administration_checklist(
+            self.object
+        ).pk
+        context["energy_plan_checklist_id"] = _get_energy_plan_checklist(self.object).pk
         context["groups"] = groups
         return context
 

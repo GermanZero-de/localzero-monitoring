@@ -8,6 +8,20 @@
 {% endblock extrahead %}
 {% block content %}
   {% csrf_token %}
+  <h2 class="admin-h2">Checklisten</h2>
+  <div>
+    <a href="{% admin_reverse 'capchecklist' 'change' cap_checklist_id %}"
+       class="changelink">Checkliste zum KAP editieren</a>
+  </div>
+  <div>
+    <a href="{% admin_reverse 'administrationchecklist' 'change' administration_checklist_id %}"
+       class="changelink">Checkliste zu Verwaltungsstrukturen editieren</a>
+  </div>
+  <div>
+    <a href="{% admin_reverse 'energyplanchecklist' 'change' energy_plan_checklist_id %}"
+       class="changelink">Checkliste zur Wärmeplanung editieren</a>
+  </div>
+  <h2 class="admin-h2">KAP Board</h2>
   <div>
     <a href="{% admin_reverse 'task' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
        class="addlink">Handlungsfeld hinzufügen</a>
