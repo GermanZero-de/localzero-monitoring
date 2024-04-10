@@ -116,6 +116,18 @@ class InvitationInline(
         )
 
 
+class ChecklistAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ("city",)
+        else:
+            return ()
+
+
 class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     # ------ change list page ------
     list_display = ("zipcode", "name", "teaser", "edit_tasks")
@@ -369,6 +381,6 @@ admin.site.index_title = "Dateneingabe"
 
 admin.site.register(City, CityAdmin)
 admin.site.register(Task, TaskAdmin)
-admin.site.register(CapChecklist)
-admin.site.register(AdministrationChecklist)
-admin.site.register(EnergyPlanChecklist)
+admin.site.register(CapChecklist, ChecklistAdmin)
+admin.site.register(AdministrationChecklist, ChecklistAdmin)
+admin.site.register(EnergyPlanChecklist, ChecklistAdmin)
