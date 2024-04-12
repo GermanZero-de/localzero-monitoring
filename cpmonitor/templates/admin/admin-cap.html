@@ -10,16 +10,39 @@
   {% csrf_token %}
   <h2 class="admin-h2">Checklisten</h2>
   <div>
-    <a href="{% admin_reverse 'capchecklist' 'change' cap_checklist_id %}"
-       class="changelink">Checkliste zum KAP editieren</a>
+    Checkliste zum KAP
+    {% if cap_checklist_id == None %}
+      <a href="{% admin_reverse 'capchecklist' 'add' %}" class="addlink">hinzufügen</a>
+    {% else %}
+      <a href="{% admin_reverse 'capchecklist' 'change' cap_checklist_id %}"
+         class="changelink">editieren</a>
+      <a href="{% admin_reverse 'capchecklist' 'delete' cap_checklist_id %}"
+         class="deletelink">löschen</a>
+    {% endif %}
   </div>
   <div>
-    <a href="{% admin_reverse 'administrationchecklist' 'change' administration_checklist_id %}"
-       class="changelink">Checkliste zu Verwaltungsstrukturen editieren</a>
+    Checkliste zu Verwaltungsstrukturen
+    {% if administration_checklist_id == None %}
+      <a href="{% admin_reverse 'administrationchecklist' 'add' %}"
+         class="addlink">hinzufügen</a>
+    {% else %}
+      <a href="{% admin_reverse 'administrationchecklist' 'change' administration_checklist_id %}"
+         class="changelink">editieren</a>
+      <a href="{% admin_reverse 'administrationchecklist' 'delete' administration_checklist_id %}"
+         class="deletelink">löschen</a>
+    {% endif %}
   </div>
   <div>
-    <a href="{% admin_reverse 'energyplanchecklist' 'change' energy_plan_checklist_id %}"
-       class="changelink">Checkliste zur Wärmeplanung editieren</a>
+    Checkliste zur Wärmeplanung
+    {% if energy_plan_checklist_id == None %}
+      <a href="{% admin_reverse 'energyplanchecklist' 'add' %}"
+         class="addlink">hinzufügen</a>
+    {% else %}
+      <a href="{% admin_reverse 'energyplanchecklist' 'change' energy_plan_checklist_id %}"
+         class="changelink">editieren</a>
+      <a href="{% admin_reverse 'energyplanchecklist' 'delete' energy_plan_checklist_id %}"
+         class="deletelink">löschen</a>
+    {% endif %}
   </div>
   <h2 class="admin-h2">KAP Board</h2>
   <div>

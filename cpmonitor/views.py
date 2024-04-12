@@ -707,15 +707,23 @@ class CapEditView(DetailView, admin.ModelAdmin):
     template_name = "admin/admin-cap.html"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         groups = _get_task_groups(self.object)
+        cap_checklist = _get_cap_checklist(self.object)
+        administration_checklist = _get_administration_checklist(self.object)
+        energy_plan_checklist = _get_energy_plan_checklist(self.object)
+
+        context = super().get_context_data(**kwargs)
         context["title"] = self.object.name
         context["city_id"] = str(self.object.pk)
-        context["cap_checklist_id"] = _get_cap_checklist(self.object).pk
-        context["administration_checklist_id"] = _get_administration_checklist(
-            self.object
-        ).pk
-        context["energy_plan_checklist_id"] = _get_energy_plan_checklist(self.object).pk
+        context["cap_checklist_id"] = (
+            cap_checklist.pk if cap_checklist != None else None
+        )
+        context["administration_checklist_id"] = (
+            administration_checklist.pk if administration_checklist != None else None
+        )
+        context["energy_plan_checklist_id"] = (
+            energy_plan_checklist.pk if energy_plan_checklist != None else None
+        )
         context["groups"] = groups
         return context
 
