@@ -228,7 +228,10 @@ class CapChecklist(models.Model):
         return "Checkliste zum KAP für " + self.city.name
 
     city = models.OneToOneField(
-        City, on_delete=models.PROTECT, related_name="cap_checklist"
+        City,
+        on_delete=models.PROTECT,
+        related_name="cap_checklist",
+        verbose_name="Stadt",
     )
 
     cap_exists = models.BooleanField(
@@ -386,7 +389,10 @@ class AdministrationChecklist(models.Model):
         return "Checkliste zu Verwaltungsstrukturen für " + self.city.name
 
     city = models.OneToOneField(
-        City, on_delete=models.PROTECT, related_name="administration_checklist"
+        City,
+        on_delete=models.PROTECT,
+        related_name="administration_checklist",
+        verbose_name="Stadt",
     )
 
     climate_protection_management_exists = models.BooleanField(
@@ -497,7 +503,10 @@ class EnergyPlanChecklist(models.Model):
         return "Checkliste zur Wärmeplanung für " + self.city.name
 
     city = models.OneToOneField(
-        City, on_delete=models.PROTECT, related_name="energy_plan_checklist"
+        City,
+        on_delete=models.PROTECT,
+        related_name="energy_plan_checklist",
+        verbose_name="Stadt",
     )
 
     energy_plan_exists = models.BooleanField(
