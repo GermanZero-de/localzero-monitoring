@@ -12,7 +12,8 @@
   <div>
     Checkliste zum KAP
     {% if cap_checklist_id == None %}
-      <a href="{% admin_reverse 'capchecklist' 'add' %}" class="addlink">hinzufügen</a>
+      <a href="{% admin_reverse 'capchecklist' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
+         class="addlink">hinzufügen</a>
     {% else %}
       <a href="{% admin_reverse 'capchecklist' 'change' cap_checklist_id %}"
          class="changelink">editieren</a>
@@ -23,7 +24,7 @@
   <div>
     Checkliste zu Verwaltungsstrukturen
     {% if administration_checklist_id == None %}
-      <a href="{% admin_reverse 'administrationchecklist' 'add' %}"
+      <a href="{% admin_reverse 'administrationchecklist' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
          class="addlink">hinzufügen</a>
     {% else %}
       <a href="{% admin_reverse 'administrationchecklist' 'change' administration_checklist_id %}"
@@ -35,7 +36,7 @@
   <div>
     Checkliste zur Wärmeplanung
     {% if energy_plan_checklist_id == None %}
-      <a href="{% admin_reverse 'energyplanchecklist' 'add' %}"
+      <a href="{% admin_reverse 'energyplanchecklist' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
          class="addlink">hinzufügen</a>
     {% else %}
       <a href="{% admin_reverse 'energyplanchecklist' 'change' energy_plan_checklist_id %}"

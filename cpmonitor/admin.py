@@ -129,6 +129,14 @@ class ChecklistAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
         else:
             return ()
 
+    def get_changeform_initial_data(self, request: HttpRequest):
+        query_string = self.get_preserved_filters(request)
+        filters = QueryDict(query_string).get("_changelist_filters")
+        city_id = QueryDict(filters).get(_city_filter_query)
+        return {
+            "city": city_id,
+        }
+
 
 class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     # ------ change list page ------
