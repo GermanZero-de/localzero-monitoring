@@ -16,10 +16,10 @@ def test_should_go_to_city_view_when_clicking_city_select_dropdown_item(
     expect(page).to_have_url(live_server.url + "/beispielstadt/")
 
 
-def test_city_page_should_have_city_name_in_title(live_server, page: Page):
+def test_the_city_page_should_have_the_city_name_in_the_title(live_server, page: Page):
     page.goto(live_server.url + "/beispielstadt/")
 
-    expect(page).to_have_title("Beispielstadt - Monitoring LocalZero")
+    expect(page).to_have_title("LocalZero Monitoring - Beispielstadt")
 
 
 def test_all_city_related_pages_should_show_the_city_logo(live_server, page: Page):
