@@ -22,6 +22,47 @@ def test_city_page_should_have_city_name_in_title(live_server, page: Page):
     expect(page).to_have_title("Beispielstadt - Monitoring LocalZero")
 
 
+def test_all_city_related_pages_should_show_the_city_logo(live_server, page: Page):
+    page.goto(live_server.url + "/beispielstadt/")
+
+    expect(
+        page.get_by_role("img", name="Logo der Lokalgruppe BeispielLos")
+    ).to_be_visible()
+
+    page.goto(live_server.url + "/beispielstadt/kap_checkliste/")
+
+    expect(
+        page.get_by_role("img", name="Logo der Lokalgruppe BeispielLos")
+    ).to_be_visible()
+
+    page.goto(live_server.url + "/beispielstadt/verwaltungsstrukturen_checkliste/")
+
+    expect(
+        page.get_by_role("img", name="Logo der Lokalgruppe BeispielLos")
+    ).to_be_visible()
+
+    page.goto(live_server.url + "/beispielstadt/waermeplanung_checkliste/")
+
+    expect(
+        page.get_by_role("img", name="Logo der Lokalgruppe BeispielLos")
+    ).to_be_visible()
+
+    page.goto(live_server.url + "/beispielstadt/massnahmen/mobilitat/")
+
+    expect(
+        page.get_by_role("img", name="Logo der Lokalgruppe BeispielLos")
+    ).to_be_visible()
+
+    page.goto(
+        live_server.url
+        + "/beispielstadt/massnahmen/mobilitat/u-bahn-strecke-verlangern/"
+    )
+
+    expect(
+        page.get_by_role("img", name="Logo der Lokalgruppe BeispielLos")
+    ).to_be_visible()
+
+
 def test_city_page_should_display_supporting_ngos(live_server, page: Page):
     page.goto(live_server.url + "/beispielstadt/")
 

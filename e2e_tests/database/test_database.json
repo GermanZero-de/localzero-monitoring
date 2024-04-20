@@ -99,7 +99,7 @@
     "assessment_administration": "Wie bewertet ihr die **Nachhaltigkeitsarchitektur der Verwaltung**? Dieser Text fasst die wichtigsten Punkte zusammen.",
     "assessment_action_plan": "Hier soll die Bewertung des **Klimaaktionsplans** stehen. Was haltet ihr von dem Plan?",
     "assessment_status": "### Wie sieht es aus? \r\n\r\nEine einleitende Übersicht in die Bewertung des Umsetzungsstandes.\r\nHält die Kommune sich im Wesentlichen an ihren eigenen Plan?",
-    "last_update": "2024-03-22",
+    "last_update": "2024-04-20",
     "contact_name": "",
     "contact_email": "",
     "internal_information": "Dies ist eine total wichtige interne Info!",
@@ -1154,6 +1154,7 @@
     "website": "https://www.beispiel-los.de",
     "teaser": "Eine beispiellos gute Initiative für eine klimaneutrale Zukunft in unserer Stadt.",
     "description": "Wenn Du mitmachen willst, wendest du Dich am besten an Maxi Mustermensch unter maxi@beispiel-los.de.\r\n\r\nUnser Monitoring basiert auf öffentlich zugänglichen Informationen aus dem lokalen BeispielBlatt, dere Website der Stadtverwaltung, dem Klimaaktionsplan, dem Ratsinformationssystem und dem Marktstammdatenregister. Und wir haben auch mit dem Bürgermeister gesprochen. Weitergehende Informationen zum Monitoring bekommst Du bei Dina Durchblick unter dina@beispiel-los.de.",
+    "logo": "uploads/2024/04/20/MuenchenZero180x180_bnM5bZs.png",
     "featured_image": "uploads/2023/09/01/Fotos-alle-1024x683_SEEJ1JR.jpeg"
   }
 },
