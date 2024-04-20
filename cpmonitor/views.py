@@ -293,6 +293,7 @@ def cap_checklist_view(request, city_slug):
             "breadcrumbs": breadcrumbs,
             "city": city,
             "cap_checklist": _get_cap_checklist(city),
+            "local_group": getattr(city, "local_group", None),
         }
     )
     return render(request, "cap_checklist.html", context)
@@ -326,6 +327,7 @@ def administration_checklist_view(request, city_slug):
             "breadcrumbs": breadcrumbs,
             "city": city,
             "administration_checklist": _get_administration_checklist(city),
+            "local_group": getattr(city, "local_group", None),
         }
     )
 
@@ -360,6 +362,7 @@ def energy_plan_checklist_view(request, city_slug):
             "breadcrumbs": breadcrumbs,
             "city": city,
             "energy_plan_checklist": _get_energy_plan_checklist(city),
+            "local_group": getattr(city, "local_group", None),
         }
     )
 
@@ -427,7 +430,13 @@ def task_view(request, city_slug, task_slugs=None):
         groups, tasks = _get_children(request, city)
 
         context.update(
-            {"breadcrumbs": breadcrumbs, "city": city, "groups": groups, "tasks": tasks}
+            {
+                "breadcrumbs": breadcrumbs,
+                "city": city,
+                "groups": groups,
+                "tasks": tasks,
+                "local_group": getattr(city, "local_group", None),
+            }
         )
 
         return render(
@@ -452,7 +461,13 @@ def task_view(request, city_slug, task_slugs=None):
         for ancestor in task.get_ancestors()
     ] + [{"label": task.title, "url": reverse("task", args=[city_slug, task.slugs])}]
 
-    context.update({"breadcrumbs": breadcrumbs, "city": city})
+    context.update(
+        {
+            "breadcrumbs": breadcrumbs,
+            "city": city,
+            "local_group": getattr(city, "local_group", None),
+        }
+    )
 
     if task.is_leaf():
         context.update({"task": task})
