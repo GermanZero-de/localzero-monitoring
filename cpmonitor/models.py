@@ -1135,11 +1135,16 @@ class LocalGroup(models.Model):
             </ul>
         """,
     )
+    logo = models.ImageField(
+        "Logo",
+        blank=True,
+        upload_to="uploads/%Y/%m/%d/",
+    )
     featured_image = models.ImageField(
         "Bild der Lokalgruppe",
         blank=True,
         upload_to="uploads/%Y/%m/%d/",
-        help_text="Ein Foto oder Logo der Lokalgruppe, mindestens 500 Pixel breit und 300 Pixel hoch.",
+        help_text="Mindestens 500 Pixel breit und 300 Pixel hoch.",
     )
 
     def save(self):
