@@ -13,12 +13,12 @@ $(document).ready(function () {
       drop(event, this);
     });
 
-  $(".column-drop-area")
+  $(".dropping-area")
     .on("dragover", function (event) {
-      onDragOverColumnDropArea(event);
+      onDragOverDroppingArea(event);
     })
     .on("dragleave", function (event) {
-      onDragLeaveColumnDropArea(event);
+      onDragLeaveDroppingArea(event);
     })
     .on("drop", function (event) {
       drop(event, this);
@@ -38,10 +38,10 @@ $(document).ready(function () {
     }
   }
 
-  function onDragOverColumnDropArea(event) {
+  function onDragOverDroppingArea(event) {
     event.preventDefault();
-    const columnDropAreaClass = event.currentTarget.id;
-    const target = document.getElementById(columnDropAreaClass);
+    const droppingAreaClass = event.currentTarget.id;
+    const target = document.getElementById(droppingAreaClass);
     target.classList.add("drag-over-middle");
   }
 
@@ -60,10 +60,10 @@ $(document).ready(function () {
     target.classList.remove("drag-over-top", "drag-over-middle");
   }
 
-  function onDragLeaveColumnDropArea(event) {
+  function onDragLeaveDroppingArea(event) {
     event.preventDefault();
-    const columnDropAreaClass = event.currentTarget.id;
-    const target = document.getElementById(columnDropAreaClass);
+    const droppingAreaClass = event.currentTarget.id;
+    const target = document.getElementById(droppingAreaClass);
     target.classList.remove("drag-over-middle");
   }
 
