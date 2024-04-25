@@ -5,7 +5,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cpmonitor", "0041_city_supporting_ngos_task_supporting_ngos"),
+        ("cpmonitor", "0042_localgroup_logo_alter_localgroup_featured_image"),
     ]
 
     operations = [

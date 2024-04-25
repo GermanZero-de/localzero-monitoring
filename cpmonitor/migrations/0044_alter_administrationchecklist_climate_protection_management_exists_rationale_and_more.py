@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cpmonitor", "0042_alter_administrationchecklist_options_and_more"),
+        ("cpmonitor", "0043_alter_administrationchecklist_options_and_more"),
     ]
 
     operations = [

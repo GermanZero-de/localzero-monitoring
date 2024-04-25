@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
     dependencies = [
         (
             "cpmonitor",
-            "0043_alter_administrationchecklist_climate_protection_management_exists_rationale_and_more",
+            "0044_alter_administrationchecklist_climate_protection_management_exists_rationale_and_more",
         ),
     ]
 
