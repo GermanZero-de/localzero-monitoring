@@ -303,3 +303,41 @@ def test_should_move_the_task_below_the_chosen_task_when_moving_a_task_on_anothe
     expect(dragged_task.locator("//parent::div").get_by_role("img")).to_have_class(
         "inline marginleft-1"
     )
+
+
+def test_should_add_the_checklist_to_the_respective_city_when_clicking_add_new_cap_checklist(
+    live_server, page: Page
+):
+    # when
+    admin_login(live_server.url, page)
+    go_to_cap_edit_board(page, "Ohnenix")
+    page.get_by_text("Checkliste zum KAP").get_by_role(
+        "link", name="hinzufügen"
+    ).click()
+
+    # then
+    expect(page.get_by_label("Stadt")).to_contain_text("Ohnenix")
+    page.get_by_label("Gibt es einen Klima-Aktionsplan").check()
+    page.get_by_role("button", name="Sichern", exact=True).first.click()
+
+
+def test_should_show_the_checkist_add_button_when_a_checklist_was_deleted(
+    live_server, page: Page
+):
+    # when
+    admin_login(live_server.url, page)
+    go_to_cap_edit_board(page, "Beispielstadt")
+    page.get_by_text("Checkliste zum KAP").get_by_role("link", name="löschen").click()
+    page.get_by_text("Ja, ich bin sicher").click()
+
+    # then
+    go_to_cap_edit_board(page, "Beispielstadt")
+    expect(
+        page.get_by_text("Checkliste zum KAP").get_by_role("link", name="löschen")
+    ).not_to_be_visible()
+    expect(
+        page.get_by_text("Checkliste zum KAP").get_by_role("link", name="editieren")
+    ).not_to_be_visible()
+    expect(
+        page.get_by_text("Checkliste zum KAP").get_by_role("link", name="hinzufügen")
+    ).to_be_visible()
