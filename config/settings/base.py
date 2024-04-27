@@ -144,9 +144,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "cpmonitor" / "static",
+    ("bootstrap", os.path.join(BASE_DIR, "node_modules", "bootstrap", "dist", "js")),
     ("jquery", os.path.join(BASE_DIR, "node_modules", "jquery", "dist")),
-    ("tabler", os.path.join(BASE_DIR, "node_modules", "@tabler", "core", "dist")),
-    ("tabler-icons", os.path.join(BASE_DIR, "node_modules", "@tabler", "icons")),
 ]
 
 # Default primary key field type
