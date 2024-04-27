@@ -20,7 +20,16 @@ $lz-yellow: #ffc80c;
 }
 
 .card {
-  --tblr-card-border-color: #777;
+  border-radius: 0;
+  border: 0;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 50px),
+    calc(100% - 50px) 100%,
+    0 100%
+  );
+  background-color: $lz-yellow;
 }
 
 .progress {
