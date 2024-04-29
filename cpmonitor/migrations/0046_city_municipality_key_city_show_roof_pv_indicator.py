@@ -7,7 +7,7 @@ class Migration(migrations.Migration):
     dependencies = [
         (
             "cpmonitor",
-            "0037_alter_administrationchecklist_intersectoral_concepts_exists_and_more",
+            "0045_alter_administrationchecklist_city_and_more",
         ),
     ]
 
