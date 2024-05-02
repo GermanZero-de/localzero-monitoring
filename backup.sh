@@ -26,6 +26,14 @@ docker exec djangoapp-${env} /bin/sh -c "tar -C $mediaDirectoryInContainer -cz -
 
 printf "Created a new backup in %s \n" "$directoryOfBackup"/"$date"
 
+# Save logs
+if [[ "${env}" = "production" ]]; then
+    directoryOfLogs="$directoryOfBackup"/production-logs/"$date"
+    mkdir -p ${directoryOfLogs}
+    docker logs nginx-${env} > "${directoryOfLogs}"/nginx.log
+    printf "Copied logs to %s \n" "${directoryOfLogs}"
+fi
+
 # delete the oldest backups
 cd "$directoryOfBackup"
 
