@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from django.http import Http404, JsonResponse
+from django.http import Http404, HttpResponseServerError, JsonResponse
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -617,7 +617,7 @@ def mstr_view(request, municipality_key):
     try:
         r = requests.get(url, params)
     except:
-        return HttpResponseServerError(500)
+        return HttpResponseServerError()
 
     data = r.json()["Data"]
 
