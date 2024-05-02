@@ -1,7 +1,7 @@
 name: Deploy
 on:
   push:
-    branches: [deploy-to-testing, deploy-to-production]
+    branches: [deploy-to-testing, newfe-to-testing, deploy-to-production]
   workflow_dispatch:
 
 jobs:
@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       environment: ${{ steps.determine-environment.outputs.environment }}
+      source:      ${{ steps.determine-environment.outputs.source }}
       url:         ${{ steps.determine-environment.outputs.url }}
     steps:
       - id: determine-environment
@@ -18,14 +19,21 @@ jobs:
           case $GITHUB_REF in
           refs/heads/deploy-to-production)
             echo "environment=production"
+            echo "source=main"
             echo "url=https://monitoring.localzero.net/"
             ;;
           refs/heads/deploy-to-testing)
             echo "environment=testing"
+            echo "source=main"
+            echo "url=https://monitoring-test.localzero.net/"
+            ;;
+          refs/heads/newfe-to-testing)
+            echo "environment=testing"
+            echo "source=newfe"
             echo "url=https://monitoring-test.localzero.net/"
             ;;
           *)
-            echo "not an environment: $GITHUB_REF - should be refs/heads/deploy-to-{testing|production}"
+            echo "not an environment: $GITHUB_REF - should be refs/heads/deploy-to-{testing|production} or refs/heads/newfe-to-testing"
             ;;
           esac >> $GITHUB_OUTPUT
 
@@ -38,6 +46,7 @@ jobs:
       url:  ${{ needs.get-environment.outputs.url }}
     env:
       ENVIRONMENT: ${{ needs.get-environment.outputs.environment }}
+      SOURCE: ${{ needs.get-environment.outputs.source }}
       URL: ${{ needs.get-environment.outputs.url }}
       DIR: ${{ vars.DEPLOY_TO_DIR }} # Set here: https://github.com/GermanZero-de/klimaschutzmonitor/settings/variables/actions
 
@@ -62,7 +71,7 @@ jobs:
           chmod u+x deploy.sh
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
-          ./deploy.sh "$ENVIRONMENT"
+          ./deploy.sh "$ENVIRONMENT" "$SOURCE"
 
       - name: Restore last production backup to testing if we deployed to testing
         if: needs.get-environment.outputs.environment == 'testing'
