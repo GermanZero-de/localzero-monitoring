@@ -1,11 +1,11 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
 from . import views
+from .admin import admin_site
 from .views import SelectCityView, CapEditView, move_task
 
 prefix_kommune = ""
@@ -26,7 +26,7 @@ urlpatterns = [
         name="edit-cap",
     ),
     path("admin/cap/task/move/<int:pk>/", login_required(move_task)),
-    path("admin/", admin.site.urls),
+    path("admin/", admin_site.urls),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
     path("api/mstr/<slug:municipality_key>", views.mstr_view, name="mstr"),
     path("martor/", include("martor.urls")),

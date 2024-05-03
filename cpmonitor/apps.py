@@ -3,7 +3,7 @@ from django.contrib.admin.apps import AdminConfig
 
 
 class MyAdminConfig(AdminConfig):
-    default_site = "cpmonitor.admin.CapEditSite"
+    default_site = "cpmonitor.admin.AdminSite"
 
 
 class CpmonitorConfig(AppConfig):

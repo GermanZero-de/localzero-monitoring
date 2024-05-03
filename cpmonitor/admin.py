@@ -1,5 +1,7 @@
 from collections.abc import Sequence
 
+from allauth.account.models import EmailAddress
+from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
 from django.contrib import admin, messages
 from django.db import models
 from django.forms import TextInput
@@ -13,21 +15,30 @@ from rules.contrib.admin import ObjectPermissionsModelAdminMixin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 
-from cpmonitor.views import SelectCityView, CapEditView
+from cpmonitor.views import SelectCityView, CapEditView, _get_cities
 from . import rules, utils
 from .models import (
     Chart,
     City,
     Task,
-    AdministrationChecklist,
     LocalGroup,
     Invitation,
-    EnergyPlanChecklist,
     CapChecklist,
+    AdministrationChecklist,
+    EnergyPlanChecklist,
 )
 
 
-class CapEditSite(admin.AdminSite):
+class AdminSite(admin.AdminSite):
+    site_header = "LocalZero Monitoring"
+    site_title = "LocalZero Monitoring"
+    index_title = "Dateneingabe"
+
+    def index(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context["object_list"] = _get_cities(request)
+        return super().index(request, extra_context=extra_context)
+
     def get_urls(self):
         urlpatterns = super().get_urls()
         urlpatterns += [
@@ -41,7 +52,7 @@ class CapEditSite(admin.AdminSite):
         return urlpatterns
 
 
-admin.site = CapEditSite()
+admin_site = AdminSite()
 
 
 _city_filter_query = "city__id__exact"
@@ -385,12 +396,13 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
 
-admin.site.site_header = "LocalZero Monitoring"
-admin.site.site_title = "LocalZero Monitoring"
-admin.site.index_title = "Dateneingabe"
-
-admin.site.register(City, CityAdmin)
-admin.site.register(Task, TaskAdmin)
-admin.site.register(CapChecklist, ChecklistAdmin)
-admin.site.register(AdministrationChecklist, ChecklistAdmin)
-admin.site.register(EnergyPlanChecklist, ChecklistAdmin)
+admin_site.register(City, CityAdmin)
+admin_site.register(Task, TaskAdmin)
+admin_site.register(CapChecklist, ChecklistAdmin)
+admin_site.register(AdministrationChecklist, ChecklistAdmin)
+admin_site.register(EnergyPlanChecklist, ChecklistAdmin)
+# allauth
+admin_site.register(EmailAddress)
+admin_site.register(SocialApp)
+admin_site.register(SocialAccount)
+admin_site.register(SocialToken)
