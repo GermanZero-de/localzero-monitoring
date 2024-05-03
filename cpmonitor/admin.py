@@ -1,5 +1,7 @@
 from collections.abc import Sequence
 
+from allauth.account.models import EmailAddress
+from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
 from django.contrib import admin, messages
 from django.db import models
 from django.forms import TextInput
@@ -13,22 +15,30 @@ from rules.contrib.admin import ObjectPermissionsModelAdminMixin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 
-from cpmonitor.views import SelectCityView, CapEditView
-
+from cpmonitor.views import SelectCityView, CapEditView, _get_cities
 from . import rules, utils
 from .models import (
     Chart,
     City,
     Task,
-    CapChecklist,
-    AdministrationChecklist,
     LocalGroup,
     Invitation,
+    CapChecklist,
+    AdministrationChecklist,
     EnergyPlanChecklist,
 )
 
 
-class CapEditSite(admin.AdminSite):
+class AdminSite(admin.AdminSite):
+    site_header = "LocalZero Monitoring"
+    site_title = "LocalZero Monitoring"
+    index_title = "Dateneingabe"
+
+    def index(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context["object_list"] = _get_cities(request)
+        return super().index(request, extra_context=extra_context)
+
     def get_urls(self):
         urlpatterns = super().get_urls()
         urlpatterns += [
@@ -42,7 +52,7 @@ class CapEditSite(admin.AdminSite):
         return urlpatterns
 
 
-admin.site = CapEditSite()
+admin_site = AdminSite()
 
 
 _city_filter_query = "city__id__exact"
@@ -77,32 +87,6 @@ class ChartInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
 
     formfield_overrides = {
         models.CharField: {"widget": TextInput(attrs={"size": "100"})},
-        models.TextField: {"widget": AdminMartorWidget},
-    }
-
-
-class CapChecklistInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
-    model = CapChecklist
-
-    formfield_overrides = {
-        models.TextField: {"widget": AdminMartorWidget},
-    }
-
-
-class AdministrationChecklistInline(
-    ObjectPermissionsModelAdminMixin, admin.StackedInline
-):
-    model = AdministrationChecklist
-
-    formfield_overrides = {
-        models.TextField: {"widget": AdminMartorWidget},
-    }
-
-
-class EnergyPlanChecklistInline(ObjectPermissionsModelAdminMixin, admin.StackedInline):
-    model = EnergyPlanChecklist
-
-    formfield_overrides = {
         models.TextField: {"widget": AdminMartorWidget},
     }
 
@@ -143,6 +127,28 @@ class InvitationInline(
         )
 
 
+class ChecklistAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMartorWidget},
+    }
+
+    save_on_top = True
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ("city",)
+        else:
+            return ()
+
+    def get_changeform_initial_data(self, request: HttpRequest):
+        query_string = self.get_preserved_filters(request)
+        filters = QueryDict(query_string).get("_changelist_filters")
+        city_id = QueryDict(filters).get(_city_filter_query)
+        return {
+            "city": city_id,
+        }
+
+
 class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     # ------ change list page ------
     list_display = ("zipcode", "name", "teaser", "edit_tasks")
@@ -165,7 +171,9 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
         This is the only entry point to reach the changelist for the tasks.
         """
         list_url = _admin_url(Task, "changelist", city.id)
-        return format_html('<a href="{}">KAP bearbeiten</a>', list_url)
+        return format_html(
+            '<a href="{}">Handlungsfelder / Maßnahmen bearbeiten</a>', list_url
+        )
 
     # ------ change / add page ------
     save_on_top = True
@@ -189,9 +197,6 @@ class CityAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
     inlines = [
         ChartInline,
         LocalGroupInline,
-        CapChecklistInline,
-        AdministrationChecklistInline,
-        EnergyPlanChecklistInline,
         InvitationInline,
     ]
 
@@ -315,7 +320,7 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         if city_id and rules.is_allowed_to_edit(request.user, int(city_id)):
             return super().changelist_view(request)
 
-        msg = "Bitte eine Stadt auswählen, für die Sektoren / Maßnahmen geändert werden sollen. Rechts davon 'KAP bearbeiten' wählen."
+        msg = "Bitte eine Stadt auswählen, für die Handlungsfelder / Maßnahmen geändert werden sollen. Rechts davon 'Handlungsfelder / Maßnahmen bearbeiten' wählen."
         self.message_user(request, msg, messages.INFO)
         return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
@@ -386,14 +391,18 @@ class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
         if city_id and rules.is_allowed_to_edit(request.user, int(city_id)):
             return super().add_view(request, form_url, extra_context)
 
-        msg = "Bitte eine Stadt auswählen, für die ein Sektor / eine Maßnahme hinzugefügt werden soll. Rechts davon 'KAP bearbeiten' wählen."
+        msg = "Bitte eine Stadt auswählen, für die Handlungsfelder / Maßnahmen geändert werden sollen. Rechts davon 'Handlungsfelder / Maßnahmen bearbeiten' wählen."
         self.message_user(request, msg, messages.INFO)
         return HttpResponseRedirect(_admin_url(City, "changelist", None))
 
 
-admin.site.site_header = "LocalZero Monitoring"
-admin.site.site_title = "LocalZero Monitoring"
-admin.site.index_title = "Dateneingabe"
-
-admin.site.register(City, CityAdmin)
-admin.site.register(Task, TaskAdmin)
+admin_site.register(City, CityAdmin)
+admin_site.register(Task, TaskAdmin)
+admin_site.register(CapChecklist, ChecklistAdmin)
+admin_site.register(AdministrationChecklist, ChecklistAdmin)
+admin_site.register(EnergyPlanChecklist, ChecklistAdmin)
+# allauth
+admin_site.register(EmailAddress)
+admin_site.register(SocialApp)
+admin_site.register(SocialAccount)
+admin_site.register(SocialToken)

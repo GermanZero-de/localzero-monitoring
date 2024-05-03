@@ -55,6 +55,9 @@ class City(models.Model):
         """,
     )
     zipcode = models.CharField("PLZ", max_length=5)
+    municipality_key = models.CharField(
+        "Gemeindeschlüssel", max_length=8, blank=True, null=True
+    )
     url = models.URLField("Homepage", blank=True)
 
     city_editors = models.ManyToManyField(
@@ -86,6 +89,15 @@ class City(models.Model):
 
     target_year = models.IntegerField(
         "Zieljahr Klimaneutralität", blank=True, null=True, help_text="z.B. 2035"
+    )
+
+    show_roof_pv_indicator = models.BooleanField(
+        "Graphik Entwicklung Dach-PV",
+        default=False,
+        help_text="""
+            Graphik zur Entwicklung der Dach-PV anzeigen. Daten werden automatisch aus dem
+            Marktstammdatenregister bezogen. Der Gemeindeschlüssel muss dazu ausgefüllt sein.
+        """,
     )
 
     teaser = models.CharField(
@@ -221,10 +233,17 @@ class City(models.Model):
 
 class CapChecklist(models.Model):
     class Meta:
-        verbose_name = "KAP Checkliste"
+        verbose_name = "Checkliste zum KAP"
+        verbose_name_plural = "Checklisten zum KAP"
+
+    def __str__(self):
+        return "Checkliste zum KAP für " + self.city.name
 
     city = models.OneToOneField(
-        City, on_delete=models.PROTECT, related_name="cap_checklist"
+        City,
+        on_delete=models.PROTECT,
+        related_name="cap_checklist",
+        verbose_name="Stadt",
     )
 
     cap_exists = models.BooleanField(
@@ -239,7 +258,7 @@ class CapChecklist(models.Model):
         "Bereichen der Kommune von Bedeutung.",
     )
     cap_exists_rationale = models.TextField(
-        "Begründung zu: Gibt es einen Klima-Aktionsplan?",
+        "Begründung",
         blank=True,
     )
     target_date_exists = models.BooleanField(
@@ -252,7 +271,7 @@ class CapChecklist(models.Model):
         "eingespart werden.",
     )
     target_date_exists_rationale = models.TextField(
-        "Begründung zu: Ist im Klima-Aktionsplan ein Zieljahr der Klimaneutralität hinterlegt",
+        "Begründung",
         blank=True,
     )
     based_on_remaining_co2_budget = models.BooleanField(
@@ -265,7 +284,7 @@ class CapChecklist(models.Model):
         "überschreiten darf.",
     )
     based_on_remaining_co2_budget_rationale = models.TextField(
-        "Begründung zu: Sind die Einsparziele im Klima-Aktionsplan auf Grundlage des Restbudgets berechnet?",
+        "Begründung",
         blank=True,
     )
     sectors_of_climate_vision_used = models.BooleanField(
@@ -280,7 +299,7 @@ class CapChecklist(models.Model):
         "muss und vor allem in den fehlenden Sektoren trotzdem Maßnahmen entwickelt werden sollten.",
     )
     sectors_of_climate_vision_used_rationale = models.TextField(
-        "Begründung zu: Bilanziert der Klima-Aktionsplan vollständig, zum Beispiel in den Sektoren der Klimavision?",
+        "Begründung",
         blank=True,
     )
     scenario_for_climate_neutrality_till_2035_exists = models.BooleanField(
@@ -292,7 +311,7 @@ class CapChecklist(models.Model):
         "Oft ist im KAP ein weiteres Szenario mit einem anderen Zieljahr hinterlegt zum Bsp. 2040 oder 2045",
     )
     scenario_for_climate_neutrality_till_2035_exists_rationale = models.TextField(
-        "Begründung zu: Enthält der Klima-Aktionsplan ein Szenario mit dem Ziel Klimaneutralität bis 2035?",
+        "Begründung",
         blank=True,
     )
     scenario_for_business_as_usual_exists = models.BooleanField(
@@ -304,7 +323,7 @@ class CapChecklist(models.Model):
         "Einfluss auf kommunale Emissionen haben (Bsp: veränderter Bundesdeutscher Strommix).",
     )
     scenario_for_business_as_usual_exists_rationale = models.TextField(
-        "Begründung zu: Ist ein Trendszenario hinterlegt?",
+        "Begründung",
         blank=True,
     )
     annual_costs_are_specified = models.BooleanField(
@@ -317,7 +336,7 @@ class CapChecklist(models.Model):
         "ermittelt werden.",
     )
     annual_costs_are_specified_rationale = models.TextField(
-        "Begründung zu: Sind die jährlichen Kosten und der jährliche Personalbedarf der Maßnahmen ausgewiesen?",
+        "Begründung",
         blank=True,
     )
     tasks_are_planned_yearly = models.BooleanField(
@@ -332,7 +351,7 @@ class CapChecklist(models.Model):
         "den kleinen Emissionsquellen Maßnahmen ergriffen werden.",
     )
     tasks_are_planned_yearly_rationale = models.TextField(
-        "Begründung zu: Haben die Maßnahmen eine jahresscharfe Planung?",
+        "Begründung",
         blank=True,
     )
     tasks_have_responsible_entity = models.BooleanField(
@@ -344,7 +363,7 @@ class CapChecklist(models.Model):
         "die kommunale Tochter oder sogar die zuständige Sachbearbeitung genannt werden.",
     )
     tasks_have_responsible_entity_rationale = models.TextField(
-        "Begründung zu: Sind verantwortliche Personen/Fachbereiche/kommunale Gesellschaften für alle Maßnahmen hinterlegt?",
+        "Begründung",
         blank=True,
     )
     annual_reduction_of_emissions_can_be_predicted = models.BooleanField(
@@ -356,7 +375,7 @@ class CapChecklist(models.Model):
         "wird der Weg zur Treibhausgasneutralität klar erkennbar und zu kompensierende Emissionen sichtbar.",
     )
     annual_reduction_of_emissions_can_be_predicted_rationale = models.TextField(
-        "Begründung zu: Wird anhand der Maßnahmen ein jährlicher Reduktionspfad des Energiebedarfs und der THG-Emissionen ersichtlich?",
+        "Begründung",
         blank=True,
     )
     concept_for_participation_specified = models.BooleanField(
@@ -368,17 +387,24 @@ class CapChecklist(models.Model):
         "z.B. kommunale Unternehmen oder Vereine).",
     )
     concept_for_participation_specified_rationale = models.TextField(
-        "Begründung zu: Gibt es ein gutes Konzept zur Akteur:innenbeteiligung?",
+        "Begründung",
         blank=True,
     )
 
 
 class AdministrationChecklist(models.Model):
     class Meta:
-        verbose_name = "Verwaltungsstrukturen Checkliste"
+        verbose_name = "Checkliste zu Verwaltungsstrukturen"
+        verbose_name_plural = "Checklisten zu Verwaltungsstrukturen"
+
+    def __str__(self):
+        return "Checkliste zu Verwaltungsstrukturen für " + self.city.name
 
     city = models.OneToOneField(
-        City, on_delete=models.PROTECT, related_name="administration_checklist"
+        City,
+        on_delete=models.PROTECT,
+        related_name="administration_checklist",
+        verbose_name="Stadt",
     )
 
     climate_protection_management_exists = models.BooleanField(
@@ -392,8 +418,7 @@ class AdministrationChecklist(models.Model):
         "unterstellt ist, sondern selber ein Fachdienst.",
     )
     climate_protection_management_exists_rationale = models.TextField(
-        "Begründung zu: Gibt es ein Klimaschutzmanagement, das befugt ist, Entscheidungen zu treffen und"
-        " über Haushaltsmittel verfügt?",
+        "Begründung",
         blank=True,
     )
     climate_relevance_check_exists = models.BooleanField(
@@ -412,7 +437,7 @@ class AdministrationChecklist(models.Model):
         "Beschlüsse werden somit bereits während der Erstellung durch die Sachbearbeiter:innen in den Fachbereichen auf ihre Klimarelevanz hin (vor-)bewertet und Aspekte des Klimaschutzes sind automatisch integraler Bestandteil jeder Beschlussfassung. Klimafolgen werden somit transparent, Politiker:innen können fundierter entscheiden. Langfristig baut die Kommune Kompetenzen auf, um die Auswirkung auf das Klima bei allen relevanten Entscheidungen zu berücksichtigen.",
     )
     climate_relevance_check_exists_rationale = models.TextField(
-        "Begründung zu: Klimarelevanzprüfung: werden alle Beschlüsse von Verwaltung und Politik auf die Auswirkungen auf das Klima geprüft?",
+        "Begründung",
         blank=True,
     )
     climate_protection_monitoring_exists = models.BooleanField(
@@ -426,7 +451,7 @@ class AdministrationChecklist(models.Model):
         "behalten.",
     )
     climate_protection_monitoring_exists_rationale = models.TextField(
-        "Begründung zu: Gibt es ein Monitoring von Kimaschutzmaßnahmen?",
+        "Begründung",
         blank=True,
     )
     intersectoral_concepts_exists = models.BooleanField(
@@ -440,7 +465,7 @@ class AdministrationChecklist(models.Model):
         "das Kimaschutz eine zentrale Rolle spielt.",
     )
     intersectoral_concepts_exists_rationale = models.TextField(
-        "Begründung zu: Beziehen (sektorenübergreifende) Konzepte und Planungspapiere Klimaschutz mit ein?",
+        "Begründung",
         blank=True,
     )
     guidelines_for_sustainable_procurement_exists = models.BooleanField(
@@ -455,7 +480,7 @@ class AdministrationChecklist(models.Model):
         "Beschaffungsleitfaden als Organisationsziel definiert werden.",
     )
     guidelines_for_sustainable_procurement_exists_rationale = models.TextField(
-        "Begründung zu: Gibt es Richtlinien für ein nachhaltiges Beschaffungswesen?",
+        "Begründung",
         blank=True,
     )
     municipal_office_for_funding_management_exists = models.BooleanField(
@@ -466,7 +491,7 @@ class AdministrationChecklist(models.Model):
         "und dafür sorgen, dass effizient an Klimaschutz gearbeitet werden kann.",
     )
     municipal_office_for_funding_management_exists_rationale = models.TextField(
-        "Begründung zu: Gibt es eine eigene kommunale Stelle für Fördermittelmanagement (unter anderem Beantragung etc. für den Klimaschutz)?",
+        "Begründung",
         blank=True,
     )
     public_relation_with_local_actors_exists = models.BooleanField(
@@ -476,17 +501,24 @@ class AdministrationChecklist(models.Model):
         "Lokalpolitik beraten. Um politischen Einfluss auszuüben sollten diese regelmäßig tagen.",
     )
     public_relation_with_local_actors_exists_rationale = models.TextField(
-        "Begründung zu: Gibt es einen Klimabeirat/Klimarat/Bürger:innenrat? Ist so ein Gremium in der Kommune eingerichtet und tagt regelmäßig?",
+        "Begründung",
         blank=True,
     )
 
 
 class EnergyPlanChecklist(models.Model):
     class Meta:
-        verbose_name = "Wärmeplanung Checkliste"
+        verbose_name = "Checkliste zur Wärmeplanung"
+        verbose_name_plural = "Checklisten zur Wärmeplanung"
+
+    def __str__(self):
+        return "Checkliste zur Wärmeplanung für " + self.city.name
 
     city = models.OneToOneField(
-        City, on_delete=models.PROTECT, related_name="energy_plan_checklist"
+        City,
+        on_delete=models.PROTECT,
+        related_name="energy_plan_checklist",
+        verbose_name="Stadt",
     )
 
     energy_plan_exists = models.BooleanField(
@@ -1135,11 +1167,16 @@ class LocalGroup(models.Model):
             </ul>
         """,
     )
+    logo = models.ImageField(
+        "Logo",
+        blank=True,
+        upload_to="uploads/%Y/%m/%d/",
+    )
     featured_image = models.ImageField(
         "Bild der Lokalgruppe",
         blank=True,
         upload_to="uploads/%Y/%m/%d/",
-        help_text="Ein Foto oder Logo der Lokalgruppe, mindestens 500 Pixel breit und 300 Pixel hoch.",
+        help_text="Mindestens 500 Pixel breit und 300 Pixel hoch.",
     )
 
     def save(self):

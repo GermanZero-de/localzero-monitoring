@@ -1,3 +1,4 @@
+name: Delete unused uploaded images
 on:
   schedule:
     - cron:  '0 0 * * *'

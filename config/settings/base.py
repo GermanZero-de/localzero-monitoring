@@ -144,6 +144,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "cpmonitor" / "static",
+    ("apexcharts", os.path.join(BASE_DIR, "node_modules", "apexcharts", "dist")),
     ("jquery", os.path.join(BASE_DIR, "node_modules", "jquery", "dist")),
     ("tabler", os.path.join(BASE_DIR, "node_modules", "@tabler", "core", "dist")),
     ("tabler-icons", os.path.join(BASE_DIR, "node_modules", "@tabler", "icons")),
@@ -172,6 +173,20 @@ MEDIA_URL = "images/"
 MARTOR_UPLOAD_PATH = "uploads/"
 MARTOR_UPLOAD_URL = "/api/uploader/"
 MAX_IMAGE_UPLOAD_SIZE = 104857600  # 100 MB
+
+MARTOR_MARKDOWN_EXTENSIONS = [
+    "markdown.extensions.extra",
+    "markdown.extensions.nl2br",
+    "markdown.extensions.smarty",
+    "markdown.extensions.fenced_code",
+    "markdown.extensions.sane_lists",
+    "martor.extensions.urlize",
+    "martor.extensions.del_ins",
+    "martor.extensions.mention",
+    "martor.extensions.emoji",
+    "martor.extensions.mdx_video",
+    # 'martor.extensions.escape_html',  # remove the extension to be able to use html in martor fields
+]
 
 # django-allauth configuration:
 # https://django-allauth.readthedocs.io/en/latest/configuration.html

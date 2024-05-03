@@ -1,5 +1,6 @@
-{% extends "base.html" %}
+{% extends "city-base.html" %}
 {% load martortags %}
+{% load static %}
 {% block title %}
   LocalZero Monitoring - {{ city.name }}
 {% endblock title %}
@@ -55,7 +56,7 @@
           <div>
             <h4 class="my-0">Zuständige Instanz</h4>
           </div>
-          <span>{{ task.responsible_organ | default:"--" }}</span>
+          <span class="text-align-right">{{ task.responsible_organ | default:"--" }}</span>
         </li>
       </ul>
     </div>
