@@ -134,6 +134,15 @@ class ChecklistAdmin(ObjectPermissionsModelAdminMixin, admin.ModelAdmin):
 
     save_on_top = True
 
+    def get_queryset(self, request):
+        "Only show checklists in the changelist if the user has permissions."
+        queryset = super().get_queryset(request)
+        if request.user.is_superuser:
+            return queryset
+        return queryset.filter(
+            rules.is_allowed_to_edit_q(request.user, None)
+        ).distinct()
+
     def get_readonly_fields(self, request, obj=None):
         if obj:
             return ("city",)
