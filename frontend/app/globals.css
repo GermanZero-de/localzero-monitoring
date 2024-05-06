@@ -1,0 +1,39 @@
+:root {
+
+  --bs-primary-rgb: 255, 200, 12;
+  --bs-border-radius: 0;
+  --max-width: 1100px;
+  --border-radius: 0;
+
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+}
+
+.dropdown-toggle::after {
+  color: rgb(var(--bs-primary-rgb));
+  display: inline-block;
+  margin-left: -50%;
+  margin-bottom: -15%;
+  vertical-align: .255em;
+  content: "";
+  border-top: 0.25em solid;
+  border-right: 0.25em solid;
+  border-bottom: 0;
+  border-left: 0;
+  top: 0;
+  transform: rotate(135deg);
+  width: 0.75em;
+  height: 0.75em;
+}
+
+.dropdown-menu {
+  --bs-dropdown-padding-y: 0;
+  background-color: rgb(255, 200, 12);
+}
+
+.dropdown-item{
+  border-bottom: 1px solid;
+  padding: 10px 50px;
+  font-weight: bold;
+}
