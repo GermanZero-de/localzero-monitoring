@@ -16,7 +16,7 @@ _always_false_q: Q = Q(pk__in=[])
 _always_true_q: Q = ~_always_false_q
 
 
-def is_allowed_to_edit_q(user: User, model: Model) -> Q:
+def is_allowed_to_edit_q(user: User, model: Model | None) -> Q:
     """
     Return a Q object to filter objects to which a user has access.
     This may be used with `QuerySet.filter`, but also with `limit_choices_to`.
