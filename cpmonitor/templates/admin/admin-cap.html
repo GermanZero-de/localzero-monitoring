@@ -8,6 +8,44 @@
 {% endblock extrahead %}
 {% block content %}
   {% csrf_token %}
+  <h2 class="admin-h2">Checklisten</h2>
+  <div>
+    Checkliste zum KAP
+    {% if cap_checklist_id == None %}
+      <a href="{% admin_reverse 'capchecklist' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
+         class="addlink">hinzufügen</a>
+    {% else %}
+      <a href="{% admin_reverse 'capchecklist' 'change' cap_checklist_id %}"
+         class="changelink">editieren</a>
+      <a href="{% admin_reverse 'capchecklist' 'delete' cap_checklist_id %}"
+         class="deletelink">löschen</a>
+    {% endif %}
+  </div>
+  <div>
+    Checkliste zu Verwaltungsstrukturen
+    {% if administration_checklist_id == None %}
+      <a href="{% admin_reverse 'administrationchecklist' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
+         class="addlink">hinzufügen</a>
+    {% else %}
+      <a href="{% admin_reverse 'administrationchecklist' 'change' administration_checklist_id %}"
+         class="changelink">editieren</a>
+      <a href="{% admin_reverse 'administrationchecklist' 'delete' administration_checklist_id %}"
+         class="deletelink">löschen</a>
+    {% endif %}
+  </div>
+  <div>
+    Checkliste zur Wärmeplanung
+    {% if energy_plan_checklist_id == None %}
+      <a href="{% admin_reverse 'energyplanchecklist' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
+         class="addlink">hinzufügen</a>
+    {% else %}
+      <a href="{% admin_reverse 'energyplanchecklist' 'change' energy_plan_checklist_id %}"
+         class="changelink">editieren</a>
+      <a href="{% admin_reverse 'energyplanchecklist' 'delete' energy_plan_checklist_id %}"
+         class="deletelink">löschen</a>
+    {% endif %}
+  </div>
+  <h2 class="admin-h2">KAP Board</h2>
   <div>
     <a href="{% admin_reverse 'task' 'add' _changelist_filters='city__id__exact%3D'|add:city_id %}"
        class="addlink">Handlungsfeld hinzufügen</a>
@@ -44,6 +82,7 @@
                     </div>
                   {% endwith %}
                 {% endfor %}
+                <div class="dropping-area" id="column_drop_area-{{ column.pk }}">&nbsp;</div>
                 <div>
                   <a href="{% admin_reverse 'task' 'add' %}?_changelist_filters=city__id__exact={{ city_id }}&position=last-child&relative_to={{ column.pk }}"
                      class="addlink">Neue Maßnahme hinzufügen</a>
