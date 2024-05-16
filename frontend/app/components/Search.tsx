@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { db } from "./db/db.server";
 import { cpmonitorCity } from "./db/schema";
+import { Card, Col, ListGroup, Row } from "react-bootstrap";
+import styles from "./Search.module.scss";
 
 export default function Search(props) {
   const [filteredCities, setFilteredCities] = useState([]);
@@ -17,14 +19,29 @@ export default function Search(props) {
   };
 
   return (
-    <>
-      <div>Suche Kommune</div>
-      <input type="text" placeholder="Name oder PLZ" onChange={search} />
-      <ul>
-        {filteredCities.map((city) => (
-          <li key={city.name}>{city.name}</li>
-        ))}
-      </ul>
-    </>
+    <Row className={styles.background}>
+      <Col></Col>
+      <Col>
+        <Card className="border-0">
+          <Card.Body className={styles.search}>
+            <Card.Title>Suche Kommune</Card.Title>
+            <Card.Text>
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Name"
+                onChange={search}
+              />
+            </Card.Text>
+            <ListGroup>
+              {filteredCities.map((city) => (
+                <ListGroup.Item key={city.name}>{city.name}</ListGroup.Item>
+              ))}
+            </ListGroup>
+          </Card.Body>
+        </Card>
+      </Col>
+      <Col></Col>
+    </Row>
   );
 }

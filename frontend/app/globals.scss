@@ -1,4 +1,4 @@
-$gz-color: #ffc80c;
+@use 'common.scss';
 $gz-secondary-color: rgb(1, 22, 51);
 
 :root {
@@ -51,7 +51,7 @@ $gz-secondary-color: rgb(1, 22, 51);
 .dropdown-menu {
   --bs-dropdown-spacer: 0.75rem;
   --bs-dropdown-padding-y: 0;
-  background-color: $gz-color;
+  background-color: common.$gz-color;
 }
 
 .dropdown-item {
@@ -66,7 +66,7 @@ h2::before {
   top: 0;
   width: 73px;
   height: 8px;
-  background-color: $gz-color;
+  background-color: common.$gz-color;
 }
 
 @mixin heading {

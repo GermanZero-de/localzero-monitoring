@@ -1,0 +1,22 @@
+@use '../common.scss';
+
+.search {
+  background-color: common.$gz-color;
+}
+
+.input {
+  border-width: 0;
+  min-height: 30px;
+
+  &::placeholder {
+    opacity: 0.4;
+  }
+}
+
+.background {
+  background-image: url("../../public/background-green-city.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+}
