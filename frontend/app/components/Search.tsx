@@ -22,8 +22,8 @@ export default function Search(props) {
     <Row className={styles.background}>
       <Col></Col>
       <Col>
-        <Card className="border-0">
-          <Card.Body className={styles.search}>
+        <Card className={styles.card}>
+          <Card.Body>
             <Card.Title>Suche Kommune</Card.Title>
             <Card.Text>
               <input
