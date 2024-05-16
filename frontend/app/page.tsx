@@ -1,5 +1,5 @@
 import Image from "next/image";
-import banner from "../public/dashboard-banner.jpg";
+import banner from "../public/images/dashboard-banner.jpg";
 import styles from "./page.module.scss";
 import { Container } from "react-bootstrap";
 
