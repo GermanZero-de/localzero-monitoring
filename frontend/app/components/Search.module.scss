@@ -3,11 +3,15 @@
 .input {
   border-width: 0;
   min-height: 30px;
-  min-width: 280px;
+  width: 280px;
 
   &::placeholder {
     opacity: 0.4;
   }
+}
+
+.listItem {
+    width: 280px;
 }
 
 .background {

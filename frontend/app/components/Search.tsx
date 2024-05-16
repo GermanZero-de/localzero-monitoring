@@ -32,12 +32,12 @@ export default function Search(props) {
                 placeholder="Name"
                 onChange={search}
               />
+              <ListGroup>
+                {filteredCities.map((city) => (
+                  <ListGroup.Item className={styles.listItem} key={city.name}>{city.name}</ListGroup.Item>
+                ))}
+              </ListGroup>
             </Card.Text>
-            <ListGroup>
-              {filteredCities.map((city) => (
-                <ListGroup.Item key={city.name}>{city.name}</ListGroup.Item>
-              ))}
-            </ListGroup>
           </Card.Body>
         </Card>
       </Col>
