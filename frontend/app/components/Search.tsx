@@ -34,7 +34,9 @@ export default function Search(props) {
               />
               <ListGroup>
                 {filteredCities.map((city) => (
-                  <ListGroup.Item className={styles.listItem} key={city.name}>{city.name}</ListGroup.Item>
+                  <Link href={"/" + city.slug + "/"} key={city.slug}>
+                    <ListGroup.Item className={styles.listItem}>{city.name}</ListGroup.Item>
+                  </Link>
                 ))}
               </ListGroup>
             </Card.Text>
