@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import SocialIcon from "./SocialIcon";
+import styles from "./styles/Footer.module.scss"
 export default function Footer() {
   return (
     <div className="bg-secondary mt-auto">
@@ -15,20 +16,24 @@ export default function Footer() {
             </ul>
 
           </Col>
-          <Col className="text-center d-flex">
+          <Col className="text-center d-flex align-items-center">
               <SocialIcon name="facebook" link="https://de-de.facebook.com/GermanZero.NGO"/>
               <SocialIcon name="x" link="https://twitter.com/_germanzero"/>
               <SocialIcon name="youtube" link="https://www.youtube.com/channel/UCyio7GV0kpXeOu5m6Xo6A3A" />
               <SocialIcon name="linkedin" link="https://www.linkedin.com/company/germanzero/"/>
               <SocialIcon name="instagram" link="https://www.instagram.com/_GermanZero/"/>
            </Col>
-          <Col className="text-center">
-            <a href="/">logo</a>
+          <Col className="text-center d-flex align-items-center justify-content-end">
+
+              <a href="https://www.transparency.de/" rel="noopener nofollow" target="_blank">
+                <img alt="" src="/images/itz_weiss_transp.png" />
+
+                </a>
           </Col>
         </Row>
         <Row>
-          <Col className="text-center text-white">
-            Gebaut mit Kirby, gehostet mit 100% erneuerbarer Energie in der Schweiz durch ungleich glarus ag
+          <Col className={[styles.text,"text-center text-white"].join(" ")}>
+          <div className="align-items-top col d-flex footer-subline justify-content-center mt-3"><div>🌱 </div> <div> Gebaut mit <a href="https://getkirby.com/" target="_blank">Kirby</a>, gehostet mit 100% erneuerbarer Energie in der Schweiz durch <a href="https://datacenterlight.ch/" target="_blank">ungleich glarus ag</a> </div></div>
           </Col>
 
         </Row>

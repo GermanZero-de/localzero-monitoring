@@ -1,3 +1,4 @@
+'use client';
 import * as React from 'react'
 import styles from "./styles/SocialIcon.module.scss";
 import Image from 'next/image'
@@ -16,6 +17,7 @@ const SocialIcon: React.FC<Props> = ({ name, link }) => {
 return (
 <div className={styles.wrapper}>
 <img
+    onClick={() => window.open(link)}
       src={imgSrc}
       alt={name}
     />
