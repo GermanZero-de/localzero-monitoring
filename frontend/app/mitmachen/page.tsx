@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import { Container } from "react-bootstrap";
 import Card from "../components/Card";
 export default function Home() {
