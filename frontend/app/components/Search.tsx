@@ -13,7 +13,7 @@ export default function Search(props) {
     const searchTerm = event.target.value;
 
     const filteredCities = props.cities.filter((city) =>
-      city.name.toLowerCase().startsWith(searchTerm.toLowerCase()),
+      city.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setFilteredCities(filteredCities);
   };
