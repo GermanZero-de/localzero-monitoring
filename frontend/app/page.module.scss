@@ -1,6 +1,25 @@
 
 
 .banner {
-  height: 400px;
+  height: 440px;
   position: relative;
+}
+
+.textPrimary{
+  color: rgb(var(--bs-primary-rgb));
+  text-align: center;
+  width: 100%;
+  top: 290px;
+  font-size: 48px;
+  position: absolute;
+  z-index: 1;
+}
+.textSecondary{
+  width: 300px;
+  left: 50px;
+  top: 130px;
+  color: white;
+  font-size: 32px;
+  position: absolute;
+  z-index: 1;
 }

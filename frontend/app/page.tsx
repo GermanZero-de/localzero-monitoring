@@ -7,6 +7,9 @@ export default function Home() {
   return (
     <>
       <div className={styles.banner}>
+        <h1 className={styles.textPrimary}>Auf dem Weg zur Klimaneutralität</h1>
+        <h1 className={styles.textSecondary}>Klimaschutz-Monitoring von Kommunen</h1>
+
         <Image
           fill
           style={{ objectFit: "cover" }}
