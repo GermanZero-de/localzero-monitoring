@@ -7,6 +7,7 @@ $gz-secondary-color: rgb(1, 22, 51);
   --max-width: 1100px;
   --border-radius: 0;
   --bs-secondary-rgb: 1, 22, 51;
+
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
     "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -34,7 +35,7 @@ $gz-secondary-color: rgb(1, 22, 51);
   color: rgb(var(--bs-primary-rgb));
   display: inline-block;
   margin-left: -50%;
-  margin-bottom: -15%;
+  margin-bottom: -20%;
   vertical-align: 0.255em;
   content: "";
   border-top: 0.25em solid;
@@ -48,6 +49,7 @@ $gz-secondary-color: rgb(1, 22, 51);
 }
 
 .dropdown-menu {
+  --bs-dropdown-spacer: 0.75rem;
   --bs-dropdown-padding-y: 0;
   background-color: $gz-color;
 }

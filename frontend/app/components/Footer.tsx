@@ -26,14 +26,16 @@ export default function Footer() {
           <Col className="text-center d-flex align-items-center justify-content-end">
 
               <a href="https://www.transparency.de/" rel="noopener nofollow" target="_blank">
-                <img alt="" src="/images/itz_weiss_transp.png" />
+                <img alt="" height={50} src="/images/itz_weiss_transp.png" />
 
                 </a>
           </Col>
         </Row>
         <Row>
           <Col className={[styles.text,"text-center text-white"].join(" ")}>
-          <div className="align-items-top col d-flex footer-subline justify-content-center mt-3"><div>🌱 </div> <div> Gebaut mit <a href="https://getkirby.com/" target="_blank">Kirby</a>, gehostet mit 100% erneuerbarer Energie in der Schweiz durch <a href="https://datacenterlight.ch/" target="_blank">ungleich glarus ag</a> </div></div>
+          <div className="align-items-top col d-flex footer-subline justify-content-center mt-3"><div>LocalZero ist ein Teil von&nbsp;</div> <a className="link-underline-light link-light" href="https://germanzero.de/" target="_blank"> Germanzero e.V.</a></div>
+
+          <div className="align-items-top col d-flex footer-subline justify-content-center mt-3"><div>🌱 </div> <div> Gebaut mit <a className="link-underline-light link-light" href="https://getkirby.com/" target="_blank">Kirby</a>, gehostet mit 100% erneuerbarer Energie in der Schweiz durch <a className="link-underline-light link-light" href="https://datacenterlight.ch/" target="_blank">ungleich glarus ag</a> </div></div>
           </Col>
 
         </Row>
