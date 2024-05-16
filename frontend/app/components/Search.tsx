@@ -22,26 +22,22 @@ export default function Search(props) {
     <Row className={styles.background}>
       <Col></Col>
       <Col>
-        <Card className={styles.card}>
-          <Card.Body>
-            <Card.Title>Suche Kommune</Card.Title>
-            <Card.Text>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Name"
-                onChange={search}
-              />
-              <ListGroup>
-                {filteredCities.map((city) => (
-                  <Link href={"/" + city.slug + "/"} key={city.slug}>
-                    <ListGroup.Item className={styles.listItem}>{city.name}</ListGroup.Item>
-                  </Link>
-                ))}
-              </ListGroup>
-            </Card.Text>
-          </Card.Body>
-        </Card>
+        <div className={styles.searchMask}>
+          <h5 className={styles.searchMaskHeading}>Suche Kommune</h5>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Name"
+            onChange={search}
+          />
+          <ListGroup>
+            {filteredCities.map((city) => (
+              <Link href={"/" + city.slug + "/"} key={city.slug}>
+                <ListGroup.Item className={styles.listItem}>{city.name}</ListGroup.Item>
+              </Link>
+            ))}
+          </ListGroup>
+        </div>
       </Col>
       <Col></Col>
     </Row>
