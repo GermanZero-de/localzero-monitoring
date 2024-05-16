@@ -23,6 +23,7 @@ export default function Search(props) {
       <Col></Col>
       <Col>
         <div>
+          <div className={styles.shadow}>
           <div className={styles.searchMask}>
             <h5 className={styles.searchMaskHeading}>Suche Kommune</h5>
             <input
@@ -31,6 +32,7 @@ export default function Search(props) {
               placeholder="Name"
               onChange={search}
             />
+          </div>
           </div>
           <ListGroup className={styles.listGroup}>
             {filteredCities.map((city) => (
