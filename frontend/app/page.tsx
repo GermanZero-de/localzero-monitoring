@@ -19,20 +19,16 @@ export default function Home() {
       </div>
       <Container>
         <h1 style={{ textAlign: "center" }}>LocalZero Monitoring</h1>
-        <p className="pb-3 block-text">
-          ... ist eine Initiative von GermanZero, um mehr Transparenz zum
-          Fortschritt der Klimaneutralität deutscher Kommunen zu schaffen. Der
-          Fortschritt wird von ehrenamtlichen Lokalteams in den jeweiligen
-          Kommunen regelmäßig aktualisiert.
+        <p className="block-text pb-3">
+          ... ist eine Initiative von GermanZero, um mehr Transparenz zum Fortschritt der Klimaneutralität deutscher
+          Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den jeweiligen Kommunen regelmäßig
+          aktualisiert.
         </p>
         <h2>Kommunen im Monitoring</h2>
         <p className="pb-3">TODO: Kommunen</p>
         <h2>Entdecke lokalen Klimaschutz</h2>
         <p className="pb-3">TODO: Suche</p>
-        <h2>
-          LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der
-          jeweiligen Stadt betrieben.
-        </h2>
+        <h2>LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h2>
         <p className="pb-3">TODO: call to action tiles</p>
       </Container>
     </>

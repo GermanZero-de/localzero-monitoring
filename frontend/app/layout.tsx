@@ -10,11 +10,11 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "LocalZero Monitoring",
-  description: "Monitoring von Klimaschutz-Maßnahmen in LocalZero-Kommunen",
+  description: "Monitoring von Klimaschutz-Maßnahmen in LocalZero-Kommunen"
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
