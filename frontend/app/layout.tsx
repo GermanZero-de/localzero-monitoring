@@ -20,6 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
+      <head><link rel="icon" href="/favicon.svg" sizes="any" /></head>
       <body className={inter.className}>
         <Header />
         {children}
