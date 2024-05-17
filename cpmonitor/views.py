@@ -13,7 +13,6 @@ from django.contrib import admin
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import Http404, HttpResponseServerError, JsonResponse
@@ -22,12 +21,15 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView
 from invitations import views as invitations_views
 from invitations.adapters import get_invitations_adapter
 from invitations.app_settings import app_settings as invitations_settings
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .models import (
     AccessRight,
@@ -39,6 +41,7 @@ from .models import (
     EnergyPlanChecklist,
 )
 
+from .serializers import CitySerializer
 from .utils import RemainingTimeInfo
 
 STATUS_ORDER = [
@@ -783,3 +786,34 @@ def move_task(request, pk):
     position = request.POST.get("position")
     task.move(new_parent, position)
     return JsonResponse({"success": True})
+
+
+#
+# REST API views
+#
+
+
+class CityList(APIView):
+    """
+    List all cities.
+    """
+
+    def get(self, request):
+        cities = City.objects.all()
+        serializer = CitySerializer(cities, many=True)
+        return Response(serializer.data)
+
+
+class CityDetail(APIView):
+    """
+    Return a specific city.
+    """
+
+    def get(self, request, pk):
+        try:
+            city = City.objects.get(pk=pk)
+        except City.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CitySerializer(city)
+        return Response(serializer.data)

@@ -65,4 +65,11 @@ urlpatterns = [
         views.task_view,
         name="task",
     ),
+    #
+    # REST API urls
+    #
+    # Use accept header "application/json" to get json
+    #
+    path("api/cities", views.CityList.as_view()),
+    path("api/cities/<int:pk>", views.CityDetail.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
