@@ -1,10 +1,6 @@
 @use '../common.scss';
 
-$padding: 30px;
-
-.listItem {
-  width: 280px;
-}
+$padding: 35px;
 
 .background {
   background-image: url("../../public/background-green-city.png");
@@ -17,7 +13,8 @@ $padding: 30px;
     position: relative;
     top: (-$padding);
     left: $padding;
-    }
+    width: fit-content;
+}
 
 .searchMask {
   padding: $padding;
@@ -30,17 +27,23 @@ $padding: 30px;
 }
 
 .searchMaskHeading {
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 
 .input {
   border-width: 0;
   min-height: 30px;
-  width: 280px;
+  width: 100%;
 
   &::placeholder {
     opacity: 0.4;
   }
+}
+
+.inputWrapper {
+  display: inline-flex;
+  width: 100%;
+  background-color: white;
 }
 
 .shadow {

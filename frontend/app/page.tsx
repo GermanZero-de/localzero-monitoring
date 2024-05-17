@@ -2,10 +2,10 @@ import Image from "next/image";
 import banner from "../public/images/dashboard-banner.jpg";
 import styles from "./page.module.scss";
 import { Container } from "react-bootstrap";
-import { db } from "./db/db.server";
-import { cpmonitorCity } from "./db/schema";
 import Tile from "./components/Tile";
 import Search from "@/app/components/Search";
+import { db } from "./db/db.server";
+import { cpmonitorCity } from "./db/schema";
 
 const getCities = async()=> {
   const cities = await db.select().from(cpmonitorCity);
