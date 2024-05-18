@@ -20,6 +20,7 @@ rules = "^3.3"
 django-invitations = "^2.0.0"
 django-allauth = "^0.58.2"
 djangorestframework = "^3.15.1"
+django-cors-headers = "^4.3.1"
 
 [tool.pyright]
 venvPath = "."
