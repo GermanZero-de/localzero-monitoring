@@ -4,7 +4,9 @@ import { usePathname } from 'next/navigation';
 import { Container } from "react-bootstrap";
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import Markdown from 'react-markdown'
+import Markdown from 'react-markdown';
+import Image from "next/image";
+import arrow from "../../public/images/arrow-right-down.svg";
 
 export default function CityDashboard() {
   const [city, setCity] = useState({});
@@ -36,11 +38,14 @@ export default function CityDashboard() {
   return (
     <>
       <Container>
-        <h1>{city.name.toUpperCase()}</h1>
+        <h1 style={{fontWeight: 600,fontSize: 38}}>{city.name.toUpperCase()}<Image src={arrow} alt="" /></h1>
         TODO Kacheln
         <p className="block-text pb-3">
         <Markdown children={city.description} />
         </p>
+      </Container>
+      <div className="backgroundColor">
+        <Container>
         <h2>Lokalteam {city.name}</h2>
         <p className="block-text pb-3">
           {city.name}
@@ -49,7 +54,8 @@ export default function CityDashboard() {
         <p className="block-text pb-3">
           <Markdown children={city.supporting_ngos} />
         </p>
-      </Container>
+        </Container>
+      </div>
     </>
   );
 }
