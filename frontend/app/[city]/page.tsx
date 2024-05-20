@@ -40,9 +40,7 @@ export default function CityDashboard() {
       <Container>
         <h1 style={{fontWeight: 600,fontSize: 38}}>{city.name.toUpperCase()}<Image src={arrow} alt="" /></h1>
         TODO Kacheln
-        <p className="block-text pb-3">
-        <Markdown children={city.description} />
-        </p>
+        <Markdown className="block-text pb-3" children={city.description} />
       </Container>
       <div className="backgroundColor">
         <Container>
@@ -51,9 +49,7 @@ export default function CityDashboard() {
           {city.name}
         </p>
         <h2>Mit Unterstützung von</h2>
-        <p className="block-text pb-3">
-          <Markdown children={city.supporting_ngos} />
-        </p>
+        <Markdown className="block-text pb-3" children={city.supporting_ngos} />
         </Container>
       </div>
     </>
