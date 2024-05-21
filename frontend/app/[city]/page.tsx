@@ -11,6 +11,7 @@ import LocalGroup from '../components/LocalGroup';
 
 export default function CityDashboard() {
   const [city, setCity] = useState({});
+  const [hasError, setHasError] = useState(false);
 
   const pathname = usePathname();
   const slug = pathname.split("/").at(-1)
@@ -22,15 +23,19 @@ export default function CityDashboard() {
         "Content-Type": "application/json;charset=UTF-8",
       },
     }).then(response => {
-      console.log(response.data);
       setCity(response.data);
     })
     .catch(error => {
-      console.error('Error fetching data: ', error); // TODO: error handling
+      setHasError(true);
+      console.error('Error get city request: ', error);
     });
   }
 
   useEffect(() => {getCity()}, []);
+
+  if (hasError) {
+    return <h3 className='pb-3 pt-3'>Für die Stadt {slug} gibt es kein Monitoring</h3>;
+  }
 
   if (!city.name) {
     return <></>;
