@@ -37,7 +37,7 @@ export default async function Home() {
         </p>
         <h2>Kommunen im Monitoring</h2>
         <div className="d-flex justify-content-between flex-wrap">{all_cities.map(city => (
-          <Link href={"/" + city.slug}>
+          <Link key={city.slug} href={"/" + city.slug}>
             <Tile name={city.name} />
           </Link>
         ))}</div>
