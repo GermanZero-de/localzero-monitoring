@@ -10,17 +10,23 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "LocalZero Monitoring",
-  description: "Monitoring von Klimaschutz-Maßnahmen in LocalZero-Kommunen"
+  description: "Monitoring von Klimaschutz-Maßnahmen in LocalZero-Kommunen",
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="de">
-      <head><link rel="icon" href="/favicon.svg" sizes="any" /></head>
+      <head>
+        <link
+          rel="icon"
+          href="/favicon.svg"
+          sizes="any"
+        />
+      </head>
       <body className={inter.className}>
         <Header />
         {children}
