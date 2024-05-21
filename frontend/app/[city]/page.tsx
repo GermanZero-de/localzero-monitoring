@@ -40,7 +40,8 @@ export default function CityDashboard() {
     <>
       <Container>
         <h1 style={{fontWeight: 600,fontSize: 38}}>{city.name.toUpperCase()}<Image src={arrow} alt="" /></h1>
-        TODO Kacheln
+        <p className='pb-3'>TODO Kacheln</p>
+        <h2>Klimaschutz in München</h2>
         <Markdown className="block-text pb-3" children={city.description} />
       </Container>
       <div className="backgroundColor">
