@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
 import Image from "next/image";
 import arrow from "../../public/images/arrow-right-down.svg";
+import LocalGroup from '../components/LocalGroup';
 
 export default function CityDashboard() {
   const [city, setCity] = useState({});
@@ -44,10 +45,7 @@ export default function CityDashboard() {
       </Container>
       <div className="backgroundColor">
         <Container>
-        <h2>Lokalteam {city.name}</h2>
-        <p className="block-text pb-3">
-          {city.name}
-        </p>
+        <LocalGroup local_group={city.local_group}/>
         <h2>Mit Unterstützung von</h2>
         <Markdown className="block-text pb-3" children={city.supporting_ngos} />
         </Container>
