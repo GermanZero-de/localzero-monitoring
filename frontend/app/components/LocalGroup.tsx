@@ -1,14 +1,29 @@
 import Markdown from "react-markdown";
 
-export default function LocalGroup(props) {
+type Props = {
+  localGroup: LocalGroupType;
+};
+
+type LocalGroupType = {
+  name: string;
+  teaser: string;
+  website: string;
+  featuredImage: string;
+  description: string;
+};
+
+export default function LocalGroup({ localGroup }: Props) {
+  if (!localGroup) {
+    return <></>;
+  }
   return (
     <>
-      <h2>Lokalteam {props.local_group.name}</h2>
+      <h2>Lokalteam {localGroup.name}</h2>
       <div className="block-text pb-3">
-        <Markdown children={props.local_group.teaser} />
-        <Markdown children={props.local_group.website} />
-        <Markdown children={props.local_group.featuredImage} />
-        <Markdown children={props.local_group.description} />
+        <Markdown>{localGroup.teaser}</Markdown>
+        <Markdown>{localGroup.website}</Markdown>
+        <Markdown>{localGroup.featuredImage}</Markdown>
+        <Markdown>{localGroup.description}</Markdown>
       </div>
     </>
   );

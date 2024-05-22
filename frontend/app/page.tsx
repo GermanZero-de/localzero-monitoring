@@ -6,7 +6,7 @@ import Tile from "./components/Tile";
 import Search from "@/app/components/Search";
 import { db } from "./db/db.server";
 import { cpmonitorCity } from "./db/schema";
-import Link from 'next/link';
+import Link from "next/link";
 
 const getCities = async () => {
   const cities = await db.select().from(cpmonitorCity);
@@ -47,7 +47,7 @@ export default async function Home() {
           ))}
         </div>
         <h2>Entdecke lokalen Klimaschutz</h2>
-         <Search cities={all_cities} />
+        <Search cities={all_cities} />
         <h2>LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h2>
         <p className="pb-3">TODO: call to action tiles</p>
       </Container>

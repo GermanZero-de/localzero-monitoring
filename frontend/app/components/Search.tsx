@@ -10,22 +10,20 @@ import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import styles from "./Search.module.scss";
 
 export default function Search(props) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredCities, setFilteredCities] = useState([]);
 
   const search = (event) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
 
-    const filteredCities = props.cities.filter((city) =>
-      city.name.toLowerCase().includes(newSearchTerm.toLowerCase()),
-    );
+    const filteredCities = props.cities.filter((city) => city.name.toLowerCase().includes(newSearchTerm.toLowerCase()));
     setFilteredCities(filteredCities);
   };
 
   const resetSearch = () => {
-      setFilteredCities([]);
-      setSearchTerm('');
+    setFilteredCities([]);
+    setSearchTerm("");
   };
 
   return (
@@ -45,18 +43,21 @@ export default function Search(props) {
                   onChange={search}
                 />
                 <Image
-                    onClick={resetSearch}
-                    src={closingIcon}
-                    width={30}
-                    height={30}
-                    alt="Suche zurücksetzen"
-                    />
+                  onClick={resetSearch}
+                  src={closingIcon}
+                  width={30}
+                  height={30}
+                  alt="Suche zurücksetzen"
+                />
               </div>
             </div>
           </div>
           <ListGroup className={styles.listGroup}>
             {filteredCities.map((city) => (
-              <Link href={"/" + city.slug + "/"} key={city.slug}>
+              <Link
+                href={"/" + city.slug + "/"}
+                key={city.slug}
+              >
                 <ListGroup.Item>{city.name}</ListGroup.Item>
               </Link>
             ))}

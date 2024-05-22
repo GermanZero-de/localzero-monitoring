@@ -65,7 +65,7 @@ export default function CityDashboard() {
       </Container>
       <div className="backgroundColor">
         <Container>
-          <LocalGroup local_group={city.local_group} />
+          <LocalGroup localGroup={city.local_group} />
           <h2>Mit Unterstützung von</h2>
           <Markdown
             className="block-text pb-3"
