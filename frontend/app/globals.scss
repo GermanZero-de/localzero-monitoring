@@ -1,5 +1,4 @@
-$gz-color: #ffc80c;
-$gz-secondary-color: rgb(1, 22, 51);
+@use 'common.scss';
 
 :root {
   --bs-primary-rgb: 255, 200, 12;
@@ -22,7 +21,7 @@ $gz-secondary-color: rgb(1, 22, 51);
     font-weight: 600;
   }
   a:hover {
-    border-bottom: 6px solid $gz-color;
+    border-bottom: 6px solid common.$gz-color;
     position: relative;
   }
   li{
@@ -51,7 +50,7 @@ $gz-secondary-color: rgb(1, 22, 51);
 .dropdown-menu {
   --bs-dropdown-spacer: 0.75rem;
   --bs-dropdown-padding-y: 0;
-  background-color: $gz-color;
+  background-color: common.$gz-color;
 }
 
 .dropdown-item {
@@ -66,12 +65,12 @@ h2::before {
   top: 0;
   width: 73px;
   height: 8px;
-  background-color: $gz-color;
+  background-color: common.$gz-color;
 }
 
 @mixin heading {
   line-height: 1.43;
-  color: $gz-secondary-color;
+  color: common.$gz-secondary-color;
   position: relative;
   padding-top: 28px;
   margin-bottom: 30px;
