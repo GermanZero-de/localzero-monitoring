@@ -9,6 +9,30 @@ import Image from "next/image";
 import arrow from "../../public/images/arrow-right-down.svg";
 import LocalGroup from "../components/LocalGroup";
 
+const CityDescription = ({ description }) => {
+  if (!description) {
+    return <></>;
+  }
+  return (
+    <>
+      <h2>Klimaschutz in München</h2>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+    </>
+  );
+};
+
+const SupportingNgos = ({ supportingNgos }) => {
+  if (!supportingNgos) {
+    return <></>;
+  }
+  return (
+    <>
+      <h2>Mit Unterstützung von</h2>
+      <Markdown className="block-text pb-3">{supportingNgos}</Markdown>
+    </>
+  );
+};
+
 export default function CityDashboard() {
   const [city, setCity] = useState({});
   const [hasError, setHasError] = useState(false);
@@ -57,20 +81,12 @@ export default function CityDashboard() {
           />
         </h1>
         <p className="pb-3">TODO Kacheln</p>
-        <h2>Klimaschutz in München</h2>
-        <Markdown
-          className="block-text pb-3"
-          children={city.description}
-        />
+        <CityDescription description={city.description} />
       </Container>
       <div className="backgroundColor">
         <Container>
           <LocalGroup localGroup={city.local_group} />
-          <h2>Mit Unterstützung von</h2>
-          <Markdown
-            className="block-text pb-3"
-            children={city.supporting_ngos}
-          />
+          <SupportingNgos supportingNgos={city.supporting_ngos} />
         </Container>
       </div>
     </>
