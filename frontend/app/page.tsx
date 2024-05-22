@@ -4,17 +4,24 @@ import styles from "./page.module.scss";
 import { Container } from "react-bootstrap";
 import Tile from "./components/Tile";
 import Search from "@/app/components/Search";
-import { db } from "./db/db.server";
-import { cpmonitorCity } from "./db/schema";
+import axios from "axios";
 import Link from "next/link";
 
 const getCities = async () => {
-  const cities = await db.select().from(cpmonitorCity);
+  const cities = await axios.get("http://127.0.0.1:8000/api/cities", {
+    // TODO: proper url
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  });
   return cities;
 };
 
 export default async function Home() {
-  const all_cities = await getCities();
+  const cities = (await getCities()).data;
+  console.log(cities[0]);
+
   return (
     <>
       <div className={styles.banner}>
@@ -37,17 +44,21 @@ export default async function Home() {
         </p>
         <h2>Kommunen im Monitoring</h2>
         <div className="d-flex justify-content-between flex-wrap">
-          {all_cities.map((city) => (
+          {(cities || []).map((city) => (
             <Link
               key={city.slug}
               href={"/" + city.slug}
+              className={styles.noLinkStyling}
             >
-              <Tile name={city.name} />
+              <Tile
+                name={city.name}
+                logo={city.local_group?.logo}
+              />
             </Link>
           ))}
         </div>
         <h2>Entdecke lokalen Klimaschutz</h2>
-        <Search cities={all_cities} />
+        <Search cities={cities} />
         <h2>LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h2>
         <p className="pb-3">TODO: call to action tiles</p>
       </Container>
