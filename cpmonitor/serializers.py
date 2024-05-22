@@ -1,4 +1,4 @@
-from cpmonitor.models import City
+from cpmonitor.models import City, LocalGroup
 from rest_framework import serializers
 
 #
@@ -6,7 +6,23 @@ from rest_framework import serializers
 #
 
 
+class LocalGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LocalGroup
+        fields = [
+            "id",
+            "name",
+            "website",
+            "teaser",
+            "description",
+            "logo",
+            "featured_image",
+        ]
+
+
 class CitySerializer(serializers.ModelSerializer):
+    local_group = LocalGroupSerializer(read_only=True)
+
     class Meta:
         model = City
         fields = [
@@ -23,4 +39,5 @@ class CitySerializer(serializers.ModelSerializer):
             "contact_email",
             "supporting_ngos",
             "slug",
+            "local_group",
         ]

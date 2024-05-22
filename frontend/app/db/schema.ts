@@ -6,7 +6,7 @@ import {
   index,
   uniqueIndex,
   foreignKey,
-  text
+  text,
 } from "drizzle-orm/sqlite-core";
 import { sql } from "drizzle-orm";
 
@@ -14,7 +14,7 @@ export const djangoMigrations = sqliteTable("django_migrations", {
   id: integer("id").primaryKey({ autoIncrement: true }).notNull(),
   app: numeric("app").notNull(),
   name: numeric("name").notNull(),
-  applied: numeric("applied").notNull()
+  applied: numeric("applied").notNull(),
 });
 
 export const authGroupPermissions = sqliteTable(
@@ -26,7 +26,7 @@ export const authGroupPermissions = sqliteTable(
       .references(() => authGroup.id),
     permissionId: integer("permission_id")
       .notNull()
-      .references(() => authPermission.id)
+      .references(() => authPermission.id),
   },
   (table) => {
     return {
@@ -34,10 +34,10 @@ export const authGroupPermissions = sqliteTable(
       groupIdB120Cbf9: index("auth_group_permissions_group_id_b120cbf9").on(table.groupId),
       groupIdPermissionId0Cd325B0Uniq: uniqueIndex("auth_group_permissions_group_id_permission_id_0cd325b0_uniq").on(
         table.groupId,
-        table.permissionId
-      )
+        table.permissionId,
+      ),
     };
-  }
+  },
 );
 
 export const authUserGroups = sqliteTable(
@@ -49,7 +49,7 @@ export const authUserGroups = sqliteTable(
       .references(() => authUser.id),
     groupId: integer("group_id")
       .notNull()
-      .references(() => authGroup.id)
+      .references(() => authGroup.id),
   },
   (table) => {
     return {
@@ -57,10 +57,10 @@ export const authUserGroups = sqliteTable(
       userId6A12Ed8B: index("auth_user_groups_user_id_6a12ed8b").on(table.userId),
       userIdGroupId94350C0CUniq: uniqueIndex("auth_user_groups_user_id_group_id_94350c0c_uniq").on(
         table.userId,
-        table.groupId
-      )
+        table.groupId,
+      ),
     };
-  }
+  },
 );
 
 export const authUserUserPermissions = sqliteTable(
@@ -72,7 +72,7 @@ export const authUserUserPermissions = sqliteTable(
       .references(() => authUser.id),
     permissionId: integer("permission_id")
       .notNull()
-      .references(() => authPermission.id)
+      .references(() => authPermission.id),
   },
   (table) => {
     return {
@@ -80,10 +80,10 @@ export const authUserUserPermissions = sqliteTable(
       userIdA95Ead1B: index("auth_user_user_permissions_user_id_a95ead1b").on(table.userId),
       userIdPermissionId14A6B632Uniq: uniqueIndex("auth_user_user_permissions_user_id_permission_id_14a6b632_uniq").on(
         table.userId,
-        table.permissionId
-      )
+        table.permissionId,
+      ),
     };
-  }
+  },
 );
 
 export const accountEmailconfirmation = sqliteTable(
@@ -95,13 +95,13 @@ export const accountEmailconfirmation = sqliteTable(
     key: numeric("key").notNull(),
     emailAddressId: integer("email_address_id")
       .notNull()
-      .references(() => accountEmailaddress.id)
+      .references(() => accountEmailaddress.id),
   },
   (table) => {
     return {
-      emailAddressId5B7F8C58: index("account_emailconfirmation_email_address_id_5b7f8c58").on(table.emailAddressId)
+      emailAddressId5B7F8C58: index("account_emailconfirmation_email_address_id_5b7f8c58").on(table.emailAddressId),
     };
-  }
+  },
 );
 
 export const accountEmailaddress = sqliteTable(
@@ -113,7 +113,7 @@ export const accountEmailaddress = sqliteTable(
     userId: integer("user_id")
       .notNull()
       .references(() => authUser.id),
-    email: numeric("email").notNull()
+    email: numeric("email").notNull(),
   },
   (table) => {
     return {
@@ -122,10 +122,10 @@ export const accountEmailaddress = sqliteTable(
       uniqueVerifiedEmail: uniqueIndex("unique_verified_email").on(table.email),
       userIdEmail987C8728Uniq: uniqueIndex("account_emailaddress_user_id_email_987c8728_uniq").on(
         table.userId,
-        table.email
-      )
+        table.email,
+      ),
     };
-  }
+  },
 );
 
 export const djangoAdminLog = sqliteTable(
@@ -140,14 +140,14 @@ export const djangoAdminLog = sqliteTable(
     userId: integer("user_id")
       .notNull()
       .references(() => authUser.id),
-    actionTime: numeric("action_time").notNull()
+    actionTime: numeric("action_time").notNull(),
   },
   (table) => {
     return {
       userIdC564Eba6: index("django_admin_log_user_id_c564eba6").on(table.userId),
-      contentTypeIdC4Bce8Eb: index("django_admin_log_content_type_id_c4bce8eb").on(table.contentTypeId)
+      contentTypeIdC4Bce8Eb: index("django_admin_log_content_type_id_c4bce8eb").on(table.contentTypeId),
     };
-  }
+  },
 );
 
 export const djangoContentType = sqliteTable(
@@ -155,16 +155,16 @@ export const djangoContentType = sqliteTable(
   {
     id: integer("id").primaryKey({ autoIncrement: true }).notNull(),
     appLabel: numeric("app_label").notNull(),
-    model: numeric("model").notNull()
+    model: numeric("model").notNull(),
   },
   (table) => {
     return {
       appLabelModel76Bd3D3BUniq: uniqueIndex("django_content_type_app_label_model_76bd3d3b_uniq").on(
         table.appLabel,
-        table.model
-      )
+        table.model,
+      ),
     };
-  }
+  },
 );
 
 export const authPermission = sqliteTable(
@@ -175,22 +175,22 @@ export const authPermission = sqliteTable(
       .notNull()
       .references(() => djangoContentType.id),
     codename: numeric("codename").notNull(),
-    name: numeric("name").notNull()
+    name: numeric("name").notNull(),
   },
   (table) => {
     return {
       contentTypeId2F476E4B: index("auth_permission_content_type_id_2f476e4b").on(table.contentTypeId),
       contentTypeIdCodename01Ab375AUniq: uniqueIndex("auth_permission_content_type_id_codename_01ab375a_uniq").on(
         table.contentTypeId,
-        table.codename
-      )
+        table.codename,
+      ),
     };
-  }
+  },
 );
 
 export const authGroup = sqliteTable("auth_group", {
   id: integer("id").primaryKey({ autoIncrement: true }).notNull(),
-  name: numeric("name").notNull()
+  name: numeric("name").notNull(),
 });
 
 export const authUser = sqliteTable("auth_user", {
@@ -204,7 +204,7 @@ export const authUser = sqliteTable("auth_user", {
   isStaff: numeric("is_staff").notNull(),
   isActive: numeric("is_active").notNull(),
   dateJoined: numeric("date_joined").notNull(),
-  firstName: numeric("first_name").notNull()
+  firstName: numeric("first_name").notNull(),
 });
 
 export const cpmonitorChart = sqliteTable(
@@ -219,13 +219,13 @@ export const cpmonitorChart = sqliteTable(
     cityId: integer("city_id")
       .notNull()
       .references(() => cpmonitorCity.id),
-    internalInformation: text("internal_information").notNull()
+    internalInformation: text("internal_information").notNull(),
   },
   (table) => {
     return {
-      cityId4D29A02E: index("cpmonitor_chart_city_id_4d29a02e").on(table.cityId)
+      cityId4D29A02E: index("cpmonitor_chart_city_id_4d29a02e").on(table.cityId),
     };
-  }
+  },
 );
 
 export const cpmonitorCityCityAdmins = sqliteTable(
@@ -237,7 +237,7 @@ export const cpmonitorCityCityAdmins = sqliteTable(
       .references(() => cpmonitorCity.id),
     userId: integer("user_id")
       .notNull()
-      .references(() => authUser.id)
+      .references(() => authUser.id),
   },
   (table) => {
     return {
@@ -245,10 +245,10 @@ export const cpmonitorCityCityAdmins = sqliteTable(
       cityId63C569C8: index("cpmonitor_city_city_admins_city_id_63c569c8").on(table.cityId),
       cityIdUserId96Dd8Fd2Uniq: uniqueIndex("cpmonitor_city_city_admins_city_id_user_id_96dd8fd2_uniq").on(
         table.cityId,
-        table.userId
-      )
+        table.userId,
+      ),
     };
-  }
+  },
 );
 
 export const cpmonitorCityCityEditors = sqliteTable(
@@ -260,7 +260,7 @@ export const cpmonitorCityCityEditors = sqliteTable(
       .references(() => cpmonitorCity.id),
     userId: integer("user_id")
       .notNull()
-      .references(() => authUser.id)
+      .references(() => authUser.id),
   },
   (table) => {
     return {
@@ -268,10 +268,10 @@ export const cpmonitorCityCityEditors = sqliteTable(
       cityId958E3Baa: index("cpmonitor_city_city_editors_city_id_958e3baa").on(table.cityId),
       cityIdUserId375D9F90Uniq: uniqueIndex("cpmonitor_city_city_editors_city_id_user_id_375d9f90_uniq").on(
         table.cityId,
-        table.userId
-      )
+        table.userId,
+      ),
     };
-  }
+  },
 );
 
 export const cpmonitorInvitation = sqliteTable(
@@ -286,14 +286,14 @@ export const cpmonitorInvitation = sqliteTable(
     cityId: integer("city_id")
       .notNull()
       .references(() => cpmonitorCity.id),
-    inviterId: integer("inviter_id").references(() => authUser.id)
+    inviterId: integer("inviter_id").references(() => authUser.id),
   },
   (table) => {
     return {
       inviterIdB47F654C: index("cpmonitor_invitation_inviter_id_b47f654c").on(table.inviterId),
-      cityIdB035D820: index("cpmonitor_invitation_city_id_b035d820").on(table.cityId)
+      cityIdB035D820: index("cpmonitor_invitation_city_id_b035d820").on(table.cityId),
     };
-  }
+  },
 );
 
 export const cpmonitorAdministrationchecklist = sqliteTable("cpmonitor_administrationchecklist", {
@@ -312,13 +312,13 @@ export const cpmonitorAdministrationchecklist = sqliteTable("cpmonitor_administr
   climateProtectionMonitoringExistsRationale: text("climate_protection_monitoring_exists_rationale").notNull(),
   climateRelevanceCheckExistsRationale: text("climate_relevance_check_exists_rationale").notNull(),
   guidelinesForSustainableProcurementExistsRationale: text(
-    "guidelines_for_sustainable_procurement_exists_rationale"
+    "guidelines_for_sustainable_procurement_exists_rationale",
   ).notNull(),
   intersectoralConceptsExistsRationale: text("intersectoral_concepts_exists_rationale").notNull(),
   municipalOfficeForFundingManagementExistsRationale: text(
-    "municipal_office_for_funding_management_exists_rationale"
+    "municipal_office_for_funding_management_exists_rationale",
   ).notNull(),
-  publicRelationWithLocalActorsExistsRationale: text("public_relation_with_local_actors_exists_rationale").notNull()
+  publicRelationWithLocalActorsExistsRationale: text("public_relation_with_local_actors_exists_rationale").notNull(),
 });
 
 export const cpmonitorCapchecklist = sqliteTable("cpmonitor_capchecklist", {
@@ -339,19 +339,19 @@ export const cpmonitorCapchecklist = sqliteTable("cpmonitor_capchecklist", {
     .references(() => cpmonitorCity.id),
   annualCostsAreSpecifiedRationale: text("annual_costs_are_specified_rationale").notNull(),
   annualReductionOfEmissionsCanBePredictedRationale: text(
-    "annual_reduction_of_emissions_can_be_predicted_rationale"
+    "annual_reduction_of_emissions_can_be_predicted_rationale",
   ).notNull(),
   basedOnRemainingCo2BudgetRationale: text("based_on_remaining_co2_budget_rationale").notNull(),
   capExistsRationale: text("cap_exists_rationale").notNull(),
   conceptForParticipationSpecifiedRationale: text("concept_for_participation_specified_rationale").notNull(),
   scenarioForBusinessAsUsualExistsRationale: text("scenario_for_business_as_usual_exists_rationale").notNull(),
   scenarioForClimateNeutralityTill2035ExistsRationale: text(
-    "scenario_for_climate_neutrality_till_2035_exists_rationale"
+    "scenario_for_climate_neutrality_till_2035_exists_rationale",
   ).notNull(),
   sectorsOfClimateVisionUsedRationale: text("sectors_of_climate_vision_used_rationale").notNull(),
   targetDateExistsRationale: text("target_date_exists_rationale").notNull(),
   tasksArePlannedYearlyRationale: text("tasks_are_planned_yearly_rationale").notNull(),
-  tasksHaveResponsibleEntityRationale: text("tasks_have_responsible_entity_rationale").notNull()
+  tasksHaveResponsibleEntityRationale: text("tasks_have_responsible_entity_rationale").notNull(),
 });
 
 export const cpmonitorEnergyplanchecklist = sqliteTable("cpmonitor_energyplanchecklist", {
@@ -396,7 +396,7 @@ export const cpmonitorEnergyplanchecklist = sqliteTable("cpmonitor_energyplanche
   communicationGoals: numeric("communication_goals").notNull(),
   communicationGoalsRationale: text("communication_goals_rationale").notNull(),
   communicationPotential: numeric("communication_potential").notNull(),
-  communicationPotentialRationale: text("communication_potential_rationale").notNull()
+  communicationPotentialRationale: text("communication_potential_rationale").notNull(),
 });
 
 export const cpmonitorCity = sqliteTable("cpmonitor_city", {
@@ -418,7 +418,7 @@ export const cpmonitorCity = sqliteTable("cpmonitor_city", {
   teaser: numeric("teaser").notNull(),
   description: text("description").notNull(),
   internalInformation: text("internal_information").notNull(),
-  supportingNgos: text("supporting_ngos").notNull()
+  supportingNgos: text("supporting_ngos").notNull(),
 });
 
 export const cpmonitorTask = sqliteTable(
@@ -449,15 +449,15 @@ export const cpmonitorTask = sqliteTable(
     frontpage: numeric("frontpage").notNull(),
     responsibleOrganExplanation: text("responsible_organ_explanation").notNull(),
     source: integer("source").notNull(),
-    supportingNgos: text("supporting_ngos").notNull()
+    supportingNgos: text("supporting_ngos").notNull(),
   },
   (table) => {
     return {
       slugs6B93586D: index("cpmonitor_task_slugs_6b93586d").on(table.slugs),
       cityIdB62040Ed: index("cpmonitor_task_city_id_b62040ed").on(table.cityId),
-      uniqueUrls: uniqueIndex("unique_urls").on(table.cityId, table.slugs)
+      uniqueUrls: uniqueIndex("unique_urls").on(table.cityId, table.slugs),
     };
-  }
+  },
 );
 
 export const cpmonitorLocalgroup = sqliteTable("cpmonitor_localgroup", {
@@ -470,7 +470,7 @@ export const cpmonitorLocalgroup = sqliteTable("cpmonitor_localgroup", {
   cityId: integer("city_id")
     .notNull()
     .references(() => cpmonitorCity.id),
-  logo: numeric("logo").notNull()
+  logo: numeric("logo").notNull(),
 });
 
 export const djangoSession = sqliteTable(
@@ -478,13 +478,13 @@ export const djangoSession = sqliteTable(
   {
     sessionKey: numeric("session_key").primaryKey().notNull(),
     sessionData: text("session_data").notNull(),
-    expireDate: numeric("expire_date").notNull()
+    expireDate: numeric("expire_date").notNull(),
   },
   (table) => {
     return {
-      expireDateA5C62663: index("django_session_expire_date_a5c62663").on(table.expireDate)
+      expireDateA5C62663: index("django_session_expire_date_a5c62663").on(table.expireDate),
     };
-  }
+  },
 );
 
 export const socialaccountSocialapp = sqliteTable("socialaccount_socialapp", {
@@ -495,7 +495,7 @@ export const socialaccountSocialapp = sqliteTable("socialaccount_socialapp", {
   secret: numeric("secret").notNull(),
   key: numeric("key").notNull(),
   providerId: numeric("provider_id").notNull(),
-  settings: text("settings").notNull()
+  settings: text("settings").notNull(),
 });
 
 export const socialaccountSocialtoken = sqliteTable(
@@ -508,7 +508,7 @@ export const socialaccountSocialtoken = sqliteTable(
     accountId: integer("account_id")
       .notNull()
       .references(() => socialaccountSocialaccount.id),
-    appId: integer("app_id").references(() => socialaccountSocialapp.id)
+    appId: integer("app_id").references(() => socialaccountSocialapp.id),
   },
   (table) => {
     return {
@@ -516,10 +516,10 @@ export const socialaccountSocialtoken = sqliteTable(
       accountId951F210E: index("socialaccount_socialtoken_account_id_951f210e").on(table.accountId),
       appIdAccountIdFca4E0AcUniq: uniqueIndex("socialaccount_socialtoken_app_id_account_id_fca4e0ac_uniq").on(
         table.appId,
-        table.accountId
-      )
+        table.accountId,
+      ),
     };
-  }
+  },
 );
 
 export const socialaccountSocialaccount = sqliteTable(
@@ -533,15 +533,15 @@ export const socialaccountSocialaccount = sqliteTable(
     userId: integer("user_id")
       .notNull()
       .references(() => authUser.id),
-    extraData: text("extra_data").notNull()
+    extraData: text("extra_data").notNull(),
   },
   (table) => {
     return {
       userId8146E70C: index("socialaccount_socialaccount_user_id_8146e70c").on(table.userId),
       providerUidFc810C6EUniq: uniqueIndex("socialaccount_socialaccount_provider_uid_fc810c6e_uniq").on(
         table.provider,
-        table.uid
-      )
+        table.uid,
+      ),
     };
-  }
+  },
 );

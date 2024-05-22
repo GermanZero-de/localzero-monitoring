@@ -809,9 +809,9 @@ class CityDetail(APIView):
     Return a specific city.
     """
 
-    def get(self, request, pk):
+    def get(self, request, slug):
         try:
-            city = City.objects.get(pk=pk)
+            city = City.objects.get(slug=slug)
         except City.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 

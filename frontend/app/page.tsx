@@ -6,11 +6,12 @@ import Tile from "./components/Tile";
 import Search from "@/app/components/Search";
 import { db } from "./db/db.server";
 import { cpmonitorCity } from "./db/schema";
+import Link from "next/link";
 
-const getCities = async()=> {
+const getCities = async () => {
   const cities = await db.select().from(cpmonitorCity);
   return cities;
-}
+};
 
 export default async function Home() {
   const all_cities = await getCities();
@@ -35,9 +36,18 @@ export default async function Home() {
           aktualisiert.
         </p>
         <h2>Kommunen im Monitoring</h2>
-        <div className="d-flex justify-content-between flex-wrap">{all_cities.map(city=>(<Tile name={city.name} />))}</div>
+        <div className="d-flex justify-content-between flex-wrap">
+          {all_cities.map((city) => (
+            <Link
+              key={city.slug}
+              href={"/" + city.slug}
+            >
+              <Tile name={city.name} />
+            </Link>
+          ))}
+        </div>
         <h2>Entdecke lokalen Klimaschutz</h2>
-         <Search cities={all_cities} />
+        <Search cities={all_cities} />
         <h2>LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h2>
         <p className="pb-3">TODO: call to action tiles</p>
       </Container>
