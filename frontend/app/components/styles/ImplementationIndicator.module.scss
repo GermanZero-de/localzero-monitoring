@@ -1,0 +1,30 @@
+$borderWidth: 1px;
+$borderColor: #828282;
+
+$colorComplete: #9bd300;
+$colorAsPlanned: #ffa700;
+$colorUnknown: #dcdcdc;
+$colorDelayed: #f65035;
+$colorFailed: #011633;
+
+.implementationIndicator {
+  fill: none;
+  stroke: $borderColor;
+  stroke-width: $borderWidth;
+}
+
+.complete {
+  fill: $colorComplete;
+}
+.asPlanned {
+  fill: $colorAsPlanned;
+}
+.unknown {
+  fill: $colorUnknown;
+}
+.delayed {
+  fill: $colorDelayed;
+}
+.failed {
+  fill: $colorFailed;
+}

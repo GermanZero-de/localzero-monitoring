@@ -1,11 +1,11 @@
-import Image from "next/image";
-import banner from "../public/images/dashboard-banner.jpg";
-import styles from "./page.module.scss";
-import { Container } from "react-bootstrap";
-import Tile from "./components/Tile";
 import Search from "@/app/components/Search";
 import axios from "axios";
+import Image from "next/image";
 import Link from "next/link";
+import { Container } from "react-bootstrap";
+import banner from "../public/images/dashboard-banner.jpg";
+import Tile from "./components/Tile";
+import styles from "./page.module.scss";
 
 const getCities = async () => {
   const cities = await axios.get("http://127.0.0.1:8000/api/cities", {
