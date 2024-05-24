@@ -17,6 +17,20 @@ const CityDescription = ({ description }) => {
     <>
       <h2>Klimaschutz in München</h2>
       <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
+      <Markdown className="block-text pb-3">{description}</Markdown>
     </>
   );
 };
@@ -83,9 +97,9 @@ export default function CityDashboard() {
         <p className="pb-3">TODO Kacheln</p>
         <CityDescription description={city.description} />
       </Container>
+      <LocalGroup localGroup={city.local_group} />
       <div className="backgroundColor">
         <Container>
-          <LocalGroup localGroup={city.local_group} />
           <SupportingNgos supportingNgos={city.supporting_ngos} />
         </Container>
       </div>

@@ -1,4 +1,12 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
+import { Container } from "react-bootstrap";
 import Markdown from "react-markdown";
+import expandArrowDown from "../../public/images/arrow-expand-down.svg";
+import expandArrowUp from "../../public/images/arrow-expand-up.svg";
+import styles from "./styles/LocalGroup.module.scss";
 
 type Props = {
   localGroup: LocalGroupType;
@@ -13,18 +21,28 @@ type LocalGroupType = {
 };
 
 export default function LocalGroup({ localGroup }: Props) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   if (!localGroup) {
     return <></>;
   }
+
   return (
-    <>
-      <h2>Lokalteam {localGroup.name}</h2>
-      <div className="block-text pb-3">
+    <div className={isExpanded ? styles.fixed : styles.backgroundColor}>
+      <Container>
+        <h2>Lokalteam {localGroup.name}</h2>
         <Markdown>{localGroup.teaser}</Markdown>
-        <Markdown>{localGroup.website}</Markdown>
-        <Markdown>{localGroup.featuredImage}</Markdown>
-        <Markdown>{localGroup.description}</Markdown>
-      </div>
-    </>
+
+           {isExpanded ? <Markdown>{localGroup.description}</Markdown> : <div></div>}
+
+          <div className={styles.center}>
+            <Image
+              src={isExpanded ? expandArrowUp : expandArrowDown}
+              alt="Zeige mehr über das Lokalteam"
+              onClick={() => setIsExpanded(!isExpanded)}
+            />
+          </div>
+      </Container>
+    </div>
   );
 }
