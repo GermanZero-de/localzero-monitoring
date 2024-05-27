@@ -29,7 +29,6 @@ export default function LocalGroup({ localGroup, isExpanded, setIsExpanded }: Pr
     <div className={isExpanded ? styles.fixed : styles.backgroundColor}>
       <Container>
         <h2>Lokalteam {localGroup.name}</h2>
-        <Markdown>{localGroup.teaser}</Markdown>
 
         {isExpanded ? (
           <>
@@ -41,7 +40,7 @@ export default function LocalGroup({ localGroup, isExpanded, setIsExpanded }: Pr
             ></img>
           </>
         ) : (
-          <div></div>
+          <Markdown>{localGroup.teaser}</Markdown>
         )}
 
         <div className={styles.center}>
