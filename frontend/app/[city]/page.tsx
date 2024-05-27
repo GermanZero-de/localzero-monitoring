@@ -1,11 +1,11 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { Container } from "react-bootstrap";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import Markdown from "react-markdown";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import Markdown from "react-markdown";
 import arrow from "../../public/images/arrow-right-down.svg";
 import LocalGroup from "../components/LocalGroup";
 
@@ -16,20 +16,6 @@ const CityDescription = ({ description }) => {
   return (
     <>
       <h2>Klimaschutz in München</h2>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-      <Markdown className="block-text pb-3">{description}</Markdown>
       <Markdown className="block-text pb-3">{description}</Markdown>
     </>
   );
@@ -50,6 +36,7 @@ const SupportingNgos = ({ supportingNgos }) => {
 export default function CityDashboard() {
   const [city, setCity] = useState({});
   const [hasError, setHasError] = useState(false);
+  const [isLocalGroupExpanded, setIsLocalGroupExpanded] = useState(false);
 
   const pathname = usePathname();
   const slug = pathname.split("/").at(-1);
@@ -97,8 +84,12 @@ export default function CityDashboard() {
         <p className="pb-3">TODO Kacheln</p>
         <CityDescription description={city.description} />
       </Container>
-      <LocalGroup localGroup={city.local_group} />
-      <div className="backgroundColor">
+      <LocalGroup
+        localGroup={city.local_group}
+        isExpanded={isLocalGroupExpanded}
+        setIsExpanded={setIsLocalGroupExpanded}
+      />
+      <div className={isLocalGroupExpanded ? "dontDisplay" : "backgroundColor"}>
         <Container>
           <SupportingNgos supportingNgos={city.supporting_ngos} />
         </Container>
