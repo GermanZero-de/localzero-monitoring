@@ -16,8 +16,7 @@ type Props = {
 type LocalGroupType = {
   name: string;
   teaser: string;
-  website: string;
-  featuredImage: string;
+  featured_image: string;
   description: string;
 };
 
@@ -32,7 +31,18 @@ export default function LocalGroup({ localGroup, isExpanded, setIsExpanded }: Pr
         <h2>Lokalteam {localGroup.name}</h2>
         <Markdown>{localGroup.teaser}</Markdown>
 
-        {isExpanded ? <Markdown>{localGroup.description}</Markdown> : <div></div>}
+        {isExpanded ? (
+          <>
+            <Markdown>{localGroup.description}</Markdown>
+            <img
+              className="pb-3"
+              src={"http://127.0.0.1:8000" + localGroup.featured_image}
+              alt={"Lokalgruppe " + localGroup.name}
+            ></img>
+          </>
+        ) : (
+          <div></div>
+        )}
 
         <div className={styles.center}>
           <Image
