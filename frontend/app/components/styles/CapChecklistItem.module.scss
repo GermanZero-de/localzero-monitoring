@@ -1,0 +1,20 @@
+@use "../../common.scss";
+
+.accordionHeader {
+  font-size: 28px;
+  line-height: 1.43;
+  padding-top: 0;
+  margin-bottom: 0;
+
+  &:before {
+    content: none;
+  }
+}
+
+.checked {
+  color: common.$gz-checked;
+}
+
+.unchecked {
+  color: common.$gz-unchecked;
+}

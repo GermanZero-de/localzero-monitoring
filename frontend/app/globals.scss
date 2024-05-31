@@ -98,3 +98,8 @@ h2 {
 .dontDisplay {
   display: none;
 }
+
+.accordion {
+  --bs-accordion-active-color: black;
+  --bs-accordion-active-bg: common.$gz-background-color;
+}
