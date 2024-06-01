@@ -17,7 +17,7 @@ export default async function Home() {
             key={city.id}
             className="list-item"
           >
-            <h2 className="text-xl font-semibold">{city.name}</h2>
+            <h2 className="headingWithBar">{city.name}</h2>
             <p className="text-base">{city.teaser}</p>
           </li>
         ))}

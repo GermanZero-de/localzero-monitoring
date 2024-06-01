@@ -58,15 +58,6 @@
   font-weight: bold;
 }
 
-h2::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 73px;
-  height: 8px;
-  background-color: common.$gz-color;
-}
-
 @mixin heading {
   line-height: 1.43;
   color: common.$gz-secondary-color;
@@ -80,9 +71,18 @@ h1 {
   @include heading;
 }
 
-h2 {
+.headingWithBar {
   font-size: 28px;
   @include heading;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 73px;
+    height: 8px;
+    background-color: common.$gz-color;
+  }
 }
 
 .block-text {

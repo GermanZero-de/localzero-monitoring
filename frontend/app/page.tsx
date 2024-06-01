@@ -42,7 +42,7 @@ export default async function Home() {
           Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den jeweiligen Kommunen regelmäßig
           aktualisiert.
         </p>
-        <h2>Kommunen im Monitoring</h2>
+        <h2 className="headingWithBar">Kommunen im Monitoring</h2>
         <div className="d-flex justify-content-between flex-wrap">
           {(cities || []).map((city) => (
             <Link
@@ -57,9 +57,9 @@ export default async function Home() {
             </Link>
           ))}
         </div>
-        <h2>Entdecke lokalen Klimaschutz</h2>
+        <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>
         <Search cities={cities} />
-        <h2>LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h2>
+        <h2 className="headingWithBar">LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h2>
         <p className="pb-3">TODO: call to action tiles</p>
       </Container>
     </>

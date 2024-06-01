@@ -18,7 +18,7 @@ type Props = {
 const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
   return (
     <AccordionItem eventKey={checklist_item.id}>
-      <AccordionHeader className={styles.accordionHeader}>
+      <AccordionHeader>
         {checklist_item.is_checked ? (
           <i className={`bi-check-circle pe-3 ${styles.checked}`}></i>
         ) : (

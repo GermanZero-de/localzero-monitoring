@@ -28,7 +28,7 @@ export default function LocalGroup({ localGroup, isExpanded, setIsExpanded }: Pr
   return (
     <div className={isExpanded ? styles.fixed : styles.backgroundColor}>
       <Container>
-        <h2>Lokalteam {localGroup.name}</h2>
+        <h2 className="headingWithBar">Lokalteam {localGroup.name}</h2>
 
         {isExpanded ? (
           <>

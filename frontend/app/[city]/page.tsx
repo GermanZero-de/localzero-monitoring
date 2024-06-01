@@ -15,7 +15,7 @@ const CityDescription = ({ description }) => {
   }
   return (
     <>
-      <h2>Klimaschutz in München</h2>
+      <h2 className="headingWithBar">Klimaschutz in München</h2>
       <Markdown className="block-text pb-3">{description}</Markdown>
     </>
   );
@@ -27,7 +27,7 @@ const SupportingNgos = ({ supportingNgos }) => {
   }
   return (
     <>
-      <h2>Mit Unterstützung von</h2>
+      <h2 className="headingWithBar">Mit Unterstützung von</h2>
       <Markdown className="block-text pb-3">{supportingNgos}</Markdown>
     </>
   );

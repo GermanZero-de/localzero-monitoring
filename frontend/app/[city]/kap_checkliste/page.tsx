@@ -20,7 +20,7 @@ export default function CapChecklist() {
   return (
     <Container>
       <div className="pb-3"></div>
-      <h2>Klimaaktionsplan {city.name}</h2>
+      <h2 className="headingWithBar">Klimaaktionsplan {city.name}</h2>
       <Markdown className="pb-3">{city.assessment_action_plan}</Markdown>
       <Accordion
         id="accordionFlushKAP"
