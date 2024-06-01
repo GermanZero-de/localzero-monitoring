@@ -1,12 +1,12 @@
 "use client";
 
-import axios from "axios";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container } from "react-bootstrap";
 import Markdown from "react-markdown";
 import arrow from "../../public/images/arrow-right-down.svg";
+import { useGetCity } from "../CityService";
 import LocalGroup from "../components/LocalGroup";
 
 const CityDescription = ({ description }) => {
@@ -15,7 +15,7 @@ const CityDescription = ({ description }) => {
   }
   return (
     <>
-      <h2>Klimaschutz in München</h2>
+      <h2 className="headingWithBar">Klimaschutz in München</h2>
       <Markdown className="block-text pb-3">{description}</Markdown>
     </>
   );
@@ -27,47 +27,25 @@ const SupportingNgos = ({ supportingNgos }) => {
   }
   return (
     <>
-      <h2>Mit Unterstützung von</h2>
+      <h2 className="headingWithBar">Mit Unterstützung von</h2>
       <Markdown className="block-text pb-3">{supportingNgos}</Markdown>
     </>
   );
 };
 
 export default function CityDashboard() {
-  const [city, setCity] = useState({});
-  const [hasError, setHasError] = useState(false);
   const [isLocalGroupExpanded, setIsLocalGroupExpanded] = useState(false);
 
   const pathname = usePathname();
   const slug = pathname.split("/").at(-1);
 
-  const getCity = async () => {
-    const response = await axios
-      .get("http://127.0.0.1:8000/api/cities/" + slug, {
-        // TODO: proper url
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-      })
-      .then((response) => {
-        setCity(response.data);
-      })
-      .catch((error) => {
-        setHasError(true);
-        console.error("Error get city request: ", error);
-      });
-  };
-
-  useEffect(() => {
-    getCity();
-  }, []);
+  const { city, hasError } = useGetCity(slug);
 
   if (hasError) {
     return <h3 className="pb-3 pt-3">Für die Stadt {slug} gibt es kein Monitoring</h3>;
   }
 
-  if (!city.name) {
+  if (!city) {
     return <></>;
   }
 
