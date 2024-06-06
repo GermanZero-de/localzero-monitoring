@@ -1,5 +1,8 @@
 "use client";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import Image from 'next/image'
+import logo from '../../public/logo.png'
+import spende from '../../public/spende.svg'
 
 export default function Header() {
   return (
@@ -11,9 +14,9 @@ export default function Header() {
       <Container>
         <Navbar.Brand href="/">
           {" "}
-          <img
-            src="/logo.png"
-            width="200px"
+          <Image
+            src={logo}
+            width={200}
             className="d-inline-block align-top"
             alt="LocalZero Monitoring logo"
           />
@@ -35,9 +38,9 @@ export default function Header() {
           </Nav>
 
         <Navbar.Brand href="#home">
-          <img
-            src="/spende.svg"
-            width="200px"
+          <Image
+            src={spende}
+            width={200}
             className="d-inline-block align-top"
             alt="Spenden"
           />

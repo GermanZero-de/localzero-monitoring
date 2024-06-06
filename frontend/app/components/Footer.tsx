@@ -22,7 +22,7 @@ export default function Footer() {
               </li>
               <li>
                 {" "}
-                <a href="https://germanzero.de/">LOKALZERO</a>
+                <a href="https://localzero.net/">LOKALZERO</a>
               </li>
             </ul>
           </Col>
@@ -41,7 +41,7 @@ export default function Footer() {
             />
             <SocialIcon
               name="linkedin"
-              link="https://www.linkedin.com/company/germanzero/"
+              link="https://www.linkedin.com/showcase/localzero/"
             />
             <SocialIcon
               name="instagram"
@@ -74,29 +74,6 @@ export default function Footer() {
                 {" "}
                 Germanzero e.V.
               </a>
-            </div>
-
-            <div className="align-items-top col d-flex footer-subline justify-content-center mt-3">
-              <div>🌱 </div>{" "}
-              <div>
-                {" "}
-                Gebaut mit{" "}
-                <a
-                  className="link-underline-light link-light"
-                  href="https://getkirby.com/"
-                  target="_blank"
-                >
-                  Kirby
-                </a>
-                , gehostet mit 100% erneuerbarer Energie in der Schweiz durch{" "}
-                <a
-                  className="link-underline-light link-light"
-                  href="https://datacenterlight.ch/"
-                  target="_blank"
-                >
-                  ungleich glarus ag
-                </a>{" "}
-              </div>
             </div>
           </Col>
         </Row>
