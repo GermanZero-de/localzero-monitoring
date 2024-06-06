@@ -7,7 +7,6 @@ export default function Header() {
       color="light"
       expand="lg"
       className="border-bottom border-gray bg-white"
-      style={{ height: 80 }}
     >
       <Container>
         <Navbar.Brand href="/">
@@ -34,7 +33,7 @@ export default function Header() {
             <Nav.Link href="#suche_kommune">SUCHE KOMMUNE</Nav.Link>
             <Nav.Link href="topmassnahmen">TOP MASSNAHMEN</Nav.Link>
           </Nav>
-        </Navbar.Collapse>
+
         <Navbar.Brand href="#home">
           <img
             src="/spende.svg"
@@ -43,6 +42,7 @@ export default function Header() {
             alt="Spenden"
           />
         </Navbar.Brand>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
