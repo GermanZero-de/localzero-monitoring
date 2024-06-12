@@ -1,0 +1,14 @@
+.tileRowContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.tile {
+    flex: 50% 1 1;
+    margin-right: 2rem;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}

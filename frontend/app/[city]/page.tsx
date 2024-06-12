@@ -6,8 +6,11 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 import Markdown from "react-markdown";
 import arrow from "../../public/images/arrow-right-down.svg";
+import greenCity from "../../public/background-green-city.png"
 import { useGetCity } from "../CityService";
 import LocalGroup from "../components/LocalGroup";
+import NavigationTile from "@/app/components/NavigationTile";
+import styles from "./page.module.scss"
 
 const CityDescription = ({ description }) => {
   if (!description) {
@@ -60,6 +63,20 @@ export default function CityDashboard() {
           />
         </h1>
         <p className="pb-3">TODO Kacheln</p>
+        <div className="p-3">
+          <div className={styles.tileRowContainer}>
+            <NavigationTile className={styles.tile} isBigCard title={"Alles klar in " + city.name + "?"} subtitle="Einleitung">
+              <Image style={{width: "100%", height: "100%"}} src={greenCity} alt=""
+              />
+            </NavigationTile>
+            <NavigationTile className={styles.tile} isBigCard title="Stand der Maßnahmen" subtitle="Umsetzung Klimaaktionsplan">"Bild"</NavigationTile>
+          </div>
+          <div style={{display: "flex"}}>
+            <NavigationTile className={styles.tile} title="Klimaaktionsplan (KAP)">"Bild"</NavigationTile>
+            <NavigationTile className={styles.tile} title="Wärmeplanung">"Bild"</NavigationTile>
+            <NavigationTile className={styles.tile} title="Wo steht die Verwaltung?">"Bild"</NavigationTile>
+          </div>
+        </div>
         <CityDescription description={city.description} />
       </Container>
       <LocalGroup
@@ -75,3 +92,4 @@ export default function CityDashboard() {
     </>
   );
 }
+
