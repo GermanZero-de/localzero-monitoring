@@ -71,7 +71,7 @@ export default function CityDashboard() {
             </NavigationTile>
             <NavigationTile className={styles.tile} isBigCard title="Stand der Maßnahmen" subtitle="Umsetzung Klimaaktionsplan">"Bild"</NavigationTile>
           </div>
-          <div style={{display: "flex"}}>
+          <div className={styles.tileRowContainer}>
             <NavigationTile className={styles.tile} title="Klimaaktionsplan (KAP)">"Bild"</NavigationTile>
             <NavigationTile className={styles.tile} title="Wärmeplanung">"Bild"</NavigationTile>
             <NavigationTile className={styles.tile} title="Wo steht die Verwaltung?">"Bild"</NavigationTile>
