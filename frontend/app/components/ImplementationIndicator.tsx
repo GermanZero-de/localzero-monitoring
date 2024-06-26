@@ -9,15 +9,15 @@ export enum TaskStatus {
   unknown = "unknown",
 }
 
-type tasksNumberType = { complete: number; asPlanned: number; unknown: number; delayed: number; failed: number };
+type TasksNumber = { complete: number; asPlanned: number; unknown: number; delayed: number; failed: number };
 
 type Props = {
-  tasksNumber: tasksNumberType;
+  tasksNumber: TasksNumber;
 };
 
 const taskStatusOrder = [TaskStatus.unknown, TaskStatus.failed, TaskStatus.delayed, TaskStatus.asPlanned, TaskStatus.complete];
 
-const getArrowheadStyle: (taskStatusInPercent: tasksNumberType) => string = (taskStatusInPercent) => {
+const getArrowheadStyle: (taskStatusInPercent: TasksNumber) => string = (taskStatusInPercent) => {
   for (let key in TaskStatus) {
     if (taskStatusInPercent[key as TaskStatus] > 0) {
       return styles[key];
@@ -26,12 +26,12 @@ const getArrowheadStyle: (taskStatusInPercent: tasksNumberType) => string = (tas
   return styles.complete;
 };
 
-const getTotalNumber = (tasksNumber: tasksNumberType): number => {
+const getTotalNumber = (tasksNumber: TasksNumber): number => {
   return Object.values(tasksNumber).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 };
 
 const getTasksHeights = (
-  tasksNumber: tasksNumberType,
+  tasksNumber: TasksNumber,
   totalNumberOfTasks: number,
   length: number,
 ): number[] => {
@@ -53,19 +53,17 @@ const ImplementationIndicator: React.FC<Props> = ({tasksNumber: tasksNumber}) =>
   const totalLength = 150;
   const tasksHeights = getTasksHeights(tasksNumber, getTotalNumber(tasksNumber), length);
   const tasksCumulative = getTasksCumulative(tasksHeights);
-  const tasksStyle =  taskStatusOrder.map((status) => styles[status])
   const arrowheadStyle = getArrowheadStyle(tasksNumber);
 
   return (
     <svg
-      width={width + 2 * borderWidth}
-      height={totalLength + 2 * borderWidth}
+      viewBox={`0 0 ${width + borderWidth} ${totalLength + borderWidth}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       {taskStatusOrder.map((status, index) => (
             <rect
               key={status}
-              className={tasksStyle[index]}
+              className={styles[status]}
               x={borderWidthHalf}
               y={tasksCumulative[index] + borderWidthHalf}
               width={width}
