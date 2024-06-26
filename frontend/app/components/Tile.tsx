@@ -3,6 +3,7 @@ import * as React from "react";
 import styles from "./styles/Tile.module.scss";
 import Image from "next/image";
 import arrow from "../../public/images/arrow-right.svg";
+import ImplementationIndicator, { TaskStatus } from "./ImplementationIndicator";
 
 const icons = {
   facebook:
@@ -42,6 +43,17 @@ const Tile: React.FC<Props> = ({ name, logo }) => {
         ></Image>
       </div>
       {image}
+      <div className={styles.thermometer}>
+        <ImplementationIndicator
+          tasksNumber={{
+            [TaskStatus.failed]: 12,
+            [TaskStatus.asPlanned]: 33,
+            [TaskStatus.complete]: 19,
+            [TaskStatus.delayed]: 10,
+            [TaskStatus.unknown]: 10,
+          }}
+        />
+      </div>
     </div>
   );
 };
