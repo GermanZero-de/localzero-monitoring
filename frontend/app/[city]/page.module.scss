@@ -1,17 +1,17 @@
 .tileRowContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
 .tile {
-    flex: 30% 1 1;
-    margin-right: 2rem;
-    margin-bottom: 2rem;
-    max-width: 40rem;
+  flex: 30% 1 1;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  max-width: 40rem;
 
-    &:last-child {
-        margin-right: 0;
-    }
+  &:last-child {
+    margin-right: 0;
+  }
 }

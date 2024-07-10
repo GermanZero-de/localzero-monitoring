@@ -59,7 +59,9 @@ export default async function Home() {
         </div>
         <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>
         <Search cities={cities} />
-        <h2 className="headingWithBar">LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h2>
+        <h2 className="headingWithBar">
+          LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.
+        </h2>
         <p className="pb-3">TODO: call to action tiles</p>
       </Container>
     </>

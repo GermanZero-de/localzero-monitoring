@@ -1,0 +1,23 @@
+@use "../../common.scss";
+
+.header {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  // align-items: center;
+  padding: 0.5rem;
+  background-color: rgba(255, 200, 12, 0.15);
+  -webkit-clip-path: polygon(0 0, 0 100%, calc(100% - 1.5rem) 100%, 100% calc(100% - 1.5rem), 100% 0);
+  clip-path: polygon(0 0, 0 100%, calc(100% - 1.5rem) 100%, 100% calc(100% - 1.5rem), 100% 0);
+}
+
+.headertitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.headersecondrow {
+  display: flex;
+  justify-content: space-between;
+}

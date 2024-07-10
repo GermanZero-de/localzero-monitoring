@@ -1,8 +1,8 @@
 "use client";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import Image from 'next/image'
-import logo from '../../public/logo.png'
-import spende from '../../public/spende.svg'
+import Image from "next/image";
+import logo from "../../public/logo.png";
+import spende from "../../public/spende.svg";
 
 export default function Header() {
   return (
@@ -37,14 +37,14 @@ export default function Header() {
             <Nav.Link href="topmassnahmen">TOP MASSNAHMEN</Nav.Link>
           </Nav>
 
-        <Navbar.Brand href="#home">
-          <Image
-            src={spende}
-            width={200}
-            className="d-inline-block align-top"
-            alt="Spenden"
-          />
-        </Navbar.Brand>
+          <Navbar.Brand href="#home">
+            <Image
+              src={spende}
+              width={200}
+              className="d-inline-block align-top"
+              alt="Spenden"
+            />
+          </Navbar.Brand>
         </Navbar.Collapse>
       </Container>
     </Navbar>
