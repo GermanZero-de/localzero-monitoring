@@ -3,7 +3,7 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { AccordionBody, AccordionHeader, AccordionItem } from "react-bootstrap";
 import Markdown from "react-markdown";
-import styles from "./styles/CapChecklistItem.module.scss";
+import styles from "./styles/ChecklistItem.module.scss";
 
 type Props = {
   checklist_item: {

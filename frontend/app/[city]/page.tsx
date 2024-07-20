@@ -73,7 +73,7 @@ export default function CityDashboard() {
           <div className={styles.tileRowContainer}>
             <NavigationTile className={styles.tile} title="Klimaaktionsplan (KAP)" link={ city.slug + '/kap_checkliste'}>"Bild"</NavigationTile>
             <NavigationTile className={styles.tile} title="Wärmeplanung">"Bild"</NavigationTile>
-            <NavigationTile className={styles.tile} title="Wo steht die Verwaltung?">"Bild"</NavigationTile>
+            <NavigationTile className={styles.tile} title="Wo steht die Verwaltung?" link={ city.slug + '/verwaltungsstrukturen_checkliste'}>"Bild"</NavigationTile>
           </div>
         </div>
         <CityDescription description={city.description} />
