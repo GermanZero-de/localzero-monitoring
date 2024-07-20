@@ -62,7 +62,6 @@ export default function CityDashboard() {
             alt=""
           />
         </h1>
-        <p className="pb-3">TODO Kacheln</p>
         <div className="p-3">
           <div className={styles.tileRowContainer}>
             <NavigationTile className={styles.tile} isBigCard title={"Alles klar in " + city.name + "?"} subtitle="Einleitung">
@@ -72,7 +71,7 @@ export default function CityDashboard() {
             <NavigationTile className={styles.tile} isBigCard title="Stand der Maßnahmen" subtitle="Umsetzung Klimaaktionsplan">"Bild"</NavigationTile>
           </div>
           <div className={styles.tileRowContainer}>
-            <NavigationTile className={styles.tile} title="Klimaaktionsplan (KAP)">"Bild"</NavigationTile>
+            <NavigationTile className={styles.tile} title="Klimaaktionsplan (KAP)" link={ city.slug + '/kap_checkliste'}>"Bild"</NavigationTile>
             <NavigationTile className={styles.tile} title="Wärmeplanung">"Bild"</NavigationTile>
             <NavigationTile className={styles.tile} title="Wo steht die Verwaltung?">"Bild"</NavigationTile>
           </div>
