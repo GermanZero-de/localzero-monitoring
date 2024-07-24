@@ -1,0 +1,20 @@
+.container {
+  max-width: 50rem;
+  margin-bottom: 5rem;
+}
+
+.accordion {
+  & > * {
+    margin-bottom: 2rem;
+  }
+}
+
+.legende {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+        margin-right: 0.25rem;
+        height: 1.5rem;
+    }
+}
