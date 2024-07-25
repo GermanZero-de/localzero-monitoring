@@ -1,0 +1,66 @@
+@use "../../common.scss";
+
+.closedcard {
+  border: none;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  // align-items: center;
+  padding: 0.8rem;
+  background-color: rgba(255, 200, 12, 0.15);
+  -webkit-clip-path: polygon(0 0, 0 100%, calc(100% - 1.5rem) 100%, 100% calc(100% - 1.5rem), 100% 0);
+  clip-path: polygon(0 0, 0 100%, calc(100% - 1.5rem) 100%, 100% calc(100% - 1.5rem), 100% 0);
+  border-bottom: none;
+}
+
+.headertitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headersecondrow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toggle {
+  margin-left: 3rem;
+  margin-right: 2rem;
+}
+
+.iconrow {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  width: 80%;
+
+  & > * {
+    display: flex;
+  }
+
+  h2 {
+    margin-left: 0.5rem;
+  }
+}
+
+.firsticon {
+  grid-column: 1;
+}
+
+.secondicon {
+  grid-column: 2;
+}
+
+.thirdicon {
+  grid-column: 3;
+}
+
+.fourthicon {
+  grid-column: 4;
+}
+
+.fifthicon {
+  grid-column: 5;
+}

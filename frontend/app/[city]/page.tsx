@@ -1,16 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import Markdown from "react-markdown";
 import arrow from "../../public/images/arrow-right-down.svg";
-import greenCity from "../../public/background-green-city.png"
+import greenCity from "../../public/background-green-city.png";
 import { useGetCity } from "../CityService";
 import LocalGroup from "../components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";
-import styles from "./page.module.scss"
+import styles from "./page.module.scss";
 
 const CityDescription = ({ description }) => {
   if (!description) {
@@ -37,6 +38,7 @@ const SupportingNgos = ({ supportingNgos }) => {
 };
 
 export default function CityDashboard() {
+  const router = useRouter();
   const [isLocalGroupExpanded, setIsLocalGroupExpanded] = useState(false);
 
   const pathname = usePathname();
@@ -64,16 +66,51 @@ export default function CityDashboard() {
         </h1>
         <div className="p-3">
           <div className={styles.tileRowContainer}>
-            <NavigationTile className={styles.tile} isBigCard title={"Alles klar in " + city.name + "?"} subtitle="Einleitung">
-              <Image style={{width: "100%", height: "100%"}} src={greenCity} alt=""
+            <NavigationTile
+              className={styles.tile}
+              isBigCard
+              title={"Alles klar in " + city.name + "?"}
+              subtitle="Einleitung"
+              onClick={() => {}}
+            >
+              <Image
+                style={{ width: "100%", height: "100%" }}
+                src={greenCity}
+                alt=""
               />
             </NavigationTile>
-            <NavigationTile className={styles.tile} isBigCard title="Stand der Maßnahmen" subtitle="Umsetzung Klimaaktionsplan">"Bild"</NavigationTile>
+            <NavigationTile
+              className={styles.tile}
+              isBigCard
+              title="Stand der Maßnahmen"
+              subtitle="Umsetzung Klimaaktionsplan"
+              onClick={() => router.push(slug + "/massnahmen")}
+            >
+              "Bild"
+            </NavigationTile>
           </div>
           <div className={styles.tileRowContainer}>
-            <NavigationTile className={styles.tile} title="Klimaaktionsplan (KAP)" link={ city.slug + '/kap_checkliste'}>"Bild"</NavigationTile>
-            <NavigationTile className={styles.tile} title="Wärmeplanung">"Bild"</NavigationTile>
-            <NavigationTile className={styles.tile} title="Wo steht die Verwaltung?" link={ city.slug + '/verwaltungsstrukturen_checkliste'}>"Bild"</NavigationTile>
+            <NavigationTile
+              className={styles.tile}
+              title="Klimaaktionsplan (KAP)"
+              onClick={() => router.push(slug + "/kap_checkliste")}
+            >
+              "Bild"
+            </NavigationTile>
+            <NavigationTile
+              className={styles.tile}
+              title="Wärmeplanung"
+              onClick={() => {}}
+            >
+              "Bild"
+            </NavigationTile>
+            <NavigationTile
+              className={styles.tile}
+              title="Wo steht die Verwaltung?"
+              onClick={() => {}}
+            >
+              "Bild"
+            </NavigationTile>
           </div>
         </div>
         <CityDescription description={city.description} />
@@ -91,4 +128,3 @@ export default function CityDashboard() {
     </>
   );
 }
-
