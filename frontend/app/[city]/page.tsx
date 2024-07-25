@@ -51,7 +51,7 @@ export default async function CityDashboard({ params }: { params: { city: string
         </h1>
         <div className="p-3">
           <div className={styles.tileRowContainer}>
-        
+
               <NavigationTile
                 className={styles.tile}
                 isBigCard
@@ -64,7 +64,7 @@ export default async function CityDashboard({ params }: { params: { city: string
                   alt=""
                 />
               </NavigationTile>
-           
+
             <Link href={`${params.city}/massnahmen`}>
               <NavigationTile
                 className={styles.tile}
@@ -85,7 +85,7 @@ export default async function CityDashboard({ params }: { params: { city: string
                   <span>Bild</span>
             </NavigationTile>
             </Link>
-  
+
             <NavigationTile
               className={styles.tile}
               title="Wärmeplanung"
@@ -95,7 +95,7 @@ export default async function CityDashboard({ params }: { params: { city: string
             <NavigationTile
               className={styles.tile}
               title="Wo steht die Verwaltung?"
-           
+
             >
               <span>Bild</span>
             </NavigationTile>
@@ -121,7 +121,7 @@ export default async function CityDashboard({ params }: { params: { city: string
           </Col>
         </Row>
       </Container>
-  
+
     </>
   );
 }

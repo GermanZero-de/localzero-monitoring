@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 import { getCities } from "@/lib/dataService";
 
 export default async function CapChecklist({ params }: { params: { city: string } }) {
-  
+
   const city = await getCities(params.city);
 
   if (!city) {

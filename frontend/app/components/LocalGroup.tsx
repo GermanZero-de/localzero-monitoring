@@ -46,7 +46,7 @@ export default function LocalGroup({ localGroup, isExpanded }: Props) {
           <Image
             src={isExpanded ? expandArrowUp : expandArrowDown}
             alt="Zeige mehr über das Lokalteam"
-           
+
           />
         </div>
       </Container>
