@@ -9,7 +9,11 @@ import NavigationTile from "@/app/components/NavigationTile";
 import styles from "./page.module.scss";
 import { getCities } from "@/lib/dataService";
 
-const CityDescription = ({ description }) => {
+interface CityDescriptionProps {
+  description: string;
+}
+
+const CityDescription: React.FC<CityDescriptionProps> = ({ description }) => {
   if (!description) {
     return <></>;
   }
@@ -21,7 +25,11 @@ const CityDescription = ({ description }) => {
   );
 };
 
-const SupportingNgos = ({ supportingNgos }) => {
+interface SupportingNgosProps {
+  supportingNgos: string;
+}
+
+const SupportingNgos: React.FC<SupportingNgosProps>  = ({ supportingNgos }) => {
   if (!supportingNgos) {
     return <></>;
   }
@@ -32,7 +40,6 @@ const SupportingNgos = ({ supportingNgos }) => {
     </>
   );
 };
-
 export default async function CityDashboard({ params }: { params: { city: string } }) {
   const city = await getCities(params.city);
   if (!city) {

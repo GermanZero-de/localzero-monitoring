@@ -22,7 +22,7 @@ export default async function AdministrationChecklist({ params }: { params: { ci
         id="accordionFlushKAP"
         className="accordion-flush pb-3"
       >
-        {city.administration_checklist.map((item) => (
+        {city.administration_checklist.map((item:any) => (
           <ChecklistItem
             key={item.id}
             checklist_item={item}

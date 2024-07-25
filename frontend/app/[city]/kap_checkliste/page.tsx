@@ -21,7 +21,7 @@ export default async function CapChecklist({ params }: { params: { city: string 
         id="accordionFlushKAP"
         className="accordion-flush pb-3"
       >
-        {city.cap_checklist.map((item) => (
+        {city.cap_checklist.map((item:any) => (
           <ChecklistItem
             key={item.id}
             checklist_item={item}

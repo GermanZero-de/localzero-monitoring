@@ -44,7 +44,7 @@ export const CardSmall: Story = {
   },
 };
 
-
+/*
 export const MultipleCards: Story = {
   render: () => {
     const cardsData = [
@@ -61,4 +61,4 @@ export const MultipleCards: Story = {
       </div>
     );
   },
-};
+};*/

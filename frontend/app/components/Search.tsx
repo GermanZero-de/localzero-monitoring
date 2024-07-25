@@ -4,20 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import closingIcon from "../../public/x.svg";
 import { useState } from "react";
-import { db } from "./db/db.server";
-import { cpmonitorCity } from "./db/schema";
-import { Card, Col, ListGroup, Row } from "react-bootstrap";
+import {  Col, ListGroup, Row } from "react-bootstrap";
 import styles from "./Search.module.scss";
+import { City } from "@/types";
 
-export default function Search(props) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredCities, setFilteredCities] = useState([]);
+interface SearchResult {
+  name: string;
+  slug: string;
+}
 
-  const search = (event) => {
+interface SearchProps {
+  cities: SearchResult[];
+}
+
+export default function Search(props:SearchProps) {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filteredCities, setFilteredCities] = useState<SearchResult[]>([]);
+
+  const search = (event:React.ChangeEvent<HTMLInputElement>) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
 
-    const filteredCities = props.cities.filter((city) => city.name.toLowerCase().includes(newSearchTerm.toLowerCase()));
+    const filteredCities = props.cities.filter((city:SearchResult) => city.name.toLowerCase().includes(newSearchTerm.toLowerCase()));
     setFilteredCities(filteredCities);
   };
 
@@ -53,7 +61,7 @@ export default function Search(props) {
             </div>
           </div>
           <ListGroup className={styles.listGroup}>
-            {filteredCities.map((city) => (
+            {filteredCities.map((city:SearchResult) => (
               <Link
                 href={"/" + city.slug + "/"}
                 key={city.slug}
