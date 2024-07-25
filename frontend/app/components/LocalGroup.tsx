@@ -10,7 +10,6 @@ import styles from "./styles/LocalGroup.module.scss";
 type Props = {
   localGroup: LocalGroupType;
   isExpanded: boolean;
-  setIsExpanded: (isExpanded: boolean) => void;
 };
 
 type LocalGroupType = {
@@ -20,7 +19,7 @@ type LocalGroupType = {
   description: string;
 };
 
-export default function LocalGroup({ localGroup, isExpanded, setIsExpanded }: Props) {
+export default function LocalGroup({ localGroup, isExpanded }: Props) {
   if (!localGroup) {
     return <></>;
   }
@@ -47,7 +46,7 @@ export default function LocalGroup({ localGroup, isExpanded, setIsExpanded }: Pr
           <Image
             src={isExpanded ? expandArrowUp : expandArrowDown}
             alt="Zeige mehr über das Lokalteam"
-            onClick={() => setIsExpanded(!isExpanded)}
+           
           />
         </div>
       </Container>

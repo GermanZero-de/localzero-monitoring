@@ -1,19 +1,14 @@
-"use client";
-
-import { useGetCity } from "@/app/CityService";
 import ChecklistItem from "@/app/components/ChecklistItem";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { usePathname } from "next/navigation";
 import { Accordion, Container } from "react-bootstrap";
 import Markdown from "react-markdown";
+import { getCities } from "@/lib/dataService";
 
-export default function CapChecklist() {
-  const pathname = usePathname();
-  const slug = pathname.split("/").at(-2);
+export default async function CapChecklist({ params }: { params: { city: string } }) {
+  
+  const city = await getCities(params.city);
 
-  const { city, hasError } = useGetCity(slug);
-
-  if (!city || hasError) {
+  if (!city) {
     return <></>;
   }
 

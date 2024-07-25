@@ -1,19 +1,15 @@
-"use client";
-
-import { useGetCity } from "@/app/CityService";
 import ChecklistItem from "@/app/components/ChecklistItem";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { usePathname } from "next/navigation";
 import { Accordion, Container } from "react-bootstrap";
 import Markdown from "react-markdown";
+import { getCities } from "@/lib/dataService";
 
-export default function AdministrationChecklist() {
-  const pathname = usePathname();
-  const slug = pathname.split("/").at(-2);
+export default async function AdministrationChecklist({ params }: { params: { city: string } }) {
 
-  const { city, hasError } = useGetCity(slug);
+  const cities = await getCities(params.city);
+  const city = cities[0]
 
-  if (!city || hasError) {
+  if (!city) {
     return <></>;
   }
 
