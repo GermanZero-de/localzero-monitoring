@@ -1,26 +1,15 @@
 import Search from "@/app/components/Search";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "react-bootstrap";
 import banner from "../public/images/dashboard-banner.jpg";
 import Tile from "./components/Tile";
 import styles from "./page.module.scss";
-
-const getCities = async () => {
-  const cities = await axios.get("http://127.0.0.1:8000/api/cities", {
-    // TODO: proper url
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-  });
-  return cities;
-};
+import { getCities } from "@/lib/dataService";
+import { City } from "@/types";
 
 export default async function Home() {
-  const cities = (await getCities()).data;
-  console.log(cities[0]);
+  const cities = await getCities();
 
   return (
     <>
@@ -44,7 +33,7 @@ export default async function Home() {
         </p>
         <h2 className="headingWithBar">Kommunen im Monitoring</h2>
         <div className="d-flex justify-content-between flex-wrap">
-          {(cities || []).map((city) => (
+          {(cities || []).map((city:City) => (
             <Link
               key={city.slug}
               href={"/" + city.slug}

@@ -5,7 +5,6 @@ import styles from "./styles/NavigationTile.module.scss";
 interface NavigationTileProps {
   title: string;
   subtitle?: string;
-  onClick: () => any;
   children: React.ReactNode;
   isBigCard?: boolean;
   className?: string;
@@ -14,7 +13,6 @@ interface NavigationTileProps {
 const NavigationTile: React.FC<NavigationTileProps> = ({
   title,
   subtitle,
-  onClick,
   isBigCard = false,
   className,
   children,
@@ -22,7 +20,6 @@ const NavigationTile: React.FC<NavigationTileProps> = ({
   return (
     <div
       className={`${styles.card} ${isBigCard ? styles.bigcard : ""} ${className}`}
-      onClick={onClick}
     >
       <div className={styles.header}>
         <div className={styles.text}>

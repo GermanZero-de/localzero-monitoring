@@ -147,3 +147,4 @@ cpmonitor/images
 
 # docker images exported for upload
 *.tar
+!frontend/lib
