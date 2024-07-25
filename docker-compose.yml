@@ -26,6 +26,7 @@ services:
   frontend:
     container_name: frontend-${ENVIRONMENT_NAME}
     build:
+      context: ./
       dockerfile: ./docker/frontend/Dockerfile
     networks:
       - nginx_network
