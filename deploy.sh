@@ -55,7 +55,7 @@ docker tag cpmonitor:${env} cpmonitor:${env}-${date}${tag_suffix}
 docker tag klimaschutzmonitor-dbeaver:${env} klimaschutzmonitor-dbeaver:${env}-${date}${tag_suffix}
 
 # backup the db and images
-~/backup.sh $env
+~/backup.sh $env || echo "Backup not possible. Continuing."
 
 # Stop the server, apply the migrations, start the server
 cd ~/${env}/
