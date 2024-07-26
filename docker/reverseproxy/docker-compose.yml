@@ -30,11 +30,9 @@ networks:
   production_nginx_network:
     name: production_nginx_network
     driver: bridge
-    external: true
   testing_nginx_network:
     name: testing_nginx_network
     driver: bridge
-    external: true
   reverse_proxy_network:
     name: reverse_proxy_network
     driver: bridge
