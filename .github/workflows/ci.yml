@@ -40,10 +40,6 @@ jobs:
         run: poetry run python manage.py migrate --settings=config.settings.local
       - name: fill database
         run: poetry run python manage.py loaddata --settings=config.settings.local e2e_tests/database/test_database.json
-      - name: create networks
-        run: |
-          docker network create testing_nginx_network
-          docker network create production_nginx_network
       - name: start reverse-proxy
         run: docker compose -f docker/reverseproxy/docker-compose.yml up -d --build
       - name: build testing application
