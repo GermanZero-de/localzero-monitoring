@@ -13,7 +13,7 @@ import verzoegert from "../../public/images/icon-verzoegert_fehlt.svg";
 interface MeasureCardProps {
   eventKey: string;
   title: string;
-  numberOfMeasures: { done: number; inProgress: number; late: number; failed: number; unknown: number };
+  statusOfSubTasks: { done: number; inProgress: number; late: number; failed: number; unknown: number };
   children: React.ReactNode;
 }
 
@@ -33,11 +33,11 @@ const CardToggle: React.FC<{ eventKey: string }> = ({ eventKey }) => {
   );
 };
 
-const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, numberOfMeasures, children }) => {
-  const totalNumberOfMeasures = Object.entries(numberOfMeasures).reduce(
-    (sum: number, numberOfMeasure: [string, number]) => {
-      if (numberOfMeasure[0] !== "unknown") {
-        return sum + numberOfMeasure[1];
+const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubTasks, children }) => {
+  const totalNumberOfMeasures = Object.entries(statusOfSubTasks).reduce(
+    (sum: number, statusOfSubTasks: [string, number]) => {
+      if (statusOfSubTasks[0] !== "unknown") {
+        return sum + statusOfSubTasks[1];
       }
       return sum;
     },
@@ -56,49 +56,49 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, numberOfMeas
         </div>
         <div className={styles.headersecondrow}>
           <div className={styles.iconrow}>
-            {numberOfMeasures.done > 0 && (
+            {statusOfSubTasks.done > 0 && (
               <div className={styles.firsticon}>
                 <Image
                   src={abgeschlossen}
                   alt="Abgeschlossene Maßnahmen"
                 ></Image>
-                <h2>{numberOfMeasures.done}</h2>
+                <h2>{statusOfSubTasks.done}</h2>
               </div>
             )}
-            {numberOfMeasures.inProgress > 0 && (
+            {statusOfSubTasks.inProgress > 0 && (
               <div className={styles.secondicon}>
                 <Image
                   src={inArbeit}
                   alt="Maßnahmen in Arbeit"
                 ></Image>
-                <h2>{numberOfMeasures.inProgress}</h2>
+                <h2>{statusOfSubTasks.inProgress}</h2>
               </div>
             )}
-            {numberOfMeasures.late > 0 && (
+            {statusOfSubTasks.late > 0 && (
               <div className={styles.thirdicon}>
                 <Image
                   src={verzoegert}
                   alt="Verzögerte Maßnahmen"
                 ></Image>
-                <h2>{numberOfMeasures.late}</h2>
+                <h2>{statusOfSubTasks.late}</h2>
               </div>
             )}
-            {numberOfMeasures.failed > 0 && (
+            {statusOfSubTasks.failed > 0 && (
               <div className={styles.fourthicon}>
                 <Image
                   src={gescheitert}
                   alt="Gescheiterte Maßnahmen"
                 ></Image>
-                <h2>{numberOfMeasures.failed}</h2>
+                <h2>{statusOfSubTasks.failed}</h2>
               </div>
             )}
-            {numberOfMeasures.unknown > 0 && (
+            {statusOfSubTasks.unknown > 0 && (
               <div className={styles.fifthicon}>
                 <Image
                   src={unbekannt}
                   alt="Unbekannte Maßnahmen"
                 ></Image>
-                <h2>{numberOfMeasures.unknown}</h2>
+                <h2>{statusOfSubTasks.unknown}</h2>
               </div>
             )}
           </div>

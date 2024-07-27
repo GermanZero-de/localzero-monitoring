@@ -1,4 +1,4 @@
-from cpmonitor.models import City, LocalGroup, CapChecklist, AdministrationChecklist
+from cpmonitor.models import City, LocalGroup, CapChecklist, AdministrationChecklist, Task
 from rest_framework import serializers
 
 #
@@ -86,3 +86,23 @@ class CitySerializer(serializers.ModelSerializer):
             "assessment_action_plan",
             "assessment_administration",
         ]
+        
+
+class TaskSerializer(serializers.ModelSerializer):
+    children = serializers.SerializerMethodField()
+
+class Meta:
+    model = Task
+    fields = [
+        "id", "title", "city", "teaser", "description", "planned_start",
+        "planned_completion", "responsible_organ", "responsible_organ_explanation",
+        "plan_assessment", "execution_status", "execution_justification",
+        "supporting_ngos", "execution_completion", "actual_start", "actual_completion",
+        "internal_information", "slugs", "numchild", "children"
+    ]
+
+    def get_children(self, obj):
+        children = obj.get_children()
+        serializer = TaskSerializer(children, many=True)
+        return serializer.data
+
