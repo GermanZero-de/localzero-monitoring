@@ -821,7 +821,10 @@ class CityDetail(APIView):
         return Response(serializer.data)
 
 class MassnahmenbyCity(APIView):
-    def get(self, request, id):
-        children = Task.get_root_nodes().filter(city=id)
+    def get(self, request):
+        city_id = request.GET.get('city-id', None)
+        children = Task.get_root_nodes()
+        if city_id:
+            children = children.filter(city=city_id)
         serializer = TaskSerializer(children, many=True)
         return Response(serializer.data)

@@ -11,36 +11,28 @@ interface MeasureCardProps {
   children: React.ReactNode;
 }
 
-const CardToggle: React.FC<{ eventKey: string }> = ({ eventKey }) => {
-  const { activeEventKey } = useContext(AccordionContext);
-
-  const decoratedOnClick = useAccordionButton(eventKey);
-
-  const isCurrentEventKey = activeEventKey === eventKey;
-
-  return (
-    <Image
-      src={isCurrentEventKey ? expandArrowUp : expandArrowDown}
-      alt="Zeige mehr über das Lokalteam"
-      onClick={decoratedOnClick}
-    />
-  );
-};
-
 const SecondaryMeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, children }) => {
   const { activeEventKey } = useContext(AccordionContext);
+  const onClick = useAccordionButton(eventKey);
+
   const isCurrentEventKey = activeEventKey === eventKey;
 
   return (
     <Card className={!isCurrentEventKey ? styles.closedcard : ""}>
-      <Card.Header className={styles.header}>
+      <Card.Header
+        className={`${styles.header} ${styles.noicon}`}
+        onClick={onClick}
+      >
         {title}
         <div className={styles.toggle}>
-          <CardToggle eventKey={eventKey}></CardToggle>
+          <Image
+            src={isCurrentEventKey ? expandArrowUp : expandArrowDown}
+            alt="Zeige mehr über die Massnahme"
+          />
         </div>
       </Card.Header>
       <Accordion.Collapse eventKey={eventKey}>
-        <div className={styles.content}>{children}</div>
+        <Card.Body className={styles.content}>{children}</Card.Body>
       </Accordion.Collapse>
     </Card>
   );

@@ -1,34 +1,33 @@
 "use client";
 
 import { useGetCity } from "@/app/CityService";
-import Image from "next/image";
-
 import MeasureCard from "@/app/components/MeasureCard";
 import { usePathname } from "next/navigation";
-import { Accordion, Card, Container } from "react-bootstrap";
+import { Accordion, Container } from "react-bootstrap";
 import styles from "./page.module.scss";
-import abgeschlossen from "../../../public/images/icon-abgeschlossen.svg";
-import gescheitert from "../../../public/images/icon-gescheitert.svg";
-import inArbeit from "../../../public/images/icon-in_arbeit.svg";
-import unbekannt from "../../../public/images/icon-unbekannt.svg";
-import verzoegert from "../../../public/images/icon-verzoegert_fehlt.svg";
 import MeasureCardContent from "@/app/components/MeasureCardContent";
 import { ExecutionStatus, Task, useGetTasksByCity } from "@/app/TasksService";
+import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 
-export default function CityMeasures() {
-  const pathname = usePathname();
-  const slug = pathname.split("/").at(-2);
-  const { city, hasError } = useGetCity(slug);
-  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(city ? city.id : 1);
-  if (!city || hasError || hasErrorinTasks) {
-    return <></>;
-  }
+export type StatusCount = {
+  done: number;
+  inProgress: number;
+  late: number;
+  failed: number;
+  unknown: number;
+};
 
-  const getStatusNumbers = (
-    tasks: Task[],
-  ): { done: number; inProgress: number; late: number; failed: number; unknown: number } => {
-    return tasks.reduce(
-      (statusCount, task) => {
+const getRecursiveStatusNumbers = (
+  tasks: Task[],
+): { done: number; inProgress: number; late: number; failed: number; unknown: number } => {
+  return tasks.reduce(
+    (statusCount, task) => {
+      if (task.numchild > 0) {
+        const childrenStatusNumbers = getRecursiveStatusNumbers(task.children);
+        Object.keys(childrenStatusNumbers).forEach((statusKey) => {
+          statusCount[statusKey as keyof StatusCount] += childrenStatusNumbers[statusKey as keyof StatusCount];
+        });
+      } else {
         switch (task.execution_status) {
           case ExecutionStatus.UNKNOWN:
             statusCount.unknown++;
@@ -46,19 +45,26 @@ export default function CityMeasures() {
             statusCount.failed++;
             break;
         }
-        return statusCount;
-      },
-      { done: 0, inProgress: 0, late: 0, failed: 0, unknown: 0 },
-    );
-  };
+      }
+      return statusCount;
+    },
+    { done: 0, inProgress: 0, late: 0, failed: 0, unknown: 0 } as StatusCount,
+  );
+};
+
+export default function CityMeasures() {
+  const pathname = usePathname();
+  const slug = pathname.split("/").at(-2);
+  const { city, hasError } = useGetCity(slug);
+  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(city ? city.id : 1);
+  if (!city || hasError || hasErrorinTasks) {
+    return <></>;
+  }
 
   return (
     <Container className={styles.container}>
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
-      <Accordion
-        defaultActiveKey="0"
-        className={styles.accordion}
-      >
+      <Accordion className={styles.accordion}>
         {tasks &&
           tasks.map((task, i) => {
             return (
@@ -66,52 +72,36 @@ export default function CityMeasures() {
                 key={i}
                 eventKey={i.toString()}
                 title={task.title}
-                statusOfSubTasks={getStatusNumbers(task.children)}
+                statusOfSubTasks={getRecursiveStatusNumbers(task.children)}
               >
-                <Card.Body>
-                  <MeasureCardContent
-                    text={task.description}
-                    tasks={task.children}
-                  ></MeasureCardContent>
-                </Card.Body>
+                <MeasureCardContent
+                  text={task.description}
+                  tasks={task.children}
+                  eventKey={i.toString()}
+                ></MeasureCardContent>
               </MeasureCard>
             );
           })}
       </Accordion>
       <div className={styles.legende}>
         <div>
-          <Image
-            src={abgeschlossen}
-            alt="Abgeschlossene Maßnahmen"
-          ></Image>
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.COMPLETE}></ExecutionStatusIcon>
           abgeschlossen
         </div>
         <div>
-          <Image
-            src={inArbeit}
-            alt="Maßnahmen in Arbeit"
-          ></Image>
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.AS_PLANNED}></ExecutionStatusIcon>
           in Arbeit
         </div>
         <div>
-          <Image
-            src={verzoegert}
-            alt="Verzögerte Maßnahmen"
-          ></Image>
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.DELAYED}></ExecutionStatusIcon>
           verzögert
         </div>
         <div>
-          <Image
-            src={gescheitert}
-            alt="Gescheiterte Maßnahmen"
-          ></Image>
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.FAILED}></ExecutionStatusIcon>
           gescheitert
         </div>
         <div>
-          <Image
-            src={unbekannt}
-            alt="Unbekannte Maßnahmen"
-          ></Image>
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.UNKNOWN}></ExecutionStatusIcon>
           unbekannt
         </div>
       </div>

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import Markdown from "react-markdown";

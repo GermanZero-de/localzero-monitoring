@@ -3,36 +3,40 @@ import { Accordion } from "react-bootstrap";
 import styles from "./styles/MeasureCard.module.scss";
 import LinkMeasureCard from "./LinkMeasureCard";
 import SecondaryMeasureCard from "./SecondaryMeasureCard";
+import { Task } from "../TasksService";
 
 interface MeasureCardContentProps {
   text: string;
-  tasks: { title: string; parent?: boolean }[];
+  tasks: Task[];
+  eventKey: string;
 }
 
-const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks }) => {
+const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, eventKey }) => {
   return (
     <div>
       {text}
-      <Accordion
-        defaultActiveKey="0"
-        className={styles.accordion}
-      >
+      <Accordion className={styles.contentaccordion}>
         {tasks.map((task, i) => {
-          if (task.parent) {
+          if (task.numchild && task.children.length > 0) {
             return (
               <SecondaryMeasureCard
-                eventKey={i.toString()}
+                eventKey={`p${eventKey}c${i}`}
                 key={i}
                 title={task.title}
               >
-                hi{" "}
+                <MeasureCardContent
+                  text={task.description}
+                  tasks={task.children}
+                  eventKey={`p${eventKey}c${i}`}
+                ></MeasureCardContent>
               </SecondaryMeasureCard>
             );
           } else {
             return (
               <LinkMeasureCard
-                eventKey={i.toString()}
+                slugs={task.slugs}
                 title={task.title}
+                taskStatus={task.execution_status}
                 key={i}
               ></LinkMeasureCard>
             );

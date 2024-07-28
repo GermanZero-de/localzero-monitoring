@@ -8,13 +8,29 @@
   display: flex;
   justify-content: space-between;
   padding: 0.8rem;
-  background-color: rgba(255, 200, 12, 0.15);
+  background-color: rgba(220, 220, 220, 1);
   -webkit-clip-path: polygon(0 0, 0 100%, calc(100% - 1.5rem) 100%, 100% calc(100% - 1.5rem), 100% 0);
   clip-path: polygon(0 0, 0 100%, calc(100% - 1.5rem) 100%, 100% calc(100% - 1.5rem), 100% 0);
   border-bottom: none;
+  cursor: pointer;
+
+  &.noicon {
+    padding-left: 3.1rem;
+  }
+
+  img {
+    max-width: 1.8rem;
+    height: auto;
+    margin-right: 0.5rem;
+  }
 }
 
 .toggle {
-  margin-left: 3rem;
-  margin-right: 2rem;
+  margin-left: auto;
+  margin-right: 1rem;
+
+  img {
+    max-width: 1.5rem;
+    height: auto;
+  }
 }

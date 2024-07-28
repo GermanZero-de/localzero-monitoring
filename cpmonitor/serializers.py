@@ -91,15 +91,15 @@ class CitySerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     children = serializers.SerializerMethodField()
 
-class Meta:
-    model = Task
-    fields = [
-        "id", "title", "city", "teaser", "description", "planned_start",
-        "planned_completion", "responsible_organ", "responsible_organ_explanation",
-        "plan_assessment", "execution_status", "execution_justification",
-        "supporting_ngos", "execution_completion", "actual_start", "actual_completion",
-        "internal_information", "slugs", "numchild", "children"
-    ]
+    class Meta:
+        model = Task
+        fields = [
+            "id", "title", "city", "teaser", "description", "planned_start",
+            "planned_completion", "responsible_organ", "responsible_organ_explanation",
+            "plan_assessment", "execution_status", "execution_justification",
+            "supporting_ngos", "execution_completion", "actual_start", "actual_completion",
+            "internal_information", "slugs", "numchild", "children"
+        ]
 
     def get_children(self, obj):
         children = obj.get_children()

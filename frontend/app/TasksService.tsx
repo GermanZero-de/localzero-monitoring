@@ -14,6 +14,7 @@ export interface Task {
   title: string;
   description: string;
   execution_status: ExecutionStatus;
+  slugs: string;
   numchild: number;
   children: Task[];
   city: number;
@@ -29,7 +30,7 @@ export function useGetTasksByCity(id: number): {
   useEffect(() => {
     const getTasksByCity = async () => {
       try {
-        const response = await axios.get<Task[]>("http://127.0.0.1:8000/api/massnahmen/" + id, {
+        const response = await axios.get<Task[]>("http://127.0.0.1:8000/api/tasks?city-id=" + id, {
           // TODO: proper url
           headers: {
             Accept: "application/json",
