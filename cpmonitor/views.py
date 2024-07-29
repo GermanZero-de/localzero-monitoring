@@ -145,9 +145,9 @@ def _get_children(request, city, node=None):
 
 
 def _get_task_groups(city):
-        children = Task.get_root_nodes().filter(city=city)
-        groups = children.filter(depth=1)
-        return groups
+    children = Task.get_root_nodes().filter(city=city)
+    groups = children.filter(depth=1)
+    return groups
 
 
 # def _get_cap_checklist(city) -> CapChecklist | None:
@@ -820,9 +820,10 @@ class CityDetail(APIView):
         serializer = CitySerializer(city)
         return Response(serializer.data)
 
+
 class MassnahmenbyCity(APIView):
     def get(self, request):
-        city_id = request.GET.get('city-id', None)
+        city_id = request.GET.get("city-id", None)
         children = Task.get_root_nodes()
         if city_id:
             children = children.filter(city=city_id)

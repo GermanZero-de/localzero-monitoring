@@ -73,5 +73,4 @@ urlpatterns = [
     path("api/cities", views.CityList.as_view()),
     path("api/cities/<str:slug>", views.CityDetail.as_view()),
     path("api/tasks", views.MassnahmenbyCity.as_view()),
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
