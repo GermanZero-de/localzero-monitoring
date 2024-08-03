@@ -1,4 +1,4 @@
-.item::after  {
+.item:nth-last-child(n+2)::after  {
     color: rgb(var(--bs-primary-rgb));
     display: inline-block;
     margin-left: 0.5rem;

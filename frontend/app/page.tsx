@@ -20,7 +20,6 @@ const getCities = async () => {
 
 export default async function Home() {
   const cities = (await getCities()).data;
-  console.log(cities[0]);
 
   return (
     <>
