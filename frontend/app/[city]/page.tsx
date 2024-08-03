@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
+import Breadcrumb from '../components/BreadCrumb'
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import Markdown from "react-markdown";
@@ -64,6 +64,7 @@ export default function CityDashboard() {
             alt=""
           />
         </h1>
+        <Breadcrumb />
         <div className="p-3">
           <div className={styles.tileRowContainer}>
             <NavigationTile
