@@ -4,7 +4,10 @@ import { useGetCity } from "@/app/CityService";
 import { useParams } from "next/navigation";
 import { Container } from "react-bootstrap";
 import styles from "../page.module.scss";
+import Image from "next/image";
 import { Task, useGetTasksByCity } from "@/app/TasksService";
+import arrow from "../../../../public/images/arrow-right-down.svg";
+import Breadcrumb from "@/app/components/BreadCrumb";
 
 const getTaskBySlug = (tasks: Task[] | undefined, taskSlug: string): Task | undefined => {
   return tasks?.find((task) => task.slugs.includes(taskSlug));
@@ -35,9 +38,16 @@ export default function TaskDetails() {
   }
 
   const task = tasks && getTaskBySlugs(tasks, taskSlug);
-  console.log("task", task);
   return (
     <Container className={styles.container}>
+            <h1 style={{ fontWeight: 600, fontSize: 38 }}>
+          {city.name.toUpperCase()}
+          <Image
+            src={arrow}
+            alt=""
+          />
+      </h1>
+      <Breadcrumb />
       <h2 className="headingWithBar">{task?.title}</h2>
     </Container>
   );

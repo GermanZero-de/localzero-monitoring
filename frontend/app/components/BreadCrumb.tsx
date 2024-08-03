@@ -26,7 +26,7 @@ const Breadcrumb = ({}: TBreadCrumbProps) => {
                     let itemLink = link[0].toUpperCase() + link.slice(1, link.length)
                     return (
                         <React.Fragment key={index}>
-                            <li className={`${itemClasses} ${styles.links}`} >
+                            <li className={`${itemClasses} ${styles.item} ${styles.links}`} >
                                 <Link className={styles.links} href={href}>{itemLink}</Link>
                             </li>
                         </React.Fragment>
