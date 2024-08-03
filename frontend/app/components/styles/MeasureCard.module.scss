@@ -23,6 +23,7 @@
 .headersecondrow {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .toggle {
@@ -42,6 +43,8 @@
 
   & > * {
     display: flex;
+    flex-wrap: wrap-reverse;
+    align-items: center;
   }
 
   h2 {

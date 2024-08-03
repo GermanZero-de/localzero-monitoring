@@ -2,7 +2,7 @@
 
 import { useGetCity } from "@/app/CityService";
 import MeasureCard from "@/app/components/MeasureCard";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { Accordion, Container } from "react-bootstrap";
 import styles from "./page.module.scss";
 import MeasureCardContent from "@/app/components/MeasureCardContent";
@@ -53,10 +53,10 @@ const getRecursiveStatusNumbers = (
 };
 
 export default function CityMeasures() {
-  const pathname = usePathname();
-  const slug = pathname.split("/").at(-2);
-  const { city, hasError } = useGetCity(slug);
-  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(city ? city.id : 1);
+  const params = useParams();
+  const { city: slug } = params;
+  const { city, hasError } = useGetCity(slug as string);
+  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(slug as string);
   if (!city || hasError || hasErrorinTasks) {
     return <></>;
   }

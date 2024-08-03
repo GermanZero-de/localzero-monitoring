@@ -821,11 +821,13 @@ class CityDetail(APIView):
         return Response(serializer.data)
 
 
-class MassnahmenbyCity(APIView):
-    def get(self, request):
-        city_id = request.GET.get("city-id", None)
-        children = Task.get_root_nodes()
-        if city_id:
-            children = children.filter(city=city_id)
+class TasksbyCity(APIView):
+    def get(self, request, slug):
+        try:
+            city = City.objects.get(slug=slug)
+        except City.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        city_id = city.id
+        children = Task.get_root_nodes().filter(city=city_id)
         serializer = TaskSerializer(children, many=True)
         return Response(serializer.data)

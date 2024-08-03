@@ -20,17 +20,18 @@ export interface Task {
   city: number;
 }
 
-export function useGetTasksByCity(id: number): {
+export function useGetTasksByCity(slug: string): {
   tasks: Task[] | undefined;
   hasError: boolean;
 } {
   const [tasks, setTasks] = useState<Task[] | undefined>(undefined);
   const [hasError, setHasError] = useState(false);
 
+  console.log(slug);
   useEffect(() => {
     const getTasksByCity = async () => {
       try {
-        const response = await axios.get<Task[]>("http://127.0.0.1:8000/api/tasks?city-id=" + id, {
+        const response = await axios.get<Task[]>("http://127.0.0.1:8000/api/cities/" + slug + "/tasks", {
           // TODO: proper url
           headers: {
             Accept: "application/json",
@@ -45,7 +46,7 @@ export function useGetTasksByCity(id: number): {
     };
 
     getTasksByCity();
-  }, [id]);
+  }, [slug]);
 
   return { tasks, hasError };
 }

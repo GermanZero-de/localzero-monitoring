@@ -29,7 +29,7 @@ export default function TaskDetails() {
   const params = useParams();
   const { city: citySlug, task: taskSlug } = params;
   const { city, hasError } = useGetCity(citySlug as string);
-  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(city ? city.id : 1);
+  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(citySlug as string);
   if (!city || hasError || hasErrorinTasks) {
     return <></>;
   }
