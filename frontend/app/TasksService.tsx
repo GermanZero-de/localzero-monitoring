@@ -27,7 +27,6 @@ export function useGetTasksByCity(slug: string): {
   const [tasks, setTasks] = useState<Task[] | undefined>(undefined);
   const [hasError, setHasError] = useState(false);
 
-  console.log(slug);
   useEffect(() => {
     const getTasksByCity = async () => {
       try {
