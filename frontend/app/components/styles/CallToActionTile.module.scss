@@ -1,0 +1,44 @@
+@use "../../common.scss";
+
+.yellow {
+  background-color: common.$gz-color;
+}
+
+.green {
+  background-color: common.$gz-checked;
+}
+
+.tile {
+  text-decoration: none;
+  position: relative;
+  padding: 5px;
+  color: black;
+  width: 280px;
+  height: 140px;
+  -webkit-clip-path: polygon(0 0, 0 100%, calc(100% - 2rem) 100%, 100% calc(100% - 2rem), 100% 0);
+  clip-path: polygon(0 0, 0 100%, calc(100% - 2rem) 100%, 100% calc(100% - 2rem), 100% 0);
+}
+
+.content {
+  padding: 5px 50px 10px 30px;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.arrow {
+  display: block;
+  vertical-align: top;
+}
+
+.iconWrapper {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+}

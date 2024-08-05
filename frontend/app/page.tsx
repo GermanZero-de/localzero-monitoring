@@ -6,6 +6,7 @@ import { Container } from "react-bootstrap";
 import banner from "../public/images/dashboard-banner.jpg";
 import Tile from "./components/Tile";
 import styles from "./page.module.scss";
+import CallToActionTile from "@/app/components/CallToActionTile";
 
 const getCities = async () => {
   const cities = await axios.get("http://127.0.0.1:8000/api/cities", {
@@ -61,7 +62,19 @@ export default async function Home() {
         <h2 className="headingWithBar">
           LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.
         </h2>
-        <p className="pb-3">TODO: call to action tiles</p>
+        <div className={styles.callToActionSection}>
+          <CallToActionTile
+            title="Schreibe uns eine Mail:"
+            text="localzero@germanzero.de"
+            link="mailto:localzero@germanzero.de"
+            type="contact"
+          />
+          <CallToActionTile
+            title="Du willst mitmachen?"
+            link="https://localzero.net/mitmachen"
+            type="join"
+          />
+        </div>
       </Container>
     </>
   );
