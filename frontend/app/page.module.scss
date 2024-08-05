@@ -12,6 +12,7 @@
   position: absolute;
   z-index: 1;
 }
+
 .textSecondary {
   width: 300px;
   left: 50px;
@@ -25,4 +26,12 @@
 .noLinkStyling {
   color: black;
   text-decoration: none;
+}
+
+.callToActionSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  padding-bottom: 100px;
 }
