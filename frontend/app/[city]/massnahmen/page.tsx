@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetCity } from "@/app/CityService";
+import { useGetCity } from "@/app/CityHooks";
 import MeasureCard from "@/app/components/MeasureCard";
 import { useParams } from "next/navigation";
 import Image from "next/image";
@@ -67,11 +67,11 @@ export default function CityMeasures() {
   return (
     <Container className={styles.container}>
       <h1 style={{ fontWeight: 600, fontSize: 38 }}>
-          {city.name.toUpperCase()}
-          <Image
-            src={arrow}
-            alt=""
-          />
+        {city.name.toUpperCase()}
+        <Image
+          src={arrow}
+          alt=""
+        />
       </h1>
       <Breadcrumb />
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>

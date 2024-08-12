@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import Breadcrumb from '../components/BreadCrumb'
+import Breadcrumb from "../components/BreadCrumb";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import Markdown from "react-markdown";
 import arrow from "../../public/images/arrow-right-down.svg";
 import greenCity from "../../public/background-green-city.png";
-import { useGetCity } from "../CityService";
+import { useGetCity } from "../CityHooks";
 import LocalGroup from "../components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";
 import styles from "./page.module.scss";
@@ -57,7 +57,7 @@ export default function CityDashboard() {
   return (
     <>
       <Container>
-        <h1 style={{ fontWeight: 600, fontSize: 38 }}>
+        <h1 className="big-h1">
           {city.name.toUpperCase()}
           <Image
             src={arrow}
