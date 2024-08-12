@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface LocalGroup {
   id: number;
@@ -70,4 +70,36 @@ export function useGetCity(slug: string): {
   }, [slug]);
 
   return { city, hasError };
+}
+
+export function useGetCities(): {
+  cities: CityData[] | undefined;
+  hasError: boolean;
+} {
+  const [cities, setCities] = useState<CityData[] | undefined>(undefined);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const getCities = async () => {
+      const response = await axios
+        .get("http://127.0.0.1:8000/api/cities", {
+          // TODO: proper url
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        })
+        .then((response) => {
+          setCities(response.data);
+        })
+        .catch((error) => {
+          setHasError(true);
+          console.error("Error get city request: ", error);
+        });
+    };
+
+    getCities();
+  });
+
+  return { cities, hasError };
 }

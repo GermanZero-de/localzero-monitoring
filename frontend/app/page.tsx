@@ -1,5 +1,5 @@
+"use client";
 import Search from "@/app/components/Search";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "react-bootstrap";
@@ -7,20 +7,10 @@ import banner from "../public/images/dashboard-banner.jpg";
 import Tile from "./components/Tile";
 import styles from "./page.module.scss";
 import CallToActionTile from "@/app/components/CallToActionTile";
+import { useGetCities } from "@/app/CityHooks";
 
-const getCities = async () => {
-  const cities = await axios.get("http://127.0.0.1:8000/api/cities", {
-    // TODO: proper url
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-  });
-  return cities;
-};
-
-export default async function Home() {
-  const cities = (await getCities()).data;
+export default function Home() {
+  const { cities, hasError } = useGetCities();
 
   return (
     <>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetCity } from "@/app/CityService";
+import { useGetCity } from "@/app/CityHooks";
 import { useParams } from "next/navigation";
 import { Container } from "react-bootstrap";
 import styles from "../page.module.scss";
@@ -40,12 +40,12 @@ export default function TaskDetails() {
   const task = tasks && getTaskBySlugs(tasks, taskSlug);
   return (
     <Container className={styles.container}>
-            <h1 style={{ fontWeight: 600, fontSize: 38 }}>
-          {city.name.toUpperCase()}
-          <Image
-            src={arrow}
-            alt=""
-          />
+      <h1 style={{ fontWeight: 600, fontSize: 38 }}>
+        {city.name.toUpperCase()}
+        <Image
+          src={arrow}
+          alt=""
+        />
       </h1>
       <Breadcrumb />
       <h2 className="headingWithBar">{task?.title}</h2>
