@@ -11,7 +11,7 @@ interface LocalGroup {
   featured_image: string;
 }
 
-interface ChecklistItem {
+export interface ChecklistItem {
   id: number;
   question: string;
   is_checked: boolean;
@@ -36,6 +36,7 @@ export interface CityData {
   local_group: LocalGroup;
   cap_checklist: ChecklistItem[];
   administration_checklist: ChecklistItem[];
+  energy_plan_checklist: ChecklistItem[];
   assessment_action_plan: string;
   assessment_administration: string;
 }
