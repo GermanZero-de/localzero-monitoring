@@ -3,6 +3,7 @@ from cpmonitor.models import (
     LocalGroup,
     CapChecklist,
     AdministrationChecklist,
+    EnergyPlanChecklist,
     Task,
 )
 from rest_framework import serializers
@@ -65,10 +66,21 @@ class AdministrationChecklistSerializer(serializers.ModelSerializer):
         return checklistToRepresentation(instance)
 
 
+class EnergyPlanChecklistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EnergyPlanChecklist
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        super().to_representation(instance)
+        return checklistToRepresentation(instance)
+
+
 class CitySerializer(serializers.ModelSerializer):
     local_group = LocalGroupSerializer(read_only=True)
     cap_checklist = CapChecklistSerializer(read_only=True)
     administration_checklist = AdministrationChecklistSerializer(read_only=True)
+    energy_plan_checklist = EnergyPlanChecklistSerializer(read_only=True)
 
     class Meta:
         model = City
@@ -89,6 +101,7 @@ class CitySerializer(serializers.ModelSerializer):
             "local_group",
             "cap_checklist",
             "administration_checklist",
+            "energy_plan_checklist",
             "assessment_action_plan",
             "assessment_administration",
         ]
