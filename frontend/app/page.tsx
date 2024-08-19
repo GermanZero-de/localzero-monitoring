@@ -8,9 +8,15 @@ import Tile from "./components/Tile";
 import styles from "./page.module.scss";
 import CallToActionTile from "@/app/components/CallToActionTile";
 import { useGetCities } from "@/app/CityHooks";
+import expandArrowUp from "@/public/images/arrow-expand-up.svg";
+import expandArrowDown from "@/public/images/arrow-expand-down.svg";
+import { useState } from "react";
 
 export default function Home() {
   const { cities, hasError } = useGetCities();
+  const defaultNumberOfCitiesShown = 4;
+  const [allCitiesShown, setAllCitiesShown] = useState(false);
+  const [numberOfCitiesShown, setNumberOfCitiesShown] = useState(defaultNumberOfCitiesShown);
 
   return (
     <>
@@ -34,7 +40,7 @@ export default function Home() {
         </p>
         <h2 className="headingWithBar">Kommunen im Monitoring</h2>
         <div className="d-flex justify-content-between flex-wrap">
-          {(cities || []).map((city) => (
+          {(cities || []).slice(0, numberOfCitiesShown).map((city) => (
             <Link
               key={city.slug}
               href={"/" + city.slug}
@@ -46,6 +52,23 @@ export default function Home() {
               />
             </Link>
           ))}
+        </div>
+        <div className="block-text pb-3">
+          {!allCitiesShown ? <div>Anzeige weiterer Kommunen</div> : <></>}
+          <Image
+            src={allCitiesShown ? expandArrowUp : expandArrowDown}
+            alt="Zeige mehr über das Lokalteam"
+            onClick={() => {
+              setNumberOfCitiesShown(numberOfCitiesShown + defaultNumberOfCitiesShown);
+              if (numberOfCitiesShown >= cities.length - 1) {
+                setAllCitiesShown(true);
+              }
+              if (allCitiesShown) {
+                setNumberOfCitiesShown(defaultNumberOfCitiesShown);
+                setAllCitiesShown(false);
+              }
+            }}
+          />
         </div>
         <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>
         <Search cities={cities} />
