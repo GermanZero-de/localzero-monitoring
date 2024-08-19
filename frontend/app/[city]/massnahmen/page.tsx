@@ -11,6 +11,7 @@ import MeasureCardContent from "@/app/components/MeasureCardContent";
 import { ExecutionStatus, Task, useGetTasksByCity } from "@/app/TasksService";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Breadcrumb from "@/app/components/BreadCrumb";
+import Markdown from "react-markdown";
 
 export type StatusCount = {
   done: number;
@@ -74,6 +75,7 @@ export default function CityMeasures() {
         />
       </h1>
       <Breadcrumb />
+      <Markdown>{city.assessment_status}</Markdown>
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
       <Accordion className={styles.accordion}>
         {tasks &&
