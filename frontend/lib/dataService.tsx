@@ -1,7 +1,6 @@
 export async function getCities(id:string = "") {
     const slug = id ? `/${id}` : ""
     const cities = await (await fetch(`${process.env.REST_API}/api/cities${slug}`, {
-        // TODO: proper url
         cache:"no-store",
         headers: {
           Accept: "application/json",

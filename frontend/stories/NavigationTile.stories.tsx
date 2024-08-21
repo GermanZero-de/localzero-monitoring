@@ -43,22 +43,3 @@ export const CardSmall: Story = {
     children: <div>This is custom slot content</div>
   },
 };
-
-/*
-export const MultipleCards: Story = {
-  render: () => {
-    const cardsData = [
-      { title: 'Card 1', subtitle: 'Topic 1', children: <div>Content for Card 1</div> },
-      {  title: 'Card 2', subtitle: 'Topic 2', children: <div>Content for Card 2</div> },
-      {  title: 'Card 3', subtitle: 'Topic 3', children: <div>Content for Card 3</div> },
-    ];
-
-    return (
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        {cardsData.map((card, index) => (
-          <NavigationTile key={index} {...card} />
-        ))}
-      </div>
-    );
-  },
-};*/
