@@ -8,7 +8,7 @@ import ChecklistItem from "@/app/components/ChecklistItem";
 
 export default function EnergyPlanChecklist() {
   const pathname = usePathname();
-  const slug = pathname.split("/").at(-2);
+  const slug = pathname.split("/").at(-2) || "";
 
   const { city, hasError } = useGetCity(slug);
 

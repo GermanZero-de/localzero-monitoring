@@ -74,7 +74,7 @@ export function useGetCity(slug: string): {
 }
 
 export function useGetCities(): {
-  cities: CityData[] | undefined;
+  cities: CityData[] | any | undefined;
   hasError: boolean;
 } {
   const [cities, setCities] = useState<CityData[] | undefined>(undefined);

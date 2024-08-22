@@ -40,7 +40,7 @@ export default function Home() {
         </p>
         <h2 className="headingWithBar">Kommunen im Monitoring</h2>
         <div className="d-flex justify-content-between flex-wrap">
-          {(cities || []).slice(0, numberOfCitiesShown).map((city) => (
+          {(cities || []).slice(0, numberOfCitiesShown).map((city:any) => (
             <Link
               key={city.slug}
               href={"/" + city.slug}
@@ -60,7 +60,7 @@ export default function Home() {
             alt="Zeige mehr über das Lokalteam"
             onClick={() => {
               setNumberOfCitiesShown(numberOfCitiesShown + defaultNumberOfCitiesShown);
-              if (numberOfCitiesShown >= cities.length - 1) {
+              if (cities && numberOfCitiesShown >= cities.length - 1) {
                 setAllCitiesShown(true);
               }
               if (allCitiesShown) {
