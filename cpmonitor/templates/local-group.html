@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "city-base.html" %}
 {% load static %}
 {% load martortags %}
 {% block title %}
@@ -12,7 +12,7 @@
       <h1>{{ local_group.name }}</h1>
       <p>
         <svg width="15" height="15">
-          <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-link"/>
+          <use href="{% static 'tabler-icons/tabler-sprite.svg' %}#tabler-link" />
         </svg>
         <a href="{{ local_group.website }}" target="_blank">{{ local_group.website }}</a>
       </p>

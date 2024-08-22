@@ -1,9 +1,11 @@
 import json
 import os
+import re
+import requests
 import time
 import uuid
 from collections import Counter
-from datetime import date
+from datetime import date, datetime
 
 from PIL import Image
 from django.conf import settings
@@ -11,21 +13,23 @@ from django.contrib import admin
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from django.http import Http404, JsonResponse
+from django.http import Http404, HttpResponseServerError, JsonResponse
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView
 from invitations import views as invitations_views
 from invitations.adapters import get_invitations_adapter
 from invitations.app_settings import app_settings as invitations_settings
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .models import (
     AccessRight,
@@ -36,6 +40,9 @@ from .models import (
     AdministrationChecklist,
     EnergyPlanChecklist,
 )
+
+from .serializers import CitySerializer
+from .serializers import TaskSerializer
 
 from .utils import RemainingTimeInfo
 
@@ -143,6 +150,13 @@ def _get_task_groups(city):
     return groups
 
 
+# def _get_cap_checklist(city) -> CapChecklist | None:
+#     cap_checklists = CapChecklist.objects.all().filter(city=city)
+#     if len(cap_checklists) > 0:
+#         return cap_checklists[0]
+#     return None
+
+
 def _get_cities(request, slug=None):
     try:
         cities = City.objects.all()
@@ -180,13 +194,13 @@ def city_view(request, city_slug):
 
     _calculate_summary(request, city)
 
-    cap_checklist = _get_cap_checklist(city)
+    cap_checklist = _get_cap_checklist_items(city)
     cap_checklist_exists = len(cap_checklist) > 0
 
-    administration_checklist = _get_administration_checklist(city)
+    administration_checklist = _get_administration_checklist_items(city)
     administration_checklist_exists = len(administration_checklist) > 0
 
-    energy_plan_checklist = _get_energy_plan_checklist(city)
+    energy_plan_checklist = _get_energy_plan_checklist_items(city)
     energy_plan_checklist_exists = len(energy_plan_checklist) > 0
 
     breadcrumbs = _get_breadcrumbs(
@@ -292,16 +306,23 @@ def cap_checklist_view(request, city_slug):
         {
             "breadcrumbs": breadcrumbs,
             "city": city,
-            "cap_checklist": _get_cap_checklist(city),
+            "cap_checklist": _get_cap_checklist_items(city),
+            "local_group": getattr(city, "local_group", None),
         }
     )
     return render(request, "cap_checklist.html", context)
 
 
-def _get_cap_checklist(city) -> list:
+def _get_cap_checklist(city) -> CapChecklist | None:
     try:
-        checklist = city.cap_checklist
+        return city.cap_checklist
     except CapChecklist.DoesNotExist:
+        return None
+
+
+def _get_cap_checklist_items(city) -> list:
+    checklist = _get_cap_checklist(city)
+    if checklist is None:
         return []
 
     return _as_formatted_checklist(checklist)
@@ -325,17 +346,24 @@ def administration_checklist_view(request, city_slug):
         {
             "breadcrumbs": breadcrumbs,
             "city": city,
-            "administration_checklist": _get_administration_checklist(city),
+            "administration_checklist": _get_administration_checklist_items(city),
+            "local_group": getattr(city, "local_group", None),
         }
     )
 
     return render(request, "administration_checklist.html", context)
 
 
-def _get_administration_checklist(city) -> list:
+def _get_administration_checklist(city) -> AdministrationChecklist | None:
     try:
-        checklist = city.administration_checklist
+        return city.administration_checklist
     except AdministrationChecklist.DoesNotExist:
+        return None
+
+
+def _get_administration_checklist_items(city) -> list:
+    checklist = _get_administration_checklist(city)
+    if checklist is None:
         return []
 
     return _as_formatted_checklist(checklist)
@@ -359,17 +387,24 @@ def energy_plan_checklist_view(request, city_slug):
         {
             "breadcrumbs": breadcrumbs,
             "city": city,
-            "energy_plan_checklist": _get_energy_plan_checklist(city),
+            "energy_plan_checklist": _get_energy_plan_checklist_items(city),
+            "local_group": getattr(city, "local_group", None),
         }
     )
 
     return render(request, "energy_plan_checklist.html", context)
 
 
-def _get_energy_plan_checklist(city) -> list:
+def _get_energy_plan_checklist(city) -> EnergyPlanChecklist | None:
     try:
-        checklist = city.energy_plan_checklist
+        return city.energy_plan_checklist
     except EnergyPlanChecklist.DoesNotExist:
+        return None
+
+
+def _get_energy_plan_checklist_items(city) -> list:
+    checklist = _get_energy_plan_checklist(city)
+    if checklist is None:
         return []
 
     return _as_formatted_checklist(checklist)
@@ -427,7 +462,13 @@ def task_view(request, city_slug, task_slugs=None):
         groups, tasks = _get_children(request, city)
 
         context.update(
-            {"breadcrumbs": breadcrumbs, "city": city, "groups": groups, "tasks": tasks}
+            {
+                "breadcrumbs": breadcrumbs,
+                "city": city,
+                "groups": groups,
+                "tasks": tasks,
+                "local_group": getattr(city, "local_group", None),
+            }
         )
 
         return render(
@@ -452,7 +493,13 @@ def task_view(request, city_slug, task_slugs=None):
         for ancestor in task.get_ancestors()
     ] + [{"label": task.title, "url": reverse("task", args=[city_slug, task.slugs])}]
 
-    context.update({"breadcrumbs": breadcrumbs, "city": city})
+    context.update(
+        {
+            "breadcrumbs": breadcrumbs,
+            "city": city,
+            "local_group": getattr(city, "local_group", None),
+        }
+    )
 
     if task.is_leaf():
         context.update({"task": task})
@@ -564,6 +611,52 @@ def markdown_uploader_view(request):
     return HttpResponse(data, content_type="application/json")
 
 
+def mstr_view(request, municipality_key):
+    url = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetVerkleinerteOeffentlicheEinheitStromerzeugung"
+    params = {
+        "sort": "EinheitMeldeDatum-desc",
+        "page": 1,
+        "pageSize": 10000,
+        "filter": f"Energieträger~eq~'2495'~and~Gemeindeschlüssel~eq~'{municipality_key}'",
+    }
+    try:
+        r = requests.get(url, params)
+    except:
+        return HttpResponseServerError()
+
+    data = r.json()["Data"]
+
+    installed_by_year = dict()
+
+    START_YEAR = 2019
+    for entry in data:
+        if not entry["InbetriebnahmeDatum"]:
+            continue
+
+        m = re.match("/Date\((-?\d*)\)/", entry["InbetriebnahmeDatum"])
+        install_date = datetime.fromtimestamp(int(m.group(1)) / 1000)
+        year = START_YEAR if install_date.year < START_YEAR else install_date.year
+
+        if not year in installed_by_year:
+            installed_by_year[year] = 0
+
+        installed_by_year[year] += entry["Bruttoleistung"]
+
+    current_year = date.today().year
+    installed_accumulated = 0
+    years = []
+    installed = []
+    for year, installed_in_year in sorted(installed_by_year.items()):
+        if year == current_year:
+            break
+        installed_accumulated += round(installed_in_year)
+        years.append(year)
+        installed.append(installed_accumulated)
+
+    data = json.dumps({"years": years, "installed": installed})
+    return HttpResponse(data, content_type="application/json")
+
+
 class AcceptInvite(invitations_views.AcceptInvite):
     "Overwrite handling of invitation link."
 
@@ -667,10 +760,23 @@ class CapEditView(DetailView, admin.ModelAdmin):
     template_name = "admin/admin-cap.html"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         groups = _get_task_groups(self.object)
+        cap_checklist = _get_cap_checklist(self.object)
+        administration_checklist = _get_administration_checklist(self.object)
+        energy_plan_checklist = _get_energy_plan_checklist(self.object)
+
+        context = super().get_context_data(**kwargs)
         context["title"] = self.object.name
         context["city_id"] = str(self.object.pk)
+        context["cap_checklist_id"] = (
+            cap_checklist.pk if cap_checklist != None else None
+        )
+        context["administration_checklist_id"] = (
+            administration_checklist.pk if administration_checklist != None else None
+        )
+        context["energy_plan_checklist_id"] = (
+            energy_plan_checklist.pk if energy_plan_checklist != None else None
+        )
         context["groups"] = groups
         return context
 
@@ -682,3 +788,46 @@ def move_task(request, pk):
     position = request.POST.get("position")
     task.move(new_parent, position)
     return JsonResponse({"success": True})
+
+
+#
+# REST API views
+#
+
+
+class CityList(APIView):
+    """
+    List all cities.
+    """
+
+    def get(self, request):
+        cities = City.objects.all()
+        serializer = CitySerializer(cities, many=True)
+        return Response(serializer.data)
+
+
+class CityDetail(APIView):
+    """
+    Return a specific city.
+    """
+
+    def get(self, request, slug):
+        try:
+            city = City.objects.get(slug=slug)
+        except City.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CitySerializer(city)
+        return Response(serializer.data)
+
+
+class TasksbyCity(APIView):
+    def get(self, request, slug):
+        try:
+            city = City.objects.get(slug=slug)
+        except City.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        city_id = city.id
+        children = Task.get_root_nodes().filter(city=city_id)
+        serializer = TaskSerializer(children, many=True)
+        return Response(serializer.data)

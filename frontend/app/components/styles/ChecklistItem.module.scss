@@ -1,0 +1,9 @@
+@use "../../common.scss";
+
+.checked {
+  color: common.$gz-checked;
+}
+
+.unchecked {
+  color: common.$gz-unchecked;
+}

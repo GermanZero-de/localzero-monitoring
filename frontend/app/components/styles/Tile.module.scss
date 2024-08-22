@@ -1,0 +1,27 @@
+.wrapper {
+  padding: 15px;
+  margin-bottom: 30px;
+  background: rgba(var(--bs-primary-rgb));
+  width: 300px;
+  height: 180px;
+  -webkit-clip-path: polygon(0 0, 0 100%, 80% 100%, 100% 70%, 100% 0);
+  clip-path: polygon(0 0, 0 100%, 80% 100%, 100% 70%, 100% 0);
+}
+
+.heading {
+  font-size: 28px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image {
+  text-align: center;
+}
+
+.thermometer {
+  transform: scale(0.5);
+  transform-origin: top left;
+  width: 3rem;
+}

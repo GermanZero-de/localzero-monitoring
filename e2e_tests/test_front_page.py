@@ -6,7 +6,7 @@ from playwright.sync_api import Page, expect
 def test_should_show_the_title_when_being_on_the_front_page(live_server, page: Page):
     page.goto(live_server.url)
 
-    expect(page).to_have_title("Monitoring LocalZero")
+    expect(page).to_have_title("LocalZero Monitoring")
 
 
 def test_should_show_the_city_name_in_city_select_dropdown(live_server, page: Page):

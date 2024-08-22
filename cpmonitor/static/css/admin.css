@@ -8,6 +8,11 @@ body,
   height: calc(80% - 100px);
 }
 
+.admin-h2 {
+  padding-top: 20px;
+  margin-bottom: 5px;
+}
+
 .main {
   background: white;
 }
@@ -85,6 +90,10 @@ body,
   border-top-color: #e4e4e4;
 }
 .cap_board__task-item.drag-over-middle {
+  background-color: #e4e4e4;
+}
+
+.dropping-area.drag-over-middle {
   background-color: #e4e4e4;
 }
 

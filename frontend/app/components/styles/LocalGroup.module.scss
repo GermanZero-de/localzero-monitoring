@@ -1,0 +1,23 @@
+@use "../../common.scss";
+
+.center {
+  text-align: center;
+}
+
+.fixed {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  z-index: 1000;
+  background-color: common.$gz-background-color;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.backgroundColor {
+  background-color: common.$gz-background-color;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
