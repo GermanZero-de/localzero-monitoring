@@ -1,78 +1,121 @@
-import Image from "next/image";
+"use client";
 
+import { useGetCity } from "@/app/CityHooks";
 import MeasureCard from "@/app/components/MeasureCard";
-import { Accordion, Card, Container } from "react-bootstrap";
+import { useParams } from "next/navigation";
+import Image from "next/image";
+import arrow from "../../../public/images/arrow-right-down.svg";
+import { Accordion, Container } from "react-bootstrap";
 import styles from "./page.module.scss";
-import abgeschlossen from "../../../public/images/icon-abgeschlossen.svg";
-import gescheitert from "../../../public/images/icon-gescheitert.svg";
-import inArbeit from "../../../public/images/icon-in_arbeit.svg";
-import unbekannt from "../../../public/images/icon-unbekannt.svg";
-import verzoegert from "../../../public/images/icon-verzoegert_fehlt.svg";
-import { getCities } from "@/lib/dataService";
+import MeasureCardContent from "@/app/components/MeasureCardContent";
+import { ExecutionStatus, Task, useGetTasksByCity } from "@/app/TasksService";
+import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
+import Breadcrumb from "@/app/components/BreadCrumb";
+import Markdown from "react-markdown";
 
-export default async function CityMeasures({ params }: { params: { city: string } }) {
+export type StatusCount = {
+  done: number;
+  inProgress: number;
+  late: number;
+  failed: number;
+  unknown: number;
+};
 
-  const city = await getCities(params.city);
+const getRecursiveStatusNumbers = (
+  tasks: Task[],
+): { done: number; inProgress: number; late: number; failed: number; unknown: number } => {
+  return tasks.reduce(
+    (statusCount, task) => {
+      if (task.numchild > 0) {
+        const childrenStatusNumbers = getRecursiveStatusNumbers(task.children);
+        Object.keys(childrenStatusNumbers).forEach((statusKey) => {
+          statusCount[statusKey as keyof StatusCount] += childrenStatusNumbers[statusKey as keyof StatusCount];
+        });
+      } else {
+        switch (task.execution_status) {
+          case ExecutionStatus.UNKNOWN:
+            statusCount.unknown++;
+            break;
+          case ExecutionStatus.AS_PLANNED:
+            statusCount.inProgress++;
+            break;
+          case ExecutionStatus.COMPLETE:
+            statusCount.done++;
+            break;
+          case ExecutionStatus.DELAYED:
+            statusCount.late++;
+            break;
+          case ExecutionStatus.FAILED:
+            statusCount.failed++;
+            break;
+        }
+      }
+      return statusCount;
+    },
+    { done: 0, inProgress: 0, late: 0, failed: 0, unknown: 0 } as StatusCount,
+  );
+};
 
-  if (!city) {
+export default function CityMeasures() {
+  const params = useParams();
+  const { city: slug } = params;
+  const { city, hasError } = useGetCity(slug as string);
+  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(slug as string);
+  if (!city || hasError || hasErrorinTasks) {
     return <></>;
   }
 
-  const numberOfElectrictyMeasures = { done: 2, inProgress: 2, late: 1, failed: 1, unknown: 5 };
-  const numberOfEBuildingMeasures = { done: 0, inProgress: 2, late: 0, failed: 7, unknown: 5 };
-
   return (
     <Container className={styles.container}>
+      <h1 style={{ fontWeight: 600, fontSize: 38 }}>
+        {city.name.toUpperCase()}
+        <Image
+          src={arrow}
+          alt=""
+        />
+      </h1>
+      <Breadcrumb />
+      <Markdown>{city.assessment_status}</Markdown>
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
-      <Accordion
-        defaultActiveKey="0"
-        className={styles.accordion}
-      >
-        <MeasureCard
-          eventKey="0"
-          title="Strom"
-          numberOfMeasures={numberOfElectrictyMeasures}
-        >
-          <Card>Hello! I am the body</Card>
-        </MeasureCard>
-        <MeasureCard
-          eventKey="1"
-          title="Wärme und Gebäude"
-          numberOfMeasures={numberOfEBuildingMeasures}
-        >
-          <Card>Hello! I am the body</Card>
-        </MeasureCard>
+      <Accordion className={styles.accordion}>
+        {tasks &&
+          tasks.map((task, i) => {
+            return (
+              <MeasureCard
+                key={i}
+                eventKey={i.toString()}
+                title={task.title}
+                statusOfSubTasks={getRecursiveStatusNumbers(task.children)}
+              >
+                <MeasureCardContent
+                  text={task.description}
+                  tasks={task.children}
+                  eventKey={i.toString()}
+                ></MeasureCardContent>
+              </MeasureCard>
+            );
+          })}
       </Accordion>
       <div className={styles.legende}>
         <div>
-          <Image
-            src={abgeschlossen}
-            alt="Abgeschlossene Maßnahmen"
-          ></Image>abgeschlossen
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.COMPLETE}></ExecutionStatusIcon>
+          abgeschlossen
         </div>
         <div>
-          <Image
-                  src={inArbeit}
-                  alt="Maßnahmen in Arbeit"
-          ></Image>in Arbeit
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.AS_PLANNED}></ExecutionStatusIcon>
+          in Arbeit
         </div>
         <div>
-          <Image
-                  src={verzoegert}
-                  alt="Verzögerte Maßnahmen"
-          ></Image>verzögert
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.DELAYED}></ExecutionStatusIcon>
+          verzögert
         </div>
         <div>
-          <Image
-                  src={gescheitert}
-                  alt="Gescheiterte Maßnahmen"
-          ></Image>gescheitert
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.FAILED}></ExecutionStatusIcon>
+          gescheitert
         </div>
         <div>
-          <Image
-                  src={unbekannt}
-                  alt="Unbekannte Maßnahmen"
-          ></Image>unbekannt
+          <ExecutionStatusIcon taskStatus={ExecutionStatus.UNKNOWN}></ExecutionStatusIcon>
+          unbekannt
         </div>
       </div>
     </Container>

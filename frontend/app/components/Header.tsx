@@ -27,7 +27,7 @@ export default function Header() {
             <NavDropdown title="MONITORING">
               <NavDropdown.Item href="/">START</NavDropdown.Item>
               <NavDropdown.Item href="projektbeschreibung">PROJEKTBESCHREIBUNG</NavDropdown.Item>
-              <NavDropdown.Item href="mitmachen">MITMACHEN</NavDropdown.Item>
+              <NavDropdown.Item href="https://localzero.net/mitmachen" target="_blank">MITMACHEN</NavDropdown.Item>
               <NavDropdown.Item href="kontakt">KONTAKT</NavDropdown.Item>
               <NavDropdown.Item href="impressum">IMPRESSUM</NavDropdown.Item>
               <NavDropdown.Item href="datenschutz">DATENSCHUTZ</NavDropdown.Item>

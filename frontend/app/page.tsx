@@ -1,3 +1,4 @@
+"use client";
 import Search from "@/app/components/Search";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,11 +6,17 @@ import { Container } from "react-bootstrap";
 import banner from "../public/images/dashboard-banner.jpg";
 import Tile from "./components/Tile";
 import styles from "./page.module.scss";
-import { getCities } from "@/lib/dataService";
-import { City } from "@/types";
+import CallToActionTile from "@/app/components/CallToActionTile";
+import { useGetCities } from "@/app/CityHooks";
+import expandArrowUp from "@/public/images/arrow-expand-up.svg";
+import expandArrowDown from "@/public/images/arrow-expand-down.svg";
+import { useState } from "react";
 
-export default async function Home() {
-  const cities = await getCities();
+export default function Home() {
+  const { cities, hasError } = useGetCities();
+  const defaultNumberOfCitiesShown = 4;
+  const [allCitiesShown, setAllCitiesShown] = useState(false);
+  const [numberOfCitiesShown, setNumberOfCitiesShown] = useState(defaultNumberOfCitiesShown);
 
   return (
     <>
@@ -33,7 +40,7 @@ export default async function Home() {
         </p>
         <h2 className="headingWithBar">Kommunen im Monitoring</h2>
         <div className="d-flex justify-content-between flex-wrap">
-          {(cities || []).map((city:City) => (
+          {(cities || []).slice(0, numberOfCitiesShown).map((city:any) => (
             <Link
               key={city.slug}
               href={"/" + city.slug}
@@ -46,12 +53,41 @@ export default async function Home() {
             </Link>
           ))}
         </div>
+        <div className="block-text pb-3">
+          {!allCitiesShown ? <div>Anzeige weiterer Kommunen</div> : <></>}
+          <Image
+            src={allCitiesShown ? expandArrowUp : expandArrowDown}
+            alt="Zeige mehr über das Lokalteam"
+            onClick={() => {
+              setNumberOfCitiesShown(numberOfCitiesShown + defaultNumberOfCitiesShown);
+              if (cities && numberOfCitiesShown >= cities.length - 1) {
+                setAllCitiesShown(true);
+              }
+              if (allCitiesShown) {
+                setNumberOfCitiesShown(defaultNumberOfCitiesShown);
+                setAllCitiesShown(false);
+              }
+            }}
+          />
+        </div>
         <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>
         <Search cities={cities} />
         <h2 className="headingWithBar">
           LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.
         </h2>
-        <p className="pb-3">TODO: call to action tiles</p>
+        <div className={styles.callToActionSection}>
+          <CallToActionTile
+            title="Schreibe uns eine Mail:"
+            text="localzero@germanzero.de"
+            link="mailto:localzero@germanzero.de"
+            type="contact"
+          />
+          <CallToActionTile
+            title="Du willst mitmachen?"
+            link="https://localzero.net/mitmachen"
+            type="join"
+          />
+        </div>
       </Container>
     </>
   );

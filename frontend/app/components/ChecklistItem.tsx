@@ -4,20 +4,16 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { AccordionBody, AccordionHeader, AccordionItem } from "react-bootstrap";
 import Markdown from "react-markdown";
 import styles from "./styles/ChecklistItem.module.scss";
+import rehypeRaw from "rehype-raw";
+import { ChecklistItem as ChecklistItemType } from "@/app/CityHooks";
 
 type Props = {
-  checklist_item: {
-    id: string;
-    is_checked: boolean;
-    question: string;
-    help_text: string;
-    rationale: string;
-  };
+  checklist_item: ChecklistItemType;
 };
 
 const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
   return (
-    <AccordionItem eventKey={checklist_item.id}>
+    <AccordionItem eventKey={String(checklist_item.id)}>
       <AccordionHeader>
         {checklist_item.is_checked ? (
           <i className={`bi-check-circle pe-3 ${styles.checked}`}></i>
@@ -26,24 +22,28 @@ const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
         )}
         {checklist_item.question}
       </AccordionHeader>
-      <AccordionBody>
-        {checklist_item.help_text.trim() ? (
-          <div>
-            <strong>Erklärung:</strong>
-            <Markdown>{checklist_item.help_text}</Markdown>
-          </div>
-        ) : (
-          <></>
-        )}
-        {checklist_item.rationale.trim() ? (
-          <div>
-            <strong>Anmerkung / Begründung: </strong>
-            <Markdown>{checklist_item.rationale}</Markdown>
-          </div>
-        ) : (
-          <></>
-        )}
-      </AccordionBody>
+      {checklist_item.help_text.trim() || checklist_item.rationale.trim() ? (
+        <AccordionBody>
+          {checklist_item.help_text.trim() ? (
+            <div>
+              <strong>Erklärung:</strong>
+              <Markdown rehypePlugins={[rehypeRaw]}>{checklist_item.help_text}</Markdown>
+            </div>
+          ) : (
+            <></>
+          )}
+          {checklist_item.rationale.trim() ? (
+            <div>
+              <strong>Anmerkung / Begründung: </strong>
+              <Markdown>{checklist_item.rationale}</Markdown>
+            </div>
+          ) : (
+            <></>
+          )}
+        </AccordionBody>
+      ) : (
+        <></>
+      )}
     </AccordionItem>
   );
 };

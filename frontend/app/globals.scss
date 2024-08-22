@@ -15,15 +15,18 @@
 .footer-nav-list {
   list-style: none;
   padding-left: 0;
+
   a {
     color: white;
     text-decoration: none;
     font-weight: 600;
   }
+
   a:hover {
     border-bottom: 6px solid common.$gz-color;
     position: relative;
   }
+
   li {
     padding-top: 10px;
   }
@@ -69,6 +72,11 @@
 h1 {
   font-size: 32px;
   @include heading;
+}
+
+.big-h1 {
+  font-weight: 600;
+  font-size: 38px;
 }
 
 .headingWithBar {

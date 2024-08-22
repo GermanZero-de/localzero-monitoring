@@ -124,7 +124,7 @@ export default async function CityDashboard({ params }: { params: { city: string
         </Row>
         <Row >
           <Col className="p-4">
-            <p>{JSON.stringify(city)}</p>
+            <p></p>
           </Col>
         </Row>
       </Container>

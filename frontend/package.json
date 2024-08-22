@@ -12,13 +12,15 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "next": "14.2.3",
     "react": "^18",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18",
-    "react-markdown": "^9.0.1"
+    "react-markdown": "^9.0.1",
+    "rehype-raw": "^7.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
