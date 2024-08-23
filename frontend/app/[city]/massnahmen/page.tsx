@@ -2,7 +2,7 @@
 import MeasureCard from "@/app/components/MeasureCard";
 
 import Image from "next/image";
-import arrow from "../../../public/images/arrow-right-down.svg";
+import arrow from "../../../public/imgs/arrow-right-down.svg";
 import { Accordion, Container } from "react-bootstrap";
 import styles from "./page.module.scss";
 import MeasureCardContent from "@/app/components/MeasureCardContent";

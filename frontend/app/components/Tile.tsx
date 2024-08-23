@@ -2,7 +2,7 @@
 import * as React from "react";
 import styles from "./styles/Tile.module.scss";
 import Image from "next/image";
-import arrow from "../../public/images/arrow-right.svg";
+import arrow from "../../public/imgs/arrow-right.svg";
 import ImplementationIndicator, { TaskStatus } from "./ImplementationIndicator";
 
 const icons = {

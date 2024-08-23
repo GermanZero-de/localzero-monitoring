@@ -2,13 +2,13 @@ import Search from "@/app/components/Search";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "react-bootstrap";
-import banner from "../public/images/dashboard-banner.jpg";
+import banner from "../public/imgs/dashboard-banner.jpg";
 import Tile from "./components/Tile";
 import styles from "./page.module.scss";
 import CallToActionTile from "@/app/components/CallToActionTile";
 
-import expandArrowUp from "@/public/images/arrow-expand-up.svg";
-import expandArrowDown from "@/public/images/arrow-expand-down.svg";
+import expandArrowUp from "@/public/imgs/arrow-expand-up.svg";
+import expandArrowDown from "@/public/imgs/arrow-expand-down.svg";
 
 import { getCities } from "@/lib/dataService";
 import { City } from "@/types";

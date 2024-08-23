@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./styles/CallToActionTile.module.scss";
 import Image from "next/image";
-import arrow from "@/public/images/arrow-right-down-white.svg";
-import iconContact from "@/public/images/icon-email.svg";
-import iconJoin from "@/public/images/icon-join.svg";
+import arrow from "@/public/imgs/arrow-right-down-white.svg";
+import iconContact from "@/public/imgs/icon-email.svg";
+import iconJoin from "@/public/imgs/icon-join.svg";
 
 interface NavigationTileProps {
   title: string;

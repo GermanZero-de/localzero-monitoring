@@ -57,7 +57,7 @@ export default function Footer() {
               <img
                 alt=""
                 height={50}
-                src="/images/itz_weiss_transp.png"
+                src="/imgs/itz_weiss_transp.png"
               />
             </a>
           </Col>

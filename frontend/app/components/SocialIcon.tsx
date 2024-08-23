@@ -14,7 +14,7 @@ type Props = {
 };
 
 const SocialIcon: React.FC<Props> = ({ name, link }) => {
-  const imgSrc = `/images/icon-social-${name}.svg`;
+  const imgSrc = `/imgs/icon-social-${name}.svg`;
   return (
     <div className={styles.wrapper}>
       <img

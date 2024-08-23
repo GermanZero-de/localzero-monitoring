@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Col, Container, Row } from "react-bootstrap";
 import Markdown from "react-markdown";
-import arrow from "../../public/images/arrow-right-down.svg";
+import arrow from "../../public/imgs/arrow-right-down.svg";
 import greenCity from "../../public/background-green-city.png";
 import LocalGroup from "../components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";

@@ -2,8 +2,8 @@
 
 import React, { useContext } from "react";
 import Image from "next/image";
-import expandArrowDown from "../../public/images/arrow-expand-down.svg";
-import expandArrowUp from "../../public/images/arrow-expand-up.svg";
+import expandArrowDown from "../../public/imgs/arrow-expand-down.svg";
+import expandArrowUp from "../../public/imgs/arrow-expand-up.svg";
 import { Accordion, AccordionContext, Card, useAccordionButton } from "react-bootstrap";
 import styles from "./styles/SecondaryMeasureCard.module.scss";
 
