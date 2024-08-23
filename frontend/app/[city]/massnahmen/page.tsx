@@ -1,17 +1,24 @@
-"use client";
 
-import { useGetCity } from "@/app/CityHooks";
 import MeasureCard from "@/app/components/MeasureCard";
-import { useParams } from "next/navigation";
+
 import Image from "next/image";
 import arrow from "../../../public/images/arrow-right-down.svg";
 import { Accordion, Container } from "react-bootstrap";
 import styles from "./page.module.scss";
 import MeasureCardContent from "@/app/components/MeasureCardContent";
-import { ExecutionStatus, Task, useGetTasksByCity } from "@/app/TasksService";
+import type { Task } from "@/types";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Breadcrumb from "@/app/components/BreadCrumb";
 import Markdown from "react-markdown";
+import { getCities, getTasks } from "@/lib/dataService";
+
+enum ExecutionStatus {
+  UNKNOWN = 0,
+  AS_PLANNED = 2,
+  COMPLETE = 4,
+  DELAYED = 6,
+  FAILED = 8,
+}
 
 export type StatusCount = {
   done: number;
@@ -56,12 +63,10 @@ const getRecursiveStatusNumbers = (
   );
 };
 
-export default function CityMeasures() {
-  const params = useParams();
-  const { city: slug } = params;
-  const { city, hasError } = useGetCity(slug as string);
-  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(slug as string);
-  if (!city || hasError || hasErrorinTasks) {
+export default async function CityMeasures({ params }: { params: { city: string } }) {
+  const city = await getCities(params.city);
+  const tasks = await getTasks(params.city);
+  if (!city || !tasks) {
     return <></>;
   }
 

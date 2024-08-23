@@ -1,19 +1,14 @@
-"use client";
 
-import { useGetCity } from "@/app/CityHooks";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { usePathname } from "next/navigation";
 import { Accordion, Container } from "react-bootstrap";
 import ChecklistItem from "@/app/components/ChecklistItem";
+import { getCities } from "@/lib/dataService";
 
-export default function EnergyPlanChecklist() {
-  const pathname = usePathname();
-  const slug = pathname.split("/").at(-2) || "";
+export default async function EnergyPlanChecklist({ params }: { params: { city: string } }) {
+  const city = await getCities(params.city);
 
-  const { city, hasError } = useGetCity(slug);
-
-  if (!city || hasError) {
-    return <></>;
+  if (!city) {
+    return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
   }
 
   return (
