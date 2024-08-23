@@ -1,4 +1,3 @@
-"use client";
 import Search from "@/app/components/Search";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,16 +6,17 @@ import banner from "../public/images/dashboard-banner.jpg";
 import Tile from "./components/Tile";
 import styles from "./page.module.scss";
 import CallToActionTile from "@/app/components/CallToActionTile";
-import { useGetCities } from "@/app/CityHooks";
+
 import expandArrowUp from "@/public/images/arrow-expand-up.svg";
 import expandArrowDown from "@/public/images/arrow-expand-down.svg";
-import { useState } from "react";
 
-export default function Home() {
-  const { cities, hasError } = useGetCities();
-  const defaultNumberOfCitiesShown = 4;
-  const [allCitiesShown, setAllCitiesShown] = useState(false);
-  const [numberOfCitiesShown, setNumberOfCitiesShown] = useState(defaultNumberOfCitiesShown);
+import { getCities } from "@/lib/dataService";
+import { City } from "@/types";
+
+export default async function Home() {
+  const cities= await getCities();
+  const numberOfCitiesShown = 4;
+  const allCitiesShown= false;
 
   return (
     <>
@@ -40,7 +40,7 @@ export default function Home() {
         </p>
         <h2 className="headingWithBar">Kommunen im Monitoring</h2>
         <div className="d-flex justify-content-between flex-wrap">
-          {(cities || []).slice(0, numberOfCitiesShown).map((city:any) => (
+          {(cities || []).slice(0, numberOfCitiesShown).map((city:City) => (
             <Link
               key={city.slug}
               href={"/" + city.slug}
@@ -58,16 +58,6 @@ export default function Home() {
           <Image
             src={allCitiesShown ? expandArrowUp : expandArrowDown}
             alt="Zeige mehr über das Lokalteam"
-            onClick={() => {
-              setNumberOfCitiesShown(numberOfCitiesShown + defaultNumberOfCitiesShown);
-              if (cities && numberOfCitiesShown >= cities.length - 1) {
-                setAllCitiesShown(true);
-              }
-              if (allCitiesShown) {
-                setNumberOfCitiesShown(defaultNumberOfCitiesShown);
-                setAllCitiesShown(false);
-              }
-            }}
           />
         </div>
         <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>

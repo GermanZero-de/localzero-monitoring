@@ -1,6 +1,3 @@
-"use client";
-
-import { useGetCity } from "@/app/CityHooks";
 import ChecklistItem from "@/app/components/ChecklistItem";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Accordion, Container } from "react-bootstrap";

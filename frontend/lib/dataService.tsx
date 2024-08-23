@@ -9,3 +9,15 @@ export async function getCities(id:string = "") {
       })).json();
       return cities
 }
+
+export async function getTasks(id:string = "") {
+  const slug = id ? `/${id}` : ""
+  const tasks = await (await fetch(`${process.env.REST_API}/api/cities${slug}/tasks`, {
+      cache:"no-store",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    })).json();
+    return tasks
+}

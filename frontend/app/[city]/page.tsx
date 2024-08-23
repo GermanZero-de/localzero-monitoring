@@ -29,7 +29,7 @@ interface SupportingNgosProps {
   supportingNgos: string;
 }
 
-const SupportingNgos: React.FC<SupportingNgosProps>  = ({ supportingNgos }) => {
+const SupportingNgos: React.FC<SupportingNgosProps> = ({ supportingNgos }) => {
   if (!supportingNgos) {
     return <></>;
   }
@@ -59,20 +59,20 @@ export default async function CityDashboard({ params }: { params: { city: string
         <div className="p-3">
           <div className={styles.tileRowContainer}>
 
-              <NavigationTile
-                className={styles.tile}
-                isBigCard
-                title={"Alles klar in " + city.name + "?"}
-                subtitle="Einleitung"
-              >
-                <Image
-                  style={{ width: "100%", height: "100%" }}
-                  src={greenCity}
-                  alt=""
-                />
-              </NavigationTile>
+            <NavigationTile
+              className={styles.tile}
+              isBigCard
+              title={"Alles klar in " + city.name + "?"}
+              subtitle="Einleitung"
+            >
+              <Image
+                style={{ width: "100%", height: "100%" }}
+                src={greenCity}
+                alt=""
+              />
+            </NavigationTile>
 
-            <Link href={`${params.city}/massnahmen`}>
+            <Link href={`${params.city}/massnahmen`} style={{ textDecoration: 'none' }}>
               <NavigationTile
                 className={styles.tile}
                 isBigCard
@@ -84,28 +84,34 @@ export default async function CityDashboard({ params }: { params: { city: string
             </Link>
           </div>
           <div className={styles.tileRowContainer}>
-          <Link href={`${params.city}/kap_checkliste`}>
-            <NavigationTile
-              className={styles.tile}
-              title="Klimaaktionsplan (KAP)"
-            >
-                  <span>Bild</span>
-            </NavigationTile>
+            <Link href={`${params.city}/kap_checkliste`} style={{ textDecoration: 'none' }}>
+              <NavigationTile
+                className={styles.tile}
+                title="Klimaaktionsplan (KAP)"
+              >
+                <span>Bild</span>
+              </NavigationTile>
             </Link>
 
-            <NavigationTile
-              className={styles.tile}
-              title="Wärmeplanung"
-            >
-              <span>Bild</span>
-            </NavigationTile>
-            <NavigationTile
-              className={styles.tile}
-              title="Wo steht die Verwaltung?"
+            <Link href={`${params.city}/waermeplanung_checkliste`} style={{ textDecoration: 'none' }}>
+              <NavigationTile
+                className={styles.tile}
+                title="Wärmeplanung"
+              >
+                <span>Bild</span>
+              </NavigationTile>
+            </Link>
 
-            >
-              <span>Bild</span>
-            </NavigationTile>
+            <Link href={`${params.city}/verwaltungsstrukturen_checkliste`} style={{ textDecoration: 'none' }}>
+              <NavigationTile
+                className={styles.tile}
+                title="Wo steht die Verwaltung?"
+
+              >
+                <span>Bild</span>
+              </NavigationTile>
+            </Link>
+
           </div>
         </div>
         <CityDescription description={city.description} />
