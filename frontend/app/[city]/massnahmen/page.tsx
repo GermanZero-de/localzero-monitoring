@@ -84,7 +84,7 @@ export default async function CityMeasures({ params }: { params: { city: string 
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
       <Accordion className={styles.accordion}>
         {tasks &&
-          tasks.map((task, i) => {
+          tasks.map((task:any, i:number) => {
             return (
               <MeasureCard
                 key={i}
