@@ -28,6 +28,7 @@ services:
     build:
       context: ./
       dockerfile: ./docker/frontend/Dockerfile
+    image: nextjs:${ENVIRONMENT_NAME}
     networks:
       - nginx_network
     environment:

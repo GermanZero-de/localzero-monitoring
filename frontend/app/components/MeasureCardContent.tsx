@@ -3,7 +3,7 @@ import { Accordion } from "react-bootstrap";
 import styles from "./styles/MeasureCard.module.scss";
 import LinkMeasureCard from "./LinkMeasureCard";
 import SecondaryMeasureCard from "./SecondaryMeasureCard";
-import { Task } from "../TasksService";
+import { Task } from "@/types";
 
 interface MeasureCardContentProps {
   text: string;

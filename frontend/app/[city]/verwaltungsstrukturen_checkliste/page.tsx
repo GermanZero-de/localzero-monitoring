@@ -1,6 +1,3 @@
-"use client";
-
-import { useGetCity } from "@/app/CityHooks";
 import ChecklistItem from "@/app/components/ChecklistItem";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Accordion, Container } from "react-bootstrap";
@@ -9,11 +6,10 @@ import { getCities } from "@/lib/dataService";
 
 export default async function AdministrationChecklist({ params }: { params: { city: string } }) {
 
-  const cities = await getCities(params.city);
-  const city = cities[0]
+  const city = await getCities(params.city);
 
   if (!city) {
-    return <></>;
+    return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
   }
 
   return (

@@ -34,3 +34,22 @@ export interface ChecklistItem {
     help_text: string;
     rationale: string;
 }
+
+export enum ExecutionStatus {
+    UNKNOWN = 0,
+    AS_PLANNED = 2,
+    COMPLETE = 4,
+    DELAYED = 6,
+    FAILED = 8,
+  }
+
+export interface Task {
+    id: number;
+    title: string;
+    description: string;
+    execution_status: ExecutionStatus;
+    slugs: string;
+    numchild: number;
+    children: Task[];
+    city: number;
+  }

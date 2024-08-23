@@ -1,11 +1,19 @@
 import React from "react";
 import Image from "next/image";
-import { ExecutionStatus } from "../TasksService";
+
 import abgeschlossen from "../../public/images/icon-abgeschlossen.svg";
 import gescheitert from "../../public/images/icon-gescheitert.svg";
 import inArbeit from "../../public/images/icon-in_arbeit.svg";
 import unbekannt from "../../public/images/icon-unbekannt.svg";
 import verzoegert from "../../public/images/icon-verzoegert_fehlt.svg";
+
+enum ExecutionStatus {
+  UNKNOWN = 0,
+  AS_PLANNED = 2,
+  COMPLETE = 4,
+  DELAYED = 6,
+  FAILED = 8,
+}
 
 interface ExecutionStatusIconProps {
   taskStatus: ExecutionStatus;
