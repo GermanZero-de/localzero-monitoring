@@ -4,6 +4,16 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async rewrites() {
+    if(process.env.NODE_ENV === 'development'){
+      return [
+        {
+          source: '/images/:path*',
+          destination: 'https://monitoring.localzero.net/images/:path*',
+        },
+      ]
+    }
+  },
 };
 
 export default nextConfig;

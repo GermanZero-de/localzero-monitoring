@@ -24,7 +24,7 @@ const Tile: React.FC<Props> = ({ name, logo }) => {
         <Image
           width={100}
           height={100}
-          src={"http://127.0.0.1:8000" + logo}
+          src={"./" + logo}
           alt={"Logo von " + name}
         />
       </div>
