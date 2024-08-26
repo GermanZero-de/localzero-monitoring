@@ -7,7 +7,7 @@ import expandArrowUp from "../../public/imgs/arrow-expand-up.svg";
 import { Accordion, AccordionContext, Card, useAccordionButton } from "react-bootstrap";
 import styles from "./styles/MeasureCard.module.scss";
 import ExecutionStatusIcon from "./ExecutionStatusIcon";
-import { ExecutionStatus } from "../TasksService";
+import { ExecutionStatus } from "@/types/enums";
 import { StatusCount } from "../[city]/massnahmen/page";
 
 interface MeasureCardProps {

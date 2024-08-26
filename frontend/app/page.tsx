@@ -1,22 +1,17 @@
 import Search from "@/app/components/Search";
 import Image from "next/image";
-import Link from "next/link";
 import { Container } from "react-bootstrap";
 import banner from "../public/imgs/dashboard-banner.jpg";
-import Tile from "./components/Tile";
 import styles from "./page.module.scss";
 import CallToActionTile from "@/app/components/CallToActionTile";
 
-import expandArrowUp from "@/public/imgs/arrow-expand-up.svg";
-import expandArrowDown from "@/public/imgs/arrow-expand-down.svg";
 
 import { getCities } from "@/lib/dataService";
 import { City } from "@/types";
+import TileList from "./components/TileList";
 
 export default async function Home() {
   const cities= await getCities();
-  const numberOfCitiesShown = 4;
-  const allCitiesShown= false;
 
   return (
     <>
@@ -39,27 +34,10 @@ export default async function Home() {
           aktualisiert.
         </p>
         <h2 className="headingWithBar">Kommunen im Monitoring</h2>
-        <div className="d-flex justify-content-between flex-wrap">
-          {(cities || []).slice(0, numberOfCitiesShown).map((city:City) => (
-            <Link
-              key={city.slug}
-              href={"/" + city.slug}
-              className={styles.noLinkStyling}
-            >
-              <Tile
-                name={city.name}
-                logo={city.local_group?.logo}
-              />
-            </Link>
-          ))}
-        </div>
-        <div className="block-text pb-3">
-          {!allCitiesShown ? <div>Anzeige weiterer Kommunen</div> : <></>}
-          <Image
-            src={allCitiesShown ? expandArrowUp : expandArrowDown}
-            alt="Zeige mehr über das Lokalteam"
-          />
-        </div>
+
+          <TileList cities={cities}></TileList>
+
+
         <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>
         <Search cities={cities} />
         <h2 className="headingWithBar">
