@@ -13,6 +13,7 @@ const nextConfig = {
         },
       ]
     }
+    return []
   },
 };
 

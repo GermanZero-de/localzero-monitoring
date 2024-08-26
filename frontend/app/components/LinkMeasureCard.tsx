@@ -6,7 +6,7 @@ import ArrowRight from "../../public/imgs/arrow-right.svg";
 import { Card } from "react-bootstrap";
 import styles from "./styles/SecondaryMeasureCard.module.scss";
 import { usePathname, useRouter } from "next/navigation";
-import { ExecutionStatus } from "../TasksService";
+import { ExecutionStatus } from "@/types/enums";
 import ExecutionStatusIcon from "./ExecutionStatusIcon";
 
 interface LinkMeasureCardProps {

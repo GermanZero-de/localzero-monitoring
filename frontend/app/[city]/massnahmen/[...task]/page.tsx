@@ -1,11 +1,10 @@
-"use client";
 
-import { useGetCity } from "@/app/CityHooks";
-import { useParams } from "next/navigation";
+import { getCities, getTasks } from "@/lib/dataService";
+
 import { Container } from "react-bootstrap";
 import styles from "../page.module.scss";
 import Image from "next/image";
-import { Task, useGetTasksByCity } from "@/app/TasksService";
+import type { Task } from "@/types";
 import arrow from "../../../../public/imgs/arrow-right-down.svg";
 import Breadcrumb from "@/app/components/BreadCrumb";
 
@@ -28,16 +27,16 @@ const getTaskBySlugs = (tasks: Task[] | undefined, taskSlugs: string | string[])
     return getTaskBySlugs(taskGroup?.children, taskSlugs);
   }
 };
-export default function TaskDetails() {
-  const params = useParams();
-  const { city: citySlug, task: taskSlug } = params;
-  const { city, hasError } = useGetCity(citySlug as string);
-  const { tasks, hasError: hasErrorinTasks } = useGetTasksByCity(citySlug as string);
-  if (!city || hasError || hasErrorinTasks) {
-    return <></>;
+export default async function TaskDetails({ params }: { params: { city: string, task: string } }) {
+
+  const city = await getCities(params.city);
+  const tasks = await getTasks(params.city)
+
+  if (!city || !tasks) {
+    return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
   }
 
-  const task = tasks && getTaskBySlugs(tasks, taskSlug);
+  const task = getTaskBySlugs(tasks, params.task);
   return (
     <Container className={styles.container}>
       <h1 style={{ fontWeight: 600, fontSize: 38 }}>

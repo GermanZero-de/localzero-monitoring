@@ -12,7 +12,6 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "next": "14.2.3",

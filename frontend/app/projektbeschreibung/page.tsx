@@ -1,12 +1,11 @@
-"use client";
 import { Container } from "react-bootstrap";
 import Search from "@/app/components/Search";
 import styles from "@/app/page.module.scss";
 import CallToActionTile from "@/app/components/CallToActionTile";
-import { useGetCities } from "@/app/CityHooks";
-
-export default function ProjectDescription() {
-  const { cities, hasError } = useGetCities();
+import { getCities } from "@/lib/dataService";
+import type { City } from "@/types";
+export default async function ProjectDescription() {
+  const cities:City[] = await getCities();
 
   return (
     <Container>

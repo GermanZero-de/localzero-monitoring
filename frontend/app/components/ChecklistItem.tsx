@@ -5,7 +5,7 @@ import { AccordionBody, AccordionHeader, AccordionItem } from "react-bootstrap";
 import Markdown from "react-markdown";
 import styles from "./styles/ChecklistItem.module.scss";
 import rehypeRaw from "rehype-raw";
-import { ChecklistItem as ChecklistItemType } from "@/app/CityHooks";
+import { ChecklistItem as ChecklistItemType } from "@/types";
 
 type Props = {
   checklist_item: ChecklistItemType;
