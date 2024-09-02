@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 import styles from "./styles/Tile.module.scss";
 import Image from "next/image";
@@ -16,14 +15,15 @@ type Props = {
 };
 
 const Tile: React.FC<Props> = ({ name, logo }) => {
-  let image = null;
+  let image = <div className={styles.image}></div>;
 
   if (!!logo) {
     image = (
       <div className={styles.image}>
         <Image
-          width={100}
-          height={100}
+         width={0}
+         height={0}
+         style={{ width: '90%', height: 'auto', objectFit: 'cover' }}
           src={"./" + logo}
           alt={"Logo von " + name}
         />
@@ -42,17 +42,20 @@ const Tile: React.FC<Props> = ({ name, logo }) => {
           alt="arrow right"
         ></Image>
       </div>
-      {image}
-      <div className={styles.thermometer}>
-        <ImplementationIndicator
-          tasksNumber={{
-            [TaskStatus.failed]: 12,
-            [TaskStatus.asPlanned]: 33,
-            [TaskStatus.complete]: 19,
-            [TaskStatus.delayed]: 10,
-            [TaskStatus.unknown]: 10,
-          }}
-        />
+      <div className={styles.innerwrapper}>
+
+        <div className={styles.thermometer}>
+          <ImplementationIndicator
+            tasksNumber={{
+              [TaskStatus.failed]: 12,
+              [TaskStatus.asPlanned]: 33,
+              [TaskStatus.complete]: 19,
+              [TaskStatus.delayed]: 10,
+              [TaskStatus.unknown]: 10,
+            }}
+          />
+        </div>
+        {image}
       </div>
     </div>
   );

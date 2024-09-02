@@ -24,6 +24,16 @@ export default function LocalGroup({ localGroup, isExpanded }: Props) {
     return <></>;
   }
 
+  let image;
+
+  if(localGroup.featured_image){
+    image =  <img
+    className="pb-3"
+    src={"./" + localGroup.featured_image}
+    alt={"Lokalgruppe " + localGroup.name}
+  ></img>
+  }
+
   return (
     <div className={isExpanded ? styles.fixed : styles.backgroundColor}>
       <Container>
@@ -32,11 +42,7 @@ export default function LocalGroup({ localGroup, isExpanded }: Props) {
         {isExpanded ? (
           <>
             <Markdown>{localGroup.description}</Markdown>
-            <img
-              className="pb-3"
-              src={"http://127.0.0.1:8000" + localGroup.featured_image}
-              alt={"Lokalgruppe " + localGroup.name}
-            ></img>
+            {image}
           </>
         ) : (
           <Markdown>{localGroup.teaser}</Markdown>

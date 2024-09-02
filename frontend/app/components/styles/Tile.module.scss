@@ -1,6 +1,7 @@
 .wrapper {
   padding: 15px;
   margin-bottom: 30px;
+  margin-right: 20px;
   background: rgba(var(--bs-primary-rgb));
   width: 300px;
   height: 180px;
@@ -9,7 +10,7 @@
 }
 
 .heading {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 600;
   display: flex;
   justify-content: space-between;
@@ -17,11 +18,18 @@
 }
 
 .image {
-  text-align: center;
+  flex: 4;
+  align-content: center;
 }
 
 .thermometer {
   transform: scale(0.5);
   transform-origin: top left;
   width: 3rem;
+  flex: 1;
+}
+
+.innerwrapper{
+  max-height: 120px;
+  display:flex;
 }
