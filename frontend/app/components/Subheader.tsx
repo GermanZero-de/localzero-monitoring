@@ -1,4 +1,4 @@
-import banner from "../../public/imgs/dashboard-banner.jpg";
+import banner from "@/public/imgs/dashboard-banner.jpg";
 import Image from "next/image";
 import styles from "./styles/Subheader.module.scss";
 import { Container } from "react-bootstrap";
@@ -12,7 +12,7 @@ export default function Subheader() {
     <Image
       fill
       style={{ objectFit: "cover" }}
-      src={banner}
+      src="/images/background.jpg"
       alt="Fröhliches Kind mit Strohhut in einer grünen Stadt"
     />
   </div>

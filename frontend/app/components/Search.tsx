@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import closingIcon from "../../public/x.svg";
+import closingIcon from "@/public/x.svg";
 import { useState } from "react";
 import {  Col, ListGroup, Row } from "react-bootstrap";
 import styles from "./Search.module.scss";

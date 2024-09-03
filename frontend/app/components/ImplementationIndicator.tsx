@@ -1,13 +1,7 @@
 import * as React from "react";
 import styles from "./styles/ImplementationIndicator.module.scss";
+import { TaskStatus } from "@/types/enums";
 
-export enum TaskStatus {
-  complete = "complete",
-  asPlanned = "asPlanned",
-  delayed = "delayed",
-  failed = "failed",
-  unknown = "unknown",
-}
 
 type TasksNumber = { complete: number; asPlanned: number; unknown: number; delayed: number; failed: number };
 

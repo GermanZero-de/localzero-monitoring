@@ -2,24 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { Col, Container, Row } from "react-bootstrap";
 import Markdown from "react-markdown";
-import arrow from "../../public/imgs/arrow-right-down.svg";
-import greenCity from "../../public/background-green-city.png";
-import LocalGroup from "../components/LocalGroup";
+import greenCity from "@/public/background-green-city.png";
+import LocalGroup from "@/app/components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";
 import styles from "./page.module.scss";
 import { getCities } from "@/lib/dataService";
 
 interface CityDescriptionProps {
   description: string;
+  name: string;
 }
 
-const CityDescription: React.FC<CityDescriptionProps> = ({ description }) => {
+const CityDescription: React.FC<CityDescriptionProps> = ({ description, name }) => {
   if (!description) {
     return <></>;
   }
   return (
     <>
-      <h2 className="headingWithBar">Klimaschutz in München</h2>
+      <h2 className="headingWithBar">Klimaschutz in {name}</h2>
       <Markdown className="block-text pb-3">{description}</Markdown>
     </>
   );
@@ -49,13 +49,6 @@ export default async function CityDashboard({ params }: { params: { city: string
   return (
     <>
       <Container>
-        <h1 style={{ fontWeight: 600, fontSize: 38 }}>
-          {city.name.toUpperCase()}
-          <Image
-            src={arrow}
-            alt=""
-          />
-        </h1>
         <div className="p-3">
           <div className={styles.tileRowContainer}>
 
@@ -114,7 +107,12 @@ export default async function CityDashboard({ params }: { params: { city: string
 
           </div>
         </div>
-        <CityDescription description={city.description} />
+        <Row >
+          <Col className="p-4">
+            <CityDescription description={city.description} name={city.name}/>
+          </Col>
+        </Row>
+
         <Row >
           <Col className="p-4">
             <LocalGroup

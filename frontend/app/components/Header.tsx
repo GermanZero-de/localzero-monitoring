@@ -1,8 +1,8 @@
 "use client";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Image from "next/image";
-import logo from "../../public/logo.png";
-import spende from "../../public/spende.svg";
+import logo from "@/public/logo.png";
+import spende from "@/public/spende.svg";
 
 export default function Header() {
   return (

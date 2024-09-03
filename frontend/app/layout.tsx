@@ -32,11 +32,7 @@ export default async function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <Header />
-        <Subheader />
         {children}
-        <Subfooter cities={cities}/>
-        <Footer />
       </body>
     </html>
   );

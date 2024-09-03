@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import ArrowRight from "../../public/imgs/arrow-right.svg";
+import ArrowRight from "@/public/imgs/arrow-right.svg";
 import { Card } from "react-bootstrap";
 import styles from "./styles/SecondaryMeasureCard.module.scss";
 import { usePathname, useRouter } from "next/navigation";
