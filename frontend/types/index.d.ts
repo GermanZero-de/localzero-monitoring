@@ -45,3 +45,11 @@ export interface Task {
     children: Task[];
     city: number;
   }
+
+  export type StatusCount = {
+    done: number;
+    inProgress: number;
+    late: number;
+    failed: number;
+    unknown: number;
+  };

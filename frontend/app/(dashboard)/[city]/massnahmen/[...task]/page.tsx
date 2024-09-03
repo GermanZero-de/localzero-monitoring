@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 import styles from "../page.module.scss";
 import Image from "next/image";
 import type { Task } from "@/types";
-import arrow from "../../../../public/imgs/arrow-right-down.svg";
+import arrow from "@/public/imgs/arrow-right-down.svg";
 import Breadcrumb from "@/app/components/BreadCrumb";
 
 const getTaskBySlug = (tasks: Task[] | undefined, taskSlug: string): Task | undefined => {

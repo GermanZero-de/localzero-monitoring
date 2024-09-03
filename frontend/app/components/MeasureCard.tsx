@@ -2,13 +2,13 @@
 
 import React, { useContext } from "react";
 import Image from "next/image";
-import expandArrowDown from "../../public/imgs/arrow-expand-down.svg";
-import expandArrowUp from "../../public/imgs/arrow-expand-up.svg";
+import expandArrowDown from "@/public/imgs/arrow-expand-down.svg";
+import expandArrowUp from "@/public/imgs/arrow-expand-up.svg";
 import { Accordion, AccordionContext, Card, useAccordionButton } from "react-bootstrap";
 import styles from "./styles/MeasureCard.module.scss";
 import ExecutionStatusIcon from "./ExecutionStatusIcon";
 import { ExecutionStatus } from "@/types/enums";
-import { StatusCount } from "../[city]/massnahmen/page";
+import type { StatusCount } from "@/types";
 
 interface MeasureCardProps {
   eventKey: string;

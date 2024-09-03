@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { getCities } from "@/lib/dataService";
 import { City } from "@/types";
-import TileList from "./components/TileList";
+import TileList from "@/app/components/TileList";
 
 export default async function Home() {
   const cities:City[] = await getCities();

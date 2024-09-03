@@ -101,24 +101,6 @@ export default async function ProjectDescription() {
           </li>
         </ul>
       </div>
-      <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>
-      <Search cities={cities} />
-      <h2 className="headingWithBar">
-        LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.
-      </h2>
-      <div className={styles.callToActionSection}>
-        <CallToActionTile
-          title="Schreibe uns eine Mail:"
-          text="localzero@germanzero.de"
-          link="mailto:localzero@germanzero.de"
-          type="contact"
-        />
-        <CallToActionTile
-          title="Du willst mitmachen?"
-          link="https://localzero.net/mitmachen"
-          type="join"
-        />
-      </div>
     </Container>
   );
 }

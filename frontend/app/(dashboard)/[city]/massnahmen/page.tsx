@@ -2,31 +2,16 @@
 import MeasureCard from "@/app/components/MeasureCard";
 
 import Image from "next/image";
-import arrow from "../../../public/imgs/arrow-right-down.svg";
+import arrow from "@/public/imgs/arrow-right-down.svg";
 import { Accordion, Container } from "react-bootstrap";
 import styles from "./page.module.scss";
 import MeasureCardContent from "@/app/components/MeasureCardContent";
-import type { Task } from "@/types";
+import type { Task, StatusCount } from "@/types";
+import { ExecutionStatus } from "@/types/enums";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
-import Breadcrumb from "@/app/components/BreadCrumb";
 import Markdown from "react-markdown";
 import { getCities, getTasks } from "@/lib/dataService";
 
-enum ExecutionStatus {
-  UNKNOWN = 0,
-  AS_PLANNED = 2,
-  COMPLETE = 4,
-  DELAYED = 6,
-  FAILED = 8,
-}
-
-export type StatusCount = {
-  done: number;
-  inProgress: number;
-  late: number;
-  failed: number;
-  unknown: number;
-};
 
 const getRecursiveStatusNumbers = (
   tasks: Task[],
@@ -79,7 +64,7 @@ export default async function CityMeasures({ params }: { params: { city: string 
           alt=""
         />
       </h1>
-      <Breadcrumb />
+
       <Markdown>{city.assessment_status}</Markdown>
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
       <Accordion className={styles.accordion}>

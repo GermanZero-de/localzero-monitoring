@@ -5,3 +5,11 @@ export enum ExecutionStatus {
     DELAYED = 6,
     FAILED = 8,
   }
+
+  export enum TaskStatus {
+    complete = "complete",
+    asPlanned = "asPlanned",
+    delayed = "delayed",
+    failed = "failed",
+    unknown = "unknown",
+  }

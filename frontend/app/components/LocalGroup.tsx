@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import Markdown from "react-markdown";
-import expandArrowDown from "../../public/imgs/arrow-expand-down.svg";
-import expandArrowUp from "../../public/imgs/arrow-expand-up.svg";
+import expandArrowDown from "@/public/imgs/arrow-expand-down.svg";
+import expandArrowUp from "@/public/imgs/arrow-expand-up.svg";
 import styles from "./styles/LocalGroup.module.scss";
 
 type Props = {
