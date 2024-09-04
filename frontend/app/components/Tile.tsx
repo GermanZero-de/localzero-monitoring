@@ -3,6 +3,7 @@ import styles from "./styles/Tile.module.scss";
 import Image from "next/image";
 import arrow from "@/public/imgs/arrow-right.svg";
 import ImplementationIndicator from "./ImplementationIndicator";
+import indicator from "@/public/imgs/placeholders/indicator.png";
 import { TaskStatus } from "@/types/enums";
 const icons = {
   facebook:
@@ -21,10 +22,11 @@ const Tile: React.FC<Props> = ({ name, logo }) => {
     image = (
       <div className={styles.image}>
         <Image
+         unoptimized
          width={0}
          height={0}
-         style={{ width: '90%', height: 'auto', objectFit: 'cover' }}
-          src={"./" + logo}
+         style={{ width: '75%', height: 'auto', objectFit: 'cover' }}
+          src={logo}
           alt={"Logo von " + name}
         />
       </div>
@@ -33,6 +35,8 @@ const Tile: React.FC<Props> = ({ name, logo }) => {
 
   return (
     <div className={styles.wrapper}>
+      <div className={styles.background}></div>
+      <div className={styles.content}>
       <div className={styles.heading}>
         {name}
         <Image
@@ -45,18 +49,17 @@ const Tile: React.FC<Props> = ({ name, logo }) => {
       <div className={styles.innerwrapper}>
 
         <div className={styles.thermometer}>
-          <ImplementationIndicator
-            tasksNumber={{
-              [TaskStatus.failed]: 12,
-              [TaskStatus.asPlanned]: 33,
-              [TaskStatus.complete]: 19,
-              [TaskStatus.delayed]: 10,
-              [TaskStatus.unknown]: 10,
-            }}
-          />
+          <Image
+            width={280}
+            height={100}
+              src={indicator}
+              alt={"Fortschritt zur Klimaneutralität"}
+            />
         </div>
         {image}
       </div>
+      </div>
+
     </div>
   );
 };

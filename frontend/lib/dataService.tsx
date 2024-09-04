@@ -1,7 +1,7 @@
 export async function getCities(id: string = "") {
   const slug = id ? `/${id}` : ""
-  try {
-    const cities = await (await fetch(`${process.env.REST_API}/api/cities${slug}`, {
+
+    const cities = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}`, {
       cache: "no-store",
       headers: {
         Accept: "application/json",
@@ -9,16 +9,13 @@ export async function getCities(id: string = "") {
       },
     })).json();
     return cities
-  } catch (e) {
-    console.error(e)
-    return []
-  }
+
 }
 
 export async function getTasks(id: string = "") {
   const slug = id ? `/${id}` : ""
-  try {
-    const tasks = await (await fetch(`${process.env.REST_API}/api/cities${slug}/tasks`, {
+
+    const tasks = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}/tasks`, {
       cache: "no-store",
       headers: {
         Accept: "application/json",
@@ -26,8 +23,5 @@ export async function getTasks(id: string = "") {
       },
     })).json();
     return tasks
-  } catch (e) {
-    console.error(e)
-    return []
-  }
+
 }

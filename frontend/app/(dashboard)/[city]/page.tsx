@@ -7,21 +7,25 @@ import LocalGroup from "@/app/components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";
 import styles from "./page.module.scss";
 import { getCities } from "@/lib/dataService";
+import indicator from "@/public/imgs/placeholders/indicator.png";
+import indicator2 from "@/public/imgs/placeholders/indicator2.png";
 
 interface CityDescriptionProps {
+  teaser: string;
   description: string;
   name: string;
 }
 
-const CityDescription: React.FC<CityDescriptionProps> = ({ description, name }) => {
+const CityDescription: React.FC<CityDescriptionProps> = ({ description, name, teaser }) => {
   if (!description) {
     return <></>;
   }
   return (
-    <>
+    <div className={styles.mdContent}>
       <h2 className="headingWithBar">Klimaschutz in {name}</h2>
-      <Markdown className="block-text pb-3">{description}</Markdown>
-    </>
+      <h5>{teaser}</h5>
+      <Markdown className="pb-3">{description}</Markdown>
+    </div>
   );
 };
 
@@ -72,7 +76,15 @@ export default async function CityDashboard({ params }: { params: { city: string
                 title="Stand der Maßnahmen"
                 subtitle="Umsetzung Klimaaktionsplan"
               >
-                <span>Bild</span>
+                <div style={{height:300}}>
+                <Image
+                style={{padding:10, marginTop:70}}
+                width={560}
+                height={200}
+                  src={indicator}
+                  alt={"Fortschritt zur Klimaneutralität"}
+                />
+                </div>
               </NavigationTile>
             </Link>
           </div>
@@ -82,7 +94,12 @@ export default async function CityDashboard({ params }: { params: { city: string
                 className={styles.tile}
                 title="Klimaaktionsplan (KAP)"
               >
-                <span>Bild</span>
+                <Image
+                width={305}
+                height={132}
+                  src={indicator2}
+                  alt={"Fortschritt zur Klimaneutralität"}
+                />
               </NavigationTile>
             </Link>
 
@@ -91,7 +108,12 @@ export default async function CityDashboard({ params }: { params: { city: string
                 className={styles.tile}
                 title="Wärmeplanung"
               >
-                <span>Bild</span>
+                  <Image
+                width={305}
+                height={132}
+                  src={indicator2}
+                  alt={"Fortschritt zur Klimaneutralität"}
+                />
               </NavigationTile>
             </Link>
 
@@ -101,7 +123,12 @@ export default async function CityDashboard({ params }: { params: { city: string
                 title="Wo steht die Verwaltung?"
 
               >
-                <span>Bild</span>
+                <Image
+                width={305}
+                height={132}
+                  src={indicator2}
+                  alt={"Fortschritt zur Klimaneutralität"}
+                />
               </NavigationTile>
             </Link>
 
@@ -109,7 +136,7 @@ export default async function CityDashboard({ params }: { params: { city: string
         </div>
         <Row >
           <Col className="p-4">
-            <CityDescription description={city.description} name={city.name}/>
+            <CityDescription description={city.description} name={city.name} teaser={city.teaser}/>
           </Col>
         </Row>
 
