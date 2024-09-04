@@ -39,14 +39,6 @@ export default async function TaskDetails({ params }: { params: { city: string, 
   const task = getTaskBySlugs(tasks, params.task);
   return (
     <Container className={styles.container}>
-      <h1 style={{ fontWeight: 600, fontSize: 38 }}>
-        {city.name.toUpperCase()}
-        <Image
-          src={arrow}
-          alt=""
-        />
-      </h1>
-      <Breadcrumb />
       <h2 className="headingWithBar">{task?.title}</h2>
     </Container>
   );
