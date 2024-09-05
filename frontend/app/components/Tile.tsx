@@ -20,12 +20,8 @@ const Tile: React.FC<Props> = ({ name, logo }) => {
 
   if (!!logo) {
     image = (
-      <div className={styles.image}>
-        <Image
-         unoptimized
-         width={0}
-         height={0}
-         style={{ width: '75%', height: 'auto', objectFit: 'cover' }}
+      <div className={styles.imageWrapper}>
+        <img
           src={logo}
           alt={"Logo von " + name}
         />

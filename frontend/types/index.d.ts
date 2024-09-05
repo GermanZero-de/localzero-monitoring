@@ -38,12 +38,18 @@ export interface ChecklistItem {
 export interface Task {
     id: number;
     title: string;
+    teaser: string;
     description: string;
     execution_status: ExecutionStatus;
     slugs: string;
     numchild: number;
     children: Task[];
     city: number;
+    planned_completion: string;
+    planned_start:string;
+    responsible_organ:string;
+    supporting_ngos:string;
+    root: Task
   }
 
   export type StatusCount = {

@@ -10,9 +10,10 @@ export default function Subheader() {
     <h1 className={styles.textSecondary}>Klimaschutz-Monitoring von Kommunen</h1>
 
     <Image
+      unoptimized
       fill
       style={{ objectFit: "cover" }}
-      src="/images/background.jpg"
+      src="/images/background.webp"
       alt="Fröhliches Kind mit Strohhut in einer grünen Stadt"
     />
   </div>

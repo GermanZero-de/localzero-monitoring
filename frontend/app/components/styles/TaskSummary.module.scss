@@ -1,0 +1,21 @@
+.wrapper{
+    padding-right:20px;
+    font-weight:600;
+    img{
+        transform: scale(2);
+        transform-origin:top left;
+    }
+    .row{
+
+        border-bottom: 3px solid rgb(var(--bs-primary-rgb));
+        padding-bottom:10px;
+        padding-top:10px;
+        .label{
+            color:rgba(0,0,0,0.5);
+        }
+    }
+    .row:last-child{
+        border-bottom: none;
+    }
+}
+

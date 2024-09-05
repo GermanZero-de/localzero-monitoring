@@ -34,10 +34,20 @@
   align-items: center;
 }
 
-.image {
+.imageWrapper {
   align-content: space-around;
-  text-align: right;
+  text-align: center;
+  flex:1;
+  padding-left: 50px;
+  img{
+    width:100%;
+    height:auto;
+    max-width: 200px;
+     max-height: 75px;
+     object-fit: cover;
+  }
 }
+
 
 .thermometer {
   position: absolute;

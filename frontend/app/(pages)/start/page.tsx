@@ -10,8 +10,8 @@ export default async function Home() {
     <>
 
       <Container>
-        <h1 style={{ textAlign: "center" }}>LocalZero Monitoring</h1>
-        <p className="block-text pb-3">
+        <h1 className="pb-3 w-75 m-auto">LocalZero Monitoring</h1>
+        <p className="pb-5 w-75 m-auto">
           ... ist eine Initiative von GermanZero, um mehr Transparenz zum Fortschritt der Klimaneutralität deutscher
           Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den jeweiligen Kommunen regelmäßig
           aktualisiert.
