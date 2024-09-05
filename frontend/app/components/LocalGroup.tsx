@@ -28,7 +28,7 @@ export default function LocalGroup({ localGroup, isExpanded }: Props) {
 
   if(localGroup.featured_image){
     image =  <img
-    className="pb-3"
+    className="pb-3 mw-100"
     src={"./" + localGroup.featured_image}
     alt={"Lokalgruppe " + localGroup.name}
   ></img>
@@ -36,7 +36,7 @@ export default function LocalGroup({ localGroup, isExpanded }: Props) {
 
   return (
     <div className={isExpanded ? styles.fixed : styles.backgroundColor}>
-      <Container>
+      <Container className="d-flex flex-column">
         <h2 className="headingWithBar">Lokalteam {localGroup.name}</h2>
 
         {isExpanded ? (

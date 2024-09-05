@@ -1,27 +1,25 @@
 import { Container } from "react-bootstrap";
-import Search from "@/app/components/Search";
-import styles from "@/app/page.module.scss";
-import CallToActionTile from "@/app/components/CallToActionTile";
-import { getCities } from "@/lib/dataService";
-import type { City } from "@/types";
 export default async function ProjectDescription() {
-  const cities:City[] = await getCities();
+
 
   return (
     <Container>
-      <h1 className="big-h1">DAS PROJEKT</h1>
-      <div className="pb-3">
+      <p className="py-3 w-50 m-auto">
+        <h1 className="big-h1">DAS PROJEKT</h1>
+
         In vielen Kommunen geraten die Bemühungen um Klimaneutralität früher oder später ins Stocken. Kein Wunder, denn
         es gibt bundesweit keine Blaupause dafür, wie dieses Ziel zu erreichen ist. Die Kommunen und ihre Bürger:innen
         begehen hier permanent Neuland und stoßen auf zahlreiche Fragen und Hindernisse. Für Bürger:innen ist häufig
         nicht ersichtlich, ob ihre Kommune überhaupt Fortschritte erzielt.
-      </div>
-      <h2 className="headingWithBar">Kommunen im Monitoring</h2>
-      <div>
-        Deshalb hat LocalZero die Plattform LocalMonitoring ins Leben gerufen. LocalMonitoring macht Fortschritte
-        sichtbar, damit sie gefeiert werden können – und es zeigt Hürden auf, damit sie beseitigt werden können.
-      </div>
-      <div className="pb-3 pt-1">
+      </p>
+      <h2 className="headingWithBar w-75 m-auto">Kommunen im Monitoring</h2>
+      <p className="py-3 w-50 m-auto">
+        <p>
+          Deshalb hat LocalZero die Plattform LocalMonitoring ins Leben gerufen. LocalMonitoring macht Fortschritte
+          sichtbar, damit sie gefeiert werden können – und es zeigt Hürden auf, damit sie beseitigt werden können.
+        </p>
+
+
         <h4 className="pt-2">Im Fokus der Bewertung stehen drei Aspekte:</h4>
         <ul>
           <li>Der Klima-Aktionsplan einer Kommune</li>
@@ -59,9 +57,9 @@ export default async function ProjectDescription() {
             Dialog mit diesen.
           </li>
         </ul>
-      </div>
-      <h2 className="headingWithBar">Über uns</h2>
-      <div className="pb-3">
+      </p>
+      <h2 className="headingWithBar  w-75 m-auto">Über uns</h2>
+      <p className="py-3 w-50 m-auto">
         <h4>LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h4>
         LocalMonitoring ist ein Projekt der Initiative LocalZero, dem Netzwerk für kommunale Klimaneutralität unter dem
         Dach von{" "}
@@ -100,7 +98,7 @@ export default async function ProjectDescription() {
             Klimaschutzmaßnahmen.
           </li>
         </ul>
-      </div>
+      </p>
     </Container>
   );
 }

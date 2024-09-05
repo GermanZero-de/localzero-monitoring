@@ -1,6 +1,6 @@
 
 import Search from "@/app/components/Search";
-import styles from "./styles/Footer.module.scss";
+import styles from "./styles/Subfooter.module.scss";
 import CallToActionTile from "@/app/components/CallToActionTile";
 
 import { City } from "@/types";
@@ -11,7 +11,7 @@ type Props = {
 
 const Subfooter: React.FC<Props> = ({ cities }) => {
   return (
-    <Container>
+    <Container className="w-50 m-auto">
     <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>
     <Search cities={cities} />
     <h2 className="headingWithBar">
