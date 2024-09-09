@@ -43,6 +43,7 @@ from .models import (
 
 from .serializers import CitySerializer
 from .serializers import TaskSerializer
+from .serializers import TaskWithoutDraftModeSerializer
 
 from .utils import RemainingTimeInfo
 
@@ -821,7 +822,11 @@ class CityDetail(APIView):
         return Response(serializer.data)
 
 
-class TasksbyCity(APIView):
+class TasksByCity(APIView):
+    """
+    List all tasks of a city.
+    """
+
     def get(self, request, slug):
         try:
             city = City.objects.get(slug=slug)
@@ -830,4 +835,37 @@ class TasksbyCity(APIView):
         city_id = city.id
         children = Task.get_root_nodes().filter(city=city_id)
         serializer = TaskSerializer(children, many=True)
+        return Response(serializer.data)
+
+
+#
+# Temporary endpoints as dirty quick fix
+# for Bundestreffen 2024 for filtering out drafts
+#
+
+
+class CityListWithoutDraftMode(APIView):
+    """
+    List all cities which are not in draft mode.
+    """
+
+    def get(self, request):
+        cities = City.objects.all().exclude(draft_mode=True)
+        serializer = CitySerializer(cities, many=True)
+        return Response(serializer.data)
+
+
+class TasksByCityWithoutDraftMode(APIView):
+    """
+    List all tasks of a city which are not in draft mode.
+    """
+
+    def get(self, request, slug):
+        try:
+            city = City.objects.get(slug=slug)
+        except City.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        city_id = city.id
+        children = Task.get_root_nodes().filter(city=city_id, draft_mode=False)
+        serializer = TaskWithoutDraftModeSerializer(children, many=True)
         return Response(serializer.data)
