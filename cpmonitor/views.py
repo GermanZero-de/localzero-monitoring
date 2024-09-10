@@ -802,7 +802,11 @@ class CityList(APIView):
     """
 
     def get(self, request):
-        cities = City.objects.all()
+        if request.user.is_authenticated:
+            cities = City.objects.all()
+        else:
+            cities = City.objects.filter(draft_mode=False)
+
         serializer = CitySerializer(cities, many=True)
         return Response(serializer.data)
 
@@ -814,7 +818,10 @@ class CityDetail(APIView):
 
     def get(self, request, slug):
         try:
-            city = City.objects.get(slug=slug)
+            if request.user.is_authenticated:
+                city = City.objects.get(slug=slug)
+            else:
+                city = City.objects.get(slug=slug, draft_mode=False)
         except City.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -833,39 +840,10 @@ class TasksByCity(APIView):
         except City.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         city_id = city.id
-        children = Task.get_root_nodes().filter(city=city_id)
-        serializer = TaskSerializer(children, many=True)
-        return Response(serializer.data)
-
-
-#
-# Temporary endpoints as dirty quick fix
-# for Bundestreffen 2024 for filtering out drafts
-#
-
-
-class CityListWithoutDraftMode(APIView):
-    """
-    List all cities which are not in draft mode.
-    """
-
-    def get(self, request):
-        cities = City.objects.all().exclude(draft_mode=True)
-        serializer = CitySerializer(cities, many=True)
-        return Response(serializer.data)
-
-
-class TasksByCityWithoutDraftMode(APIView):
-    """
-    List all tasks of a city which are not in draft mode.
-    """
-
-    def get(self, request, slug):
-        try:
-            city = City.objects.get(slug=slug)
-        except City.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        city_id = city.id
-        children = Task.get_root_nodes().filter(city=city_id, draft_mode=False)
-        serializer = TaskWithoutDraftModeSerializer(children, many=True)
+        if request.user.is_authenticated:
+            children = Task.get_root_nodes().filter(city=city_id)
+            serializer = TaskSerializer(children, many=True)
+        else:
+            children = Task.get_root_nodes().filter(city=city_id, draft_mode=False)
+            serializer = TaskWithoutDraftModeSerializer(children, many=True)
         return Response(serializer.data)

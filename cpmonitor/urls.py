@@ -71,11 +71,6 @@ urlpatterns = [
     # Use accept header "application/json" to get json
     #
     path("api/cities", views.CityList.as_view()),
-    path("api/cities-without-drafts", views.CityListWithoutDraftMode.as_view()),
     path("api/cities/<str:slug>", views.CityDetail.as_view()),
     path("api/cities/<str:slug>/tasks", views.TasksByCity.as_view()),
-    path(
-        "api/cities/<str:slug>/tasks-without-drafts",
-        views.TasksByCityWithoutDraftMode.as_view(),
-    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
