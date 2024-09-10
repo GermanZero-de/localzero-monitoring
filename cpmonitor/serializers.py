@@ -86,6 +86,7 @@ class CitySerializer(serializers.ModelSerializer):
         model = City
         fields = [
             "id",
+            "draft_mode",
             "name",
             "municipality_key",
             "url",
@@ -114,6 +115,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = [
             "id",
+            "draft_mode",
             "title",
             "city",
             "teaser",
@@ -137,5 +139,40 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def get_children(self, obj):
         children = obj.get_children()
+        serializer = TaskSerializer(children, many=True)
+        return serializer.data
+
+
+class TaskWithoutDraftModeSerializer(serializers.ModelSerializer):
+    children = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Task
+        fields = [
+            "id",
+            "draft_mode",
+            "title",
+            "city",
+            "teaser",
+            "description",
+            "planned_start",
+            "planned_completion",
+            "responsible_organ",
+            "responsible_organ_explanation",
+            "plan_assessment",
+            "execution_status",
+            "execution_justification",
+            "supporting_ngos",
+            "execution_completion",
+            "actual_start",
+            "actual_completion",
+            "internal_information",
+            "slugs",
+            "numchild",
+            "children",
+        ]
+
+    def get_children(self, obj):
+        children = obj.get_children().exclude(draft_mode=True)
         serializer = TaskSerializer(children, many=True)
         return serializer.data
