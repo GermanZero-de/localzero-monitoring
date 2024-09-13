@@ -1,33 +1,15 @@
 
-import { getCities, getTasks } from "@/lib/dataService";
-import Image from "next/image";
-import indicator from "@/public/imgs/placeholders/indicator.png";
+import { findPreviousAndNext, getTasks } from "@/lib/dataService";
+import ArrowRight from "@/app/components/icons/ArrowRight";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../page.module.scss";
 import type { Task } from "@/types";
 import Markdown from "react-markdown";
 import TaskSummary from "@/app/components/TaskSummary";
+import TaskNavigation from "@/app/components/TaskNavigation";
+import Link from "next/link";
 
-const getTaskBySlug = (tasks: Task[] | undefined, taskSlug: string): Task | undefined => {
-  return tasks?.find((task) => task.slugs.includes(taskSlug));
-};
-
-const getTaskBySlugs = (tasks: Task[] | undefined, taskSlugs: string | string[]): Task | undefined => {
-  if (typeof taskSlugs === "string") {
-    return getTaskBySlug(tasks, taskSlugs);
-  } else if (Array.isArray(taskSlugs)) {
-    // avoid mutaion of the original slug object
-    taskSlugs = [...taskSlugs];
-    const taskGroup = getTaskBySlug(tasks, taskSlugs[0]);
-    const childSlug = taskSlugs[0] + "/" + taskSlugs[1];
-    taskSlugs.splice(0, 2, childSlug);
-    if (taskSlugs.length == 1) {
-      taskSlugs = taskSlugs[0];
-    }
-    return getTaskBySlugs(taskGroup?.children, taskSlugs);
-  }
-};
-export default async function TaskDetails({ params }: { params: { city: string, task: string } }) {
+export default async function TaskDetails({ params }: { params: { city: string, task: Array<string> } }) {
 
   const tasks = await getTasks(params.city)
 
@@ -36,15 +18,37 @@ export default async function TaskDetails({ params }: { params: { city: string, 
     return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
   }
 
-  const task = getTaskBySlugs(tasks, params.task);
+
+  const currentSlug = params.task.join("/")
+  const { previousItem, currentItem, nextItem, rootItem } = findPreviousAndNext(tasks, currentSlug);
+
+  const task = currentItem;
+
   const rootTaskSlug = task?.slugs.split("/")[0];
-  const flatTaskList = tasks.flat(10)
+
 
   if (!task) {
-    return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
+    return <h3 className="pb-3 pt-3">Maßnahme {task} wurde nicht gefunden</h3>;
   }
 
-  task.root = flatTaskList.find((t:Task)=>t.slugs===rootTaskSlug);
+
+
+
+
+  const nextUrl = nextItem ? `/${params.city}/massnahmen/${nextItem?.slugs}` : undefined;
+  const prevUrl = previousItem ? `/${params.city}/massnahmen/${previousItem?.slugs}` : undefined;
+  const rootUrl = rootItem ? `/${params.city}/massnahmen/?active=${rootTaskSlug}#${rootTaskSlug}` : undefined;
+
+  const nav = task.children.length === 0 ? <TaskNavigation prev={prevUrl} next={nextUrl} root={rootUrl}></TaskNavigation> : <></>
+
+  const linkback =
+    <div style={{ width: 250, fontSize: "1.2em" }}>
+      <Link href="./">
+        <ArrowRight
+          color="#40279C"
+          style={{ width: 50, transform: "rotate(180deg)", marginRight: 20 }}
+
+        />zurück</Link></div>
 
   return (
     <Container>
@@ -54,14 +58,11 @@ export default async function TaskDetails({ params }: { params: { city: string, 
         </Col>
       </Row>
       <Row>
-        <Col  className="d-flex">
+        <Col className="d-flex">
           <div>
-            <Image
-              width={250}
-              src={indicator}
-              alt={"Fortschritt zur Klimaneutralität"}
-            />
-            <TaskSummary task={task}></TaskSummary>
+
+            {task.children.length === 0 ? <TaskSummary task={task} root={rootItem}></TaskSummary> : linkback}
+
           </div>
           <div className="flex-grow-1 px-3 overflow-hidden">
             <div className="d-flex flex-column">
@@ -69,6 +70,11 @@ export default async function TaskDetails({ params }: { params: { city: string, 
               <Markdown className={styles.mdContent}>{task?.description}</Markdown>
             </div>
           </div>
+        </Col>
+      </Row>
+      <Row className="py-5">
+        <Col className="justify-content-center">
+          {nav}
         </Col>
       </Row>
     </Container>

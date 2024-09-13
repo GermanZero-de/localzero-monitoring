@@ -47,7 +47,7 @@ interface TileListProps {
           <Image
             onClick={toggle}
             src={showAll ? expandArrowUp : expandArrowDown}
-            alt="Zeige mehr über das Lokalteam"
+            alt="Anzeige weiterer Kommunen"
             style={{cursor:"pointer"}}
           />
         </div>

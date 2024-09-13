@@ -9,8 +9,8 @@
   justify-content: space-between;
   padding: 0.8rem;
   background-color: rgba(220, 220, 220, 1);
-  -webkit-clip-path: polygon(0 0, 0 100%, calc(100% - 1.5rem) 100%, 100% calc(100% - 1.5rem), 100% 0);
-  clip-path: polygon(0 0, 0 100%, calc(100% - 1.5rem) 100%, 100% calc(100% - 1.5rem), 100% 0);
+  -webkit-clip-path: polygon(0 0, 0 100%, calc(100% - 2rem) 100%, 100% calc(100% - 2rem), 100% 0);
+  clip-path: polygon(0 0, 0 100%, calc(100% - 2rem) 100%, 100% calc(100% - 2rem), 100% 0);
   border-bottom: none;
   cursor: pointer;
 
@@ -18,11 +18,22 @@
     padding-left: 3.1rem;
   }
 
+
   img {
     max-width: 1.8rem;
     height: auto;
     margin-right: 0.5rem;
   }
+}
+
+.suggested{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  background-color: rgb(var(--bs-primary-rgb));
+  clip-path: polygon(100% 100%, 100% 0, 0 100%)
 }
 
 .toggle {

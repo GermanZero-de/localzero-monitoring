@@ -9,9 +9,10 @@ import verzoegert from "@/public/imgs/icon-verzoegert_fehlt.svg";
 
 interface ExecutionStatusIconProps {
   taskStatus: ExecutionStatus;
+  disabled?: boolean
 }
 
-const ExecutionStatusIcon: React.FC<ExecutionStatusIconProps> = ({ taskStatus }) => {
+const ExecutionStatusIcon: React.FC<ExecutionStatusIconProps> = ({ taskStatus, disabled }) => {
   let icon = unbekannt;
   let altText = "";
   switch (taskStatus) {
@@ -36,11 +37,13 @@ const ExecutionStatusIcon: React.FC<ExecutionStatusIconProps> = ({ taskStatus })
       altText = "gescheiterte Maßnahmen";
       break;
   }
+  const imageStyle = disabled ? { filter: "grayscale(20%) contrast(50%) brightness(120%)" } : {};
 
   return (
     <Image
       src={icon}
       alt={altText}
+      style={imageStyle}
     ></Image>
   );
 };

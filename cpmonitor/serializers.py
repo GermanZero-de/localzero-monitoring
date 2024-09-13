@@ -135,6 +135,8 @@ class TaskSerializer(serializers.ModelSerializer):
             "slugs",
             "numchild",
             "children",
+            "source",
+            "frontpage",
         ]
 
     def get_children(self, obj):

@@ -18,7 +18,7 @@ export default function Footer() {
               </li>
               <li>
                 {" "}
-                <a href="topmassnahmen">TOP-MASSNAHMEN</a>
+                <a href="/topmassnahmen">TOP-MASSNAHMEN</a>
               </li>
               <li>
                 {" "}

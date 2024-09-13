@@ -1,0 +1,42 @@
+.massnahmen{
+   background: rgb(var(--bs-primary-rgb));
+   padding: 3px 15px;
+   border-radius: 0 10px 10px 10px;
+   font-weight: 600;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-rows: 1.5fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1.5fr;
+    width: 400px;
+    margin: 0 auto;
+    align-items: start;
+    justify-items: center;
+}
+
+.arrow{
+    color: rgb(var(--bs-primary-rgb));
+    display: inline-block;
+    margin: 0.5rem;
+    vertical-align: 0.255em;
+    border-top: 0.4em solid;
+    border-right: 0.4em solid;
+    border-bottom: 0;
+    border-left: 0;
+    top: 0;
+
+    width: 1em;
+    height: 1em;
+    &.right{
+        transform: rotate(45deg);
+    }
+    &.left{
+        transform: rotate(225deg);
+    }
+
+    &.up{
+        transform: rotate(315deg);
+    }
+}
+

@@ -9,12 +9,13 @@ interface MeasureCardContentProps {
   text: string;
   tasks: Task[];
   eventKey: string;
+  slugs: string;
 }
 
-const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, eventKey }) => {
+const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, slugs, eventKey }) => {
   return (
-    <div>
-      {text}
+    <div >
+      {text} <a href={"./massnahmen/"+slugs}>Mehr lesen...</a>
       <Accordion className={styles.contentaccordion}>
         {tasks.map((task, i) => {
           if (task.numchild && task.children.length > 0) {
@@ -23,9 +24,11 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, ev
                 eventKey={`p${eventKey}c${i}`}
                 key={i}
                 title={task.title}
+                source={task.source}
               >
                 <MeasureCardContent
-                  text={task.description}
+                  slugs={task.slugs}
+                  text={task.teaser}
                   tasks={task.children}
                   eventKey={`p${eventKey}c${i}`}
                 ></MeasureCardContent>
@@ -38,6 +41,7 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, ev
                 title={task.title}
                 taskStatus={task.execution_status}
                 key={i}
+                source={task.source}
               ></LinkMeasureCard>
             );
           }
