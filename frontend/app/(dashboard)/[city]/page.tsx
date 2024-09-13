@@ -151,7 +151,7 @@ export default async function CityDashboard({ params }: { params: { city: string
           <Col className="p-4" id="localgroup">
             <LocalGroup
               localGroup={city.local_group}
-              isExpanded={true}
+              isExpanded={false}
             />
           </Col>
         </Row>

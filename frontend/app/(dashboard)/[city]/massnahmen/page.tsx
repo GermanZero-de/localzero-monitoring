@@ -11,6 +11,7 @@ import { ExecutionStatus } from "@/types/enums";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Markdown from "react-markdown";
 import { getCities, getTasks } from "@/lib/dataService";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 
 const getRecursiveStatusNumbers = (
@@ -48,7 +49,8 @@ const getRecursiveStatusNumbers = (
   );
 };
 
-export default async function CityMeasures({ params }: { params: { city: string } }) {
+export default async function CityMeasures({ params, searchParams }: { params: { city: string}, searchParams:{active:string}  }) {
+  const activeKey = searchParams?.active;
   const city = await getCities(params.city);
   const tasks = await getTasks(params.city);
   if (!city || !tasks) {
@@ -67,20 +69,21 @@ export default async function CityMeasures({ params }: { params: { city: string 
 
       <Markdown>{city.assessment_status}</Markdown>
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
-      <Accordion className={styles.accordion}>
+      <Accordion className={styles.accordion} defaultActiveKey={activeKey}>
         {tasks &&
           tasks.map((task:any, i:number) => {
             return (
               <MeasureCard
                 key={i}
-                eventKey={i.toString()}
+                eventKey={task.slugs}
                 title={task.title}
                 statusOfSubTasks={getRecursiveStatusNumbers(task.children)}
               >
                 <MeasureCardContent
-                  text={task.description}
+                  slugs={task.slugs}
+                  text={task.teaser}
                   tasks={task.children}
-                  eventKey={i.toString()}
+                  eventKey={task.slugs}
                 ></MeasureCardContent>
               </MeasureCard>
             );

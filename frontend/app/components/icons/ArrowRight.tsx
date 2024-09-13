@@ -2,13 +2,18 @@ import React from "react";
 
 interface ArrowRightProps {
   color?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-const ArrowRight: React.FC<ArrowRightProps> = ({ color = "#000" }) => (
+const ArrowRight: React.FC<ArrowRightProps> = ({ color = "#000", className,
+  style }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 32 32"
+    className={className}
+    style={style}
   >
     <path
       fill={color}

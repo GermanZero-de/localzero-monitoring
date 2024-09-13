@@ -49,7 +49,10 @@ export interface Task {
     planned_start:string;
     responsible_organ:string;
     supporting_ngos:string;
-    root: Task
+    root: Task;
+    frontpage: boolean;
+    frontpage: boolean;
+    source: integer;
   }
 
   export type StatusCount = {
@@ -58,4 +61,11 @@ export interface Task {
     late: number;
     failed: number;
     unknown: number;
+  };
+
+  export type LocalGroupType = {
+    name: string;
+    teaser: string;
+    featured_image: string;
+    description: string;
   };

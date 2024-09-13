@@ -13,3 +13,9 @@ export enum ExecutionStatus {
     failed = "failed",
     unknown = "unknown",
   }
+
+  export enum TaskSource {
+    kap = 0,
+    suggested = 1
+  }
+
