@@ -34,10 +34,10 @@ export default function Header() {
             </NavDropdown>
 
             <Nav.Link href="#suche_kommune">SUCHE KOMMUNE</Nav.Link>
-            <Nav.Link href="topmassnahmen">TOP MASSNAHMEN</Nav.Link>
+            <Nav.Link href="/topmassnahmen">TOP MASSNAHMEN</Nav.Link>
           </Nav>
 
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="https://localzero.net/jetzt-spenden">
             <Image
               src={spende}
               width={200}
