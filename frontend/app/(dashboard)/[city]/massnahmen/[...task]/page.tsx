@@ -42,7 +42,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
   const nav = task.children.length === 0 ? <TaskNavigation prev={prevUrl} next={nextUrl} root={rootUrl}></TaskNavigation> : <></>
 
   const linkback =
-    <div style={{ width: 250, fontSize: "1.2em" }}>
+    <div style={{ width: 250, fontSize: "1.2em", position:"sticky", top:"100px" }}>
       <Link href={rootUrl || "./"}>
         <ArrowRight
           color="#40279C"
@@ -54,7 +54,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
     <Container>
       <Row className="py-5">
         <Col>
-          <h2>{task?.title}</h2>
+          <h1>{task?.title}</h1>
         </Col>
       </Row>
       <Row>

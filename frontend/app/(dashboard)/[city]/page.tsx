@@ -53,35 +53,35 @@ export default async function CityDashboard({ params }: { params: { city: string
     return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
   }
 
-  const kap = Array.isArray(city.cap_checklist) ? <Col className="p-2"><Link href={`${params.city}/kap_checkliste`} style={{ display:"inline-block", textDecoration: 'none' }}>
+  const kap = Array.isArray(city.cap_checklist) ? <Link href={`${params.city}/kap_checkliste`} style={{ display: "inline-block", textDecoration: 'none' }}>
     <NavigationTile
       className={styles.tile}
       title="Klimaaktionsplan (KAP)"
     >
       <ChecklistIndicator
         total={city.cap_checklist.length}
-        checked={city.cap_checklist.filter((item:ChecklistItem)=>item.is_checked).length}
+        checked={city.cap_checklist.filter((item: ChecklistItem) => item.is_checked).length}
         startYear={new Date(city.resolution_date).getFullYear()}
         endYear={city.target_year}
       />
     </NavigationTile>
-  </Link></Col> : <></>
+  </Link> : <></>
 
-  const waerme = Array.isArray(city.energy_plan_checklist) ? <Col className="p-2"><Link href={`${params.city}/waermeplanung_checkliste`} style={{ display:"inline-block",textDecoration: 'none' }}>
+  const waerme = Array.isArray(city.energy_plan_checklist) ? <Link href={`${params.city}/waermeplanung_checkliste`} style={{ display: "inline-block", textDecoration: 'none' }}>
     <NavigationTile
       className={styles.tile}
       title="Wärmeplanung"
     >
-     <ChecklistIndicator
+      <ChecklistIndicator
         total={city.energy_plan_checklist.length}
-        checked={city.energy_plan_checklist.filter((item:ChecklistItem)=>item.is_checked).length}
+        checked={city.energy_plan_checklist.filter((item: ChecklistItem) => item.is_checked).length}
         startYear={new Date(city.resolution_date).getFullYear()}
         endYear={city.target_year}
       />
     </NavigationTile>
-  </Link></Col> : <></>
+  </Link> : <></>
 
-  const verwaltung = Array.isArray(city.assessment_administration) ? <Col className="p-2"><Link href={`${params.city}/verwaltungsstrukturen_checkliste`} style={{ display:"inline-block",textDecoration: 'none' }}>
+  const verwaltung = Array.isArray(city.assessment_administration) ? <Link href={`${params.city}/verwaltungsstrukturen_checkliste`} style={{ display: "inline-block", textDecoration: 'none' }}>
     <NavigationTile
       className={styles.tile}
       title="Wo steht die Verwaltung?"
@@ -94,7 +94,7 @@ export default async function CityDashboard({ params }: { params: { city: string
         alt={"Fortschritt zur Klimaneutralität"}
       />
     </NavigationTile>
-  </Link></Col> : <></>
+  </Link> : <></>
   return (
     <>
       <Container>
@@ -136,9 +136,11 @@ export default async function CityDashboard({ params }: { params: { city: string
         </Row>
 
         <Row className="py-3">
-          {kap}
-          {waerme}
-          {verwaltung}
+          <Col className={styles.checklistContainer}>
+            {kap}
+            {waerme}
+            {verwaltung}
+            </Col>
         </Row>
 
         <Row >
