@@ -6,9 +6,11 @@ import greenCity from "@/public/background-green-city.webp";
 import LocalGroup from "@/app/components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";
 import styles from "./page.module.scss";
-import { getCities } from "@/lib/dataService";
-import indicator from "@/public/imgs/placeholders/indicator.png";
+import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
 import indicator2 from "@/public/imgs/placeholders/indicator2.png";
+import ImplementationIndicator from "@/app/components/ImplementationIndicator";
+import ChecklistIndicator from "@/app/components/ChecklistIndicator";
+import { ChecklistItem } from "@/types";
 
 interface CityDescriptionProps {
   teaser: string;
@@ -46,16 +48,59 @@ const SupportingNgos: React.FC<SupportingNgosProps> = ({ supportingNgos }) => {
 };
 export default async function CityDashboard({ params }: { params: { city: string } }) {
   const city = await getCities(params.city);
-  if (!city) {
+  const tasks = await getTasks(params.city);
+  if (!city || !tasks) {
     return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
   }
 
+  const kap = Array.isArray(city.cap_checklist) ? <Col className="p-2"><Link href={`${params.city}/kap_checkliste`} style={{ display:"inline-block", textDecoration: 'none' }}>
+    <NavigationTile
+      className={styles.tile}
+      title="Klimaaktionsplan (KAP)"
+    >
+      <ChecklistIndicator
+        total={city.cap_checklist.length}
+        checked={city.cap_checklist.filter((item:ChecklistItem)=>item.is_checked).length}
+        startYear={new Date(city.resolution_date).getFullYear()}
+        endYear={city.target_year}
+      />
+    </NavigationTile>
+  </Link></Col> : <></>
+
+  const waerme = Array.isArray(city.energy_plan_checklist) ? <Col className="p-2"><Link href={`${params.city}/waermeplanung_checkliste`} style={{ display:"inline-block",textDecoration: 'none' }}>
+    <NavigationTile
+      className={styles.tile}
+      title="Wärmeplanung"
+    >
+     <ChecklistIndicator
+        total={city.energy_plan_checklist.length}
+        checked={city.energy_plan_checklist.filter((item:ChecklistItem)=>item.is_checked).length}
+        startYear={new Date(city.resolution_date).getFullYear()}
+        endYear={city.target_year}
+      />
+    </NavigationTile>
+  </Link></Col> : <></>
+
+  const verwaltung = Array.isArray(city.assessment_administration) ? <Col className="p-2"><Link href={`${params.city}/verwaltungsstrukturen_checkliste`} style={{ display:"inline-block",textDecoration: 'none' }}>
+    <NavigationTile
+      className={styles.tile}
+      title="Wo steht die Verwaltung?"
+
+    >
+      <Image
+        width={305}
+        height={132}
+        src={indicator2}
+        alt={"Fortschritt zur Klimaneutralität"}
+      />
+    </NavigationTile>
+  </Link></Col> : <></>
   return (
     <>
       <Container>
         <Row className="py-3">
           <Col className="d-flex flex-grow-1 py-2">
-            <Link href={`#localgroup`} style={{ textDecoration: 'none', display:"flex", flex:1 }}>
+            <Link href={`#localgroup`} style={{ textDecoration: 'none', display: "flex", flex: 1 }}>
               <NavigationTile
                 className={styles.tile}
                 isBigCard
@@ -71,21 +116,19 @@ export default async function CityDashboard({ params }: { params: { city: string
             </Link>
           </Col>
           <Col className="d-flex flex-grow-1 py-2">
-            <Link href={`${params.city}/massnahmen`} style={{ textDecoration: 'none', display:"flex", flex:1 }}>
+            <Link href={`${params.city}/massnahmen`} style={{ textDecoration: 'none', display: "flex", flex: 1 }}>
               <NavigationTile
                 className={styles.tile}
                 isBigCard
                 title="Stand der Maßnahmen"
                 subtitle="Umsetzung Klimaaktionsplan"
               >
+                <ImplementationIndicator
+                  tasksNumber={getRecursiveStatusNumbers(tasks)}
+                  startYear={new Date(city.resolution_date).getFullYear()}
+                  endYear={city.target_year}
+                />
 
-                  <Image
-                    style={{ padding: 10, marginTop: 70, width: "90%" }}
-                    width={0}
-                    height={0}
-                    src={indicator}
-                    alt={"Fortschritt zur Klimaneutralität"}
-                  />
 
               </NavigationTile>
             </Link>
@@ -93,52 +136,9 @@ export default async function CityDashboard({ params }: { params: { city: string
         </Row>
 
         <Row className="py-3">
-          <Col className="p-2">
-            <Link href={`${params.city}/kap_checkliste`} style={{ textDecoration: 'none' }}>
-              <NavigationTile
-                className={styles.tile}
-                title="Klimaaktionsplan (KAP)"
-              >
-                <Image
-                  width={305}
-                  height={132}
-                  src={indicator2}
-                  alt={"Fortschritt zur Klimaneutralität"}
-                />
-              </NavigationTile>
-            </Link>
-          </Col>
-          <Col className="p-2">
-            <Link href={`${params.city}/waermeplanung_checkliste`} style={{ textDecoration: 'none' }}>
-              <NavigationTile
-                className={styles.tile}
-                title="Wärmeplanung"
-              >
-                <Image
-                  width={305}
-                  height={132}
-                  src={indicator2}
-                  alt={"Fortschritt zur Klimaneutralität"}
-                />
-              </NavigationTile>
-            </Link>
-          </Col>
-          <Col className="p-2">
-            <Link href={`${params.city}/verwaltungsstrukturen_checkliste`} style={{ textDecoration: 'none' }}>
-              <NavigationTile
-                className={styles.tile}
-                title="Wo steht die Verwaltung?"
-
-              >
-                <Image
-                  width={305}
-                  height={132}
-                  src={indicator2}
-                  alt={"Fortschritt zur Klimaneutralität"}
-                />
-              </NavigationTile>
-            </Link>
-          </Col>
+          {kap}
+          {waerme}
+          {verwaltung}
         </Row>
 
         <Row >
