@@ -51,20 +51,20 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubT
           <div className={styles.iconrow}>
 
               <div className={styles.firsticon}>
-                <ExecutionStatusIcon disabled={statusOfSubTasks.done===0} taskStatus={ExecutionStatus.COMPLETE}></ExecutionStatusIcon>
-                {statusOfSubTasks.done > 0 && ( <h2>{statusOfSubTasks.done}</h2>  )}
+                <ExecutionStatusIcon disabled={statusOfSubTasks.complete===0} taskStatus={ExecutionStatus.COMPLETE}></ExecutionStatusIcon>
+                {statusOfSubTasks.complete > 0 && ( <h2>{statusOfSubTasks.complete}</h2>  )}
               </div>
 
 
               <div className={styles.secondicon}>
-                <ExecutionStatusIcon disabled={statusOfSubTasks.inProgress===0} taskStatus={ExecutionStatus.AS_PLANNED}></ExecutionStatusIcon>
-                {statusOfSubTasks.inProgress > 0 && (<h2>{statusOfSubTasks.inProgress}</h2> )}
+                <ExecutionStatusIcon disabled={statusOfSubTasks.asPlanned===0} taskStatus={ExecutionStatus.AS_PLANNED}></ExecutionStatusIcon>
+                {statusOfSubTasks.asPlanned > 0 && (<h2>{statusOfSubTasks.asPlanned}</h2> )}
               </div>
 
 
               <div className={styles.thirdicon}>
-                <ExecutionStatusIcon disabled={statusOfSubTasks.late===0} taskStatus={ExecutionStatus.DELAYED}></ExecutionStatusIcon>
-                {statusOfSubTasks.late > 0 && (    <h2>{statusOfSubTasks.late}</h2>   )}
+                <ExecutionStatusIcon disabled={statusOfSubTasks.delayed===0} taskStatus={ExecutionStatus.DELAYED}></ExecutionStatusIcon>
+                {statusOfSubTasks.delayed > 0 && (    <h2>{statusOfSubTasks.delayed}</h2>   )}
               </div>
 
 

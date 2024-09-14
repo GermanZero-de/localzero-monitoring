@@ -56,9 +56,9 @@ export interface Task {
   }
 
   export type StatusCount = {
-    done: number;
-    inProgress: number;
-    late: number;
+    complete: number;
+    asPlanned: number;
+    delayed: number;
     failed: number;
     unknown: number;
   };
