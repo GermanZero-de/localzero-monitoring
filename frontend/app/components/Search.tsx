@@ -41,7 +41,7 @@ export default function Search(props:SearchProps) {
         <div>
           <div className={styles.shadow}>
             <div className={styles.searchMask}>
-              <h5 className={styles.searchMaskHeading}>Suche Kommune</h5>
+              <h5 className={styles.searchMaskHeading} id="suche_kommune">Suche Kommune</h5>
               <div className={styles.inputWrapper}>
                 <input
                   value={searchTerm}
