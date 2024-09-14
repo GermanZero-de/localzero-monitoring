@@ -61,28 +61,26 @@
   font-weight: bold;
 }
 
-@mixin heading($fz) {
+@mixin heading {
   font-weight: 600;
-  line-height: 2rem;
   color: common.$gz-secondary-color;
   position: relative;
-  padding-top: $fz;
-  margin-bottom: $fz;
+  padding-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 h1 {
   font-size: 1.5rem;
-  @include heading(1.5rem);
+  line-height: 2rem;
+  @include heading;
 }
 
 h2 {
   font-size: 1.25rem;
-  @include heading(1.25rem);
 }
 
 h3 {
   font-size: 1rem;
-  @include heading(1rem);
 }
 
 .big-h1 {
@@ -92,8 +90,8 @@ h3 {
 
 .headingWithBar {
   font-size: 1.5rem;
-  @include heading(1.5rem);
-
+  @include heading;
+  padding-top: 1.25rem;
   &:before {
     content: "";
     position: absolute;
