@@ -41,7 +41,13 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubT
     <Card className={!isCurrentEventKey ? styles.closedcard : ""}>
       <Card.Header
         className={styles.header}
-        onClick={onClick}
+        onClick={(e)=>{
+          const newUrl = new URL(window.location.href);
+          newUrl.searchParams.set('active', eventKey);  // Set or update the 'page' query parameter
+          window.history.pushState({}, '', newUrl.toString());  // Update the URL without refreshing
+
+          onClick(e)
+        }}
       >
         <div className={styles.headertitle}>
           <h3 id={eventKey}>{title}</h3>

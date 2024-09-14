@@ -43,7 +43,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
 
   const linkback =
     <div style={{ width: 250, fontSize: "1.2em" }}>
-      <Link href="./">
+      <Link href={rootUrl || "./"}>
         <ArrowRight
           color="#40279C"
           style={{ width: 50, transform: "rotate(180deg)", marginRight: 20 }}
