@@ -35,7 +35,7 @@ const Breadcrumb = ({ logo }: TBreadCrumbProps) => {
         alt={"Logo von " + cityName}
     /> : <div></div>
     return (
-        <div>
+        <div style={{position:"sticky", top:0, background:"white", zIndex:11}}>
             <Container style={{ position: "relative" }}>
                 <Row>
                     <Col>
