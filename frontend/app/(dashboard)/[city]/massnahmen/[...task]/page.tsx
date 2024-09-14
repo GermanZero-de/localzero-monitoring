@@ -3,7 +3,7 @@ import { findPreviousAndNext, getTasks } from "@/lib/dataService";
 import ArrowRight from "@/app/components/icons/ArrowRight";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../page.module.scss";
-import type { Task } from "@/types";
+import { decode } from 'html-entities';
 import Markdown from "react-markdown";
 import TaskSummary from "@/app/components/TaskSummary";
 import TaskNavigation from "@/app/components/TaskNavigation";
@@ -67,7 +67,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
           <div className="flex-grow-1 px-3 overflow-hidden">
             <div className="d-flex flex-column">
               <h3 className="headingWithBar">Beschreibung</h3>
-              <Markdown className={styles.mdContent}>{task?.description}</Markdown>
+              <Markdown className={styles.mdContent}>{decode(task?.description)}</Markdown>
             </div>
           </div>
         </Col>

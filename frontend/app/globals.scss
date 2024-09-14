@@ -62,15 +62,15 @@
 }
 
 @mixin heading {
-  line-height: 1.43;
+  line-height: 2rem;
   color: common.$gz-secondary-color;
   position: relative;
-  padding-top: 28px;
-  margin-bottom: 30px;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 1.5rem;
   @include heading;
 }
 

@@ -6,25 +6,66 @@ $colorAsPlanned: #ffa700;
 $colorUnknown: #dcdcdc;
 $colorDelayed: #f65035;
 $colorFailed: #011633;
+$colorTimeline: #0CA8FF;
 
-.implementationIndicator {
-  fill: none;
-  stroke: $borderColor;
-  stroke-width: $borderWidth;
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 3%;
+}
+
+.timeline{
+  bottom:3%;
+  height:25px;
+  width: 94%;
+  position: absolute;
+  background-color: $colorTimeline;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
+  label{
+    padding: 0 5px;
+  }
+}
+
+.indicatorContainer {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  bottom: 15px;
+  align-items: center;
+  position: absolute;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden; /* Ensures that the arrow does not overflow outside */
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid $colorComplete; /* This matches the color of the last task status bar */
 }
 
 .complete {
-  fill: $colorComplete;
+  background-color: $colorComplete;
 }
+
 .asPlanned {
-  fill: $colorAsPlanned;
+  background-color: $colorAsPlanned;
+
 }
 .unknown {
-  fill: $colorUnknown;
+  background-color: $colorUnknown;
 }
 .delayed {
-  fill: $colorDelayed;
+  background-color: $colorDelayed;
 }
 .failed {
-  fill: $colorFailed;
+  background-color: $colorFailed;
 }

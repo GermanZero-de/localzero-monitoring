@@ -6,6 +6,7 @@ import gescheitert from "@/public/imgs/icon-gescheitert.svg";
 import inArbeit from "@/public/imgs/icon-in_arbeit.svg";
 import unbekannt from "@/public/imgs/icon-unbekannt.svg";
 import verzoegert from "@/public/imgs/icon-verzoegert_fehlt.svg";
+import { executionLabels } from "@/lib/utils";
 
 interface ExecutionStatusIconProps {
   taskStatus: ExecutionStatus;
@@ -44,6 +45,7 @@ const ExecutionStatusIcon: React.FC<ExecutionStatusIconProps> = ({ taskStatus, d
       src={icon}
       alt={altText}
       style={imageStyle}
+      title={altText}
     ></Image>
   );
 };

@@ -6,48 +6,14 @@ import arrow from "@/public/imgs/arrow-right-down.svg";
 import { Accordion, Container } from "react-bootstrap";
 import styles from "./page.module.scss";
 import MeasureCardContent from "@/app/components/MeasureCardContent";
-import type { Task, StatusCount } from "@/types";
+
 import { ExecutionStatus } from "@/types/enums";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Markdown from "react-markdown";
-import { getCities, getTasks } from "@/lib/dataService";
-import { ReadonlyURLSearchParams } from "next/navigation";
+import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
 
 
-const getRecursiveStatusNumbers = (
-  tasks: Task[],
-): { done: number; inProgress: number; late: number; failed: number; unknown: number } => {
-  return tasks.reduce(
-    (statusCount, task) => {
-      if (task.numchild > 0) {
-        const childrenStatusNumbers = getRecursiveStatusNumbers(task.children);
-        Object.keys(childrenStatusNumbers).forEach((statusKey) => {
-          statusCount[statusKey as keyof StatusCount] += childrenStatusNumbers[statusKey as keyof StatusCount];
-        });
-      } else {
-        switch (task.execution_status) {
-          case ExecutionStatus.UNKNOWN:
-            statusCount.unknown++;
-            break;
-          case ExecutionStatus.AS_PLANNED:
-            statusCount.inProgress++;
-            break;
-          case ExecutionStatus.COMPLETE:
-            statusCount.done++;
-            break;
-          case ExecutionStatus.DELAYED:
-            statusCount.late++;
-            break;
-          case ExecutionStatus.FAILED:
-            statusCount.failed++;
-            break;
-        }
-      }
-      return statusCount;
-    },
-    { done: 0, inProgress: 0, late: 0, failed: 0, unknown: 0 } as StatusCount,
-  );
-};
+
 
 export default async function CityMeasures({ params, searchParams }: { params: { city: string}, searchParams:{active:string}  }) {
   const activeKey = searchParams?.active;

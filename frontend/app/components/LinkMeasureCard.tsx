@@ -8,6 +8,7 @@ import styles from "./styles/SecondaryMeasureCard.module.scss";
 import { usePathname, useRouter } from "next/navigation";
 import { ExecutionStatus, TaskSource } from "@/types/enums";
 import ExecutionStatusIcon from "./ExecutionStatusIcon";
+import { executionLabels } from "@/lib/utils";
 
 interface LinkMeasureCardProps {
   title: string;
