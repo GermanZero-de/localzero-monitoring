@@ -7,7 +7,6 @@ import LocalGroup from "@/app/components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";
 import styles from "./page.module.scss";
 import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
-import indicator2 from "@/public/imgs/placeholders/indicator2.png";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
 import { ChecklistItem } from "@/types";
