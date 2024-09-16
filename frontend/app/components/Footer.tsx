@@ -10,19 +10,15 @@ export default function Footer() {
             <ul className="footer-nav-list">
               <li>
                 {" "}
-                <a href="/start">DAS PROJEKT</a>
+                <a href="https://localzero.net/" target="new">LOCALZERO</a>
               </li>
               <li>
                 {" "}
-                <a href="/komunen">KOMMUNEN</a>
+                <a href="/datenschutz">DATENSCHUTZ</a>
               </li>
               <li>
                 {" "}
-                <a href="/topmassnahmen">TOP-MASSNAHMEN</a>
-              </li>
-              <li>
-                {" "}
-                <a href="https://localzero.net/">LOKALZERO</a>
+                <a href="/impressum">IMPRESSUM</a>
               </li>
             </ul>
           </Col>
