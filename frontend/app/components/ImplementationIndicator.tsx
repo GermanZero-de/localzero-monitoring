@@ -8,6 +8,7 @@ import {executionLabels} from "@/lib/utils"
 type TasksNumber = { complete: number; asPlanned: number; unknown: number; delayed: number; failed: number };
 
 type Props = {
+  style?: React.CSSProperties;
   tasksNumber: TasksNumber;
   startYear: number;
   endYear: number;
@@ -42,7 +43,26 @@ const getYearPositionPercentage = (currentYear: number, startYear: number, endYe
   return totalYears > 1 ? (yearsPassed / totalYears) * 100 : 90;
 };
 
-const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endYear }) => {
+const getFirstNonZeroTaskColor = (tasksNumber: TasksNumber) => {
+  const colorMap: Record<TaskStatus, string> = {
+    [TaskStatus.unknown]: styles.unknown,
+    [TaskStatus.failed]: styles.failed,
+    [TaskStatus.delayed]: styles.delayed,
+    [TaskStatus.asPlanned]: styles.asPlanned,
+    [TaskStatus.complete]: styles.complete,
+  };
+
+  for (let i = taskStatusOrder.length - 1; i >= 0; i--) {
+    const status = taskStatusOrder[i];
+    if (tasksNumber[status] > 0) {
+      return colorMap[status];
+    }
+  }
+  return styles.unknown; // Default to unknown if no other statuses are present
+};
+
+
+const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endYear, style }) => {
   const currentYear = new Date().getFullYear(); // Get the current year
   const barWidth = 30;
   const totalNumber = getTotalNumber(tasksNumber);
@@ -50,9 +70,10 @@ const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endY
 
   // Calculate the position of the indicator along the timeline
   const currentYearPosition = getYearPositionPercentage(currentYear, startYear, endYear);
-
+  const arrowColorClass = getFirstNonZeroTaskColor(tasksNumber);
+  console.log(arrowColorClass)
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} style={style}>
       <div className={styles.timeline}>
         <label>{startYear}</label>
         <label>{endYear}</label>
@@ -85,8 +106,7 @@ const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endY
           );
         })}
 
-        {/* Arrowhead at the bottom */}
-        <div className={styles.arrow}></div>
+      <div className={`${styles.arrow} ${arrowColorClass}`}></div>
       </div>
     </div>
   );
