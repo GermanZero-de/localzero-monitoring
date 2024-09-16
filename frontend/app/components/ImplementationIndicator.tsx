@@ -4,12 +4,12 @@ import * as React from "react";
 import styles from "./styles/ImplementationIndicator.module.scss";
 import { TaskStatus } from "@/types/enums";
 import {executionLabels} from "@/lib/utils"
+import { StatusCount } from "@/types";
 
-type TasksNumber = { complete: number; asPlanned: number; unknown: number; delayed: number; failed: number };
 
 type Props = {
   style?: React.CSSProperties;
-  tasksNumber: TasksNumber;
+  tasksNumber: StatusCount;
   startYear: number;
   endYear: number;
 };
@@ -22,11 +22,11 @@ const taskStatusOrder = [
   TaskStatus.complete,
 ];
 
-const getTotalNumber = (tasksNumber: TasksNumber): number => {
+const getTotalNumber = (tasksNumber: StatusCount): number => {
   return Object.values(tasksNumber).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 };
 
-const getTasksHeightsInPercentage = (tasksNumber: TasksNumber, totalNumberOfTasks: number): string[] => {
+const getTasksHeightsInPercentage = (tasksNumber: StatusCount, totalNumberOfTasks: number): string[] => {
   const arrowHeightPercentage = 10; // Reserve 10% for the arrow
   const remainingPercentage = 100 - arrowHeightPercentage;
 
@@ -43,7 +43,7 @@ const getYearPositionPercentage = (currentYear: number, startYear: number, endYe
   return totalYears > 1 ? (yearsPassed / totalYears) * 100 : 90;
 };
 
-const getFirstNonZeroTaskColor = (tasksNumber: TasksNumber) => {
+const getFirstNonZeroTaskColor = (tasksNumber: StatusCount) => {
   const colorMap: Record<TaskStatus, string> = {
     [TaskStatus.unknown]: styles.unknown,
     [TaskStatus.failed]: styles.failed,

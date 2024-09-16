@@ -801,14 +801,39 @@ class CityList(APIView):
     List all cities.
     """
 
+    def get_execution_status_count(self, city):
+        # Get task execution status count for the city
+        tasks = Task.objects.filter(city=city)
+        status_summary = {
+            "complete": tasks.filter(execution_status=ExecutionStatus.COMPLETE).count(),
+            "asPlanned": tasks.filter(
+                execution_status=ExecutionStatus.AS_PLANNED
+            ).count(),
+            "delayed": tasks.filter(execution_status=ExecutionStatus.DELAYED).count(),
+            "failed": tasks.filter(execution_status=ExecutionStatus.FAILED).count(),
+            "unknown": tasks.filter(execution_status=ExecutionStatus.UNKNOWN).count(),
+        }
+        return status_summary
+
     def get(self, request):
         if request.user.is_authenticated:
             cities = City.objects.all().order_by("-last_update")
         else:
             cities = City.objects.filter(draft_mode=False).order_by("-last_update")
 
+        execution_status_param = request.query_params.get("executionStatusCount", None)
+
         serializer = CitySerializer(cities, many=True)
-        return Response(serializer.data)
+        city_data = serializer.data
+
+        if execution_status_param is not None:
+            for city in city_data:
+                city_instance = City.objects.get(id=city["id"])
+                city["executionStatusCount"] = self.get_execution_status_count(
+                    city_instance
+                )
+
+        return Response(city_data)
 
 
 class CityDetail(APIView):

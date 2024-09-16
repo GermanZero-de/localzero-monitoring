@@ -6,12 +6,12 @@ const getCookie = async (name: string) => {
   return cookies().get(name)?.value ?? '';
 }
 
-export async function getCities(id: string = "") {
+export async function getCities(id: string = "", queryParams="") {
 
 
   const sessionid = await getCookie('sessionid');
   const slug = id ? `/${id}` : ""
-    const cities = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}`, {
+    const cities = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}?${queryParams}`, {
       cache: "no-store",
       headers: {
         Accept: "application/json",
