@@ -13,6 +13,7 @@
 
 .bigcard {
   border-color: common.$gz-color;
+  min-height:300px;
   @include common.highlight();
   .header {
     background-color: transparent;

@@ -3,7 +3,7 @@
 import * as React from "react";
 import styles from "./styles/ImplementationIndicator.module.scss";
 import { TaskStatus } from "@/types/enums";
-import {executionLabels} from "@/lib/utils"
+import { executionLabels } from "@/lib/utils"
 import { StatusCount } from "@/types";
 
 
@@ -12,6 +12,8 @@ type Props = {
   tasksNumber: StatusCount;
   startYear: number;
   endYear: number;
+  showLegend?: boolean;
+  showNow?: boolean;
 };
 
 const taskStatusOrder = [
@@ -30,13 +32,11 @@ const getTasksHeightsInPercentage = (tasksNumber: StatusCount, totalNumberOfTask
   const arrowHeightPercentage = 10; // Reserve 10% for the arrow
   const remainingPercentage = 100 - arrowHeightPercentage;
 
-  // Calculate the percentage of each status relative to the remaining percentage
   return taskStatusOrder.map(
     (status) => ((tasksNumber[status] / totalNumberOfTasks) * remainingPercentage).toFixed(2) + "%"
   );
 };
 
-// Helper function to calculate the current year position as a percentage along the timeline
 const getYearPositionPercentage = (currentYear: number, startYear: number, endYear: number): number => {
   const totalYears = endYear - startYear;
   const yearsPassed = currentYear - startYear;
@@ -58,56 +58,87 @@ const getFirstNonZeroTaskColor = (tasksNumber: StatusCount) => {
       return colorMap[status];
     }
   }
-  return styles.unknown; // Default to unknown if no other statuses are present
+  return styles.unknown;
 };
 
 
-const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endYear, style }) => {
-  const currentYear = new Date().getFullYear(); // Get the current year
+const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endYear, style, showLegend=false, showNow=false }) => {
+  const currentYear = new Date().getFullYear();
   const barWidth = 30;
   const totalNumber = getTotalNumber(tasksNumber);
   const tasksHeights = getTasksHeightsInPercentage(tasksNumber, totalNumber);
 
-  // Calculate the position of the indicator along the timeline
   const currentYearPosition = getYearPositionPercentage(currentYear, startYear, endYear);
   const arrowColorClass = getFirstNonZeroTaskColor(tasksNumber);
-  console.log(arrowColorClass)
+
+  const now = showNow ? <h5 style={{transform: "translateX(-50%)",left: `${currentYearPosition}%`,bottom:-24, position:"absolute"}}>{new Date().toLocaleDateString()}</h5> : <></>
+  const legend = showLegend ?  <div className={styles.legend}
+  style={{
+    overflow: "hidden",
+    position: "absolute",
+    left: `${(currentYearPosition + 5) > 50 ? 10 : currentYearPosition + 5}%`
+  }}>
+  <h2 className={styles.title}>Stand der beobachteten Maßnahmen</h2>
+  <div className={styles.legendItem}>
+    <div className={`${styles.legendColor} ${styles.unknown}`}></div>
+    <span>{executionLabels.unknown}</span>
+  </div>
+  <div className={`${styles.legendItem}`}>
+    <div className={`${styles.legendColor} ${styles.failed}`}></div>
+    <span>{executionLabels.failed}</span>
+  </div>
+  <div className={`${styles.legendItem}`}>
+    <div className={`${styles.legendColor} ${styles.delayed}`}></div>
+    <span>{executionLabels.delayed}</span>
+  </div>
+  <div className={`${styles.legendItem}`}>
+    <div className={`${styles.legendColor} ${styles.asPlanned}`}></div>
+    <span>{executionLabels.asPlanned}</span>
+  </div>
+  <div className={styles.legendItem}>
+    <div className={`${styles.legendColor} ${styles.complete}`}></div>
+    <span>{executionLabels.complete}</span>
+  </div>
+</div> :<></>
+
   return (
     <div className={styles.wrapper} style={style}>
       <div className={styles.timeline}>
         <label>{startYear}</label>
         <label>{endYear}</label>
       </div>
+      {now}
+      <div style={{ display: 'flex' }}>
 
-      {/* Position the indicatorContainer along the timeline */}
-      <div
-        className={styles.indicatorContainer}
-        style={{
-          width: `${barWidth}px`,
-          position: "absolute",
-          left: `${currentYearPosition}%`, // Move it along the timeline based on the current year
-          transform: "translateX(-50%)", // Center it based on its width
-        }}
-      >
-        {taskStatusOrder.map((status, index) => {
-          const isFirst = index === 0;
-          return (
-            <div
-              key={status}
-              className={styles[status]}
-              title={`${tasksNumber[status]} Maßnahmen ${executionLabels[status]}`}
-              style={{
-                height: tasksHeights[index], // Set height as a percentage
-                borderTopLeftRadius: isFirst ? "10px" : "0px",
-                borderTopRightRadius: isFirst ? "10px" : "0px",
-                width: "100%",
-              }}
-            ></div>
-          );
-        })}
-
-      <div className={`${styles.arrow} ${arrowColorClass}`}></div>
+        <div
+          className={styles.indicatorContainer}
+          style={{
+            width: `${barWidth}px`,
+            position: "absolute",
+            left: `${currentYearPosition}%`,
+            transform: "translateX(-50%)",
+          }}
+        >
+          {taskStatusOrder.map((status, index) => {
+            const isFirst = index === 0;
+            return (
+              <div
+                key={status}
+                className={styles[status]}
+                title={`${tasksNumber[status]} Maßnahmen ${executionLabels[status]}`}
+                style={{
+                  height: tasksHeights[index],
+                  borderTopLeftRadius: isFirst ? "10px" : "0px",
+                  borderTopRightRadius: isFirst ? "10px" : "0px",
+                  width: "100%",
+                }}
+              ></div>
+            );
+          })}
+          <div className={`${styles.arrow} ${arrowColorClass}`}></div>
+        </div>
       </div>
+      {legend}
     </div>
   );
 };

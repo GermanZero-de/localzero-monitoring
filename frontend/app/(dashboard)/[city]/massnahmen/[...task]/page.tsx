@@ -1,5 +1,5 @@
 
-import { findPreviousAndNext, getTasks } from "@/lib/dataService";
+import { findPreviousAndNext, getCities, getTasks } from "@/lib/dataService";
 import ArrowRight from "@/app/components/icons/ArrowRight";
 import { Col, Container, Row, Tooltip } from "react-bootstrap";
 import styles from "./page.module.scss";
@@ -10,10 +10,10 @@ import TaskSummary from "@/app/components/TaskSummary";
 import TaskNavigation from "@/app/components/TaskNavigation";
 import Link from "next/link";
 import localZero from "@/public/imgs/localZero.svg";
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export default async function TaskDetails({ params }: { params: { city: string, task: Array<string> } }) {
 
+  const city = await getCities(params.city)
   const tasks = await getTasks(params.city)
 
 
@@ -84,11 +84,13 @@ export default async function TaskDetails({ params }: { params: { city: string, 
         <Col className="d-flex">
           <div>
 
-            {task.children.length === 0 ? <TaskSummary task={task} root={rootItem}></TaskSummary> : linkback}
+            {task.children.length === 0 ? <TaskSummary task={task} root={rootItem} city={city}></TaskSummary> : linkback}
 
           </div>
           <div className="flex-grow-1 px-3 overflow-hidden">
             <div className="d-flex flex-column">
+
+              <Markdown className={styles.teaserContent}>{decode(task?.teaser)}</Markdown>
               <h3 className="headingWithBar">Beschreibung</h3>
               <Markdown className={styles.mdContent}>{decode(task?.description)}</Markdown>
             </div>

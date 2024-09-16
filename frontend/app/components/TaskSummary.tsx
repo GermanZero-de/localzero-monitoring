@@ -1,16 +1,17 @@
 import * as React from "react";
 import styles from "./styles/TaskSummary.module.scss";
 import { ExecutionStatus, TaskStatus } from "@/types/enums";
-import type { StatusCount, Task } from "@/types";
+import type { City, StatusCount, Task } from "@/types";
 import ExecutionStatusIcon from "./ExecutionStatusIcon";
 import { executionLabels } from "@/lib/utils"
-import Image from "next/image";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import CustomMarkdown from "./CustomMarkdown";
 
 type Props = {
     task: Task | undefined;
     root: Task | undefined;
+    city: City;
+
 };
 
 const getStatusLabel = (taskStatus: ExecutionStatus) => {
@@ -28,11 +29,17 @@ const getStatusLabel = (taskStatus: ExecutionStatus) => {
     }
 }
 
-const getStatusRow = (attr: string | undefined, title: string, markdown = false) => {
+const getStatusRow = (attr: string | undefined, title: string, markdown = false, date=false) => {
     if (markdown && attr) {
         return <div className={styles.row}>
             <div className={styles.label}>{title}:</div>
             <div><CustomMarkdown content={attr}></CustomMarkdown></div>
+        </div>
+    }
+    if (date && attr) {
+        return <div className={styles.row}>
+            <div className={styles.label}>{title}:</div>
+            <div>{new Date(attr).toLocaleDateString()}</div>
         </div>
     }
     return attr ? (
@@ -68,13 +75,14 @@ const getTaskCounts = (taskStatus: ExecutionStatus): StatusCount => {
     return defaultStatusCount;
 };
 
-const TaskSummary: React.FC<Props> = ({ task, root }) => {
-
-    const indicator = task?.planned_start && task.planned_completion ? <ImplementationIndicator
+const TaskSummary: React.FC<Props> = ({ task, root, city }) => {
+    const startYear = task?.planned_start || city.resolution_date;
+    const endYear = task?.planned_completion || city?.target_year.toString();
+    const indicator = task && startYear && endYear ? <ImplementationIndicator
         style={{ height: 110 }}
         tasksNumber={getTaskCounts(task.execution_status)}
-        startYear={new Date(task.planned_start).getFullYear()}
-        endYear={new Date(task.planned_completion).getFullYear()}
+        startYear={new Date(startYear).getFullYear()}
+        endYear={new Date(endYear).getFullYear()}
     />
         : <></>
     return (
@@ -85,7 +93,7 @@ const TaskSummary: React.FC<Props> = ({ task, root }) => {
                 {getStatusLabel(task?.execution_status)}
             </div>
             {getStatusRow(root?.title, "Sektor")}
-            {getStatusRow(task?.planned_start, "Beginn")}
+            {getStatusRow(task?.planned_start, "Beginn", false, true)}
             {getStatusRow(task?.planned_completion, "Ende")}
             {getStatusRow(task?.responsible_organ, "Zusständigkeit")}
             {getStatusRow(task?.supporting_ngos, "Kooperation", true)}

@@ -35,7 +35,7 @@ const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
           {checklist_item.rationale.trim() ? (
             <div>
               <strong>Anmerkung / Begründung: </strong>
-              <Markdown>{checklist_item.rationale}</Markdown>
+              <Markdown className="mdContent">{checklist_item.rationale}</Markdown>
             </div>
           ) : (
             <></>

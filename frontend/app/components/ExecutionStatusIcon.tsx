@@ -38,7 +38,7 @@ const ExecutionStatusIcon: React.FC<ExecutionStatusIconProps> = ({ taskStatus, d
       altText = "gescheiterte Maßnahmen";
       break;
   }
-  const imageStyle = disabled ? { filter: "grayscale(20%) contrast(50%) brightness(120%)" } : {};
+  const imageStyle = disabled ? { filter: "grayscale(90%) contrast(50%) brightness(120%)" } : {};
 
   return (
     <Image

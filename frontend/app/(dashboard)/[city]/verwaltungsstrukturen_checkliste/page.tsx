@@ -16,7 +16,7 @@ export default async function AdministrationChecklist({ params }: { params: { ci
     <Container>
       <div className="pb-3"></div>
       <h2 className="headingWithBar">Nachhaltigkeitsarchitektur in der Verwaltung</h2>
-      <Markdown className="pb-3">{city.assessment_administration}</Markdown>
+      <Markdown className="pb-3 mdContent">{city.assessment_administration}</Markdown>
       <Accordion
         id="accordionFlushKAP"
         className="accordion-flush pb-3"

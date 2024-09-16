@@ -25,7 +25,7 @@ const CityDescription: React.FC<CityDescriptionProps> = ({ description, name, te
     <div className={styles.mdContent}>
       <h2 className="headingWithBar">Klimaschutz in {name}</h2>
       <h5>{teaser}</h5>
-      <Markdown className="pb-3">{description}</Markdown>
+      <Markdown className="pb-3 mdContent">{description}</Markdown>
     </div>
   );
 };
@@ -96,10 +96,10 @@ export default async function CityDashboard({ params }: { params: { city: string
   </Link> : <></>
   return (
     <>
-      <Container>
+      <Container className={styles.container}>
         <Row className="py-3">
           <Col className="d-flex flex-grow-1 py-2">
-            <Link href={`#localgroup`} style={{ textDecoration: 'none', display: "flex", flex: 1 }}>
+            <Link href={`#description`} style={{ textDecoration: 'none', display: "flex", flex: 1 }}>
               <NavigationTile
                 className={styles.tile}
                 isBigCard
@@ -126,6 +126,7 @@ export default async function CityDashboard({ params }: { params: { city: string
                   tasksNumber={getRecursiveStatusNumbers(tasks)}
                   startYear={new Date(city.resolution_date).getFullYear()}
                   endYear={city.target_year}
+                  showLegend
                 />
 
 
@@ -143,13 +144,13 @@ export default async function CityDashboard({ params }: { params: { city: string
         </Row>
 
         <Row >
-          <Col className="p-4">
+          <Col className="p-4" id="description" style={{scrollMarginTop:100}}>
             <CityDescription description={city.description} name={city.name} teaser={city.teaser} />
           </Col>
         </Row>
 
         <Row >
-          <Col className="p-4" id="localgroup">
+          <Col className="p-4">
             <LocalGroup
               localGroup={city.local_group}
               isExpanded={false}
