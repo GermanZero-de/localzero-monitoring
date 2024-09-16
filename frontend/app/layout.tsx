@@ -3,11 +3,7 @@ import { Inter } from "next/font/google";
 import { getCities } from "@/lib/dataService";
 import { City } from "@/types";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header";
-import Subheader from "./components/Subheader";
-import Footer from "./components/Footer";
 import "./globals.scss";
-import Subfooter from "./components/Subfooter";
 
 const inter = Inter({ subsets: ["latin"] });
 

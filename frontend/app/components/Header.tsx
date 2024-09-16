@@ -1,10 +1,13 @@
 "use client";
+import { useState } from 'react';
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 import spende from "@/public/spende.svg";
 
 export default function Header() {
+  const [showDropdown, setShowDropdown] = useState(false);
+
   return (
     <Navbar
       color="light"
@@ -13,7 +16,6 @@ export default function Header() {
     >
       <Container>
         <Navbar.Brand href="/">
-          {" "}
           <Image
             src={logo}
             width={200}
@@ -23,8 +25,15 @@ export default function Header() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="fw-bold m-auto">
-            <NavDropdown title="MONITORING">
+          <Nav fill className="fw-bold flex-grow-1">
+            <NavDropdown
+              title="MONITORING"
+              show={showDropdown}
+              onMouseEnter={() => setShowDropdown(true)}
+              onMouseLeave={() => setShowDropdown(false)}
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <div className="dropDownDivider"></div>
               <NavDropdown.Item href="/">ALLE KOMMUNEN</NavDropdown.Item>
               <NavDropdown.Item href="/projektbeschreibung">ÜBER DAS PROJEKT</NavDropdown.Item>
             </NavDropdown>
