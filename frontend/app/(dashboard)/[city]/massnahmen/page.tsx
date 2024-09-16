@@ -11,6 +11,7 @@ import { ExecutionStatus } from "@/types/enums";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Markdown from "react-markdown";
 import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
+import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 
 
 
@@ -25,6 +26,14 @@ export default async function CityMeasures({ params, searchParams }: { params: {
 
   return (
     <Container className={styles.container}>
+      <ImplementationIndicator
+        style={{height:250, marginBottom:30}}
+        tasksNumber={getRecursiveStatusNumbers(tasks)}
+        startYear={new Date(city.resolution_date).getFullYear()}
+        endYear={city.target_year}
+        showLegend
+        showNow
+      ></ImplementationIndicator>
       <h1 style={{ fontWeight: 600, fontSize: 38 }}>
         {city.name.toUpperCase()}
         <Image
@@ -33,7 +42,7 @@ export default async function CityMeasures({ params, searchParams }: { params: {
         />
       </h1>
 
-      <Markdown>{city.assessment_status}</Markdown>
+      <Markdown className="mdContent">{city.assessment_status}</Markdown>
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
       <Accordion className={styles.accordion} defaultActiveKey={activeKey}>
         {tasks &&

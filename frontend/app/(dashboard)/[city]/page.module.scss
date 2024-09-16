@@ -1,5 +1,4 @@
 .tile {
-  min-width:400px;
   flex: 1;
 }
 
@@ -11,10 +10,10 @@
 
 .checklistContainer{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
   a{
-    width:32%
-  }
-  a:nth-child(2){
-    margin:0 2%;
+    flex: 1;
   }
 }

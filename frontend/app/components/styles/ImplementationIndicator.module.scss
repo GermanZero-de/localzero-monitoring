@@ -13,11 +13,13 @@ $colorTimeline: #0CA8FF;
   height: 100%;
   position: relative;
   padding: 3%;
+  display: flex; /* Ensure legend and indicator are placed next to each other */
+  justify-content: space-between; /* Spacing between the timeline/indicator and the legend */
 }
 
-.timeline{
-  bottom:3%;
-  height:25px;
+.timeline {
+  bottom: 3%;
+  height: 25px;
   width: 94%;
   position: absolute;
   background-color: $colorTimeline;
@@ -25,20 +27,20 @@ $colorTimeline: #0CA8FF;
   display: flex;
   justify-content: space-between;
   padding: 2px;
-  label{
+
+  label {
     padding: 0 5px;
   }
 }
 
 .indicatorContainer {
+  bottom: 15px;
   height: 90%;
   display: flex;
   flex-direction: column;
-  bottom: 15px;
   align-items: center;
   position: absolute;
   background-color: transparent;
-  position: relative;
   overflow: hidden; /* Ensures that the arrow does not overflow outside */
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
@@ -58,14 +60,16 @@ $colorTimeline: #0CA8FF;
 
 .asPlanned {
   background-color: $colorAsPlanned;
-
 }
+
 .unknown {
   background-color: $colorUnknown;
 }
+
 .delayed {
   background-color: $colorDelayed;
 }
+
 .failed {
   background-color: $colorFailed;
 }
@@ -93,4 +97,55 @@ $colorTimeline: #0CA8FF;
 .arrow.failed {
   border-top-color: $colorFailed;
   background-color: transparent;
+}
+
+@media screen and (max-width: 1200px) {
+  .title{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  div.legend{
+    display: none;
+  }
+}
+/* Legend styling */
+.legend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20px;
+  color: rgb(33, 37, 41);
+  .legendItem {
+    display: flex;
+    align-items: center;
+
+    .legendColor {
+      width: 10px;
+      height: 10px;
+      border-top-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+      margin-right: 8px;
+
+      &.complete {
+        background-color: $colorComplete;
+      }
+      &.asPlanned {
+        background-color: $colorAsPlanned;
+      }
+      &.unknown {
+        background-color: $colorUnknown;
+      }
+
+      &.delayed .legendColor {
+        background-color: $colorDelayed;
+      }
+
+      &.failed .legendColor {
+        background-color: $colorFailed;
+      }
+    }
+  }
 }

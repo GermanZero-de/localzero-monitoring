@@ -16,7 +16,7 @@ export default async function CapChecklist({ params }: { params: { city: string 
     <Container>
       <div className="pb-3"></div>
       <h2 className="headingWithBar">Klimaaktionsplan {city.name}</h2>
-      <Markdown className="pb-3">{city.assessment_action_plan}</Markdown>
+      <Markdown className="pb-3 mdContent">{city.assessment_action_plan}</Markdown>
       <Accordion
         id="accordionFlushKAP"
         className="accordion-flush pb-3"
