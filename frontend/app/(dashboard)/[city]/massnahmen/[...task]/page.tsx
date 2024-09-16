@@ -1,13 +1,16 @@
 
 import { findPreviousAndNext, getTasks } from "@/lib/dataService";
 import ArrowRight from "@/app/components/icons/ArrowRight";
-import { Col, Container, Row } from "react-bootstrap";
-import styles from "../page.module.scss";
+import { Col, Container, Row, Tooltip } from "react-bootstrap";
+import styles from "./page.module.scss";
+import Image from "next/image";
 import { decode } from 'html-entities';
 import Markdown from "react-markdown";
 import TaskSummary from "@/app/components/TaskSummary";
 import TaskNavigation from "@/app/components/TaskNavigation";
 import Link from "next/link";
+import localZero from "@/public/imgs/localZero.svg";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export default async function TaskDetails({ params }: { params: { city: string, task: Array<string> } }) {
 
@@ -42,7 +45,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
   const nav = task.children.length === 0 ? <TaskNavigation prev={prevUrl} next={nextUrl} root={rootUrl}></TaskNavigation> : <></>
 
   const linkback =
-    <div style={{ width: 250, fontSize: "1.2em", position:"sticky", top:"100px" }}>
+    <div style={{ width: 250, fontSize: "1.2em", position: "sticky", top: "100px" }}>
       <Link href={rootUrl || "./"}>
         <ArrowRight
           color="#40279C"
@@ -50,11 +53,31 @@ export default async function TaskDetails({ params }: { params: { city: string, 
 
         />zurück</Link></div>
 
+  const topmapNahme = task.source === 1 ? <>
+    <div className={styles.cornerTop}>
+      <Image
+        src={localZero}
+        alt="LocalZero Top Maßnahme"
+        title="LocalZero Maßnahme: Diese Maßnahme ist vom Netzwerk LocalZero oder dem Lokalteam vorgeschlagen.Die Kommune hat sie bisher nicht geplant. Sie ist aber dringend notwendig auf dem Weg zur Klimaneutralität. Sie ist einfach umzusetzen und/oder spart schnell und viel Treibhausgase ein."
+
+      />
+    </div>
+
+      <div className={styles.cornerBottom}>
+        <Image
+          title="LocalZero Maßnahme: Diese Maßnahme ist vom Netzwerk LocalZero oder dem Lokalteam vorgeschlagen.Die Kommune hat sie bisher nicht geplant. Sie ist aber dringend notwendig auf dem Weg zur Klimaneutralität. Sie ist einfach umzusetzen und/oder spart schnell und viel Treibhausgase ein."
+          src={localZero}
+          alt="LocalZero Top Maßnahme"
+        />
+
+      </div></> : <></>
+
   return (
-    <Container>
+    <Container className={`${styles.container} ${task.source === 1 ? styles.top : ""}`}>
       <Row className="py-5">
         <Col>
           <h1>{task?.title}</h1>
+          {topmapNahme}
         </Col>
       </Row>
       <Row>
@@ -75,8 +98,9 @@ export default async function TaskDetails({ params }: { params: { city: string, 
       <Row className="py-5">
         <Col className="justify-content-center">
           {nav}
+
         </Col>
       </Row>
-    </Container>
+    </Container >
   );
 }
