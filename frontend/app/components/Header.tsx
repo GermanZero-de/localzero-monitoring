@@ -25,8 +25,8 @@ export default function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="fw-bold m-auto">
             <NavDropdown title="MONITORING">
-              <NavDropdown.Item href="/">Alle Kommunen</NavDropdown.Item>
-              <NavDropdown.Item href="/projektbeschreibung">Über das Projekt</NavDropdown.Item>
+              <NavDropdown.Item href="/">ALLE KOMMUNEN</NavDropdown.Item>
+              <NavDropdown.Item href="/projektbeschreibung">ÜBER DAS PROJEKT</NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link href="#suche_kommune">SUCHE KOMMUNE</Nav.Link>
