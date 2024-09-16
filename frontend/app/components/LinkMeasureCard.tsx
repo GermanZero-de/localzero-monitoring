@@ -32,7 +32,7 @@ const LinkMeasureCard: React.FC<LinkMeasureCardProps> = ({ title, slugs, taskSta
 
         <ExecutionStatusIcon taskStatus={taskStatus}></ExecutionStatusIcon>
         {title}
-        <div className={styles.toggle}>
+        <div className={styles.toggle} title="mehr über die Massnahme">
           <Image
             src={ArrowRight}
             alt="Zeige mehr über die Massnahme"

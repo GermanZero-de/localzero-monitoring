@@ -4,3 +4,16 @@ $gz-background-color: #fff9e5;
 
 $gz-checked: #9bd300;
 $gz-unchecked: grey;
+
+@mixin highlight(){
+    transform-style: preserve-3d;
+    transition:
+      .4s ease-in-out transform,
+      .4s ease-in-out filter;
+
+  &:hover{
+    transform: translate3d(0px, -5px, 0px);
+    filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.2));
+
+  }
+}

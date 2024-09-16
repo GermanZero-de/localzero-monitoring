@@ -8,15 +8,21 @@
   background-color: common.$gz-checked;
 }
 
-.tile {
-  text-decoration: none;
+.wrapper{
   position: relative;
+
+  @include common.highlight();
+}
+.tile {
   padding: 5px;
-  color: black;
   width: 280px;
   height: 140px;
+  color: black;
+  text-decoration: none;
+  display: block;
   -webkit-clip-path: polygon(0 0, 0 100%, calc(100% - 2rem) 100%, 100% calc(100% - 2rem), 100% 0);
   clip-path: polygon(0 0, 0 100%, calc(100% - 2rem) 100%, 100% calc(100% - 2rem), 100% 0);
+
 }
 
 .content {
