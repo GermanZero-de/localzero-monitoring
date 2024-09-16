@@ -33,7 +33,7 @@ export default function Header() {
             <Nav.Link href="/topmassnahmen">TOP MASSNAHMEN</Nav.Link>
           </Nav>
 
-          <Navbar.Brand href="https://localzero.net/jetzt-spenden">
+          <Navbar.Brand href="https://localzero.net/jetzt-spenden" target="new">
             <Image
               src={spende}
               width={200}

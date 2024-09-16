@@ -18,7 +18,7 @@ const CallToActionTile: React.FC<NavigationTileProps> = ({ title, text, link, ty
     <div className={styles.wrapper}>
     <a
       href={link}
-      target="_blank"
+      target="_new"
       className={`${styles.tile} ${colorStyle}`}
     >
 
