@@ -15,6 +15,7 @@ export interface City {
     local_group: LocalGroup;
     cap_checklist: ChecklistItem[];
     assessment_action_plan: string;
+    executionStatusCount?: StatusCount
 }
 
 export interface LocalGroup {
