@@ -803,9 +803,9 @@ class CityList(APIView):
 
     def get(self, request):
         if request.user.is_authenticated:
-            cities = City.objects.all()
+            cities = City.objects.all().order_by("-last_update")
         else:
-            cities = City.objects.filter(draft_mode=False)
+            cities = City.objects.filter(draft_mode=False).order_by("-last_update")
 
         serializer = CitySerializer(cities, many=True)
         return Response(serializer.data)
