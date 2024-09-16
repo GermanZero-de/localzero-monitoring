@@ -40,10 +40,15 @@
   align-content: space-around;
   text-align: center;
   flex:1;
-  padding-left: 50px;
+  position:absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   img{
     width:100%;
     height:auto;
+    opacity: 0.6;
     max-width: 200px;
      max-height: 75px;
      object-fit: scale-down;

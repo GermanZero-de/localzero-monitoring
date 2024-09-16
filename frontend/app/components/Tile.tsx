@@ -47,12 +47,13 @@ const Tile: React.FC<Props> = ({ name, logo, executionStatus, startYear, endYear
           alt="arrow right"
         ></Image>
       </div>
+      {image}
       <div className={styles.innerwrapper}>
 
         <div className={styles.thermometer}>
           {indicator}
         </div>
-        {image}
+
       </div>
       </div>
 
