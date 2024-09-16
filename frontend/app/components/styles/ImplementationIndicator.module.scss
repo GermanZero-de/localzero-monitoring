@@ -49,7 +49,7 @@ $colorTimeline: #0CA8FF;
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-top: 15px solid $colorComplete; /* This matches the color of the last task status bar */
+  border-top: 15px solid; /* Default without color */
 }
 
 .complete {
@@ -68,4 +68,29 @@ $colorTimeline: #0CA8FF;
 }
 .failed {
   background-color: $colorFailed;
+}
+
+.arrow.complete {
+  border-top-color: $colorComplete;
+  background-color: transparent;
+}
+
+.arrow.asPlanned {
+  border-top-color: $colorAsPlanned;
+  background-color: transparent;
+}
+
+.arrow.unknown {
+  border-top-color: $colorUnknown;
+  background-color: transparent;
+}
+
+.arrow.delayed {
+  border-top-color: $colorDelayed;
+  background-color: transparent;
+}
+
+.arrow.failed {
+  border-top-color: $colorFailed;
+  background-color: transparent;
 }

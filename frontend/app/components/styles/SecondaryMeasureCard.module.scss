@@ -12,8 +12,13 @@
   -webkit-clip-path: polygon(0 0, 0 100%, calc(100% - 2rem) 100%, 100% calc(100% - 2rem), 100% 0);
   clip-path: polygon(0 0, 0 100%, calc(100% - 2rem) 100%, 100% calc(100% - 2rem), 100% 0);
   border-bottom: none;
+  transition: transform 0.3s ease-in-out;
   cursor: pointer;
 
+  &:hover{
+    transform: translate(5px, 0);
+    background-color: rgba(230, 230, 230, 1);
+  }
   &.noicon {
     padding-left: 3.1rem;
   }
@@ -39,7 +44,6 @@
 .toggle {
   margin-left: auto;
   margin-right: 1rem;
-
   img {
     max-width: 1.5rem;
     height: auto;

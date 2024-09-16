@@ -10,15 +10,15 @@ import Image from "next/image";
 
 type TBreadCrumbProps = {
     logo: string
+    cityName: string
 }
 
-const Breadcrumb = ({ logo }: TBreadCrumbProps) => {
+const Breadcrumb = ({ logo, cityName }: TBreadCrumbProps) => {
 
     const paths = usePathname()
     const pathNames = paths.split('/').filter(path => path);
 
     const citySlug = pathNames[0] ?? "";
-    const cityName = citySlug[0]?.toUpperCase() + citySlug?.slice(1)
     const listClasses = "item";
     const activeClasses = "fw-bold";
     const labelMapping: { [key: string]: string } = {

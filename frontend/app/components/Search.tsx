@@ -5,8 +5,7 @@ import Link from "next/link";
 import closingIcon from "@/public/x.svg";
 import { useState } from "react";
 import {  Col, ListGroup, Row } from "react-bootstrap";
-import styles from "./Search.module.scss";
-import { City } from "@/types";
+import styles from "./styles/Search.module.scss";
 
 interface SearchResult {
   name: string;

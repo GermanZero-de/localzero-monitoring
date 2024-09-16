@@ -1,3 +1,5 @@
+@use "../../common.scss";
+
 .wrapper {
 
   margin-bottom: 30px;
@@ -5,7 +7,7 @@
   position:relative;
   width: 300px;
   height: 180px;
-
+  @include common.highlight();
 }
 
 .background{

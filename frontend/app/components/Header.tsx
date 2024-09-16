@@ -25,19 +25,15 @@ export default function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="fw-bold m-auto">
             <NavDropdown title="MONITORING">
-              <NavDropdown.Item href="/">START</NavDropdown.Item>
-              <NavDropdown.Item href="/projektbeschreibung">PROJEKTBESCHREIBUNG</NavDropdown.Item>
-              <NavDropdown.Item href="https://localzero.net/mitmachen" target="_blank">MITMACHEN</NavDropdown.Item>
-              <NavDropdown.Item href="/kontakt">KONTAKT</NavDropdown.Item>
-              <NavDropdown.Item href="/impressum">IMPRESSUM</NavDropdown.Item>
-              <NavDropdown.Item href="/datenschutz">DATENSCHUTZ</NavDropdown.Item>
+              <NavDropdown.Item href="/">ALLE KOMMUNEN</NavDropdown.Item>
+              <NavDropdown.Item href="/projektbeschreibung">ÜBER DAS PROJEKT</NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link href="#suche_kommune">SUCHE KOMMUNE</Nav.Link>
             <Nav.Link href="/topmassnahmen">TOP MASSNAHMEN</Nav.Link>
           </Nav>
 
-          <Navbar.Brand href="https://localzero.net/jetzt-spenden">
+          <Navbar.Brand href="https://localzero.net/jetzt-spenden" target="new">
             <Image
               src={spende}
               width={200}

@@ -15,11 +15,13 @@ interface NavigationTileProps {
 const CallToActionTile: React.FC<NavigationTileProps> = ({ title, text, link, type }) => {
   const colorStyle = type === "contact" ? styles.yellow : styles.green;
   return (
+    <div className={styles.wrapper}>
     <a
       href={link}
-      target="_blank"
+      target="_new"
       className={`${styles.tile} ${colorStyle}`}
     >
+
       <Image
         className={styles.arrow}
         width={15}
@@ -48,7 +50,9 @@ const CallToActionTile: React.FC<NavigationTileProps> = ({ title, text, link, ty
         <h4 className={styles.title}>{title}</h4>
         {text && <h5 className={styles.text}>{text}</h5>}
       </div>
+
     </a>
+    </div>
   );
 };
 

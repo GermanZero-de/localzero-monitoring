@@ -7,7 +7,6 @@ import LocalGroup from "@/app/components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";
 import styles from "./page.module.scss";
 import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
-import indicator2 from "@/public/imgs/placeholders/indicator2.png";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
 import { ChecklistItem } from "@/types";
@@ -81,17 +80,17 @@ export default async function CityDashboard({ params }: { params: { city: string
     </NavigationTile>
   </Link> : <></>
 
-  const verwaltung = Array.isArray(city.assessment_administration) ? <Link href={`${params.city}/verwaltungsstrukturen_checkliste`} style={{ display: "inline-block", textDecoration: 'none' }}>
+  const verwaltung = Array.isArray(city.administration_checklist) ? <Link href={`${params.city}/verwaltungsstrukturen_checkliste`} style={{ display: "inline-block", textDecoration: 'none' }}>
     <NavigationTile
       className={styles.tile}
       title="Wo steht die Verwaltung?"
 
     >
-      <Image
-        width={305}
-        height={132}
-        src={indicator2}
-        alt={"Fortschritt zur Klimaneutralität"}
+     <ChecklistIndicator
+        total={city.administration_checklist.length}
+        checked={city.administration_checklist.filter((item: ChecklistItem) => item.is_checked).length}
+        startYear={new Date(city.resolution_date).getFullYear()}
+        endYear={city.target_year}
       />
     </NavigationTile>
   </Link> : <></>
