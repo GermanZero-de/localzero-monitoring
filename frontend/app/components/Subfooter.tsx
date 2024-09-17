@@ -12,7 +12,7 @@ type Props = {
 const Subfooter: React.FC<Props> = ({ cities }) => {
   return (
     <Container className="w-50 m-auto">
-    <h2 className="headingWithBar">Entdecke lokalen Klimaschutz</h2>
+    <h1 className="headingWithBar">Entdecke lokalen Klimaschutz</h1>
     <Search cities={cities} />
     <h2 className="headingWithBar">
       LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.

@@ -26,7 +26,7 @@ export default async function EnergyPlanChecklist({ params }: { params: { city: 
             showLegend
             title="Wie steht es um die Wärmeplanung?"
           /></div>
-        <h2 className="headingWithBar">Wärmeplanung</h2>
+        <h1 className="headingWithBar">Wärmeplanung</h1>
         <div className="pb-4">
           Der Wärmewende kommt eine Schlüsselposition bei der Einhaltung des Paris Agreement und damit der Begrenzung
           der Klimaerhitzung auf unter 2 Grad zu. Im Stromsektor gibt es etablierte Marktmechanismen, im Verkehrssektor

@@ -39,7 +39,7 @@ export default function LocalGroup({ localGroup }: Props) {
   return (
     <div className={isExpanded ? styles.fixed : styles.backgroundColor}>
       <Container className="d-flex flex-column">
-        <h2 className="headingWithBar">Lokalteam {localGroup.name}</h2>
+        <h1 className="headingWithBar">Lokalteam {localGroup.name}</h1>
 
         {isExpanded ? (
           <>

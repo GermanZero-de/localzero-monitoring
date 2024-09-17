@@ -28,7 +28,7 @@ export default async function CapChecklist({ params }: { params: { city: string 
             title="Qualität des KAP"
           />
       </div>
-      <h2 className="headingWithBar">Klimaaktionsplan {city.name}</h2>
+      <h1 className="headingWithBar">Klimaaktionsplan {city.name}</h1>
       <Markdown rehypePlugins={[rehypeRaw]} className="pb-3 mdContent">{city.assessment_action_plan}</Markdown>
       <Accordion
         id="accordionFlushKAP"

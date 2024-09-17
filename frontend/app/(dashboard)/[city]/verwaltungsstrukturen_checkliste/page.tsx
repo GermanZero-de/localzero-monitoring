@@ -27,7 +27,7 @@ export default async function AdministrationChecklist({ params }: { params: { ci
             title="Wo steht die Verwaltung?"
           />
       </div>
-      <h2 className="headingWithBar">Nachhaltigkeitsarchitektur in der Verwaltung</h2>
+      <h1 className="headingWithBar">Nachhaltigkeitsarchitektur in der Verwaltung</h1>
       <Markdown rehypePlugins={[rehypeRaw]} className="pb-3 mdContent">{city.assessment_administration}</Markdown>
       <Accordion
         id="accordionFlushKAP"

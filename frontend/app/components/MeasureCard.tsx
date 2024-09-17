@@ -50,7 +50,7 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubT
         }}
       >
         <div className={styles.headertitle}>
-          <h3 id={eventKey}>{title}</h3>
+          <h4 id={eventKey}>{title}</h4>
           <div>{totalNumberOfMeasures} Maßnahmen im Monitoring</div>
         </div>
         <div className={styles.headersecondrow}>
@@ -58,31 +58,31 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubT
 
               <div className={styles.firsticon}>
                 <ExecutionStatusIcon disabled={statusOfSubTasks.complete===0} taskStatus={ExecutionStatus.COMPLETE}></ExecutionStatusIcon>
-                {statusOfSubTasks.complete > 0 && ( <h2>{statusOfSubTasks.complete}</h2>  )}
+                {statusOfSubTasks.complete > 0 && ( <h4>{statusOfSubTasks.complete}</h4>  )}
               </div>
 
 
               <div className={styles.secondicon}>
                 <ExecutionStatusIcon disabled={statusOfSubTasks.asPlanned===0} taskStatus={ExecutionStatus.AS_PLANNED}></ExecutionStatusIcon>
-                {statusOfSubTasks.asPlanned > 0 && (<h2>{statusOfSubTasks.asPlanned}</h2> )}
+                {statusOfSubTasks.asPlanned > 0 && (<h4>{statusOfSubTasks.asPlanned}</h4> )}
               </div>
 
 
               <div className={styles.thirdicon}>
                 <ExecutionStatusIcon disabled={statusOfSubTasks.delayed===0} taskStatus={ExecutionStatus.DELAYED}></ExecutionStatusIcon>
-                {statusOfSubTasks.delayed > 0 && (    <h2>{statusOfSubTasks.delayed}</h2>   )}
+                {statusOfSubTasks.delayed > 0 && (    <h4>{statusOfSubTasks.delayed}</h4>   )}
               </div>
 
 
               <div className={styles.fourthicon}>
                 <ExecutionStatusIcon disabled={statusOfSubTasks.failed===0}  taskStatus={ExecutionStatus.FAILED}></ExecutionStatusIcon>
-                {statusOfSubTasks.failed > 0 && ( <h2>{statusOfSubTasks.failed}</h2>    )}
+                {statusOfSubTasks.failed > 0 && ( <h4>{statusOfSubTasks.failed}</h4>    )}
               </div>
 
 
               <div className={styles.fifthicon}>
                 <ExecutionStatusIcon  disabled={statusOfSubTasks.unknown===0} taskStatus={ExecutionStatus.UNKNOWN}></ExecutionStatusIcon>
-                {statusOfSubTasks.unknown > 0 && (  <h2>{statusOfSubTasks.unknown}</h2>  )}
+                {statusOfSubTasks.unknown > 0 && (  <h4>{statusOfSubTasks.unknown}</h4>  )}
               </div>
 
           </div>

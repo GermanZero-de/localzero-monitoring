@@ -77,7 +77,7 @@ const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endY
     position: "absolute",
     left: `${(currentYearPosition + 5) > 50 ? 10 : currentYearPosition + 5}%`
   }}>
-  <h2 className={styles.title}>Stand der beobachteten Maßnahmen</h2>
+  <h5 className={styles.title}>Stand der beobachteten Maßnahmen</h5>
   <div className={styles.legendItem}>
     <div className={`${styles.legendColor} ${styles.unknown}`}></div>
     <span>{executionLabels.unknown}</span>
