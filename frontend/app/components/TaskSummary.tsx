@@ -95,7 +95,7 @@ const TaskSummary: React.FC<Props> = ({ task, root, city }) => {
             {getStatusRow(root?.title, "Sektor")}
             {getStatusRow(task?.planned_start, "Beginn", false, true)}
             {getStatusRow(task?.planned_completion, "Ende")}
-            {getStatusRow(task?.responsible_organ, "Zusständigkeit")}
+            {getStatusRow(task?.responsible_organ, "Zuständigkeit")}
             {getStatusRow(task?.supporting_ngos, "Kooperation", true)}
         </div>
     );
