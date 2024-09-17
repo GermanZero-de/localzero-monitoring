@@ -4,13 +4,12 @@ import ArrowRight from "@/app/components/icons/ArrowRight";
 import { Col, Container, Row, Tooltip } from "react-bootstrap";
 import styles from "./page.module.scss";
 import Image from "next/image";
-import { decode } from 'html-entities';
-import Markdown from "react-markdown";
 import TaskSummary from "@/app/components/TaskSummary";
 import TaskNavigation from "@/app/components/TaskNavigation";
 import Link from "next/link";
 import localZero from "@/public/imgs/localZero.svg";
 import rehypeRaw from "rehype-raw";
+import CustomMarkdown from "@/app/components/CustomMarkdown";
 
 export default async function TaskDetails({ params }: { params: { city: string, task: Array<string> } }) {
 
@@ -73,10 +72,10 @@ export default async function TaskDetails({ params }: { params: { city: string, 
 
       </div></> : <></>
 
-      const assestment = task.plan_assessment ? <><h1 className="headingWithBar">Bewertung der geplanten Maßnahme</h1><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.plan_assessment}</Markdown></> : <></>
-      const execution = task.execution_justification ? <><h1 className="headingWithBar">Begründung Umsetzungsstand</h1><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.execution_justification}</Markdown></> : <></>
-      const explanation = task.responsible_organ_explanation ? <><h1 className="headingWithBar">Zuständige Instanz</h1><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.responsible_organ_explanation}</Markdown></> : <></>
-      const supporting_ngos = task.supporting_ngos ? <><h1 className="headingWithBar">Mit Unterstützung von</h1><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.supporting_ngos}</Markdown></> : <></>
+      const assestment = task.plan_assessment ? <><h1 className="headingWithBar">Bewertung der geplanten Maßnahme</h1><CustomMarkdown content={task?.plan_assessment}></CustomMarkdown></> : <></>
+      const execution = task.execution_justification ? <><h1 className="headingWithBar">Begründung Umsetzungsstand</h1><CustomMarkdown content={task?.execution_justification}></CustomMarkdown></> : <></>
+      const explanation = task.responsible_organ_explanation ? <><h1 className="headingWithBar">Zuständige Instanz</h1><CustomMarkdown content={task?.responsible_organ_explanation}></CustomMarkdown></> : <></>
+      const supporting_ngos = task.supporting_ngos ? <><h1 className="headingWithBar">Mit Unterstützung von</h1><CustomMarkdown content={task?.supporting_ngos}></CustomMarkdown></> : <></>
 
 
   return (
@@ -97,9 +96,9 @@ export default async function TaskDetails({ params }: { params: { city: string, 
           <div className="flex-grow-1 px-3 overflow-hidden">
             <div className="d-flex flex-column">
 
-              <Markdown rehypePlugins={[rehypeRaw]} className={styles.teaserContent}>{task?.teaser}</Markdown>
+              <CustomMarkdown className={styles.teaserContent} content={task?.teaser}></CustomMarkdown>
               <h1 className="headingWithBar">Beschreibung</h1>
-              <Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.description}</Markdown>
+              <CustomMarkdown  content={task?.description}></CustomMarkdown>
 
               {assestment}
               {execution}

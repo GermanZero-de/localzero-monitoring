@@ -30,6 +30,7 @@ export default function LocalGroup({ localGroup }: Props) {
 
   const image = localGroup.featured_image ? (
     <img
+      style={{objectFit:"none"}}
       className="pb-3 mw-100"
       src={"./" + localGroup.featured_image}
       alt={"Lokalgruppe " + localGroup.name}
@@ -43,11 +44,11 @@ export default function LocalGroup({ localGroup }: Props) {
 
         {isExpanded ? (
           <>
-            <Markdown rehypePlugins={[rehypeRaw]}>{localGroup.description}</Markdown>
+            <Markdown className="mdContent" rehypePlugins={[rehypeRaw]}>{localGroup.description}</Markdown>
             {image}
           </>
         ) : (
-          <Markdown rehypePlugins={[rehypeRaw]}>{localGroup.teaser}</Markdown>
+          <Markdown className="mdContent" rehypePlugins={[rehypeRaw]}>{localGroup.teaser}</Markdown>
         )}
 
         <div className={styles.center}>

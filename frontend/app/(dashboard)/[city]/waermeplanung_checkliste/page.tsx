@@ -19,8 +19,8 @@ export default async function EnergyPlanChecklist({ params }: { params: { city: 
       <div className="pb-3">
           <ChecklistIndicator
             style={{height:250, marginBottom:30}}
-            total={city.cap_checklist.length}
-            checked={city.cap_checklist.filter((item: CheckItem) => item.is_checked).length}
+            total={city.energy_plan_checklist.length}
+            checked={city.energy_plan_checklist.filter((item: CheckItem) => item.is_checked).length}
             startYear={new Date(city.resolution_date).getFullYear()}
             endYear={city.target_year}
             showLegend
@@ -102,12 +102,12 @@ export default async function EnergyPlanChecklist({ params }: { params: { city: 
             checklist_item={city.energy_plan_checklist[8]}
           />
           <h5 className="pt-4">5. Erstellung der Zielszenarien (§ 17 WPG)</h5>
-          <p>
+          <div>
             <ul>
               <li>Entwicklung des zukünftigen Wärmebedarfs</li>
               <li>Flächenhafte Darstellung zur klimaneutralen Bedarfsdeckung mit jeweiligen Zwischenschritten</li>
             </ul>
-          </p>
+          </div>
           <ChecklistItem
             key={9}
             checklist_item={city.energy_plan_checklist[9]}

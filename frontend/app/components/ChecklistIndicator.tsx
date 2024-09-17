@@ -50,7 +50,9 @@ const ChecklistIndicator: React.FC<Props> = ({ total, checked, startYear, endYea
   return (
     <div className={styles.wrapper} style={style}>
       {legend}
-      <div className={styles.timeline}>
+      <div className={styles.timeline} style={{
+        background: `linear-gradient(90deg, #0CA8FF ${currentYearPosition}%, #ccc ${currentYearPosition}%)`
+        }}>
         <label>{startYear}</label>
         <label>{endYear}</label>
       </div>
@@ -64,8 +66,8 @@ const ChecklistIndicator: React.FC<Props> = ({ total, checked, startYear, endYea
                 <span className={styles.tickLabel}>
                   {index === 0
                     ? total
-                    : index === Math.round(tickCount / 2)
-                    ? Math.round(total / 2)
+                    : index === Math.floor(tickCount / 2)
+                    ? Math.floor(total / 2)
                     : 1}
                 </span>
               )}
