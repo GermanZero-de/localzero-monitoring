@@ -14,6 +14,8 @@ type Props = {
 
 };
 
+const formatter = new Intl.DateTimeFormat('de')
+
 const getStatusLabel = (taskStatus: ExecutionStatus) => {
     switch (taskStatus) {
         case ExecutionStatus.UNKNOWN:
@@ -39,7 +41,7 @@ const getStatusRow = (attr: string | undefined, title: string, markdown = false,
     if (date && attr) {
         return <div className={styles.row}>
             <div className={styles.label}>{title}:</div>
-            <div>{new Date(attr).toLocaleDateString()}</div>
+            <div>{formatter.format(new Date(attr))}</div>
         </div>
     }
     return attr ? (
