@@ -41,7 +41,7 @@ const ChecklistIndicator: React.FC<Props> = ({ total, checked, startYear, endYea
     position: "absolute",
     left: `${(currentYearPosition + 5) > 50 ? 10 : currentYearPosition + 5}%`
   }}>
-  <h2 className={styles.title}>{title}</h2>
+  <h5 className={styles.title}>{title}</h5>
   <div className={styles.legendItem}>
     <span>Erfüllt {checked} von {total} Kriterien</span>
   </div>

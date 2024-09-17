@@ -135,24 +135,29 @@
 @mixin heading {
   color: common.$gz-secondary-color;
   position: relative;
+  font-family: PTSerif;
+  line-height: 1.43;
 }
 
 h1 {
-  font-family: PTSerif;
-
   @include heading;
   font-size: 28px;
-  line-height: 2rem;
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
 h2 {
-  font-size: 1.25rem;
+  @include heading;
+  font-size: 22px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 h3 {
-  font-size: 1rem;
+  @include heading;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .big-h1 {
@@ -161,12 +166,7 @@ h3 {
 }
 
 .headingWithBar {
-  font-size: 28px;
-  @include heading;
-  padding-top: 30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  font-family: PTSerif;
+  padding-top: 25px;
   &:before {
     content: "";
     position: absolute;

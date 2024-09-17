@@ -14,7 +14,7 @@ export default async function Home() {
         <p className="pb-5 w-75 m-auto">
         ... ist eine Initiative von <a href="https://localzero.net/" target="new">LocalZero</a>, um mehr Transparenz zum Fortschritt der Klimaneutralität deutscher Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den jeweiligen Kommunen regelmäßig aktualisiert.
         </p>
-        <h2 className="headingWithBar">Kommunen im Monitoring</h2>
+        <h1 className="headingWithBar">Kommunen im Monitoring</h1>
 
           <TileList cities={cities}></TileList>
 

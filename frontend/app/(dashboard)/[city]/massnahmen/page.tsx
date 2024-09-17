@@ -38,13 +38,14 @@ export default async function CityMeasures({ params, searchParams }: { params: {
       <h1 >
         {city.name}
         <Image
+          style={{marginLeft:10}}
           src={arrow}
           alt=""
         />
       </h1>
 
       <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{city.assessment_status}</Markdown>
-      <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
+      <h1 className="headingWithBar">Maßnahmen in {city.name}</h1>
       <Accordion className={styles.accordion} defaultActiveKey={activeKey}>
         {tasks &&
           tasks.map((task:any, i:number) => {

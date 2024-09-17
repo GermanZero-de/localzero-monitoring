@@ -24,7 +24,7 @@ const NavigationTile: React.FC<NavigationTileProps> = ({
       <div className={styles.header}>
         <div className={styles.text}>
           {subtitle && <h5 className={styles.subtitle}>{subtitle}</h5>}
-          <h3 className={styles.title}>{title}</h3>
+          <h4 className={styles.title}>{title}</h4>
         </div>
         <div className={styles.arrow}>
           <ArrowRight color="#ffc80c" />

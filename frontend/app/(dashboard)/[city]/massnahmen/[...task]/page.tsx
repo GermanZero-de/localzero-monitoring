@@ -73,10 +73,10 @@ export default async function TaskDetails({ params }: { params: { city: string, 
 
       </div></> : <></>
 
-      const assestment = task.plan_assessment ? <><h3 className="headingWithBar">Bewertung der geplanten Maßnahme</h3><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.plan_assessment}</Markdown></> : <></>
-      const execution = task.execution_justification ? <><h3 className="headingWithBar">Begründung Umsetzungsstand</h3><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.execution_justification}</Markdown></> : <></>
-      const explanation = task.responsible_organ_explanation ? <><h3 className="headingWithBar">Zuständige Instanz</h3><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.responsible_organ_explanation}</Markdown></> : <></>
-      const supporting_ngos = task.supporting_ngos ? <><h3 className="headingWithBar">Mit Unterstützung von</h3><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.supporting_ngos}</Markdown></> : <></>
+      const assestment = task.plan_assessment ? <><h1 className="headingWithBar">Bewertung der geplanten Maßnahme</h1><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.plan_assessment}</Markdown></> : <></>
+      const execution = task.execution_justification ? <><h1 className="headingWithBar">Begründung Umsetzungsstand</h1><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.execution_justification}</Markdown></> : <></>
+      const explanation = task.responsible_organ_explanation ? <><h1 className="headingWithBar">Zuständige Instanz</h1><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.responsible_organ_explanation}</Markdown></> : <></>
+      const supporting_ngos = task.supporting_ngos ? <><h1 className="headingWithBar">Mit Unterstützung von</h1><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.supporting_ngos}</Markdown></> : <></>
 
 
   return (
@@ -98,7 +98,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
             <div className="d-flex flex-column">
 
               <Markdown rehypePlugins={[rehypeRaw]} className={styles.teaserContent}>{task?.teaser}</Markdown>
-              <h3 className="headingWithBar">Beschreibung</h3>
+              <h1 className="headingWithBar">Beschreibung</h1>
               <Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.description}</Markdown>
 
               {assestment}

@@ -24,7 +24,7 @@ const CityDescription: React.FC<CityDescriptionProps> = ({ description, name, te
   }
   return (
     <div className={styles.mdContent}>
-      <h2 className="headingWithBar">Klimaschutz in {name}</h2>
+      <h1 className="headingWithBar">Klimaschutz in {name}</h1>
       <h5>{teaser}</h5>
       <Markdown rehypePlugins={[rehypeRaw]} className="pb-3 mdContent">{description}</Markdown>
     </div>
@@ -95,6 +95,11 @@ export default async function CityDashboard({ params }: { params: { city: string
       />
     </NavigationTile>
   </Link> : <></>
+
+  const localgroup = city?.local_group?.description ? <LocalGroup
+      localGroup={city.local_group}
+      isExpanded={false}
+    /> : <></>
   return (
     <>
       <Container className={styles.container}>
@@ -152,10 +157,7 @@ export default async function CityDashboard({ params }: { params: { city: string
 
         <Row >
           <Col className="p-4">
-            <LocalGroup
-              localGroup={city.local_group}
-              isExpanded={false}
-            />
+           {localgroup}
           </Col>
         </Row>
         <Row >
