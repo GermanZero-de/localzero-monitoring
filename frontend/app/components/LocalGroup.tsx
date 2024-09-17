@@ -8,6 +8,7 @@ import expandArrowUp from "@/public/imgs/arrow-expand-up.svg";
 import styles from "./styles/LocalGroup.module.scss";
 import { LocalGroupType } from "@/types";
 import { useState } from "react";
+import rehypeRaw from "rehype-raw";
 
 type Props = {
   localGroup: LocalGroupType | null;
@@ -42,11 +43,11 @@ export default function LocalGroup({ localGroup }: Props) {
 
         {isExpanded ? (
           <>
-            <Markdown>{localGroup.description}</Markdown>
+            <Markdown rehypePlugins={[rehypeRaw]}>{localGroup.description}</Markdown>
             {image}
           </>
         ) : (
-          <Markdown>{localGroup.teaser}</Markdown>
+          <Markdown rehypePlugins={[rehypeRaw]}>{localGroup.teaser}</Markdown>
         )}
 
         <div className={styles.center}>

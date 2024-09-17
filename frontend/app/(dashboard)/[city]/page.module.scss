@@ -11,9 +11,9 @@
 .checklistContainer{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 20px;
   a{
     flex: 1;
+    max-width: 500px;
   }
 }

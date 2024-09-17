@@ -28,7 +28,7 @@ interface TileListProps {
 
   return (
     <div>
-    <div className="d-flex justify-content-start flex-wrap">
+    <div className="d-flex justify-content-start flex-wrap" style={{gap:"24px"}}>
      {visibleCities.map((city:City) => (
             <Link
               key={city.slug}

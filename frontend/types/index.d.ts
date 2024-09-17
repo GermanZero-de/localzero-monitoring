@@ -28,7 +28,7 @@ export interface LocalGroup {
     featured_image: string;
 }
 
-export interface ChecklistItem {
+export interface CheckItem {
     id: number;
     question: string;
     is_checked: boolean;
@@ -54,6 +54,9 @@ export interface Task {
     frontpage: boolean;
     frontpage: boolean;
     source: integer;
+    plan_assessment: string;
+    execution_justification: string;
+    responsible_organ_explanation: string;
   }
 
   export type StatusCount = {

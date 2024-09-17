@@ -1,6 +1,5 @@
 import { getCities } from "@/lib/dataService";
 import { City } from "@/types";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import BreadCrumb from "@/app/components/BreadCrumb";

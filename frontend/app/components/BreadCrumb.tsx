@@ -17,8 +17,6 @@ const Breadcrumb = ({ logo, cityName }: TBreadCrumbProps) => {
 
     const paths = usePathname()
     const pathNames = paths.split('/').filter(path => path);
-
-    const citySlug = pathNames[0] ?? "";
     const listClasses = "item";
     const activeClasses = "fw-bold";
     const labelMapping: { [key: string]: string } = {
@@ -42,6 +40,7 @@ const Breadcrumb = ({ logo, cityName }: TBreadCrumbProps) => {
                         <h1 style={{ fontWeight: 600, fontSize: 38 }}>
                             {cityName}
                             <Image
+                                style={{marginLeft:10}}
                                 src={arrow}
                                 alt=""
                             />

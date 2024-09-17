@@ -10,6 +10,7 @@ import TaskSummary from "@/app/components/TaskSummary";
 import TaskNavigation from "@/app/components/TaskNavigation";
 import Link from "next/link";
 import localZero from "@/public/imgs/localZero.svg";
+import rehypeRaw from "rehype-raw";
 
 export default async function TaskDetails({ params }: { params: { city: string, task: Array<string> } }) {
 
@@ -72,9 +73,15 @@ export default async function TaskDetails({ params }: { params: { city: string, 
 
       </div></> : <></>
 
+      const assestment = task.plan_assessment ? <><h3 className="headingWithBar">Bewertung der geplanten Maßnahme</h3><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.plan_assessment}</Markdown></> : <></>
+      const execution = task.execution_justification ? <><h3 className="headingWithBar">Begründung Umsetzungsstand</h3><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.execution_justification}</Markdown></> : <></>
+      const explanation = task.responsible_organ_explanation ? <><h3 className="headingWithBar">Zuständige Instanz</h3><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.responsible_organ_explanation}</Markdown></> : <></>
+      const supporting_ngos = task.supporting_ngos ? <><h3 className="headingWithBar">Mit Unterstützung von</h3><Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.supporting_ngos}</Markdown></> : <></>
+
+
   return (
     <Container className={`${styles.container} ${task.source === 1 ? styles.top : ""}`}>
-      <Row className="py-5">
+      <Row>
         <Col>
           <h1>{task?.title}</h1>
           {topmapNahme}
@@ -90,9 +97,14 @@ export default async function TaskDetails({ params }: { params: { city: string, 
           <div className="flex-grow-1 px-3 overflow-hidden">
             <div className="d-flex flex-column">
 
-              <Markdown className={styles.teaserContent}>{decode(task?.teaser)}</Markdown>
+              <Markdown rehypePlugins={[rehypeRaw]} className={styles.teaserContent}>{task?.teaser}</Markdown>
               <h3 className="headingWithBar">Beschreibung</h3>
-              <Markdown className={styles.mdContent}>{decode(task?.description)}</Markdown>
+              <Markdown rehypePlugins={[rehypeRaw]} className={styles.mdContent}>{task?.description}</Markdown>
+
+              {assestment}
+              {execution}
+              {explanation}
+              {supporting_ngos}
             </div>
           </div>
         </Col>

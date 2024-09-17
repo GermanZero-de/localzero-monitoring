@@ -4,10 +4,14 @@ import * as React from "react";
 import styles from "./styles/ChecklistIndicator.module.scss";
 
 type Props = {
+  style?: React.CSSProperties;
   total: number;
   checked: number;
   startYear: number;
   endYear: number;
+  showLegend?: boolean;
+  showNow?: boolean;
+  title?: string;
 };
 
 const getYearPositionPercentage = (currentYear: number, startYear: number, endYear: number): number => {
@@ -16,9 +20,8 @@ const getYearPositionPercentage = (currentYear: number, startYear: number, endYe
   return totalYears > 1 ? (yearsPassed / totalYears) * 100 : 90;
 };
 
-const ChecklistIndicator: React.FC<Props> = ({ total, checked, startYear, endYear }) => {
+const ChecklistIndicator: React.FC<Props> = ({ total, checked, startYear, endYear, style, title ="", showLegend=false, showNow=false }) => {
   const currentYear = new Date().getFullYear();
-  const barWidth = 30;
 
   const checkedHeight = (checked * 100) / total;
   const currentYearPosition = getYearPositionPercentage(currentYear, startYear, endYear);
@@ -32,8 +35,21 @@ const ChecklistIndicator: React.FC<Props> = ({ total, checked, startYear, endYea
     return tickValue;
   });
 
+  const legend = showLegend ?  <div className={styles.legend}
+  style={{
+    overflow: "hidden",
+    position: "absolute",
+    left: `${(currentYearPosition + 5) > 50 ? 10 : currentYearPosition + 5}%`
+  }}>
+  <h2 className={styles.title}>{title}</h2>
+  <div className={styles.legendItem}>
+    <span>Erfüllt {checked} von {total} Kriterien</span>
+  </div>
+</div> :<></>
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} style={style}>
+      {legend}
       <div className={styles.timeline}>
         <label>{startYear}</label>
         <label>{endYear}</label>
@@ -57,9 +73,8 @@ const ChecklistIndicator: React.FC<Props> = ({ total, checked, startYear, endYea
           ))}
         </div>
       <div
-        className={styles.indicatorContainer}
+        className={`${styles.indicatorContainer} ${showLegend? "" : styles.small}`}
         style={{
-          width: `${barWidth}px`,
           position: "absolute",
           left: `${currentYearPosition}%`, // Move it along the timeline based on the current year
           transform: "translateX(-50%)", // Center it based on its width

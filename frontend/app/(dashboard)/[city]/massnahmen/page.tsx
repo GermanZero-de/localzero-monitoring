@@ -12,6 +12,7 @@ import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Markdown from "react-markdown";
 import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
+import rehypeRaw from "rehype-raw";
 
 
 
@@ -34,15 +35,15 @@ export default async function CityMeasures({ params, searchParams }: { params: {
         showLegend
         showNow
       ></ImplementationIndicator>
-      <h1 style={{ fontWeight: 600, fontSize: 38 }}>
-        {city.name.toUpperCase()}
+      <h1 >
+        {city.name}
         <Image
           src={arrow}
           alt=""
         />
       </h1>
 
-      <Markdown className="mdContent">{city.assessment_status}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{city.assessment_status}</Markdown>
       <h2 className="headingWithBar">Maßnahmen in {city.name}</h2>
       <Accordion className={styles.accordion} defaultActiveKey={activeKey}>
         {tasks &&

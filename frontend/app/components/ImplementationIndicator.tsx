@@ -64,7 +64,6 @@ const getFirstNonZeroTaskColor = (tasksNumber: StatusCount) => {
 
 const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endYear, style, showLegend=false, showNow=false }) => {
   const currentYear = new Date().getFullYear();
-  const barWidth = 30;
   const totalNumber = getTotalNumber(tasksNumber);
   const tasksHeights = getTasksHeightsInPercentage(tasksNumber, totalNumber);
 
@@ -111,9 +110,8 @@ const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endY
       <div style={{ display: 'flex' }}>
 
         <div
-          className={styles.indicatorContainer}
+          className={`${styles.indicatorContainer} ${showLegend? "" : styles.small}`}
           style={{
-            width: `${barWidth}px`,
             position: "absolute",
             left: `${currentYearPosition}%`,
             transform: "translateX(-50%)",

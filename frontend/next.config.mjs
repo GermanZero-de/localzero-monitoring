@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
+  i18n: {
+    locales: ['de', 'en'],
+    defaultLocale: 'de',
+  },
   images: {
     unoptimized: false,
   },

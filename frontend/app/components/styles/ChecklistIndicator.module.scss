@@ -1,3 +1,5 @@
+$width: 40px;
+
 .wrapper {
   width: 100%;
   height: 100%;
@@ -33,16 +35,22 @@
   background-color: transparent;
   position: relative;
   overflow: hidden;
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
+  width: $width;
+  border-top-right-radius: $width/2;
+  border-top-left-radius:  $width/2;
+  &.small{
+    width: $width - 10px;
+    border-top-right-radius: ($width - 10px)/2;
+    border-top-left-radius: ($width - 10px)/2;
+  }
 }
 
 .arrow {
   width: 0;
   height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 15px solid #9bd300;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #9bd300;
 }
 
 /* Add tick container for right side */
@@ -62,11 +70,30 @@
   background-color: gray;
 }
 
-/* Labels for the ticks */
+
 .tickLabel {
   position: absolute;
   left: 15px;
   top: -10px;
   font-size: 0.8em;
   color: black;
+}
+
+
+@media screen and (max-width: 1000px) {
+  div.legend{
+    display: none;
+  }
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20px;
+  color: rgb(33, 37, 41);
+  .legendItem {
+    display: flex;
+    align-items: center;
+  }
 }
