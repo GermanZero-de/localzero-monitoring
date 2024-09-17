@@ -1,5 +1,5 @@
-import { getCities } from "@/lib/dataService";
-import { City } from "@/types";
+import { getCities, getTasks } from "@/lib/dataService";
+import { City, Task } from "@/types";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import BreadCrumb from "@/app/components/BreadCrumb";
@@ -15,10 +15,12 @@ export default async function DashboardLayout({
   params: { city: string }
 }>) {
   const city:City = await getCities(params.city);
+  const tasks:Task[] = await getTasks(params.city);
+
   return (
     <Container>
         <Header />
-        <BreadCrumb logo={city.local_group?.logo} cityName={city.name}></BreadCrumb>
+        <BreadCrumb logo={city.local_group?.logo} tasks={tasks} cityName={city.name}></BreadCrumb>
         {children}
         <Footer />
     </Container>

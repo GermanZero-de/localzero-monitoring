@@ -1,19 +1,22 @@
 'use client'
 
-import React, { ReactNode } from 'react'
+import React from 'react'
 import arrow from "@/public/imgs/arrow-right-down.svg";
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import styles from "./styles/Breadcrumb.module.scss";
 import { Col, Container, Row } from 'react-bootstrap';
 import Image from "next/image";
+import { findPreviousAndNext } from "@/lib/utils";
+import { Task } from '@/types';
 
 type TBreadCrumbProps = {
     logo: string
     cityName: string
+    tasks:Task[]
 }
 
-const Breadcrumb = ({ logo, cityName }: TBreadCrumbProps) => {
+const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
 
     const paths = usePathname()
     const pathNames = paths.split('/').filter(path => path);
@@ -54,6 +57,11 @@ const Breadcrumb = ({ logo, cityName }: TBreadCrumbProps) => {
                                     let label = labelMapping[link] ?? link[0].toUpperCase() + link.slice(1, link.length)
                                     if (index === 0) {
                                         label = "Dashboard"
+                                    }else{
+                                        const token = findPreviousAndNext(tasks, href.split("/").slice(3).join("/"))
+                                        if(token?.currentItem){
+                                            label= token.currentItem.title
+                                        }
                                     }
                                     return (
                                         <React.Fragment key={index}>

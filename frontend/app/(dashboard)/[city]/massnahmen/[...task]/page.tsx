@@ -1,5 +1,6 @@
 
-import { findPreviousAndNext, getCities, getTasks } from "@/lib/dataService";
+import { getCities, getTasks } from "@/lib/dataService";
+import { findPreviousAndNext } from "@/lib/utils";
 import ArrowRight from "@/app/components/icons/ArrowRight";
 import { Col, Container, Row, Tooltip } from "react-bootstrap";
 import styles from "./page.module.scss";
