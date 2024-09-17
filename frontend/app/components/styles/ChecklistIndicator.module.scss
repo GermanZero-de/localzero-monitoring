@@ -5,23 +5,22 @@ $width: 40px;
   height: 100%;
   min-height: 150px;
   position: relative;
-  padding: 3%;
 }
 
 .timeline {
-  bottom: 3%;
-  height: 20px;
-  width: 94%;
+  height: 25px;
+  right: 0;
+  left: 0;
+  bottom:0px;
   position: absolute;
-  background-color: #0ca8ff;
   color: white;
   display: flex;
   justify-content: space-between;
-  padding: 2px;
-
   label {
-    font-size: 0.8em;
     padding: 0 5px;
+  }
+  &.small{
+    height: 20px;
   }
 }
 

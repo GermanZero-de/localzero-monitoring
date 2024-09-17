@@ -19,8 +19,8 @@ export default async function AdministrationChecklist({ params }: { params: { ci
       <div className="pb-3">
           <ChecklistIndicator
             style={{height:250, marginBottom:30}}
-            total={city.cap_checklist.length}
-            checked={city.cap_checklist.filter((item: CheckItem) => item.is_checked).length}
+            total={city.administration_checklist.length}
+            checked={city.administration_checklist.filter((item: CheckItem) => item.is_checked).length}
             startYear={new Date(city.resolution_date).getFullYear()}
             endYear={city.target_year}
             showLegend

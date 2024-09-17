@@ -801,9 +801,13 @@ class CityList(APIView):
     List all cities.
     """
 
-    def get_execution_status_count(self, city):
+    def get_execution_status_count(self, city, auth):
         # Get task execution status count for the city
-        tasks = Task.objects.filter(city=city)
+        if auth:
+            tasks = Task.objects.filter(city=city)
+        else:
+            tasks = Task.objects.filter(city=city, draft_mode=False)
+
         status_summary = {
             "complete": tasks.filter(execution_status=ExecutionStatus.COMPLETE).count(),
             "asPlanned": tasks.filter(
@@ -830,7 +834,7 @@ class CityList(APIView):
             for city in city_data:
                 city_instance = City.objects.get(id=city["id"])
                 city["executionStatusCount"] = self.get_execution_status_count(
-                    city_instance
+                    city_instance, request.user.is_authenticated
                 )
 
         return Response(city_data)

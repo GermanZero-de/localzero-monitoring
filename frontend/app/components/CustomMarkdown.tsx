@@ -33,14 +33,15 @@ const ImageRenderer: React.FC<ImageProps> = ({ alt, src, content }) => {
 // Type for Markdown component props
 interface MarkdownProps {
   content: string;
+  className?:string;
 }
 
-const CustomMarkdown: React.FC<MarkdownProps> = ({ content }) => {
+const CustomMarkdown: React.FC<MarkdownProps> = ({ content, className="" }) => {
   const components: Components = {
     img: ({ alt, src }) => <ImageRenderer alt={alt} src={src} content={content} />,
   };
   const match = content?.match(regex);
-  return <ReactMarkdown rehypePlugins={[rehypeRaw]} components={components}>{match ? content?.replace(match[0], "").trim() : content}</ReactMarkdown>;
+  return <ReactMarkdown className={className} rehypePlugins={[rehypeRaw]} components={components}>{match ? content?.replace(match[0], "").trim() : content}</ReactMarkdown>;
 };
 
 export default CustomMarkdown;

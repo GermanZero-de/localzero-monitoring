@@ -129,6 +129,7 @@ export default async function CityDashboard({ params }: { params: { city: string
                 subtitle="Umsetzung Klimaaktionsplan"
               >
                 <ImplementationIndicator
+                  style={{padding:"10px"}}
                   tasksNumber={getRecursiveStatusNumbers(tasks)}
                   startYear={new Date(city.resolution_date).getFullYear()}
                   endYear={city.target_year}
@@ -163,11 +164,6 @@ export default async function CityDashboard({ params }: { params: { city: string
         <Row >
           <Col className="p-4">
             <SupportingNgos supportingNgos={city.supporting_ngos} />
-          </Col>
-        </Row>
-        <Row >
-          <Col className="p-4">
-            <p></p>
           </Col>
         </Row>
       </Container>

@@ -70,7 +70,7 @@ const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endY
   const currentYearPosition = getYearPositionPercentage(currentYear, startYear, endYear);
   const arrowColorClass = getFirstNonZeroTaskColor(tasksNumber);
 
-  const now = showNow ? <h5 style={{transform: "translateX(-50%)",left: `${currentYearPosition}%`,bottom:-24, position:"absolute"}}>{new Date().toLocaleDateString()}</h5> : <></>
+  const now = showNow ? <h5 style={{transform: "translateX(-50%)",left: `${currentYearPosition}%`,bottom:-30, position:"absolute"}}>{new Date().toLocaleDateString()}</h5> : <></>
   const legend = showLegend ?  <div className={styles.legend}
   style={{
     overflow: "hidden",
@@ -102,7 +102,9 @@ const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endY
 
   return (
     <div className={styles.wrapper} style={style}>
-      <div className={styles.timeline}>
+      <div className={`${styles.timeline} ${showLegend? "" : styles.small}`} style={{
+        background: `linear-gradient(90deg, #0CA8FF ${currentYearPosition}%, #ccc ${currentYearPosition}%)`
+      }}>
         <label>{startYear}</label>
         <label>{endYear}</label>
       </div>
