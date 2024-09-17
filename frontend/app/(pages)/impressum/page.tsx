@@ -19,9 +19,8 @@ export default async function ProjectDescription() {
 
     Franklinstraße 27, 10587 Berlin<br />
 
-    vertreten durch den Vorstand: Sina Arndt, Anke Bytomski-Guerrier, Dr.-Ing. Claas Helmke, Peter Schwierz
+    vertreten durch den Vorstand: Dr. Albrecht von Sonntag, Friedemann Brockmeyer, Dr. Martin Oetting
     E-Mail:&nbsp;<a href="mailto:info@germanzero.de" rel="noopener noreferrer nofollow">info@GermanZero.de</a>
-    Telefon:&nbsp;<a href="tel:03039807590" rel="noopener noreferrer nofollow">030 39807590</a>
     Verantwortlicher i.S.v. § 55 Rundfunkstaatsvertrag (RStV): Dr. Julian Zuber
     Steuernummer: 17/430/17389
   </p>

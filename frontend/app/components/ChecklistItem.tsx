@@ -5,10 +5,10 @@ import { AccordionBody, AccordionHeader, AccordionItem } from "react-bootstrap";
 import Markdown from "react-markdown";
 import styles from "./styles/ChecklistItem.module.scss";
 import rehypeRaw from "rehype-raw";
-import { ChecklistItem as ChecklistItemType } from "@/types";
+import type { CheckItem } from "@/types";
 
 type Props = {
-  checklist_item: ChecklistItemType;
+  checklist_item: CheckItem;
 };
 
 const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
@@ -20,7 +20,7 @@ const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
         ) : (
           <i className={`bi-circle pe-3 ${styles.unchecked}`}></i>
         )}
-        {checklist_item.question}
+        <span style={{fontWeight: checklist_item.is_checked ? "bold" :""}}>{checklist_item.question}</span>
       </AccordionHeader>
       {checklist_item.help_text.trim() || checklist_item.rationale.trim() ? (
         <AccordionBody>
@@ -35,7 +35,7 @@ const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
           {checklist_item.rationale.trim() ? (
             <div>
               <strong>Anmerkung / Begründung: </strong>
-              <Markdown className="mdContent">{checklist_item.rationale}</Markdown>
+              <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{checklist_item.rationale}</Markdown>
             </div>
           ) : (
             <></>

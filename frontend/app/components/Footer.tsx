@@ -68,7 +68,7 @@ export default function Footer() {
                 target="_blank"
               >
                 {" "}
-                Germanzero e.V.
+                GermanZero e.V.
               </a>
             </div>
           </Col>

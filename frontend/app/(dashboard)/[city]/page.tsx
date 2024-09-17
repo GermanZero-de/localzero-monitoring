@@ -9,7 +9,8 @@ import styles from "./page.module.scss";
 import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
-import { ChecklistItem } from "@/types";
+import { CheckItem } from "@/types";
+import rehypeRaw from "rehype-raw";
 
 interface CityDescriptionProps {
   teaser: string;
@@ -25,7 +26,7 @@ const CityDescription: React.FC<CityDescriptionProps> = ({ description, name, te
     <div className={styles.mdContent}>
       <h2 className="headingWithBar">Klimaschutz in {name}</h2>
       <h5>{teaser}</h5>
-      <Markdown className="pb-3 mdContent">{description}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} className="pb-3 mdContent">{description}</Markdown>
     </div>
   );
 };
@@ -41,7 +42,7 @@ const SupportingNgos: React.FC<SupportingNgosProps> = ({ supportingNgos }) => {
   return (
     <>
       <h2 className="headingWithBar">Mit Unterstützung von</h2>
-      <Markdown className="block-text pb-3">{supportingNgos}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} className="block-text pb-3">{supportingNgos}</Markdown>
     </>
   );
 };
@@ -59,7 +60,7 @@ export default async function CityDashboard({ params }: { params: { city: string
     >
       <ChecklistIndicator
         total={city.cap_checklist.length}
-        checked={city.cap_checklist.filter((item: ChecklistItem) => item.is_checked).length}
+        checked={city.cap_checklist.filter((item: CheckItem) => item.is_checked).length}
         startYear={new Date(city.resolution_date).getFullYear()}
         endYear={city.target_year}
       />
@@ -73,7 +74,7 @@ export default async function CityDashboard({ params }: { params: { city: string
     >
       <ChecklistIndicator
         total={city.energy_plan_checklist.length}
-        checked={city.energy_plan_checklist.filter((item: ChecklistItem) => item.is_checked).length}
+        checked={city.energy_plan_checklist.filter((item: CheckItem) => item.is_checked).length}
         startYear={new Date(city.resolution_date).getFullYear()}
         endYear={city.target_year}
       />
@@ -88,7 +89,7 @@ export default async function CityDashboard({ params }: { params: { city: string
     >
      <ChecklistIndicator
         total={city.administration_checklist.length}
-        checked={city.administration_checklist.filter((item: ChecklistItem) => item.is_checked).length}
+        checked={city.administration_checklist.filter((item: CheckItem) => item.is_checked).length}
         startYear={new Date(city.resolution_date).getFullYear()}
         endYear={city.target_year}
       />

@@ -3,6 +3,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { Accordion, Container } from "react-bootstrap";
 import Markdown from "react-markdown";
 import { getCities } from "@/lib/dataService";
+import ChecklistIndicator from "@/app/components/ChecklistIndicator";
+import type { CheckItem } from "@/types";
+import rehypeRaw from "rehype-raw";
 
 export default async function CapChecklist({ params }: { params: { city: string } }) {
 
@@ -13,10 +16,20 @@ export default async function CapChecklist({ params }: { params: { city: string 
   }
 
   return (
-    <Container>
-      <div className="pb-3"></div>
+    <Container className="w-75">
+      <div className="pb-3">
+          <ChecklistIndicator
+            style={{height:250, marginBottom:30}}
+            total={city.cap_checklist.length}
+            checked={city.cap_checklist.filter((item: CheckItem) => item.is_checked).length}
+            startYear={new Date(city.resolution_date).getFullYear()}
+            endYear={city.target_year}
+            showLegend
+            title="Qualität des KAP"
+          />
+      </div>
       <h2 className="headingWithBar">Klimaaktionsplan {city.name}</h2>
-      <Markdown className="pb-3 mdContent">{city.assessment_action_plan}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} className="pb-3 mdContent">{city.assessment_action_plan}</Markdown>
       <Accordion
         id="accordionFlushKAP"
         className="accordion-flush pb-3"
