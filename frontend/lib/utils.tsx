@@ -9,11 +9,11 @@ export const executionLabels = {
 }
 
 interface PreviousNextResult {
-    previousItem: Task | undefined;
-    currentItem: Task | undefined;
-    nextItem: Task | undefined;
-    rootItem: Task | undefined;
-  }
+  previousItem: Task | undefined;
+  currentItem: Task | undefined;
+  nextItem: Task | undefined;
+  rootItem: Task | undefined;
+}
 
 
 export function findPreviousAndNext(data: Task[], slug: string): PreviousNextResult {
@@ -50,3 +50,19 @@ export function findPreviousAndNext(data: Task[], slug: string): PreviousNextRes
 
     return { previousItem, currentItem, nextItem, rootItem };
   }
+
+export function flattenTasks(tasks:Task[]) {
+    let flatList:Task[] = [];
+
+    function recurse(tasks:Task[]) {
+        for (const task of tasks) {
+            flatList.push(task); // Add the current task to the flat list
+            if (task.children && task.children.length > 0) {
+                recurse(task.children); // Recursively process the children
+            }
+        }
+    }
+
+    recurse(tasks); // Start recursion from the top-level tasks
+    return flatList;
+}

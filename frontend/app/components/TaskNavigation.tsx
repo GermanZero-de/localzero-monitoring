@@ -1,18 +1,28 @@
+'use client'
+
 import * as React from "react";
 import styles from "./styles/TaskNavigation.module.scss";
-import type { Task } from "@/types";
 import Link from "next/link";
-
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import TaskTreeView from "@/app/components/TaskTreeView";
+import { Task } from "@/types";
 
 type Props = {
     next: string | undefined;
     prev: string | undefined;
     root: string | undefined;
+    tasks: Task[];
+    baseUrl?:string;
+    active?:string;
+    cityname: string;
 };
 
 
-const TaskNavigation: React.FC<Props> = ({ next, prev, root }) => {
+const TaskNavigation: React.FC<Props> = ({ next, prev, root, tasks, baseUrl, active, cityname }) => {
+    const [show, setShow] = React.useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
         <div className={styles.wrapper}>
             <div></div>
@@ -28,7 +38,7 @@ const TaskNavigation: React.FC<Props> = ({ next, prev, root }) => {
                 <div className={`${styles.arrow} ${styles.left}`}></div>
             </Link> : <div></div>}
 
-            <div className={styles.massnahmen}>Maßnahmen</div>
+            <div className={styles.massnahmen} onClick={handleShow}>Maßnahmen</div>
             <div className="align-content-center" >
 
             {next ? <Link href={next ?? "./"} className="d-flex align-items-center">
@@ -38,6 +48,14 @@ const TaskNavigation: React.FC<Props> = ({ next, prev, root }) => {
 
             </div>
 
+            <Offcanvas show={show} onHide={handleClose} placement="end" className="custom-offcanvas">
+                <Offcanvas.Header closeButton>
+                <Offcanvas.Title>Maßnahmen in {cityname}</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                <TaskTreeView tasks={tasks} baseUrl={baseUrl} active={active}/>
+                </Offcanvas.Body>
+            </Offcanvas>
         </div>
     );
 };
