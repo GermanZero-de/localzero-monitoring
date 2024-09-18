@@ -43,14 +43,14 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubT
         className={styles.header}
         onClick={(e)=>{
           const newUrl = new URL(window.location.href);
-          newUrl.searchParams.set('active', eventKey);  // Set or update the 'page' query parameter
-          window.history.pushState({}, '', newUrl.toString());  // Update the URL without refreshing
-
+          newUrl.searchParams.set('active', eventKey);
+          newUrl.hash=`#${eventKey}`;
+          window.history.pushState({}, '', newUrl.toString());
           onClick(e)
         }}
       >
         <div className={styles.headertitle}>
-          <h4 id={eventKey}>{title}</h4>
+          <h4 id={eventKey} style={{scrollMarginTop:200}}>{title}</h4>
           <div>{totalNumberOfMeasures} Maßnahmen im Monitoring</div>
         </div>
         <div className={styles.headersecondrow}>
