@@ -10,23 +10,26 @@ interface MeasureCardContentProps {
   tasks: Task[];
   eventKey: string;
   slugs: string;
+  activeKey: string;
 }
 
-const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, slugs, eventKey }) => {
+const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, slugs, eventKey, activeKey="" }) => {
+
   return (
     <div >
       {text} <a href={"./massnahmen/"+slugs}>Mehr lesen...</a>
-      <Accordion className={styles.contentaccordion}>
+      <Accordion className={styles.contentaccordion} defaultActiveKey={activeKey}>
         {tasks.map((task, i) => {
           if (task.numchild && task.children.length > 0) {
             return (
               <SecondaryMeasureCard
-                eventKey={`p${eventKey}c${i}`}
+                eventKey={task.slugs}
                 key={i}
                 title={task.title}
                 source={task.source}
               >
                 <MeasureCardContent
+                  activeKey={activeKey}
                   slugs={task.slugs}
                   text={task.teaser}
                   tasks={task.children}

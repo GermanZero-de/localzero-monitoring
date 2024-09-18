@@ -27,7 +27,12 @@ const SecondaryMeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, chi
       {suggested}
       <Card.Header
         className={`${styles.header} ${styles.noicon}`}
-        onClick={onClick}
+        onClick={(e)=>{
+          const newUrl = new URL(window.location.href);
+          newUrl.searchParams.set('active', eventKey);
+          window.history.pushState({}, '', newUrl.toString());
+          onClick(e)
+        }}
       >
         {title}
         <div className={styles.toggle}>

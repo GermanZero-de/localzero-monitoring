@@ -41,7 +41,9 @@ export default async function TaskDetails({ params }: { params: { city: string, 
 
   const nextUrl = nextItem ? `/${params.city}/massnahmen/${nextItem?.slugs}` : undefined;
   const prevUrl = previousItem ? `/${params.city}/massnahmen/${previousItem?.slugs}` : undefined;
-  const rootUrl = rootItem ? `/${params.city}/massnahmen/?active=${rootTaskSlug}#${rootTaskSlug}` : undefined;
+
+  const back = task.children.length !== 0 ? task.slugs : task.slugs.split("/").slice(0,-1).join("/");
+  const rootUrl = rootItem ? `/${params.city}/massnahmen/?active=${back}#${rootTaskSlug}` : undefined;
 
   const nav = task.children.length === 0 ? <TaskNavigation prev={prevUrl} next={nextUrl} root={rootUrl}></TaskNavigation> : <></>
 
@@ -90,9 +92,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
       <Row>
         <Col className="d-flex">
           <div>
-
             {task.children.length === 0 ? <TaskSummary task={task} root={rootItem} city={city}></TaskSummary> : linkback}
-
           </div>
           <div className="flex-grow-1 px-3 overflow-hidden">
             <div className="d-flex flex-column">
@@ -100,7 +100,6 @@ export default async function TaskDetails({ params }: { params: { city: string, 
               <CustomMarkdown className={styles.teaserContent} content={task?.teaser}></CustomMarkdown>
               <h1 className="headingWithBar">Beschreibung</h1>
               <CustomMarkdown  content={task?.description}></CustomMarkdown>
-
               {assestment}
               {execution}
               {explanation}
@@ -112,7 +111,6 @@ export default async function TaskDetails({ params }: { params: { city: string, 
       <Row className="py-5">
         <Col className="justify-content-center">
           {nav}
-
         </Col>
       </Row>
     </Container >

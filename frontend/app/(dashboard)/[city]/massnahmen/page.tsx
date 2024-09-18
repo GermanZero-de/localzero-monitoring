@@ -18,7 +18,7 @@ import rehypeRaw from "rehype-raw";
 
 
 export default async function CityMeasures({ params, searchParams }: { params: { city: string}, searchParams:{active:string}  }) {
-  const activeKey = searchParams?.active;
+  const activeKey = searchParams?.active || "";
   const city = await getCities(params.city);
   const tasks = await getTasks(params.city);
   if (!city || !tasks) {
@@ -46,7 +46,7 @@ export default async function CityMeasures({ params, searchParams }: { params: {
 
       <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{city.assessment_status}</Markdown>
       <h1 className="headingWithBar">Maßnahmen in {city.name}</h1>
-      <Accordion className={styles.accordion} defaultActiveKey={activeKey}>
+      <Accordion className={styles.accordion} defaultActiveKey={activeKey.split("/")[0]}>
         {tasks &&
           tasks.map((task:any, i:number) => {
             return (
@@ -57,6 +57,7 @@ export default async function CityMeasures({ params, searchParams }: { params: {
                 statusOfSubTasks={getRecursiveStatusNumbers(task.children)}
               >
                 <MeasureCardContent
+                  activeKey={activeKey}
                   slugs={task.slugs}
                   text={task.teaser}
                   tasks={task.children}

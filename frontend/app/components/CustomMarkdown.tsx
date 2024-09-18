@@ -25,7 +25,6 @@ const ImageRenderer: React.FC<ImageProps> = ({ alt, src, content }) => {
     width = size[0] ? `${size[0]}px` : "auto";
     height = size[1] ? `${size[1]}px` : "auto";
   }
-  console.log("dimensions",width, height)
   // Apply the extracted width and height as inline styles
   return <img src={src} alt={alt} style={{ width, height }} />;
 };
@@ -41,7 +40,7 @@ const CustomMarkdown: React.FC<MarkdownProps> = ({ content, className="" }) => {
     img: ({ alt, src }) => <ImageRenderer alt={alt} src={src} content={content} />,
   };
   const match = content?.match(regex);
-  return <ReactMarkdown className={className} rehypePlugins={[rehypeRaw]} components={components}>{match ? content?.replace(match[0], "").trim() : content}</ReactMarkdown>;
+  return <ReactMarkdown className={`mdContent ${className}`} rehypePlugins={[rehypeRaw]} components={components}>{match ? content?.replace(match[0], "").trim() : content}</ReactMarkdown>;
 };
 
 export default CustomMarkdown;
