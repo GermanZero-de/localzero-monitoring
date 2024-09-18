@@ -40,7 +40,8 @@ const getTasksHeightsInPercentage = (tasksNumber: StatusCount, totalNumberOfTask
 const getYearPositionPercentage = (currentYear: number, startYear: number, endYear: number): number => {
   const totalYears = endYear - startYear;
   const yearsPassed = currentYear - startYear;
-  return totalYears > 1 ? (yearsPassed / totalYears) * 100 : 90;
+  const perc = (yearsPassed / totalYears) * 100 < 0 ? 0 : (yearsPassed / totalYears);
+  return totalYears > 1 ? perc : 90;
 };
 
 const getFirstNonZeroTaskColor = (tasksNumber: StatusCount) => {
