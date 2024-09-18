@@ -44,7 +44,7 @@ export interface Task {
     execution_status: ExecutionStatus;
     slugs: string;
     numchild: number;
-    children: Task[];
+    children: Array<Task>;
     city: number;
     planned_completion: string;
     planned_start:string;
@@ -52,11 +52,11 @@ export interface Task {
     supporting_ngos:string;
     root: Task;
     frontpage: boolean;
-    frontpage: boolean;
-    source: integer;
+    source: number;
     plan_assessment: string;
     execution_justification: string;
     responsible_organ_explanation: string;
+    draft_mode:boolean;
   }
 
   export type StatusCount = {

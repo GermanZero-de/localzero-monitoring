@@ -1,16 +1,16 @@
 
 import { getCities, getTasks } from "@/lib/dataService";
-import { findPreviousAndNext } from "@/lib/utils";
+import { findPreviousAndNext, flattenTasks } from "@/lib/utils";
 import ArrowRight from "@/app/components/icons/ArrowRight";
-import { Col, Container, Row, Tooltip } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import styles from "./page.module.scss";
 import Image from "next/image";
 import TaskSummary from "@/app/components/TaskSummary";
 import TaskNavigation from "@/app/components/TaskNavigation";
 import Link from "next/link";
 import localZero from "@/public/imgs/localZero.svg";
-import rehypeRaw from "rehype-raw";
 import CustomMarkdown from "@/app/components/CustomMarkdown";
+import { Task } from "@/types";
 
 export default async function TaskDetails({ params }: { params: { city: string, task: Array<string> } }) {
 
@@ -35,17 +35,20 @@ export default async function TaskDetails({ params }: { params: { city: string, 
     return <h3 className="pb-3 pt-3">Maßnahme {task} wurde nicht gefunden</h3>;
   }
 
+  const taskListFlat = flattenTasks(tasks).filter((t:Task)=>t.children.length===0).map((t:Task)=>t.slugs);
+  const currentTaskIndex = taskListFlat.indexOf(task.slugs);
 
+  const nextIndex = currentTaskIndex === taskListFlat.length-1 ? 0 : currentTaskIndex+1;
+  const prevIndex = currentTaskIndex === 0 ? taskListFlat.length-1 : currentTaskIndex-1;
 
-
-
-  const nextUrl = nextItem ? `/${params.city}/massnahmen/${nextItem?.slugs}` : undefined;
-  const prevUrl = previousItem ? `/${params.city}/massnahmen/${previousItem?.slugs}` : undefined;
+  const baseUrl = `/${params.city}/massnahmen/`
+  const nextUrl = `${baseUrl}/${taskListFlat[nextIndex]}`;
+  const prevUrl =  `${baseUrl}${taskListFlat[prevIndex]}`;
 
   const back = task.children.length !== 0 ? task.slugs : task.slugs.split("/").slice(0,-1).join("/");
-  const rootUrl = rootItem ? `/${params.city}/massnahmen/?active=${back}#${rootTaskSlug}` : undefined;
+  const rootUrl = rootItem ? `${baseUrl}?active=${back}#${rootTaskSlug}` : undefined;
 
-  const nav = task.children.length === 0 ? <TaskNavigation prev={prevUrl} next={nextUrl} root={rootUrl}></TaskNavigation> : <></>
+  const nav = task.children.length === 0 ? <TaskNavigation prev={prevUrl} next={nextUrl} root={rootUrl} tasks={tasks} baseUrl={baseUrl} active={currentItem.slugs} cityname={city.name}></TaskNavigation> : <></>
 
   const linkback =
     <div style={{ width: 250, fontSize: "1.2em", position: "sticky", top: "100px" }}>
