@@ -1,4 +1,3 @@
-import { getCities } from "@/lib/dataService";
 import { Container } from "react-bootstrap";
 
 
