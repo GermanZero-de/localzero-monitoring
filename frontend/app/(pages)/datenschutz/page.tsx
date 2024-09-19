@@ -1,6 +1,8 @@
 import { Container } from "react-bootstrap";
 
+export const dynamic = 'force-static';
 export default async function ProjectDescription() {
+
 
   return (
     <Container className="py-3 w-75 m-auto">

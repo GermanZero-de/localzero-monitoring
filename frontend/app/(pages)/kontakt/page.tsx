@@ -7,6 +7,7 @@ import styles from "./page.module.scss";
 import arrow from "@/public/imgs/arrow-right-down.svg";
 import Link from "next/link";
 
+export const dynamic = 'force-static';
 export default function ProjectDescription() {
   return (
     <Container>
