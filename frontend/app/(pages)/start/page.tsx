@@ -4,7 +4,7 @@ import { City } from "@/types";
 import TileList from "@/app/components/TileList";
 
 export default async function Home() {
-  const cities:City[] = await getCities("","executionStatusCount");
+  const cities:City[] = await getCities();
 
   return (
     <>
