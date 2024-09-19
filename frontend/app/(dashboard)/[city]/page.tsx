@@ -18,8 +18,6 @@ interface CityDescriptionProps {
   name: string;
 }
 
-export const dynamic = 'force-static';
-
 const CityDescription: React.FC<CityDescriptionProps> = ({ description, name, teaser }) => {
   if (!description) {
     return <></>;
