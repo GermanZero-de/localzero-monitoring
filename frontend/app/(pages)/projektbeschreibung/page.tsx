@@ -2,7 +2,6 @@ import { Container } from "react-bootstrap";
 
 export default async function ProjectDescription() {
 
-
   return (
     <Container>
       <div className="py-3 w-50 m-auto">
