@@ -1,0 +1,19 @@
+.tile {
+  flex: 1;
+}
+
+.mdContent{
+  img {
+    max-width: 100%;
+  }
+}
+
+.checklistContainer{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  a{
+    flex: 1;
+    max-width: 500px;
+  }
+}

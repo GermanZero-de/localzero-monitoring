@@ -1,0 +1,157 @@
+$borderWidth: 1px;
+$borderColor: #828282;
+
+$colorComplete: #9bd300;
+$colorAsPlanned: #ffa700;
+$colorUnknown: #dcdcdc;
+$colorDelayed: #f65035;
+$colorFailed: #011633;
+$width: 40px;
+
+.wrapper {
+  flex:1;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeline {
+  height: 25px;
+  right: 0;
+  left: 0;
+  bottom:0px;
+  position: absolute;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  label {
+    padding: 0 5px;
+    line-height: 1.4em;
+  }
+  &.small{
+    height: 20px;
+  }
+}
+
+.indicatorContainer {
+  bottom: 15px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  background-color: transparent;
+  overflow: hidden;
+  width: $width;
+  border-top-right-radius: $width/2;
+  border-top-left-radius:  $width/2;
+  &.small{
+    width: $width - 10px;
+    border-top-right-radius: ($width - 10px)/2;
+    border-top-left-radius: ($width - 10px)/2;
+  }
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid;
+}
+
+.complete {
+  background-color: $colorComplete;
+}
+
+.asPlanned {
+  background-color: $colorAsPlanned;
+}
+
+.unknown {
+  background-color: $colorUnknown;
+}
+
+.delayed {
+  background-color: $colorDelayed;
+}
+
+.failed {
+  background-color: $colorFailed;
+}
+
+.arrow.complete {
+  border-top-color: $colorComplete;
+  background-color: transparent;
+}
+
+.arrow.asPlanned {
+  border-top-color: $colorAsPlanned;
+  background-color: transparent;
+}
+
+.arrow.unknown {
+  border-top-color: $colorUnknown;
+  background-color: transparent;
+}
+
+.arrow.delayed {
+  border-top-color: $colorDelayed;
+  background-color: transparent;
+}
+
+.arrow.failed {
+  border-top-color: $colorFailed;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 1200px) {
+  .title{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  div.legend{
+    display: none;
+  }
+}
+/* Legend styling */
+.legend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20px;
+  color: rgb(33, 37, 41);
+  .legendItem {
+    display: flex;
+    align-items: center;
+
+    .legendColor {
+      width: 10px;
+      height: 10px;
+      border-top-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+      margin-right: 8px;
+
+      &.complete {
+        background-color: $colorComplete;
+      }
+      &.asPlanned {
+        background-color: $colorAsPlanned;
+      }
+      &.unknown {
+        background-color: $colorUnknown;
+      }
+
+      &.delayed .legendColor {
+        background-color: $colorDelayed;
+      }
+
+      &.failed .legendColor {
+        background-color: $colorFailed;
+      }
+    }
+  }
+}
