@@ -40,7 +40,12 @@ const getTasksHeightsInPercentage = (tasksNumber: StatusCount, totalNumberOfTask
 const getYearPositionPercentage = (currentYear: number, startYear: number, endYear: number): number => {
   const totalYears = endYear - startYear;
   const yearsPassed = currentYear - startYear;
-  const perc = ((yearsPassed / totalYears) * 100) < 0 ? 0 : (yearsPassed / totalYears)* 100;
+  let perc = (yearsPassed / totalYears) * 100
+  if(perc<0){
+    perc=5;
+  }else if(perc>100){
+    perc=100;
+  }
   return totalYears > 1 ? perc : 90;
 };
 
@@ -126,7 +131,7 @@ const ImplementationIndicator: React.FC<Props> = ({ tasksNumber, startYear, endY
               <div
                 key={status}
                 className={styles[status]}
-                title={`${tasksNumber[status]} Maßnahmen ${executionLabels[status]}`}
+                title={`${tasksNumber[status]} Maßnahme${tasksNumber[status]===1 ? "" : "n"} ${executionLabels[status]}`}
                 style={{
                   height: tasksHeights[index],
                   borderTopLeftRadius: isFirst ? "10px" : "0px",
