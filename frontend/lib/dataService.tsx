@@ -7,12 +7,11 @@ const getCookie = async (name: string) => {
 }
 
 export async function getCities(id: string = "", queryParams="") {
-
-
   const sessionid = await getCookie('sessionid');
+  const revalidate = sessionid ? 0: 3600;
   const slug = id ? `/${id}` : ""
     const cities = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}?${queryParams}`, {
-      cache: "no-store",
+      next: { revalidate },
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
@@ -26,8 +25,9 @@ export async function getCities(id: string = "", queryParams="") {
 export async function getTasks(id: string = "") {
   const slug = id ? `/${id}` : ""
   const sessionid = await getCookie('sessionid');
+  const revalidate = sessionid ? 0: 3600;
     const tasks = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}/tasks`, {
-      cache: "no-store",
+      next: { revalidate },
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
