@@ -1,0 +1,61 @@
+@use "../../../../common.scss";
+
+.container {
+  position: relative;
+}
+
+.top{
+  background-color: common.$gz-background-color;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+.cornerTop{
+  text-align: right;
+  width:150px;
+  height:150px;
+  background:common.$gz-color;
+  position: absolute;
+  top:0;
+  right:0;
+  clip-path: polygon(0% 0%, 100% 100%, 100% 0% );
+  img{
+    margin:20px 10px;
+    animation: shake 1.5s ease-in-out;
+  }
+}
+
+.cornerBottom{
+  width:150px;
+  height:150px;
+  background:common.$gz-color;
+  position: absolute;
+  bottom:0;
+  left:0;
+  clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+  img{
+    margin-top:100px;
+    margin-left:10px;
+  }
+}
+
+
+
+.mdContent{
+  img {
+    max-width: 100%;
+  }
+}
+.teaserContent{
+  font-weight: bold;
+}

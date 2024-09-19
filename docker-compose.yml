@@ -23,6 +23,17 @@ services:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:?Please set the DJANGO_SECRET_KEY environment variable.}
       - DJANGO_CSRF_TRUSTED_ORIGINS=${DJANGO_CSRF_TRUSTED_ORIGINS:?Please set the DJANGO_CSRF_TRUSTED_ORIGINS environment variable.}
 
+  frontend:
+    container_name: frontend-${ENVIRONMENT_NAME}
+    build:
+      context: ./
+      dockerfile: ./docker/frontend/Dockerfile
+    image: nextjs:${ENVIRONMENT_NAME}
+    networks:
+      - nginx_network
+    environment:
+      - REST_API=http://djangoapp:8000
+
   nginx-unprivileged:
     container_name: nginx-${ENVIRONMENT_NAME}
     image: nginxinc/nginx-unprivileged:alpine

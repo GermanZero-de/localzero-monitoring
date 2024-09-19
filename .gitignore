@@ -128,8 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Intellij
+# IDEs
 .idea
+.vscode
 
 # Yarn
 .yarn/*
@@ -146,3 +147,4 @@ cpmonitor/images
 
 # docker images exported for upload
 *.tar
+!frontend/lib

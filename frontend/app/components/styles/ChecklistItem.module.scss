@@ -1,0 +1,11 @@
+@use "../../common.scss";
+
+.checked {
+  color: common.$gz-checked;
+  font-size: 1.5em;
+}
+
+.unchecked {
+  color: common.$gz-unchecked;
+  font-size: 1.5em;
+}

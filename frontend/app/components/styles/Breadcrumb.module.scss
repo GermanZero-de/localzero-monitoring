@@ -1,0 +1,22 @@
+.item:nth-last-child(n+2)::after  {
+    color: rgb(var(--bs-primary-rgb));
+    display: inline-block;
+    margin-left: 0.5rem;
+    margin-right: 0.75rem;
+    margin-bottom: -5px;
+    vertical-align: 0.255em;
+    border-top: 0.25em solid;
+    border-right: 0.25em solid;
+    border-bottom: 0;
+    border-left: 0;
+    content: "";
+    top: 0;
+    transform: rotate(45deg);
+    width: 0.75em;
+    height: 0.75em;
+
+}
+.links{
+  text-decoration: none;
+  color: var(--bs-body-color);
+}

@@ -13,7 +13,6 @@ from django.contrib import admin
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import Http404, HttpResponseServerError, JsonResponse
@@ -22,12 +21,15 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView
 from invitations import views as invitations_views
 from invitations.adapters import get_invitations_adapter
 from invitations.app_settings import app_settings as invitations_settings
 from invitations.views import accept_invitation
 from martor.utils import LazyEncoder
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .models import (
     AccessRight,
@@ -38,6 +40,10 @@ from .models import (
     AdministrationChecklist,
     EnergyPlanChecklist,
 )
+
+from .serializers import CitySerializer
+from .serializers import TaskSerializer
+from .serializers import TaskWithoutDraftModeSerializer
 
 from .utils import RemainingTimeInfo
 
@@ -783,3 +789,90 @@ def move_task(request, pk):
     position = request.POST.get("position")
     task.move(new_parent, position)
     return JsonResponse({"success": True})
+
+
+#
+# REST API views
+#
+
+
+class CityList(APIView):
+    """
+    List all cities.
+    """
+
+    def get_execution_status_count(self, city, auth):
+        # Get task execution status count for the city
+        if auth:
+            tasks = Task.objects.filter(city=city)
+        else:
+            tasks = Task.objects.filter(city=city, draft_mode=False)
+
+        status_summary = {
+            "complete": tasks.filter(execution_status=ExecutionStatus.COMPLETE).count(),
+            "asPlanned": tasks.filter(
+                execution_status=ExecutionStatus.AS_PLANNED
+            ).count(),
+            "delayed": tasks.filter(execution_status=ExecutionStatus.DELAYED).count(),
+            "failed": tasks.filter(execution_status=ExecutionStatus.FAILED).count(),
+            "unknown": tasks.filter(execution_status=ExecutionStatus.UNKNOWN).count(),
+        }
+        return status_summary
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            cities = City.objects.all().order_by("-last_update")
+        else:
+            cities = City.objects.filter(draft_mode=False).order_by("-last_update")
+
+        execution_status_param = request.query_params.get("executionStatusCount", None)
+
+        serializer = CitySerializer(cities, many=True)
+        city_data = serializer.data
+
+        if execution_status_param is not None:
+            for city in city_data:
+                city_instance = City.objects.get(id=city["id"])
+                city["executionStatusCount"] = self.get_execution_status_count(
+                    city_instance, request.user.is_authenticated
+                )
+
+        return Response(city_data)
+
+
+class CityDetail(APIView):
+    """
+    Return a specific city.
+    """
+
+    def get(self, request, slug):
+        try:
+            if request.user.is_authenticated:
+                city = City.objects.get(slug=slug)
+            else:
+                city = City.objects.get(slug=slug, draft_mode=False)
+        except City.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CitySerializer(city)
+        return Response(serializer.data)
+
+
+class TasksByCity(APIView):
+    """
+    List all tasks of a city.
+    """
+
+    def get(self, request, slug):
+        try:
+            city = City.objects.get(slug=slug)
+        except City.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        city_id = city.id
+        if request.user.is_authenticated:
+            children = Task.get_root_nodes().filter(city=city_id)
+            serializer = TaskSerializer(children, many=True)
+        else:
+            children = Task.get_root_nodes().filter(city=city_id, draft_mode=False)
+            serializer = TaskWithoutDraftModeSerializer(children, many=True)
+        return Response(serializer.data)
