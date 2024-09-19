@@ -7,7 +7,6 @@ const getCookie = async (name: string) => {
 }
 
 export async function getCities(id: string = "", queryParams="") {
-  console.time("getCities")
   const sessionid = await getCookie('sessionid');
   const revalidate = sessionid ? 0: 3600;
   const slug = id ? `/${id}` : ""
@@ -19,7 +18,6 @@ export async function getCities(id: string = "", queryParams="") {
         Cookie: `sessionid=${sessionid};`
       },
     })).json();
-    console.timeEnd("getCities")
     return cities
 
 }
