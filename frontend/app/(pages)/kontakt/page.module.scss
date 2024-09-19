@@ -1,0 +1,13 @@
+.kontaktPic {
+  cursor:pointer;
+  position:absolute;
+  right:15px;
+  top:35px;
+  flex: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.kontaktPic:hover {
+  opacity: 1;
+}
