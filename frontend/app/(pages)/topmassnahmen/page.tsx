@@ -1,9 +1,8 @@
-import { getCities } from "@/lib/dataService";
 import { Container } from "react-bootstrap";
 
 
 export default async function TopMassnahmen() {
-  const all_cities = await getCities();
+
   return (
     <Container className="min-vh-50 p-3">
    LocalZero hat daf&uuml;r einige Studien und viele Klima-Aktionspl&auml;ne ausgewertet und die Ma&szlig;nahmen unter folgenden

@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
-export default async function ProjectDescription() {
 
+export default async function ProjectDescription() {
 
   return (
     <Container>

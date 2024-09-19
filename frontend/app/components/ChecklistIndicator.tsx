@@ -17,7 +17,12 @@ type Props = {
 const getYearPositionPercentage = (currentYear: number, startYear: number, endYear: number): number => {
   const totalYears = endYear - startYear;
   const yearsPassed = currentYear - startYear;
-  const perc = (yearsPassed / totalYears) * 100 < 0 ? 0 : (yearsPassed / totalYears)* 100;
+  let perc = (yearsPassed / totalYears) * 100
+  if(perc<0){
+    perc=5;
+  }else if(perc>100){
+    perc=100;
+  }
   return totalYears > 1 ? perc : 90;
 };
 
