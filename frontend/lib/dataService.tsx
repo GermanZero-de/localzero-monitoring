@@ -10,7 +10,7 @@ export async function getCities(id: string = "", queryParams="") {
   const sessionid = await getCookie('sessionid');
   const revalidate = sessionid ? 0: 3600;
   const slug = id ? `/${id}` : ""
-    const cities = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}?${queryParams}`, {
+    const cities = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}?executionStatusCount`, {
       next: { revalidate },
       headers: {
         Accept: "application/json",
