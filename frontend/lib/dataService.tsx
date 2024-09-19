@@ -6,9 +6,9 @@ const getCookie = async (name: string) => {
   return cookies().get(name)?.value ?? '';
 }
 
-export async function getCities(id: string = "", queryParams="") {
+export async function getCities(id: string = "") {
   const sessionid = await getCookie('sessionid');
-  const revalidate = sessionid ? 0: 3600;
+  const revalidate = sessionid ? 0: 1800;
   const slug = id ? `/${id}` : ""
     const cities = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}?executionStatusCount`, {
       next: { revalidate },
@@ -25,7 +25,7 @@ export async function getCities(id: string = "", queryParams="") {
 export async function getTasks(id: string = "") {
   const slug = id ? `/${id}` : ""
   const sessionid = await getCookie('sessionid');
-  const revalidate = sessionid ? 0: 3600;
+  const revalidate = sessionid ? 0: 1800;
     const tasks = await (await fetch(`${process.env.REST_API || "http://localhost:8000"}/api/cities${slug}/tasks`, {
       next: { revalidate },
       headers: {
