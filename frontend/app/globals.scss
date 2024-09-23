@@ -227,7 +227,7 @@ h3 {
 .w-sm-50 {
   width: 50% !important;
   @media (max-width: 1000px) {
-    width: 750% !important; // Ensures 100% width on smaller screens
+    width: 75% !important; // Ensures 100% width on smaller screens
   }
   @media (max-width: 450px) {
     width: 100% !important; // Ensures 100% width on smaller screens
