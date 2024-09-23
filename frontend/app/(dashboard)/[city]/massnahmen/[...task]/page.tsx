@@ -93,7 +93,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
         </Col>
       </Row>
       <Row>
-        <Col className="d-flex">
+        <Col className={styles.descr}>
           <div>
             {task.children.length === 0 ? <TaskSummary task={task} root={rootItem} city={city}></TaskSummary> : linkback}
           </div>

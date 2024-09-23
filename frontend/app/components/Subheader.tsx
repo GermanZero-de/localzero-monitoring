@@ -6,12 +6,11 @@ export default function Subheader() {
     <Container>
     <div className={styles.banner}>
     <span className={styles.textPrimary}>Auf dem Weg zur Klimaneutralität</span>
-    <span className={styles.textSecondary}>Klimaschutz-Monitoring von Kommunen</span>
 
     <Image
       unoptimized
       fill
-      style={{ objectFit: "cover" }}
+      style={{ objectFit: "cover", objectPosition:"70%" }}
       src="/images/background.webp"
       alt="Fröhliches Kind mit Strohhut in einer grünen Stadt"
     />
