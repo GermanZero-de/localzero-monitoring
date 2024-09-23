@@ -34,6 +34,7 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubT
     0,
   );
 
+  const empty = <>&nbsp;</>;
   const { activeEventKey } = useContext(AccordionContext);
   const isCurrentEventKey = activeEventKey === eventKey;
   const onClick = useAccordionButton(eventKey);
@@ -58,31 +59,31 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubT
 
               <div className={styles.firsticon}>
                 <ExecutionStatusIcon disabled={statusOfSubTasks.complete===0} taskStatus={ExecutionStatus.COMPLETE}></ExecutionStatusIcon>
-                {statusOfSubTasks.complete > 0 && ( <h4>{statusOfSubTasks.complete}</h4>  )}
+                {<h4>{statusOfSubTasks.complete || empty}</h4>}
               </div>
 
 
               <div className={styles.secondicon}>
                 <ExecutionStatusIcon disabled={statusOfSubTasks.asPlanned===0} taskStatus={ExecutionStatus.AS_PLANNED}></ExecutionStatusIcon>
-                {statusOfSubTasks.asPlanned > 0 && (<h4>{statusOfSubTasks.asPlanned}</h4> )}
+                {<h4>{statusOfSubTasks.asPlanned || empty}</h4> }
               </div>
 
 
               <div className={styles.thirdicon}>
                 <ExecutionStatusIcon disabled={statusOfSubTasks.delayed===0} taskStatus={ExecutionStatus.DELAYED}></ExecutionStatusIcon>
-                {statusOfSubTasks.delayed > 0 && (    <h4>{statusOfSubTasks.delayed}</h4>   )}
+                {<h4>{statusOfSubTasks.delayed || empty}</h4>}
               </div>
 
 
               <div className={styles.fourthicon}>
                 <ExecutionStatusIcon disabled={statusOfSubTasks.failed===0}  taskStatus={ExecutionStatus.FAILED}></ExecutionStatusIcon>
-                {statusOfSubTasks.failed > 0 && ( <h4>{statusOfSubTasks.failed}</h4>    )}
+                {<h4>{statusOfSubTasks.failed || empty}</h4>}
               </div>
 
 
               <div className={styles.fifthicon}>
                 <ExecutionStatusIcon  disabled={statusOfSubTasks.unknown===0} taskStatus={ExecutionStatus.UNKNOWN}></ExecutionStatusIcon>
-                {statusOfSubTasks.unknown > 0 && (  <h4>{statusOfSubTasks.unknown}</h4>  )}
+                {<h4>{statusOfSubTasks.unknown || empty}</h4>}
               </div>
 
           </div>

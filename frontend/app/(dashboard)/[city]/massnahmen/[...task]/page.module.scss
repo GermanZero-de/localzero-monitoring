@@ -4,6 +4,13 @@
   position: relative;
 }
 
+.descr{
+  flex-direction: row;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+
 .top{
   background-color: common.$gz-background-color;
 }

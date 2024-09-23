@@ -11,12 +11,12 @@ export default function ProjectDescription() {
   return (
     <Container>
 
-      <div className="py-3 w-50 m-auto">
+      <div className="py-3 w-sm-50 m-auto">
       <h1 className="big-h1">Kontakt</h1>
         Wir haben uns bemüht die Informationen und die Website sehr klar aufzubereiten, aber es ergeben sich immer Fragen. Darum scheue nicht uns zu kontaktieren ...
       </div>
-      <h2 className="headingWithBar w-75 m-auto">Monitoring</h2>
-      <p className="py-3 w-50 m-auto d-flex position-relative">
+      <h2 className="headingWithBar w-sm-75 m-auto">Monitoring</h2>
+      <p className="py-3 w-sm-50 m-auto d-flex position-relative">
         <p className="flex-grow-1">
           Philipp beantwortet dir alle Fragen zum Monitoring, zur Website... Bitte schicke eine E-Mail oder vereinbare einen Termin
           <Image
@@ -36,8 +36,8 @@ export default function ProjectDescription() {
               />
           </Link>
       </p>
-      <h2 className="headingWithBar w-75 m-auto">Lokalteams</h2>
-      <p className="py-3 w-50 m-auto d-flex position-relative">
+      <h2 className="headingWithBar w-sm-75 m-auto">Lokalteams</h2>
+      <p className="py-3 w-sm-50 m-auto d-flex position-relative">
         <p className="flex-grow-1">
         Leonie beantwortet dir alle Fragen zu den Lokalteams... Bitte schicke eine E-Mail oder vereinbare einen Termin
         <Image
@@ -58,8 +58,8 @@ export default function ProjectDescription() {
        </Link>
       </p>
 
-      <h2 className="headingWithBar w-75 m-auto">Maßnahmen</h2>
-      <div className="py-3 w-50 m-auto">
+      <h2 className="headingWithBar w-sm-75 m-auto">Maßnahmen</h2>
+      <div className="py-3 w-sm-50 m-auto">
       Johannes beantwortet dir alle Fragen zu den Maßnahmen... Bitte schicke eine E-Mail oder vereinbare einen Termin
       </div>
     </Container>
