@@ -15,7 +15,7 @@ export default async function AdministrationChecklist({ params }: { params: { ci
   }
 
   return (
-    <Container className="w-75">
+    <Container className="w-sm-75">
       <div className="pb-3">
           <ChecklistIndicator
             style={{height:250, marginBottom:30}}

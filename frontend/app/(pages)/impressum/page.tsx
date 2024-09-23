@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 export default async function ProjectDescription() {
 
   return (
-    <Container className="py-3 w-75 m-auto">
+    <Container className="py-3 w-sm-75 m-auto">
 
         <h1 className="big-h1">Impressum</h1>
         <p>

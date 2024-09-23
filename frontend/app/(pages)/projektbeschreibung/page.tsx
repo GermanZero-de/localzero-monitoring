@@ -4,7 +4,7 @@ export default async function ProjectDescription() {
 
   return (
     <Container>
-      <div className="py-3 w-50 m-auto">
+      <div className="py-3 w-sm-50 m-auto">
         <h1 className="big-h1">DAS PROJEKT</h1>
 
         In vielen Kommunen geraten die Bemühungen um Klimaneutralität früher oder später ins Stocken. Kein Wunder, denn
@@ -12,8 +12,8 @@ export default async function ProjectDescription() {
         begehen hier permanent Neuland und stoßen auf zahlreiche Fragen und Hindernisse. Für Bürger:innen ist häufig
         nicht ersichtlich, ob ihre Kommune überhaupt Fortschritte erzielt.
       </div>
-      <h1 className="headingWithBar w-75 m-auto">Kommunen im Monitoring</h1>
-      <div className="py-3 w-50 m-auto">
+      <h1 className="headingWithBar w-sm-75 m-auto">Kommunen im Monitoring</h1>
+      <div className="py-3 w-sm-50 m-auto">
         <p>
           Deshalb hat LocalZero die Plattform LocalMonitoring ins Leben gerufen. LocalMonitoring macht Fortschritte
           sichtbar, damit sie gefeiert werden können – und es zeigt Hürden auf, damit sie beseitigt werden können.
@@ -58,8 +58,8 @@ export default async function ProjectDescription() {
           </li>
         </ul>
       </div>
-      <h1 className="headingWithBar  w-75 m-auto">Über uns</h1>
-      <div className="py-3 w-50 m-auto">
+      <h1 className="headingWithBar w-sm-75 m-auto">Über uns</h1>
+      <div className="py-3 w-sm-50 m-auto">
         <h4>LocalMonitoring wird ehrenamtlich von engagierten Bürger:innen der jeweiligen Stadt betrieben.</h4>
         LocalMonitoring ist ein Projekt der Initiative LocalZero, dem Netzwerk für kommunale Klimaneutralität unter dem
         Dach von{" "}

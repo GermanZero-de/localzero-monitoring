@@ -13,7 +13,7 @@ import { Task } from '@/types';
 type TBreadCrumbProps = {
     logo: string
     cityName: string
-    tasks:Task[]
+    tasks: Task[]
 }
 
 const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
@@ -27,29 +27,30 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
         kap_checkliste: "Klimaaktionsplan",
         verwaltungsstrukturen_checkliste: "Verwaltungsstrukturen",
     };
-    const localLogo = logo ? <Image
-        unoptimized
-        width={200}
-        height={0}
-        style={{ height: 'auto', objectFit: 'cover' }}
+    const localLogo = logo ? <img
+        style={{ height: 'auto', objectFit: 'cover', maxWidth:150, maxHeight:150 }}
         src={logo}
         alt={"Logo von " + cityName}
-    /> : <div></div>
+    /> : <></>
     return (
-        <div style={{position:"sticky", top:0, background:"white", zIndex:11}}>
+        <div style={{ position: "sticky", top: 0, background: "white", zIndex: 11 }}>
             <Container style={{ position: "relative" }}>
                 <Row>
-                    <Col>
+                    <Col className="justify-content-between d-flex">
                         <h1 style={{ fontWeight: 600, fontSize: 38 }}>
                             {cityName}
                             <Image
-                                style={{marginLeft:10}}
+                                style={{ marginLeft: 10 }}
                                 src={arrow}
                                 alt=""
                             />
                         </h1>
+                        {localLogo}
 
-                        <ul className="breadcrumb">
+
+                    </Col>
+                <Row>
+                <ul className="breadcrumb">
                             {
                                 pathNames.map((link, index) => {
                                     let href = `/${pathNames.slice(0, index + 1).join('/')}`
@@ -57,10 +58,10 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
                                     let label = labelMapping[link] ?? link[0].toUpperCase() + link.slice(1, link.length)
                                     if (index === 0) {
                                         label = "Dashboard"
-                                    }else{
+                                    } else {
                                         const token = findPreviousAndNext(tasks, href.split("/").slice(3).join("/"))
-                                        if(token?.currentItem){
-                                            label= token.currentItem.title
+                                        if (token?.currentItem) {
+                                            label = token.currentItem.title
                                         }
                                     }
                                     return (
@@ -73,10 +74,9 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
                                 })
                             }
                         </ul>
-                    </Col>
-                    <Col md="auto" className="align-content-center">
-                        {localLogo}
-                    </Col>
+                </Row>
+
+
                 </Row>
             </Container>
         </div>

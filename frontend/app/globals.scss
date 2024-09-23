@@ -1,5 +1,12 @@
 @use "common.scss";
 
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/utilities';
+
 :root {
   --bs-primary-rgb: 255, 200, 12;
   --bs-border-radius: 0;
@@ -14,6 +21,9 @@
 
 .custom-offcanvas {
   --bs-offcanvas-width: 600px;
+    @media (max-width: 700px) {
+      --bs-offcanvas-width: 400px;
+    }
 }
 
 .custom-offcanvas .offcanvas-end {
@@ -149,9 +159,12 @@
 
 h1 {
   @include heading;
-  font-size: 28px;
+  font-size: 3rem;
   margin-top: 30px;
   margin-bottom: 30px;
+  @media (max-width: 450px) {
+    font-size: 2rem;
+  }
 }
 
 h2 {
@@ -202,4 +215,21 @@ h3 {
 .accordion {
   --bs-accordion-active-color: black;
   --bs-accordion-active-bg: common.$gz-background-color;
+}
+
+.w-sm-75 {
+  width: 75% !important;
+  @media (max-width: 450px) {
+    width: 100% !important; // Ensures 100% width on smaller screens
+  }
+}
+
+.w-sm-50 {
+  width: 50% !important;
+  @media (max-width: 1000px) {
+    width: 75% !important; // Ensures 100% width on smaller screens
+  }
+  @media (max-width: 450px) {
+    width: 100% !important; // Ensures 100% width on smaller screens
+  }
 }
