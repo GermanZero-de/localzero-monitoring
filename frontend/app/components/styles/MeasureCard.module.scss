@@ -1,5 +1,14 @@
 @use "../../common.scss";
 
+
+@mixin responsive {
+  img{
+    @media (max-width: 450px) {
+      transform: scale(0.8);
+    }
+  }
+}
+
 .closedcard {
   border: none;
 }
@@ -56,22 +65,27 @@
 
 .firsticon {
   grid-column: 1;
+  @include responsive;
 }
 
 .secondicon {
   grid-column: 2;
+  @include responsive;
 }
 
 .thirdicon {
   grid-column: 3;
+  @include responsive;
 }
 
 .fourthicon {
   grid-column: 4;
+  @include responsive;
 }
 
 .fifthicon {
   grid-column: 5;
+  @include responsive;
 }
 
 .contentaccordion {

@@ -38,7 +38,6 @@ export default function Header() {
               <NavDropdown.Item href="/projektbeschreibung">ÜBER DAS PROJEKT</NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="#suche_kommune">SUCHE KOMMUNE</Nav.Link>
             <Nav.Link href="/topmassnahmen">TOP MASSNAHMEN</Nav.Link>
           </Nav>
 
