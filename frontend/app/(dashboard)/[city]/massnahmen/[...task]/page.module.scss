@@ -6,6 +6,7 @@
 
 .descr{
   flex-direction: row;
+  display: flex;
   @media (max-width: 700px) {
     flex-direction: column;
   }
