@@ -19,6 +19,13 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.navbar-collapse.collapse.show {
+  .dropdown-item{
+    font-size: 0.8rem;
+  }
+}
+
+
 .custom-offcanvas {
   --bs-offcanvas-width: 600px;
     @media (max-width: 700px) {
