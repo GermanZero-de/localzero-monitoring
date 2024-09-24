@@ -125,6 +125,10 @@
     margin-right:auto;
   }
 
+  .nav-item.dropdown, a.nav-link{
+    max-width:257px
+  }
+
   .nav-item.dropdown::after {
     color: rgb(var(--bs-primary-rgb));
     display: inline-block;
