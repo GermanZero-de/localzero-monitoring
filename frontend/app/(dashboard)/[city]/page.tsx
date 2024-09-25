@@ -9,7 +9,7 @@ import styles from "./page.module.scss";
 import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
-import { CheckItem } from "@/types";
+import type { CheckItem, Chart } from "@/types";
 import rehypeRaw from "rehype-raw";
 
 interface CityDescriptionProps {
@@ -96,6 +96,17 @@ export default async function CityDashboard({ params }: { params: { city: string
     </NavigationTile>
   </Link> : <></>
 
+  const charts = Array.isArray(city.charts) ? city.charts.map((chart:Chart, key:number) => <figure key={key}>
+      <img className="d-block border"
+          title={chart.alt_description}
+          alt={chart.alt_description}
+          src={ chart.image }/>
+      <figcaption>
+      <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{chart.caption}</Markdown>
+        <span className="text-muted">Quelle: { chart.source } - Lizenz: { chart.license }</span>
+      </figcaption>
+    </figure>) :<></>
+
   const localgroup = city?.local_group?.description ? <LocalGroup
       localGroup={city.local_group}
       isExpanded={false}
@@ -153,6 +164,7 @@ export default async function CityDashboard({ params }: { params: { city: string
         <Row >
           <Col className="p-4" id="description" style={{scrollMarginTop:100}}>
             <CityDescription description={city.description} name={city.name} teaser={city.teaser} />
+            <div className={styles.charts}>{charts}</div>
           </Col>
         </Row>
 
