@@ -5,6 +5,7 @@ from cpmonitor.models import (
     AdministrationChecklist,
     EnergyPlanChecklist,
     Task,
+    Chart,
 )
 from rest_framework import serializers
 
@@ -25,6 +26,12 @@ class LocalGroupSerializer(serializers.ModelSerializer):
             "logo",
             "featured_image",
         ]
+
+
+class ChartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chart
+        fields = ["id", "image", "alt_description", "source", "caption", "license"]
 
 
 def checklistToRepresentation(instance):
@@ -81,6 +88,7 @@ class CitySerializer(serializers.ModelSerializer):
     cap_checklist = CapChecklistSerializer(read_only=True)
     administration_checklist = AdministrationChecklistSerializer(read_only=True)
     energy_plan_checklist = EnergyPlanChecklistSerializer(read_only=True)
+    charts = ChartSerializer(many=True, read_only=True)
 
     class Meta:
         model = City
@@ -105,6 +113,7 @@ class CitySerializer(serializers.ModelSerializer):
             "energy_plan_checklist",
             "assessment_action_plan",
             "assessment_administration",
+            "charts",
         ]
 
 

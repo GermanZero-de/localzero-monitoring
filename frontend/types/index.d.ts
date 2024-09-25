@@ -73,3 +73,12 @@ export interface Task {
     featured_image: string;
     description: string;
   };
+
+  export type Chart = {
+    id: number;
+    image: string;
+    alt_description: string;
+    source: string;
+    caption: string;
+    license: string;
+  }
