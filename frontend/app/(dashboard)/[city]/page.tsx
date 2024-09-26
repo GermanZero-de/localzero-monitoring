@@ -11,6 +11,7 @@ import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
 import type { CheckItem, Chart } from "@/types";
 import rehypeRaw from "rehype-raw";
+import ImageModal from "@/app/components/ImageModal";
 
 interface CityDescriptionProps {
   teaser: string;
@@ -96,16 +97,16 @@ export default async function CityDashboard({ params }: { params: { city: string
     </NavigationTile>
   </Link> : <></>
 
-  const charts = Array.isArray(city.charts) ? city.charts.map((chart:Chart, key:number) => <figure key={key}>
-      <img className="d-block border"
-          title={chart.alt_description}
-          alt={chart.alt_description}
-          src={ chart.image }/>
-      <figcaption>
-      <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{chart.caption}</Markdown>
-        <span className="text-muted">Quelle: { chart.source } - Lizenz: { chart.license }</span>
-      </figcaption>
-    </figure>) :<></>
+  const charts = Array.isArray(city.charts) ? city.charts.map((chart:Chart, key:number) => <ImageModal title={chart.alt_description}
+  key={key}
+  alt={chart.alt_description}
+  src={ chart.image }
+  caption={ chart.caption }
+  source={ chart.source }
+  license={ chart.license }
+  >
+  </ImageModal>
+  ) :<></>
 
   const localgroup = city?.local_group?.description ? <LocalGroup
       localGroup={city.local_group}
