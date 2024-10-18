@@ -1,8 +1,8 @@
 from collections.abc import Sequence
 
 from allauth.account.models import EmailAddress
-from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
 from django.contrib import admin, messages
+from django.contrib.auth.models import User
 from django.db import models
 from django.forms import TextInput
 from django.forms.models import ErrorList
@@ -410,8 +410,14 @@ admin_site.register(Task, TaskAdmin)
 admin_site.register(CapChecklist, ChecklistAdmin)
 admin_site.register(AdministrationChecklist, ChecklistAdmin)
 admin_site.register(EnergyPlanChecklist, ChecklistAdmin)
-# allauth
+
 admin_site.register(EmailAddress)
-admin_site.register(SocialApp)
-admin_site.register(SocialAccount)
-admin_site.register(SocialToken)
+
+
+def get_user_admin():
+    from django.contrib.auth.admin import UserAdmin
+
+    return UserAdmin
+
+
+admin_site.register(User, get_user_admin())
