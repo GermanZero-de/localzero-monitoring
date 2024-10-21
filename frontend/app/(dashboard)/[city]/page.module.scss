@@ -2,18 +2,50 @@
   flex: 1;
 }
 
-.mdContent{
+.mdContent {
   img {
     max-width: 100%;
   }
 }
 
-.checklistContainer{
+.checklistContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  a{
+
+  a {
     flex: 1;
     max-width: 500px;
+  }
+}
+
+.charts {
+  img {
+    float: left;
+    margin-right: 15px;
+    max-width: 60%;
+  }
+
+  figure {
+    margin-top: 3z0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  figcaption {
+    flex: 1;
+    font-size: smaller;
+    /* Schriftgröße anpassen */
+    margin-top: 0;
+  }
+  @media screen and (max-width: 600px) {
+    img {
+      pointer-events: none;
+      max-width: 100%;
+    }
+    figcaption {
+      text-align:center;
+    }
   }
 }
