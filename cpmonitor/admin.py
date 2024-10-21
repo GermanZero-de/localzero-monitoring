@@ -414,10 +414,11 @@ admin_site.register(EnergyPlanChecklist, ChecklistAdmin)
 admin_site.register(EmailAddress)
 
 
-def get_user_admin():
+def get_user_admin_class():
+    """Import UserAdmin here instead of on file level to prevent circular dependency"""
     from django.contrib.auth.admin import UserAdmin
 
     return UserAdmin
 
 
-admin_site.register(User, get_user_admin())
+admin_site.register(User, get_user_admin_class())
