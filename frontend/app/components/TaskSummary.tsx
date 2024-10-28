@@ -79,7 +79,7 @@ const getTaskCounts = (taskStatus: ExecutionStatus): StatusCount => {
 
 const TaskSummary: React.FC<Props> = ({ task, root, city }) => {
     const startYear = task?.planned_start || city.resolution_date;
-    const endYear = task?.planned_completion || city?.target_year.toString();
+    const endYear = task?.planned_completion || city?.target_year?.toString() || "";
     const indicator = task && startYear && endYear ? <ImplementationIndicator
         style={{ height: 110 }}
         tasksNumber={getTaskCounts(task.execution_status)}
