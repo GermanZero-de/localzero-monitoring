@@ -1167,13 +1167,27 @@ class LocalGroup(models.Model):
             </ul>
         """,
     )
-    logo = models.ImageField(
-        "Logo",
+    logo_square = models.ImageField(
+        "quadratisches Logo",
         blank=True,
         upload_to="uploads/%Y/%m/%d/",
+        help_text="""
+            <p>Logo eurer Kommune für die Kommunenliste.
+            Am besten quadratisch und weiß auf transparent,
+            da es auf gelbem Hintergrund angezeigt wird.</p>
+        """,
+    )
+    logo_wide = models.ImageField(
+        "breites Logo",
+        blank=True,
+        upload_to="uploads/%Y/%m/%d/",
+        help_text="""
+            <p>Logo für die Hauptseite eurer Kommune.
+            Am besten nicht weiß, da es auf weißem Hintergrund angezeigt wird.</p>
+        """,
     )
     featured_image = models.ImageField(
-        "Bild der Lokalgruppe",
+        "Foto der Lokalgruppe",
         blank=True,
         upload_to="uploads/%Y/%m/%d/",
         help_text="Mindestens 500 Pixel breit und 300 Pixel hoch.",
