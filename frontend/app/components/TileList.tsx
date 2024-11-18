@@ -37,7 +37,7 @@ interface TileListProps {
             >
               <Tile
                 name={city.name}
-                logo={city.local_group?.logo}
+                logo={city.local_group?.logo_square}
                 executionStatus={city?.executionStatusCount}
                 startYear={city.resolution_date ? new Date(city.resolution_date).getFullYear() : null}
                 endYear={city.target_year}
