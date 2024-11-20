@@ -28,7 +28,7 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
         verwaltungsstrukturen_checkliste: "Verwaltungsstrukturen",
     };
     const localLogo = logo ? <img
-        style={{ height: 'auto', objectFit: 'cover', maxWidth:150, maxHeight:150 }}
+        style={{ height: 'auto', objectFit: 'cover', maxWidth: 500, maxHeight: 150 }}
         src={logo}
         alt={"Logo von " + cityName}
     /> : <></>
