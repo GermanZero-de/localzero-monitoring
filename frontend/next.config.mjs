@@ -14,7 +14,8 @@ const nextConfig = {
     ]
   },
   async rewrites() {
-    if(process.env.NODE_ENV === 'development'){
+    console.log(process.env.LOCALDEV)
+    if(process.env.NODE_ENV === 'development' && !process.env.LOCALDEV){
       return [
         {
           source: '/images/:path*',
