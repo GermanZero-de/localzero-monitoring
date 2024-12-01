@@ -43,6 +43,7 @@ from .models import (
 
 from .serializers import CitySerializer
 from .serializers import TaskSerializer
+from .serializers import TaskTopSerializer
 from .serializers import TaskWithoutDraftModeSerializer
 
 from .utils import RemainingTimeInfo
@@ -875,4 +876,15 @@ class TasksByCity(APIView):
         else:
             children = Task.get_root_nodes().filter(city=city_id, draft_mode=False)
             serializer = TaskWithoutDraftModeSerializer(children, many=True)
+        return Response(serializer.data)
+
+
+class TasksTop(APIView):
+    """
+    List all top tasks.
+    """
+
+    def get(self, request):
+        tasks = Task.objects.filter(draft_mode=False, source__gt=0)
+        serializer = TaskTopSerializer(tasks, many=True)
         return Response(serializer.data)
