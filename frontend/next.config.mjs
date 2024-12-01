@@ -14,7 +14,6 @@ const nextConfig = {
     ]
   },
   async rewrites() {
-    console.log(process.env.LOCALDEV)
     if(process.env.NODE_ENV === 'development' && !process.env.LOCALDEV){
       return [
         {
@@ -22,9 +21,14 @@ const nextConfig = {
           destination: 'https://monitoring.localzero.net/images/:path*',
         }
       ]
+    } else {
+      return [
+        {
+          source: '/images/:path*',
+          destination: 'http://localhost:8000/images/:path*',
+        }
+      ]
     }
-    return [
-    ]
   },
 };
 
