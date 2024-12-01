@@ -1160,7 +1160,8 @@
     "website": "https://www.beispiel-los.de",
     "teaser": "Eine beispiellos gute Initiative für eine klimaneutrale Zukunft in unserer Stadt.",
     "description": "Wenn Du mitmachen willst, wendest du Dich am besten an Maxi Mustermensch unter maxi@beispiel-los.de.\r\n\r\nUnser Monitoring basiert auf öffentlich zugänglichen Informationen aus dem lokalen BeispielBlatt, dere Website der Stadtverwaltung, dem Klimaaktionsplan, dem Ratsinformationssystem und dem Marktstammdatenregister. Und wir haben auch mit dem Bürgermeister gesprochen. Weitergehende Informationen zum Monitoring bekommst Du bei Dina Durchblick unter dina@beispiel-los.de.",
-    "logo": "uploads/2024/04/20/MuenchenZero180x180_bnM5bZs.png",
+    "logo_square": "uploads/2024/04/20/MuenchenZero180x180_bnM5bZs.png",
+    "logo_wide": "",
     "featured_image": "uploads/2023/09/01/Fotos-alle-1024x683_SEEJ1JR.jpeg"
   }
 },

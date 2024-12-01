@@ -24,7 +24,8 @@ export interface LocalGroup {
     website: string;
     teaser: string;
     description: string;
-    logo: string;
+    logo_square: string;
+    logo_wide: string;
     featured_image: string;
 }
 
