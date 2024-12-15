@@ -49,8 +49,8 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
 
 
                     </Col>
-                <Row>
-                <ul className="breadcrumb">
+                <nav>
+                    <ul className="breadcrumb">
                             {
                                 pathNames.map((link, index) => {
                                     let href = `/${pathNames.slice(0, index + 1).join('/')}`
@@ -74,9 +74,7 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
                                 })
                             }
                         </ul>
-                </Row>
-
-
+                    </nav>
                 </Row>
             </Container>
         </div>
