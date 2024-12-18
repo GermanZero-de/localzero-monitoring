@@ -69,8 +69,6 @@ docker run --user=1007:1007 --rm -v /home/monitoring/${env}/db:/db cpmonitor:${e
 
 # use the latest docker-compose.yml to start the app using the new image
 mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-docker network ls --filter name="${env}_nginx_network" --quiet
-docker network inspect "${env}_nginx_network"
 if [[ $(docker network ls --filter name="${env}_nginx_network" --quiet | wc -l) == 0 ]]; then
     echo "Creating docker network ${env}_nginx_network since it does not exist."
     docker network create ${env}_nginx_network || echo "Failed to create network, but continuing."
