@@ -170,31 +170,28 @@
 
 h1 {
   @include heading;
-  font-size: 3rem;
+  font-size: 2rem; //32px
   margin-top: 30px;
   margin-bottom: 30px;
-  @media (max-width: 450px) {
-    font-size: 2rem;
-  }
 }
 
 h2 {
   @include heading;
-  font-size: 22px;
+  font-size: 1.4rem;
   margin-top: 25px;
   margin-bottom: 25px;
 }
 
 h3 {
   @include heading;
-  font-size: 18px;
+  font-size: 1.2rem;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
 .big-h1 {
   font-weight: 600;
-  font-size: 38px;
+  font-size: 1.6rem;
 }
 
 .headingWithBar {

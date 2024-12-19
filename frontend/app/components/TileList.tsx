@@ -46,7 +46,7 @@ interface TileListProps {
           ))}
     </div>
     <div className="block-text pb-3">
-          {!showAll ? <div>Anzeige weiterer Kommunen</div> : <></>}
+          {!showAll ? <div className="lh-4 py-4">Anzeige weiterer Kommunen</div> : <></>}
           <Image
             onClick={toggle}
             src={showAll ? expandArrowUp : expandArrowDown}

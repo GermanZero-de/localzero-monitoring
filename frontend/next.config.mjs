@@ -14,16 +14,21 @@ const nextConfig = {
     ]
   },
   async rewrites() {
-    if(process.env.NODE_ENV === 'development'){
+    if(process.env.NODE_ENV === 'development' && !process.env.LOCALDEV){
       return [
         {
           source: '/images/:path*',
           destination: 'https://monitoring.localzero.net/images/:path*',
         }
       ]
+    } else {
+      return [
+        {
+          source: '/images/:path*',
+          destination: 'http://localhost:8000/images/:path*',
+        }
+      ]
     }
-    return [
-    ]
   },
 };
 
