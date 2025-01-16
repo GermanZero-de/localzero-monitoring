@@ -45,13 +45,11 @@ interface TileListProps {
             </Link>
           ))}
     </div>
-    <div className="block-text pb-3">
+    <div className="block-text pb-3" onClick={toggle} style={{cursor:"pointer"}}>
           {!showAll ? <div className="lh-4 py-4">Anzeige weiterer Kommunen</div> : <></>}
           <Image
-            onClick={toggle}
             src={showAll ? expandArrowUp : expandArrowDown}
             alt="Anzeige weiterer Kommunen"
-            style={{cursor:"pointer"}}
           />
         </div>
     </div>
