@@ -37,7 +37,7 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
             <Container style={{ position: "relative" }}>
                 <Row>
                     <Col className="justify-content-between d-md-flex">
-                        <h1 style={{ fontWeight: 600, whiteSpace: "nowrap" }}>
+                        <h1 style={{ fontWeight: 600, whiteSpace: "nowrap" }} className="mb-0">
                             {cityName}
                             <Image
                                 style={{ marginLeft: 10 }}
