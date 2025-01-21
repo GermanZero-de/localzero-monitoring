@@ -55,13 +55,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tabler/core@npm:^1.0.0-beta17":
-  version: 1.0.0-beta20
-  resolution: "@tabler/core@npm:1.0.0-beta20"
+"@tabler/core@npm:>=1.0.0-beta17 <1.0.0-beta22":
+  version: 1.0.0-beta21
+  resolution: "@tabler/core@npm:1.0.0-beta21"
   dependencies:
     "@popperjs/core": ^2.11.8
-    "@tabler/icons": ^2.32.0
-    bootstrap: 5.3.1
+    "@tabler/icons": ^3.14.0
+    bootstrap: 5.3.3
   peerDependencies:
     "@melloware/coloris": ^0.19.1
     apexcharts: ^3.40.0
@@ -78,7 +78,7 @@ __metadata:
     nouislider: ^15.7.0
     plyr: ^3.7.8
     star-rating.js: ^4.3.0
-    tinymce: ^6.4.2
+    tinymce: ^6.4.2 || ^7.0.0
     tom-select: ^2.2.2
   peerDependenciesMeta:
     "@melloware/coloris":
@@ -115,14 +115,21 @@ __metadata:
       optional: true
     tom-select:
       optional: true
-  checksum: 53d65b41b39b47d2afcb3189c5949089974e3ed4b8bf5d43041ea930b036fa6a637bf828cc70972c27ac6a51b98f02f0d92656282e05d3561239998f0d25ec8a
+  checksum: 3553b474ec49454f9219bfd8a7c73ec1cdb72eb09f896361d4b4ce49ffe850f36f34f022ad0ed5c3cc52c2d70f58cd0c46004247cc45130a8f05a1d72509e656
   languageName: node
   linkType: hard
 
-"@tabler/icons@npm:^2.30.0, @tabler/icons@npm:^2.32.0":
+"@tabler/icons@npm:^2.30.0":
   version: 2.46.0
   resolution: "@tabler/icons@npm:2.46.0"
   checksum: b805e92f0a7a0a634f618eb20626e496e270c9b67d0a79fe99caf618fe7b6dc7138754a1687dfeaefa29e22e9928824cc4c7e48145808fe32088f1d0ceba464a
+  languageName: node
+  linkType: hard
+
+"@tabler/icons@npm:^3.14.0":
+  version: 3.29.0
+  resolution: "@tabler/icons@npm:3.29.0"
+  checksum: f2682d0938af51e001ad9a0e74b347333e3d649f5d4a8ad4daa512eebfd66799bb349067890b154f15cb8b233597800cff0223761ae4f2000d09404d0b12ce87
   languageName: node
   linkType: hard
 
@@ -228,12 +235,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:5.3.1":
-  version: 5.3.1
-  resolution: "bootstrap@npm:5.3.1"
+"bootstrap@npm:5.3.3":
+  version: 5.3.3
+  resolution: "bootstrap@npm:5.3.3"
   peerDependencies:
     "@popperjs/core": ^2.11.8
-  checksum: f8176376aa6c6d8947d58a67f0c57fa0b6b7dcd087ff83454e0d727c07cf33e8107e56aa298045d652f84b53b24ac72457af73e41c5631c9ebdc1909039c5dac
+  checksum: 537b68db30150075614310e9ebdf1be9b4affdf89ca226d59f4352e82a368b203af13ed0ce5ccfa4e06f141ecd233f7432ca3817e9c1a39863a05fbe13c73c4b
   languageName: node
   linkType: hard
 
@@ -329,7 +336,7 @@ __metadata:
   resolution: "cpmonitor@workspace:."
   dependencies:
     "@popperjs/core": ^2.11.2
-    "@tabler/core": ^1.0.0-beta17
+    "@tabler/core": ">=1.0.0-beta17 <1.0.0-beta22"
     "@tabler/icons": ^2.30.0
     apexcharts: ^3.45.1
     jquery: ^3.6.3
