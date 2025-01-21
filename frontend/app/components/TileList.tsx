@@ -37,7 +37,7 @@ interface TileListProps {
             >
               <Tile
                 name={city.name}
-                logo={city.local_group?.logo}
+                logo={city.local_group?.logo_square}
                 executionStatus={city?.executionStatusCount}
                 startYear={city.resolution_date ? new Date(city.resolution_date).getFullYear() : null}
                 endYear={city.target_year}
@@ -45,13 +45,11 @@ interface TileListProps {
             </Link>
           ))}
     </div>
-    <div className="block-text pb-3">
+    <div className="block-text pb-3" onClick={toggle} style={{cursor:"pointer"}}>
           {!showAll ? <div className="lh-4 py-4">Anzeige weiterer Kommunen</div> : <></>}
           <Image
-            onClick={toggle}
             src={showAll ? expandArrowUp : expandArrowDown}
             alt="Anzeige weiterer Kommunen"
-            style={{cursor:"pointer"}}
           />
         </div>
     </div>
