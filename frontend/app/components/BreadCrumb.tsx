@@ -28,7 +28,7 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
         verwaltungsstrukturen_checkliste: "Verwaltungsstrukturen",
     };
     const localLogo = logo ? <img
-        style={{ height: 'auto', objectFit: 'cover', maxWidth:150, maxHeight:150 }}
+        style={{ height: 'auto', objectFit: 'cover', maxWidth: 500, maxHeight: 150 }}
         src={logo}
         alt={"Logo von " + cityName}
     /> : <></>
@@ -36,8 +36,8 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
         <div style={{ position: "sticky", top: 0, background: "white", zIndex: 11 }}>
             <Container style={{ position: "relative" }}>
                 <Row>
-                    <Col className="justify-content-between d-flex">
-                        <h1 style={{ fontWeight: 600, whiteSpace: "nowrap"}}>
+                    <Col className="justify-content-between d-md-flex">
+                        <h1 style={{ fontWeight: 600, whiteSpace: "nowrap" }} className="mb-0">
                             {cityName}
                             <Image
                                 style={{ marginLeft: 10 }}
@@ -45,37 +45,37 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
                                 alt=""
                             />
                         </h1>
-                        {localLogo}
-
-
                     </Col>
+                    <Col className="justify-content-end d-md-flex align-self-center">
+                        {localLogo}
+                    </Col>
+                </Row>
                 <nav>
                     <ul className="breadcrumb">
-                            {
-                                pathNames.map((link, index) => {
-                                    let href = `/${pathNames.slice(0, index + 1).join('/')}`
-                                    let itemClasses = paths === href ? activeClasses : listClasses
-                                    let label = labelMapping[link] ?? link[0].toUpperCase() + link.slice(1, link.length)
-                                    if (index === 0) {
-                                        label = "Dashboard"
-                                    } else {
-                                        const token = findPreviousAndNext(tasks, href.split("/").slice(3).join("/"))
-                                        if (token?.currentItem) {
-                                            label = token.currentItem.title
-                                        }
+                        {
+                            pathNames.map((link, index) => {
+                                let href = `/${pathNames.slice(0, index + 1).join('/')}`
+                                let itemClasses = paths === href ? activeClasses : listClasses
+                                let label = labelMapping[link] ?? link[0].toUpperCase() + link.slice(1, link.length)
+                                if (index === 0) {
+                                    label = "Dashboard"
+                                } else {
+                                    const token = findPreviousAndNext(tasks, href.split("/").slice(3).join("/"))
+                                    if (token?.currentItem) {
+                                        label = token.currentItem.title
                                     }
-                                    return (
-                                        <React.Fragment key={index}>
-                                            <li className={`${itemClasses} ${styles.item} ${styles.links}`} >
-                                                <Link className={styles.links} href={href}>{label}</Link>
-                                            </li>
-                                        </React.Fragment>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </nav>
-                </Row>
+                                }
+                                return (
+                                    <React.Fragment key={index}>
+                                        <li className={`${itemClasses} ${styles.item} ${styles.links}`} >
+                                            <Link className={styles.links} href={href}>{label}</Link>
+                                        </li>
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+                    </ul>
+                </nav>
             </Container>
         </div>
     )

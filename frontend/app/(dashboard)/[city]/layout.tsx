@@ -20,7 +20,7 @@ export default async function DashboardLayout({
   return (
     <Container>
         <Header />
-        <BreadCrumb logo={city.local_group?.logo} tasks={tasks} cityName={city.name}></BreadCrumb>
+        <BreadCrumb logo={city.local_group?.logo_wide} tasks={tasks} cityName={city.name}></BreadCrumb>
         {children}
         <Footer />
     </Container>

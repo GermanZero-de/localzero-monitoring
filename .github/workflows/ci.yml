@@ -12,7 +12,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - name: setup python
@@ -29,11 +29,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: install Yarn
-        run: corepack enable && yarn set version ${{ env.YARN_VERSION }}
-      - name: install javascript dependencies
-        run: |
-          yarn install
       - name: run pre-commit hooks on all files
         run: SKIP=no-commit-to-branch poetry run pre-commit run --all-files
       - name: create database
