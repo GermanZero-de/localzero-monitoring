@@ -23,7 +23,8 @@ class LocalGroupSerializer(serializers.ModelSerializer):
             "website",
             "teaser",
             "description",
-            "logo",
+            "logo_square",
+            "logo_wide",
             "featured_image",
         ]
 

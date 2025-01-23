@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
-    "@tabler/core": "^1.0.0-beta17",
+    "@tabler/core": ">=1.0.0-beta17 <1.0.0-beta22",
     "@tabler/icons": "^2.30.0",
     "apexcharts": "^3.45.1",
     "jquery": "^3.6.3"
