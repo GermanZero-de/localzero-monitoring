@@ -1,3 +1,13 @@
+# build frontend
+FROM node:19-alpine AS frontend-builder
+
+WORKDIR /cpmonitor
+
+COPY package.json yarn.lock ./
+COPY cpmonitor/static/css cpmonitor/static/css
+RUN yarn install && \
+    yarn run compile:css
+
 # basic python settings
 FROM python:3.10-alpine AS python-base
 
@@ -26,6 +36,10 @@ RUN poetry export --without dev --format requirements.txt \
     | /venv/bin/pip install --requirement /dev/stdin
 
 COPY . .
+COPY --from=frontend-builder /cpmonitor/cpmonitor/static/css ./cpmonitor/static/css
+COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/icons ./node_modules/@tabler/icons
+COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/core/dist ./node_modules/@tabler/core/dist
+COPY --from=frontend-builder /cpmonitor/node_modules/jquery/dist ./node_modules/jquery/dist
 RUN DJANGO_SECRET_KEY="dummy" DJANGO_CSRF_TRUSTED_ORIGINS="dummy" DJANGO_DEBUG="False" \
     /venv/bin/python manage.py collectstatic --no-input -v 2 --settings=config.settings.container
 RUN poetry build && \
