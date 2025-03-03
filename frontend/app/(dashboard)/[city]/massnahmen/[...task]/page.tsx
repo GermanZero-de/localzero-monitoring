@@ -81,7 +81,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
       const assestment = task.plan_assessment ? <><h1 className="headingWithBar">Bewertung der geplanten Maßnahme</h1><CustomMarkdown content={task?.plan_assessment}></CustomMarkdown></> : <></>
       const execution = task.execution_justification ? <><h1 className="headingWithBar">Begründung Umsetzungsstand</h1><CustomMarkdown content={task?.execution_justification}></CustomMarkdown></> : <></>
       const explanation = task.responsible_organ_explanation ? <><h1 className="headingWithBar">Zuständige Instanz</h1><CustomMarkdown content={task?.responsible_organ_explanation}></CustomMarkdown></> : <></>
-      const supporting_ngos = task.supporting_ngos ? <><h1 className="headingWithBar">Mit Unterstützung von</h1><CustomMarkdown content={task?.supporting_ngos}></CustomMarkdown></> : <></>
+    
 
 
   return (
@@ -106,7 +106,6 @@ export default async function TaskDetails({ params }: { params: { city: string, 
               {assestment}
               {execution}
               {explanation}
-              {supporting_ngos}
             </div>
           </div>
         </Col>
