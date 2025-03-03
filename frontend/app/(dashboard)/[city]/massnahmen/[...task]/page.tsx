@@ -81,8 +81,6 @@ export default async function TaskDetails({ params }: { params: { city: string, 
       const assestment = task.plan_assessment ? <><h1 className="headingWithBar">Bewertung der geplanten Maßnahme</h1><CustomMarkdown content={task?.plan_assessment}></CustomMarkdown></> : <></>
       const execution = task.execution_justification ? <><h1 className="headingWithBar">Begründung Umsetzungsstand</h1><CustomMarkdown content={task?.execution_justification}></CustomMarkdown></> : <></>
       const explanation = task.responsible_organ_explanation ? <><h1 className="headingWithBar">Zuständige Instanz</h1><CustomMarkdown content={task?.responsible_organ_explanation}></CustomMarkdown></> : <></>
-    
-
 
   return (
     <Container className={`${styles.container} ${task.source === 1 ? styles.top : ""}`}>
