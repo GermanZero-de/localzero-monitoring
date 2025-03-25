@@ -9,6 +9,7 @@ import styles from "./styles/LocalGroup.module.scss";
 import { LocalGroupType } from "@/types";
 import { useState } from "react";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from 'remark-gfm'
 
 type Props = {
   localGroup: LocalGroupType | null;
@@ -44,11 +45,11 @@ export default function LocalGroup({ localGroup }: Props) {
 
         {isExpanded ? (
           <>
-            <Markdown className="mdContent" rehypePlugins={[rehypeRaw]}>{localGroup.description}</Markdown>
+            <Markdown className="mdContent" rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{localGroup.description}</Markdown>
             {image}
           </>
         ) : (
-          <Markdown className="mdContent" rehypePlugins={[rehypeRaw]}>{localGroup.teaser}</Markdown>
+          <Markdown className="mdContent" rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{localGroup.teaser}</Markdown>
         )}
 
         <div className={styles.center}>

@@ -6,6 +6,8 @@ import { getCities } from "@/lib/dataService";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
 import { CheckItem } from "@/types";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from 'remark-gfm'
+
 export default async function AdministrationChecklist({ params }: { params: { city: string } }) {
 
   const city = await getCities(params.city);
@@ -28,7 +30,7 @@ export default async function AdministrationChecklist({ params }: { params: { ci
           />
       </div>
       <h1 className="headingWithBar">Nachhaltigkeitsarchitektur in der Verwaltung</h1>
-      <Markdown rehypePlugins={[rehypeRaw]} className="pb-3 mdContent">{city.assessment_administration}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="pb-3 mdContent">{city.assessment_administration}</Markdown>
       <Accordion
         id="accordionFlushKAP"
         className="accordion-flush pb-3"

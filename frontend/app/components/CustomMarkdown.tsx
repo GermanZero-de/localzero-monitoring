@@ -1,6 +1,8 @@
 import React from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from 'remark-gfm'
+import styles from "./styles/CustomMarkdown.module.scss";
 
 // Define the custom renderer for images
 interface ImageProps {
@@ -40,7 +42,7 @@ const CustomMarkdown: React.FC<MarkdownProps> = ({ content, className="" }) => {
     img: ({ alt, src }) => <ImageRenderer alt={alt} src={src} content={content} />,
   };
   const match = content?.match(regex);
-  return <ReactMarkdown className={`mdContent ${className}`} rehypePlugins={[rehypeRaw]} components={components}>{match ? content?.replace(match[0], "").trim() : content}</ReactMarkdown>;
+  return <ReactMarkdown className={`mdContent ${className} ${styles.mdContent}`} rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} components={components}>{match ? content?.replace(match[0], "").trim() : content}</ReactMarkdown>;
 };
 
 export default CustomMarkdown;

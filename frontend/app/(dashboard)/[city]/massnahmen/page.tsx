@@ -13,7 +13,7 @@ import Markdown from "react-markdown";
 import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import rehypeRaw from "rehype-raw";
-
+import remarkGfm from 'remark-gfm'
 
 
 
@@ -44,7 +44,7 @@ export default async function CityMeasures({ params, searchParams }: { params: {
         />
       </h1>
 
-      <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{city.assessment_status}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="mdContent">{city.assessment_status}</Markdown>
       <h1 className="headingWithBar">Maßnahmen in {city.name}</h1>
       <Accordion className={styles.accordion} defaultActiveKey={activeKey.split("/")[0]}>
         {tasks &&
