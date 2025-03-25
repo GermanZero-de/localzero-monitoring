@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Modal, CloseButton } from 'react-bootstrap';
 import Markdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm'
 
 interface ImageModalProps {
   src: string;
@@ -44,7 +45,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
             />
         <figcaption>
-        <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{caption}</Markdown>
+        <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="mdContent">{caption}</Markdown>
             <span className="text-muted">Quelle: { source } - Lizenz: { license }</span>
         </figcaption>
      </figure>
@@ -62,7 +63,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 style={{maxHeight: "90%"}}
                 />
             <figcaption>
-            <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{caption}</Markdown>
+            <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="mdContent">{caption}</Markdown>
                 <span className="text-muted">Quelle: { source } - Lizenz: { license }</span>
             </figcaption>
         </figure>
