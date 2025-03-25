@@ -43,10 +43,6 @@ const MeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, statusOfSubT
       <Card.Header
         className={styles.header}
         onClick={(e)=>{
-          const newUrl = new URL(window.location.href);
-          newUrl.searchParams.set('active', eventKey);
-          newUrl.hash=`#${eventKey}`;
-          window.history.pushState({}, '', newUrl.toString());
           onClick(e)
         }}
       >

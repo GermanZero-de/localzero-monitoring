@@ -1,4 +1,5 @@
-import { Task } from "@/types";
+import type { Task, StatusCount } from "@/types";
+import { ExecutionStatus } from "@/types/enums";
 
 export const executionLabels = {
     "complete":"abgeschlossen",
@@ -66,3 +67,38 @@ export function flattenTasks(tasks:Task[]) {
     recurse(tasks); // Start recursion from the top-level tasks
     return flatList;
 }
+
+export const getRecursiveStatusNumbers = (
+    tasks: Task[],
+  ): { complete: number; asPlanned: number; delayed: number; failed: number; unknown: number } => {
+    return tasks.reduce(
+      (statusCount, task) => {
+        if (task.numchild > 0) {
+          const childrenStatusNumbers = getRecursiveStatusNumbers(task.children);
+          Object.keys(childrenStatusNumbers).forEach((statusKey) => {
+            statusCount[statusKey as keyof StatusCount] += childrenStatusNumbers[statusKey as keyof StatusCount];
+          });
+        } else {
+          switch (task.execution_status) {
+            case ExecutionStatus.UNKNOWN:
+              statusCount.unknown++;
+              break;
+            case ExecutionStatus.AS_PLANNED:
+              statusCount.asPlanned++;
+              break;
+            case ExecutionStatus.COMPLETE:
+              statusCount.complete++;
+              break;
+            case ExecutionStatus.DELAYED:
+              statusCount.delayed++;
+              break;
+            case ExecutionStatus.FAILED:
+              statusCount.failed++;
+              break;
+          }
+        }
+        return statusCount;
+      },
+      { complete: 0, asPlanned: 0, delayed: 0, failed: 0, unknown: 0 } as StatusCount,
+    );
+  };
