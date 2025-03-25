@@ -6,6 +6,7 @@ import { getCities } from "@/lib/dataService";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
 import type { CheckItem } from "@/types";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from 'remark-gfm'
 
 export default async function CapChecklist({ params }: { params: { city: string } }) {
 
@@ -29,7 +30,7 @@ export default async function CapChecklist({ params }: { params: { city: string 
           />
       </div>
       <h1 className="headingWithBar">Klimaaktionsplan {city.name}</h1>
-      <Markdown rehypePlugins={[rehypeRaw]} className="pb-3 mdContent">{city.assessment_action_plan}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="pb-3 mdContent">{city.assessment_action_plan}</Markdown>
       <Accordion
         id="accordionFlushKAP"
         className="accordion-flush pb-3"

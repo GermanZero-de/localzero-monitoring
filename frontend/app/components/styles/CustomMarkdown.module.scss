@@ -1,0 +1,18 @@
+.mdContent{
+    img {
+      max-width: 100%;
+    }
+    table td,th {
+      padding:5px 10px;
+      border-width: 1px;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #eee;
+
+      }
+
+    th{
+        background: lightgray;
+    }
+  }
