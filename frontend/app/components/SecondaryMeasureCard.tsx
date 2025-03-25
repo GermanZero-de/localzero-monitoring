@@ -8,7 +8,6 @@ import { Accordion, AccordionContext, Card, useAccordionButton } from "react-boo
 import styles from "./styles/SecondaryMeasureCard.module.scss";
 import { TaskSource } from "@/types/enums";
 
-
 interface MeasureCardProps {
   eventKey: string;
   title: string;
@@ -28,9 +27,6 @@ const SecondaryMeasureCard: React.FC<MeasureCardProps> = ({ eventKey, title, chi
       <Card.Header
         className={`${styles.header} ${styles.noicon}`}
         onClick={(e)=>{
-          const newUrl = new URL(window.location.href);
-          newUrl.searchParams.set('active', eventKey);
-          window.history.pushState({}, '', newUrl.toString());
           onClick(e)
         }}
       >
