@@ -1,24 +1,18 @@
-
 import MeasureCard from "@/app/components/MeasureCard";
-
 import Image from "next/image";
 import arrow from "@/public/imgs/arrow-right-down.svg";
-import { Accordion, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import styles from "./page.module.scss";
-import MeasureCardContent from "@/app/components/MeasureCardContent";
-
 import { ExecutionStatus } from "@/types/enums";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Markdown from "react-markdown";
-import { getCities, getTasks, getRecursiveStatusNumbers } from "@/lib/dataService";
+import { getCities, getTasks } from "@/lib/dataService";
+import {  getRecursiveStatusNumbers } from "@/lib/utils";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import rehypeRaw from "rehype-raw";
+import MeasuresAccordion from "@/app/components/MeasuresAccordion";
 
-
-
-
-export default async function CityMeasures({ params, searchParams }: { params: { city: string}, searchParams:{active:string}  }) {
-  const activeKey = searchParams?.active || "";
+export default async function CityMeasures({ params }: { params: { city: string} }) {
   const city = await getCities(params.city);
   const tasks = await getTasks(params.city);
   if (!city || !tasks) {
@@ -46,27 +40,7 @@ export default async function CityMeasures({ params, searchParams }: { params: {
 
       <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{city.assessment_status}</Markdown>
       <h1 className="headingWithBar">Maßnahmen in {city.name}</h1>
-      <Accordion className={styles.accordion} defaultActiveKey={activeKey.split("/")[0]}>
-        {tasks &&
-          tasks.map((task:any, i:number) => {
-            return (
-              <MeasureCard
-                key={i}
-                eventKey={task.slugs}
-                title={task.title}
-                statusOfSubTasks={getRecursiveStatusNumbers(task.children)}
-              >
-                <MeasureCardContent
-                  activeKey={activeKey}
-                  slugs={task.slugs}
-                  text={task.teaser}
-                  tasks={task.children}
-                  eventKey={task.slugs}
-                ></MeasureCardContent>
-              </MeasureCard>
-            );
-          })}
-      </Accordion>
+      <MeasuresAccordion tasks={tasks} />
       <div className={styles.legende}>
         <div>
           <ExecutionStatusIcon taskStatus={ExecutionStatus.COMPLETE}></ExecutionStatusIcon>
