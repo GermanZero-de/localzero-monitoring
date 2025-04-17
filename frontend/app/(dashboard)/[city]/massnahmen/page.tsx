@@ -11,6 +11,7 @@ import {  getRecursiveStatusNumbers } from "@/lib/utils";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import rehypeRaw from "rehype-raw";
 import MeasuresAccordion from "@/app/components/MeasuresAccordion";
+import remarkGfm from 'remark-gfm'
 
 export default async function CityMeasures({ params }: { params: { city: string} }) {
   const city = await getCities(params.city);
@@ -38,7 +39,7 @@ export default async function CityMeasures({ params }: { params: { city: string}
         />
       </h1>
 
-      <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{city.assessment_status}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="mdContent">{city.assessment_status}</Markdown>
       <h1 className="headingWithBar">Maßnahmen in {city.name}</h1>
       <MeasuresAccordion tasks={tasks} />
       <div className={styles.legende}>
