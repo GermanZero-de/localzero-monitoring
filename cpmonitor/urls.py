@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
@@ -31,7 +32,17 @@ urlpatterns = [
         name="accept-invite",
     ),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
-    #
+    
+    # Declare frontend task URLs so treebeard can reverse them.
+    # The dummy "view" returned here is never shown because nginx requests this from the frontend app instead!
+    path(
+        "<slug:city_slug>/massnahmen/<path:task_slugs>/",
+        lambda _ : HttpResponse("this is where nginx proxies the task page of the frontend app when deployed"),
+        name="task",
+    ),
+    # Declare frontend index URL so it can be reversed by django when city admin or editor invitations are accepted
+    path("", lambda _ : HttpResponse("this is where nginx proxies the index page of the frontend app when deployed"), name="index"),
+    
     # REST API urls
     #
     # Use accept header "application/json" to get json
@@ -40,5 +51,4 @@ urlpatterns = [
     path("api/cities/<str:slug>", views.CityDetail.as_view()),
     path("api/cities/<str:slug>/tasks", views.TasksByCity.as_view()),
     path("api/tasks/top", views.TasksTop.as_view()),
-    path("", RedirectView.as_view(url="/start"), name="index"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

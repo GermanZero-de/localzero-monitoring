@@ -4,7 +4,6 @@ import re
 import requests
 import time
 import uuid
-from collections import Counter
 from datetime import date, datetime
 
 from PIL import Image
@@ -15,11 +14,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from django.http import Http404, HttpResponseServerError, JsonResponse
+from django.http import HttpResponseServerError, JsonResponse
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.shortcuts import render
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, DetailView
 from invitations import views as invitations_views
@@ -37,8 +34,6 @@ from .models import (
     ExecutionStatus,
     Task,
     CapChecklist,
-    AdministrationChecklist,
-    EnergyPlanChecklist,
 )
 
 from .serializers import CitySerializer
@@ -46,7 +41,6 @@ from .serializers import TaskSerializer
 from .serializers import TaskTopSerializer
 from .serializers import TaskWithoutDraftModeSerializer
 
-from .utils import RemainingTimeInfo
 
 STATUS_ORDER = [
     ExecutionStatus.FAILED,
