@@ -8,8 +8,6 @@ from . import views
 from .admin import admin_site
 from .views import SelectCityView, CapEditView, move_task
 
-prefix_kommune = ""
-
 urlpatterns = [
     path(
         "favicon.ico",
