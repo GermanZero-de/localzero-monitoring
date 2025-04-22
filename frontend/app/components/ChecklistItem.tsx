@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 import styles from "./styles/ChecklistItem.module.scss";
 import rehypeRaw from "rehype-raw";
 import type { CheckItem } from "@/types";
+import remarkGfm from 'remark-gfm'
 
 type Props = {
   checklist_item: CheckItem;
@@ -27,7 +28,7 @@ const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
           {checklist_item.help_text.trim() ? (
             <div>
               <strong>Erklärung:</strong>
-              <Markdown rehypePlugins={[rehypeRaw]}>{checklist_item.help_text}</Markdown>
+              <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{checklist_item.help_text}</Markdown>
             </div>
           ) : (
             <></>
@@ -35,7 +36,7 @@ const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
           {checklist_item.rationale.trim() ? (
             <div>
               <strong>Anmerkung / Begründung: </strong>
-              <Markdown rehypePlugins={[rehypeRaw]} className="mdContent">{checklist_item.rationale}</Markdown>
+              <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="mdContent">{checklist_item.rationale}</Markdown>
             </div>
           ) : (
             <></>
