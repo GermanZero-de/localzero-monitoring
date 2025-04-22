@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
@@ -8,13 +9,7 @@ from . import views
 from .admin import admin_site
 from .views import SelectCityView, CapEditView, move_task
 
-prefix_kommune = ""
-
 urlpatterns = [
-    path("projekt/", views.project_view, name="project"),
-    path("impressum/", views.impressum_view, name="impressum"),
-    path("datenschutz/", views.datenschutz_view, name="datenschutz"),
-    path("ueber-uns/", views.ueber_uns_view, name="ueber-uns"),
     path(
         "favicon.ico",
         RedirectView.as_view(url=settings.STATIC_URL + "favicon.svg", permanent=True),
@@ -37,35 +32,23 @@ urlpatterns = [
         name="accept-invite",
     ),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
-    path("", views.index_view, name="index"),
-    path(prefix_kommune + "<slug:city_slug>/", views.city_view, name="city"),
+    # Declare frontend task URLs so treebeard can reverse them.
+    # The dummy "view" returned here is never shown because nginx requests this from the frontend app instead!
     path(
-        prefix_kommune + "<slug:city_slug>/lokalgruppe/",
-        views.local_group_view,
-        name="local_group",
-    ),
-    path(
-        prefix_kommune + "<slug:city_slug>/kap_checkliste/",
-        views.cap_checklist_view,
-        name="cap_checklist",
-    ),
-    path(
-        prefix_kommune + "<slug:city_slug>/verwaltungsstrukturen_checkliste/",
-        views.administration_checklist_view,
-        name="administration_checklist",
-    ),
-    path(
-        prefix_kommune + "<slug:city_slug>/waermeplanung_checkliste/",
-        views.energy_plan_checklist_view,
-        name="energy_plan_checklist",
-    ),
-    path(prefix_kommune + "<slug:city_slug>/massnahmen/", views.task_view, name="task"),
-    path(
-        prefix_kommune + "<slug:city_slug>/massnahmen/<path:task_slugs>/",
-        views.task_view,
+        "<slug:city_slug>/massnahmen/<path:task_slugs>/",
+        lambda _: HttpResponse(
+            "this is where nginx proxies the task page of the frontend app when deployed"
+        ),
         name="task",
     ),
-    #
+    # Declare frontend index URL so it can be reversed by django when city admin or editor invitations are accepted
+    path(
+        "",
+        lambda _: HttpResponse(
+            "this is where nginx proxies the index page of the frontend app when deployed"
+        ),
+        name="index",
+    ),
     # REST API urls
     #
     # Use accept header "application/json" to get json

@@ -1,6 +1,5 @@
 import pytest
 
-from django.contrib import admin
 from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.test import Client
@@ -10,7 +9,6 @@ from pytest_django.asserts import (
     assertTemplateNotUsed,
     assertContains,
     assertNotContains,
-    assertRedirects,
 )
 
 

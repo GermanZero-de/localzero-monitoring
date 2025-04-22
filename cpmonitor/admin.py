@@ -15,7 +15,7 @@ from rules.contrib.admin import ObjectPermissionsModelAdminMixin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory, MoveNodeForm
 
-from cpmonitor.views import SelectCityView, CapEditView, _get_cities
+from cpmonitor.views import SelectCityView, CapEditView
 from . import rules, utils
 from .models import (
     Chart,
@@ -27,6 +27,23 @@ from .models import (
     AdministrationChecklist,
     EnergyPlanChecklist,
 )
+
+
+def _show_drafts(request):
+    return request.user.is_authenticated
+
+
+def _get_cities(request, slug=None):
+    try:
+        cities = City.objects.all()
+        if not _show_drafts(request):
+            cities = cities.filter(draft_mode=False)
+        if slug:
+            return cities.get(slug=slug)
+        else:
+            return cities.order_by("name")
+    except City.DoesNotExist:
+        return None
 
 
 class AdminSite(admin.AdminSite):
