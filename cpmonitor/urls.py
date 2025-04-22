@@ -32,17 +32,23 @@ urlpatterns = [
         name="accept-invite",
     ),
     path("api/uploader/", views.markdown_uploader_view, name="markdown_uploader"),
-    
     # Declare frontend task URLs so treebeard can reverse them.
     # The dummy "view" returned here is never shown because nginx requests this from the frontend app instead!
     path(
         "<slug:city_slug>/massnahmen/<path:task_slugs>/",
-        lambda _ : HttpResponse("this is where nginx proxies the task page of the frontend app when deployed"),
+        lambda _: HttpResponse(
+            "this is where nginx proxies the task page of the frontend app when deployed"
+        ),
         name="task",
     ),
     # Declare frontend index URL so it can be reversed by django when city admin or editor invitations are accepted
-    path("", lambda _ : HttpResponse("this is where nginx proxies the index page of the frontend app when deployed"), name="index"),
-    
+    path(
+        "",
+        lambda _: HttpResponse(
+            "this is where nginx proxies the index page of the frontend app when deployed"
+        ),
+        name="index",
+    ),
     # REST API urls
     #
     # Use accept header "application/json" to get json
