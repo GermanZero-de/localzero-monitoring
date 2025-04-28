@@ -1,4 +1,4 @@
-# build frontend
+# build admin frontend
 FROM node:19-alpine AS frontend-builder
 
 WORKDIR /cpmonitor
