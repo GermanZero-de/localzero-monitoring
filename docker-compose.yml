@@ -22,6 +22,7 @@ services:
       - DJANGO_DEBUG=${DJANGO_DEBUG}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:?Please set the DJANGO_SECRET_KEY environment variable.}
       - DJANGO_CSRF_TRUSTED_ORIGINS=${DJANGO_CSRF_TRUSTED_ORIGINS:?Please set the DJANGO_CSRF_TRUSTED_ORIGINS environment variable.}
+    restart: unless-stopped
 
   frontend:
     container_name: frontend-${ENVIRONMENT_NAME}
@@ -33,6 +34,7 @@ services:
       - nginx_network
     environment:
       - REST_API=http://djangoapp:8000
+    restart: unless-stopped
 
   nginx-unprivileged:
     container_name: nginx-${ENVIRONMENT_NAME}
@@ -48,6 +50,7 @@ services:
       - djangoapp
     networks:
       - nginx_network
+    restart: unless-stopped
 
   dbeaver:
     build: ./docker/dbeaver
@@ -65,6 +68,7 @@ services:
       CB_ADMIN_PASSWORD: ${CB_ADMIN_PASSWORD}
     depends_on:
       - djangoapp
+    restart: unless-stopped
 
 networks:
   nginx_network:

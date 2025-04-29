@@ -69,12 +69,8 @@ docker run --user=1007:1007 --rm -v /home/monitoring/${env}/db:/db cpmonitor:${e
 
 # use the latest docker-compose.yml to start the app using the new image
 mv docker-compose.yml docker-compose.yml.bak && cp /tmp/docker-compose.yml .
-if [[ $(docker network ls --filter name="${env}_nginx_network" --quiet | wc -l) == 0 ]]; then
-    echo "Creating docker network ${env}_nginx_network since it does not exist."
-    docker network create ${env}_nginx_network || echo "Failed to create network, but continuing."
-else
-    echo "Docker network ${env}_nginx_network already exists."
-fi
+docker network create testing_nginx_network || echo "Failed to create network testing_nginx_network, but continuing."
+docker network create production_nginx_network || echo "Failed to create network production_nginx_network, but continuing."
 docker-compose up --detach --no-build
 
 # Update the reverse proxy config

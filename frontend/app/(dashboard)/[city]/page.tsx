@@ -13,6 +13,7 @@ import ChecklistIndicator from "@/app/components/ChecklistIndicator";
 import type { CheckItem, Chart } from "@/types";
 import rehypeRaw from "rehype-raw";
 import ImageModal from "@/app/components/ImageModal";
+import remarkGfm from 'remark-gfm'
 
 interface CityDescriptionProps {
   teaser: string;
@@ -28,7 +29,7 @@ const CityDescription: React.FC<CityDescriptionProps> = ({ description, name, te
     <div className={styles.mdContent}>
       <h1 className="headingWithBar">Klimaschutz in {name}</h1>
       <h5>{teaser}</h5>
-      <Markdown rehypePlugins={[rehypeRaw]} className="pb-3 mdContent">{description}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="pb-3 mdContent">{description}</Markdown>
     </div>
   );
 };
@@ -44,7 +45,7 @@ const SupportingNgos: React.FC<SupportingNgosProps> = ({ supportingNgos }) => {
   return (
     <>
       <h2 className="headingWithBar">Mit Unterstützung von</h2>
-      <Markdown rehypePlugins={[rehypeRaw]} className="block-text pb-3">{supportingNgos}</Markdown>
+      <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}  className="block-text pb-3">{supportingNgos}</Markdown>
     </>
   );
 };
