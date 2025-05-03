@@ -9,7 +9,7 @@ RUN yarn install && \
     yarn run compile:css
 
 # basic python settings
-FROM python:3.10-alpine AS python-base
+FROM python:3.11-alpine AS python-base
 
 ENV PYTHONFAULTHANDLER=1 \
     PYTHONHASHSEED=random \
@@ -21,7 +21,7 @@ ENV PYTHONFAULTHANDLER=1 \
 WORKDIR /cpmonitor
 
 # build python app
-FROM python-base as python-builder
+FROM python-base AS python-builder
 
 ENV PIP_DEFAULT_TIMEOUT=100 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
@@ -46,7 +46,7 @@ RUN poetry build && \
     /venv/bin/pip install dist/*.whl
 
 # put together final app container
-FROM python-base as final
+FROM python-base AS final
 
 ENV PATH="/venv/bin:${PATH}"
 ENV VIRTUAL_ENV="/venv"
