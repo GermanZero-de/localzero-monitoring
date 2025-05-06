@@ -39,8 +39,6 @@ services:
   nginx-unprivileged:
     container_name: nginx-${ENVIRONMENT_NAME}
     image: nginxinc/nginx-unprivileged:alpine
-    ports:
-      - 8080
     volumes:
       - nginx_config_volume:/etc/nginx/conf.d
       - nginx_extras_volume:/etc/nginx/conf.d/extras
