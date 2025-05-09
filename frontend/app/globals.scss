@@ -1,11 +1,16 @@
 @use "common.scss";
 
-@import 'bootstrap/scss/mixins';
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/variables-dark';
-@import 'bootstrap/scss/maps';
-@import 'bootstrap/scss/utilities';
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/utilities";
+
+@font-face {
+  font-family: "PT Serif";
+  src: url("../public/fonts/PTSerif/PTSerif-Regular.ttf") format("truetype");
+}
 
 :root {
   --bs-primary-rgb: 255, 200, 12;
@@ -164,7 +169,7 @@
 @mixin heading {
   color: common.$gz-secondary-color;
   position: relative;
-  font-family: PT Serif;
+  font-family: "PT Serif";
   line-height: 1.43;
 }
 
