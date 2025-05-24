@@ -22,7 +22,7 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, sl
   const [activeKey, setActiveKey] = useState<string>("");
 
   useEffect(() => {
-    const active = searchParams.get("activesub");
+    const active = searchParams.get(eventKey.substring(0,5));
     if (active) {
       setActiveKey(active);
     }
@@ -31,17 +31,16 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, sl
   const handleSelect = (key: string | null) => {
     const newKey = key || "";
     setActiveKey(newKey);
-
     const params = new URLSearchParams(searchParams.toString());
-
+  
     if (newKey) {
-      params.set("activesub", newKey);
+      params.set(eventKey.substring(0,5), newKey);
     } else {
-      params.delete("activesub");
+      params.delete(eventKey.substring(0,5));
     }
-
+  
     router.replace(`?${params.toString()}`, { scroll: false });
-  };
+  };  
 
   return (
     <div >
