@@ -23,20 +23,25 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, sl
 
   useEffect(() => {
     const active = searchParams.get(eventKey.substring(0,5));
-    if (active) {
-      setActiveKey(active);
+    const matchingChildTask = tasks.find((t) => t.slugs.split("/").pop() === active);
+
+    if (matchingChildTask) {
+      setActiveKey(matchingChildTask.slugs);
     }
   }, [searchParams]);
 
   const handleSelect = (key: string | null) => {
     const newKey = key || "";
-    setActiveKey(newKey);
+    const lastSegment = newKey.split("/").pop()!;
     const params = new URLSearchParams(searchParams.toString());
+    const keyPart = eventKey.substring(0,5);
+
+    setActiveKey(newKey);
   
     if (newKey) {
-      params.set(eventKey.substring(0,5), newKey);
+      params.set(keyPart, lastSegment);
     } else {
-      params.delete(eventKey.substring(0,5));
+      params.delete(keyPart);
     }
   
     router.replace(`?${params.toString()}`, { scroll: false });
