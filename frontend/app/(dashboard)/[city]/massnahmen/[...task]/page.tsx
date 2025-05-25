@@ -13,23 +13,16 @@ import CustomMarkdown from "@/app/components/CustomMarkdown";
 import { Task } from "@/types";
 
 export default async function TaskDetails({ params }: { params: { city: string, task: Array<string> } }) {
-
   const city = await getCities(params.city)
   const tasks = await getTasks(params.city)
-
 
   if (!tasks) {
     return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
   }
 
-
   const currentSlug = params.task.join("/")
-  const { previousItem, currentItem, nextItem, rootItem } = findPreviousAndNext(tasks, currentSlug);
-
+  const { currentItem, rootItem } = findPreviousAndNext(tasks, currentSlug);
   const task = currentItem;
-
-  const rootTaskSlug = task?.slugs.split("/")[0];
-
 
   if (!task) {
     return <h3 className="pb-3 pt-3">Maßnahme {task} wurde nicht gefunden</h3>;
@@ -45,8 +38,7 @@ export default async function TaskDetails({ params }: { params: { city: string, 
   const nextUrl = `${baseUrl}/${taskListFlat[nextIndex]}`;
   const prevUrl =  `${baseUrl}${taskListFlat[prevIndex]}`;
 
-  const back = task.children.length !== 0 ? task.slugs : task.slugs.split("/").slice(0,-1).join("/");
-  const rootUrl = rootItem ? `${baseUrl}?active=${back}#${rootTaskSlug}` : undefined;
+ const rootUrl = rootItem ? buildRootUrl(task.slugs, baseUrl) : undefined;
 
   const nav = task.children.length === 0 ? <TaskNavigation prev={prevUrl} next={nextUrl} root={rootUrl} tasks={tasks} baseUrl={baseUrl} active={currentItem.slugs} cityname={city.name}></TaskNavigation> : <></>
 
@@ -116,3 +108,24 @@ export default async function TaskDetails({ params }: { params: { city: string, 
     </Container >
   );
 }
+
+function buildRootUrl(slugs: string, baseUrl: string): string {
+  const segments = slugs.split("/");
+
+  console.log('seg: ', segments);
+  if (segments.length < 2) {
+    return `${baseUrl}?active=${segments[0]}`;
+  }
+
+  const [active, ...rest] = segments;
+  const params = new URLSearchParams({ active });
+
+  rest.forEach((segment, i) => {
+    const index = i < 1 ? 'n' : (i+1)
+    params.set('sub' + index, segment);
+    console.log('params: ',params);
+  });
+
+  return `${baseUrl}?${params.toString()}`;
+}
+
