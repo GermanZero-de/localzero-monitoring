@@ -22,7 +22,7 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, sl
   const [activeKey, setActiveKey] = useState<string>("");
 
   useEffect(() => {
-    const active = searchParams.get(eventKey.substring(0,5));
+    const active= searchParams.get('sub' + eventKey.substring(eventKey.length-1));
     const matchingChildTask = tasks.find((t) => t.slugs.split("/").pop() === active);
 
     if (matchingChildTask) {
@@ -34,7 +34,7 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, sl
     const newKey = key || "";
     const lastSegment = newKey.split("/").pop()!;
     const params = new URLSearchParams(searchParams.toString());
-    const keyPart = eventKey.substring(0,5);
+    const keyPart = 'sub' + eventKey.substring(eventKey.length-1);
 
     setActiveKey(newKey);
   
