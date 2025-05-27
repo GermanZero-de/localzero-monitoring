@@ -46,10 +46,10 @@ interface TileListProps {
           ))}
     </div>
     <div className="block-text pb-3" onClick={toggle} style={{cursor:"pointer"}}>
-          {!showAll ? <div className="lh-4 py-4">Anzeige weiterer Kommunen</div> : <></>}
+          <div className="lh-4 py-4">{!showAll ? "weitere Kommunen" : "weniger"}</div>
           <Image
             src={showAll ? expandArrowUp : expandArrowDown}
-            alt="Anzeige weiterer Kommunen"
+            alt="weitere Kommunen"
           />
         </div>
     </div>
