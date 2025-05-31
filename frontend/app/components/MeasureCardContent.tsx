@@ -16,37 +16,45 @@ interface MeasureCardContentProps {
   activeKey: string;
 }
 
-const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, slugs, eventKey}) => {
+const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, slugs, eventKey }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [activeKey, setActiveKey] = useState<string>("");
 
   useEffect(() => {
-    const active = searchParams.get("activesub");
-    if (active) {
-      setActiveKey(active);
+    const active = searchParams.get("sub" + eventKey.substring(eventKey.length - 1));
+    const matchingChildTask = tasks.find((t) => t.slugs.split("/").pop() === active);
+
+    if (matchingChildTask) {
+      setActiveKey(matchingChildTask.slugs);
     }
   }, [searchParams]);
 
   const handleSelect = (key: string | null) => {
     const newKey = key || "";
+    const lastSegment = newKey.split("/").pop()!;
+    const params = new URLSearchParams(searchParams.toString());
+    const keyPart = "sub" + eventKey.substring(eventKey.length - 1);
+
     setActiveKey(newKey);
 
-    const params = new URLSearchParams(searchParams.toString());
-
     if (newKey) {
-      params.set("activesub", newKey);
+      params.set(keyPart, lastSegment);
     } else {
-      params.delete("activesub");
+      params.delete(keyPart);
     }
 
     router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   return (
-    <div >
-      {text} <a href={"./massnahmen/"+slugs}>Mehr lesen...</a>
-      <Accordion className={styles.contentaccordion} activeKey={activeKey} onSelect={(key) => handleSelect(key as string)}>
+    <div>
+      {text} <a href={"./massnahmen/" + slugs}>Mehr lesen...</a>
+      <Accordion
+        className={styles.contentaccordion}
+        activeKey={activeKey}
+        onSelect={(key) => handleSelect(key as string)}
+      >
         {tasks.map((task, i) => {
           if (task.numchild && task.children.length > 0) {
             return (
