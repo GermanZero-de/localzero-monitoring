@@ -4,14 +4,14 @@
 }
 
 .textPrimary {
-  color: rgb(var(--bs-primary-rgb));
+  background-color: rgb(var(--bs-primary-rgb));
+  color: white;
   text-align: center;
   width: 100%;
   top: 290px;
-  font-size: 48px;
+  font-size: 41px;
   position: absolute;
   z-index: 1;
-  text-shadow: #333 1px 1px 12px;
   @media (max-width: 450px) {
     font-size: 2.5rem;
     line-height: 3rem;
