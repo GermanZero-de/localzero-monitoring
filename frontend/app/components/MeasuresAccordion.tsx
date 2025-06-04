@@ -37,7 +37,7 @@ export default function MeasuresAccordion({ tasks }: MeasuresAccordionProps) {
       params.delete("active");
       params.delete("activesub");
     }
-   
+
     router.replace(`?${params.toString()}`, { scroll: false });
   };
 
