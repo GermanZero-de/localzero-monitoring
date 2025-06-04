@@ -31,12 +31,13 @@ export default function MeasuresAccordion({ tasks }: MeasuresAccordionProps) {
     const params = new URLSearchParams(searchParams.toString());
 
     if (newKey) {
+      params.delete("activesub");
       params.set("active", newKey);
     } else {
       params.delete("active");
       params.delete("activesub");
     }
-   //
+
     router.replace(`?${params.toString()}`, { scroll: false });
   };
 
