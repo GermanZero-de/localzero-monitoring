@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./styles/Subheader.module.scss";
 import { Container } from "react-bootstrap";
+import heroimage from "@/public/hero-image.webp";
 export default function Subheader() {
   return (
     <Container>
@@ -11,8 +12,8 @@ export default function Subheader() {
       unoptimized
       fill
       style={{ objectFit: "cover", objectPosition:"70%" }}
-      src="/images/background.webp"
-      alt="Fröhliches Kind mit Strohhut in einer grünen Stadt"
+      src={heroimage}
+      alt="Begrünter Stadtplatz mit vielen Bäumen"
     />
   </div>
   </Container>
