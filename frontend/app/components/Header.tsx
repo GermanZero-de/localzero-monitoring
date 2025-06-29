@@ -36,13 +36,8 @@ export default function Header() {
             <Nav.Link
               href="https://mitmachen-wiki.germanzero.org/w/LocalZero:Top_Ma%C3%9Fnahmen_f%C3%BCr_Kommunen"
               target="_blank"
+              aria-label="Öffne das Germanzero Wiki in neuem Tab"
             >
-              <Image
-                width={30}
-                height={15}
-                src={arrow}
-                alt="little arrow"
-              ></Image>
               TOP MASSNAHMEN
             </Nav.Link>
           </Nav>
