@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import { getCities } from "@/lib/dataService";
 import { City } from "@/types";
+import Subheader from "@/app/components/Subheader";
 import TileList from "@/app/components/TileList";
 
 export default async function Home() {
@@ -8,18 +9,18 @@ export default async function Home() {
 
   return (
     <>
-
+      <Subheader />
       <Container>
-        <h1 className="py-4 w-sm-50 m-auto">LocalMonitoring</h1>
-        <p className="pb-4 w-sm-50 m-auto">
-        ... ist eine Initiative von <a href="https://localzero.net/" target="new">LocalZero</a>, um mehr Transparenz zum Fortschritt der Klimaneutralität deutscher Kommunen zu schaffen. Der Fortschritt wird von ehrenamtlichen Lokalteams in den jeweiligen Kommunen regelmäßig aktualisiert.
-        </p>
+        <div className="w-sm-75 m-auto">
+          <h1 className="">Willkommen beim LocalMonitoring</h1>
+          <p className="pb-4">
+          Das LocalMonitoring ist eine Initiative von <a href="https://localzero.net/" target="new">LocalZero</a>. Ziel ist es, den Fortschritt deutscher Kommunen auf dem Weg zur Klimaneutralität transparent zu machen. Ehrenamtliche Lokalteams aktualisieren dafür regelmäßig die Daten in ihren jeweiligen Städten.
+          </p>
+        </div>
+
         <h1 className="headingWithBar">Kommunen im Monitoring</h1>
 
           <TileList cities={cities}></TileList>
-
-
-
       </Container>
     </>
   );
