@@ -14,9 +14,10 @@ interface MeasureCardContentProps {
   eventKey: string;
   slugs: string;
   activeKey: string;
+  showReadMore?: boolean;
 }
 
-const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, slugs, eventKey }) => {
+const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, slugs, eventKey, showReadMore }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [activeKey, setActiveKey] = useState<string>("");
@@ -49,7 +50,19 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, sl
 
   return (
     <div>
-      {text} <a href={"./massnahmen/" + slugs}>Mehr lesen...</a>
+      {text}{" "}
+      {showReadMore ? (
+        <p>
+          <a
+            className="teaser"
+            href={"./massnahmen/" + slugs}
+          >
+            Mehr lesen...
+          </a>
+        </p>
+      ) : (
+        ""
+      )}
       <Accordion
         className={styles.contentaccordion}
         activeKey={activeKey}
