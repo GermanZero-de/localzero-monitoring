@@ -50,7 +50,19 @@ const MeasureCardContent: React.FC<MeasureCardContentProps> = ({ text, tasks, sl
 
   return (
     <div>
-      {text} {showReadMore ? <a href={"./massnahmen/" + slugs}>Mehr lesen...</a> : ""}
+      {text}{" "}
+      {showReadMore ? (
+        <p>
+          <a
+            className="teaser"
+            href={"./massnahmen/" + slugs}
+          >
+            Mehr lesen...
+          </a>
+        </p>
+      ) : (
+        ""
+      )}
       <Accordion
         className={styles.contentaccordion}
         activeKey={activeKey}

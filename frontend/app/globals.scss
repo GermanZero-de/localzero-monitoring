@@ -21,29 +21,29 @@
   --border-radius: 0;
   --bs-secondary-rgb: 1, 22, 51;
   --bs-nav-link-color: rgb(33, 37, 41);
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-    "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-sans-serif:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .navbar-collapse.collapse.show {
-  .dropdown-item{
+  .dropdown-item {
     font-size: 0.8rem;
   }
 }
 
-
 .custom-offcanvas {
   --bs-offcanvas-width: 600px;
-    @media (max-width: 700px) {
-      --bs-offcanvas-width: 400px;
-    }
+  @media (max-width: 700px) {
+    --bs-offcanvas-width: 400px;
+  }
 }
 
 .custom-offcanvas .offcanvas-end {
   width: var(--bs-offcanvas-width);
 }
-.mdContent{
+.mdContent {
   img {
     max-width: 100%;
     margin-top: 30px;
@@ -71,69 +71,71 @@
   }
 }
 
-
-
 .dropdown-menu {
   --bs-dropdown-spacer: 0;
   --bs-dropdown-padding-y: 0;
   opacity: 0;
   max-height: 0;
   overflow: hidden;
-  transition: opacity 0.3s ease, max-height 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    max-height 0.3s ease;
   transform: translateY(-10px);
   transform-origin: top;
   border: none;
 }
 
-.dropdown-menu a, a.nav-link{
+.dropdown-menu a,
+a.nav-link {
   border: none;
   color: rgb(33, 37, 41);
 }
 
 @media (min-width: 990px) {
-
-  .dropdown-toggle::after{
+  .dropdown-toggle::after {
     visibility: hidden;
-   }
-
+  }
 
   .dropdown-menu.show {
     background-color: common.$gz-color;
   }
 
-  .dropdown-toggle.show{
+  .dropdown-toggle.show {
     background-color: common.$gz-color;
   }
 
-  .nav-link:hover{
+  .nav-link:hover {
     text-decoration: underline;
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 3px;
   }
 
-  .nav-item.dropdown:hover, .dropdown-item:hover, .dropdown-item:active{
+  .nav-item.dropdown:hover,
+  .dropdown-item:hover,
+  .dropdown-item:active {
     background-color: common.$gz-color !important;
     color: rgb(33, 37, 41);
     text-decoration: underline;
     text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 3px;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 3px;
   }
 
-  .dropDownDivider{
+  .dropDownDivider {
     border-top: solid 6px #fff;
     box-sizing: border-box;
     height: 6px;
     width: 78px;
     margin-top: 15px;
     margin-bottom: 32px;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .nav-item.dropdown, a.nav-link{
-    max-width:257px
+  .nav-item.dropdown,
+  a.nav-link {
+    max-width: 257px;
   }
 
   .nav-item.dropdown::after {
@@ -151,7 +153,6 @@
     position: absolute;
     bottom: -10px;
   }
-
 }
 
 .dropdown-menu.show {
@@ -160,7 +161,6 @@
   transform: translateY(0);
   text-align: center;
 }
-
 
 .dropdown-item {
   border-bottom: 1px solid;
@@ -246,5 +246,16 @@ h3 {
   }
   @media (max-width: 450px) {
     width: 100% !important; // Ensures 100% width on smaller screens
+  }
+}
+
+a.teaser {
+  color: common.$gz-secondary-color;
+  margin-top: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  &:hover {
+    text-decoration: underline;
   }
 }
