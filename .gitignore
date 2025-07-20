@@ -132,14 +132,9 @@ dmypy.json
 .idea
 .vscode
 
-# Yarn
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+# npm
 node_modules
+!package-lock.json
 
 # images uploaded through the admin interface
 cpmonitor/images
@@ -148,4 +143,3 @@ cpmonitor/images
 # docker images exported for upload
 *.tar
 !frontend/lib
-package-lock.json

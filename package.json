@@ -1,6 +1,5 @@
 {
-  "name": "cpmonitor",
-  "packageManager": "yarn@3.4.1",
+  "name": "localzero-monitoring-admin",
   "scripts": {
     "compile:css:watch": "sass --watch --load-path=node_modules cpmonitor/static/css/",
     "compile:css:poll": "sass --watch --poll --load-path=node_modules cpmonitor/static/css/",
