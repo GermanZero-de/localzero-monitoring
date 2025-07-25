@@ -34,6 +34,8 @@ from .models import (
     ExecutionStatus,
     Task,
     CapChecklist,
+    AdministrationChecklist,
+    EnergyPlanChecklist,
 )
 
 from .serializers import CitySerializer
@@ -63,6 +65,20 @@ def _get_cap_checklist(city) -> CapChecklist | None:
     try:
         return city.cap_checklist
     except CapChecklist.DoesNotExist:
+        return None
+
+
+def _get_administration_checklist(city) -> AdministrationChecklist | None:
+    try:
+        return city.administration_checklist
+    except AdministrationChecklist.DoesNotExist:
+        return None
+
+
+def _get_energy_plan_checklist(city) -> EnergyPlanChecklist | None:
+    try:
+        return city.energy_plan_checklist
+    except EnergyPlanChecklist.DoesNotExist:
         return None
 
 
