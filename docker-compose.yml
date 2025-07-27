@@ -56,8 +56,6 @@ services:
       - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
     networks:
       - nginx_network
-    ports:
-      - 8978
     environment:
       CB_SERVER_NAME: CloudBeaver CE Server
       CB_ADMIN_NAME: ${CB_ADMIN_NAME}
