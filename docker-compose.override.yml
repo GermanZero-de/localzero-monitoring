@@ -2,6 +2,8 @@
 services:
   djangoapp:
     user: "1000"
+    volumes:
+      - nginx_extras_volume:/nginx/extras-local
   nginx-unprivileged:
     ports:
       - 80:8080
