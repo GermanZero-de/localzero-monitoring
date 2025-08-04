@@ -1,10 +1,5 @@
-import os
-
 import pytest
-from django.core.management import call_command
 from playwright.sync_api import Page, BrowserContext
-
-from config.settings.base import BASE_DIR
 
 
 @pytest.fixture(scope="session")
