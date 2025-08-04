@@ -305,7 +305,7 @@ def test_should_move_the_task_below_the_chosen_task_when_moving_a_task_on_anothe
     )
 
 
-def test_should_add_the_checklist_to_the_respective_city_when_clicking_add_new_cap_checklist(
+def test_should_add_cap_checklist_to_the_respective_city_when_clicking_add_new_cap_checklist(
     live_server, page: Page
 ):
     # when
@@ -318,6 +318,40 @@ def test_should_add_the_checklist_to_the_respective_city_when_clicking_add_new_c
     # then
     expect(page.get_by_label("Stadt")).to_contain_text("Ohnenix")
     page.get_by_label("Gibt es einen Klima-Aktionsplan").check()
+    page.get_by_role("button", name="Sichern", exact=True).first.click()
+
+
+def test_should_add_administration_checklist_to_the_respective_city_when_clicking_add_new_administration_checklist(
+    live_server, page: Page
+):
+    # when
+    admin_login(live_server.url, page)
+    go_to_cap_edit_board(page, "Ohnenix")
+    page.get_by_text("Checkliste zu Verwaltungsstrukturen").get_by_role(
+        "link", name="hinzufügen"
+    ).click()
+
+    # then
+    expect(page.get_by_label("Stadt")).to_contain_text("Ohnenix")
+    page.get_by_label("Gibt es ein Klimaschutzmanagement").check()
+    page.get_by_role("button", name="Sichern", exact=True).first.click()
+
+
+def test_should_add_heat_plan_checklist_to_the_respective_city_when_clicking_add_new_heat_plan_checklist(
+    live_server, page: Page
+):
+    # when
+    admin_login(live_server.url, page)
+    go_to_cap_edit_board(page, "Ohnenix")
+    page.get_by_text("Checkliste zur Wärmeplanung").get_by_role(
+        "link", name="hinzufügen"
+    ).click()
+
+    # then
+    expect(page.get_by_label("Stadt")).to_contain_text("Ohnenix")
+    page.get_by_label(
+        "Liegt ein öffentlich bekannt gemachter Beschluss zur Durchführung der Wärmeplanung vor?"
+    ).check()
     page.get_by_role("button", name="Sichern", exact=True).first.click()
 
 
