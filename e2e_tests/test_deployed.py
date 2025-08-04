@@ -2,9 +2,6 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-@pytest.mark.skip(
-    reason="see https://github.com/GermanZero-de/localzero-monitoring/issues/720"
-)
 def test_should_provide_basic_website_functionality_when_using_the_deployed_application(
     page: Page,
 ):
@@ -14,6 +11,6 @@ def test_should_provide_basic_website_functionality_when_using_the_deployed_appl
     """
     page.goto("https://localhost")
 
-    page.locator(".card", has_text="Beispielstadt").click()
+    page.get_by_text("Beispielstadt").click()
 
-    expect(page).to_have_url("https://localhost/beispielstadt/")
+    expect(page).to_have_url("https://localhost/beispielstadt")
