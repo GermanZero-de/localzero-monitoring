@@ -41,6 +41,7 @@ services:
     volumes:
       - nginx_config_volume:/etc/nginx/conf.d
       - nginx_extras_volume:/etc/nginx/conf.d/extras
+      - ${HTPASSWD_PATH:-/dev/null}:/etc/nginx/conf.d/extras/htpasswd
       - static_volume:/cpmonitor/static
       - ${IMAGES_PATH}:/cpmonitor/images
     depends_on:
