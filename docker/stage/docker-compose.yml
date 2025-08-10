@@ -1,0 +1,77 @@
+# Composition for a local/testing/production stage
+services:
+  djangoapp:
+    container_name: djangoapp-${ENVIRONMENT_NAME}
+    build:
+      context: ../../
+      dockerfile: docker/stage/cpmonitor/Dockerfile
+    image: cpmonitor:${ENVIRONMENT_NAME}
+    user: ${PYTHON_USER_ID:-1007}
+    volumes:
+      - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
+      - static_volume:/static
+      - ${IMAGES_PATH?:Please set the IMAGES_PATH environment variable.}:/images
+      - nginx_config_volume:/nginx/conf.d
+      - nginx_extras_volume:/nginx/extras-${NGINX_EXTRAS_ENVIRONMENT:-${ENVIRONMENT_NAME}}
+      - ${BACKUP_PATH?:Please set the BACKUP_PATH environment variable.}:/backup
+    networks:
+      - nginx_network
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.container
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:?Please set the DJANGO_SECRET_KEY environment variable.}
+      - DJANGO_CSRF_TRUSTED_ORIGINS=${DJANGO_CSRF_TRUSTED_ORIGINS:?Please set the DJANGO_CSRF_TRUSTED_ORIGINS environment variable.}
+    restart: unless-stopped
+
+  frontend:
+    container_name: frontend-${ENVIRONMENT_NAME}
+    build:
+      context: ../../
+      dockerfile: docker/stage/frontend/Dockerfile
+    image: nextjs:${ENVIRONMENT_NAME}
+    networks:
+      - nginx_network
+    environment:
+      - REST_API=http://djangoapp:8000
+    restart: unless-stopped
+
+  nginx-unprivileged:
+    container_name: nginx-${ENVIRONMENT_NAME}
+    image: nginxinc/nginx-unprivileged:alpine
+    volumes:
+      - nginx_config_volume:/etc/nginx/conf.d
+      - nginx_extras_volume:/etc/nginx/conf.d/extras
+      - static_volume:/cpmonitor/static
+      - ${IMAGES_PATH}:/cpmonitor/images
+    depends_on:
+      - djangoapp
+    networks:
+      - nginx_network
+    restart: unless-stopped
+
+  dbeaver:
+    build: ./dbeaver
+    container_name: dbeaver-${ENVIRONMENT_NAME}
+    image: klimaschutzmonitor-dbeaver:${ENVIRONMENT_NAME}
+    volumes:
+      - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
+    networks:
+      - nginx_network
+    environment:
+      CB_SERVER_NAME: CloudBeaver CE Server
+      CB_ADMIN_NAME: ${CB_ADMIN_NAME}
+      CB_ADMIN_PASSWORD: ${CB_ADMIN_PASSWORD}
+    depends_on:
+      - djangoapp
+    restart: unless-stopped
+
+networks:
+  nginx_network:
+    name: ${ENVIRONMENT_NAME}_nginx_network
+    external: true
+
+volumes:
+  # just declare the volumes so nginx and django can share them
+  nginx_config_volume:
+  nginx_extras_volume:
+  static_volume:

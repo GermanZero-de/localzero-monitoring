@@ -45,6 +45,6 @@ jobs:
           docker network create testing_nginx_network
           docker network create production_nginx_network
       - name: build and run testing application and reverse proxy
-        run: docker compose -f docker-compose.with-reverse-proxy.yml up -d
+        run: docker compose up -d
       - name: run tests
         run: poetry run pytest
