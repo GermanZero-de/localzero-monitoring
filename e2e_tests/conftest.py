@@ -10,4 +10,4 @@ def browser_context_args(browser_context_args):
 
 @pytest.fixture(scope="session")
 def base_url():
-    return "http://localhost"
+    return "https://localhost"
