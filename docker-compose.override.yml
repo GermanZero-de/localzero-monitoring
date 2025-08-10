@@ -1,12 +1,15 @@
-# Bind to HTTP port to allow local development without reverse proxy.
+# Overrides for testing locally or in CI
+
 services:
   djangoapp:
     user: "1000"
   nginx-unprivileged:
+    # Bind to HTTP port to allow local development and testing without reverse proxy.
     ports:
       - 80:8080
 
 networks:
   nginx_network:
+    name: local_nginx_network
     driver: bridge
     external: false

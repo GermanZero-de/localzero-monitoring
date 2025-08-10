@@ -1,5 +1,28 @@
+import os
+import pytest
+
+from django.core.management import call_command
 from django.utils.text import slugify
-from playwright.sync_api import Page, expect
+from playwright.sync_api import BrowserContext, Page, expect
+from config.settings.base import BASE_DIR
+
+
+@pytest.fixture(scope="function")
+def django_db_setup(django_db_setup, django_db_blocker):
+    with django_db_blocker.unblock():
+        call_command("flush", "--noinput")
+        call_command(
+            "loaddata",
+            os.path.join(BASE_DIR, "e2e_tests", "database", "test_database.json"),
+        )
+
+
+@pytest.fixture
+def page(context: BrowserContext) -> Page:
+    """Sends along basic auth for admin page so we can skip the login process."""
+    # Generate base64 encoded user:password with `echo -n "user:password" | base64`
+    context.set_extra_http_headers({"Authorization": "Basic a2VybnRlYW06cGFzc3dvcmQ="})
+    return context.new_page()
 
 
 def admin_login(base_url: str, page: Page):
