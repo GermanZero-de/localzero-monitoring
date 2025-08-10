@@ -5,7 +5,7 @@ services:
       context: ./
       dockerfile: ./docker/cpmonitor/Dockerfile
     image: cpmonitor:${ENVIRONMENT_NAME}
-    user: "1007"
+    user: ${PYTHON_USER_ID:-1007}
     volumes:
       - ${DB_PATH?:Please set the DB_PATH environment variable.}:/db
       - static_volume:/static
