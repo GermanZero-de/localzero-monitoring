@@ -11,7 +11,7 @@ services:
       - static_volume:/static
       - ${IMAGES_PATH?:Please set the IMAGES_PATH environment variable.}:/images
       - nginx_config_volume:/nginx/conf.d
-      - nginx_extras_volume:/nginx/extras-${ENVIRONMENT_NAME}
+      - nginx_extras_volume:/nginx/extras-${NGINX_EXTRAS_ENVIRONMENT:-${ENVIRONMENT_NAME}}
       - ${BACKUP_PATH?:Please set the BACKUP_PATH environment variable.}:/backup
     networks:
       - nginx_network

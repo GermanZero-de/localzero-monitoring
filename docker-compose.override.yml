@@ -2,13 +2,12 @@
 services:
   djangoapp:
     user: "1000"
-    volumes:
-      - nginx_extras_volume:/nginx/extras-local
   nginx-unprivileged:
     ports:
       - 80:8080
 
 networks:
   nginx_network:
+    name: local_nginx_network
     driver: bridge
     external: false
