@@ -1,5 +1,4 @@
-version: '3'
-
+# Composition for the reverse proxy that combines test and prod and handles TLS.
 services:
   reverse-proxy:
     container_name: reverse-proxy

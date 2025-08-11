@@ -46,7 +46,7 @@ requires = ["poetry-core>=1.3.2"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-norecursedirs = "e2e_tests frontend"
+norecursedirs = "e2e_tests/old_frontend frontend"
 env = [
     "DJANGO_SETTINGS_MODULE=config.settings.container",
     "DJANGO_SECRET_KEY=somePlaceholder",

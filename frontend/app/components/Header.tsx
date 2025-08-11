@@ -13,13 +13,13 @@ export default function Header() {
     <Navbar
       color="light"
       expand="lg"
-      className="border-bottom border-gray bg-white"
+      className="bg-white py-3"
     >
       <Container>
         <Navbar.Brand href="/">
           <Image
             src={logo}
-            width={200}
+            width={180}
             className="d-inline-block align-top"
             alt="LocalZero Monitoring logo"
           />
