@@ -60,6 +60,7 @@ export default function MeasuresAccordion({ tasks }: MeasuresAccordionProps) {
                 activeKey={activeKey}
                 slugs={task.slugs}
                 text={task.teaser}
+                showReadMore={task.description && task.description.length > 2}
                 tasks={task.children}
                 eventKey={task.slugs}
               ></MeasureCardContent>

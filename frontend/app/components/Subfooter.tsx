@@ -11,7 +11,7 @@ type Props = {
 
 const Subfooter: React.FC<Props> = ({ cities }) => {
   return (
-    <Container className="w-sm-50 m-auto">
+    <Container className="w-sm-75 m-auto">
     <h1 className="headingWithBar">Entdecke lokalen Klimaschutz</h1>
     <Search cities={cities} />
     <h2 className="headingWithBar">

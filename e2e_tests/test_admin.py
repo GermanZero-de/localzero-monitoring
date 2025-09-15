@@ -1,5 +1,28 @@
+import os
+import pytest
+
+from django.core.management import call_command
 from django.utils.text import slugify
-from playwright.sync_api import Page, expect
+from playwright.sync_api import BrowserContext, Page, expect
+from config.settings.base import BASE_DIR
+
+
+@pytest.fixture(scope="function")
+def django_db_setup(django_db_setup, django_db_blocker):
+    with django_db_blocker.unblock():
+        call_command("flush", "--noinput")
+        call_command(
+            "loaddata",
+            os.path.join(BASE_DIR, "e2e_tests", "database", "test_database.json"),
+        )
+
+
+@pytest.fixture
+def page(context: BrowserContext) -> Page:
+    """Sends along basic auth for admin page so we can skip the login process."""
+    # Generate base64 encoded user:password with `echo -n "user:password" | base64`
+    context.set_extra_http_headers({"Authorization": "Basic a2VybnRlYW06cGFzc3dvcmQ="})
+    return context.new_page()
 
 
 def admin_login(base_url: str, page: Page):
@@ -305,7 +328,7 @@ def test_should_move_the_task_below_the_chosen_task_when_moving_a_task_on_anothe
     )
 
 
-def test_should_add_the_checklist_to_the_respective_city_when_clicking_add_new_cap_checklist(
+def test_should_add_cap_checklist_to_the_respective_city_when_clicking_add_new_cap_checklist(
     live_server, page: Page
 ):
     # when
@@ -318,6 +341,40 @@ def test_should_add_the_checklist_to_the_respective_city_when_clicking_add_new_c
     # then
     expect(page.get_by_label("Stadt")).to_contain_text("Ohnenix")
     page.get_by_label("Gibt es einen Klima-Aktionsplan").check()
+    page.get_by_role("button", name="Sichern", exact=True).first.click()
+
+
+def test_should_add_administration_checklist_to_the_respective_city_when_clicking_add_new_administration_checklist(
+    live_server, page: Page
+):
+    # when
+    admin_login(live_server.url, page)
+    go_to_cap_edit_board(page, "Ohnenix")
+    page.get_by_text("Checkliste zu Verwaltungsstrukturen").get_by_role(
+        "link", name="hinzufügen"
+    ).click()
+
+    # then
+    expect(page.get_by_label("Stadt")).to_contain_text("Ohnenix")
+    page.get_by_label("Gibt es ein Klimaschutzmanagement").check()
+    page.get_by_role("button", name="Sichern", exact=True).first.click()
+
+
+def test_should_add_heat_plan_checklist_to_the_respective_city_when_clicking_add_new_heat_plan_checklist(
+    live_server, page: Page
+):
+    # when
+    admin_login(live_server.url, page)
+    go_to_cap_edit_board(page, "Ohnenix")
+    page.get_by_text("Checkliste zur Wärmeplanung").get_by_role(
+        "link", name="hinzufügen"
+    ).click()
+
+    # then
+    expect(page.get_by_label("Stadt")).to_contain_text("Ohnenix")
+    page.get_by_label(
+        "Liegt ein öffentlich bekannt gemachter Beschluss zur Durchführung der Wärmeplanung vor?"
+    ).check()
     page.get_by_role("button", name="Sichern", exact=True).first.click()
 
 
