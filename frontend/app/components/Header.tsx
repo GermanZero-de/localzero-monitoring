@@ -34,7 +34,7 @@ export default function Header() {
             <Nav.Link href="/projektbeschreibung">ÜBER DAS PROJEKT</Nav.Link>
 
             <Nav.Link
-              href="https://mitmachen-wiki.germanzero.org/w/LocalZero:Top_Ma%C3%9Fnahmen_f%C3%BCr_Kommunen"
+              href="https://localzero.net/loesungen/top-massnahmen"
               target="_blank"
               aria-label="Öffne das Germanzero Wiki in neuem Tab"
             >
