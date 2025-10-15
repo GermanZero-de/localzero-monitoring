@@ -249,7 +249,7 @@ class TaskForm(MoveNodeForm):
         elif isinstance(initial, dict) and "city" in initial:
             self.city = initial["city"]
         elif isinstance(data, dict) and "city" in data:
-            self.city = data["city"][0]
+            self.city = data["city"]
         super().__init__(
             data=data,
             files=files,
