@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from 'next';
 import { Col, Container, Row } from "react-bootstrap";
 import Markdown from "react-markdown";
 import greenCity from "@/public/background-green-city.webp";
 import LocalGroup from "@/app/components/LocalGroup";
 import NavigationTile from "@/app/components/NavigationTile";
 import styles from "./page.module.scss";
+import { generateMetadataForCity } from '@/lib/metadata';
 import { getCities, getTasks } from "@/lib/dataService";
 import {  getRecursiveStatusNumbers } from "@/lib/utils";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
@@ -19,6 +21,10 @@ interface CityDescriptionProps {
   teaser: string;
   description: string;
   name: string;
+}
+
+export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
+  return generateMetadataForCity(params.city);
 }
 
 const CityDescription: React.FC<CityDescriptionProps> = ({ description, name, teaser }) => {
