@@ -29,6 +29,10 @@ def test_all_city_related_pages_should_show_the_city_logo(base_url: str, page: P
 
     expect(page.get_by_role("img", name=logo_name)).to_be_visible()
 
+    page.goto(base_url + "/beispielstadt/massnahmen/")
+
+    expect(page.get_by_role("img", name=logo_name)).to_be_visible()
+
     page.goto(base_url + "/beispielstadt/massnahmen/mobilitat/")
 
     expect(page.get_by_role("img", name=logo_name)).to_be_visible()
@@ -85,3 +89,13 @@ def test_should_go_to_the_administration_checklist_view_when_clicking_the_checkl
     expect(page).to_have_url(
         base_url + "/beispielstadt/verwaltungsstrukturen_checkliste"
     )
+
+
+def test_should_go_to_the_heatplanning_checklist_view_when_clicking_the_checklist_card(
+    base_url: str, page: Page
+):
+    page.goto(base_url + "/beispielstadt/")
+
+    page.get_by_text("Wärmeplanung").click()
+
+    expect(page).to_have_url(base_url + "/beispielstadt/waermeplanung_checkliste")
