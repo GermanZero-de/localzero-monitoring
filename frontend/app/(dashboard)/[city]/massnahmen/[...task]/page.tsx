@@ -1,8 +1,10 @@
+import { generateMetadataForCity } from '@/lib/metadata';
 import { getCities, getTasks } from "@/lib/dataService";
 import { findPreviousAndNext, flattenTasks } from "@/lib/utils";
 import ArrowRight from "@/app/components/icons/ArrowRight";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "./page.module.scss";
+import type { Metadata } from 'next';
 import Image from "next/image";
 import TaskSummary from "@/app/components/TaskSummary";
 import TaskNavigation from "@/app/components/TaskNavigation";
@@ -10,6 +12,10 @@ import Link from "next/link";
 import localZero from "@/public/imgs/localZero.svg";
 import CustomMarkdown from "@/app/components/CustomMarkdown";
 import { Task } from "@/types";
+
+export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
+  return generateMetadataForCity(params.city);
+}
 
 export default async function TaskDetails({ params }: { params: { city: string; task: Array<string> } }) {
   const city = await getCities(params.city);
