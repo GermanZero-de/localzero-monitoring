@@ -8,14 +8,6 @@ def page(base_url: str, page: Page):
     return page
 
 
-@pytest.fixture
-def task_suggested_by_ngo_page(base_url: str, page: Page):
-    page.goto(
-        f"{base_url}/beispielstadt/massnahmen/umstellung-fernwarme-auf-geothermie"
-    )
-    return page
-
-
 def test_the_task_page_should_have_the_city_name_in_the_title(page: Page):
     expect(page).to_have_title("LocalZero Monitoring - Beispielstadt")
 
@@ -82,30 +74,32 @@ def test_task_page_should_display_parent_task_group_in_sidebar(page: Page):
     expect(page.get_by_text("Sektor:Mobilität")).to_be_visible()
 
 
+def test_task_page_should_display_begin_date_in_sidebar(page: Page):
+    # search for joined text of two adjacent divs
+    expect(page.get_by_text("Beginn:4.11.2024")).to_be_visible()
+
+
+def test_task_page_should_display_end_date_in_sidebar(page: Page):
+    # search for joined text of two adjacent divs
+    expect(page.get_by_text("Ende:28.11.2099")).to_be_visible()
+
+
 def test_task_page_should_display_responsible_organ_in_sidebar(page: Page):
     # search for joined text of two adjacent divs
     expect(page.get_by_text("Zuständigkeit:Baureferat")).to_be_visible()
 
 
+@pytest.fixture
+def task_suggested_by_ngo_page(base_url: str, page: Page):
+    page.goto(
+        f"{base_url}/beispielstadt/massnahmen/umstellung-fernwarme-auf-geothermie"
+    )
+    return page
+
+
 def test_task_page_should_display_supporting_ngos_in_sidebar(
     task_suggested_by_ngo_page: Page,
 ):
-    expect(task_suggested_by_ngo_page.get_by_text("Kooperation:")).to_be_visible()
-    expect(
-        task_suggested_by_ngo_page.get_by_role("link", name="aidfive")
-    ).to_be_visible()
-
-
-def test_task_page_should_display_begin_date_in_sidebar(
-    task_suggested_by_ngo_page: Page,
-):
-    expect(task_suggested_by_ngo_page.get_by_text("Kooperation:")).to_be_visible()
-    expect(
-        task_suggested_by_ngo_page.get_by_role("link", name="aidfive")
-    ).to_be_visible()
-
-
-def test_task_page_should_display_end_date_in_sidebar(task_suggested_by_ngo_page: Page):
     expect(task_suggested_by_ngo_page.get_by_text("Kooperation:")).to_be_visible()
     expect(
         task_suggested_by_ngo_page.get_by_role("link", name="aidfive")
