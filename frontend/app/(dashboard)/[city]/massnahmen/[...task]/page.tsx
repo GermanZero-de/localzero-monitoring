@@ -13,6 +13,8 @@ import localZero from "@/public/imgs/localZero.svg";
 import CustomMarkdown from "@/app/components/CustomMarkdown";
 import { Task } from "@/types";
 
+const TASK_SOURCE_LOCALZERO_SUGGESTION = 1
+
 export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
   return generateMetadataForCity(params.city);
 }
@@ -74,22 +76,22 @@ export default async function TaskDetails({ params }: { params: { city: string; 
     </div>
   );
 
-  const topmapNahme =
-    task.source === 1 ? (
+  const topTask =
+    task.source === TASK_SOURCE_LOCALZERO_SUGGESTION ? (
       <>
         <div className={styles.cornerTop}>
           <Image
             src={localZero}
             alt="LocalZero Top Maßnahme"
-            title="LocalZero Maßnahme: Diese Maßnahme ist vom Netzwerk LocalZero oder dem Lokalteam vorgeschlagen.Die Kommune hat sie bisher nicht geplant. Sie ist aber dringend notwendig auf dem Weg zur Klimaneutralität. Sie ist einfach umzusetzen und/oder spart schnell und viel Treibhausgase ein."
+            title="LocalZero Maßnahme: Diese Maßnahme ist vom Netzwerk LocalZero oder dem Lokalteam vorgeschlagen. Die Kommune hat sie bisher nicht geplant. Sie ist aber dringend notwendig auf dem Weg zur Klimaneutralität. Sie ist einfach umzusetzen und/oder spart schnell und viel Treibhausgase ein."
           />
         </div>
 
         <div className={styles.cornerBottom}>
           <Image
-            title="LocalZero Maßnahme: Diese Maßnahme ist vom Netzwerk LocalZero oder dem Lokalteam vorgeschlagen.Die Kommune hat sie bisher nicht geplant. Sie ist aber dringend notwendig auf dem Weg zur Klimaneutralität. Sie ist einfach umzusetzen und/oder spart schnell und viel Treibhausgase ein."
             src={localZero}
             alt="LocalZero Top Maßnahme"
+            title="LocalZero Maßnahme: Diese Maßnahme ist vom Netzwerk LocalZero oder dem Lokalteam vorgeschlagen. Die Kommune hat sie bisher nicht geplant. Sie ist aber dringend notwendig auf dem Weg zur Klimaneutralität. Sie ist einfach umzusetzen und/oder spart schnell und viel Treibhausgase ein."
           />
         </div>
       </>
@@ -127,7 +129,7 @@ export default async function TaskDetails({ params }: { params: { city: string; 
       <Row>
         <Col>
           <h1>{task?.title}</h1>
-          {topmapNahme}
+          {topTask}
         </Col>
       </Row>
       <Row>
