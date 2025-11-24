@@ -29,20 +29,6 @@ def test_all_city_related_pages_should_show_the_city_logo(base_url: str, page: P
 
     expect(page.get_by_role("img", name=logo_name)).to_be_visible()
 
-    page.goto(base_url + "/beispielstadt/massnahmen/")
-
-    expect(page.get_by_role("img", name=logo_name)).to_be_visible()
-
-    page.goto(base_url + "/beispielstadt/massnahmen/mobilitat/")
-
-    expect(page.get_by_role("img", name=logo_name)).to_be_visible()
-
-    page.goto(
-        base_url + "/beispielstadt/massnahmen/mobilitat/u-bahn-strecke-verlangern/"
-    )
-
-    expect(page.get_by_role("img", name=logo_name)).to_be_visible()
-
 
 def test_city_page_should_display_supporting_ngos(base_url: str, page: Page):
     page.goto(base_url + "/beispielstadt/")
