@@ -23,9 +23,10 @@ const Breadcrumb = ({ logo, cityName, tasks }: TBreadCrumbProps) => {
     const listClasses = "item";
     const activeClasses = "fw-bold";
     const labelMapping: { [key: string]: string } = {
-        waermeplanung_checkliste: "Wärmeplanung",
         kap_checkliste: "Klimaaktionsplan",
+        massnahmen: "Maßnahmen",
         verwaltungsstrukturen_checkliste: "Verwaltungsstrukturen",
+        waermeplanung_checkliste: "Wärmeplanung",
     };
     const localLogo = logo ? <img
         style={{ height: 'auto', objectFit: 'cover', maxWidth: 500, maxHeight: 150 }}

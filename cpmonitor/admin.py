@@ -323,9 +323,20 @@ class CityPermissionFilter(admin.RelatedFieldListFilter):
         return len(self.lookup_choices) > 0
 
 
+@admin.action(description="Ausgewählte Maßnahme(n)/Sektor(en) veröffentlichen")
+def mark_published(modeladmin, request, queryset):
+    queryset.update(draft_mode=False)
+
+
+@admin.action(description="Ausgewählte Maßnahme(n)/Sektor(en) als Entwurf markieren")
+def mark_draft(modeladmin, request, queryset):
+    queryset.update(draft_mode=True)
+
+
 class TaskAdmin(ObjectPermissionsModelAdminMixin, TreeAdmin):
     # ------ change list page ------
     change_list_template = "admin/task_changelist.html"
+    actions = [mark_published, mark_draft]
 
     @admin.display(description="Öffentliche Seite")
     def slug_link(self, task: Task):

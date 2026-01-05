@@ -1,17 +1,23 @@
 import MeasureCard from "@/app/components/MeasureCard";
 import Image from "next/image";
+import type { Metadata } from 'next';
 import arrow from "@/public/imgs/arrow-right-down.svg";
 import { Container } from "react-bootstrap";
 import styles from "./page.module.scss";
 import { ExecutionStatus } from "@/types/enums";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Markdown from "react-markdown";
+import { generateMetadataForCity } from '@/lib/metadata';
 import { getCities, getTasks } from "@/lib/dataService";
 import {  getRecursiveStatusNumbers } from "@/lib/utils";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import rehypeRaw from "rehype-raw";
 import MeasuresAccordion from "@/app/components/MeasuresAccordion";
 import remarkGfm from 'remark-gfm'
+
+export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
+  return generateMetadataForCity(params.city);
+}
 
 export default async function CityMeasures({ params }: { params: { city: string} }) {
   const city = await getCities(params.city);
