@@ -5,6 +5,7 @@ from django.core.management import call_command
 from django.utils.text import slugify
 from playwright.sync_api import BrowserContext, Page, expect
 from config.settings.base import BASE_DIR
+from cpmonitor.models import Task
 
 
 @pytest.fixture(scope="function")
@@ -398,3 +399,48 @@ def test_should_show_the_checkist_add_button_when_a_checklist_was_deleted(
     expect(
         page.get_by_text("Checkliste zum KAP").get_by_role("link", name="hinzufügen")
     ).to_be_visible()
+
+
+def test_should_mark_multiple_draft_tasks_as_published_when_publish_action_is_performed(
+    live_server, page: Page
+):
+    admin_login(live_server.url, page)
+    page.get_by_role("link", name="Kommunen").click()
+    page.get_by_role("row", name="Beispielstadt").get_by_role(
+        "link", name="Handlungsfelder / Maßnahmen bearbeiten"
+    ).click()
+
+    page.get_by_role("row", name="Bürgerbeteiligung").get_by_role("checkbox").check()
+    page.get_by_role("row", name="Parkraumbewirtschaftung").get_by_role(
+        "checkbox"
+    ).check()
+    page.get_by_label("Aktion: ---------").select_option(
+        "Ausgewählte Maßnahme(n)/Sektor(en) veröffentlichen"
+    )
+    page.get_by_role("button", name="Ausführen").click()
+
+    assert Task.objects.get(title="Bürgerbeteiligung").draft_mode == False
+    assert Task.objects.get(title="Parkraumbewirtschaftung").draft_mode == False
+
+
+def test_should_mark_multiple_public_tasks_as_draft_when_draft_action_is_performed(
+    live_server, page: Page
+):
+    admin_login(live_server.url, page)
+    page.get_by_role("link", name="Kommunen").click()
+    page.get_by_role("row", name="Beispielstadt").get_by_role(
+        "link", name="Handlungsfelder / Maßnahmen bearbeiten"
+    ).click()
+    page.get_by_role("row", name="Carsharing einführen").get_by_role("checkbox").check()
+    page.get_by_role("row", name="Umstellung Fernwärme auf Geothermie").get_by_role(
+        "checkbox"
+    ).check()
+    page.get_by_label("Aktion: ---------").select_option(
+        "Ausgewählte Maßnahme(n)/Sektor(en) als Entwurf markieren"
+    )
+    page.get_by_role("button", name="Ausführen").click()
+
+    assert Task.objects.get(title="Carsharing einführen").draft_mode == True
+    assert (
+        Task.objects.get(title="Umstellung Fernwärme auf Geothermie").draft_mode == True
+    )
