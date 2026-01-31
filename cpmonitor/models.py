@@ -559,7 +559,7 @@ class EnergyPlanChecklist(models.Model):
         "Ergibt sich ein klares gebäudescharfes Bild des Wärmebedarfs und der aktuellen Wärmeversorgungsart?",
         default=False,
         help_text=mark_safe(
-            'Sind alle oder zumindest die wichtigsten Bilanzen  und Kennzahlen der Gemeinde vorhanden?<br/>Wichtige Bilanzen:<ul><li>Energiebilanz</li><li>Treibhausgasbilanzen</li><li>räumlich aufgelöster Wärmebedarf</li></ul>Mögliche Kenngrößen:<ul><li>Wohnflächen</li><li>Nutzungsarten der Gebäude</li><li>Flächendichten</li><li>Gebäudetypen und Baualtersklassen</li><li>Versorgungs- und Beheizungsstruktur der Gebäude</li></ul><a target="_blank" href="https://www.kea-bw.de/waermewende/wissensportal/leistungsverzeichnis-kwp">Mehr Infos hier</a> (Leistungsverzeichnis A.1.1).'
+            'Sind alle oder zumindest die wichtigsten Bilanzen  und Kennzahlen der Gemeinde vorhanden?<br/>Wichtige Bilanzen:<ul><li>Energiebilanz</li><li>Treibhausgasbilanzen</li><li>räumlich aufgelöster Wärmebedarf</li></ul>Mögliche Kenngrößen:<ul><li>Wohnflächen</li><li>Nutzungsarten der Gebäude</li><li>Flächendichten</li><li>Gebäudetypen und Baualtersklassen</li><li>Versorgungs- und Beheizungsstruktur der Gebäude</li></ul><a target="_blank" href="https://www.kww-halle.de/service/infothek/detail/kww-musterleistungsverzeichnis-baden-wuerttemberg">Mehr Infos hier</a> (Leistungsverzeichnis A.1.1).'
         ),
     )
     demand_specified_rationale = models.TextField(
