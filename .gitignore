@@ -149,3 +149,6 @@ cpmonitor/images
 *.tar
 !frontend/lib
 package-lock.json
+
+# direnv
+.direnv
