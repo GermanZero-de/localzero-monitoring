@@ -15,6 +15,7 @@ services:
       - reverse_proxy_network
     depends_on:
       - acme-sh
+      - umami
     restart: unless-stopped
 
   acme-sh:
@@ -26,6 +27,45 @@ services:
     networks:
       - reverse_proxy_network
     restart: unless-stopped
+
+  umami:
+    container_name: umami-${ENVIRONMENT_NAME}
+    image: ghcr.io/umami-software/umami:3.0.3
+    ports:
+      - "3000:3000"
+    environment:
+      APP_SECRET: replace-me-with-a-random-string
+      DATABASE_URL: postgresql://umami:umami@umami-db:5432/umami
+    depends_on:
+      umami-db:
+        condition: service_healthy
+    init: true
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "curl http://localhost:3000/api/heartbeat" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nginx_network
+
+  umami-db:
+    container_name: umami-db-${ENVIRONMENT_NAME}
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: umami
+    volumes:
+      - umami-db-data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nginx_network
 
 networks:
   production_nginx_network:
@@ -39,3 +79,6 @@ networks:
   reverse_proxy_network:
     name: reverse_proxy_network
     driver: bridge
+
+volumes:
+  umami-db-data:

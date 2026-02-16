@@ -46,6 +46,7 @@ services:
       - ${IMAGES_PATH}:/cpmonitor/images
     depends_on:
       - djangoapp
+      - dbeaver
     networks:
       - nginx_network
     restart: unless-stopped
