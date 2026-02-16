@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from 'next/script'
 import { Inter } from "next/font/google";
 import { getCities } from "@/lib/dataService";
 import { City } from "@/types";
@@ -29,6 +30,11 @@ export default async function RootLayout({
       </head>
       <body className={inter.className}>
         {children}
+    <Script
+        defer
+        src="/umami/script.js"
+        data-website-id="b718ea63-70a1-4ab8-8391-089fb1336a41"
+        />
       </body>
     </html>
   );
