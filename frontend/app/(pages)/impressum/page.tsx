@@ -17,7 +17,7 @@ export default async function ProjectDescription() {
 
     Geschäftsstelle Berlin<br />
 
-    Franklinstraße 27, 10587 Berlin<br />
+    Marienstraße 26, 10117 Berlin<br />
 
     vertreten durch den Vorstand: Dr. Albrecht von Sonntag, Friedemann Brockmeyer, Dr. Martin Oetting
     E-Mail:&nbsp;<a href="mailto:info@germanzero.de" rel="noopener noreferrer nofollow">info@GermanZero.de</a>
