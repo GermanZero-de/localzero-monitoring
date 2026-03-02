@@ -46,6 +46,8 @@ services:
       - ${IMAGES_PATH}:/cpmonitor/images
     depends_on:
       - djangoapp
+      - umami
+      - dbeaver
     networks:
       - nginx_network
     restart: unless-stopped
@@ -69,9 +71,11 @@ services:
   umami:
     container_name: umami-${ENVIRONMENT_NAME}
     image: ghcr.io/umami-software/umami:3.0.3
+    ports:
+      - "3333:3000"
     environment:
-      DATABASE_URL: postgresql://umami:umami@umami-db:5432/umami
       APP_SECRET: replace-me-with-a-random-string
+      DATABASE_URL: postgresql://umami:umami@umami-db:5432/umami
     depends_on:
       umami-db:
         condition: service_healthy
