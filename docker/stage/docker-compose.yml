@@ -46,6 +46,7 @@ services:
       - ${IMAGES_PATH}:/cpmonitor/images
     depends_on:
       - djangoapp
+      - plausible
     networks:
       - nginx_network
     restart: unless-stopped
@@ -66,40 +67,103 @@ services:
       - djangoapp
     restart: unless-stopped
 
-  umami:
-    container_name: umami-${ENVIRONMENT_NAME}
-    image: ghcr.io/umami-software/umami:3.0.3
-    environment:
-      DATABASE_URL: postgresql://umami:umami@umami-db:5432/umami
-      APP_SECRET: replace-me-with-a-random-string
-    depends_on:
-      umami-db:
-        condition: service_healthy
-    init: true
+  plausible_db:
+    image: postgres:16-alpine
     restart: always
+    volumes:
+      - plausible-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
     healthcheck:
-      test: [ "CMD-SHELL", "curl http://localhost:3000/api/heartbeat" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      start_period: 1m
     networks:
       - nginx_network
 
-  umami-db:
-    container_name: umami-db-${ENVIRONMENT_NAME}
-    image: postgres:15-alpine
-    environment:
-      POSTGRES_DB: umami
-      POSTGRES_USER: umami
-      POSTGRES_PASSWORD: umami
-    volumes:
-      - umami-db-data:/var/lib/postgresql/data
+  plausible_events_db:
+    image: clickhouse/clickhouse-server:24.12-alpine
     restart: always
+    volumes:
+      - plausible-event-data:/var/lib/clickhouse
+      - plausible-event-logs:/var/log/clickhouse-server
+      - ./clickhouse/logs.xml:/etc/clickhouse-server/config.d/logs.xml:ro
+      # This makes ClickHouse bind to IPv4 only, since Docker doesn't enable IPv6 in bridge networks by default.
+      # Fixes "Listen [::]:9000 failed: Address family for hostname not supported" warnings.
+      - ./clickhouse/ipv4-only.xml:/etc/clickhouse-server/config.d/ipv4-only.xml:ro
+      # The following configuration files make ClickHouse consume less resources, which is useful for small setups.
+      # https://clickhouse.com/docs/en/operations/tips#using-less-than-16gb-of-ram
+      - ./clickhouse/low-resources.xml:/etc/clickhouse-server/config.d/low-resources.xml:ro
+      - ./clickhouse/default-profile-low-resources-overrides.xml:/etc/clickhouse-server/users.d/default-profile-low-resources-overrides.xml:ro
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    environment:
+      - CLICKHOUSE_SKIP_USER_SETUP=1
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      test:
+        [
+          "CMD-SHELL",
+          "wget --no-verbose --tries=1 -O - http://127.0.0.1:8123/ping || exit 1",
+        ]
+      start_period: 1m
+    networks:
+      - nginx_network
+
+  plausible:
+    image: ghcr.io/plausible/community-edition:v3.2.0
+    restart: always
+    command: sh -c "/entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
+    depends_on:
+      plausible_db:
+        condition: service_healthy
+      plausible_events_db:
+        condition: service_healthy
+    volumes:
+      - plausible-data:/var/lib/plausible
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    environment:
+      - TMPDIR=/var/lib/plausible/tmp
+      # required: https://github.com/plausible/community-edition/wiki/configuration#required
+      - BASE_URL=https://localhost/analytics
+      - SECRET_KEY_BASE=5Weq7caaxD9eY0rFc0vdrfMK9ZU6uWSx6gR/1GTlivpuaXwtHobrA62SjOCrkTZS
+      # optional: https://github.com/plausible/community-edition/wiki/configuration#optional
+      # registration: https://github.com/plausible/community-edition/wiki/configuration#registration
+      - TOTP_VAULT_KEY
+      - DISABLE_REGISTRATION
+      - ENABLE_EMAIL_VERIFICATION
+      # web: https://github.com/plausible/community-edition/wiki/configuration#web
+      - HTTP_PORT=8000
+      - HTTPS_PORT
+      # databases: https://github.com/plausible/community-edition/wiki/configuration#database
+      - DATABASE_URL
+      - CLICKHOUSE_DATABASE_URL
+      # Google: https://github.com/plausible/community-edition/wiki/configuration#google
+      - GOOGLE_CLIENT_ID
+      - GOOGLE_CLIENT_SECRET
+      # geolocation: https://github.com/plausible/community-edition/wiki/configuration#ip-geolocation
+      - IP_GEOLOCATION_DB
+      - GEONAMES_SOURCE_FILE
+      - MAXMIND_LICENSE_KEY
+      - MAXMIND_EDITION
+      # email: https://github.com/plausible/community-edition/wiki/configuration#email
+      - MAILER_ADAPTER
+      - MAILER_EMAIL
+      - MAILER_NAME
+      - SMTP_HOST_ADDR
+      - SMTP_HOST_PORT
+      - SMTP_USER_NAME
+      - SMTP_USER_PWD
+      - SMTP_HOST_SSL_ENABLED
+      - POSTMARK_API_KEY
+      - MAILGUN_API_KEY
+      - MAILGUN_DOMAIN
+      - MAILGUN_BASE_URI
+      - MANDRILL_API_KEY
+      - SENDGRID_API_KEY
     networks:
       - nginx_network
 
@@ -109,8 +173,11 @@ networks:
     external: true
 
 volumes:
-  # just declare the volumes so nginx and django can share them
+  # just declare the volumes so services can share them
   nginx_config_volume:
   nginx_extras_volume:
   static_volume:
-  umami-db-data:
+  plausible-data:
+  plausible-db-data:
+  plausible-event-data:
+  plausible-event-logs:
