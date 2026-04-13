@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { loadEnvConfig } from '@next/env'
 import Script from 'next/script'
 import { Inter } from "next/font/google";
 import { getCities } from "@/lib/dataService";
@@ -30,11 +31,10 @@ export default async function RootLayout({
       </head>
       <body className={inter.className}>
         {children}
-    // TODO: inject the ID once we created it, via environment variable
     <Script
         defer
         src="https://analytics.monitoring.localzero.net/script.js"
-        data-website-id="5d6b2df8-64ad-4a58-b4f1-b765d99ba9b1"
+        data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
         />
       </body>
     </html>

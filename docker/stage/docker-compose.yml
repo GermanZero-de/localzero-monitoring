@@ -33,6 +33,7 @@ services:
       - nginx_network
     environment:
       - REST_API=http://djangoapp:8000
+      - NEXT_PUBLIC_UMAMI_WEBSITE_ID=${UMAMI_WEBSITE_ID}
     restart: unless-stopped
 
   nginx-unprivileged:
