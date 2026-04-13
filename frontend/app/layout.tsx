@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { loadEnvConfig } from '@next/env'
+import Script from 'next/script'
 import { Inter } from "next/font/google";
 import { getCities } from "@/lib/dataService";
 import { City } from "@/types";
@@ -29,6 +31,11 @@ export default async function RootLayout({
       </head>
       <body className={inter.className}>
         {children}
+    <Script
+        defer
+        src="https://analytics.monitoring.localzero.net/script.js"
+        data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+        />
       </body>
     </html>
   );
