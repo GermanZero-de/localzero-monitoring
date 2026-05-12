@@ -33,6 +33,7 @@ services:
       - nginx_network
     environment:
       - REST_API=http://djangoapp:8000
+      - NEXT_PUBLIC_UMAMI_WEBSITE_ID=${UMAMI_WEBSITE_ID}
     restart: unless-stopped
 
   nginx-unprivileged:
@@ -46,6 +47,7 @@ services:
       - ${IMAGES_PATH}:/cpmonitor/images
     depends_on:
       - djangoapp
+      - dbeaver
     networks:
       - nginx_network
     restart: unless-stopped
