@@ -47,7 +47,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - nginx_network
+      - reverse_proxy_network
 
   umami-db:
     container_name: umami-db-${ENVIRONMENT_NAME}
