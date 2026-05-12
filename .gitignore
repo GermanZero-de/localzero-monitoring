@@ -152,3 +152,6 @@ package-lock.json
 
 # direnv
 .direnv
+
+# umami-db created by local testing
+docker/reverseproxy/umami-db
