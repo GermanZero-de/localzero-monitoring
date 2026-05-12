@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
 
   umami:
-    container_name: umami-${ENVIRONMENT_NAME}
+    container_name: umami
     image: ghcr.io/umami-software/umami:3.0.3
     ports:
       - "3000:3000"
@@ -50,14 +50,14 @@ services:
       - reverse_proxy_network
 
   umami-db:
-    container_name: umami-db-${ENVIRONMENT_NAME}
+    container_name: umami-db
     image: postgres:15-alpine
     environment:
       POSTGRES_DB: umami
       POSTGRES_USER: umami
       POSTGRES_PASSWORD: umami
     volumes:
-      - umami-db-data:/var/lib/postgresql/data
+      - ./umami-db:/var/lib/postgresql/data
     restart: always
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
@@ -79,6 +79,3 @@ networks:
   reverse_proxy_network:
     name: reverse_proxy_network
     driver: bridge
-
-volumes:
-  umami-db-data:
