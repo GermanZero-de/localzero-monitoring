@@ -38,7 +38,6 @@ RUN poetry export --without dev --format requirements.txt \
     | /venv/bin/pip install --requirement /dev/stdin
 
 COPY . .
-RUN  find /cpmonitor
 COPY --from=frontend-builder /cpmonitor/cpmonitor/static/css ./cpmonitor/static/css
 COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/icons ./node_modules/@tabler/icons
 COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/core/dist ./node_modules/@tabler/core/dist
