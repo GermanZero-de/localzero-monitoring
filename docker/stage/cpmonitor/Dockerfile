@@ -1,10 +1,12 @@
 # build admin frontend
-FROM node:19-alpine AS frontend-builder
+FROM node:20-alpine AS frontend-builder
 
 WORKDIR /cpmonitor
 
 COPY package.json yarn.lock ./
 COPY cpmonitor/static/css cpmonitor/static/css
+RUN corepack enable
+RUN yarn config set nodeLinker node-modules
 RUN yarn install && \
     yarn run compile:css
 
