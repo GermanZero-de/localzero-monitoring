@@ -1,10 +1,12 @@
 # build admin frontend
-FROM node:19-alpine AS frontend-builder
+FROM node:20-alpine AS frontend-builder
 
 WORKDIR /cpmonitor
 
 COPY package.json yarn.lock ./
 COPY cpmonitor/static/css cpmonitor/static/css
+RUN corepack enable
+RUN yarn config set nodeLinker node-modules
 RUN yarn install && \
     yarn run compile:css
 
@@ -36,6 +38,7 @@ RUN poetry export --without dev --format requirements.txt \
     | /venv/bin/pip install --requirement /dev/stdin
 
 COPY . .
+RUN  find /cpmonitor
 COPY --from=frontend-builder /cpmonitor/cpmonitor/static/css ./cpmonitor/static/css
 COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/icons ./node_modules/@tabler/icons
 COPY --from=frontend-builder /cpmonitor/node_modules/@tabler/core/dist ./node_modules/@tabler/core/dist
