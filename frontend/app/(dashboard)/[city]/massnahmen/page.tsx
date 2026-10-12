@@ -15,6 +15,11 @@ import rehypeRaw from "rehype-raw";
 import MeasuresAccordion from "@/app/components/MeasuresAccordion";
 import remarkGfm from 'remark-gfm'
 
+// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
+// Remove this opt-out after verifying the segment passes validation without it.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 export async function generateMetadata(props: { params: Promise<{ city: string }> }): Promise<Metadata> {
   const params = await props.params;
   return generateMetadataForCity(params.city);

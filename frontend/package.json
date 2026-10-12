@@ -15,7 +15,7 @@
   "dependencies": {
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
-    "next": "15.5.25",
+    "next": "16.4.0",
     "react": "19.3.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "19.3.0",
@@ -36,7 +36,7 @@
     "@types/react-dom": "19.3.0",
     "cross-env": "^10.1.0",
     "eslint": "9.39.5",
-    "eslint-config-next": "15.5.25",
+    "eslint-config-next": "16.4.0",
     "eslint-plugin-storybook": "9.1.20",
     "html-entities": "^2.6.0",
     "prettier": "^3.9.6",
