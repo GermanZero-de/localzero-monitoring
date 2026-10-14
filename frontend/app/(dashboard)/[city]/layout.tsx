@@ -5,36 +5,29 @@ import Footer from "@/app/components/Footer";
 import BreadCrumb from "@/app/components/BreadCrumb";
 import { Container } from "react-bootstrap";
 
-
-
-// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
-// Remove this opt-out after verifying the segment passes validation without it.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-export const instant = false;
-
-
-
 export default async function DashboardLayout(
   props: Readonly<{
     children: React.ReactNode;
-    params: Promise<{ city: string }>
-  }>
+    params: Promise<{ city: string }>;
+  }>,
 ) {
   const params = await props.params;
 
-  const {
-    children
-  } = props;
+  const { children } = props;
 
-  const city:City = await getCities(params.city);
-  const tasks:Task[] = await getTasks(params.city);
+  const city: City = await getCities(params.city);
+  const tasks: Task[] = await getTasks(params.city);
 
   return (
     <Container>
-        <Header />
-        <BreadCrumb logo={city.local_group?.logo_wide} tasks={tasks} cityName={city.name}></BreadCrumb>
-        {children}
-        <Footer />
+      <Header />
+      <BreadCrumb
+        logo={city.local_group?.logo_wide}
+        tasks={tasks}
+        cityName={city.name}
+      ></BreadCrumb>
+      {children}
+      <Footer />
     </Container>
   );
 }

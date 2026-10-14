@@ -7,65 +7,61 @@ import styles from "./page.module.scss";
 import arrow from "@/public/imgs/arrow-right-down.svg";
 import Link from "next/link";
 
-// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
-// Remove this opt-out after verifying the segment passes validation without it.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-export const instant = false;
-
 export default function ProjectDescription() {
   return (
     <Container>
-
-      <div className="py-3 w-sm-50 m-auto">
-      <h1 className="big-h1">Kontakt</h1>
-        Wir haben uns bemüht die Informationen und die Website sehr klar aufzubereiten, aber es ergeben sich immer Fragen. Darum scheue nicht uns zu kontaktieren ...
+      <div className="w-sm-50 m-auto py-3">
+        <h1 className="big-h1">Kontakt</h1>
+        Wir haben uns bemüht die Informationen und die Website sehr klar aufzubereiten, aber es ergeben sich immer
+        Fragen. Darum scheue nicht uns zu kontaktieren ...
       </div>
       <h2 className="headingWithBar w-sm-75 m-auto">Monitoring</h2>
-      <p className="py-3 w-sm-50 m-auto d-flex position-relative">
+      <p className="w-sm-50 d-flex position-relative m-auto py-3">
         <p className="flex-grow-1">
-          Philipp beantwortet dir alle Fragen zum Monitoring, zur Website... Bitte schicke eine E-Mail oder vereinbare einen Termin
+          Philipp beantwortet dir alle Fragen zum Monitoring, zur Website... Bitte schicke eine E-Mail oder vereinbare
+          einen Termin
           <Image
-          src={arrow}
-          alt=""
-        />
+            src={arrow}
+            alt=""
+          />
         </p>
         <Link href="mailto:philipp.nuske@germanzero.de">
           <Image
-                src={highlight_portr}
-                alt="hightlight"
-                className={styles.kontaktPic}
-              />
+            src={highlight_portr}
+            alt="hightlight"
+            className={styles.kontaktPic}
+          />
           <Image
-                src={philipp}
-                alt="Philipp"
-              />
-          </Link>
+            src={philipp}
+            alt="Philipp"
+          />
+        </Link>
       </p>
       <h2 className="headingWithBar w-sm-75 m-auto">Lokalteams</h2>
-      <p className="py-3 w-sm-50 m-auto d-flex position-relative">
+      <p className="w-sm-50 d-flex position-relative m-auto py-3">
         <p className="flex-grow-1">
-        Leonie beantwortet dir alle Fragen zu den Lokalteams... Bitte schicke eine E-Mail oder vereinbare einen Termin
-        <Image
-          src={arrow}
-          alt=""
-        />
+          Leonie beantwortet dir alle Fragen zu den Lokalteams... Bitte schicke eine E-Mail oder vereinbare einen Termin
+          <Image
+            src={arrow}
+            alt=""
+          />
         </p>
         <Link href="mailto:Leoni.Rohlfs@GermanZero.de">
-        <Image
-              src={highlight_portr}
-              alt="hightlight"
-              className={styles.kontaktPic}
-            />
-        <Image
-              src={leonie}
-              alt="Leonie"
-            />
-       </Link>
+          <Image
+            src={highlight_portr}
+            alt="hightlight"
+            className={styles.kontaktPic}
+          />
+          <Image
+            src={leonie}
+            alt="Leonie"
+          />
+        </Link>
       </p>
 
       <h2 className="headingWithBar w-sm-75 m-auto">Maßnahmen</h2>
-      <div className="py-3 w-sm-50 m-auto">
-      Johannes beantwortet dir alle Fragen zu den Maßnahmen... Bitte schicke eine E-Mail oder vereinbare einen Termin
+      <div className="w-sm-50 m-auto py-3">
+        Johannes beantwortet dir alle Fragen zu den Maßnahmen... Bitte schicke eine E-Mail oder vereinbare einen Termin
       </div>
     </Container>
   );

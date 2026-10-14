@@ -5,11 +5,6 @@ import { getCities } from "@/lib/dataService";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
 import type { CheckItem } from "@/types";
 
-// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
-// Remove this opt-out after verifying the segment passes validation without it.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-export const instant = false;
-
 export default async function EnergyPlanChecklist(props: { params: Promise<{ city: string }> }) {
   const params = await props.params;
   const city = await getCities(params.city);

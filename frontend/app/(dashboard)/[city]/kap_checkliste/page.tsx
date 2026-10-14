@@ -6,12 +6,7 @@ import { getCities } from "@/lib/dataService";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
 import type { CheckItem } from "@/types";
 import rehypeRaw from "rehype-raw";
-import remarkGfm from 'remark-gfm'
-
-// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
-// Remove this opt-out after verifying the segment passes validation without it.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-export const instant = false;
+import remarkGfm from "remark-gfm";
 
 export default async function CapChecklist(props: { params: Promise<{ city: string }> }) {
   const params = await props.params;
@@ -25,25 +20,30 @@ export default async function CapChecklist(props: { params: Promise<{ city: stri
   return (
     <Container className="w-sm-75">
       <div className="pb-3">
-          <ChecklistIndicator
-            style={{height:250, marginBottom:30}}
-            total={city.cap_checklist.length}
-            checked={city.cap_checklist.filter((item: CheckItem) => item.is_checked).length}
-            startYear={new Date(city.resolution_date).getFullYear()}
-            endYear={city.target_year}
-            showLegend
-            title="Qualität des KAP"
-          />
+        <ChecklistIndicator
+          style={{ height: 250, marginBottom: 30 }}
+          total={city.cap_checklist.length}
+          checked={city.cap_checklist.filter((item: CheckItem) => item.is_checked).length}
+          startYear={new Date(city.resolution_date).getFullYear()}
+          endYear={city.target_year}
+          showLegend
+          title="Qualität des KAP"
+        />
       </div>
       <h1 className="headingWithBar">Klimaaktionsplan {city.name}</h1>
-      <div className="pb-3 mdContent">
-        <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{city.assessment_action_plan}</Markdown>
+      <div className="mdContent pb-3">
+        <Markdown
+          rehypePlugins={[rehypeRaw]}
+          remarkPlugins={[remarkGfm]}
+        >
+          {city.assessment_action_plan}
+        </Markdown>
       </div>
       <Accordion
         id="accordionFlushKAP"
         className="accordion-flush pb-3"
       >
-        {city.cap_checklist.map((item:any) => (
+        {city.cap_checklist.map((item: any) => (
           <ChecklistItem
             key={item.id}
             checklist_item={item}

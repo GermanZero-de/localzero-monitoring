@@ -1,31 +1,26 @@
 import MeasureCard from "@/app/components/MeasureCard";
 import Image from "next/image";
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 import arrow from "@/public/imgs/arrow-right-down.svg";
 import { Container } from "react-bootstrap";
 import styles from "./page.module.scss";
 import { ExecutionStatus } from "@/types/enums";
 import ExecutionStatusIcon from "@/app/components/ExecutionStatusIcon";
 import Markdown from "react-markdown";
-import { generateMetadataForCity } from '@/lib/metadata';
+import { generateMetadataForCity } from "@/lib/metadata";
 import { getCities, getTasks } from "@/lib/dataService";
-import {  getRecursiveStatusNumbers } from "@/lib/utils";
+import { getRecursiveStatusNumbers } from "@/lib/utils";
 import ImplementationIndicator from "@/app/components/ImplementationIndicator";
 import rehypeRaw from "rehype-raw";
 import MeasuresAccordion from "@/app/components/MeasuresAccordion";
-import remarkGfm from 'remark-gfm'
-
-// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
-// Remove this opt-out after verifying the segment passes validation without it.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-export const instant = false;
+import remarkGfm from "remark-gfm";
 
 export async function generateMetadata(props: { params: Promise<{ city: string }> }): Promise<Metadata> {
   const params = await props.params;
   return generateMetadataForCity(params.city);
 }
 
-export default async function CityMeasures(props: { params: Promise<{ city: string}> }) {
+export default async function CityMeasures(props: { params: Promise<{ city: string }> }) {
   const params = await props.params;
   const city = await getCities(params.city);
   const tasks = await getTasks(params.city);
@@ -36,24 +31,29 @@ export default async function CityMeasures(props: { params: Promise<{ city: stri
   return (
     <Container className={styles.container}>
       <ImplementationIndicator
-        style={{height:250, marginBottom:30}}
+        style={{ height: 250, marginBottom: 30 }}
         tasksNumber={getRecursiveStatusNumbers(tasks)}
         startYear={new Date(city.resolution_date).getFullYear()}
         endYear={city.target_year}
         showLegend
         showNow
       ></ImplementationIndicator>
-      <h1 >
+      <h1>
         {city.name}
         <Image
-          style={{marginLeft:10}}
+          style={{ marginLeft: 10 }}
           src={arrow}
           alt=""
         />
       </h1>
 
       <div className="mdContent">
-        <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{city.assessment_status}</Markdown>
+        <Markdown
+          rehypePlugins={[rehypeRaw]}
+          remarkPlugins={[remarkGfm]}
+        >
+          {city.assessment_status}
+        </Markdown>
       </div>
       <h1 className="headingWithBar">Maßnahmen in {city.name}</h1>
       <MeasuresAccordion tasks={tasks} />
