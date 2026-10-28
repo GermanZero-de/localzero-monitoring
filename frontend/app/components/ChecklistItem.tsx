@@ -36,7 +36,9 @@ const ChecklistItem: React.FC<Props> = ({ checklist_item }) => {
           {checklist_item.rationale.trim() ? (
             <div>
               <strong>Anmerkung / Begründung: </strong>
-              <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="mdContent">{checklist_item.rationale}</Markdown>
+              <div className="mdContent">
+                <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{checklist_item.rationale}</Markdown>
+              </div>
             </div>
           ) : (
             <></>

@@ -1,31 +1,32 @@
-
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Accordion, Container } from "react-bootstrap";
 import ChecklistItem from "@/app/components/ChecklistItem";
 import { getCities } from "@/lib/dataService";
 import ChecklistIndicator from "@/app/components/ChecklistIndicator";
-import { CheckItem } from "@/types";
+import type { CheckItem } from "@/types";
 
-export default async function EnergyPlanChecklist({ params }: { params: { city: string } }) {
+export default async function EnergyPlanChecklist(props: { params: Promise<{ city: string }> }) {
+  const params = await props.params;
   const city = await getCities(params.city);
 
   if (!city) {
-    return <h3 className="pb-3 pt-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
+    return <h3 className="pt-3 pb-3">Für die Stadt {params.city} gibt es kein Monitoring</h3>;
   }
 
   return (
     <>
       <Container className="w-sm-75">
-      <div className="pb-3">
+        <div className="pb-3">
           <ChecklistIndicator
-            style={{height:250, marginBottom:30}}
+            style={{ height: 250, marginBottom: 30 }}
             total={city.energy_plan_checklist.length}
             checked={city.energy_plan_checklist.filter((item: CheckItem) => item.is_checked).length}
             startYear={new Date(city.resolution_date).getFullYear()}
             endYear={city.target_year}
             showLegend
             title="Wie steht es um die Wärmeplanung?"
-          /></div>
+          />
+        </div>
         <h1 className="headingWithBar">Wärmeplanung</h1>
         <div className="pb-4">
           Der Wärmewende kommt eine Schlüsselposition bei der Einhaltung des Paris Agreement und damit der Begrenzung
