@@ -2,7 +2,7 @@ import {cookies} from 'next/headers';
 
 
 const getCookie = async (name: string) => {
-  return cookies().get(name)?.value ?? '';
+  return (await cookies()).get(name)?.value ?? '';
 }
 
 export async function getCities(id: string = "") {

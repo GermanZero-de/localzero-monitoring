@@ -3,12 +3,14 @@ __pypackages__
 .env
 .env.*
 .git
+.github
 .gitignore
 .idea
 .installed.cfg
 .pre-commit-config.yaml
 .pytest_cache
 .Python
+.scripts
 .venv
 .vscode
 .yarn
@@ -17,6 +19,7 @@ __pypackages__
 *.tar
 **/*.css
 **/*.css.map
+backup
 build
 cpmonitor/images
 db
@@ -40,3 +43,4 @@ share/python-wheels
 var
 venv
 wheels
+docker/reverseproxy/umami-db

@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
+
 import { Container, Row, Col } from "react-bootstrap";
 import SocialIcon from "./SocialIcon";
 import styles from "./styles/Footer.module.scss";

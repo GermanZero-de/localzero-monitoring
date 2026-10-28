@@ -7,8 +7,8 @@ on:
 env:
   PYTHON_VERSION: '3.11'
   POETRY_VERSION: '2.1.2'
-  NODE_VERSION: '16.16'
-  YARN_VERSION: '3.4.1'
+  NODE_VERSION: '24.22.1'
+  YARN_VERSION: '4.18.0'
 
 jobs:
   build:
