@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:24.21-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -7,8 +7,8 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install dependencies
-COPY /frontend/package.json /frontend/package-lock.json* ./
-RUN npm ci
+COPY /frontend/package.json /frontend/yarn.lock /frontend/.yarnrc.yml ./
+RUN corepack enable && yarn install
 
 
 # Rebuild the source code only when needed
@@ -22,7 +22,7 @@ COPY /frontend/ .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN npm run build
+RUN corepack enable && yarn build
 
 # Production image, copy all the files and run next
 FROM base AS runner

@@ -45,7 +45,9 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
             />
         <figcaption>
-        <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="mdContent">{caption}</Markdown>
+        <div className="mdContent">
+          <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{caption}</Markdown>
+        </div>
             <span className="text-muted">Quelle: { source } - Lizenz: { license }</span>
         </figcaption>
      </figure>
@@ -63,7 +65,9 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 style={{maxHeight: "90%"}}
                 />
             <figcaption>
-            <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} className="mdContent">{caption}</Markdown>
+            <div className="mdContent">
+              <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{caption}</Markdown>
+            </div>
                 <span className="text-muted">Quelle: { source } - Lizenz: { license }</span>
             </figcaption>
         </figure>

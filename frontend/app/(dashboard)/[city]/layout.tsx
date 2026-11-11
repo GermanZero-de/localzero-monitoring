@@ -5,24 +5,29 @@ import Footer from "@/app/components/Footer";
 import BreadCrumb from "@/app/components/BreadCrumb";
 import { Container } from "react-bootstrap";
 
+export default async function DashboardLayout(
+  props: Readonly<{
+    children: React.ReactNode;
+    params: Promise<{ city: string }>;
+  }>,
+) {
+  const params = await props.params;
 
+  const { children } = props;
 
-export default async function DashboardLayout({
-  children,
-  params
-}: Readonly<{
-  children: React.ReactNode;
-  params: { city: string }
-}>) {
-  const city:City = await getCities(params.city);
-  const tasks:Task[] = await getTasks(params.city);
+  const city: City = await getCities(params.city);
+  const tasks: Task[] = await getTasks(params.city);
 
   return (
     <Container>
-        <Header />
-        <BreadCrumb logo={city.local_group?.logo_wide} tasks={tasks} cityName={city.name}></BreadCrumb>
-        {children}
-        <Footer />
+      <Header />
+      <BreadCrumb
+        logo={city.local_group?.logo_wide}
+        tasks={tasks}
+        cityName={city.name}
+      ></BreadCrumb>
+      {children}
+      <Footer />
     </Container>
   );
 }
