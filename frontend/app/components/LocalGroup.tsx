@@ -45,11 +45,15 @@ export default function LocalGroup({ localGroup }: Props) {
 
         {isExpanded ? (
           <>
-            <Markdown className="mdContent" rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{localGroup.description}</Markdown>
+            <div className="mdContent">
+              <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{localGroup.description}</Markdown>
+            </div>
             {image}
           </>
         ) : (
-          <Markdown className="mdContent" rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{localGroup.teaser}</Markdown>
+          <div className="mdContent">
+            <Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{localGroup.teaser}</Markdown>
+          </div>
         )}
 
         <div className={styles.center}>

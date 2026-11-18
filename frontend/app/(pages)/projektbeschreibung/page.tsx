@@ -4,26 +4,23 @@ export default async function ProjectDescription() {
   return (
     <Container>
       <div className="w-sm-75 m-auto my-3">
-
         <h1 className="headingWithBar">Projektbeschreibung</h1>
         <p>
-          In vielen Kommunen geraten die Bemühungen um Klimaneutralität früher oder später ins Stocken. Kein Wunder, denn
-          es gibt bundesweit keine Blaupause dafür, wie dieses Ziel zu erreichen ist. Die Kommunen und ihre Bürger:innen
-          begehen hier permanent Neuland und stoßen auf zahlreiche Fragen und Hindernisse. Für Bürger:innen ist häufig
-          nicht ersichtlich, ob ihre Kommune überhaupt Fortschritte erzielt.
+          In vielen Kommunen geraten die Bemühungen um Klimaneutralität früher oder später ins Stocken. Kein Wunder,
+          denn es gibt bundesweit keine Blaupause dafür, wie dieses Ziel zu erreichen ist. Die Kommunen und ihre
+          Bürger:innen begehen hier permanent Neuland und stoßen auf zahlreiche Fragen und Hindernisse. Für Bürger:innen
+          ist häufig nicht ersichtlich, ob ihre Kommune überhaupt Fortschritte erzielt.
         </p>
         <p>
           Deshalb hat LocalZero die Plattform LocalMonitoring ins Leben gerufen. LocalMonitoring macht Fortschritte
           sichtbar, damit sie gefeiert werden können – und es zeigt Hürden auf, damit sie beseitigt werden können.
         </p>
-
         <h4 className="pt-2">Im Fokus der Bewertung stehen drei Aspekte:</h4>
         <ul className="py-3">
           <li>Der Klima-Aktionsplan einer Kommune</li>
           <li>Die Verwaltungsstruktur der Kommune</li>
           <li>Die Umsetzungsstände von beschlossenen Klimaschutzmaßnahmen</li>
         </ul>
-
         <h4 className="pt-2">LocalMonitoring bietet Übersicht und Transparenz</h4>
         Als öffentlich zugängliche Plattform hilft LocalMonitoring der Verwaltung und stärkt die Akzeptanz bei den
         Bürger:innen, indem es
@@ -36,7 +33,6 @@ export default async function ProjectDescription() {
             ansässigen Wirtschaftsunternehmen oder Umweltverbänden dient.
           </li>
         </ul>
-
         <h4 className="pt-2">LocalMonitoring unterstützt Kommunen bei der Umsetzung</h4>
         Unterstützt von den beteiligten Teams kann eine Stadt zeigen, wo es Erfolge und Anstrengungen gibt.
         <ul className="py-3">
@@ -56,19 +52,27 @@ export default async function ProjectDescription() {
             Dialog mit diesen.
           </li>
         </ul>
-
         <h1 className="headingWithBar">Über uns</h1>
-
         <h4>Ehrenamts-Power</h4>
-        <p>LocalMonitoring ist ein Projekt der Initiative LocalZero, dem Netzwerk für kommunale Klimaneutralität unter dem Dach von <a href="https://germanzero.de/" target="_blank">GermanZero</a>. Dennoch wird das Tool ehrenamtlich von engagierten Bürger:innen entwickelt und inhaltlich gepflegt. Teams von LocalZero sind in mehr als 90 Städten in Deutschland aktiv. In über 40 Städten haben sie bereits
-        Beschlüsse für Klimaneutralität bis spätestens 2035 bewirkt.</p>
-
+        <p>
+          LocalMonitoring ist ein Projekt der Initiative LocalZero, dem Netzwerk für kommunale Klimaneutralität unter
+          dem Dach von{" "}
+          <a
+            href="https://germanzero.de/"
+            target="_blank"
+          >
+            GermanZero
+          </a>
+          . Dennoch wird das Tool ehrenamtlich von engagierten Bürger:innen entwickelt und inhaltlich gepflegt. Teams
+          von LocalZero sind in mehr als 90 Städten in Deutschland aktiv. In über 40 Städten haben sie bereits
+          Beschlüsse für Klimaneutralität bis spätestens 2035 bewirkt.
+        </p>
         <h4 className="pt-2">Mehr zu LocalZero</h4>
-        <p>Weil es bundesweit keine Blaupausen für die komplexen Schritte gibt, die eine Kommune unternehmen muss, um
-        klimaneutral zu werden, hat sich LocalZero zum Ziel gesetzt, die Kommunen und ihre engagierten Bürger:innen mit
-        Knowhow und Best Practices zu unterstützen.</p>
-
-
+        <p>
+          Weil es bundesweit keine Blaupausen für die komplexen Schritte gibt, die eine Kommune unternehmen muss, um
+          klimaneutral zu werden, hat sich LocalZero zum Ziel gesetzt, die Kommunen und ihre engagierten Bürger:innen
+          mit Knowhow und Best Practices zu unterstützen.
+        </p>
         <b>Wichtige Instrumente hierfür sind</b>
         <ul className="py-3">
           <li>

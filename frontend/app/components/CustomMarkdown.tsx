@@ -39,10 +39,16 @@ interface MarkdownProps {
 
 const CustomMarkdown: React.FC<MarkdownProps> = ({ content, className="" }) => {
   const components: Components = {
-    img: ({ alt, src }) => <ImageRenderer alt={alt} src={src} content={content} />,
+    img: ({ alt, src }) => <ImageRenderer alt={alt} src={src as string} content={content} />,
   };
   const match = content?.match(regex);
-  return <ReactMarkdown className={`mdContent ${className} ${styles.mdContent}`} rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} components={components}>{match ? content?.replace(match[0], "").trim() : content}</ReactMarkdown>;
+  return (
+    <div className={`mdContent ${className} ${styles.mdContent}`}>
+      <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} components={components}>
+        {match ? content?.replace(match[0], "").trim() : content}
+      </ReactMarkdown>
+    </div>
+  );
 };
 
 export default CustomMarkdown;
